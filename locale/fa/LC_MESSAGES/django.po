@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-20 13:03+0330\n"
+"POT-Creation-Date: 2024-01-20 13:16+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Yousof.A.Asadi <yosofasadi2@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -74,6 +74,90 @@ msgstr "گزارش"
 msgid "Audit Logs"
 msgstr "گزارشات"
 
+#: shop/admin.py:10 shop/models.py:39
+msgid "Inventory"
+msgstr "موجودی"
+
+#: shop/admin.py:15 shop/admin.py:43
+msgid "Low"
+msgstr "محدود"
+
+#: shop/admin.py:28 shop/admin.py:46
+#, fuzzy
+#| msgid "Inventory"
+msgid "Clear inventory"
+msgstr "خالی کردن موجودی"
+
+#: shop/admin.py:29 shop/admin.py:58 shop/models.py:17 shop/models.py:31
+#: shop/models.py:35 shop/models.py:50
+msgid "Title"
+msgstr "عنوان"
+
+#: shop/admin.py:29 shop/models.py:38 shop/models.py:96
+msgid "Unit Price"
+msgstr "قیمت واحد"
+
+#: shop/admin.py:30
+#, fuzzy
+#| msgid "Inventory"
+msgid "Inventory Status"
+msgstr "وضعیت موجودی"
+
+#: shop/admin.py:30
+#, fuzzy
+#| msgid "Action"
+msgid "Collection Title"
+msgstr "عنوان مجموعه"
+
+#: shop/admin.py:44
+msgid "OK"
+msgstr "متوسط"
+
+#: shop/admin.py:51
+#, python-brace-format
+msgid "{count} products were successfully updated."
+msgstr "{count} محصول با موفقیت به‌روزرسانی شدند."
+
+#: shop/admin.py:58
+#, fuzzy
+#| msgid "Products"
+msgid "Products Count"
+msgstr "تعداد محصولات"
+
+#: shop/admin.py:67 shop/models.py:49
+msgid "Products"
+msgstr "محصولات"
+
+#: shop/admin.py:76 shop/models.py:59 shop/models.py:73
+msgid "First Name"
+msgstr "نام"
+
+#: shop/admin.py:76 shop/models.py:60 shop/models.py:73
+#, fuzzy
+#| msgid "Table Name"
+msgid "Last Name"
+msgstr "نام خانوادگی"
+
+#: shop/admin.py:76 shop/models.py:64
+msgid "Membership"
+msgstr "عضویت"
+
+#: shop/admin.py:76 shop/admin.py:88 shop/models.py:89
+msgid "Orders"
+msgstr "سفارش‌ها"
+
+#: shop/admin.py:106
+msgid "ID"
+msgstr "شناسه"
+
+#: shop/admin.py:106 shop/models.py:82
+msgid "Placed At"
+msgstr "تاریخ قرار گرفتن"
+
+#: shop/admin.py:106 shop/models.py:71 shop/models.py:85 shop/models.py:106
+msgid "Customer"
+msgstr "مشتری"
+
 #: shop/models.py:8 shop/models.py:37
 msgid "Description"
 msgstr "توضیحات"
@@ -89,10 +173,6 @@ msgstr "تبلیغات"
 #: shop/models.py:13 shop/models.py:42
 msgid "Promotions"
 msgstr "تبلیغات"
-
-#: shop/models.py:17 shop/models.py:31 shop/models.py:35 shop/models.py:50
-msgid "Title"
-msgstr "عنوان"
 
 #: shop/models.py:19
 msgid "Parent"
@@ -112,14 +192,6 @@ msgstr "مجموعه‌ها"
 msgid "Slug"
 msgstr "نامک"
 
-#: shop/models.py:38 shop/models.py:96
-msgid "Unit Price"
-msgstr "قیمت واحد"
-
-#: shop/models.py:39
-msgid "Inventory"
-msgstr "موجودی"
-
 #: shop/models.py:40
 msgid "Last Update"
 msgstr "آخرین به‌روزرسانی"
@@ -127,10 +199,6 @@ msgstr "آخرین به‌روزرسانی"
 #: shop/models.py:48 shop/models.py:94 shop/models.py:120
 msgid "Product"
 msgstr "محصول"
-
-#: shop/models.py:49
-msgid "Products"
-msgstr "محصولات"
 
 #: shop/models.py:55
 msgid "Bronze"
@@ -144,16 +212,6 @@ msgstr "نقره‌ای"
 msgid "Gold"
 msgstr "طلایی"
 
-#: shop/models.py:59 shop/models.py:73
-msgid "First Name"
-msgstr "نام"
-
-#: shop/models.py:60 shop/models.py:73
-#, fuzzy
-#| msgid "Table Name"
-msgid "Last Name"
-msgstr "نام خانوادگی"
-
 #: shop/models.py:61
 msgid "Email"
 msgstr "ایمیل"
@@ -165,14 +223,6 @@ msgstr "تلفن"
 #: shop/models.py:63
 msgid "Birth Date"
 msgstr "تاریخ تولد"
-
-#: shop/models.py:64
-msgid "Membership"
-msgstr "عضویت"
-
-#: shop/models.py:71 shop/models.py:85 shop/models.py:106
-msgid "Customer"
-msgstr "مشتری"
 
 #: shop/models.py:72
 msgid "Customers"
@@ -190,10 +240,6 @@ msgstr "تکمیل شده"
 msgid "Failed"
 msgstr "ناموفق"
 
-#: shop/models.py:82
-msgid "Placed At"
-msgstr "تاریخ قرار گرفتن"
-
 #: shop/models.py:83
 msgid "Payment Status"
 msgstr "وضعیت پرداخت"
@@ -201,10 +247,6 @@ msgstr "وضعیت پرداخت"
 #: shop/models.py:88 shop/models.py:93
 msgid "Order"
 msgstr "سفارش"
-
-#: shop/models.py:89
-msgid "Orders"
-msgstr "سفارش‌ها"
 
 #: shop/models.py:95 shop/models.py:121
 msgid "Quantity"
@@ -245,6 +287,12 @@ msgstr "آیتم سبد خرید"
 #: shop/models.py:125
 msgid "Cart Items"
 msgstr "آیتم‌های سبد خرید"
+
+#: tags/admin.py:10
+#, fuzzy
+#| msgid "Label"
+msgid "label"
+msgstr "برچسب"
 
 #: tags/models.py:17
 msgid "Label"
