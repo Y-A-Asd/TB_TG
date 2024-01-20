@@ -90,7 +90,7 @@ class CustomerAdmin(admin.ModelAdmin):
     @admin.display(ordering='orders_count')
     def orders(self, customer):
         url = (
-                reverse('admin:store_order_changelist')
+                reverse('admin:shop_order_changelist')
                 + '?'
                 + urlencode({'customer__id': str(customer.id)}))
         return format_html('<a href="{}">{} {}</a>', url, customer.orders_count, _('Orders'))
@@ -114,5 +114,6 @@ class OrderItemInline(admin.TabularInline):
 class OrderAdmin(admin.ModelAdmin):
     exclude = ['deleted_at']
     autocomplete_fields = ['customer']
+    list_filter = ['customer']
     inlines = [OrderItemInline]
     list_display = ['id', 'placed_at', 'customer']

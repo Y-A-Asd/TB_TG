@@ -185,6 +185,9 @@ msgstr "نام"
 msgid "Last Name"
 msgstr "نام خانوادگی"
 
+msgid "LAST NAME"
+msgstr "نام خانوادگی"
+
 #: shop/models.py:61
 msgid "Email"
 msgstr "ایمیل"
