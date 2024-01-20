@@ -7,4 +7,4 @@ from django.utils.translation import gettext_lazy as _
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
-    search_fields = [_('label')]
+    search_fields = ['label']

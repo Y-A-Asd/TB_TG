@@ -28,7 +28,7 @@ class Collection(BaseModel):
     class Meta:
         verbose_name = _("Collection")
         verbose_name_plural = _("Collections")
-        ordering = [_("Title")]
+        ordering = ["title"]
 
 
 class Product(BaseModel):
@@ -47,7 +47,7 @@ class Product(BaseModel):
     class Meta:
         verbose_name = _("Product")
         verbose_name_plural = _("Products")
-        ordering = [_("Title")]
+        ordering = ["title"]
 
 
 class Customer(BaseModel):
@@ -70,7 +70,7 @@ class Customer(BaseModel):
     class Meta:
         verbose_name = _("Customer")
         verbose_name_plural = _("Customers")
-        ordering = [_("First Name"), _("Last Name")]
+        ordering = ["first_name", "last_name"]
 
 
 class Order(BaseModel):

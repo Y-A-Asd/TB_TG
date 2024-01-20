@@ -40,3 +40,5 @@ class AuditLog(models.Model):
     class Meta:
         verbose_name = _("Audit Log")
         verbose_name_plural = _("Audit Logs")
+
+
