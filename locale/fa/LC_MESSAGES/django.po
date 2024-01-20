@@ -9,14 +9,15 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-20 18:45+0330\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Yousof.A.Asadi <yosofasadi2@gmail.com>\n"
+"PO-Revision-Date: 2024-01-20 18:55+0330\n"
+"Last-Translator: Anonymous User <yosofasady2@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Translated-Using: django-rosetta 0.9.8\n"
 
 #: TB_TG/settings.py:117
 msgid "English"
@@ -103,10 +104,9 @@ msgid "Password"
 msgstr "رمز عبور"
 
 #: core/models.py:79
-#, fuzzy
 #| msgid "Action"
 msgid "Active"
-msgstr "عملیات"
+msgstr "فعال"
 
 #: core/models.py:80
 msgid "Staff"
@@ -117,10 +117,9 @@ msgid "Last Login"
 msgstr "آخرین ورود"
 
 #: core/models.py:90
-#, fuzzy
 #| msgid "User"
 msgid "Users"
-msgstr "کاربر"
+msgstr "کاربران"
 
 #: shop/admin.py:11 shop/models.py:39
 msgid "Inventory"
@@ -135,7 +134,6 @@ msgid "OK"
 msgstr "متوسط"
 
 #: shop/admin.py:50
-#, fuzzy
 #| msgid "Inventory"
 msgid "Clear inventory"
 msgstr "خالی کردن موجودی"
@@ -178,7 +176,6 @@ msgid "Parent"
 msgstr "والد"
 
 #: shop/models.py:29 shop/models.py:41
-#, fuzzy
 #| msgid "Action"
 msgid "Collection"
 msgstr "مجموعه"
@@ -220,7 +217,6 @@ msgid "First Name"
 msgstr "نام"
 
 #: shop/models.py:60
-#, fuzzy
 #| msgid "Table Name"
 msgid "Last Name"
 msgstr "نام خانوادگی"
@@ -314,13 +310,11 @@ msgid "Label"
 msgstr "برچسب"
 
 #: tags/models.py:35
-#, fuzzy
 #| msgid "Cart Item"
 msgid "Tagged Item"
 msgstr "آیتم برچسب گزاری شده"
 
 #: tags/models.py:36
-#, fuzzy
 #| msgid "Cart Items"
 msgid "Tagged Items"
 msgstr "آیتم‌های برچسب گزاری شده"
@@ -329,17 +323,14 @@ msgstr "آیتم‌های برچسب گزاری شده"
 #~ msgstr "نام خانوادگی"
 
 #, fuzzy
-#~| msgid "Inventory"
 #~ msgid "Inventory Status"
 #~ msgstr "وضعیت موجودی"
 
 #, fuzzy
-#~| msgid "Action"
 #~ msgid "Collection Title"
 #~ msgstr "عنوان مجموعه"
 
 #, fuzzy
-#~| msgid "Products"
 #~ msgid "Products Count"
 #~ msgstr "تعداد محصولات"
 
@@ -347,6 +338,5 @@ msgstr "آیتم‌های برچسب گزاری شده"
 #~ msgstr "شناسه"
 
 #, fuzzy
-#~| msgid "Label"
 #~ msgid "label"
 #~ msgstr "برچسب"
