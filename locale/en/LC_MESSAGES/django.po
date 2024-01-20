@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-20 12:00+0330\n"
+"POT-Creation-Date: 2024-01-20 12:18+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,10 +17,59 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
 #: TB_TG/settings.py:112
 msgid "English"
 msgstr ""
 
 #: TB_TG/settings.py:113
 msgid "Persian"
+msgstr ""
+
+#: core/models.py:15
+msgid "Created at"
+msgstr ""
+
+#: core/models.py:16
+msgid "Updated at"
+msgstr ""
+
+#: core/models.py:17
+msgid "Deleted at"
+msgstr ""
+
+#: core/models.py:32
+msgid "User"
+msgstr ""
+
+#: core/models.py:33
+msgid "Action"
+msgstr ""
+
+#: core/models.py:34
+msgid "Timestamp"
+msgstr ""
+
+#: core/models.py:35
+msgid "Table Name"
+msgstr ""
+
+#: core/models.py:36
+msgid "Row ID"
+msgstr ""
+
+#: core/models.py:37
+msgid "Old Value"
+msgstr ""
+
+#: core/models.py:38
+msgid "Changes"
+msgstr ""
+
+#: core/models.py:41
+msgid "Audit Log"
+msgstr ""
+
+#: core/models.py:42
+msgid "Audit Logs"
 msgstr ""
