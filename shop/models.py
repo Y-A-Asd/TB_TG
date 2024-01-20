@@ -111,6 +111,7 @@ class Address(BaseModel):
 
 
 class Cart(BaseModel):
+    """چیزی به ذهنم نمیاد :-)"""
     pass
 
 
