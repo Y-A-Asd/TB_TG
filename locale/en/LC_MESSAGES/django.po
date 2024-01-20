@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-20 12:18+0330\n"
+"POT-Creation-Date: 2024-01-20 12:44+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -72,4 +72,172 @@ msgstr ""
 
 #: core/models.py:42
 msgid "Audit Logs"
+msgstr ""
+
+#: shop/models.py:8 shop/models.py:37
+msgid "Description"
+msgstr ""
+
+#: shop/models.py:9
+msgid "Discount"
+msgstr ""
+
+#: shop/models.py:12
+msgid "Promotion"
+msgstr ""
+
+#: shop/models.py:13 shop/models.py:42
+msgid "Promotions"
+msgstr ""
+
+#: shop/models.py:17 shop/models.py:31 shop/models.py:35 shop/models.py:50
+msgid "Title"
+msgstr ""
+
+#: shop/models.py:19
+msgid "Parent"
+msgstr ""
+
+#: shop/models.py:29 shop/models.py:41
+msgid "Collection"
+msgstr ""
+
+#: shop/models.py:30
+msgid "Collections"
+msgstr ""
+
+#: shop/models.py:36
+msgid "Slug"
+msgstr ""
+
+#: shop/models.py:38 shop/models.py:96
+msgid "Unit Price"
+msgstr ""
+
+#: shop/models.py:39
+msgid "Inventory"
+msgstr ""
+
+#: shop/models.py:40
+msgid "Last Update"
+msgstr ""
+
+#: shop/models.py:48 shop/models.py:94 shop/models.py:119
+msgid "Product"
+msgstr ""
+
+#: shop/models.py:49
+msgid "Products"
+msgstr ""
+
+#: shop/models.py:55
+msgid "Bronze"
+msgstr ""
+
+#: shop/models.py:56
+msgid "Silver"
+msgstr ""
+
+#: shop/models.py:57
+msgid "Gold"
+msgstr ""
+
+#: shop/models.py:59 shop/models.py:73
+msgid "First Name"
+msgstr ""
+
+#: shop/models.py:60 shop/models.py:73
+msgid "Last Name"
+msgstr ""
+
+#: shop/models.py:61
+msgid "Email"
+msgstr ""
+
+#: shop/models.py:62
+msgid "Phone"
+msgstr ""
+
+#: shop/models.py:63
+msgid "Birth Date"
+msgstr ""
+
+#: shop/models.py:64
+msgid "Membership"
+msgstr ""
+
+#: shop/models.py:71 shop/models.py:85 shop/models.py:106
+msgid "Customer"
+msgstr ""
+
+#: shop/models.py:72
+msgid "Customers"
+msgstr ""
+
+#: shop/models.py:78
+msgid "Pending"
+msgstr ""
+
+#: shop/models.py:79
+msgid "Complete"
+msgstr ""
+
+#: shop/models.py:80
+msgid "Failed"
+msgstr ""
+
+#: shop/models.py:82
+msgid "Placed At"
+msgstr ""
+
+#: shop/models.py:83
+msgid "Payment Status"
+msgstr ""
+
+#: shop/models.py:88 shop/models.py:93
+msgid "Order"
+msgstr ""
+
+#: shop/models.py:89
+msgid "Orders"
+msgstr ""
+
+#: shop/models.py:95 shop/models.py:120
+msgid "Quantity"
+msgstr ""
+
+#: shop/models.py:99
+msgid "Order Item"
+msgstr ""
+
+#: shop/models.py:100
+msgid "Order Items"
+msgstr ""
+
+#: shop/models.py:104
+msgid "Street"
+msgstr ""
+
+#: shop/models.py:105
+msgid "City"
+msgstr ""
+
+#: shop/models.py:109
+msgid "Address"
+msgstr ""
+
+#: shop/models.py:110
+msgid "Addresses"
+msgstr ""
+
+#: shop/models.py:118
+msgid "Cart"
+msgstr ""
+
+#: shop/models.py:123
+msgid "Cart Item"
+msgstr ""
+
+#: shop/models.py:124
+msgid "Cart Items"
 msgstr ""
