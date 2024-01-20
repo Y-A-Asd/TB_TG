@@ -1,3 +1,6 @@
+from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import AbstractUser, PermissionsMixin
+from django.core.validators import RegexValidator
 from django.db import models
 from django.utils import timezone
 from django.conf import settings
@@ -42,3 +45,46 @@ class AuditLog(models.Model):
         verbose_name_plural = _("Audit Logs")
 
 
+class UserManager(BaseUserManager):
+    def create_user(self, phone_number, email, password=None, **extra_fields):
+        if not phone_number and not email:
+            raise ValueError(_('The phone number or email field must be set'))
+        user = self.model(phone_number=phone_number, email=self.normalize_email(email), **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, phone_number, email, password=None, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+        return self.create_user(phone_number, email, password, **extra_fields)
+
+
+class User(AbstractBaseUser, PermissionsMixin):
+    phone_number = models.CharField(
+        max_length=11,
+        unique=True,
+        validators=[
+            RegexValidator(
+                regex=r'^09\d{9}$',
+                message=_('Phone number must start with "09" and have 11 digits.'),
+                code='invalid_phone_number'
+            )
+        ],
+        verbose_name=_("Phone Number")
+    )
+
+    email = models.EmailField(unique=True, verbose_name=_("Email"))
+    password = models.CharField(max_length=128, verbose_name=_("Password"))
+    is_active = models.BooleanField(default=True, verbose_name=_("Active"))
+    is_staff = models.BooleanField(default=False, verbose_name=_("Staff"))
+    last_login = models.DateTimeField(auto_now_add=True, verbose_name=_('Last Login'))
+
+    objects = UserManager()
+
+    USERNAME_FIELD = 'phone_number'
+    REQUIRED_FIELDS = ['email']
+
+    class Meta:
+        verbose_name = _("User")
+        verbose_name_plural = _("Users")

@@ -1,6 +1,6 @@
 from django.core.validators import MinValueValidator
-from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.db import models
 from core.models import BaseModel
 
 
@@ -123,3 +123,6 @@ class CartItem(BaseModel):
     class Meta:
         verbose_name = _("Cart Item")
         verbose_name_plural = _("Cart Items")
+
+
+

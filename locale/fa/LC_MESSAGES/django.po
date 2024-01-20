@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-20 15:40+0330\n"
+"POT-Creation-Date: 2024-01-20 18:45+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Yousof.A.Asadi <yosofasadi2@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: TB_TG/settings.py:115
+#: TB_TG/settings.py:117
 msgid "English"
 msgstr "اینگلیسی"
 
-#: TB_TG/settings.py:116
+#: TB_TG/settings.py:118
 msgid "Persian"
 msgstr "فارسی"
 
@@ -34,53 +34,93 @@ msgstr "برچسب"
 msgid "Tags"
 msgstr "برچسب ها"
 
-#: core/models.py:15
+#: core/models.py:18
 msgid "Created at"
 msgstr "تاریخ ایجاد"
 
-#: core/models.py:16
+#: core/models.py:19
 msgid "Updated at"
 msgstr "تاریخ به‌روزرسانی"
 
-#: core/models.py:17
+#: core/models.py:20
 msgid "Deleted at"
 msgstr "تاریخ حذف"
 
-#: core/models.py:32
+#: core/models.py:35 core/models.py:89
 msgid "User"
 msgstr "کاربر"
 
-#: core/models.py:33
+#: core/models.py:36
 msgid "Action"
 msgstr "عملیات"
 
-#: core/models.py:34
+#: core/models.py:37
 msgid "Timestamp"
 msgstr "زمان"
 
-#: core/models.py:35
+#: core/models.py:38
 msgid "Table Name"
 msgstr "نام جدول"
 
-#: core/models.py:36
+#: core/models.py:39
 msgid "Row ID"
 msgstr "شناسه ردیف"
 
-#: core/models.py:37
+#: core/models.py:40
 msgid "Old Value"
 msgstr "مقدار قدیمی"
 
-#: core/models.py:38
+#: core/models.py:41
 msgid "Changes"
 msgstr "تغییرات"
 
-#: core/models.py:41
+#: core/models.py:44
 msgid "Audit Log"
 msgstr "گزارش"
 
-#: core/models.py:42
+#: core/models.py:45
 msgid "Audit Logs"
 msgstr "گزارشات"
+
+#: core/models.py:51
+msgid "The phone number or email field must be set"
+msgstr "شماره تلفن و ایمیل الزامیست"
+
+#: core/models.py:70
+msgid "Phone number must start with \"09\" and have 11 digits."
+msgstr "شماره تلفن معتبر نیست 09123456789"
+
+#: core/models.py:74
+msgid "Phone Number"
+msgstr "شماره تلفن"
+
+#: core/models.py:77 shop/models.py:61
+msgid "Email"
+msgstr "ایمیل"
+
+#: core/models.py:78
+msgid "Password"
+msgstr "رمز عبور"
+
+#: core/models.py:79
+#, fuzzy
+#| msgid "Action"
+msgid "Active"
+msgstr "عملیات"
+
+#: core/models.py:80
+msgid "Staff"
+msgstr "کارمند"
+
+#: core/models.py:81
+msgid "Last Login"
+msgstr "آخرین ورود"
+
+#: core/models.py:90
+#, fuzzy
+#| msgid "User"
+msgid "Users"
+msgstr "کاربر"
 
 #: shop/admin.py:11 shop/models.py:39
 msgid "Inventory"
@@ -185,13 +225,6 @@ msgstr "نام"
 msgid "Last Name"
 msgstr "نام خانوادگی"
 
-msgid "LAST NAME"
-msgstr "نام خانوادگی"
-
-#: shop/models.py:61
-msgid "Email"
-msgstr "ایمیل"
-
 #: shop/models.py:62
 msgid "Phone"
 msgstr "تلفن"
@@ -291,6 +324,9 @@ msgstr "آیتم برچسب گزاری شده"
 #| msgid "Cart Items"
 msgid "Tagged Items"
 msgstr "آیتم‌های برچسب گزاری شده"
+
+#~ msgid "LAST NAME"
+#~ msgstr "نام خانوادگی"
 
 #, fuzzy
 #~| msgid "Inventory"
