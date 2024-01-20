@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-20 12:44+0330\n"
+"POT-Creation-Date: 2024-01-20 13:03+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -122,7 +122,7 @@ msgstr ""
 msgid "Last Update"
 msgstr ""
 
-#: shop/models.py:48 shop/models.py:94 shop/models.py:119
+#: shop/models.py:48 shop/models.py:94 shop/models.py:120
 msgid "Product"
 msgstr ""
 
@@ -202,7 +202,7 @@ msgstr ""
 msgid "Orders"
 msgstr ""
 
-#: shop/models.py:95 shop/models.py:120
+#: shop/models.py:95 shop/models.py:121
 msgid "Quantity"
 msgstr ""
 
@@ -230,14 +230,34 @@ msgstr ""
 msgid "Addresses"
 msgstr ""
 
-#: shop/models.py:118
+#: shop/models.py:119
 msgid "Cart"
 msgstr ""
 
-#: shop/models.py:123
+#: shop/models.py:124
 msgid "Cart Item"
 msgstr ""
 
-#: shop/models.py:124
+#: shop/models.py:125
 msgid "Cart Items"
+msgstr ""
+
+#: tags/models.py:17
+msgid "Label"
+msgstr ""
+
+#: tags/models.py:23 tags/models.py:29
+msgid "Tag"
+msgstr ""
+
+#: tags/models.py:24
+msgid "Tags"
+msgstr ""
+
+#: tags/models.py:35
+msgid "Tagged Item"
+msgstr ""
+
+#: tags/models.py:36
+msgid "Tagged Items"
 msgstr ""

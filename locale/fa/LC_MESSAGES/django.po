@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-20 12:44+0330\n"
+"POT-Creation-Date: 2024-01-20 13:03+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Yousof.A.Asadi <yosofasadi2@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -124,7 +124,7 @@ msgstr "موجودی"
 msgid "Last Update"
 msgstr "آخرین به‌روزرسانی"
 
-#: shop/models.py:48 shop/models.py:94 shop/models.py:119
+#: shop/models.py:48 shop/models.py:94 shop/models.py:120
 msgid "Product"
 msgstr "محصول"
 
@@ -206,7 +206,7 @@ msgstr "سفارش"
 msgid "Orders"
 msgstr "سفارش‌ها"
 
-#: shop/models.py:95 shop/models.py:120
+#: shop/models.py:95 shop/models.py:121
 msgid "Quantity"
 msgstr "تعداد"
 
@@ -234,14 +234,38 @@ msgstr "آدرس"
 msgid "Addresses"
 msgstr "آدرس‌ها"
 
-#: shop/models.py:118
+#: shop/models.py:119
 msgid "Cart"
 msgstr "سبد خرید"
 
-#: shop/models.py:123
+#: shop/models.py:124
 msgid "Cart Item"
 msgstr "آیتم سبد خرید"
 
-#: shop/models.py:124
+#: shop/models.py:125
 msgid "Cart Items"
 msgstr "آیتم‌های سبد خرید"
+
+#: tags/models.py:17
+msgid "Label"
+msgstr "برچسب"
+
+#: tags/models.py:23 tags/models.py:29
+msgid "Tag"
+msgstr "برچسب"
+
+#: tags/models.py:24
+msgid "Tags"
+msgstr "برچسب ها"
+
+#: tags/models.py:35
+#, fuzzy
+#| msgid "Cart Item"
+msgid "Tagged Item"
+msgstr "آیتم برچسب گزاری شده"
+
+#: tags/models.py:36
+#, fuzzy
+#| msgid "Cart Items"
+msgid "Tagged Items"
+msgstr "آیتم‌های برچسب گزاری شده"
