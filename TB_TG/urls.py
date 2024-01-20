@@ -24,6 +24,7 @@ from django.urls import path, include
 urlpatterns = i18n_patterns(
     path('admin/', admin.site.urls),
     path('rosetta/', include('rosetta.urls')),
+    path('shop/', include('shop.urls')),
 
     prefix_default_language=False
 )

@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'rosetta',
     'core',
     'shop',
@@ -107,12 +108,12 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTH_USER_MODEL = 'core.User'
-AUTHENTICATION_BACKENDS = ['users.backends.PhoneBackend']
+AUTHENTICATION_BACKENDS = ['core.backends.PhoneBackend']
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'fa'
+LANGUAGE_CODE = 'en'
 
 LANGUAGES = [
     ('en', _('English')),
@@ -146,3 +147,8 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'djmailyosof@gmail.com'
 EMAIL_HOST_PASSWORD = 'wlbqpqetjidxlxvs'
+
+
+REST_FRAMEWORK = {
+    'COERCE_DECIMAL_TO_STRING': False
+}
