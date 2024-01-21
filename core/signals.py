@@ -62,8 +62,8 @@ def get_model_changes(old_instance, new_instance):
                 }
             elif isinstance(field, ForeignKey):
                 changes[field.name] = {
-                    'old_value': old_value.pk,
-                    'new_value': new_value.pk,
+                    'old_value': old_value.pk if old_value is not None else None,
+                    'new_value': new_value.pk if new_value is not None else None,
                 }
             else:
                 changes[field.name] = {
