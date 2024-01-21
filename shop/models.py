@@ -38,7 +38,8 @@ class Product(BaseModel):
     unit_price = models.DecimalField(_("Unit Price"), max_digits=6, decimal_places=2, validators=[MinValueValidator(1)])
     inventory = models.IntegerField(_("Inventory"), validators=[MinValueValidator(0)])
     last_update = models.DateTimeField(_("Last Update"), auto_now=True)
-    collection = models.ForeignKey(Collection, on_delete=models.PROTECT, verbose_name=_("Collection"))
+    collection = models.ForeignKey(Collection, on_delete=models.PROTECT, verbose_name=_("Collection"),
+                                   related_name='products')
     promotions = models.ManyToManyField(Promotion, blank=True, verbose_name=_("Promotions"))
 
     def __str__(self) -> str:
@@ -91,7 +92,7 @@ class Order(BaseModel):
 
 class OrderItem(BaseModel):
     order = models.ForeignKey(Order, on_delete=models.PROTECT, verbose_name=_("Order"))
-    product = models.ForeignKey(Product, on_delete=models.PROTECT, verbose_name=_("Product"))
+    product = models.ForeignKey(Product, on_delete=models.PROTECT, verbose_name=_("Product"), related_name='orderitems')
     quantity = models.PositiveSmallIntegerField(_("Quantity"))
     unit_price = models.DecimalField(_("Unit Price"), max_digits=6, decimal_places=2)
 
@@ -123,6 +124,3 @@ class CartItem(BaseModel):
     class Meta:
         verbose_name = _("Cart Item")
         verbose_name_plural = _("Cart Items")
-
-
-
