@@ -7,7 +7,7 @@ from django.contrib.sessions.models import Session
 from django.db.models.signals import post_save, pre_delete, pre_save
 from django.db.models.fields.related import ForeignKey
 from django.db.models.fields.files import FileField
-from django.db.models.fields import DateTimeField
+from django.db.models.fields import DateTimeField, DateField
 import uuid
 import inspect
 
@@ -32,7 +32,7 @@ def serialize_model_instance(instance):
     for field in instance._meta.fields:
         field_value = getattr(instance, field.name)
 
-        if isinstance(field, DateTimeField):
+        if isinstance(field, (DateTimeField, DateField)):
             field_value = field_value.isoformat() if field_value else None
         elif isinstance(field, ForeignKey):
             field_value = str(field_value.pk) if field_value else None
@@ -91,7 +91,7 @@ def log_create_update(sender, instance, **kwargs):
     except sender.DoesNotExist:
         action = 'CREATE'
         old_value = None
-        changes = None
+        changes = serialize_model_instance(instance)
     else:
         action = 'UPDATE'
         old_value = serialize_model_instance(old_instance)
@@ -121,6 +121,9 @@ def log_create_update(sender, instance, **kwargs):
             user = None
     else:
         user = None
+
+    print(old_value)
+    print(changes)
     AuditLog.objects.create(
         user=user,
         action=action,

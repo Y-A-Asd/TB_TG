@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+from datetime import timedelta
 from pathlib import Path
 from django.utils.translation import gettext_lazy as _
 
@@ -163,11 +163,12 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-   'AUTH_HEADER_TYPES': ('JWT',),
+    'AUTH_HEADER_TYPES': ('JWT',),
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=1)
 }
 
 DJOSER = {
     'SERIALIZERS': {
-       'user_create': 'core.serializers.UserCreateSerializer'
+        'user_create': 'core.serializers.UserCreateSerializer'
     }
 }

@@ -72,6 +72,9 @@ class Customer(BaseModel):
         verbose_name = _("Customer")
         verbose_name_plural = _("Customers")
         ordering = ["first_name", "last_name"]
+        permissions = [
+            ('view_history', 'Can view history')
+        ]
 
 
 class Order(BaseModel):
