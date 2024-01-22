@@ -10,8 +10,8 @@ from django_filters.rest_framework import DjangoFilterBackend
 from .pagination import DefaultPagination
 from .serializers import ProductSerializer, CollectionSerializer, ReviewSerializer, CartSerializer, \
     CartItemSerializer, AddItemsSerializer, UpdateItemsSerializer, CustomerSerializer, OrderSerializer, \
-    CreateOrderSerializer, UpdateOrderSerializer
-from .models import Product, Collection, OrderItem, Review, Cart, CartItem, Customer, Order
+    CreateOrderSerializer, UpdateOrderSerializer, ProductImageSerializer
+from .models import Product, Collection, OrderItem, Review, Cart, CartItem, Customer, Order, ProductImage
 from .filters import ProductFilter
 from .permissions import IsAdminOrReadOnly, ViewCustomerHistoryPermission
 
@@ -129,7 +129,7 @@ from .permissions import IsAdminOrReadOnly, ViewCustomerHistoryPermission
 
 
 class ProductViewSet(ModelViewSet):
-    queryset = Product.objects.all()
+    queryset = Product.objects.all().prefetch_related('images')
     serializer_class = ProductSerializer
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     filterset_class = ProductFilter
@@ -264,3 +264,14 @@ class OrderViewSet(ModelViewSet):
         elif self.request.method == 'PATCH':
             return UpdateOrderSerializer
         return OrderSerializer
+
+
+class ProductImageViewSet(ModelViewSet):
+    serializer_class = ProductImageSerializer
+
+    def get_serializer_context(self):
+        return {'product_id': self.kwargs['product_pk']}
+
+    def get_queryset(self):
+        print(self.kwargs)
+        return ProductImage.objects.filter(prodcut_id=self.kwargs['product_pk'])

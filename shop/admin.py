@@ -4,6 +4,8 @@ from django.db.models.query import QuerySet
 from django.utils.html import format_html, urlencode
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
+from parler.admin import TranslatableAdmin
+
 from . import models
 
 
@@ -22,6 +24,23 @@ class InventoryFilter(admin.SimpleListFilter):
             return queryset.filter(inventory__lt=10)
 
 
+@admin.register(models.Promotion)
+class PromotionAdmin(TranslatableAdmin):
+    # list_display = ('products_title', 'description', 'discount')
+    ...
+
+
+class ProductImageInline(admin.TabularInline):
+    model = models.ProductImage
+    readonly_fields = ['thumbnail']
+
+    def thumbnail(self, obj):
+        if obj.image.name != '':
+            return format_html(
+                f'<img class="thumbnail" src="{obj.image.url}"/>'
+            )
+
+
 @admin.register(models.Product)
 class ProductAdmin(admin.ModelAdmin):
     autocomplete_fields = ['collection']
@@ -29,6 +48,7 @@ class ProductAdmin(admin.ModelAdmin):
         'slug': ['title']
     }
     actions = ['Clear inventory']
+    inlines = [ProductImageInline]
     list_display = ['title', 'unit_price',
                     'inventory_status', 'collection_title']
     list_editable = ['unit_price']
@@ -55,6 +75,11 @@ class ProductAdmin(admin.ModelAdmin):
             _('{count} products were successfully updated.').format(count=updated_count),
             messages.ERROR
         )
+
+    class Media:
+        css = {
+            'all': ['shop/style.css']
+        }
 
 
 @admin.register(models.Collection)

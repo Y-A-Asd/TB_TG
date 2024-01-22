@@ -1,14 +1,27 @@
 from decimal import Decimal
 from django.db import transaction
+from django.utils.text import slugify
 from rest_framework import serializers
-from shop.models import Product, Collection, Review, Cart, CartItem, Customer, Order, OrderItem
+from shop.models import Product, Collection, Review, Cart, CartItem, Customer, Order, OrderItem, ProductImage
+
+
+class ProductImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductImage
+        fields = ['id', 'image']
+
+    def create(self, validated_data):
+        product_id = self.context['product_id']
+        return ProductImage.objects.create(product_id=product_id, **validated_data)
 
 
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ['id', 'title', 'slug', 'description', 'inventory', 'price', 'price_with_tax', 'collection']
+        fields = ['id', 'title', 'description', 'inventory', 'price', 'price_with_tax', 'collection_id', 'images']
 
+    images = ProductImageSerializer(many=True, read_only=True)
+    collection_id = serializers.IntegerField(required=False)
     price = serializers.DecimalField(max_digits=6, decimal_places=2, source='unit_price')
     price_with_tax = serializers.SerializerMethodField(method_name='calculate_tax')
 
@@ -16,6 +29,17 @@ class ProductSerializer(serializers.ModelSerializer):
 
     def calculate_tax(self, product: Product):
         return product.unit_price * Decimal(1.1)
+
+    def create(self, validated_data):
+        # Generate a slug based on the title
+        validated_data['slug'] = slugify(validated_data['title'])
+        return super().create(validated_data)
+
+    def update(self, instance, validated_data):
+        # Update the slug if the title is modified
+        if 'title' in validated_data:
+            validated_data['slug'] = slugify(validated_data['title'])
+        return super().update(instance, validated_data)
 
 
 class SimpleProductSerializer(serializers.ModelSerializer):
