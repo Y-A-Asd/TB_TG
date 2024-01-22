@@ -35,7 +35,7 @@ def serialize_model_instance(instance):
         if isinstance(field, DateTimeField):
             field_value = field_value.isoformat() if field_value else None
         elif isinstance(field, ForeignKey):
-            field_value = field_value.pk if field_value else None
+            field_value = str(field_value.pk) if field_value else None
         elif isinstance(field, FileField):
             continue
         elif isinstance(field_value, (Decimal, uuid.UUID)):
@@ -121,7 +121,6 @@ def log_create_update(sender, instance, **kwargs):
             user = None
     else:
         user = None
-
     AuditLog.objects.create(
         user=user,
         action=action,
