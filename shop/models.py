@@ -116,11 +116,12 @@ class Cart(BaseModel):
 
 
 class CartItem(BaseModel):
-    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, verbose_name=_("Cart"))
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, verbose_name=_("Cart"), related_name='items')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name=_("Product"))
     quantity = models.PositiveSmallIntegerField(_("Quantity"))
 
     class Meta:
+        unique_together = [['cart', 'product']]
         verbose_name = _("Cart Item")
         verbose_name_plural = _("Cart Items")
 
