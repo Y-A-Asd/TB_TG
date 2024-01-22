@@ -83,7 +83,6 @@ class Order(BaseModel):
         PAYMENT_STATUS_COMPLETE = 'C', _('Complete')
         PAYMENT_STATUS_FAILED = 'F', _('Failed')
 
-    placed_at = models.DateTimeField(_("Placed At"), auto_now_add=True)
     payment_status = models.CharField(_("Payment Status"), max_length=1, choices=PaymentStatus,
                                       default=PaymentStatus.PAYMENT_STATUS_PENDING)
     customer = models.ForeignKey(Customer, on_delete=models.PROTECT, verbose_name=_("Customer"))
@@ -94,10 +93,9 @@ class Order(BaseModel):
 
 
 class OrderItem(BaseModel):
-    order = models.ForeignKey(Order, on_delete=models.PROTECT, verbose_name=_("Order"))
+    order = models.ForeignKey(Order, on_delete=models.PROTECT, verbose_name=_("Order"), related_name='orders')
     product = models.ForeignKey(Product, on_delete=models.PROTECT, verbose_name=_("Product"), related_name='orderitems')
     quantity = models.PositiveSmallIntegerField(_("Quantity"))
-    unit_price = models.DecimalField(_("Unit Price"), max_digits=6, decimal_places=2)
 
     class Meta:
         verbose_name = _("Order Item")

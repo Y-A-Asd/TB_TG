@@ -117,4 +117,4 @@ class OrderAdmin(admin.ModelAdmin):
     autocomplete_fields = ['customer']
     list_filter = ['customer']
     inlines = [OrderItemInline]
-    list_display = ['id', 'placed_at', 'customer']
+    list_display = ['id', 'created_at', 'customer']
