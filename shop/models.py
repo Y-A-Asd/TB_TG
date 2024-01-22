@@ -1,6 +1,7 @@
 from django.core.validators import MinValueValidator
 from django.utils.translation import gettext_lazy as _
 from django.db import models
+from django.conf import settings
 from core.models import BaseModel
 import uuid
 
@@ -59,11 +60,10 @@ class Customer(BaseModel):
 
     first_name = models.CharField(_("First Name"), max_length=255)
     last_name = models.CharField(_("Last Name"), max_length=255)
-    email = models.EmailField(_("Email"), unique=True)
-    phone = models.CharField(_("Phone"), max_length=255)
     birth_date = models.DateField(_("Birth Date"), null=True, blank=True)
     membership = models.CharField(_("Membership"), max_length=1, choices=MembershipStatus,
                                   default=MembershipStatus.MEMBERSHIP_BRONZE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, verbose_name=_("User"), on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'

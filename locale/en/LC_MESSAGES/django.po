@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-20 18:45+0330\n"
+"POT-Creation-Date: 2024-01-22 05:37+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,19 +18,19 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: TB_TG/settings.py:117
+#: TB_TG/settings.py:124
 msgid "English"
 msgstr ""
 
-#: TB_TG/settings.py:118
+#: TB_TG/settings.py:125
 msgid "Persian"
 msgstr ""
 
-#: core/admin.py:12 tags/models.py:23 tags/models.py:29
+#: core/admin.py:16 tags/models.py:23 tags/models.py:29
 msgid "Tag"
 msgstr ""
 
-#: core/admin.py:13 tags/models.py:24
+#: core/admin.py:17 tags/models.py:24
 msgid "Tags"
 msgstr ""
 
@@ -46,7 +46,7 @@ msgstr ""
 msgid "Deleted at"
 msgstr ""
 
-#: core/models.py:35 core/models.py:89
+#: core/models.py:35 core/models.py:89 shop/models.py:66
 msgid "User"
 msgstr ""
 
@@ -94,7 +94,7 @@ msgstr ""
 msgid "Phone Number"
 msgstr ""
 
-#: core/models.py:77 shop/models.py:61
+#: core/models.py:77
 msgid "Email"
 msgstr ""
 
@@ -118,7 +118,7 @@ msgstr ""
 msgid "Users"
 msgstr ""
 
-#: shop/admin.py:11 shop/models.py:39
+#: shop/admin.py:11 shop/models.py:41
 msgid "Inventory"
 msgstr ""
 
@@ -139,84 +139,76 @@ msgstr ""
 msgid "{count} products were successfully updated."
 msgstr ""
 
-#: shop/admin.py:73 shop/models.py:49
+#: shop/admin.py:73 shop/models.py:51
 msgid "Products"
 msgstr ""
 
-#: shop/admin.py:96 shop/models.py:89
+#: shop/admin.py:97 shop/models.py:90
 msgid "Orders"
 msgstr ""
 
-#: shop/models.py:8 shop/models.py:37
+#: shop/models.py:10 shop/models.py:39
 msgid "Description"
 msgstr ""
 
-#: shop/models.py:9
+#: shop/models.py:11
 msgid "Discount"
 msgstr ""
 
-#: shop/models.py:12
+#: shop/models.py:14
 msgid "Promotion"
 msgstr ""
 
-#: shop/models.py:13 shop/models.py:42
+#: shop/models.py:15 shop/models.py:44
 msgid "Promotions"
 msgstr ""
 
-#: shop/models.py:17 shop/models.py:35
+#: shop/models.py:19 shop/models.py:37
 msgid "Title"
 msgstr ""
 
-#: shop/models.py:19
+#: shop/models.py:21
 msgid "Parent"
 msgstr ""
 
-#: shop/models.py:29 shop/models.py:41
+#: shop/models.py:31 shop/models.py:42
 msgid "Collection"
 msgstr ""
 
-#: shop/models.py:30
+#: shop/models.py:32
 msgid "Collections"
 msgstr ""
 
-#: shop/models.py:36
+#: shop/models.py:38
 msgid "Slug"
 msgstr ""
 
-#: shop/models.py:38 shop/models.py:96
+#: shop/models.py:40 shop/models.py:97
 msgid "Unit Price"
 msgstr ""
 
-#: shop/models.py:40
-msgid "Last Update"
-msgstr ""
-
-#: shop/models.py:48 shop/models.py:94 shop/models.py:120
+#: shop/models.py:50 shop/models.py:95 shop/models.py:120
 msgid "Product"
 msgstr ""
 
-#: shop/models.py:55
+#: shop/models.py:57
 msgid "Bronze"
 msgstr ""
 
-#: shop/models.py:56
+#: shop/models.py:58
 msgid "Silver"
 msgstr ""
 
-#: shop/models.py:57
+#: shop/models.py:59
 msgid "Gold"
 msgstr ""
 
-#: shop/models.py:59
+#: shop/models.py:61
 msgid "First Name"
 msgstr ""
 
-#: shop/models.py:60
-msgid "Last Name"
-msgstr ""
-
 #: shop/models.py:62
-msgid "Phone"
+msgid "Last Name"
 msgstr ""
 
 #: shop/models.py:63
@@ -227,63 +219,63 @@ msgstr ""
 msgid "Membership"
 msgstr ""
 
-#: shop/models.py:71 shop/models.py:85 shop/models.py:106
+#: shop/models.py:72 shop/models.py:86 shop/models.py:107
 msgid "Customer"
 msgstr ""
 
-#: shop/models.py:72
+#: shop/models.py:73
 msgid "Customers"
 msgstr ""
 
-#: shop/models.py:78
+#: shop/models.py:79
 msgid "Pending"
 msgstr ""
 
-#: shop/models.py:79
+#: shop/models.py:80
 msgid "Complete"
 msgstr ""
 
-#: shop/models.py:80
+#: shop/models.py:81
 msgid "Failed"
 msgstr ""
 
-#: shop/models.py:82
+#: shop/models.py:83
 msgid "Placed At"
 msgstr ""
 
-#: shop/models.py:83
+#: shop/models.py:84
 msgid "Payment Status"
 msgstr ""
 
-#: shop/models.py:88 shop/models.py:93
+#: shop/models.py:89 shop/models.py:94
 msgid "Order"
 msgstr ""
 
-#: shop/models.py:95 shop/models.py:121
+#: shop/models.py:96 shop/models.py:121
 msgid "Quantity"
 msgstr ""
 
-#: shop/models.py:99
+#: shop/models.py:100
 msgid "Order Item"
 msgstr ""
 
-#: shop/models.py:100
+#: shop/models.py:101
 msgid "Order Items"
 msgstr ""
 
-#: shop/models.py:104
+#: shop/models.py:105
 msgid "Street"
 msgstr ""
 
-#: shop/models.py:105
+#: shop/models.py:106
 msgid "City"
 msgstr ""
 
-#: shop/models.py:109
+#: shop/models.py:110
 msgid "Address"
 msgstr ""
 
-#: shop/models.py:110
+#: shop/models.py:111
 msgid "Addresses"
 msgstr ""
 
@@ -291,11 +283,11 @@ msgstr ""
 msgid "Cart"
 msgstr ""
 
-#: shop/models.py:124
+#: shop/models.py:125
 msgid "Cart Item"
 msgstr ""
 
-#: shop/models.py:125
+#: shop/models.py:126
 msgid "Cart Items"
 msgstr ""
 

@@ -5,8 +5,10 @@ from .models import User
 class PhoneBackend(ModelBackend):
     def authenticate(self, request, username=None, password=None, **kwargs):
         try:
-            user = User.objects.get(phone_number=username)
-            print(user)
+            if username is not None:
+                user = User.objects.get(phone_number=username)
+            else:
+                user = User.objects.get(phone_number=kwargs.get('phone_number'))
         except User.DoesNotExist:
             return None
         if user.check_password(password):

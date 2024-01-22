@@ -2,7 +2,7 @@ from decimal import Decimal
 
 from rest_framework import serializers
 
-from shop.models import Product, Collection, Review, Cart, CartItem
+from shop.models import Product, Collection, Review, Cart, CartItem, Customer
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -132,3 +132,10 @@ class UpdateItemsSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError('Most be at least 1 !')
         else:
             return value
+
+
+class CustomerSerializer(serializers.ModelSerializer):
+    user_id = serializers.IntegerField()
+    class Meta:
+        model = Customer
+        fields = ['id', 'first_name', 'last_name', 'user_id', 'birth_date', 'membership']
