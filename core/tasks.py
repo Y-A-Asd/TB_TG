@@ -22,7 +22,7 @@ def delete_inactive_users():
 @shared_task
 def send_promotion_emails():
     one_days_ago = timezone.now() - timezone.timedelta(days=1)
-    promotions = Promotion.objects.filter(created_at__lte=one_days_ago)
+    promotions = Promotion.objects.filter(created_at__gte=one_days_ago)
 
     for user in User.objects.all():
         subject = 'New Promotions!'
@@ -30,8 +30,13 @@ def send_promotion_emails():
         to_email = user.email
 
         try:
-            send_mail(subject, message, 'djmailyosof@gmail.com', [to_email], auth_user='djmailyosof@gmail.com',
-                      auth_password=EMAIL_HOST_PASSWORD)
-            logger.info(f"Sent promotion email to {to_email}")
+            if promotions.exists():
+                promotion_messages = "\n".join([f" - {promotion}" for promotion in promotions])
+                message = f"New promotions available:\n{promotion_messages}\n\n{message}"
+                send_mail(subject, message, 'djmailyosof@gmail.com', [to_email],
+                          auth_user='djmailyosof@gmail.com', auth_password=EMAIL_HOST_PASSWORD)
+                logger.info(f"Sent promotion email to {to_email}")
+            else:
+                logger.info(f"No new promotions to send to {to_email}")
         except Exception as e:
             logger.error(f"Failed to send promotion email to {to_email}: {e}")
