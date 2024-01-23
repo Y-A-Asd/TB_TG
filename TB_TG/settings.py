@@ -10,8 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
-from datetime import timedelta
 from pathlib import Path
+from celery.schedules import crontab
+from datetime import timedelta
 from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -187,3 +188,23 @@ PARLER_LANGUAGES = {
         'hide_untranslated': False,
     }
 }
+
+CELERY_BROKER_URL = 'redis://localhost:6379/1'
+CELERY_BEAT_SCHEDULE = {
+    'delete_inactive_users': {
+        'task': 'core.tasks.delete_inactive_users',
+        'schedule': crontab(hour='*/24'),
+    },
+    'send_promotion_emails': {
+        'task': 'core.tasks.send_promotion_emails',
+        'schedule': crontab(hour='*/24'),
+    },
+}
+"""
+celery command:
+    celery -A TB_TG beat -> apply beat worker
+    celery -A TB_TG flower -> apply flower celery manager at localhost:5555
+    celery -A TB_TG worker --loglevel=info -> run celery worker
+    
+
+"""
