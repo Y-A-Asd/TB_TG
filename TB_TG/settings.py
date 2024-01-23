@@ -76,8 +76,7 @@ ROOT_URLCONF = 'TB_TG.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -211,4 +210,19 @@ celery command:
     celery -A TB_TG worker --loglevel=info -> run celery worker
     
 
+"""
+
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/2",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
+"""
+how to use cache in class base views:
+    @method_decorator(cache_page(60) -> 1 minute cache
 """
