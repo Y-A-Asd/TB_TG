@@ -1,0 +1,3 @@
+2024-01-24 00:52:03,708 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-24 00:52:07,186 %(INFO)s - shop.views - List view accessed
+2024-01-24 00:54:05,295 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/TB_TG/settings.py changed, reloading.

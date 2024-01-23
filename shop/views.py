@@ -1,4 +1,5 @@
 from django.db.models import Count
+import logging
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import action
@@ -14,6 +15,10 @@ from .serializers import ProductSerializer, CollectionSerializer, ReviewSerializ
 from .models import Product, Collection, OrderItem, Review, Cart, CartItem, Customer, Order, ProductImage
 from .filters import ProductFilter
 from .permissions import IsAdminOrReadOnly, ViewCustomerHistoryPermission
+
+logger = logging.getLogger(__name__)
+# logger.info()
+
 
 # Create your views here.
 """class api view example"""
@@ -140,6 +145,13 @@ class ProductViewSet(ModelViewSet):
 
     """we can manually filter by overwrite get_queryset function"""
 
+    def list(self, request, *args, **kwargs):
+        # Log a message when the list view is accessed
+        logger.info("List view accessed")
+
+        queryset = self.filter_queryset(self.get_queryset())
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
     # def get_queryset(self):
     #     queryset = Product.objects.all()
     #     collection_id = self.request.query_params.get('collection_id')
@@ -173,6 +185,7 @@ class ReviewViewSet(ModelViewSet):
     pagination_class = DefaultPagination
 
     def get_queryset(self):
+        logger.info('test-logs')
         return Review.objects.filter(product_id=self.kwargs['product_pk'])
 
     def get_serializer_context(self):
