@@ -4,7 +4,7 @@ from celery.utils.log import get_task_logger
 from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
 from django.utils import timezone
-from TB_TG.settings import EMAIL_HOST_PASSWORD
+from TB_TG.settings.common import EMAIL_HOST_PASSWORD
 from .models import User
 from shop.models import Promotion
 

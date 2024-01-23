@@ -16,18 +16,11 @@ from datetime import timedelta
 from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-^r6+$o=0!juwr_0k89v86z93ikk&3=f1#fdxrse&k52vi*7e_u'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
 
 INTERNAL_IPS = [
     # ...
@@ -68,9 +61,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-if DEBUG:
-    MIDDLEWARE += ['silk.middleware.SilkyMiddleware']
 
 ROOT_URLCONF = 'TB_TG.urls'
 
@@ -250,7 +240,7 @@ LOGGING = {
     },
     'formatters': {
         'verbose': {
-            'format': '{asctime} %({levelname})s - {name} - {massage}',
+            'format': '{asctime} %({levelname})s - {name} - {message}',
             'style': '{'
         }
     }
