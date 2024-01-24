@@ -227,3 +227,8 @@ KeyError: "Key 'name' not found in 'ProductForm'. Choices are: collection, descr
 2024-01-24 04:54:22,053 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
 2024-01-24 04:54:23,504 %(WARNING)s - silk.model_factory - Response to request with pk 771f819c-294f-4147-8d2c-42bf3783f4d2 has content type text/javascript but was unable to parse it
 2024-01-24 04:54:43,429 %(WARNING)s - silk.model_factory - Response to request with pk 82aa272d-c778-422a-91eb-3dbe48ca45c0 has content type text/javascript but was unable to parse it
+2024-01-24 19:26:38,585 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-24 19:27:19,697 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/models.py changed, reloading.
+2024-01-24 19:27:20,517 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-24 19:28:54,758 %(WARNING)s - silk.model_factory - Response to request with pk 509e5348-bc71-4d53-a364-a06f2222bc68 has content type text/javascript but was unable to parse it
+2024-01-24 19:28:57,013 %(WARNING)s - silk.model_factory - Response to request with pk 183afcc4-0391-4339-88ff-8effb47df3d8 has content type text/javascript but was unable to parse it

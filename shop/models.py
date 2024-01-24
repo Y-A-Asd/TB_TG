@@ -120,7 +120,7 @@ class Customer(TranslatableModel, BaseModel):
 
 class Address(BaseModel):
     zip_code = models.CharField(_("Zip Code"), max_length=10)
-    path = models.CharField(_("Path"), max_length=255)
+    path = models.CharField(_("Path"), max_length=1025)
     city = models.CharField(_("City"), max_length=255)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, verbose_name=_("Customer"))
 
@@ -130,13 +130,15 @@ class Address(BaseModel):
 
 
 class Order(BaseModel):
-    class PaymentStatus(models.TextChoices):
-        PAYMENT_STATUS_PENDING = 'P', _('Pending')
-        PAYMENT_STATUS_COMPLETE = 'C', _('Complete')
-        PAYMENT_STATUS_FAILED = 'F', _('Failed')
+    class OrderStatus(models.TextChoices):
+        ORDER_STATUS_NOT_PAID = 'N', _('Not Paid')
+        ORDER_STATUS_PENDING = 'P', _('Pending')
+        ORDER_STATUS_SHIPPING = 'S', _('Shipping')
+        ORDER_STATUS_DELIVERED = 'D', _('Delivered')
+        ORDER_STATUS_FAILED = 'F', _('Failed')
 
-    payment_status = models.CharField(_("Payment Status"), max_length=1, choices=PaymentStatus,
-                                      default=PaymentStatus.PAYMENT_STATUS_PENDING)
+    payment_status = models.CharField(_("Payment Status"), max_length=1, choices=OrderStatus,
+                                      default=OrderStatus.ORDER_STATUS_NOT_PAID)
     customer = models.ForeignKey(Customer, on_delete=models.PROTECT, verbose_name=_("Customer"))
     address = models.ForeignKey(Address, on_delete=models.PROTECT, verbose_name=_("Address"))
 
@@ -187,9 +189,19 @@ class DiscountItemManager(models.Manager):
 
 
 class BaseDiscount(BaseModel):
+    class Mode(models.TextChoices):
+        DirectPrice = 'DO', _('DirectPrice')
+        DiscountOff = 'DP', _('DiscountOff')
+
     discount = models.DecimalField(_("Discount"), max_digits=12, decimal_places=2)
     active = models.BooleanField(_("Active"), default=True)
-    timestamp = models.DateTimeField(_("Timestamp"), default=None)
+    code = models.CharField(_('Code'), max_length=50, unique=True, null=True, blank=True)
+    valid_from = models.DateTimeField()
+    valid_to = models.DateTimeField()
+    mode = models.CharField(_('Mode'),
+                            max_length=2,
+                            choices=Mode,
+                            default=Mode.DiscountOff)
 
     class Meta:
         verbose_name = _("Discount")
@@ -220,10 +232,45 @@ class DiscountItems(models.Model):
             content_type=self.content_type,
             object_id=self.object_id,
             discount__active=True
-        ).exclude(pk=self.pk)  # Exclude the current instance for updates
+        ).exclude(pk=self.pk)
 
         if existing_discount_item.exists():
             raise ValidationError(_('There is already an active discount for this item.'))
 
-# class SiteSettings(BaseModel):
-#     pass
+
+class Transaction(BaseModel):
+    class PaymentStatus(models.TextChoices):
+        PAYMENT_STATUS_PENDING = 'P', _('Pending')
+        PAYMENT_STATUS_COMPLETE = 'C', _('Complete')
+        PAYMENT_STATUS_FAILED = 'F', _('Failed')
+
+    order = models.OneToOneField(Order, on_delete=models.CASCADE, verbose_name=_("Order"), related_name='transaction')
+    payment_status = models.CharField(_("Payment Status"), max_length=1, choices=PaymentStatus,
+                                      default=PaymentStatus.PAYMENT_STATUS_PENDING)
+    total_price = models.DecimalField(_("Total Price"), max_digits=10, decimal_places=2)
+    customer = models.ForeignKey(Customer, on_delete=models.PROTECT, verbose_name=_("Customer"))
+    receipt_number = models.CharField(_("Receipt Number"), max_length=255)
+
+    def __str__(self):
+        return f"Transaction for Order #{self.order.pk} - {self.get_payment_status_display()}"
+
+    class Meta:
+        verbose_name = _("Transaction")
+        verbose_name_plural = _("Transactions")
+
+
+class SiteSettings(TranslatableModel, BaseModel):
+    translations = TranslatedFields(
+        footer_text = models.TextField(_("Footer Text"), blank=True, null=True),
+        address = models.TextField(_("Address"), blank=True, null=True)
+    )
+    phone_number = models.CharField(_("Phone Number"), max_length=20, blank=True, null=True)
+    logo = models.ImageField(_("Logo"), upload_to='site_settings/logos/', blank=True, null=True)
+    social_media_links = models.JSONField(_("Social Media Links"), blank=True, null=True)
+
+    def __str__(self):
+        return f"Site Settings {self.pk}"
+
+    class Meta:
+        verbose_name = _("Site Settings")
+        verbose_name_plural = _("Site Settings")

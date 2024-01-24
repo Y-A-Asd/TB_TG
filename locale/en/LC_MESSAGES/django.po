@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-24 04:57+0330\n"
+"POT-Creation-Date: 2024-01-24 19:29+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -54,7 +54,7 @@ msgstr ""
 msgid "Action"
 msgstr ""
 
-#: core/models.py:37 shop/models.py:192
+#: core/models.py:37
 msgid "Timestamp"
 msgstr ""
 
@@ -90,7 +90,7 @@ msgstr ""
 msgid "Phone number must start with \"09\" and have 11 digits."
 msgstr ""
 
-#: core/models.py:74
+#: core/models.py:74 shop/models.py:267
 msgid "Phone Number"
 msgstr ""
 
@@ -102,7 +102,7 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: core/models.py:79 shop/models.py:191
+#: core/models.py:79 shop/models.py:197
 msgid "Active"
 msgstr ""
 
@@ -143,7 +143,7 @@ msgstr ""
 msgid "Products"
 msgstr ""
 
-#: shop/admin.py:121 shop/models.py:145
+#: shop/admin.py:121 shop/models.py:147
 msgid "Orders"
 msgstr ""
 
@@ -183,7 +183,7 @@ msgstr ""
 msgid "Unit Price"
 msgstr ""
 
-#: shop/models.py:76 shop/models.py:150 shop/models.py:164
+#: shop/models.py:76 shop/models.py:152 shop/models.py:166
 msgid "Product"
 msgstr ""
 
@@ -215,7 +215,8 @@ msgstr ""
 msgid "Membership"
 msgstr ""
 
-#: shop/models.py:113 shop/models.py:125 shop/models.py:140 shop/models.py:174
+#: shop/models.py:113 shop/models.py:125 shop/models.py:142 shop/models.py:176
+#: shop/models.py:251
 msgid "Customer"
 msgstr ""
 
@@ -235,7 +236,7 @@ msgstr ""
 msgid "City"
 msgstr ""
 
-#: shop/models.py:128 shop/models.py:141
+#: shop/models.py:128 shop/models.py:143 shop/models.py:265
 msgid "Address"
 msgstr ""
 
@@ -244,67 +245,127 @@ msgid "Addresses"
 msgstr ""
 
 #: shop/models.py:134
+msgid "Not Paid"
+msgstr ""
+
+#: shop/models.py:135 shop/models.py:243
 msgid "Pending"
 msgstr ""
 
-#: shop/models.py:135
-msgid "Complete"
+#: shop/models.py:136
+msgid "Shipping"
 msgstr ""
 
-#: shop/models.py:136
+#: shop/models.py:137
+msgid "Delivered"
+msgstr ""
+
+#: shop/models.py:138 shop/models.py:245
 msgid "Failed"
 msgstr ""
 
-#: shop/models.py:138
+#: shop/models.py:140 shop/models.py:248
 msgid "Payment Status"
 msgstr ""
 
-#: shop/models.py:144 shop/models.py:149
+#: shop/models.py:146 shop/models.py:151 shop/models.py:247
 msgid "Order"
 msgstr ""
 
-#: shop/models.py:151 shop/models.py:165
+#: shop/models.py:153 shop/models.py:167
 msgid "Quantity"
 msgstr ""
 
-#: shop/models.py:154
+#: shop/models.py:156
 msgid "Order Item"
 msgstr ""
 
-#: shop/models.py:155
+#: shop/models.py:157
 msgid "Order Items"
 msgstr ""
 
-#: shop/models.py:163
+#: shop/models.py:165
 msgid "Cart"
 msgstr ""
 
-#: shop/models.py:169
+#: shop/models.py:171
 msgid "Cart Item"
 msgstr ""
 
-#: shop/models.py:170
+#: shop/models.py:172
 msgid "Cart Items"
 msgstr ""
 
-#: shop/models.py:190 shop/models.py:195 shop/models.py:200
+#: shop/models.py:193
+msgid "DirectPrice"
+msgstr ""
+
+#: shop/models.py:194
+msgid "DiscountOff"
+msgstr ""
+
+#: shop/models.py:196 shop/models.py:207 shop/models.py:212
 msgid "Discount"
 msgstr ""
 
-#: shop/models.py:196
+#: shop/models.py:198
+msgid "Code"
+msgstr ""
+
+#: shop/models.py:201
+msgid "Mode"
+msgstr ""
+
+#: shop/models.py:208
 msgid "Discounts"
 msgstr ""
 
-#: shop/models.py:215
+#: shop/models.py:227
 msgid "Discount Item"
 msgstr ""
 
-#: shop/models.py:216
+#: shop/models.py:228
 msgid "Discount Items"
 msgstr ""
 
-#: shop/models.py:226
+#: shop/models.py:238
 msgid "There is already an active discount for this item."
+msgstr ""
+
+#: shop/models.py:244
+msgid "Complete"
+msgstr ""
+
+#: shop/models.py:250
+msgid "Total Price"
+msgstr ""
+
+#: shop/models.py:252
+msgid "Receipt Number"
+msgstr ""
+
+#: shop/models.py:258
+msgid "Transaction"
+msgstr ""
+
+#: shop/models.py:259
+msgid "Transactions"
+msgstr ""
+
+#: shop/models.py:264
+msgid "Footer Text"
+msgstr ""
+
+#: shop/models.py:268
+msgid "Logo"
+msgstr ""
+
+#: shop/models.py:269
+msgid "Social Media Links"
+msgstr ""
+
+#: shop/models.py:275 shop/models.py:276
+msgid "Site Settings"
 msgstr ""
 
 #: shop/validator.py:22
