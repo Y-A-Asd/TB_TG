@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-24 03:49+0330\n"
+"POT-Creation-Date: 2024-01-24 04:57+0330\n"
 "PO-Revision-Date: 2024-01-20 18:55+0330\n"
 "Last-Translator: Anonymous User <yosofasady2@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,7 +47,7 @@ msgstr "تاریخ به‌روزرسانی"
 msgid "Deleted at"
 msgstr "تاریخ حذف"
 
-#: core/models.py:35 core/models.py:89 shop/models.py:84
+#: core/models.py:35 core/models.py:89 shop/models.py:100
 msgid "User"
 msgstr "کاربر"
 
@@ -55,7 +55,7 @@ msgstr "کاربر"
 msgid "Action"
 msgstr "عملیات"
 
-#: core/models.py:37 shop/models.py:169
+#: core/models.py:37 shop/models.py:192
 msgid "Timestamp"
 msgstr "زمان"
 
@@ -103,7 +103,7 @@ msgstr "ایمیل"
 msgid "Password"
 msgstr "رمز عبور"
 
-#: core/models.py:79 shop/models.py:168
+#: core/models.py:79 shop/models.py:191
 msgid "Active"
 msgstr "فعال"
 
@@ -119,7 +119,7 @@ msgstr "آخرین ورود"
 msgid "Users"
 msgstr "کاربران"
 
-#: shop/admin.py:13 shop/models.py:54
+#: shop/admin.py:13 shop/models.py:64
 msgid "Inventory"
 msgstr "موجودی"
 
@@ -140,185 +140,189 @@ msgstr "خالی کردن موجودی"
 msgid "{count} products were successfully updated."
 msgstr "{count} محصول با موفقیت به‌روزرسانی شدند."
 
-#: shop/admin.py:98 shop/models.py:64
+#: shop/admin.py:98 shop/models.py:77
 msgid "Products"
 msgstr "محصولات"
 
-#: shop/admin.py:122 shop/models.py:122
+#: shop/admin.py:121 shop/models.py:145
 msgid "Orders"
 msgstr "سفارش‌ها"
 
-#: shop/models.py:16 shop/models.py:32 shop/models.py:50
+#: shop/models.py:17 shop/models.py:34 shop/models.py:58
 msgid "Title"
 msgstr "عنوان"
 
-#: shop/models.py:17 shop/models.py:52
+#: shop/models.py:18 shop/models.py:60
 msgid "Description"
 msgstr "توضیحات"
 
-#: shop/models.py:21
+#: shop/models.py:22
 msgid "Promotion"
 msgstr "تبلیغات"
 
-#: shop/models.py:22 shop/models.py:57
+#: shop/models.py:23 shop/models.py:67
 msgid "Promotions"
 msgstr "تبلیغات"
 
-#: shop/models.py:34
+#: shop/models.py:38
 msgid "Parent"
 msgstr "والد"
 
-#: shop/models.py:44 shop/models.py:55
+#: shop/models.py:51 shop/models.py:65
 msgid "Collection"
 msgstr "مجموعه"
 
-#: shop/models.py:45
+#: shop/models.py:52
 msgid "Collections"
 msgstr "مجموعه‌ها"
 
-#: shop/models.py:51
+#: shop/models.py:59
 msgid "Slug"
 msgstr "نامک"
 
-#: shop/models.py:53
+#: shop/models.py:63
 msgid "Unit Price"
 msgstr "قیمت واحد"
 
-#: shop/models.py:63 shop/models.py:127 shop/models.py:141
+#: shop/models.py:76 shop/models.py:150 shop/models.py:164
 msgid "Product"
 msgstr "محصول"
 
-#: shop/models.py:75
+#: shop/models.py:88
 msgid "Bronze"
 msgstr "برنز"
 
-#: shop/models.py:76
+#: shop/models.py:89
 msgid "Silver"
 msgstr "نقره‌ای"
 
-#: shop/models.py:77
+#: shop/models.py:90
 msgid "Gold"
 msgstr "طلایی"
 
-#: shop/models.py:79
+#: shop/models.py:93
 msgid "First Name"
 msgstr "نام"
 
-#: shop/models.py:80
+#: shop/models.py:94
 msgid "Last Name"
 msgstr "نام خانوادگی"
 
-#: shop/models.py:81
+#: shop/models.py:97
 msgid "Birth Date"
 msgstr "تاریخ تولد"
 
-#: shop/models.py:82
+#: shop/models.py:98
 msgid "Membership"
 msgstr "عضویت"
 
-#: shop/models.py:90 shop/models.py:102 shop/models.py:117 shop/models.py:151
+#: shop/models.py:113 shop/models.py:125 shop/models.py:140 shop/models.py:174
 msgid "Customer"
 msgstr "مشتری"
 
-#: shop/models.py:91
+#: shop/models.py:114
 msgid "Customers"
 msgstr "مشتریان"
 
-#: shop/models.py:99
+#: shop/models.py:122
 msgid "Zip Code"
-msgstr ""
+msgstr "کد پستی"
 
-#: shop/models.py:100
+#: shop/models.py:123
 msgid "Path"
-msgstr ""
+msgstr "مسیر"
 
-#: shop/models.py:101
+#: shop/models.py:124
 msgid "City"
 msgstr "شهر"
 
-#: shop/models.py:105 shop/models.py:118
+#: shop/models.py:128 shop/models.py:141
 msgid "Address"
 msgstr "آدرس"
 
-#: shop/models.py:106
+#: shop/models.py:129
 msgid "Addresses"
 msgstr "آدرس‌ها"
 
-#: shop/models.py:111
+#: shop/models.py:134
 msgid "Pending"
 msgstr "در حال انتظار"
 
-#: shop/models.py:112
+#: shop/models.py:135
 msgid "Complete"
 msgstr "تکمیل شده"
 
-#: shop/models.py:113
+#: shop/models.py:136
 msgid "Failed"
 msgstr "ناموفق"
 
-#: shop/models.py:115
+#: shop/models.py:138
 msgid "Payment Status"
 msgstr "وضعیت پرداخت"
 
-#: shop/models.py:121 shop/models.py:126
+#: shop/models.py:144 shop/models.py:149
 msgid "Order"
 msgstr "سفارش"
 
-#: shop/models.py:128 shop/models.py:142
+#: shop/models.py:151 shop/models.py:165
 msgid "Quantity"
 msgstr "تعداد"
 
-#: shop/models.py:131
+#: shop/models.py:154
 msgid "Order Item"
 msgstr "آیتم سفارش"
 
-#: shop/models.py:132
+#: shop/models.py:155
 msgid "Order Items"
 msgstr "آیتم‌های سفارش"
 
-#: shop/models.py:140
+#: shop/models.py:163
 msgid "Cart"
 msgstr "سبد خرید"
 
-#: shop/models.py:146
+#: shop/models.py:169
 msgid "Cart Item"
 msgstr "آیتم سبد خرید"
 
-#: shop/models.py:147
+#: shop/models.py:170
 msgid "Cart Items"
 msgstr "آیتم‌های سبد خرید"
 
-#: shop/models.py:167 shop/models.py:172 shop/models.py:177
+#: shop/models.py:190 shop/models.py:195 shop/models.py:200
 msgid "Discount"
 msgstr "تخفیف"
 
-#: shop/models.py:173
+#: shop/models.py:196
 #, fuzzy
 #| msgid "Discount"
 msgid "Discounts"
-msgstr "تخفیف"
+msgstr "تخفیفات"
 
-#: shop/models.py:192
+#: shop/models.py:215
 #, fuzzy
 #| msgid "Discount"
 msgid "Discount Item"
 msgstr "تخفیف"
 
-#: shop/models.py:193
+#: shop/models.py:216
 #, fuzzy
 #| msgid "Discount"
 msgid "Discount Items"
 msgstr "تخفیف"
 
+#: shop/models.py:226
+msgid "There is already an active discount for this item."
+msgstr "همزمان نمیتوانید دو تخفیف فعال داشته باشید"
+
 #: shop/validator.py:22
 #, python-brace-format
 msgid "Tag with label '{tag_label}' does not exist."
-msgstr ""
+msgstr "برچسب با موضوع {tag_label} پیدا نشد "
 
 #: shop/validator.py:36
 #, python-brace-format
 msgid "{model} is not an allowed content type for discounts."
-msgstr ""
+msgstr "{model} اجازه دریافت قابلیت تخفیف را ندارد"
 
 #: tags/models.py:17
 msgid "Label"

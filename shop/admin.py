@@ -26,8 +26,7 @@ class InventoryFilter(admin.SimpleListFilter):
 
 @admin.register(models.Promotion)
 class PromotionAdmin(TranslatableAdmin):
-    # list_display = ('products_title', 'description', 'discount')
-    ...
+    list_display = ('title', 'description')
 
 
 class ProductImageInline(admin.TabularInline):
@@ -42,11 +41,12 @@ class ProductImageInline(admin.TabularInline):
 
 
 @admin.register(models.Product)
-class ProductAdmin(admin.ModelAdmin):
+class ProductAdmin(TranslatableAdmin):
     autocomplete_fields = ['collection']
-    prepopulated_fields = {
-        'slug': ['title']
-    }
+
+    def get_prepopulated_fields(self, request, obj=None):
+        return {'slug': ('title',)}
+
     actions = ['Clear inventory']
     inlines = [ProductImageInline]
     list_display = ['title', 'unit_price',
@@ -83,7 +83,7 @@ class ProductAdmin(admin.ModelAdmin):
 
 
 @admin.register(models.Collection)
-class CollectionAdmin(admin.ModelAdmin):
+class CollectionAdmin(TranslatableAdmin):
     autocomplete_fields = ['parent']
     list_display = ['title', 'products_count']
     search_fields = ['title']
@@ -104,12 +104,11 @@ class CollectionAdmin(admin.ModelAdmin):
 
 
 @admin.register(models.Customer)
-class CustomerAdmin(admin.ModelAdmin):
+class CustomerAdmin(TranslatableAdmin):
     list_display = ['first_name', 'last_name', 'membership', 'orders']
     list_editable = ['membership']
     list_per_page = 10
     list_select_related = ['user']
-    ordering = ['first_name', 'last_name']
     search_fields = ['first_name__istartswith', 'last_name__istartswith']
     exclude = ['deleted_at']
 

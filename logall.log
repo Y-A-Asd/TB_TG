@@ -68,3 +68,162 @@ ImportError: cannot import name 'EMAIL_HOST_PASSWORD' from 'TB_TG.settings' (unk
 2024-01-24 02:31:55,842 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
 2024-01-24 02:39:39,119 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/models.py changed, reloading.
 2024-01-24 02:39:39,842 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-24 04:26:37,642 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-24 04:27:46,063 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-24 04:28:47,301 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/core/backends.py changed, reloading.
+2024-01-24 04:28:48,363 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-24 04:29:25,816 %(ERROR)s - django.request - Internal Server Error: /admin/shop/order/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/options.py", line 714, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/decorators/cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/sites.py", line 240, in inner
+    return view(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1981, in changelist_view
+    cl = self.get_changelist_instance(request)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/options.py", line 862, in get_changelist_instance
+    return ChangeList(
+           ^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/views/main.py", line 144, in __init__
+    self.queryset = self.get_queryset(request)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/views/main.py", line 539, in get_queryset
+    ) = self.get_filters(request)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/views/main.py", line 215, in get_filters
+    spec = field_list_filter_class(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/filters.py", line 216, in create
+    return list_filter_class(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/filters.py", line 231, in __init__
+    self.lookup_choices = self.field_choices(field, request, model_admin)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/filters.py", line 272, in field_choices
+    return field.get_choices(include_blank=False, ordering=ordering)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/fields/__init__.py", line 1074, in get_choices
+    return (blank_choice if include_blank else []) + [
+                                                     ^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/fields/__init__.py", line 1075, in <listcomp>
+    (choice_func(x), str(x)) for x in qs
+                     ^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/models.py", line 104, in __str__
+    first_name_translation = self.translations.get(language_code=default_language)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 647, in get
+    raise self.model.DoesNotExist(
+parler.models.DoesNotExist: CustomerTranslation matching query does not exist.
+2024-01-24 04:31:02,830 %(WARNING)s - silk.model_factory - Response to request with pk 15b5b0a9-7559-4b15-9d49-bce5880a4d93 has content type text/javascript but was unable to parse it
+2024-01-24 04:31:06,163 %(WARNING)s - silk.model_factory - Response to request with pk f6b7e263-bff0-4744-b690-448d668419ad has content type text/javascript but was unable to parse it
+2024-01-24 04:31:15,208 %(WARNING)s - silk.model_factory - Response to request with pk 54016032-6705-47d4-92d1-cd707afa7ba4 has content type text/javascript but was unable to parse it
+2024-01-24 04:31:16,664 %(WARNING)s - silk.model_factory - Response to request with pk 10822541-10a0-4e1b-aac4-2d4a9d902e15 has content type text/javascript but was unable to parse it
+2024-01-24 04:32:33,086 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/core/backends.py changed, reloading.
+2024-01-24 04:32:34,333 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-24 04:48:22,641 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py changed, reloading.
+2024-01-24 04:48:24,423 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-24 04:50:24,645 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py changed, reloading.
+2024-01-24 04:50:25,611 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-24 04:51:05,877 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py changed, reloading.
+2024-01-24 04:51:06,978 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-24 04:51:28,942 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py changed, reloading.
+2024-01-24 04:51:29,677 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-24 04:53:40,943 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py changed, reloading.
+2024-01-24 04:53:41,731 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-24 04:53:58,049 %(ERROR)s - django.request - Internal Server Error: /admin/shop/product/add/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/forms/forms.py", line 174, in __getitem__
+    field = self.fields[name]
+            ~~~~~~~~~~~^^^^^^
+KeyError: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/options.py", line 714, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/decorators/cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/sites.py", line 240, in inner
+    return view(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1941, in add_view
+    return self.changeform_view(request, None, form_url, extra_context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1802, in changeform_view
+    return self._changeform_view(request, object_id, form_url, extra_context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1883, in _changeform_view
+    admin_form = helpers.AdminForm(
+                 ^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/helpers.py", line 49, in __init__
+    self.prepopulated_fields = [
+                               ^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/helpers.py", line 50, in <listcomp>
+    {"field": form[field_name], "dependencies": [form[f] for f in dependencies]}
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/helpers.py", line 50, in <listcomp>
+    {"field": form[field_name], "dependencies": [form[f] for f in dependencies]}
+                                                 ~~~~^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/parler/forms.py", line 186, in __getitem__
+    boundfield = super().__getitem__(name)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/forms/forms.py", line 176, in __getitem__
+    raise KeyError(
+KeyError: "Key 'name' not found in 'ProductForm'. Choices are: collection, description, inventory, promotions, slug, title, unit_price."
+2024-01-24 04:54:21,207 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py changed, reloading.
+2024-01-24 04:54:22,053 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-24 04:54:23,504 %(WARNING)s - silk.model_factory - Response to request with pk 771f819c-294f-4147-8d2c-42bf3783f4d2 has content type text/javascript but was unable to parse it
+2024-01-24 04:54:43,429 %(WARNING)s - silk.model_factory - Response to request with pk 82aa272d-c778-422a-91eb-3dbe48ca45c0 has content type text/javascript but was unable to parse it

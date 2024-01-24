@@ -1,5 +1,6 @@
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
+from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, FileExtensionValidator
 from django.utils.translation import gettext_lazy as _, get_language
 from django.db import models
@@ -28,8 +29,11 @@ class Promotion(TranslatableModel, BaseModel):
         return f'Promotion {self.pk} - {description}'
 
 
-class Collection(BaseModel):
-    title = models.CharField(_("Title"), max_length=255, unique=True)
+class Collection(TranslatableModel, BaseModel):
+    translations = TranslatedFields(
+        title=models.CharField(_('Title'), max_length=255)
+    )
+
     parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='subcollection',
                                verbose_name=_("Parent"))
 
@@ -37,32 +41,41 @@ class Collection(BaseModel):
     def is_subcollection(self):
         return self.parent is not None
 
-    def __str__(self) -> str:
-        return self.title
+    def __str__(self):
+        default_language = get_language() or 'en'
+        title_translation = self.translations.get(language_code=default_language)
+        title = title_translation.title if title_translation else f"Collection {self.pk}"
+        return f'Collection {self.pk} - {title}'
 
     class Meta:
         verbose_name = _("Collection")
         verbose_name_plural = _("Collections")
-        ordering = ["title"]
+        ordering = ["translations__title"]
 
 
-class Product(BaseModel):
-    title = models.CharField(_("Title"), max_length=255, unique=True)
-    slug = models.SlugField(_("Slug"))
-    description = models.TextField(_("Description"), null=True, blank=True)
+class Product(TranslatableModel, BaseModel):
+    translations = TranslatedFields(
+        title=models.CharField(_("Title"), max_length=255),
+        slug=models.SlugField(_("Slug")),
+        description=models.TextField(_("Description"), null=True, blank=True)
+    )
+
     unit_price = models.DecimalField(_("Unit Price"), max_digits=6, decimal_places=2, validators=[MinValueValidator(1)])
     inventory = models.IntegerField(_("Inventory"), validators=[MinValueValidator(0)])
     collection = models.ForeignKey(Collection, on_delete=models.PROTECT, verbose_name=_("Collection"),
                                    related_name='products')
     promotions = models.ManyToManyField(Promotion, blank=True, verbose_name=_("Promotions"), related_name='products')
 
-    def __str__(self) -> str:
-        return self.title
+    def __str__(self):
+        default_language = get_language() or 'en'
+        title_translation = self.translations.get(language_code=default_language)
+        title = title_translation.title if title_translation else f"Product {self.pk}"
+        return f'Product {self.pk} - {title}'
 
     class Meta:
         verbose_name = _("Product")
         verbose_name_plural = _("Products")
-        ordering = ["title"]
+        ordering = ["translations__title"]
 
 
 class ProductImage(BaseModel):
@@ -70,26 +83,36 @@ class ProductImage(BaseModel):
     image = models.ImageField(upload_to='shop/images', validators=[validate_file_size])
 
 
-class Customer(BaseModel):
+class Customer(TranslatableModel, BaseModel):
     class MembershipStatus(models.TextChoices):
         MEMBERSHIP_BRONZE = 'B', _('Bronze')
         MEMBERSHIP_SILVER = 'S', _('Silver')
         MEMBERSHIP_GOLD = 'G', _('Gold')
 
-    first_name = models.CharField(_("First Name"), max_length=255)
-    last_name = models.CharField(_("Last Name"), max_length=255)
+    translations = TranslatedFields(
+        first_name=models.CharField(_("First Name"), max_length=255),
+        last_name=models.CharField(_("Last Name"), max_length=255)
+    )
+
     birth_date = models.DateField(_("Birth Date"), null=True, blank=True)
     membership = models.CharField(_("Membership"), max_length=1, choices=MembershipStatus,
                                   default=MembershipStatus.MEMBERSHIP_BRONZE)
     user = models.OneToOneField(settings.AUTH_USER_MODEL, verbose_name=_("User"), on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.first_name} {self.last_name}'
+        default_language = get_language() or 'en'
+        first_name_translation = self.translations.get(language_code=default_language)
+        first_name = first_name_translation.first_name if first_name_translation else f"Customer {self.pk}"
+
+        last_name_translation = self.translations.get(language_code=default_language)
+        last_name = last_name_translation.last_name if last_name_translation else ""
+
+        return f'{first_name} {last_name}'
 
     class Meta:
         verbose_name = _("Customer")
         verbose_name_plural = _("Customers")
-        ordering = ["first_name", "last_name"]
+        ordering = ["translations__first_name", "translations__last_name"]
         permissions = [
             ('view_history', 'Can view history')
         ]
@@ -182,16 +205,25 @@ class DiscountItems(models.Model):
 
     class Meta:
         """https://docs.djangoproject.com/en/5.0/ref/models/constraints/#uniqueconstraint"""
-        constraints = [
-            models.UniqueConstraint(
-                fields=['content_type', 'object_id'],
-                condition=models.Q(active=True),
-                name='unique_active_discount'
-            )
-        ]
+        # constraints = [
+        #     models.UniqueConstraint(
+        #         fields=['content_type', 'object_id'],
+        #         condition=models.Q(discount__active=True),
+        #         name='unique_active_discount'
+        #     )
+        # ]
         verbose_name = _("Discount Item")
         verbose_name_plural = _("Discount Items")
 
+    def clean(self):
+        existing_discount_item = DiscountItems.objects.filter(
+            content_type=self.content_type,
+            object_id=self.object_id,
+            discount__active=True
+        ).exclude(pk=self.pk)  # Exclude the current instance for updates
+
+        if existing_discount_item.exists():
+            raise ValidationError(_('There is already an active discount for this item.'))
 
 # class SiteSettings(BaseModel):
 #     pass
