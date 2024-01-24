@@ -195,6 +195,10 @@ CELERY_BEAT_SCHEDULE = {
         'task': 'core.tasks.send_promotion_emails',
         'schedule': crontab(hour='*/24'),
     },
+    'delete_inactive_carts': {
+        'task': 'path.to.delete_inactive_carts',
+        'schedule': crontab(hour='*/24'),
+    },
 }
 """
 celery command:

@@ -14,7 +14,7 @@ from shop.validator import validate_file_size
 class Promotion(TranslatableModel, BaseModel):
     translations: TranslatedFields = TranslatedFields(
         title=models.CharField(_('Title'), max_length=255),
-        description=models.CharField(_("Description"), max_length=255)
+        description=models.CharField(_("Description"), max_length=500)
     )
 
     class Meta:
@@ -95,6 +95,17 @@ class Customer(BaseModel):
         ]
 
 
+class Address(BaseModel):
+    zip_code = models.CharField(_("Zip Code"), max_length=10)
+    path = models.CharField(_("Path"), max_length=255)
+    city = models.CharField(_("City"), max_length=255)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, verbose_name=_("Customer"))
+
+    class Meta:
+        verbose_name = _("Address")
+        verbose_name_plural = _("Addresses")
+
+
 class Order(BaseModel):
     class PaymentStatus(models.TextChoices):
         PAYMENT_STATUS_PENDING = 'P', _('Pending')
@@ -104,6 +115,7 @@ class Order(BaseModel):
     payment_status = models.CharField(_("Payment Status"), max_length=1, choices=PaymentStatus,
                                       default=PaymentStatus.PAYMENT_STATUS_PENDING)
     customer = models.ForeignKey(Customer, on_delete=models.PROTECT, verbose_name=_("Customer"))
+    address = models.ForeignKey(Address, on_delete=models.PROTECT, verbose_name=_("Address"))
 
     class Meta:
         verbose_name = _("Order")
@@ -118,16 +130,6 @@ class OrderItem(BaseModel):
     class Meta:
         verbose_name = _("Order Item")
         verbose_name_plural = _("Order Items")
-
-
-class Address(BaseModel):
-    street = models.CharField(_("Street"), max_length=255)
-    city = models.CharField(_("City"), max_length=255)
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, verbose_name=_("Customer"))
-
-    class Meta:
-        verbose_name = _("Address")
-        verbose_name_plural = _("Addresses")
 
 
 class Cart(BaseModel):
@@ -146,6 +148,7 @@ class CartItem(BaseModel):
 
 
 class Review(BaseModel):
+    user = models.ForeignKey(Customer, on_delete=models.CASCADE, verbose_name=_("Customer"))
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
     name = models.CharField(max_length=255)
     description = models.TextField()
@@ -190,3 +193,5 @@ class DiscountItems(models.Model):
         verbose_name_plural = _("Discount Items")
 
 
+# class SiteSettings(BaseModel):
+#     pass
