@@ -122,6 +122,7 @@ class Address(BaseModel):
     zip_code = models.CharField(_("Zip Code"), max_length=10)
     path = models.CharField(_("Path"), max_length=1025)
     city = models.CharField(_("City"), max_length=255)
+    province = models.CharField(_("Province"), max_length=32)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, verbose_name=_("Customer"))
 
     class Meta:
@@ -261,8 +262,8 @@ class Transaction(BaseModel):
 
 class SiteSettings(TranslatableModel, BaseModel):
     translations = TranslatedFields(
-        footer_text = models.TextField(_("Footer Text"), blank=True, null=True),
-        address = models.TextField(_("Address"), blank=True, null=True)
+        footer_text=models.TextField(_("Footer Text"), blank=True, null=True),
+        address=models.TextField(_("Address"), blank=True, null=True)
     )
     phone_number = models.CharField(_("Phone Number"), max_length=20, blank=True, null=True)
     logo = models.ImageField(_("Logo"), upload_to='site_settings/logos/', blank=True, null=True)
@@ -274,3 +275,15 @@ class SiteSettings(TranslatableModel, BaseModel):
     class Meta:
         verbose_name = _("Site Settings")
         verbose_name_plural = _("Site Settings")
+
+
+class WishList(BaseModel):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name=_("Product"))
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, verbose_name=_("Customer"))
+
+    class Meta:
+        verbose_name = 'WishList'
+        verbose_name_plural = 'WishList'
+
+    def __str__(self):
+        return f'{self.customer.first_name} {self.customer.last_name}'

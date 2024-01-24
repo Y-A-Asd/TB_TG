@@ -142,3 +142,5 @@ class OrderAdmin(admin.ModelAdmin):
     list_filter = ['customer']
     inlines = [OrderItemInline]
     list_display = ['id', 'created_at', 'customer']
+
+

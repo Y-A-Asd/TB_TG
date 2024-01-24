@@ -232,3 +232,54 @@ KeyError: "Key 'name' not found in 'ProductForm'. Choices are: collection, descr
 2024-01-24 19:27:20,517 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
 2024-01-24 19:28:54,758 %(WARNING)s - silk.model_factory - Response to request with pk 509e5348-bc71-4d53-a364-a06f2222bc68 has content type text/javascript but was unable to parse it
 2024-01-24 19:28:57,013 %(WARNING)s - silk.model_factory - Response to request with pk 183afcc4-0391-4339-88ff-8effb47df3d8 has content type text/javascript but was unable to parse it
+2024-01-25 00:11:41,871 %(WARNING)s - silk.model_factory - Response to request with pk 8c3ba355-1bb2-4897-ba01-1c1c0f4df347 has content type text/javascript but was unable to parse it
+2024-01-25 00:11:44,148 %(WARNING)s - silk.model_factory - Response to request with pk 3b64632c-e3c2-4bce-90a7-4ba65724d56a has content type text/javascript but was unable to parse it
+2024-01-25 00:18:28,202 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/models.py changed, reloading.
+2024-01-25 00:18:29,108 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-25 00:22:36,637 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/models.py changed, reloading.
+2024-01-25 00:22:38,157 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-25 00:35:50,052 %(WARNING)s - silk.model_factory - Response to request with pk 9f07f587-2f46-40ce-be69-4a0b93aeee70 has content type text/javascript but was unable to parse it
+2024-01-25 00:35:53,517 %(WARNING)s - silk.model_factory - Response to request with pk 3f6f46c9-9ed1-47a1-af67-8103cc7a80fb has content type text/javascript but was unable to parse it
+2024-01-25 00:35:57,524 %(WARNING)s - silk.model_factory - Response to request with pk 8dd6a4fb-90ee-4592-9989-836e77dee971 has content type text/javascript but was unable to parse it
+2024-01-25 00:37:27,928 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py changed, reloading.
+2024-01-25 00:37:29,792 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-25 00:45:46,082 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/validator.py changed, reloading.
+2024-01-25 00:45:47,410 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-25 01:01:39,210 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/validator.py changed, reloading.
+2024-01-25 01:01:39,945 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-25 01:02:41,061 %(WARNING)s - silk.model_factory - Response to request with pk 3ab92573-1a0b-49f6-b332-fa7521e743a4 has content type text/javascript but was unable to parse it
+2024-01-25 01:02:43,806 %(WARNING)s - silk.model_factory - Response to request with pk 6c551e25-b803-47a3-b05c-76fe5e474d7a has content type text/javascript but was unable to parse it
+2024-01-25 01:07:25,436 %(WARNING)s - django.request - Unauthorized: /shop/collections/
+2024-01-25 01:07:25,465 %(WARNING)s - django.request - Forbidden: /shop/collections/
+2024-01-25 01:31:04,028 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/validator.py changed, reloading.
+2024-01-25 01:31:04,822 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-25 01:32:29,959 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/validator.py changed, reloading.
+2024-01-25 01:32:30,762 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-25 01:33:19,377 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/validator.py changed, reloading.
+2024-01-25 01:33:20,234 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-25 01:34:12,394 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/validator.py changed, reloading.
+2024-01-25 01:34:13,317 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-25 01:34:35,360 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/validator.py changed, reloading.
+2024-01-25 01:34:36,299 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-25 01:34:48,648 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/validator.py changed, reloading.
+2024-01-25 01:34:49,541 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-25 01:35:44,780 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/validator.py changed, reloading.
+2024-01-25 01:35:45,606 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-25 01:35:59,025 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/validator.py changed, reloading.
+2024-01-25 01:35:59,836 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-25 01:36:04,718 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/validator.py changed, reloading.
+2024-01-25 01:36:05,540 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-25 01:36:36,998 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/validator.py changed, reloading.
+2024-01-25 01:36:37,872 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-25 01:37:10,773 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/validator.py changed, reloading.
+2024-01-25 01:37:11,503 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-25 01:37:48,534 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/validator.py changed, reloading.
+2024-01-25 01:37:49,427 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-25 01:38:59,358 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/validator.py changed, reloading.
+2024-01-25 01:39:00,302 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-25 01:39:20,089 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/validator.py changed, reloading.
+2024-01-25 01:39:20,941 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-25 01:40:19,502 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/validator.py changed, reloading.
+2024-01-25 01:40:20,475 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-25 01:40:43,584 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/validator.py changed, reloading.
+2024-01-25 01:40:44,442 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
