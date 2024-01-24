@@ -60,7 +60,8 @@ class Product(TranslatableModel, BaseModel):
         description=models.TextField(_("Description"), null=True, blank=True)
     )
 
-    unit_price = models.DecimalField(_("Unit Price"), max_digits=6, decimal_places=2, validators=[MinValueValidator(1)])
+    unit_price = models.DecimalField(_("Unit Price"), max_digits=15, decimal_places=2,
+                                     validators=[MinValueValidator(1)])
     inventory = models.IntegerField(_("Inventory"), validators=[MinValueValidator(0)])
     collection = models.ForeignKey(Collection, on_delete=models.PROTECT, verbose_name=_("Collection"),
                                    related_name='products')
@@ -159,7 +160,7 @@ class OrderItem(BaseModel):
 
 
 class Cart(BaseModel):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
 
 class CartItem(BaseModel):
@@ -178,6 +179,14 @@ class Review(BaseModel):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
     name = models.CharField(max_length=255)
     description = models.TextField()
+    parent_review = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='replies')
+
+    def __str__(self):
+        return f"{self.user} - {self.name}"
+
+    class Meta:
+        verbose_name = _("Review")
+        verbose_name_plural = _("Reviews")
 
 
 class DiscountItemManager(models.Manager):

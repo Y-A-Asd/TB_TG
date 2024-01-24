@@ -1,20 +1,20 @@
 from django.contrib.auth.models import Permission
-
+from django.contrib.contenttypes.models import ContentType
 from .models import User
 from shop.models import Product
 from django.contrib import admin
 from django.contrib.contenttypes.admin import GenericTabularInline
-from shop.admin import ProductAdmin, ProductImageInline
+from shop.admin import ProductAdmin, ProductImageInline, TagInline
 from tags.models import TaggedItem
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 
-class TagInline(GenericTabularInline):
-    autocomplete_fields = ['tag']
-    model = TaggedItem
-    verbose_name = _('Tag')
-    verbose_name_plural = _('Tags')
+@admin.register(ContentType)
+class ContentTypeAdmin(admin.ModelAdmin):
+    list_display = ['app_label', 'model']
+    search_fields = ['app_label', 'model']
+    inlines = [TagInline]
 
 
 class CustomProductAdmin(ProductAdmin):
@@ -28,7 +28,7 @@ admin.site.register(Product, CustomProductAdmin)
 @admin.register(Permission)
 class PermissionAdmin(admin.ModelAdmin):
     search_fields = ['codename']
-    pass
+    inlines = [TagInline]
 
 
 class PermissionInline(admin.TabularInline):
