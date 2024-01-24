@@ -59,3 +59,12 @@ Traceback (most recent call last):
   File "/home/flatlife/djangopro/TB_TG/TB_TG/core/tasks.py", line 7, in <module>
     from TB_TG.settings import EMAIL_HOST_PASSWORD
 ImportError: cannot import name 'EMAIL_HOST_PASSWORD' from 'TB_TG.settings' (unknown location)
+2024-01-24 02:21:29,278 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-24 02:22:14,934 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/TB_TG/settings/dev.py changed, reloading.
+2024-01-24 02:22:15,641 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-24 02:22:54,050 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/TB_TG/settings/common.py changed, reloading.
+2024-01-24 02:22:55,008 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-24 02:31:54,324 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/models.py changed, reloading.
+2024-01-24 02:31:55,842 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-24 02:39:39,119 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/models.py changed, reloading.
+2024-01-24 02:39:39,842 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader

@@ -1,3 +1,5 @@
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
 from django.core.validators import MinValueValidator, FileExtensionValidator
 from django.utils.translation import gettext_lazy as _, get_language
 from django.db import models
@@ -11,22 +13,17 @@ from shop.validator import validate_file_size
 
 class Promotion(TranslatableModel, BaseModel):
     translations: TranslatedFields = TranslatedFields(
+        title=models.CharField(_('Title'), max_length=255),
         description=models.CharField(_("Description"), max_length=255)
     )
-    discount = models.FloatField(_("Discount"))
 
     class Meta:
         verbose_name = _("Promotion")
         verbose_name_plural = _("Promotions")
 
     def __str__(self):
-        # Get the default language for the current thread or use a fallback
         default_language = get_language() or 'en'
-
-        # Retrieve the translated description for the default language
         description_translation = self.translations.get(language_code=default_language)
-
-        # If a translation is available, return the description; otherwise, return a default value
         description = description_translation.description if description_translation else f"Promotion {self.pk}"
         return f'Promotion {self.pk} - {description}'
 
@@ -152,3 +149,44 @@ class Review(BaseModel):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
     name = models.CharField(max_length=255)
     description = models.TextField()
+
+
+class DiscountItemManager(models.Manager):
+    def get_discount(self, obj_type, obj_id):
+        content_type = ContentType.objects.get_for_model(obj_type)
+
+        return DiscountItems.objects \
+            .select_related('discount') \
+            .filter(content_type=content_type, object_id=obj_id)
+
+
+class BaseDiscount(BaseModel):
+    discount = models.DecimalField(_("Discount"), max_digits=12, decimal_places=2)
+    active = models.BooleanField(_("Active"), default=True)
+    timestamp = models.DateTimeField(_("Timestamp"), default=None)
+
+    class Meta:
+        verbose_name = _("Discount")
+        verbose_name_plural = _("Discounts")
+
+
+class DiscountItems(models.Model):
+    discount = models.ForeignKey(BaseDiscount, on_delete=models.PROTECT, verbose_name=_("Discount"))
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    object_id = models.CharField(max_length=33)
+    content_object = GenericForeignKey()
+    objects = DiscountItemManager()
+
+    class Meta:
+        """https://docs.djangoproject.com/en/5.0/ref/models/constraints/#uniqueconstraint"""
+        constraints = [
+            models.UniqueConstraint(
+                fields=['content_type', 'object_id'],
+                condition=models.Q(active=True),
+                name='unique_active_discount'
+            )
+        ]
+        verbose_name = _("Discount Item")
+        verbose_name_plural = _("Discount Items")
+
+

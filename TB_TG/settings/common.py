@@ -245,3 +245,8 @@ LOGGING = {
         }
     }
 }
+
+"""
+for run server 
+    use this command ->      gunicorn TB_TG.wsgi
+"""
