@@ -2,13 +2,14 @@ from django import forms
 from django.contrib import admin, messages
 from django.contrib.contenttypes.admin import GenericTabularInline
 from django.core.exceptions import ValidationError
+from django.db.models import F
 from django.db.models.aggregates import Count, Sum
 from django.db.models.query import QuerySet
 from django.utils.html import format_html, urlencode
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from dal import autocomplete
-from parler.admin import TranslatableAdmin
+from parler.admin import TranslatableAdmin, TranslatableTabularInline
 from tags.models import TaggedItem
 from . import models
 from .models import CartItem, Cart, Review, BaseDiscount, DiscountItems, Transaction, Address, FeatureValue, \
@@ -22,7 +23,7 @@ class TagInline(GenericTabularInline):
     verbose_name_plural = _('Tags')
 
 
-class FeatureValueInline(admin.TabularInline):
+class FeatureValueInline(TranslatableTabularInline):
     model = FeatureValue
     extra = 1
     exclude = ['deleted_at', 'created_at', 'updated_at']
@@ -58,16 +59,17 @@ class InventoryFilter(admin.SimpleListFilter):
 
     def lookups(self, request, model_admin):
         return [
-            ('<10', _('Low')),
+            ('<min', _('Low')),
         ]
 
     def queryset(self, request, queryset: QuerySet):
-        if self.value() == '<10':
-            return queryset.filter(inventory__lt=10)
+        if self.value() == '<min':
+            return queryset.filter(inventory__lt=F('min_inventory'))
 
 
 @admin.register(models.Promotion)
 class PromotionAdmin(TranslatableAdmin):
+    exclude = ['deleted_at', 'created_at', 'updated_at']
     list_display = ('title', 'description')
     inlines = [TagInline]
 
@@ -76,6 +78,7 @@ class ProductImageInline(admin.TabularInline):
     model = models.ProductImage
     readonly_fields = ['thumbnail']
     inlines = [TagInline]
+    exclude = ['deleted_at', 'created_at', 'updated_at']
 
     def thumbnail(self, obj):
         if obj.image.name != '':
@@ -91,8 +94,7 @@ class ProductAdmin(TranslatableAdmin):
     def get_prepopulated_fields(self, request, obj=None):
         return {'slug': ('title',)}
 
-    actions = ['Clear inventory']
-    inlines = [ProductImageInline]
+    actions = ['clear_inventory']
     list_display = ['title', 'unit_price',
                     'inventory_status', 'collection_title', 'min_inventory']
     list_editable = ['unit_price']
@@ -101,14 +103,14 @@ class ProductAdmin(TranslatableAdmin):
     list_select_related = ['collection']
     search_fields = ['title']
     exclude = ['deleted_at', 'created_at', 'updated_at']
-    inlines = [TagInline]
+    inlines = [TagInline, ProductImageInline]
 
     def collection_title(self, product):
         return product.collection.title
 
     @admin.display(ordering='inventory')
     def inventory_status(self, product):
-        if product.inventory < 10:
+        if product.inventory <= product.min_inventory:
             return _('Low')
         return _('OK')
 
@@ -224,8 +226,24 @@ class CartItemInline(admin.TabularInline):
     exclude = ['deleted_at', 'created_at', 'updated_at']
 
 
+class CartItemAdminForm(forms.ModelForm):
+    class Meta:
+        model = CartItem
+        fields = '__all__'
+
+    def clean_quantity(self):
+        quantity = self.cleaned_data['quantity']
+        product = self.cleaned_data.get('product')
+
+        if product and quantity > product.inventory:
+            raise ValidationError("Quantity cannot be greater than the available inventory.")
+
+        return quantity
+
+
 @admin.register(CartItem)
 class CartItemAdmin(admin.ModelAdmin):
+    form = CartItemAdminForm
     list_display = ['cart', 'product', 'quantity', 'view_cart']
     list_filter = ['cart', 'product']
     exclude = ['deleted_at', 'created_at', 'updated_at']
@@ -233,6 +251,12 @@ class CartItemAdmin(admin.ModelAdmin):
     def view_cart(self, obj):
         cart_url = reverse('admin:shop_cart_change', args=[obj.cart.id])
         return format_html('<a href="{}">View Cart Items</a>', cart_url)
+
+    def save_model(self, request, obj, form, change):
+        if obj.product and obj.quantity > obj.product.inventory:
+            raise ValidationError("Quantity cannot be greater than the available inventory.")
+
+        super().save_model(request, obj, form, change)
 
 
 @admin.register(Cart)

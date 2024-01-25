@@ -286,5 +286,5 @@ class ProductImageViewSet(ModelViewSet):
         return {'product_id': self.kwargs['product_pk']}
 
     def get_queryset(self):
-        print(self.kwargs)
+        # print(self.kwargs)
         return ProductImage.objects.filter(prodcut_id=self.kwargs['product_pk'])

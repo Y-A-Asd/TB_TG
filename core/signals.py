@@ -122,8 +122,8 @@ def log_create_update(sender, instance, **kwargs):
     else:
         user = None
 
-    print(old_value)
-    print(changes)
+    # print(old_value)
+    # print(changes)
     AuditLog.objects.create(
         user=user,
         action=action,

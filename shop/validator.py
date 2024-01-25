@@ -42,8 +42,8 @@ def get_allowed_content_types(tag_label):
 
 def validate_allowed_content_type(model, tag_label):
     allowed_content_types = get_allowed_content_types(tag_label)
-    print(allowed_content_types)
-    print(model, allowed_content_types)
+    # print(allowed_content_types)
+    # print(model, allowed_content_types)
     if model not in allowed_content_types:
         raise ValidationError(_(f"{model} is not an allowed content type for discounts."))
 

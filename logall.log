@@ -4690,3 +4690,138 @@ AttributeError: 'NoneType' object has no attribute 'model'
 2024-01-26 00:00:08,435 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
 2024-01-26 00:00:31,690 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/models.py changed, reloading.
 2024-01-26 00:00:33,612 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-26 01:24:18,918 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/filters.py changed, reloading.
+2024-01-26 01:24:20,499 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-26 01:24:23,718 %(WARNING)s - silk.model_factory - Response to request with pk 68882f60-7405-43e0-9350-e88132594927 has content type text/javascript but was unable to parse it
+2024-01-26 01:24:32,390 %(WARNING)s - silk.model_factory - Response to request with pk f4909184-919f-478c-bee5-0490188b457d has content type text/javascript but was unable to parse it
+2024-01-26 01:24:35,024 %(WARNING)s - silk.model_factory - Response to request with pk 3cb299d6-19bc-4823-a59f-150e5fd8bb6a has content type text/javascript but was unable to parse it
+2024-01-26 01:24:51,027 %(WARNING)s - silk.model_factory - Response to request with pk f15a1c82-d955-4fd0-b010-96e9ed526eaa has content type text/javascript but was unable to parse it
+2024-01-26 01:24:53,155 %(WARNING)s - silk.model_factory - Response to request with pk 0fc366cd-c126-4dcd-9a04-5c3b927a7809 has content type text/javascript but was unable to parse it
+2024-01-26 01:24:58,686 %(WARNING)s - silk.model_factory - Response to request with pk d23a0b17-1f4f-440b-9f93-76dbadfd39d9 has content type text/javascript but was unable to parse it
+2024-01-26 01:26:13,782 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py changed, reloading.
+2024-01-26 01:26:15,010 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-26 01:26:16,776 %(WARNING)s - silk.model_factory - Response to request with pk b91bef55-6904-4d6a-975d-4016e75d9cbd has content type text/javascript but was unable to parse it
+2024-01-26 01:26:27,697 %(WARNING)s - silk.model_factory - Response to request with pk 3a5cc340-0798-48ff-977b-597042917fba has content type text/javascript but was unable to parse it
+2024-01-26 01:26:29,244 %(WARNING)s - silk.model_factory - Response to request with pk 638a5f26-6385-4259-acc7-910a777fdff2 has content type text/javascript but was unable to parse it
+2024-01-26 01:26:43,973 %(WARNING)s - silk.model_factory - Response to request with pk 302fbbd5-5248-4cc0-bdd9-833877ee71b8 has content type text/javascript but was unable to parse it
+2024-01-26 01:26:47,249 %(WARNING)s - silk.model_factory - Response to request with pk 44f1cd07-aad5-4f19-bb95-63189a08c806 has content type text/javascript but was unable to parse it
+2024-01-26 01:26:49,244 %(WARNING)s - silk.model_factory - Response to request with pk 42591e03-4fae-430e-85a2-c7b1860e9de2 has content type text/javascript but was unable to parse it
+2024-01-26 01:26:55,926 %(WARNING)s - silk.model_factory - Response to request with pk 28d17612-6dbb-4ff5-8095-60f19fb70c83 has content type text/javascript but was unable to parse it
+2024-01-26 01:27:02,782 %(WARNING)s - silk.model_factory - Response to request with pk c1ff60c6-0a8b-4d02-8bde-8ddbf2db19f7 has content type text/javascript but was unable to parse it
+2024-01-26 01:27:04,470 %(WARNING)s - silk.model_factory - Response to request with pk df2e2c90-868e-4472-9ca9-caa297db88d5 has content type text/javascript but was unable to parse it
+2024-01-26 01:27:07,362 %(WARNING)s - silk.model_factory - Response to request with pk 168fa2db-07b6-4509-9e6a-171c107e2bd7 has content type text/javascript but was unable to parse it
+2024-01-26 01:27:09,257 %(WARNING)s - silk.model_factory - Response to request with pk 808ce9f9-4120-4410-ad87-b809fdc666c1 has content type text/javascript but was unable to parse it
+2024-01-26 01:27:16,523 %(WARNING)s - silk.model_factory - Response to request with pk 7cfb80a7-ffb3-4897-9eb6-438774c4276d has content type text/javascript but was unable to parse it
+2024-01-26 01:27:17,859 %(WARNING)s - silk.model_factory - Response to request with pk 3c2b4ec8-fa1e-41df-a9e3-9fb7cb36a422 has content type text/javascript but was unable to parse it
+2024-01-26 01:27:20,162 %(WARNING)s - silk.model_factory - Response to request with pk 0756a65f-ae91-4869-a7f4-2eb1d9d3d066 has content type text/javascript but was unable to parse it
+2024-01-26 01:27:23,630 %(WARNING)s - silk.model_factory - Response to request with pk 81e6db48-f22c-4a1d-9ab6-cd937e0a0c0c has content type text/javascript but was unable to parse it
+2024-01-26 01:28:39,589 %(WARNING)s - silk.model_factory - Response to request with pk e5360117-3af9-4d2f-9221-69f8627499ba has content type text/javascript but was unable to parse it
+2024-01-26 01:28:44,601 %(WARNING)s - silk.model_factory - Response to request with pk 4217e054-51c2-4994-bed1-c2469ae6e8db has content type text/javascript but was unable to parse it
+2024-01-26 01:29:00,121 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py changed, reloading.
+2024-01-26 01:29:02,585 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-26 01:29:04,292 %(WARNING)s - silk.model_factory - Response to request with pk 140b28e8-0310-4b4c-bdbf-93af3dfbcb7e has content type text/javascript but was unable to parse it
+2024-01-26 01:29:36,422 %(WARNING)s - silk.model_factory - Response to request with pk bbc2a308-9089-4f72-97be-3a0aecc1d33f has content type text/javascript but was unable to parse it
+2024-01-26 01:29:42,020 %(WARNING)s - silk.model_factory - Response to request with pk 830408c1-131f-4832-b260-cfc2cb332c3a has content type text/javascript but was unable to parse it
+2024-01-26 01:29:46,577 %(WARNING)s - silk.model_factory - Response to request with pk fd774c8c-97ba-4d33-98ce-c51bf618fabc has content type text/javascript but was unable to parse it
+2024-01-26 01:29:51,169 %(WARNING)s - silk.model_factory - Response to request with pk 1b2c04b7-dae6-4f2d-b81a-a6e204e93786 has content type text/javascript but was unable to parse it
+2024-01-26 01:30:25,544 %(WARNING)s - silk.model_factory - Response to request with pk d0090314-3223-4831-af06-5023594ede2b has content type text/javascript but was unable to parse it
+2024-01-26 01:30:28,317 %(WARNING)s - silk.model_factory - Response to request with pk 417abcce-c2b9-4ac9-9650-e21cf8162db7 has content type text/javascript but was unable to parse it
+2024-01-26 01:30:50,345 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py changed, reloading.
+2024-01-26 01:30:51,538 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-26 01:30:53,320 %(WARNING)s - silk.model_factory - Response to request with pk 32461a92-241e-4180-b7dc-af1dd4c0829f has content type text/javascript but was unable to parse it
+2024-01-26 01:31:27,350 %(WARNING)s - silk.model_factory - Response to request with pk e25e2adb-946c-47a1-bf5f-cbcb7671b202 has content type text/javascript but was unable to parse it
+2024-01-26 01:33:41,072 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/core/admin.py changed, reloading.
+2024-01-26 01:33:42,382 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-26 01:33:44,319 %(WARNING)s - silk.model_factory - Response to request with pk 8c111fb6-63d9-4eeb-9486-1e5242585847 has content type text/javascript but was unable to parse it
+2024-01-26 01:33:51,837 %(WARNING)s - silk.model_factory - Response to request with pk ef424ddd-4e81-4889-9645-934d4cc1cd71 has content type text/javascript but was unable to parse it
+2024-01-26 01:34:26,124 %(WARNING)s - silk.model_factory - Response to request with pk 0d1e730d-6125-4a78-8465-c247ab8fe7c0 has content type text/javascript but was unable to parse it
+2024-01-26 01:34:30,032 %(WARNING)s - silk.model_factory - Response to request with pk 80750b51-846c-408c-acb2-6da5d76eab7b has content type text/javascript but was unable to parse it
+2024-01-26 01:34:33,317 %(WARNING)s - silk.model_factory - Response to request with pk 08670943-0772-4083-9d99-ab2b551dd297 has content type text/javascript but was unable to parse it
+2024-01-26 01:34:35,248 %(WARNING)s - silk.model_factory - Response to request with pk 2c65f291-0f2b-4bc0-9db8-856001addcbb has content type text/javascript but was unable to parse it
+2024-01-26 01:34:37,020 %(WARNING)s - silk.model_factory - Response to request with pk aae5f9e8-94b3-4f81-8bbb-9b7a7cde5712 has content type text/javascript but was unable to parse it
+2024-01-26 01:35:09,220 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py changed, reloading.
+2024-01-26 01:35:10,759 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-26 01:35:13,194 %(WARNING)s - silk.model_factory - Response to request with pk 42096c3f-ab6b-41fd-9f7e-042242ed1492 has content type text/javascript but was unable to parse it
+2024-01-26 01:35:19,597 %(WARNING)s - silk.model_factory - Response to request with pk 88b2953e-5312-470c-bf89-ec5a42e4e478 has content type text/javascript but was unable to parse it
+2024-01-26 01:35:24,986 %(WARNING)s - silk.model_factory - Response to request with pk 5a09f85a-9ec4-4f2e-b403-67f80c03f599 has content type text/javascript but was unable to parse it
+2024-01-26 01:35:46,291 %(WARNING)s - silk.model_factory - Response to request with pk bf6744c4-07cd-4feb-b3b7-a4dea6fbf1cb has content type text/javascript but was unable to parse it
+2024-01-26 01:38:42,351 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py changed, reloading.
+2024-01-26 01:38:43,733 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-26 01:38:46,039 %(WARNING)s - silk.model_factory - Response to request with pk 53b7c65f-2093-4f8a-b456-4e6b6b7efb97 has content type text/javascript but was unable to parse it
+2024-01-26 01:38:48,682 %(WARNING)s - silk.model_factory - Response to request with pk 882cce97-ff55-46cb-a8dd-896c4e800b4e has content type text/javascript but was unable to parse it
+2024-01-26 01:38:56,266 %(WARNING)s - silk.model_factory - Response to request with pk d2a45040-51d2-4364-a9c6-7b1e50e5aec4 has content type text/javascript but was unable to parse it
+2024-01-26 01:38:59,464 %(WARNING)s - silk.model_factory - Response to request with pk 01ae3b01-7420-4d08-af70-5859002ffea7 has content type text/javascript but was unable to parse it
+2024-01-26 01:39:03,620 %(WARNING)s - silk.model_factory - Response to request with pk fc2f08ef-c14d-494c-8d33-2a71a2f42669 has content type text/javascript but was unable to parse it
+2024-01-26 01:39:12,112 %(WARNING)s - silk.model_factory - Response to request with pk 0b7bb09f-9734-4159-a669-6a3c52fe8c2c has content type text/javascript but was unable to parse it
+2024-01-26 01:39:22,592 %(WARNING)s - silk.model_factory - Response to request with pk ff1489f7-9b11-4e5f-a93d-ca4a521cb16c has content type text/javascript but was unable to parse it
+2024-01-26 01:39:26,242 %(WARNING)s - silk.model_factory - Response to request with pk db01e3e8-a484-4573-a6df-46a542790932 has content type text/javascript but was unable to parse it
+2024-01-26 01:39:28,293 %(WARNING)s - silk.model_factory - Response to request with pk 49298c54-0bb5-4a9d-b481-ee4aeff8ab78 has content type text/javascript but was unable to parse it
+2024-01-26 01:39:32,742 %(WARNING)s - silk.model_factory - Response to request with pk 64eef498-9c68-4cfa-80d7-c0107335a52d has content type text/javascript but was unable to parse it
+2024-01-26 01:39:34,968 %(WARNING)s - silk.model_factory - Response to request with pk e664f636-0abc-4fa6-85d4-25cd15207dbd has content type text/javascript but was unable to parse it
+2024-01-26 01:50:58,811 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/views.py changed, reloading.
+2024-01-26 01:50:59,918 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-26 02:08:59,271 %(WARNING)s - silk.model_factory - Response to request with pk b70fd197-9f93-495a-80ee-880aa665909b has content type text/javascript but was unable to parse it
+2024-01-26 02:09:00,849 %(WARNING)s - silk.model_factory - Response to request with pk c5233958-09d8-4921-a8b0-00a65a042127 has content type text/javascript but was unable to parse it
+2024-01-26 02:09:02,031 %(WARNING)s - silk.model_factory - Response to request with pk c24fa793-44d7-44f6-85b5-76d5811422c3 has content type text/javascript but was unable to parse it
+2024-01-26 02:09:08,710 %(WARNING)s - silk.model_factory - Response to request with pk 5636b049-506a-4a48-a0de-83c8f277f0af has content type text/javascript but was unable to parse it
+2024-01-26 02:09:10,365 %(WARNING)s - silk.model_factory - Response to request with pk 96bf1347-6ec6-43d6-aeb0-8daadf830fa2 has content type text/javascript but was unable to parse it
+2024-01-26 02:09:14,496 %(WARNING)s - silk.model_factory - Response to request with pk 92e1e4bd-2947-499d-a532-d5adf1a537b6 has content type text/javascript but was unable to parse it
+2024-01-26 02:09:17,859 %(WARNING)s - silk.model_factory - Response to request with pk 7e5087a4-47e7-4002-849a-a64651b28e31 has content type text/javascript but was unable to parse it
+2024-01-26 02:09:20,102 %(WARNING)s - silk.model_factory - Response to request with pk 9c9b6a94-4524-4f04-b78a-dc47d28b8d6f has content type text/javascript but was unable to parse it
+2024-01-26 02:09:27,064 %(WARNING)s - silk.model_factory - Response to request with pk 808c9d96-a249-4ede-9cde-a26dce38b86a has content type text/javascript but was unable to parse it
+2024-01-26 02:11:44,569 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py changed, reloading.
+2024-01-26 02:11:45,547 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-26 02:11:50,373 %(WARNING)s - silk.model_factory - Response to request with pk d6f1648d-642e-4ed6-8bcf-a74746b9a579 has content type text/javascript but was unable to parse it
+2024-01-26 02:11:55,236 %(WARNING)s - silk.model_factory - Response to request with pk 61935e57-bcc4-43da-aa6d-c3afdff93708 has content type text/javascript but was unable to parse it
+2024-01-26 02:11:58,563 %(WARNING)s - silk.model_factory - Response to request with pk 4f95c3b6-b2fd-4856-b36a-ededc2d402af has content type text/javascript but was unable to parse it
+2024-01-26 02:12:00,263 %(WARNING)s - silk.model_factory - Response to request with pk 8dc24557-5d9a-4f75-adac-10bfee9f2e18 has content type text/javascript but was unable to parse it
+2024-01-26 02:12:06,102 %(ERROR)s - django.request - Internal Server Error: /admin/shop/cartitem/1/change/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/options.py", line 714, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/decorators/cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/sites.py", line 240, in inner
+    return view(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1944, in change_view
+    return self.changeform_view(request, object_id, form_url, extra_context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1802, in changeform_view
+    return self._changeform_view(request, object_id, form_url, extra_context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1853, in _changeform_view
+    self.save_model(request, new_object, form, not add)
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py", line 242, in save_model
+    raise ValidationError("Quantity cannot be greater than the available inventory.")
+django.core.exceptions.ValidationError: ['Quantity cannot be greater than the available inventory.']
+2024-01-26 02:12:22,405 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py changed, reloading.
+2024-01-26 02:12:23,607 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-26 02:13:38,872 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py changed, reloading.
+2024-01-26 02:13:39,952 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-26 02:13:45,245 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py changed, reloading.
+2024-01-26 02:13:47,018 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-26 02:13:51,375 %(WARNING)s - silk.model_factory - Response to request with pk 7f0fad67-8cab-4074-8a70-107fe6cb4693 has content type text/javascript but was unable to parse it

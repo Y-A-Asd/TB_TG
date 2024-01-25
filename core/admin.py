@@ -17,14 +17,6 @@ class ContentTypeAdmin(admin.ModelAdmin):
     inlines = [TagInline]
 
 
-class CustomProductAdmin(ProductAdmin):
-    inlines = [TagInline, ProductImageInline]
-
-
-admin.site.unregister(Product)
-admin.site.register(Product, CustomProductAdmin)
-
-
 @admin.register(Permission)
 class PermissionAdmin(admin.ModelAdmin):
     search_fields = ['codename']
