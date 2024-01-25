@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-24 19:29+0330\n"
+"POT-Creation-Date: 2024-01-25 03:04+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,14 +26,6 @@ msgstr ""
 msgid "Persian"
 msgstr ""
 
-#: core/admin.py:16 tags/models.py:23 tags/models.py:29
-msgid "Tag"
-msgstr ""
-
-#: core/admin.py:17 tags/models.py:24
-msgid "Tags"
-msgstr ""
-
 #: core/models.py:18
 msgid "Created at"
 msgstr ""
@@ -46,7 +38,7 @@ msgstr ""
 msgid "Deleted at"
 msgstr ""
 
-#: core/models.py:35 core/models.py:89 shop/models.py:100
+#: core/models.py:35 core/models.py:89 shop/models.py:101
 msgid "User"
 msgstr ""
 
@@ -90,7 +82,7 @@ msgstr ""
 msgid "Phone number must start with \"09\" and have 11 digits."
 msgstr ""
 
-#: core/models.py:74 shop/models.py:267
+#: core/models.py:74 shop/models.py:277
 msgid "Phone Number"
 msgstr ""
 
@@ -102,7 +94,7 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: core/models.py:79 shop/models.py:197
+#: core/models.py:79 shop/models.py:207
 msgid "Active"
 msgstr ""
 
@@ -118,32 +110,40 @@ msgstr ""
 msgid "Users"
 msgstr ""
 
-#: shop/admin.py:13 shop/models.py:64
+#: shop/admin.py:17 tags/models.py:23 tags/models.py:29
+msgid "Tag"
+msgstr ""
+
+#: shop/admin.py:18 tags/admin.py:15 tags/models.py:24
+msgid "Tags"
+msgstr ""
+
+#: shop/admin.py:22 shop/models.py:65
 msgid "Inventory"
 msgstr ""
 
-#: shop/admin.py:19 shop/admin.py:67
+#: shop/admin.py:29 shop/admin.py:80
 msgid "Low"
 msgstr ""
 
-#: shop/admin.py:68
+#: shop/admin.py:81
 msgid "OK"
 msgstr ""
 
-#: shop/admin.py:70
+#: shop/admin.py:83
 msgid "Clear inventory"
 msgstr ""
 
-#: shop/admin.py:75
+#: shop/admin.py:88
 #, python-brace-format
 msgid "{count} products were successfully updated."
 msgstr ""
 
-#: shop/admin.py:98 shop/models.py:77
+#: shop/admin.py:112 shop/models.py:78
 msgid "Products"
 msgstr ""
 
-#: shop/admin.py:121 shop/models.py:147
+#: shop/admin.py:136 shop/models.py:149
 msgid "Orders"
 msgstr ""
 
@@ -159,7 +159,7 @@ msgstr ""
 msgid "Promotion"
 msgstr ""
 
-#: shop/models.py:23 shop/models.py:67
+#: shop/models.py:23 shop/models.py:68
 msgid "Promotions"
 msgstr ""
 
@@ -167,7 +167,7 @@ msgstr ""
 msgid "Parent"
 msgstr ""
 
-#: shop/models.py:51 shop/models.py:65
+#: shop/models.py:51 shop/models.py:66
 msgid "Collection"
 msgstr ""
 
@@ -183,197 +183,209 @@ msgstr ""
 msgid "Unit Price"
 msgstr ""
 
-#: shop/models.py:76 shop/models.py:152 shop/models.py:166
+#: shop/models.py:77 shop/models.py:154 shop/models.py:168 shop/models.py:290
 msgid "Product"
 msgstr ""
 
-#: shop/models.py:88
+#: shop/models.py:89
 msgid "Bronze"
 msgstr ""
 
-#: shop/models.py:89
+#: shop/models.py:90
 msgid "Silver"
 msgstr ""
 
-#: shop/models.py:90
+#: shop/models.py:91
 msgid "Gold"
 msgstr ""
 
-#: shop/models.py:93
+#: shop/models.py:94
 msgid "First Name"
 msgstr ""
 
-#: shop/models.py:94
+#: shop/models.py:95
 msgid "Last Name"
 msgstr ""
 
-#: shop/models.py:97
+#: shop/models.py:98
 msgid "Birth Date"
 msgstr ""
 
-#: shop/models.py:98
+#: shop/models.py:99
 msgid "Membership"
 msgstr ""
 
-#: shop/models.py:113 shop/models.py:125 shop/models.py:142 shop/models.py:176
-#: shop/models.py:251
+#: shop/models.py:114 shop/models.py:127 shop/models.py:144 shop/models.py:178
+#: shop/models.py:261 shop/models.py:291
 msgid "Customer"
 msgstr ""
 
-#: shop/models.py:114
+#: shop/models.py:115
 msgid "Customers"
 msgstr ""
 
-#: shop/models.py:122
+#: shop/models.py:123
 msgid "Zip Code"
 msgstr ""
 
-#: shop/models.py:123
+#: shop/models.py:124
 msgid "Path"
 msgstr ""
 
-#: shop/models.py:124
+#: shop/models.py:125
 msgid "City"
 msgstr ""
 
-#: shop/models.py:128 shop/models.py:143 shop/models.py:265
+#: shop/models.py:126
+msgid "Province"
+msgstr ""
+
+#: shop/models.py:130 shop/models.py:145 shop/models.py:275
 msgid "Address"
 msgstr ""
 
-#: shop/models.py:129
+#: shop/models.py:131
 msgid "Addresses"
 msgstr ""
 
-#: shop/models.py:134
+#: shop/models.py:136
 msgid "Not Paid"
 msgstr ""
 
-#: shop/models.py:135 shop/models.py:243
+#: shop/models.py:137 shop/models.py:253
 msgid "Pending"
 msgstr ""
 
-#: shop/models.py:136
+#: shop/models.py:138
 msgid "Shipping"
 msgstr ""
 
-#: shop/models.py:137
+#: shop/models.py:139
 msgid "Delivered"
 msgstr ""
 
-#: shop/models.py:138 shop/models.py:245
+#: shop/models.py:140 shop/models.py:255
 msgid "Failed"
 msgstr ""
 
-#: shop/models.py:140 shop/models.py:248
+#: shop/models.py:142 shop/models.py:258
 msgid "Payment Status"
 msgstr ""
 
-#: shop/models.py:146 shop/models.py:151 shop/models.py:247
+#: shop/models.py:148 shop/models.py:153 shop/models.py:257
 msgid "Order"
 msgstr ""
 
-#: shop/models.py:153 shop/models.py:167
+#: shop/models.py:155 shop/models.py:169
 msgid "Quantity"
 msgstr ""
 
-#: shop/models.py:156
+#: shop/models.py:158
 msgid "Order Item"
 msgstr ""
 
-#: shop/models.py:157
+#: shop/models.py:159
 msgid "Order Items"
 msgstr ""
 
-#: shop/models.py:165
+#: shop/models.py:167
 msgid "Cart"
 msgstr ""
 
-#: shop/models.py:171
+#: shop/models.py:173
 msgid "Cart Item"
 msgstr ""
 
-#: shop/models.py:172
+#: shop/models.py:174
 msgid "Cart Items"
 msgstr ""
 
-#: shop/models.py:193
+#: shop/models.py:188
+msgid "Review"
+msgstr ""
+
+#: shop/models.py:189
+msgid "Reviews"
+msgstr ""
+
+#: shop/models.py:203
 msgid "DirectPrice"
 msgstr ""
 
-#: shop/models.py:194
+#: shop/models.py:204
 msgid "DiscountOff"
 msgstr ""
 
-#: shop/models.py:196 shop/models.py:207 shop/models.py:212
+#: shop/models.py:206 shop/models.py:217 shop/models.py:222
 msgid "Discount"
 msgstr ""
 
-#: shop/models.py:198
+#: shop/models.py:208
 msgid "Code"
 msgstr ""
 
-#: shop/models.py:201
+#: shop/models.py:211
 msgid "Mode"
 msgstr ""
 
-#: shop/models.py:208
+#: shop/models.py:218
 msgid "Discounts"
 msgstr ""
 
-#: shop/models.py:227
+#: shop/models.py:237
 msgid "Discount Item"
 msgstr ""
 
-#: shop/models.py:228
+#: shop/models.py:238
 msgid "Discount Items"
 msgstr ""
 
-#: shop/models.py:238
+#: shop/models.py:248
 msgid "There is already an active discount for this item."
 msgstr ""
 
-#: shop/models.py:244
+#: shop/models.py:254
 msgid "Complete"
 msgstr ""
 
-#: shop/models.py:250
+#: shop/models.py:260
 msgid "Total Price"
 msgstr ""
 
-#: shop/models.py:252
+#: shop/models.py:262
 msgid "Receipt Number"
 msgstr ""
 
-#: shop/models.py:258
+#: shop/models.py:268
 msgid "Transaction"
 msgstr ""
 
-#: shop/models.py:259
+#: shop/models.py:269
 msgid "Transactions"
 msgstr ""
 
-#: shop/models.py:264
+#: shop/models.py:274
 msgid "Footer Text"
 msgstr ""
 
-#: shop/models.py:268
+#: shop/models.py:278
 msgid "Logo"
 msgstr ""
 
-#: shop/models.py:269
+#: shop/models.py:279
 msgid "Social Media Links"
 msgstr ""
 
-#: shop/models.py:275 shop/models.py:276
+#: shop/models.py:285 shop/models.py:286
 msgid "Site Settings"
 msgstr ""
 
-#: shop/validator.py:22
+#: shop/validator.py:23
 #, python-brace-format
 msgid "Tag with label '{tag_label}' does not exist."
 msgstr ""
 
-#: shop/validator.py:36
+#: shop/validator.py:48
 #, python-brace-format
 msgid "{model} is not an allowed content type for discounts."
 msgstr ""

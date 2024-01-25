@@ -1,5 +1,7 @@
+from django import forms
 from django.contrib import admin, messages
 from django.contrib.contenttypes.admin import GenericTabularInline
+from django.core.exceptions import ValidationError
 from django.db.models.aggregates import Count
 from django.db.models.query import QuerySet
 from django.utils.html import format_html, urlencode
@@ -8,7 +10,7 @@ from django.utils.translation import gettext_lazy as _
 from parler.admin import TranslatableAdmin
 from tags.models import TaggedItem
 from . import models
-from .models import CartItem, Cart
+from .models import CartItem, Cart, Review, BaseDiscount, DiscountItems
 
 
 class TagInline(GenericTabularInline):
@@ -21,7 +23,7 @@ class TagInline(GenericTabularInline):
 class InventoryFilter(admin.SimpleListFilter):
     title = _('Inventory')
     parameter_name = 'inventory'
-    exclude = ['deleted_at']
+    exclude = ['deleted_at', 'created_at', 'updated_at']
     inlines = [TagInline]
 
     def lookups(self, request, model_admin):
@@ -68,7 +70,7 @@ class ProductAdmin(TranslatableAdmin):
     list_per_page = 10
     list_select_related = ['collection']
     search_fields = ['title']
-    exclude = ['deleted_at']
+    exclude = ['deleted_at', 'created_at', 'updated_at']
     inlines = [TagInline]
 
     def collection_title(self, product):
@@ -100,7 +102,7 @@ class CollectionAdmin(TranslatableAdmin):
     autocomplete_fields = ['parent']
     list_display = ['title', 'products_count']
     search_fields = ['title']
-    exclude = ['deleted_at']
+    exclude = ['deleted_at', 'created_at', 'updated_at']
     inlines = [TagInline]
 
     @admin.display(ordering='products_count')
@@ -118,13 +120,13 @@ class CollectionAdmin(TranslatableAdmin):
 
 
 @admin.register(models.Customer)
-class CustomerAdmin(TranslatableAdmin):
+class CustomerAdmin(admin.ModelAdmin):
     list_display = ['first_name', 'last_name', 'membership', 'orders']
     list_editable = ['membership']
     list_per_page = 10
     list_select_related = ['user']
     search_fields = ['first_name__istartswith', 'last_name__istartswith']
-    exclude = ['deleted_at']
+    exclude = ['deleted_at', 'created_at', 'updated_at']
     inlines = [TagInline]
 
     @admin.display(ordering='orders_count')
@@ -142,7 +144,7 @@ class CustomerAdmin(TranslatableAdmin):
 
 
 class OrderItemInline(admin.TabularInline):
-    exclude = ['deleted_at']
+    exclude = ['deleted_at', 'created_at', 'updated_at']
     autocomplete_fields = ['product']
     min_num = 1
     max_num = 10
@@ -152,7 +154,7 @@ class OrderItemInline(admin.TabularInline):
 
 @admin.register(models.Order)
 class OrderAdmin(admin.ModelAdmin):
-    exclude = ['deleted_at']
+    exclude = ['deleted_at', 'updated_at']
     autocomplete_fields = ['customer']
     list_filter = ['customer']
     inlines = [OrderItemInline, TagInline]
@@ -162,14 +164,14 @@ class OrderAdmin(admin.ModelAdmin):
 class CartItemInline(admin.TabularInline):
     model = CartItem
     extra = 1
-    exclude = ['deleted_at']
+    exclude = ['deleted_at', 'created_at', 'updated_at']
 
 
 @admin.register(CartItem)
 class CartItemAdmin(admin.ModelAdmin):
     list_display = ['cart', 'product', 'quantity', 'view_cart']
     list_filter = ['cart', 'product']
-    exclude = ['deleted_at']
+    exclude = ['deleted_at', 'created_at', 'updated_at']
 
     def view_cart(self, obj):
         cart_url = reverse('admin:shop_cart_change', args=[obj.cart.id])
@@ -181,10 +183,72 @@ class CartAdmin(admin.ModelAdmin):
     list_display = ['id', 'view_cart_items']
     readonly_fields = ['view_cart_items']
     inlines = [CartItemInline]
-    exclude = ['deleted_at']
+    exclude = ['deleted_at', 'created_at', 'updated_at']
 
     def view_cart_items(self, obj):
         cart_items_url = reverse('admin:shop_cartitem_changelist') + f'?cart__id__exact={obj.id}'
         return format_html('<a href="{}">View Cart Items</a>', cart_items_url)
 
     view_cart_items.short_description = 'Cart Items'
+
+
+@admin.register(Review)
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ['user', 'product', 'name', 'parent_review']
+    list_filter = ['user', 'product']
+    search_fields = ['name', 'description']
+    date_hierarchy = 'created_at'
+    exclude = ['deleted_at', 'updated_at']
+
+
+class BaseDiscountAdminForm(forms.ModelForm):
+    class Meta:
+        model = BaseDiscount
+        fields = ['code', 'discount', 'mode', 'active', 'valid_from', 'valid_to']
+
+    def clean(self):
+        """
+            https://docs.djangoproject.com/en/5.0/topics/forms/modelforms/
+            https://docs.djangoproject.com/en/5.0/topics/forms/modelforms/#overriding-clean-on-a-modelformset
+            https://docs.djangoproject.com/en/5.0/topics/forms/modelforms/#overriding-methods-on-an-inlineformset
+        """
+        cleaned_data = super().clean()
+        mode = cleaned_data.get('mode')
+        discount = cleaned_data.get('discount')
+        if mode == BaseDiscount.Mode.DirectPrice and discount < 101:
+            raise ValidationError({'discount': 'Invalid discount!(Check Mode again)'})
+
+        if mode == BaseDiscount.Mode.DiscountOff and discount > 99:
+            raise ValidationError({'discount': 'Invalid discount(Check Mode again)'})
+
+        return cleaned_data
+
+
+class DiscountItemsInline(admin.TabularInline):
+    model = DiscountItems
+    extra = 1
+
+
+@admin.register(BaseDiscount)
+class BaseDiscountAdmin(admin.ModelAdmin):
+    form = BaseDiscountAdminForm
+    list_filter = ['mode', 'active', 'valid_from', 'valid_to']
+    search_fields = ['code']
+    date_hierarchy = 'valid_from'
+    inlines = [DiscountItemsInline]
+
+
+@admin.register(DiscountItems)
+class DiscountItemsAdmin(admin.ModelAdmin):
+    list_display = ['content_type', 'object_id', 'discount', 'get_content_object_link']
+    list_filter = ['content_type', 'discount__mode', 'discount__active']
+    search_fields = ['object_id']
+    readonly_fields = ['get_content_object_link']
+    exclude = ['content_object']
+
+    def get_content_object_link(self, obj):
+        link = reverse('admin:%s_%s_change' % (obj.content_type.app_label, obj.content_type.model),
+                       args=[obj.object_id])
+        return format_html('<a href="{}">{}</a>', link, obj.content_object)
+
+    get_content_object_link.short_description = _('Content Object')

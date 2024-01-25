@@ -1,7 +1,7 @@
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ValidationError
-from django.core.validators import MinValueValidator, FileExtensionValidator
+from django.core.validators import MinValueValidator, FileExtensionValidator, MaxValueValidator
 from django.utils.translation import gettext_lazy as _, get_language
 from django.db import models
 from django.conf import settings
@@ -84,16 +84,14 @@ class ProductImage(BaseModel):
     image = models.ImageField(upload_to='shop/images', validators=[validate_file_size])
 
 
-class Customer(TranslatableModel, BaseModel):
+class Customer(BaseModel):
     class MembershipStatus(models.TextChoices):
         MEMBERSHIP_BRONZE = 'B', _('Bronze')
         MEMBERSHIP_SILVER = 'S', _('Silver')
         MEMBERSHIP_GOLD = 'G', _('Gold')
 
-    translations = TranslatedFields(
-        first_name=models.CharField(_("First Name"), max_length=255),
-        last_name=models.CharField(_("Last Name"), max_length=255)
-    )
+    first_name = models.CharField(_("First Name"), max_length=255),
+    last_name = models.CharField(_("Last Name"), max_length=255)
 
     birth_date = models.DateField(_("Birth Date"), null=True, blank=True)
     membership = models.CharField(_("Membership"), max_length=1, choices=MembershipStatus,
@@ -101,19 +99,12 @@ class Customer(TranslatableModel, BaseModel):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, verbose_name=_("User"), on_delete=models.CASCADE)
 
     def __str__(self):
-        default_language = get_language() or 'en'
-        first_name_translation = self.translations.get(language_code=default_language)
-        first_name = first_name_translation.first_name if first_name_translation else f"Customer {self.pk}"
-
-        last_name_translation = self.translations.get(language_code=default_language)
-        last_name = last_name_translation.last_name if last_name_translation else ""
-
-        return f'{first_name} {last_name}'
+        return f'{self.first_name} {self.last_name}'
 
     class Meta:
         verbose_name = _("Customer")
         verbose_name_plural = _("Customers")
-        ordering = ["translations__first_name", "translations__last_name"]
+        # ordering = ["first_name", "last_name"]
         permissions = [
             ('view_history', 'Can view history')
         ]
@@ -177,9 +168,11 @@ class CartItem(BaseModel):
 class Review(BaseModel):
     user = models.ForeignKey(Customer, on_delete=models.CASCADE, verbose_name=_("Customer"))
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
+    rating = models.PositiveIntegerField(_('Rating'), validators=[MinValueValidator(1), MaxValueValidator(5)])
     name = models.CharField(max_length=255)
     description = models.TextField()
     parent_review = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='replies')
+    active = models.BooleanField(_("Active"), default=False)
 
     def __str__(self):
         return f"{self.user} - {self.name}"
@@ -216,6 +209,9 @@ class BaseDiscount(BaseModel):
     class Meta:
         verbose_name = _("Discount")
         verbose_name_plural = _("Discounts")
+
+    def __str__(self):
+        return f'DISCOUNT {self.pk} - {self.discount}, {self.mode}, {self.code}'
 
 
 class DiscountItems(models.Model):
