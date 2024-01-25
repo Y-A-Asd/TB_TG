@@ -15,6 +15,7 @@ class TaggedItemInline(GenericTabularInline):
     verbose_name_plural = _("Tags")
     autocomplete_fields = ['tag']
 
+
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
     list_display = ['label']
@@ -28,5 +29,3 @@ class TaggedItemAdmin(admin.ModelAdmin):
     search_fields = ['tag__label']
     ordering = ['-id']
     autocomplete_fields = ['tag']
-
-

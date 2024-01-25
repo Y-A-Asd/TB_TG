@@ -2,15 +2,17 @@ from django import forms
 from django.contrib import admin, messages
 from django.contrib.contenttypes.admin import GenericTabularInline
 from django.core.exceptions import ValidationError
-from django.db.models.aggregates import Count
+from django.db.models.aggregates import Count, Sum
 from django.db.models.query import QuerySet
 from django.utils.html import format_html, urlencode
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
+from dal import autocomplete
 from parler.admin import TranslatableAdmin
 from tags.models import TaggedItem
 from . import models
-from .models import CartItem, Cart, Review, BaseDiscount, DiscountItems
+from .models import CartItem, Cart, Review, BaseDiscount, DiscountItems, Transaction, Address, FeatureValue, \
+    MainFeature, Order, OrderItem, SiteSettings
 
 
 class TagInline(GenericTabularInline):
@@ -18,6 +20,34 @@ class TagInline(GenericTabularInline):
     model = TaggedItem
     verbose_name = _('Tag')
     verbose_name_plural = _('Tags')
+
+
+class FeatureValueInline(admin.TabularInline):
+    model = FeatureValue
+    extra = 1
+    exclude = ['deleted_at', 'created_at', 'updated_at']
+
+
+@admin.register(MainFeature)
+class MainFeatureAdmin(TranslatableAdmin):
+    inlines = [FeatureValueInline]
+    list_display = ['title', 'description']
+    search_fields = ['title']
+    exclude = ['deleted_at', 'created_at', 'updated_at']
+
+    class Meta:
+        model = MainFeature
+
+
+@admin.register(FeatureValue)
+class FeatureValueAdmin(TranslatableAdmin):
+    list_display = ['value', 'description', 'parent_feature']
+    search_fields = ['value']
+    list_filter = ['parent_feature']
+    exclude = ['deleted_at', 'created_at', 'updated_at']
+
+    class Meta:
+        model = FeatureValue
 
 
 class InventoryFilter(admin.SimpleListFilter):
@@ -64,7 +94,7 @@ class ProductAdmin(TranslatableAdmin):
     actions = ['Clear inventory']
     inlines = [ProductImageInline]
     list_display = ['title', 'unit_price',
-                    'inventory_status', 'collection_title']
+                    'inventory_status', 'collection_title', 'min_inventory']
     list_editable = ['unit_price']
     list_filter = ['collection', 'updated_at', InventoryFilter]
     list_per_page = 10
@@ -99,8 +129,8 @@ class ProductAdmin(TranslatableAdmin):
 
 @admin.register(models.Collection)
 class CollectionAdmin(TranslatableAdmin):
-    autocomplete_fields = ['parent']
-    list_display = ['title', 'products_count']
+    autocomplete_fields = ['parent', 'main_feature']
+    list_display = ['title', 'products_count', 'main_feature', 'parent']
     search_fields = ['title']
     exclude = ['deleted_at', 'created_at', 'updated_at']
     inlines = [TagInline]
@@ -119,6 +149,12 @@ class CollectionAdmin(TranslatableAdmin):
         )
 
 
+class AddressInline(admin.TabularInline):
+    model = Address
+    extra = 1
+    exclude = ['deleted_at', 'created_at', 'updated_at']
+
+
 @admin.register(models.Customer)
 class CustomerAdmin(admin.ModelAdmin):
     list_display = ['first_name', 'last_name', 'membership', 'orders']
@@ -127,7 +163,7 @@ class CustomerAdmin(admin.ModelAdmin):
     list_select_related = ['user']
     search_fields = ['first_name__istartswith', 'last_name__istartswith']
     exclude = ['deleted_at', 'created_at', 'updated_at']
-    inlines = [TagInline]
+    inlines = [TagInline, AddressInline]
 
     @admin.display(ordering='orders_count')
     def orders(self, customer):
@@ -147,18 +183,39 @@ class OrderItemInline(admin.TabularInline):
     exclude = ['deleted_at', 'created_at', 'updated_at']
     autocomplete_fields = ['product']
     min_num = 1
-    max_num = 10
-    model = models.OrderItem
+    max_num = 20
+    model = OrderItem
     extra = 0
 
 
-@admin.register(models.Order)
+@admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
     exclude = ['deleted_at', 'updated_at']
     autocomplete_fields = ['customer']
-    list_filter = ['customer']
+    list_filter = ['customer', 'order_status']
     inlines = [OrderItemInline, TagInline]
-    list_display = ['id', 'created_at', 'customer']
+    list_display = ['id', 'created_at', 'customer', 'order_status', 'total_price']
+    search_fields = ['id', 'customer__user__username']
+    actions = ['mark_as_delivered']
+
+    def total_price(self, obj):
+        return obj.order_items.aggregate(total_price=Sum(models.F('product__unit_price') * models.F('quantity')))[
+            'total_price']
+
+    total_price.short_description = _("Total Price")
+
+    def mark_as_delivered(self, request, queryset):
+        queryset.update(order_status=Order.OrderStatus.ORDER_STATUS_DELIVERED)
+
+    mark_as_delivered.short_description = _("Mark selected orders as delivered")
+
+    def view_order_items(self, obj):
+        order_items_url = reverse('admin:shop_orderitem_changelist') + f'?order__id__exact={obj.id}'
+        return format_html('<a href="{}">View Order Items</a>', order_items_url)
+
+    view_order_items.short_description = _('Order Items')
+
+    list_display_links = ['id', 'created_at']
 
 
 class CartItemInline(admin.TabularInline):
@@ -252,3 +309,61 @@ class DiscountItemsAdmin(admin.ModelAdmin):
         return format_html('<a href="{}">{}</a>', link, obj.content_object)
 
     get_content_object_link.short_description = _('Content Object')
+
+
+"""
+https://stackoverflow.com/questions/43852601/offering-choices-that-depend-on-other-fields-in-django-admin
+https://stackoverflow.com/questions/43852601/offering-choices-that-depend-on-other-fields-in-django-admin
+https://stackoverflow.com/questions/43852601/offering-choices-that-depend-on-other-fields-in-django-admin
+https://stackoverflow.com/questions/43852601/offering-choices-that-depend-on-other-fields-in-django-admin
+https://stackoverflow.com/questions/43852601/offering-choices-that-depend-on-other-fields-in-django-admin
+https://stackoverflow.com/questions/43852601/offering-choices-that-depend-on-other-fields-in-django-admin
+https://stackoverflow.com/questions/43852601/offering-choices-that-depend-on-other-fields-in-django-admin
+https://stackoverflow.com/questions/43852601/offering-choices-that-depend-on-other-fields-in-django-admin
+https://stackoverflow.com/questions/43852601/offering-choices-that-depend-on-other-fields-in-django-admin
+"""
+
+
+@admin.register(Transaction)
+class TransactionAdmin(admin.ModelAdmin):
+    list_display = ['order_link', 'payment_status', 'total_price', 'customer', 'receipt_number']
+    list_filter = ['payment_status', 'customer']
+    search_fields = ['order__id', 'customer__user__username', 'receipt_number']
+    actions = ['mark_as_complete']
+    exclude = ['deleted_at', 'created_at', 'updated_at']
+
+    def order_link(self, obj):
+        return format_html('<a href="{}">{}</a>', reverse('admin:shop_order_change', args=[obj.order.id]), obj.order)
+
+    order_link.short_description = _('Order')
+
+    def mark_as_complete(self, request, queryset):
+        queryset.update(payment_status=Transaction.PaymentStatus.PAYMENT_STATUS_COMPLETE)
+
+    mark_as_complete.short_description = _('Mark selected transactions as complete')
+
+    def get_readonly_fields(self, request, obj=None):
+        if obj and obj.payment_status == Transaction.PaymentStatus.PAYMENT_STATUS_COMPLETE:
+            return self.readonly_fields + ('order', 'payment_status', 'total_price', 'customer', 'receipt_number')
+        return self.readonly_fields
+
+
+class SiteSettingsAdmin(TranslatableAdmin):
+    list_display = ['id', 'phone_number', 'logo_thumbnail']
+    readonly_fields = ['logo_thumbnail']
+    fieldsets = [
+        (_('General Settings'), {'fields': ['phone_number', 'social_media_links']}),
+        (_('Translations'), {'fields': ['footer_text', 'address']}),
+        (_('Logo'), {'fields': ['logo', 'logo_thumbnail']}),
+    ]
+
+    def logo_thumbnail(self, obj):
+        if obj.logo:
+            return '<img src="{}" style="max-height: 100px; max-width: 150px;"/>'.format(obj.logo.url)
+        return _('No Image')
+
+    logo_thumbnail.allow_tags = True
+    logo_thumbnail.short_description = _('Logo Preview')
+
+
+admin.site.register(SiteSettings, SiteSettingsAdmin)

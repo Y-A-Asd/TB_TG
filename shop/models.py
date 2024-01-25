@@ -1,7 +1,8 @@
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ValidationError
-from django.core.validators import MinValueValidator, FileExtensionValidator, MaxValueValidator
+from django.core.validators import MinValueValidator, MaxValueValidator
+from shop.validator import validate_file_size
 from django.utils.translation import gettext_lazy as _, get_language
 from django.db import models
 from django.conf import settings
@@ -9,7 +10,29 @@ from parler.models import TranslatableModel, TranslatedFields
 from core.models import BaseModel
 import uuid
 
-from shop.validator import validate_file_size
+
+class MainFeature(TranslatableModel, BaseModel):
+    translations: TranslatedFields = TranslatedFields(
+        title=models.CharField(_('Title'), max_length=255),
+        description=models.CharField(_("Description"), max_length=500)
+    )
+
+    class Meta:
+        verbose_name = _("Feature")
+        verbose_name_plural = _("Features")
+
+
+class FeatureValue(TranslatableModel, BaseModel):
+    translations: TranslatedFields = TranslatedFields(
+        value=models.CharField(_('Title'), max_length=255),
+        description=models.CharField(_("Description"), max_length=500)
+    )
+    parent_feature = models.ForeignKey(MainFeature, on_delete=models.CASCADE, related_name='values',
+                                       verbose_name=_("Feature Values"))
+
+    class Meta:
+        verbose_name = _("Value")
+        verbose_name_plural = _("Values")
 
 
 class Promotion(TranslatableModel, BaseModel):
@@ -37,6 +60,9 @@ class Collection(TranslatableModel, BaseModel):
     parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='subcollection',
                                verbose_name=_("Parent"))
 
+    main_feature = models.ForeignKey(MainFeature, on_delete=models.PROTECT, related_name='collections',
+                                     verbose_name='Features', null=True)
+
     @property
     def is_subcollection(self):
         return self.parent is not None
@@ -63,6 +89,8 @@ class Product(TranslatableModel, BaseModel):
     unit_price = models.DecimalField(_("Unit Price"), max_digits=15, decimal_places=2,
                                      validators=[MinValueValidator(1)])
     inventory = models.IntegerField(_("Inventory"), validators=[MinValueValidator(0)])
+    min_inventory = models.IntegerField(_("Minimum Inventory"), validators=[MinValueValidator(0)], null=True,
+                                        blank=True)
     collection = models.ForeignKey(Collection, on_delete=models.PROTECT, verbose_name=_("Collection"),
                                    related_name='products')
     promotions = models.ManyToManyField(Promotion, blank=True, verbose_name=_("Promotions"), related_name='products')
@@ -130,10 +158,15 @@ class Order(BaseModel):
         ORDER_STATUS_DELIVERED = 'D', _('Delivered')
         ORDER_STATUS_FAILED = 'F', _('Failed')
 
-    payment_status = models.CharField(_("Payment Status"), max_length=1, choices=OrderStatus,
-                                      default=OrderStatus.ORDER_STATUS_NOT_PAID)
+    order_status = models.CharField(_("Payment Status"), max_length=1, choices=OrderStatus,
+                                    default=OrderStatus.ORDER_STATUS_NOT_PAID)
     customer = models.ForeignKey(Customer, on_delete=models.PROTECT, verbose_name=_("Customer"))
-    address = models.ForeignKey(Address, on_delete=models.PROTECT, verbose_name=_("Address"))
+    zip_code = models.CharField(_("Zip Code"), max_length=10)
+    path = models.CharField(_("Path"), max_length=1025)
+    city = models.CharField(_("City"), max_length=255)
+    province = models.CharField(_("Province"), max_length=32)
+    first_name = models.CharField(_("First Name"), max_length=255),
+    last_name = models.CharField(_("Last Name"), max_length=255)
 
     class Meta:
         verbose_name = _("Order")
@@ -143,6 +176,8 @@ class Order(BaseModel):
 class OrderItem(BaseModel):
     order = models.ForeignKey(Order, on_delete=models.PROTECT, verbose_name=_("Order"), related_name='orders')
     product = models.ForeignKey(Product, on_delete=models.PROTECT, verbose_name=_("Product"), related_name='orderitems')
+    unit_price = models.DecimalField(_("Unit Price"), max_digits=15, decimal_places=2,
+                                     validators=[MinValueValidator(1)])
     quantity = models.PositiveSmallIntegerField(_("Quantity"))
 
     class Meta:
@@ -282,13 +317,13 @@ class SiteSettings(TranslatableModel, BaseModel):
         verbose_name_plural = _("Site Settings")
 
 
-class WishList(BaseModel):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name=_("Product"))
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, verbose_name=_("Customer"))
-
-    class Meta:
-        verbose_name = 'WishList'
-        verbose_name_plural = 'WishList'
-
-    def __str__(self):
-        return f'{self.customer.first_name} {self.customer.last_name}'
+# class WishList(BaseModel):
+#     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name=_("Product"))
+#     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, verbose_name=_("Customer"))
+#
+#     class Meta:
+#         verbose_name = 'WishList'
+#         verbose_name_plural = 'WishList'
+#
+#     def __str__(self):
+#         return f'{self.customer.first_name} {self.customer.last_name}'
