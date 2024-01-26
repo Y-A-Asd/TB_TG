@@ -8,7 +8,7 @@ def validate_file_size(file):
     max_size_kb = 500
 
     if file.size > max_size_kb * 1024:
-        raise ValidationError(f"File is large: max size = {max_size_kb}KB!")
+        raise ValidationError(_(f"File is large: max size = {max_size_kb}KB!"))
 
 
 def get_allowed_content_types(tag_label):

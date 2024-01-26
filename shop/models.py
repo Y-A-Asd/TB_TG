@@ -2,6 +2,8 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.db.models import Sum, F
+
 from shop.validator import validate_file_size
 from django.utils.translation import gettext_lazy as _, get_language
 from django.db import models
@@ -172,6 +174,9 @@ class Order(BaseModel):
         verbose_name = _("Order")
         verbose_name_plural = _("Orders")
 
+    def get_total_price(self):
+        return self.orders.aggregate(total_price=Sum(F('unit_price') * F('quantity')))['total_price']
+
 
 class OrderItem(BaseModel):
     order = models.ForeignKey(Order, on_delete=models.PROTECT, verbose_name=_("Order"), related_name='orders')
@@ -290,7 +295,7 @@ class Transaction(BaseModel):
                                       default=PaymentStatus.PAYMENT_STATUS_PENDING)
     total_price = models.DecimalField(_("Total Price"), max_digits=10, decimal_places=2)
     customer = models.ForeignKey(Customer, on_delete=models.PROTECT, verbose_name=_("Customer"))
-    receipt_number = models.CharField(_("Receipt Number"), max_length=255)
+    receipt_number = models.CharField(_("Receipt Number"), max_length=255, null=True)
 
     def __str__(self):
         return f"Transaction for Order #{self.order.pk} - {self.get_payment_status_display()}"
@@ -315,7 +320,6 @@ class SiteSettings(TranslatableModel, BaseModel):
     class Meta:
         verbose_name = _("Site Settings")
         verbose_name_plural = _("Site Settings")
-
 
 # class WishList(BaseModel):
 #     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name=_("Product"))

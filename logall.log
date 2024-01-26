@@ -4825,3 +4825,1469 @@ django.core.exceptions.ValidationError: ['Quantity cannot be greater than the av
 2024-01-26 02:13:45,245 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py changed, reloading.
 2024-01-26 02:13:47,018 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
 2024-01-26 02:13:51,375 %(WARNING)s - silk.model_factory - Response to request with pk 7f0fad67-8cab-4074-8a70-107fe6cb4693 has content type text/javascript but was unable to parse it
+2024-01-26 05:40:50,090 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-26 05:41:05,575 %(WARNING)s - django.request - Not Found: /
+2024-01-26 05:41:06,531 %(WARNING)s - django.request - Not Found: /favicon.ico
+2024-01-26 05:41:18,750 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/signals.py changed, reloading.
+2024-01-26 05:41:19,780 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-26 05:41:29,096 %(ERROR)s - django.request - Internal Server Error: /admin/shop/order/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/options.py", line 681, in get_field
+    return self.fields_map[field_name]
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^
+KeyError: 'total_price'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/utils.py", line 289, in lookup_field
+    f = _get_non_gfk_field(opts, name)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/utils.py", line 322, in _get_non_gfk_field
+    field = opts.get_field(name)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/options.py", line 683, in get_field
+    raise FieldDoesNotExist(
+django.core.exceptions.FieldDoesNotExist: Order has no field named 'total_price'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/test/utils.py", line 111, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/test/utils.py", line 111, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/test/utils.py", line 111, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/base.py", line 45, in render
+    return super().render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/library.py", line 258, in render
+    _dict = self.func(*resolved_args, **resolved_kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/admin_list.py", line 343, in result_list
+    "results": list(results(cl)),
+               ^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/admin_list.py", line 319, in results
+    yield ResultList(None, items_for_result(cl, res, None))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/admin_list.py", line 310, in __init__
+    super().__init__(*items)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/admin_list.py", line 217, in items_for_result
+    f, attr, value = lookup_field(field_name, result, cl.model_admin)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/utils.py", line 298, in lookup_field
+    value = attr(obj)
+            ^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py", line 204, in total_price
+    return obj.order_items.aggregate(total_price=Sum(models.F('product__unit_price') * models.F('quantity')))[
+           ^^^^^^^^^^^^^^^
+AttributeError: 'Order' object has no attribute 'order_items'
+2024-01-26 05:42:45,012 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py changed, reloading.
+2024-01-26 05:42:46,347 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-26 05:42:48,559 %(ERROR)s - django.request - Internal Server Error: /admin/shop/order/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/options.py", line 681, in get_field
+    return self.fields_map[field_name]
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^
+KeyError: 'total_price'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/utils.py", line 289, in lookup_field
+    f = _get_non_gfk_field(opts, name)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/utils.py", line 322, in _get_non_gfk_field
+    field = opts.get_field(name)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/options.py", line 683, in get_field
+    raise FieldDoesNotExist(
+django.core.exceptions.FieldDoesNotExist: Order has no field named 'total_price'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/test/utils.py", line 111, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/test/utils.py", line 111, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/test/utils.py", line 111, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/base.py", line 45, in render
+    return super().render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/library.py", line 258, in render
+    _dict = self.func(*resolved_args, **resolved_kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/admin_list.py", line 343, in result_list
+    "results": list(results(cl)),
+               ^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/admin_list.py", line 319, in results
+    yield ResultList(None, items_for_result(cl, res, None))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/admin_list.py", line 310, in __init__
+    super().__init__(*items)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/admin_list.py", line 217, in items_for_result
+    f, attr, value = lookup_field(field_name, result, cl.model_admin)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/utils.py", line 298, in lookup_field
+    value = attr(obj)
+            ^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py", line 204, in total_price
+    return obj.orders.aggregate(total_price=Sum(models.F('product__unit_price') * models.F('quantity')))[
+                                                ^^^^^^^^
+AttributeError: module 'shop.models' has no attribute 'F'
+2024-01-26 05:46:27,928 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py changed, reloading.
+2024-01-26 05:46:29,404 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-26 05:46:33,876 %(WARNING)s - django.request - Not Found: /admin/shop/order/
+2024-01-26 05:46:58,900 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py changed, reloading.
+2024-01-26 05:46:59,858 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-26 05:47:13,730 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py changed, reloading.
+2024-01-26 05:47:14,605 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-26 05:47:20,684 %(ERROR)s - django.request - Internal Server Error: /admin/shop/order/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/options.py", line 681, in get_field
+    return self.fields_map[field_name]
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^
+KeyError: 'total_price'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/utils.py", line 289, in lookup_field
+    f = _get_non_gfk_field(opts, name)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/utils.py", line 322, in _get_non_gfk_field
+    field = opts.get_field(name)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/options.py", line 683, in get_field
+    raise FieldDoesNotExist(
+django.core.exceptions.FieldDoesNotExist: Order has no field named 'total_price'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/test/utils.py", line 111, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/test/utils.py", line 111, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/test/utils.py", line 111, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/base.py", line 45, in render
+    return super().render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/library.py", line 258, in render
+    _dict = self.func(*resolved_args, **resolved_kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/admin_list.py", line 343, in result_list
+    "results": list(results(cl)),
+               ^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/admin_list.py", line 319, in results
+    yield ResultList(None, items_for_result(cl, res, None))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/admin_list.py", line 310, in __init__
+    super().__init__(*items)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/admin_list.py", line 217, in items_for_result
+    f, attr, value = lookup_field(field_name, result, cl.model_admin)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/utils.py", line 298, in lookup_field
+    value = attr(obj)
+            ^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py", line 203, in total_price
+    return obj.orders.aggregate(total_price=Sum(models.F('orderitems__unit_price') * models.F('orderitems__quantity')))[
+                                                ^^^^^^^^
+AttributeError: module 'shop.models' has no attribute 'F'
+2024-01-26 05:48:30,671 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py changed, reloading.
+2024-01-26 05:48:31,739 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-26 05:48:33,536 %(ERROR)s - django.request - Internal Server Error: /admin/shop/order/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/options.py", line 681, in get_field
+    return self.fields_map[field_name]
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^
+KeyError: 'total_price'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/utils.py", line 289, in lookup_field
+    f = _get_non_gfk_field(opts, name)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/utils.py", line 322, in _get_non_gfk_field
+    field = opts.get_field(name)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/options.py", line 683, in get_field
+    raise FieldDoesNotExist(
+django.core.exceptions.FieldDoesNotExist: Order has no field named 'total_price'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/test/utils.py", line 111, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/test/utils.py", line 111, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/test/utils.py", line 111, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/base.py", line 45, in render
+    return super().render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/library.py", line 258, in render
+    _dict = self.func(*resolved_args, **resolved_kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/admin_list.py", line 343, in result_list
+    "results": list(results(cl)),
+               ^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/admin_list.py", line 319, in results
+    yield ResultList(None, items_for_result(cl, res, None))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/admin_list.py", line 310, in __init__
+    super().__init__(*items)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/admin_list.py", line 217, in items_for_result
+    f, attr, value = lookup_field(field_name, result, cl.model_admin)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/utils.py", line 298, in lookup_field
+    value = attr(obj)
+            ^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py", line 203, in total_price
+    return obj.orders.aggregate(total_price=Sum(models.F('orderitems__unit_price') * models.F('orderitems__quantity')))[
+                                                ^^^^^^^^
+AttributeError: module 'shop.models' has no attribute 'F'
+2024-01-26 05:52:09,065 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py changed, reloading.
+2024-01-26 05:52:10,674 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-26 05:52:13,524 %(ERROR)s - django.request - Internal Server Error: /admin/shop/order/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/options.py", line 681, in get_field
+    return self.fields_map[field_name]
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^
+KeyError: 'total_price'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/utils.py", line 289, in lookup_field
+    f = _get_non_gfk_field(opts, name)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/utils.py", line 322, in _get_non_gfk_field
+    field = opts.get_field(name)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/options.py", line 683, in get_field
+    raise FieldDoesNotExist(
+django.core.exceptions.FieldDoesNotExist: Order has no field named 'total_price'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/test/utils.py", line 111, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/test/utils.py", line 111, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/test/utils.py", line 111, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/base.py", line 45, in render
+    return super().render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/library.py", line 258, in render
+    _dict = self.func(*resolved_args, **resolved_kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/admin_list.py", line 343, in result_list
+    "results": list(results(cl)),
+               ^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/admin_list.py", line 319, in results
+    yield ResultList(None, items_for_result(cl, res, None))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/admin_list.py", line 310, in __init__
+    super().__init__(*items)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/admin_list.py", line 217, in items_for_result
+    f, attr, value = lookup_field(field_name, result, cl.model_admin)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/utils.py", line 298, in lookup_field
+    value = attr(obj)
+            ^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py", line 203, in total_price
+    return obj.orders.aggregate(total_price=Sum(Order.F('orders__unit_price') * models.F('orders__quantity')))[
+                                                ^^^^^^^
+AttributeError: type object 'Order' has no attribute 'F'
+2024-01-26 05:52:34,945 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py changed, reloading.
+2024-01-26 05:52:37,200 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-26 05:52:39,203 %(ERROR)s - django.request - Internal Server Error: /admin/shop/order/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/options.py", line 681, in get_field
+    return self.fields_map[field_name]
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^
+KeyError: 'total_price'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/utils.py", line 289, in lookup_field
+    f = _get_non_gfk_field(opts, name)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/utils.py", line 322, in _get_non_gfk_field
+    field = opts.get_field(name)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/options.py", line 683, in get_field
+    raise FieldDoesNotExist(
+django.core.exceptions.FieldDoesNotExist: Order has no field named 'total_price'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/test/utils.py", line 111, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/test/utils.py", line 111, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/test/utils.py", line 111, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/base.py", line 45, in render
+    return super().render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/library.py", line 258, in render
+    _dict = self.func(*resolved_args, **resolved_kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/admin_list.py", line 343, in result_list
+    "results": list(results(cl)),
+               ^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/admin_list.py", line 319, in results
+    yield ResultList(None, items_for_result(cl, res, None))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/admin_list.py", line 310, in __init__
+    super().__init__(*items)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/admin_list.py", line 217, in items_for_result
+    f, attr, value = lookup_field(field_name, result, cl.model_admin)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/utils.py", line 298, in lookup_field
+    value = attr(obj)
+            ^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py", line 203, in total_price
+    return obj.orders.aggregate(total_price=Sum(F('orders__unit_price') * F('orders__quantity')))[
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 602, in aggregate
+    return self.query.chain().get_aggregation(self.db, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 448, in get_aggregation
+    aggregate = aggregate_expr.resolve_expression(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/aggregates.py", line 64, in resolve_expression
+    c = super().resolve_expression(query, allow_joins, reuse, summarize)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/expressions.py", line 975, in resolve_expression
+    c.source_expressions[pos] = arg.resolve_expression(
+                                ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/expressions.py", line 720, in resolve_expression
+    lhs = self.lhs.resolve_expression(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/expressions.py", line 854, in resolve_expression
+    return query.resolve_ref(self.name, allow_joins, reuse, summarize)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 2003, in resolve_ref
+    join_info = self.setup_joins(
+                ^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1856, in setup_joins
+    path, final_field, targets, rest = self.names_to_path(
+                                       ^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1761, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'orders' into field. Choices are: created_at, deleted_at, id, order, order_id, product, product_id, quantity, unit_price, updated_at
+2024-01-26 05:54:13,213 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py changed, reloading.
+2024-01-26 05:54:14,759 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-26 05:54:16,721 %(WARNING)s - silk.model_factory - Response to request with pk 9dd29a78-50ce-43e5-a4c8-1fbf777f7a56 has content type text/javascript but was unable to parse it
+2024-01-26 05:54:39,652 %(WARNING)s - silk.model_factory - Response to request with pk 84ef830c-3b4b-4df7-9cae-c66f730f0c50 has content type text/javascript but was unable to parse it
+2024-01-26 05:54:58,017 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py changed, reloading.
+2024-01-26 05:55:00,091 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-26 05:55:02,858 %(WARNING)s - silk.model_factory - Response to request with pk e451a11d-d8e5-46bf-8162-07dc84eff989 has content type text/javascript but was unable to parse it
+2024-01-26 05:55:08,246 %(WARNING)s - silk.model_factory - Response to request with pk 41ba0233-93dd-40c3-bd14-660504da1f69 has content type text/javascript but was unable to parse it
+2024-01-26 05:55:31,553 %(WARNING)s - silk.model_factory - Response to request with pk 453ca64e-3f6f-4ee6-abe5-3f7107b35072 has content type text/javascript but was unable to parse it
+2024-01-26 05:56:30,741 %(WARNING)s - silk.model_factory - Response to request with pk 8c36325d-de28-40a7-b07e-af0e25b84aa8 has content type text/javascript but was unable to parse it
+2024-01-26 05:57:27,126 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/signals.py changed, reloading.
+2024-01-26 05:57:28,248 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-26 05:57:29,723 %(WARNING)s - silk.model_factory - Response to request with pk 37966196-cf27-409b-8933-39bf64550a9a has content type text/javascript but was unable to parse it
+2024-01-26 05:57:34,351 %(WARNING)s - silk.model_factory - Response to request with pk bc2437e9-1242-4e76-8aac-0a6ca21f6946 has content type text/javascript but was unable to parse it
+2024-01-26 05:57:51,791 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/signals.py changed, reloading.
+2024-01-26 05:57:52,753 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-26 05:58:16,797 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/signals.py changed, reloading.
+2024-01-26 05:58:17,583 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-26 06:01:57,711 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py changed, reloading.
+2024-01-26 06:01:58,628 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-26 06:05:59,151 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/signals.py changed, reloading.
+2024-01-26 06:06:01,104 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-26 06:06:03,788 %(WARNING)s - silk.model_factory - Response to request with pk c33e4243-bda8-45bd-91dc-966708f6c180 has content type text/javascript but was unable to parse it
+2024-01-26 06:06:08,621 %(ERROR)s - django.request - Internal Server Error: /admin/shop/order/2/change/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/options.py", line 714, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/decorators/cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/sites.py", line 240, in inner
+    return view(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1944, in change_view
+    return self.changeform_view(request, object_id, form_url, extra_context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1802, in changeform_view
+    return self._changeform_view(request, object_id, form_url, extra_context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1853, in _changeform_view
+    self.save_model(request, new_object, form, not add)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1257, in save_model
+    obj.save()
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/base.py", line 822, in save
+    self.save_base(
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/base.py", line 924, in save_base
+    post_save.send(
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/dispatch/dispatcher.py", line 189, in send
+    response = receiver(signal=self, sender=sender, **named)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/signals.py", line 20, in create_customer_for_new_user
+    Transaction.objects.create(order=order, customer=customer, total_price=total_price, receipt_number=receipt_number)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 675, in create
+    obj = self.model(**kwargs)
+          ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/base.py", line 543, in __init__
+    _setattr(self, field.name, rel_obj)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/fields/related_descriptors.py", line 283, in __set__
+    raise ValueError(
+ValueError: Cannot assign "<django.db.models.fields.related.ForeignKey: customer>": "Transaction.customer" must be a "Customer" instance.
+2024-01-26 06:07:29,130 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/signals.py changed, reloading.
+2024-01-26 06:07:30,499 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-26 06:07:45,081 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/signals.py changed, reloading.
+2024-01-26 06:07:46,305 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-26 06:07:49,368 %(ERROR)s - django.request - Internal Server Error: /admin/shop/order/2/change/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/backends/sqlite3/base.py", line 328, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.IntegrityError: NOT NULL constraint failed: shop_transaction.receipt_number
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/options.py", line 714, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/decorators/cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/sites.py", line 240, in inner
+    return view(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1944, in change_view
+    return self.changeform_view(request, object_id, form_url, extra_context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1802, in changeform_view
+    return self._changeform_view(request, object_id, form_url, extra_context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1853, in _changeform_view
+    self.save_model(request, new_object, form, not add)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1257, in save_model
+    obj.save()
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/base.py", line 822, in save
+    self.save_base(
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/base.py", line 924, in save_base
+    post_save.send(
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/dispatch/dispatcher.py", line 189, in send
+    response = receiver(signal=self, sender=sender, **named)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/signals.py", line 20, in create_transaction_for_new_order
+    Transaction.objects.create(order=order, customer=customer, total_price=total_price, receipt_number=receipt_number)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 677, in create
+    obj.save(force_insert=True, using=self.db)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/base.py", line 822, in save
+    self.save_base(
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/base.py", line 909, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/base.py", line 1067, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/base.py", line 1108, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 1845, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 1823, in execute_sql
+    cursor.execute(sql, params)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/debug_toolbar/panels/sql/tracking.py", line 252, in execute
+    return self._record(super().execute, sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/debug_toolbar/panels/sql/tracking.py", line 177, in _record
+    return method(sql, params)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/backends/sqlite3/base.py", line 328, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: NOT NULL constraint failed: shop_transaction.receipt_number
+2024-01-26 06:08:39,165 %(WARNING)s - silk.model_factory - Response to request with pk 34f159c6-ee07-4adf-b43c-b2a06ded0266 has content type text/javascript but was unable to parse it
+2024-01-26 06:08:44,328 %(WARNING)s - silk.model_factory - Response to request with pk 85c9cfce-a63a-4f38-af66-b4375034a637 has content type text/javascript but was unable to parse it
+2024-01-26 06:09:02,666 %(WARNING)s - silk.model_factory - Response to request with pk 7b972064-bf1f-4411-a8cb-7797fa227c43 has content type text/javascript but was unable to parse it
+2024-01-26 06:09:48,584 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py changed, reloading.
+2024-01-26 06:09:49,697 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-26 06:09:51,776 %(ERROR)s - django.request - Internal Server Error: /admin/shop/order/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/options.py", line 681, in get_field
+    return self.fields_map[field_name]
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^
+KeyError: 'view_order_items'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/utils.py", line 289, in lookup_field
+    f = _get_non_gfk_field(opts, name)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/utils.py", line 322, in _get_non_gfk_field
+    field = opts.get_field(name)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/options.py", line 683, in get_field
+    raise FieldDoesNotExist(
+django.core.exceptions.FieldDoesNotExist: Order has no field named 'view_order_items'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/test/utils.py", line 111, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/test/utils.py", line 111, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/test/utils.py", line 111, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/base.py", line 45, in render
+    return super().render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/library.py", line 258, in render
+    _dict = self.func(*resolved_args, **resolved_kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/admin_list.py", line 343, in result_list
+    "results": list(results(cl)),
+               ^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/admin_list.py", line 319, in results
+    yield ResultList(None, items_for_result(cl, res, None))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/admin_list.py", line 310, in __init__
+    super().__init__(*items)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/admin_list.py", line 217, in items_for_result
+    f, attr, value = lookup_field(field_name, result, cl.model_admin)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/utils.py", line 298, in lookup_field
+    value = attr(obj)
+            ^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py", line 214, in view_order_items
+    order_items_url = reverse('admin:shop_orders_changelist') + f'?order__id__exact={obj.id}'
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 848, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'shop_orders_changelist' not found. 'shop_orders_changelist' is not a valid view function or pattern name.
+2024-01-26 06:10:06,503 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py changed, reloading.
+2024-01-26 06:10:08,755 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-26 06:10:10,744 %(ERROR)s - django.request - Internal Server Error: /admin/shop/order/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/options.py", line 681, in get_field
+    return self.fields_map[field_name]
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^
+KeyError: 'view_order_items'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/utils.py", line 289, in lookup_field
+    f = _get_non_gfk_field(opts, name)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/utils.py", line 322, in _get_non_gfk_field
+    field = opts.get_field(name)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/options.py", line 683, in get_field
+    raise FieldDoesNotExist(
+django.core.exceptions.FieldDoesNotExist: Order has no field named 'view_order_items'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/test/utils.py", line 111, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/test/utils.py", line 111, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/test/utils.py", line 111, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/base.py", line 45, in render
+    return super().render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/library.py", line 258, in render
+    _dict = self.func(*resolved_args, **resolved_kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/admin_list.py", line 343, in result_list
+    "results": list(results(cl)),
+               ^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/admin_list.py", line 319, in results
+    yield ResultList(None, items_for_result(cl, res, None))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/admin_list.py", line 310, in __init__
+    super().__init__(*items)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/admin_list.py", line 217, in items_for_result
+    f, attr, value = lookup_field(field_name, result, cl.model_admin)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/utils.py", line 298, in lookup_field
+    value = attr(obj)
+            ^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py", line 214, in view_order_items
+    order_items_url = reverse('admin:shop_orderitem_changelist') + f'?order__id__exact={obj.id}'
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 848, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'shop_orderitem_changelist' not found. 'shop_orderitem_changelist' is not a valid view function or pattern name.
+2024-01-26 06:10:43,580 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py changed, reloading.
+2024-01-26 06:10:45,633 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-26 06:10:47,259 %(ERROR)s - django.request - Internal Server Error: /admin/shop/order/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/options.py", line 681, in get_field
+    return self.fields_map[field_name]
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^
+KeyError: 'view_order_items'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/utils.py", line 289, in lookup_field
+    f = _get_non_gfk_field(opts, name)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/utils.py", line 322, in _get_non_gfk_field
+    field = opts.get_field(name)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/options.py", line 683, in get_field
+    raise FieldDoesNotExist(
+django.core.exceptions.FieldDoesNotExist: Order has no field named 'view_order_items'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/test/utils.py", line 111, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/test/utils.py", line 111, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/test/utils.py", line 111, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/base.py", line 45, in render
+    return super().render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/library.py", line 258, in render
+    _dict = self.func(*resolved_args, **resolved_kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/admin_list.py", line 343, in result_list
+    "results": list(results(cl)),
+               ^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/admin_list.py", line 319, in results
+    yield ResultList(None, items_for_result(cl, res, None))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/admin_list.py", line 310, in __init__
+    super().__init__(*items)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/admin_list.py", line 217, in items_for_result
+    f, attr, value = lookup_field(field_name, result, cl.model_admin)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/utils.py", line 298, in lookup_field
+    value = attr(obj)
+            ^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py", line 214, in view_order_items
+    order_items_url = reverse('admin:shop_orderitems_changelist') + f'?order__id__exact={obj.id}'
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 848, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'shop_orderitems_changelist' not found. 'shop_orderitems_changelist' is not a valid view function or pattern name.
+2024-01-26 06:11:38,548 %(WARNING)s - silk.model_factory - Response to request with pk 0072960d-c555-4462-9f6c-73fdf17b8525 has content type text/javascript but was unable to parse it
+2024-01-26 06:12:26,061 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py changed, reloading.
+2024-01-26 06:12:27,435 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-26 06:12:34,581 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py changed, reloading.
+2024-01-26 06:12:37,014 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-26 06:12:40,101 %(WARNING)s - silk.model_factory - Response to request with pk 1cd938d9-6c8a-4af3-997e-f29842a66306 has content type text/javascript but was unable to parse it
+2024-01-26 06:12:47,606 %(WARNING)s - silk.model_factory - Response to request with pk b7276958-f659-4f46-bf49-8ba278fd502c has content type text/javascript but was unable to parse it
+2024-01-26 06:12:50,325 %(WARNING)s - silk.model_factory - Response to request with pk 8cb5ee18-546b-485c-b4cb-23a0ae6aa88a has content type text/javascript but was unable to parse it
+2024-01-26 06:12:56,332 %(WARNING)s - silk.model_factory - Response to request with pk 25d71ff4-83de-4850-ab2a-992b73db25ff has content type text/javascript but was unable to parse it
+2024-01-26 06:12:58,847 %(WARNING)s - silk.model_factory - Response to request with pk 35e24d91-69ab-481a-87e3-774f7dbc8055 has content type text/javascript but was unable to parse it
+2024-01-26 06:15:23,381 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py changed, reloading.
+2024-01-26 06:15:24,612 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-26 06:17:08,374 %(WARNING)s - django.request - Not Found: /roseta

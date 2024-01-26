@@ -1,8 +1,8 @@
+from django.db.models import F
 from django import forms
 from django.contrib import admin, messages
 from django.contrib.contenttypes.admin import GenericTabularInline
 from django.core.exceptions import ValidationError
-from django.db.models import F
 from django.db.models.aggregates import Count, Sum
 from django.db.models.query import QuerySet
 from django.utils.html import format_html, urlencode
@@ -195,14 +195,13 @@ class OrderAdmin(admin.ModelAdmin):
     exclude = ['deleted_at', 'updated_at']
     autocomplete_fields = ['customer']
     list_filter = ['customer', 'order_status']
-    inlines = [OrderItemInline, TagInline]
-    list_display = ['id', 'created_at', 'customer', 'order_status', 'total_price']
+    inlines = [OrderItemInline]
+    list_display = ['id', 'customer', 'order_status', 'total_price', 'view_order_items', 'created_at']
     search_fields = ['id', 'customer__user__username']
     actions = ['mark_as_delivered']
 
     def total_price(self, obj):
-        return obj.order_items.aggregate(total_price=Sum(models.F('product__unit_price') * models.F('quantity')))[
-            'total_price']
+        return obj.orders.aggregate(total_price=Sum(F('unit_price') * F('quantity')))['total_price']
 
     total_price.short_description = _("Total Price")
 
@@ -218,6 +217,22 @@ class OrderAdmin(admin.ModelAdmin):
     view_order_items.short_description = _('Order Items')
 
     list_display_links = ['id', 'created_at']
+
+
+@admin.register(OrderItem)
+class OrderItemAdmin(admin.ModelAdmin):
+    list_display = ['order', 'product', 'unit_price', 'quantity']
+    list_filter = ['order', 'product']
+    search_fields = ['order__id', 'product__title']
+    exclude = ['deleted_at', 'created_at', 'updated_at']
+
+    def get_readonly_fields(self, request, obj=None):
+        return ['order', 'product']
+
+    def get_total_price(self, obj):
+        return obj.unit_price * obj.quantity
+
+    get_total_price.short_description = _("Total Price")
 
 
 class CartItemInline(admin.TabularInline):
@@ -236,7 +251,7 @@ class CartItemAdminForm(forms.ModelForm):
         product = self.cleaned_data.get('product')
 
         if product and quantity > product.inventory:
-            raise ValidationError("Quantity cannot be greater than the available inventory.")
+            raise ValidationError(_("Quantity cannot be greater than the available inventory."))
 
         return quantity
 
@@ -254,7 +269,7 @@ class CartItemAdmin(admin.ModelAdmin):
 
     def save_model(self, request, obj, form, change):
         if obj.product and obj.quantity > obj.product.inventory:
-            raise ValidationError("Quantity cannot be greater than the available inventory.")
+            raise ValidationError(_("Quantity cannot be greater than the available inventory."))
 
         super().save_model(request, obj, form, change)
 
@@ -297,10 +312,10 @@ class BaseDiscountAdminForm(forms.ModelForm):
         mode = cleaned_data.get('mode')
         discount = cleaned_data.get('discount')
         if mode == BaseDiscount.Mode.DirectPrice and discount < 101:
-            raise ValidationError({'discount': 'Invalid discount!(Check Mode again)'})
+            raise ValidationError({'discount': _('Invalid discount!(Check Mode again)')})
 
         if mode == BaseDiscount.Mode.DiscountOff and discount > 99:
-            raise ValidationError({'discount': 'Invalid discount(Check Mode again)'})
+            raise ValidationError({'discount': _('Invalid discount(Check Mode again)')})
 
         return cleaned_data
 
