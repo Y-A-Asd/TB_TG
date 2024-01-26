@@ -3,6 +3,7 @@ from django.db import transaction
 from django.utils.text import slugify
 from rest_framework import serializers
 from shop.models import Product, Collection, Review, Cart, CartItem, Customer, Order, OrderItem, ProductImage
+from parler_rest.serializers import TranslatableModelSerializer, TranslatedFieldsField
 
 
 class ProductImageSerializer(serializers.ModelSerializer):
@@ -15,14 +16,17 @@ class ProductImageSerializer(serializers.ModelSerializer):
         return ProductImage.objects.create(product_id=product_id, **validated_data)
 
 
-class ProductSerializer(serializers.ModelSerializer):
+class ProductSerializer(TranslatableModelSerializer):
+    translations = TranslatedFieldsField(shared_model=Product)
+
     class Meta:
         model = Product
-        fields = ['id', 'title', 'description', 'inventory', 'price', 'price_with_tax', 'collection_id', 'images']
+        fields = ['id', 'translations', 'description', 'inventory',
+                  'price', 'price_with_tax', 'collection_id', 'promotions', 'images']
 
     images = ProductImageSerializer(many=True, read_only=True)
     collection_id = serializers.IntegerField(required=False)
-    price = serializers.DecimalField(max_digits=6, decimal_places=2, source='unit_price')
+    price = serializers.DecimalField(max_digits=15, decimal_places=2, source='unit_price')
     price_with_tax = serializers.SerializerMethodField(method_name='calculate_tax')
 
     """4 ways to serialize relations : 1.pk 2.object 3.string 4.hyperlink"""
@@ -42,10 +46,12 @@ class ProductSerializer(serializers.ModelSerializer):
         return super().update(instance, validated_data)
 
 
-class SimpleProductSerializer(serializers.ModelSerializer):
+class SimpleProductSerializer(TranslatableModelSerializer):
+    translations = TranslatedFieldsField(shared_model=Product)
+
     class Meta:
         model = Product
-        fields = ['id', 'title', 'price']
+        fields = ['id', 'translations', 'price']
 
     price = serializers.DecimalField(max_digits=6, decimal_places=2, source='unit_price')
 
@@ -69,10 +75,12 @@ class SimpleProductSerializer(serializers.ModelSerializer):
     #     return instance
 
 
-class CollectionSerializer(serializers.ModelSerializer):
+class CollectionSerializer(TranslatableModelSerializer):
+    translations = TranslatedFieldsField(shared_model=Collection)
+
     class Meta:
         model = Collection
-        fields = ['id', 'title', 'parent', 'products_count']
+        fields = ['id', 'translations', 'parent', 'products_count']
 
     products_count = serializers.IntegerField(read_only=True)
 
@@ -80,7 +88,12 @@ class CollectionSerializer(serializers.ModelSerializer):
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
-        fields = ['id', 'created_at', 'name', 'description']
+        fields = ['id', 'created_at', 'parent_review', 'title', 'description', 'rating', 'user']
+
+    def to_representation(self, instance):
+        if instance.active:
+            return super().to_representation(instance)
+        return None
 
     def create(self, validated_data):
         product_id = self.context['product_id']
@@ -103,13 +116,18 @@ class CartSerializer(serializers.ModelSerializer):
     id = serializers.UUIDField(read_only=True)
     items = CartItemSerializer(many=True, read_only=True)
     total_price = serializers.SerializerMethodField()
+    customer = serializers.IntegerField(required=False, read_only=True)
 
     def get_total_price(self, cart):
         return sum([item.quantity * item.product.unit_price for item in cart.items.all()])
 
+    def save(self, **kwargs):
+        customer = Customer.objects.get(self.context['request'].user)
+        cart = CartItem.objects.create(customer=customer)
+        return cart
     class Meta:
         model = Cart
-        fields = ['id', 'items', 'total_price']
+        fields = ['id', 'items', 'total_price', 'customer']
 
 
 class AddItemsSerializer(serializers.ModelSerializer):

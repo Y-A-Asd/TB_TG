@@ -276,7 +276,7 @@ class CartItemAdmin(admin.ModelAdmin):
 
 @admin.register(Cart)
 class CartAdmin(admin.ModelAdmin):
-    list_display = ['id', 'view_cart_items']
+    list_display = ['id', 'customer', 'view_cart_items']
     readonly_fields = ['view_cart_items']
     inlines = [CartItemInline]
     exclude = ['deleted_at', 'created_at', 'updated_at']
@@ -290,7 +290,7 @@ class CartAdmin(admin.ModelAdmin):
 
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
-    list_display = ['user', 'product', 'name', 'parent_review']
+    list_display = ['user', 'product', 'title', 'parent_review', 'rating']
     list_filter = ['user', 'product']
     search_fields = ['name', 'description']
     date_hierarchy = 'created_at'

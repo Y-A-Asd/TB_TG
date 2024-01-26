@@ -120,7 +120,7 @@ class Customer(BaseModel):
         MEMBERSHIP_SILVER = 'S', _('Silver')
         MEMBERSHIP_GOLD = 'G', _('Gold')
 
-    first_name = models.CharField(_("First Name"), max_length=255),
+    first_name = models.CharField(_("First Name"), max_length=255)
     last_name = models.CharField(_("Last Name"), max_length=255)
 
     birth_date = models.DateField(_("Birth Date"), null=True, blank=True)
@@ -192,6 +192,7 @@ class OrderItem(BaseModel):
 
 class Cart(BaseModel):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    customer = models.ForeignKey(Customer, on_delete=models.PROTECT, verbose_name=_("Customer"))
 
 
 class CartItem(BaseModel):
@@ -207,15 +208,16 @@ class CartItem(BaseModel):
 
 class Review(BaseModel):
     user = models.ForeignKey(Customer, on_delete=models.CASCADE, verbose_name=_("Customer"))
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews', verbose_name='Product')
     rating = models.PositiveIntegerField(_('Rating'), validators=[MinValueValidator(1), MaxValueValidator(5)])
-    name = models.CharField(max_length=255)
+    title = models.CharField(_('Title'), max_length=255)
     description = models.TextField()
-    parent_review = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='replies')
+    parent_review = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='replies',
+                                      verbose_name='Reply to')
     active = models.BooleanField(_("Active"), default=False)
 
     def __str__(self):
-        return f"{self.user} - {self.name}"
+        return f"{self.user} - {self.title}"
 
     class Meta:
         verbose_name = _("Review")
