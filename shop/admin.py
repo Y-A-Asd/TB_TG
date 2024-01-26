@@ -12,7 +12,7 @@ from dal import autocomplete
 from parler.admin import TranslatableAdmin, TranslatableTabularInline
 from tags.models import TaggedItem
 from . import models
-from .models import CartItem, Cart, Review, BaseDiscount, DiscountItems, Transaction, Address, FeatureValue, \
+from .models import Review, Transaction, Address, FeatureValue, \
     MainFeature, Order, OrderItem, SiteSettings
 
 
@@ -67,6 +67,12 @@ class InventoryFilter(admin.SimpleListFilter):
             return queryset.filter(inventory__lt=F('min_inventory'))
 
 
+class PromotionItemsInline(admin.TabularInline):
+    model = models.PromotionItems
+    extra = 1
+    exclude = ['deleted_at', 'created_at', 'updated_at']
+
+
 @admin.register(models.Promotion)
 class PromotionAdmin(TranslatableAdmin):
     exclude = ['deleted_at', 'created_at', 'updated_at']
@@ -103,10 +109,13 @@ class ProductAdmin(TranslatableAdmin):
     list_select_related = ['collection']
     search_fields = ['title']
     exclude = ['deleted_at', 'created_at', 'updated_at']
-    inlines = [TagInline, ProductImageInline]
+    inlines = [PromotionItemsInline, TagInline, ProductImageInline]
 
     def collection_title(self, product):
-        return product.collection.title
+        if product.collection:
+            return product.collection.title
+        else:
+            return _('No Collection')
 
     @admin.display(ordering='inventory')
     def inventory_status(self, product):
@@ -235,59 +244,6 @@ class OrderItemAdmin(admin.ModelAdmin):
     get_total_price.short_description = _("Total Price")
 
 
-class CartItemInline(admin.TabularInline):
-    model = CartItem
-    extra = 1
-    exclude = ['deleted_at', 'created_at', 'updated_at']
-
-
-class CartItemAdminForm(forms.ModelForm):
-    class Meta:
-        model = CartItem
-        fields = '__all__'
-
-    def clean_quantity(self):
-        quantity = self.cleaned_data['quantity']
-        product = self.cleaned_data.get('product')
-
-        if product and quantity > product.inventory:
-            raise ValidationError(_("Quantity cannot be greater than the available inventory."))
-
-        return quantity
-
-
-@admin.register(CartItem)
-class CartItemAdmin(admin.ModelAdmin):
-    form = CartItemAdminForm
-    list_display = ['cart', 'product', 'quantity', 'view_cart']
-    list_filter = ['cart', 'product']
-    exclude = ['deleted_at', 'created_at', 'updated_at']
-
-    def view_cart(self, obj):
-        cart_url = reverse('admin:shop_cart_change', args=[obj.cart.id])
-        return format_html('<a href="{}">View Cart Items</a>', cart_url)
-
-    def save_model(self, request, obj, form, change):
-        if obj.product and obj.quantity > obj.product.inventory:
-            raise ValidationError(_("Quantity cannot be greater than the available inventory."))
-
-        super().save_model(request, obj, form, change)
-
-
-@admin.register(Cart)
-class CartAdmin(admin.ModelAdmin):
-    list_display = ['id', 'customer', 'view_cart_items']
-    readonly_fields = ['view_cart_items']
-    inlines = [CartItemInline]
-    exclude = ['deleted_at', 'created_at', 'updated_at']
-
-    def view_cart_items(self, obj):
-        cart_items_url = reverse('admin:shop_cartitem_changelist') + f'?cart__id__exact={obj.id}'
-        return format_html('<a href="{}">View Cart Items</a>', cart_items_url)
-
-    view_cart_items.short_description = 'Cart Items'
-
-
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
     list_display = ['user', 'product', 'title', 'parent_review', 'rating']
@@ -295,59 +251,6 @@ class ReviewAdmin(admin.ModelAdmin):
     search_fields = ['name', 'description']
     date_hierarchy = 'created_at'
     exclude = ['deleted_at', 'updated_at']
-
-
-class BaseDiscountAdminForm(forms.ModelForm):
-    class Meta:
-        model = BaseDiscount
-        fields = ['code', 'discount', 'mode', 'active', 'valid_from', 'valid_to']
-
-    def clean(self):
-        """
-            https://docs.djangoproject.com/en/5.0/topics/forms/modelforms/
-            https://docs.djangoproject.com/en/5.0/topics/forms/modelforms/#overriding-clean-on-a-modelformset
-            https://docs.djangoproject.com/en/5.0/topics/forms/modelforms/#overriding-methods-on-an-inlineformset
-        """
-        cleaned_data = super().clean()
-        mode = cleaned_data.get('mode')
-        discount = cleaned_data.get('discount')
-        if mode == BaseDiscount.Mode.DirectPrice and discount < 101:
-            raise ValidationError({'discount': _('Invalid discount!(Check Mode again)')})
-
-        if mode == BaseDiscount.Mode.DiscountOff and discount > 99:
-            raise ValidationError({'discount': _('Invalid discount(Check Mode again)')})
-
-        return cleaned_data
-
-
-class DiscountItemsInline(admin.TabularInline):
-    model = DiscountItems
-    extra = 1
-
-
-@admin.register(BaseDiscount)
-class BaseDiscountAdmin(admin.ModelAdmin):
-    form = BaseDiscountAdminForm
-    list_filter = ['mode', 'active', 'valid_from', 'valid_to']
-    search_fields = ['code']
-    date_hierarchy = 'valid_from'
-    inlines = [DiscountItemsInline]
-
-
-@admin.register(DiscountItems)
-class DiscountItemsAdmin(admin.ModelAdmin):
-    list_display = ['content_type', 'object_id', 'discount', 'get_content_object_link']
-    list_filter = ['content_type', 'discount__mode', 'discount__active']
-    search_fields = ['object_id']
-    readonly_fields = ['get_content_object_link']
-    exclude = ['content_object']
-
-    def get_content_object_link(self, obj):
-        link = reverse('admin:%s_%s_change' % (obj.content_type.app_label, obj.content_type.model),
-                       args=[obj.object_id])
-        return format_html('<a href="{}">{}</a>', link, obj.content_object)
-
-    get_content_object_link.short_description = _('Content Object')
 
 
 """

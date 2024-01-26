@@ -1,9 +1,13 @@
+import json
+
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db.models import Sum, F
+from django.utils import timezone
 
+from discount.models import BaseDiscount
 from shop.validator import validate_file_size
 from django.utils.translation import gettext_lazy as _, get_language
 from django.db import models
@@ -46,6 +50,16 @@ class Promotion(TranslatableModel, BaseModel):
     class Meta:
         verbose_name = _("Promotion")
         verbose_name_plural = _("Promotions")
+
+    def clean(self):
+        existing_discount_item = self.discount.objects.filter(
+            content_type=self.content_type,
+            object_id=self.object_id,
+            discount__active=True
+        ).exclude(pk=self.pk)
+
+        if existing_discount_item.exists():
+            raise ValidationError(_('There is already an active discount for this item.'))
 
     def __str__(self):
         default_language = get_language() or 'en'
@@ -94,8 +108,9 @@ class Product(TranslatableModel, BaseModel):
     min_inventory = models.IntegerField(_("Minimum Inventory"), validators=[MinValueValidator(0)], null=True,
                                         blank=True)
     collection = models.ForeignKey(Collection, on_delete=models.PROTECT, verbose_name=_("Collection"),
-                                   related_name='products')
+                                   related_name='products', null=True, blank=True)
     promotions = models.ManyToManyField(Promotion, blank=True, verbose_name=_("Promotions"), related_name='products')
+    discount = models.ForeignKey(BaseDiscount, on_delete=models.PROTECT, verbose_name=_("Discount"))
 
     def __str__(self):
         default_language = get_language() or 'en'
@@ -103,10 +118,44 @@ class Product(TranslatableModel, BaseModel):
         title = title_translation.title if title_translation else f"Product {self.pk}"
         return f'Product {self.pk} - {title}'
 
+    def price_after_off(self, discount: BaseDiscount):
+        discount.ensure_availability()
+        if discount.mode == discount.Mode.DirectPrice:
+            return self.unit_price - discount.discount
+        elif discount.mode == discount.Mode.DiscountOff:
+            return self.unit_price - (self.unit_price * discount.discount / 100)
+        else:
+            raise ValueError(f"Invalid discount mode: {discount.mode}")
+
+        # def clean(self):
+        #     existing_discount_item = self.discount.objects.filter(
+        #         content_type=self.content_type,
+        #         object_id=self.object_id,
+        #         discount__active=True
+        #     ).exclude(pk=self.pk)
+
+        if existing_discount_item.exists():
+            raise ValidationError(_('There is already an active discount for this item.'))
+
     class Meta:
         verbose_name = _("Product")
         verbose_name_plural = _("Products")
         ordering = ["translations__title"]
+
+
+class PromotionItems(BaseModel):
+    promotion = models.ForeignKey(Promotion, on_delete=models.CASCADE, related_name='promotionitems')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='promtions')
+    discount = models.ForeignKey(BaseDiscount, on_delete=models.PROTECT, verbose_name=_("Discount"))
+
+    def price_after_off(self, discount: BaseDiscount):
+        discount.ensure_availability()
+        if discount.mode == discount.Mode.DirectPrice:
+            return self.product.unit_price - discount.discount
+        elif discount.mode == discount.Mode.DiscountOff:
+            return self.product.unit_price - (self.product.unit_price * discount.discount / 100)
+        else:
+            raise ValueError(f"Invalid discount mode: {discount.mode}")
 
 
 class ProductImage(BaseModel):
@@ -190,22 +239,6 @@ class OrderItem(BaseModel):
         verbose_name_plural = _("Order Items")
 
 
-class Cart(BaseModel):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    customer = models.ForeignKey(Customer, on_delete=models.PROTECT, verbose_name=_("Customer"))
-
-
-class CartItem(BaseModel):
-    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, verbose_name=_("Cart"), related_name='items')
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name=_("Product"))
-    quantity = models.PositiveSmallIntegerField(_("Quantity"))
-
-    class Meta:
-        unique_together = [['cart', 'product']]
-        verbose_name = _("Cart Item")
-        verbose_name_plural = _("Cart Items")
-
-
 class Review(BaseModel):
     user = models.ForeignKey(Customer, on_delete=models.CASCADE, verbose_name=_("Customer"))
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews', verbose_name='Product')
@@ -222,68 +255,6 @@ class Review(BaseModel):
     class Meta:
         verbose_name = _("Review")
         verbose_name_plural = _("Reviews")
-
-
-class DiscountItemManager(models.Manager):
-    def get_discount(self, obj_type, obj_id):
-        content_type = ContentType.objects.get_for_model(obj_type)
-
-        return DiscountItems.objects \
-            .select_related('discount') \
-            .filter(content_type=content_type, object_id=obj_id)
-
-
-class BaseDiscount(BaseModel):
-    class Mode(models.TextChoices):
-        DirectPrice = 'DO', _('DirectPrice')
-        DiscountOff = 'DP', _('DiscountOff')
-
-    discount = models.DecimalField(_("Discount"), max_digits=12, decimal_places=2)
-    active = models.BooleanField(_("Active"), default=True)
-    code = models.CharField(_('Code'), max_length=50, unique=True, null=True, blank=True)
-    valid_from = models.DateTimeField()
-    valid_to = models.DateTimeField()
-    mode = models.CharField(_('Mode'),
-                            max_length=2,
-                            choices=Mode,
-                            default=Mode.DiscountOff)
-
-    class Meta:
-        verbose_name = _("Discount")
-        verbose_name_plural = _("Discounts")
-
-    def __str__(self):
-        return f'DISCOUNT {self.pk} - {self.discount}, {self.mode}, {self.code}'
-
-
-class DiscountItems(models.Model):
-    discount = models.ForeignKey(BaseDiscount, on_delete=models.PROTECT, verbose_name=_("Discount"))
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = models.CharField(max_length=33)
-    content_object = GenericForeignKey()
-    objects = DiscountItemManager()
-
-    class Meta:
-        """https://docs.djangoproject.com/en/5.0/ref/models/constraints/#uniqueconstraint"""
-        # constraints = [
-        #     models.UniqueConstraint(
-        #         fields=['content_type', 'object_id'],
-        #         condition=models.Q(discount__active=True),
-        #         name='unique_active_discount'
-        #     )
-        # ]
-        verbose_name = _("Discount Item")
-        verbose_name_plural = _("Discount Items")
-
-    def clean(self):
-        existing_discount_item = DiscountItems.objects.filter(
-            content_type=self.content_type,
-            object_id=self.object_id,
-            discount__active=True
-        ).exclude(pk=self.pk)
-
-        if existing_discount_item.exists():
-            raise ValidationError(_('There is already an active discount for this item.'))
 
 
 class Transaction(BaseModel):

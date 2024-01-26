@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django_filters',
     'rest_framework',
     'rosetta',
+    'discount',
     'core',
     'shop',
     'tags',
@@ -252,6 +253,10 @@ LOGGING = {
         }
     }
 }
+
+
+CART_SESSION_ID = 'cart'
+
 
 """
 for run server 
