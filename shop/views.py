@@ -4,6 +4,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, DestroyModelMixin
@@ -11,10 +12,10 @@ from django_filters.rest_framework import DjangoFilterBackend
 from .pagination import DefaultPagination
 from .serializers import (ProductSerializer, CollectionSerializer, ReviewSerializer,
                           CartSerializer, \
-    CartItemSerializer, AddItemsSerializer, UpdateItemsSerializer,
+                          CartItemSerializer, AddItemsSerializer, UpdateItemsSerializer,
                           CustomerSerializer, OrderSerializer, \
-    CreateOrderSerializer, UpdateOrderSerializer, ProductImageSerializer)
-from .models import Product, Collection, OrderItem, Review, Customer, Order, ProductImage, CartItem, Cart
+                          CreateOrderSerializer, UpdateOrderSerializer, ProductImageSerializer, AddressSerializer)
+from .models import Product, Collection, OrderItem, Review, Customer, Order, ProductImage, CartItem, Cart, Address
 from .filters import ProductFilter
 from .permissions import IsAdminOrReadOnly, ViewCustomerHistoryPermission
 
@@ -154,6 +155,7 @@ class ProductViewSet(ModelViewSet):
         queryset = self.filter_queryset(self.get_queryset())
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
+
     # def get_queryset(self):
     #     queryset = Product.objects.all()
     #     collection_id = self.request.query_params.get('collection_id')
@@ -235,7 +237,7 @@ class CustomerViewSet(ModelViewSet):
     @action(detail=False, methods=['GET', 'PUT'], permission_classes=[IsAuthenticated])
     def me(self, request):
         user_id = request.user.id
-        customer, created = Customer.objects.get(user_id=user_id)
+        customer = Customer.objects.get(user_id=user_id)
         if request.method == 'GET':
             serializer = CustomerSerializer(customer)
             return Response(serializer.data)
@@ -290,3 +292,8 @@ class ProductImageViewSet(ModelViewSet):
     def get_queryset(self):
         # print(self.kwargs)
         return ProductImage.objects.filter(prodcut_id=self.kwargs['product_pk'])
+
+
+class AddressViewSet(ModelViewSet):
+    queryset = Address.objects.all()
+    serializer_class = AddressSerializer

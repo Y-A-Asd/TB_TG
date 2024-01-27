@@ -11379,3 +11379,339 @@ KeyError: "Key 'slug' not found in 'ProductForm'. Choices are: collection, disco
 2024-01-27 06:16:54,675 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/urls.py changed, reloading.
 2024-01-27 06:16:55,810 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
 2024-01-27 06:17:00,088 %(WARNING)s - silk.model_factory - Response to request with pk 355146cb-8ff3-4c28-8088-ec7d505fb7aa has content type text/javascript but was unable to parse it
+2024-01-27 06:32:48,556 %(WARNING)s - silk.model_factory - Response to request with pk 7f41c470-f0e6-469d-bc33-4d5c658b544a has content type text/javascript but was unable to parse it
+2024-01-27 06:34:12,750 %(WARNING)s - silk.model_factory - Response to request with pk edec465a-b9f3-483f-94d6-89d15e45d98c has content type text/javascript but was unable to parse it
+2024-01-27 06:35:48,341 %(WARNING)s - django.request - Unauthorized: /shop/customers/
+2024-01-27 06:35:54,122 %(WARNING)s - django.request - Unauthorized: /shop/customers/me/
+2024-01-27 06:36:00,817 %(WARNING)s - django.request - Unauthorized: /shop/customers/me/
+2024-01-27 06:36:12,392 %(WARNING)s - django.request - Unauthorized: /auth/users/
+2024-01-27 06:36:15,328 %(WARNING)s - django.request - Method Not Allowed: /auth/jwt/create
+2024-01-27 06:36:50,825 %(WARNING)s - django.request - Not Found: /
+2024-01-27 06:36:54,166 %(INFO)s - shop.views - List view accessed
+2024-01-27 06:37:02,008 %(ERROR)s - django.request - Internal Server Error: /shop/customers/me/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/views.py", line 238, in me
+    customer, created = Customer.objects.get(user_id=user_id)
+    ^^^^^^^^^^^^^^^^^
+TypeError: cannot unpack non-iterable Customer object
+2024-01-27 06:37:08,771 %(ERROR)s - django.request - Internal Server Error: /shop/customers/me/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/views.py", line 238, in me
+    customer, created = Customer.objects.get(user_id=user_id)
+    ^^^^^^^^^^^^^^^^^
+TypeError: cannot unpack non-iterable Customer object
+2024-01-27 06:37:29,271 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/views.py changed, reloading.
+2024-01-27 06:37:30,148 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 06:39:21,462 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/views.py changed, reloading.
+2024-01-27 06:39:22,339 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 06:55:30,265 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/serializers.py changed, reloading.
+2024-01-27 06:55:31,404 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 06:56:56,443 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/serializers.py changed, reloading.
+2024-01-27 06:56:57,459 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 06:59:55,714 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/serializers.py changed, reloading.
+2024-01-27 06:59:56,769 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 07:00:06,640 %(ERROR)s - django.request - Internal Server Error: /shop/orders/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/mixins.py", line 46, in list
+    return Response(serializer.data)
+                    ^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 768, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 686, in to_representation
+    return [
+           ^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/fields.py", line 1837, in to_representation
+    method = getattr(self.parent, self.method_name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'OrderSerializer' object has no attribute 'get_total_price'
+2024-01-27 07:01:02,736 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/serializers.py changed, reloading.
+2024-01-27 07:01:03,818 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 07:01:27,795 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/views.py changed, reloading.
+2024-01-27 07:01:28,706 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 07:01:59,784 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/serializers.py changed, reloading.
+2024-01-27 07:02:00,590 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 07:02:35,195 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/views.py changed, reloading.
+2024-01-27 07:02:36,397 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 07:15:14,918 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/views.py changed, reloading.
+2024-01-27 07:15:15,919 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 07:15:55,185 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/urls.py changed, reloading.
+2024-01-27 07:15:56,086 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 07:23:24,155 %(WARNING)s - silk.model_factory - Response to request with pk 871c00b1-0f03-4c39-b62b-50cb9a925b5a has content type text/javascript but was unable to parse it
+2024-01-27 07:23:27,374 %(WARNING)s - silk.model_factory - Response to request with pk 19705b66-6a5c-4957-9938-95e28c92e2cb has content type text/javascript but was unable to parse it
+2024-01-27 07:23:42,764 %(WARNING)s - silk.model_factory - Response to request with pk aa172054-60f5-4f8d-8ccc-c235f5a12e85 has content type text/javascript but was unable to parse it
+2024-01-27 07:25:39,730 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/models.py changed, reloading.
+2024-01-27 07:25:41,037 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 07:26:52,207 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/models.py changed, reloading.
+2024-01-27 07:26:53,183 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 07:28:20,635 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/serializers.py changed, reloading.
+2024-01-27 07:28:22,024 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 07:34:47,455 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/serializers.py changed, reloading.
+2024-01-27 07:34:48,647 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 07:37:17,286 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/models.py changed, reloading.
+2024-01-27 07:37:18,088 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 07:37:23,394 %(WARNING)s - django.request - Method Not Allowed: /shop/cart/
+2024-01-27 07:37:50,391 %(ERROR)s - django.request - Internal Server Error: /shop/cart/73b50c1e-07f2-4101-84de-5c3d801d0b2e/items/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/mixins.py", line 46, in list
+    return Response(serializer.data)
+                    ^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 768, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 686, in to_representation
+    return [
+           ^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/fields.py", line 1838, in to_representation
+    return method(value)
+           ^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/serializers.py", line 109, in get_total_price
+    return cart_item.quantity * cart_item.product.price_after_off()
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/models.py", line 135, in price_after_off
+    self.discount.ensure_availability()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'ensure_availability'
+2024-01-27 07:38:33,391 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/models.py changed, reloading.
+2024-01-27 07:38:34,655 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 07:38:50,598 %(WARNING)s - silk.model_factory - Response to request with pk 8c5a56ac-44c6-4401-8ab5-1061801f74be has content type text/javascript but was unable to parse it
+2024-01-27 07:38:56,672 %(WARNING)s - silk.model_factory - Response to request with pk 46ad73fa-1c1f-4031-856d-405e02ad1c5a has content type text/javascript but was unable to parse it
+2024-01-27 07:39:03,377 %(WARNING)s - silk.model_factory - Response to request with pk c8a067b1-3769-4e2c-a274-68462cee4843 has content type text/javascript but was unable to parse it
+2024-01-27 07:39:15,539 %(WARNING)s - silk.model_factory - Response to request with pk a4c669da-6c52-4ac9-afe4-59940e75dc43 has content type text/javascript but was unable to parse it
+2024-01-27 07:40:57,225 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/models.py changed, reloading.
+2024-01-27 07:40:58,221 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 07:40:59,380 %(ERROR)s - django.request - Internal Server Error: /shop/cart/73b50c1e-07f2-4101-84de-5c3d801d0b2e/items/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/mixins.py", line 46, in list
+    return Response(serializer.data)
+                    ^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 768, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 686, in to_representation
+    return [
+           ^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/fields.py", line 1838, in to_representation
+    return method(value)
+           ^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/serializers.py", line 109, in get_total_price
+    return cart_item.quantity * cart_item.product.price_after_off()
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'Decimal' object is not callable
+2024-01-27 07:41:25,776 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/serializers.py changed, reloading.
+2024-01-27 07:41:27,055 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 07:41:47,904 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/serializers.py changed, reloading.
+2024-01-27 07:41:49,335 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 07:42:23,463 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/serializers.py changed, reloading.
+2024-01-27 07:42:24,235 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 07:42:45,232 %(WARNING)s - django.request - Unauthorized: /shop/orders/
+2024-01-27 07:42:58,299 %(WARNING)s - django.request - Bad Request: /shop/orders/
+2024-01-27 07:43:22,670 %(ERROR)s - django.request - Internal Server Error: /shop/orders/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/views.py", line 267, in create
+    order = serializer.save()
+            ^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/serializers.py", line 215, in save
+    zip_code = address.zip_code
+               ^^^^^^^^^^^^^^^^
+AttributeError: 'QuerySet' object has no attribute 'zip_code'
+2024-01-27 07:43:44,945 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/serializers.py changed, reloading.
+2024-01-27 07:43:46,443 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 07:43:48,190 %(ERROR)s - django.request - Internal Server Error: /shop/orders/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/views.py", line 267, in create
+    order = serializer.save()
+            ^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/serializers.py", line 215, in save
+    zip_code = address.zip_code
+               ^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'zip_code'
+2024-01-27 07:43:58,565 %(WARNING)s - silk.model_factory - Response to request with pk 402ef4ed-c621-477f-9522-99428f859f1c has content type text/javascript but was unable to parse it
+2024-01-27 07:44:06,756 %(WARNING)s - silk.model_factory - Response to request with pk 7a553c8e-c0b4-4c70-8c7d-ba53704cbb34 has content type text/javascript but was unable to parse it
+2024-01-27 07:44:09,628 %(WARNING)s - silk.model_factory - Response to request with pk 1311c531-ab5c-4e2d-a34a-56f2698e7eb5 has content type text/javascript but was unable to parse it
+2024-01-27 07:44:16,909 %(WARNING)s - silk.model_factory - Response to request with pk 142d0834-9499-4961-952a-0e5c5c078780 has content type text/javascript but was unable to parse it
+2024-01-27 07:44:34,931 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/models.py changed, reloading.
+2024-01-27 07:44:35,860 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 07:46:08,110 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/serializers.py changed, reloading.
+2024-01-27 07:46:08,976 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader

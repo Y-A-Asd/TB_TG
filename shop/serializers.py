@@ -2,7 +2,7 @@ from decimal import Decimal
 from django.db import transaction
 from django.utils.text import slugify
 from rest_framework import serializers
-from shop.models import Product, Collection, Review, Customer, Order, OrderItem, ProductImage, CartItem, Cart
+from shop.models import Product, Collection, Review, Customer, Order, OrderItem, ProductImage, CartItem, Cart, Address
 from parler_rest.serializers import TranslatableModelSerializer, TranslatedFieldsField
 from django.utils.translation import gettext_lazy as _
 
@@ -49,12 +49,11 @@ class ProductSerializer(TranslatableModelSerializer):
 
 class SimpleProductSerializer(TranslatableModelSerializer):
     translations = TranslatedFieldsField(shared_model=Product)
+    price = serializers.DecimalField(max_digits=15, decimal_places=2, source='price_after_off')
 
     class Meta:
         model = Product
         fields = ['id', 'translations', 'price']
-
-    price = serializers.DecimalField(max_digits=6, decimal_places=2, source='unit_price')
 
     """validation example"""
     # def validate(self,data):
@@ -119,7 +118,7 @@ class CartSerializer(serializers.ModelSerializer):
     total_price = serializers.SerializerMethodField()
 
     def get_total_price(self, cart):
-        return sum([item.quantity * item.product.unit_price for item in cart.items.all()])
+        return sum([item.quantity * item.product.price_after_off for item in cart.items.all()])
 
     class Meta:
         model = Cart
@@ -184,7 +183,7 @@ class OrderItemSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = OrderItem
-        fields = ['id', 'product', 'quantity']
+        fields = ('product', 'unit_price', 'quantity')
 
 
 class OrderSerializer(serializers.ModelSerializer):
@@ -192,7 +191,8 @@ class OrderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = ['id', 'customer', 'created_at', 'payment_status', 'orders']
+        fields = (
+            'order_status', 'customer', 'zip_code', 'path', 'city', 'province', 'first_name', 'last_name', 'orders',)
 
 
 class CreateOrderSerializer(serializers.Serializer):
@@ -200,22 +200,33 @@ class CreateOrderSerializer(serializers.Serializer):
 
     def validate_cart_id(self, value):
         if not Cart.objects.filter(pk=value).exists():
-            raise serializers.ValidationError('No cart found!')
+            raise serializers.ValidationError(_('No cart found!'))
         if CartItem.objects.filter(cart_id=value).count() == 0:
-            raise serializers.ValidationError('Cart is empty!')
+            raise serializers.ValidationError(_('Cart is empty!'))
         return value
 
     def save(self, **kwargs):
         with transaction.atomic():
             cart_id = self.validated_data['cart_id']
             customer, created = Customer.objects.get_or_create(user_id=self.context['user_id'])
-            order = Order.objects.create(customer=customer)
+            first_name = customer.first_name
+            last_name = customer.last_name
+            address: Address = customer.address_set.filter(default=True).first()
+            if not address:
+                raise serializers.ValidationError(_('You dont have address set please set your default address!'))
+            zip_code = address.zip_code
+            province = address.province
+            path = address.path
+            city = address.city
+            order = Order.objects.create(customer=customer, first_name=first_name, last_name=last_name,
+                                         zip_code=zip_code, province=province, path=path, city=city)
             cart_items = CartItem.objects.filter(cart_id=cart_id)
             order_items = [
                 OrderItem(
                     order=order,
                     product=item.product,
-                    quantity=item.quantity
+                    quantity=item.quantity,
+                    unit_price=item.product.price_after_off
                 ) for item in cart_items
             ]
             OrderItem.objects.bulk_create(order_items)
@@ -228,4 +239,10 @@ class CreateOrderSerializer(serializers.Serializer):
 class UpdateOrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
-        fields = ['payment_status']
+        fields = ['order_status']
+
+
+class AddressSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Address
+        fields = ('id', 'zip_code', 'path', 'city', 'province', 'default')

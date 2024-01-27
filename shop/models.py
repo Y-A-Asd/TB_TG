@@ -131,14 +131,17 @@ class Product(TranslatableModel, BaseModel):
         title = title_translation.title if title_translation else f"Product {self.pk}"
         return f'Product {self.pk} - {title} - {self.unit_price}'
 
-    def price_after_off(self, discount: BaseDiscount):
-        discount.ensure_availability()
-        if discount.mode == discount.Mode.DirectPrice:
-            return self.unit_price - discount.discount
-        elif discount.mode == discount.Mode.DiscountOff:
-            return self.unit_price - (self.unit_price * discount.discount / 100)
-        else:
-            raise ValueError(f"Invalid discount mode: {discount.mode}")
+    @property
+    def price_after_off(self, ):
+        if self.discount:
+            self.discount.ensure_availability()
+            if self.discount.mode == self.discount.Mode.DirectPrice:
+                return self.unit_price - self.discount.discount
+            elif self.discount.mode == self.discount.Mode.DiscountOff:
+                return self.unit_price - (self.unit_price * self.discount.discount / 100)
+            else:
+                raise ValueError(f"Invalid discount mode: {self.discount.mode}")
+        return self.unit_price
 
         # def clean(self):
         #     existing_discount_item = self.discount.objects.filter(
@@ -209,10 +212,17 @@ class Address(BaseModel):
     city = models.CharField(_("City"), max_length=255)
     province = models.CharField(_("Province"), max_length=32)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, verbose_name=_("Customer"))
+    default = models.BooleanField(_("Default"), default=True)
 
     class Meta:
         verbose_name = _("Address")
         verbose_name_plural = _("Addresses")
+
+    def save(self, *args, **kwargs):
+        if self.default:
+            Address.objects.filter(customer=self.customer).exclude(id=self.id).update(default=False)
+
+        super().save(*args, **kwargs)
 
 
 class Order(BaseModel):
