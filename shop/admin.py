@@ -172,7 +172,7 @@ class ProductAdmin(TranslatableAdmin):
     def clear_inventory(self, request, queryset):
         updated_count = queryset.update(inventory=0)
         self.message_user(request, _('{count} products were successfully updated.').format(count=updated_count),
-                          messages.ERROR)
+                          messages.SUCCESS)
 
     class Media:
         css = {'all': ['shop/style.css']}

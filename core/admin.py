@@ -1,8 +1,11 @@
+from django.apps import apps
 from django.contrib.auth.models import Permission
 from django.contrib.contenttypes.models import ContentType
-from .models import User
+from django.db.models import ForeignKey
+from django.shortcuts import get_object_or_404
+from .models import User, AuditLog
 from shop.models import Product
-from django.contrib import admin
+from django.contrib import admin, messages
 from django.contrib.contenttypes.admin import GenericTabularInline
 from shop.admin import TagInline
 from tags.models import TaggedItem
@@ -59,3 +62,44 @@ class UserAdmin(BaseUserAdmin):
     filter_horizontal = ('groups', 'user_permissions')
 
     inlines = [PermissionInline, GroupInline]
+
+
+@admin.register(AuditLog)
+class AuditlogAdmin(admin.ModelAdmin):
+    list_display = ('id', 'user', 'action', 'timestamp', 'changes', 'table_name')
+    actions = ['revert']
+
+    @admin.action(description=_('Action Revert'))
+    def revert(self, request, queryset):
+        if queryset.count() != 1:
+            messages.error(request, _("Please select only one row to revert."))
+            return
+
+        log_entry = queryset.first()
+        after_log = AuditLog.objects.all().filter(row_id=log_entry.row_id, timestamp__gte=log_entry.timestamp)
+
+        app_name, model_name = log_entry.table_name.split('_')
+
+        # mage mishe inghadar ziba bashe ?? :-)
+
+        model_class = apps.get_model(app_label=app_name, model_name=model_name)
+
+        model_instance = get_object_or_404(model_class, id=log_entry.row_id)
+        changes = {}
+        for log in after_log:
+
+            if log.changes:
+                for field_name, field_data in log.changes.items():
+
+                    if isinstance(model_instance._meta.get_field(field_name), ForeignKey):
+                        field_data['old_value'] = model_instance._meta.get_field(field_name).related_model.objects.get(
+                            pk=(field_data['old_value']))
+
+                    setattr(model_instance, field_name, field_data['old_value'])
+                    if model_instance.deleted_at == "None":
+                        model_instance.deleted_at = None
+
+                model_instance.save()
+                changes[field_name] = str(field_data)
+
+        self.message_user(request, _("Changes reverted successfully."), messages.SUCCESS)

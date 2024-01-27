@@ -11715,3 +11715,362 @@ AttributeError: 'NoneType' object has no attribute 'zip_code'
 2024-01-27 07:44:35,860 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
 2024-01-27 07:46:08,110 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/serializers.py changed, reloading.
 2024-01-27 07:46:08,976 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 07:47:36,370 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/serializers.py changed, reloading.
+2024-01-27 07:47:37,499 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 07:50:00,970 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/serializers.py changed, reloading.
+2024-01-27 07:50:02,048 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 07:54:04,625 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/serializers.py changed, reloading.
+2024-01-27 07:54:05,636 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 07:54:06,725 %(ERROR)s - django.request - Internal Server Error: /shop/orders/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/fields.py", line 446, in get_attribute
+    return get_attribute(instance, self.source_attrs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/fields.py", line 96, in get_attribute
+    instance = getattr(instance, attr)
+               ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'OrderItem' object has no attribute 'price_after_off'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/mixins.py", line 46, in list
+    return Response(serializer.data)
+                    ^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 768, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 686, in to_representation
+    return [
+           ^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 686, in to_representation
+    return [
+           ^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 509, in to_representation
+    attribute = field.get_attribute(instance)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/fields.py", line 479, in get_attribute
+    raise type(exc)(msg)
+AttributeError: Got AttributeError when attempting to get a value for field `price` on serializer `OrderItemSerializer`.
+The serializer field might be named incorrectly and not match any attribute or key on the `OrderItem` instance.
+Original exception text was: 'OrderItem' object has no attribute 'price_after_off'.
+2024-01-27 07:54:36,442 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/serializers.py changed, reloading.
+2024-01-27 07:54:37,953 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 07:55:03,380 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/serializers.py changed, reloading.
+2024-01-27 07:55:04,289 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 07:58:36,241 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/serializers.py changed, reloading.
+2024-01-27 07:58:37,423 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 09:05:30,573 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/core/admin.py changed, reloading.
+2024-01-27 09:05:31,528 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 09:07:14,415 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/core/admin.py changed, reloading.
+2024-01-27 09:07:16,239 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 09:08:21,257 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/core/admin.py changed, reloading.
+2024-01-27 09:08:22,233 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 09:08:46,350 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/core/admin.py changed, reloading.
+2024-01-27 09:08:47,263 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 09:09:02,013 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/core/admin.py changed, reloading.
+2024-01-27 09:09:02,746 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 09:09:22,532 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/core/admin.py changed, reloading.
+2024-01-27 09:09:23,440 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 09:09:26,130 %(WARNING)s - silk.model_factory - Response to request with pk 2e2e64e3-0abd-49bc-82fe-6df57741cfe0 has content type text/javascript but was unable to parse it
+2024-01-27 09:09:29,353 %(WARNING)s - silk.model_factory - Response to request with pk 5b32c078-2cd8-4be9-8c60-173439c9deea has content type text/javascript but was unable to parse it
+2024-01-27 09:09:35,878 %(WARNING)s - silk.model_factory - Response to request with pk 30699afc-3c10-4757-8dac-5aca861c10f5 has content type text/javascript but was unable to parse it
+2024-01-27 09:10:00,852 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/core/admin.py changed, reloading.
+2024-01-27 09:10:02,074 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 09:10:10,028 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/core/admin.py changed, reloading.
+2024-01-27 09:10:11,094 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 09:10:14,275 %(WARNING)s - silk.model_factory - Response to request with pk c39bac7b-99e7-4aae-8d24-794dd75c8138 has content type text/javascript but was unable to parse it
+2024-01-27 09:10:17,862 %(WARNING)s - silk.model_factory - Response to request with pk 7a820730-3cec-4579-981f-b35486104d5c has content type text/javascript but was unable to parse it
+2024-01-27 09:10:49,230 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/core/admin.py changed, reloading.
+2024-01-27 09:10:50,653 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 09:10:52,575 %(WARNING)s - silk.model_factory - Response to request with pk f18152c8-9dfd-4d36-b550-be859d4b0db0 has content type text/javascript but was unable to parse it
+2024-01-27 09:10:59,614 %(WARNING)s - silk.model_factory - Response to request with pk 18a0a8b4-cbcf-43b4-9e15-e5e57e2a7251 has content type text/javascript but was unable to parse it
+2024-01-27 09:11:02,036 %(WARNING)s - silk.model_factory - Response to request with pk f125b5e3-30d1-4a7d-b429-3fe9f3d9cab9 has content type text/javascript but was unable to parse it
+2024-01-27 09:11:07,269 %(WARNING)s - silk.model_factory - Response to request with pk e5a6548f-3c67-4d98-a16c-4f89f2695967 has content type text/javascript but was unable to parse it
+2024-01-27 09:11:10,738 %(WARNING)s - silk.model_factory - Response to request with pk 52aafe6a-5263-48ca-8c5e-11be421b287f has content type text/javascript but was unable to parse it
+2024-01-27 09:12:39,290 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/core/signals.py changed, reloading.
+2024-01-27 09:12:40,285 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 09:12:42,652 %(WARNING)s - silk.model_factory - Response to request with pk 26a01f3a-1702-42c0-bf30-57fc7aacfd73 has content type text/javascript but was unable to parse it
+2024-01-27 09:12:44,394 %(WARNING)s - silk.model_factory - Response to request with pk 0fe3f5b9-d7c0-4978-9538-e978fc3f72f4 has content type text/javascript but was unable to parse it
+2024-01-27 09:12:48,604 %(WARNING)s - silk.model_factory - Response to request with pk bc93320f-bd13-4b9f-8ccf-65c468994300 has content type text/javascript but was unable to parse it
+2024-01-27 09:13:02,244 %(WARNING)s - silk.model_factory - Response to request with pk 6860a934-17b9-447e-b228-d7da934963a0 has content type text/javascript but was unable to parse it
+2024-01-27 09:13:51,580 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/core/admin.py changed, reloading.
+2024-01-27 09:13:52,757 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 09:13:54,525 %(WARNING)s - silk.model_factory - Response to request with pk 0a91521e-4d24-4604-bcab-ebf2a278e1c4 has content type text/javascript but was unable to parse it
+2024-01-27 09:14:01,080 %(WARNING)s - silk.model_factory - Response to request with pk fcc1abc7-09dc-4699-a511-a15bfe585764 has content type text/javascript but was unable to parse it
+2024-01-27 09:14:34,114 %(WARNING)s - silk.model_factory - Response to request with pk f0e5c5f1-6b13-403e-8a04-f844a64314da has content type text/javascript but was unable to parse it
+2024-01-27 09:14:41,580 %(WARNING)s - silk.model_factory - Response to request with pk 1a01ba88-49c4-4167-bb15-c1073b4f6c5e has content type text/javascript but was unable to parse it
+2024-01-27 09:15:59,934 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/core/admin.py changed, reloading.
+2024-01-27 09:16:01,188 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 09:16:05,579 %(ERROR)s - django.request - Internal Server Error: /admin/core/auditlog/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/options.py", line 714, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/decorators/cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/sites.py", line 240, in inner
+    return view(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/options.py", line 2014, in changelist_view
+    response = self.response_action(
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1648, in response_action
+    response = func(self, request, queryset)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/core/admin.py", line 73, in revert
+    print(self.id)
+          ^^^^^^^
+AttributeError: 'AuditlogAdmin' object has no attribute 'id'
+2024-01-27 09:16:16,507 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/core/admin.py changed, reloading.
+2024-01-27 09:16:17,551 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 09:16:19,739 %(ERROR)s - django.request - Internal Server Error: /admin/core/auditlog/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/options.py", line 714, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/decorators/cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/sites.py", line 240, in inner
+    return view(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/options.py", line 2014, in changelist_view
+    response = self.response_action(
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1648, in response_action
+    response = func(self, request, queryset)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/core/admin.py", line 74, in revert
+    print(queryset.id)
+          ^^^^^^^^^^^
+AttributeError: 'QuerySet' object has no attribute 'id'
+2024-01-27 09:16:52,480 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/core/admin.py changed, reloading.
+2024-01-27 09:16:53,564 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 09:16:56,714 %(ERROR)s - django.request - Internal Server Error: /admin/core/auditlog/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/options.py", line 714, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/decorators/cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/sites.py", line 240, in inner
+    return view(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/options.py", line 2014, in changelist_view
+    response = self.response_action(
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1648, in response_action
+    response = func(self, request, queryset)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/core/admin.py", line 73, in revert
+    print(self.pk)
+          ^^^^^^^
+AttributeError: 'AuditlogAdmin' object has no attribute 'pk'
+2024-01-27 09:19:19,055 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/core/admin.py changed, reloading.
+2024-01-27 09:19:20,396 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 09:19:23,585 %(WARNING)s - silk.model_factory - Response to request with pk f740a4cb-29fd-4c6b-b196-e48e26851460 has content type text/javascript but was unable to parse it
+2024-01-27 09:20:09,004 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/core/admin.py changed, reloading.
+2024-01-27 09:20:10,113 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 09:20:16,904 %(WARNING)s - silk.model_factory - Response to request with pk 11e10c16-2a66-4e78-8431-0e1086fb6c89 has content type text/javascript but was unable to parse it
+2024-01-27 09:20:52,387 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/core/admin.py changed, reloading.
+2024-01-27 09:20:53,430 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 09:22:37,488 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/core/admin.py changed, reloading.
+2024-01-27 09:22:38,328 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 09:22:51,318 %(ERROR)s - django.request - Internal Server Error: /admin/core/auditlog/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/options.py", line 714, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/decorators/cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/sites.py", line 240, in inner
+    return view(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/options.py", line 2014, in changelist_view
+    response = self.response_action(
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1648, in response_action
+    response = func(self, request, queryset)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/core/admin.py", line 81, in revert
+    model_class = apps.get_model(app_label=app_name, model_name=model_name)
+                  ^^^^^^^^^^^^^^
+AttributeError: module 'django.apps' has no attribute 'get_model'
+2024-01-27 09:23:21,332 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/core/admin.py changed, reloading.
+2024-01-27 09:23:22,163 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 09:23:24,021 %(ERROR)s - django.request - Internal Server Error: /admin/core/auditlog/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/options.py", line 714, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/decorators/cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/sites.py", line 240, in inner
+    return view(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/options.py", line 2014, in changelist_view
+    response = self.response_action(
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/options.py", line 1648, in response_action
+    response = func(self, request, queryset)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/core/admin.py", line 90, in revert
+    if isinstance(model_instance._meta.get_field(field_name), ForeignKey):
+                                                              ^^^^^^^^^^
+NameError: name 'ForeignKey' is not defined
+2024-01-27 09:23:45,038 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/core/admin.py changed, reloading.
+2024-01-27 09:23:46,272 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 09:23:49,218 %(WARNING)s - silk.model_factory - Response to request with pk 8668f778-9398-4a24-ab4a-657313ab3180 has content type text/javascript but was unable to parse it
+2024-01-27 09:24:18,640 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/core/admin.py changed, reloading.
+2024-01-27 09:24:19,635 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 09:24:43,814 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/core/admin.py changed, reloading.
+2024-01-27 09:24:44,819 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 09:24:47,884 %(WARNING)s - silk.model_factory - Response to request with pk 4e31f0b2-5568-48a0-ade4-af331b35f36b has content type text/javascript but was unable to parse it
+2024-01-27 09:25:32,368 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/core/admin.py changed, reloading.
+2024-01-27 09:25:33,353 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-27 09:25:40,539 %(WARNING)s - silk.model_factory - Response to request with pk c024cb9e-be28-41b5-bfe9-8435266e241f has content type text/javascript but was unable to parse it
+2024-01-27 09:25:56,274 %(WARNING)s - silk.model_factory - Response to request with pk 8cbd61d3-a00e-4028-87a9-6a2a5d16ad31 has content type text/javascript but was unable to parse it

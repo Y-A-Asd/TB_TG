@@ -22,12 +22,13 @@ class ProductSerializer(TranslatableModelSerializer):
 
     class Meta:
         model = Product
-        fields = ['id', 'translations', 'description', 'inventory',
+        fields = ['id', 'translations', 'description', 'inventory', 'org_price',
                   'price', 'price_with_tax', 'collection_id', 'promotions', 'images']
 
     images = ProductImageSerializer(many=True, read_only=True)
     collection_id = serializers.IntegerField(required=False)
-    price = serializers.DecimalField(max_digits=15, decimal_places=2, source='unit_price')
+    price = serializers.DecimalField(max_digits=15, decimal_places=2, source='price_after_off')
+    org_price = serializers.DecimalField(max_digits=15, decimal_places=2, source='unit_price')
     price_with_tax = serializers.SerializerMethodField(method_name='calculate_tax')
 
     """4 ways to serialize relations : 1.pk 2.object 3.string 4.hyperlink"""
@@ -49,11 +50,12 @@ class ProductSerializer(TranslatableModelSerializer):
 
 class SimpleProductSerializer(TranslatableModelSerializer):
     translations = TranslatedFieldsField(shared_model=Product)
+    org_price = serializers.DecimalField(max_digits=15, decimal_places=2, source='unit_price')
     price = serializers.DecimalField(max_digits=15, decimal_places=2, source='price_after_off')
 
     class Meta:
         model = Product
-        fields = ['id', 'translations', 'price']
+        fields = ['id', 'translations', 'org_price', 'price']
 
     """validation example"""
     # def validate(self,data):
@@ -147,13 +149,13 @@ class AddItemsSerializer(serializers.ModelSerializer):
 
     def validate_product_id(self, value):
         if not Product.objects.filter(pk=value).exists():
-            raise serializers.ValidationError('No Prodcuts found!')
+            raise serializers.ValidationError(_('No Prodcuts found!'))
         else:
             return value
 
     def validate_quantity(self, value):
         if value < 1:
-            raise serializers.ValidationError('Most be at least 1 !')
+            raise serializers.ValidationError(_('Most be at least 1 !'))
         else:
             return value
 
@@ -165,7 +167,7 @@ class UpdateItemsSerializer(serializers.ModelSerializer):
 
     def validate_quantity(self, value):
         if value < 1:
-            raise serializers.ValidationError('Most be at least 1 !')
+            raise serializers.ValidationError(_('Most be at least 1 !'))
         else:
             return value
 
@@ -180,19 +182,25 @@ class CustomerSerializer(serializers.ModelSerializer):
 
 class OrderItemSerializer(serializers.ModelSerializer):
     product = SimpleProductSerializer()
+    price = serializers.DecimalField(max_digits=15, decimal_places=2, source='unit_price')
 
     class Meta:
         model = OrderItem
-        fields = ('product', 'unit_price', 'quantity')
+        fields = ('product', 'price', 'quantity')
 
 
 class OrderSerializer(serializers.ModelSerializer):
     orders = OrderItemSerializer(many=True)
+    total_price = serializers.SerializerMethodField()
 
     class Meta:
         model = Order
         fields = (
-            'order_status', 'customer', 'zip_code', 'path', 'city', 'province', 'first_name', 'last_name', 'orders',)
+            'id', 'order_status', 'customer', 'zip_code', 'path', 'city', 'province', 'first_name', 'last_name', 'orders',
+            'total_price')
+
+    def get_total_price(self, order):
+        return sum([item.quantity * item.unit_price for item in order.orders.all()])
 
 
 class CreateOrderSerializer(serializers.Serializer):
