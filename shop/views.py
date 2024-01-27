@@ -10,11 +10,11 @@ from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, DestroyM
 from django_filters.rest_framework import DjangoFilterBackend
 from .pagination import DefaultPagination
 from .serializers import (ProductSerializer, CollectionSerializer, ReviewSerializer,
-                          # CartSerializer, \
-    # CartItemSerializer, AddItemsSerializer, UpdateItemsSerializer,
+                          CartSerializer, \
+    CartItemSerializer, AddItemsSerializer, UpdateItemsSerializer,
                           CustomerSerializer, OrderSerializer, \
     CreateOrderSerializer, UpdateOrderSerializer, ProductImageSerializer)
-from .models import Product, Collection, OrderItem, Review, Customer, Order, ProductImage
+from .models import Product, Collection, OrderItem, Review, Customer, Order, ProductImage, CartItem, Cart
 from .filters import ProductFilter
 from .permissions import IsAdminOrReadOnly, ViewCustomerHistoryPermission
 
@@ -194,29 +194,29 @@ class ReviewViewSet(ModelViewSet):
         return {'product_id': self.kwargs['product_pk']}
 
 
-# class CartViewSet(CreateModelMixin,
-#                   RetrieveModelMixin,
-#                   DestroyModelMixin,
-#                   GenericViewSet):
-#     queryset = Cart.objects.all().prefetch_related('items__product')
-#     serializer_class = CartSerializer
-#
-#
-# class CartItemViewSet(ModelViewSet):
-#     http_method_names = ['get', 'post', 'patch', 'delete']
-#
-#     def get_queryset(self):
-#         return CartItem.objects.filter(cart_id=self.kwargs['cart_pk']).select_related('product')
-#
-#     def get_serializer_class(self):
-#         if self.request.method == 'POST':
-#             return AddItemsSerializer
-#         elif self.request.method == 'PATCH':
-#             return UpdateItemsSerializer
-#         return CartItemSerializer
-#
-#     def get_serializer_context(self):
-#         return {'cart_id': self.kwargs['cart_pk']}
+class CartViewSet(CreateModelMixin,
+                  RetrieveModelMixin,
+                  DestroyModelMixin,
+                  GenericViewSet):
+    queryset = Cart.objects.all().prefetch_related('items__product')
+    serializer_class = CartSerializer
+
+
+class CartItemViewSet(ModelViewSet):
+    http_method_names = ['get', 'post', 'patch', 'delete']
+
+    def get_queryset(self):
+        return CartItem.objects.filter(cart_id=self.kwargs['cart_pk']).select_related('product')
+
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return AddItemsSerializer
+        elif self.request.method == 'PATCH':
+            return UpdateItemsSerializer
+        return CartItemSerializer
+
+    def get_serializer_context(self):
+        return {'cart_id': self.kwargs['cart_pk']}
 
 
 class CustomerViewSet(ModelViewSet):

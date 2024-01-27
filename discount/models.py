@@ -64,5 +64,3 @@ class BaseDiscount(BaseModel):
 
     def __str__(self):
         return f'DISCOUNT {self.pk} - {self.discount}, {self.mode}, {self.code}'
-
-

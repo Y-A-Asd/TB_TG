@@ -6,6 +6,7 @@ from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db.models import Sum, F
 from django.utils import timezone
+from parler.managers import TranslatableManager
 
 from discount.models import BaseDiscount
 from shop.validator import validate_file_size
@@ -34,11 +35,17 @@ class FeatureValue(TranslatableModel, BaseModel):
         description=models.CharField(_("Description"), max_length=500)
     )
     parent_feature = models.ForeignKey(MainFeature, on_delete=models.CASCADE, related_name='values',
-                                       verbose_name=_("Feature Values"))
+                                       verbose_name=_("Feature Parent"))
+
+    def __str__(self):
+        default_language = get_language() or 'en'
+        description_translation = self.translations.get(language_code=default_language)
+        value = description_translation.value if description_translation else f"Feature_Value {self.pk}"
+        return f'Feature_Value {self.pk} - {value}'
 
     class Meta:
-        verbose_name = _("Value")
-        verbose_name_plural = _("Values")
+        verbose_name = _("Feature Value")
+        verbose_name_plural = _("Feature Values")
 
 
 class Promotion(TranslatableModel, BaseModel):
@@ -76,8 +83,8 @@ class Collection(TranslatableModel, BaseModel):
     parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='subcollection',
                                verbose_name=_("Parent"))
 
-    main_feature = models.ForeignKey(MainFeature, on_delete=models.PROTECT, related_name='collections',
-                                     verbose_name='Features', null=True)
+    main_feature = models.ManyToManyField(MainFeature, related_name='collections',
+                                          verbose_name='Features')
 
     @property
     def is_subcollection(self):
@@ -105,18 +112,24 @@ class Product(TranslatableModel, BaseModel):
     unit_price = models.DecimalField(_("Unit Price"), max_digits=15, decimal_places=2,
                                      validators=[MinValueValidator(1)])
     inventory = models.IntegerField(_("Inventory"), validators=[MinValueValidator(0)])
-    min_inventory = models.IntegerField(_("Minimum Inventory"), validators=[MinValueValidator(0)], null=True,
-                                        blank=True)
+    min_inventory = models.IntegerField(_("Minimum Inventory"), validators=[MinValueValidator(0)],
+                                        null=True, blank=True)
     collection = models.ForeignKey(Collection, on_delete=models.PROTECT, verbose_name=_("Collection"),
                                    related_name='products', null=True, blank=True)
-    promotions = models.ManyToManyField(Promotion, blank=True, verbose_name=_("Promotions"), related_name='products')
-    discount = models.ForeignKey(BaseDiscount, on_delete=models.PROTECT, verbose_name=_("Discount"))
+    promotions = models.ForeignKey(Promotion, on_delete=models.CASCADE, null=True, blank=True,
+                                   verbose_name=_("Promotions"),
+                                   related_name='products')
+    discount = models.ForeignKey(BaseDiscount, on_delete=models.CASCADE, verbose_name=_("Discount"),
+                                 null=True, blank=True)
+
+    value_feature = models.ManyToManyField(FeatureValue, related_name='produts_feature',
+                                           verbose_name='Features', blank=True)
 
     def __str__(self):
         default_language = get_language() or 'en'
         title_translation = self.translations.get(language_code=default_language)
         title = title_translation.title if title_translation else f"Product {self.pk}"
-        return f'Product {self.pk} - {title}'
+        return f'Product {self.pk} - {title} - {self.unit_price}'
 
     def price_after_off(self, discount: BaseDiscount):
         discount.ensure_availability()
@@ -143,19 +156,20 @@ class Product(TranslatableModel, BaseModel):
         ordering = ["translations__title"]
 
 
-class PromotionItems(BaseModel):
-    promotion = models.ForeignKey(Promotion, on_delete=models.CASCADE, related_name='promotionitems')
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='promtions')
-    discount = models.ForeignKey(BaseDiscount, on_delete=models.PROTECT, verbose_name=_("Discount"))
+class Cart(BaseModel):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
-    def price_after_off(self, discount: BaseDiscount):
-        discount.ensure_availability()
-        if discount.mode == discount.Mode.DirectPrice:
-            return self.product.unit_price - discount.discount
-        elif discount.mode == discount.Mode.DiscountOff:
-            return self.product.unit_price - (self.product.unit_price * discount.discount / 100)
-        else:
-            raise ValueError(f"Invalid discount mode: {discount.mode}")
+
+class CartItem(BaseModel):
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, verbose_name=_("Cart"), related_name='items')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name=_("Product"))
+    # unit_price = models.DecimalField(_('Price'),max_digits=15, decimal_places=2, null=True, blank=True)
+    quantity = models.PositiveSmallIntegerField(_("Quantity"))
+
+    class Meta:
+        unique_together = [['cart', 'product']]
+        verbose_name = _("Cart Item")
+        verbose_name_plural = _("Cart Items")
 
 
 class ProductImage(BaseModel):
@@ -216,7 +230,7 @@ class Order(BaseModel):
     path = models.CharField(_("Path"), max_length=1025)
     city = models.CharField(_("City"), max_length=255)
     province = models.CharField(_("Province"), max_length=32)
-    first_name = models.CharField(_("First Name"), max_length=255),
+    first_name = models.CharField(_("First Name"), max_length=255)
     last_name = models.CharField(_("Last Name"), max_length=255)
 
     class Meta:
@@ -224,7 +238,8 @@ class Order(BaseModel):
         verbose_name_plural = _("Orders")
 
     def get_total_price(self):
-        return self.orders.aggregate(total_price=Sum(F('unit_price') * F('quantity')))['total_price']
+        total_price = self.orders.aggregate(total_price=Sum(F('unit_price') * F('quantity')))['total_price']
+        return total_price if total_price is not None else 0
 
 
 class OrderItem(BaseModel):

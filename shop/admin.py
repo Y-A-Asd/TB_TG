@@ -10,10 +10,13 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from dal import autocomplete
 from parler.admin import TranslatableAdmin, TranslatableTabularInline
+from parler.forms import TranslatableModelForm
+
 from tags.models import TaggedItem
 from . import models
+from .filters import MainFeatureFilter, ValueFeatureFilter
 from .models import Review, Transaction, Address, FeatureValue, \
-    MainFeature, Order, OrderItem, SiteSettings
+    MainFeature, Order, OrderItem, SiteSettings, Product, Collection
 
 
 class TagInline(GenericTabularInline):
@@ -23,7 +26,7 @@ class TagInline(GenericTabularInline):
     verbose_name_plural = _('Tags')
 
 
-class FeatureValueInline(TranslatableTabularInline):
+class FeatureValueInline1(TranslatableTabularInline):
     model = FeatureValue
     extra = 1
     exclude = ['deleted_at', 'created_at', 'updated_at']
@@ -31,7 +34,7 @@ class FeatureValueInline(TranslatableTabularInline):
 
 @admin.register(MainFeature)
 class MainFeatureAdmin(TranslatableAdmin):
-    inlines = [FeatureValueInline]
+    inlines = [FeatureValueInline1]
     list_display = ['title', 'description']
     search_fields = ['title']
     exclude = ['deleted_at', 'created_at', 'updated_at']
@@ -67,12 +70,6 @@ class InventoryFilter(admin.SimpleListFilter):
             return queryset.filter(inventory__lt=F('min_inventory'))
 
 
-class PromotionItemsInline(admin.TabularInline):
-    model = models.PromotionItems
-    extra = 1
-    exclude = ['deleted_at', 'created_at', 'updated_at']
-
-
 @admin.register(models.Promotion)
 class PromotionAdmin(TranslatableAdmin):
     exclude = ['deleted_at', 'created_at', 'updated_at']
@@ -93,23 +90,71 @@ class ProductImageInline(admin.TabularInline):
             )
 
 
-@admin.register(models.Product)
+class MainFeatureFilter(admin.SimpleListFilter):
+    title = _('Main Feature')
+    parameter_name = 'main_feature'
+
+    def lookups(self, request, model_admin):
+        return [(main_feature.id, str(main_feature)) for main_feature in MainFeature.objects.all()]
+
+    def queryset(self, request, queryset):
+        main_feature_id = self.value()
+        if main_feature_id:
+            return queryset.filter(main_feature__id=main_feature_id)
+
+
+class FeatureValueInline(admin.TabularInline):
+    model = Product.value_feature.through
+    extra = 1
+
+
+class CollectionAdminForm(forms.ModelForm):
+    class Meta:
+        model = Collection
+        fields = '__all__'
+
+
+@admin.register(Collection)
+class CollectionAdmin(admin.ModelAdmin):
+    autocomplete_fields = ['parent', 'main_feature']
+    list_filter = ['main_feature']
+    list_display = ['title', 'products_count', 'parent']
+    search_fields = ['title']
+    exclude = ['deleted_at', 'created_at', 'updated_at']
+
+    @admin.display(ordering='products_count')
+    def products_count(self, collection):
+        url = reverse('admin:shop_product_changelist') + '?' + urlencode({'collection__id': str(collection.id)})
+        return format_html('<a href="{}">{} {}</a>', url, collection.products_count, 'Products')
+
+    def get_queryset(self, request):
+        return super().get_queryset(request).annotate(
+            products_count=Count('products')
+        )
+
+
+class ProductAdminForm(TranslatableModelForm):
+    class Meta:
+        model = Product
+        exclude = []
+
+@admin.register(Product)
 class ProductAdmin(TranslatableAdmin):
-    autocomplete_fields = ['collection']
+    form = ProductAdminForm
+    autocomplete_fields = ['collection', 'value_feature']
 
     def get_prepopulated_fields(self, request, obj=None):
         return {'slug': ('title',)}
 
     actions = ['clear_inventory']
-    list_display = ['title', 'unit_price',
-                    'inventory_status', 'collection_title', 'min_inventory']
+    list_display = ['title', 'unit_price', 'inventory_status', 'collection_title', 'min_inventory']
     list_editable = ['unit_price']
-    list_filter = ['collection', 'updated_at', InventoryFilter]
+    list_filter = ['collection', 'collection__main_feature', 'updated_at']
     list_per_page = 10
     list_select_related = ['collection']
     search_fields = ['title']
     exclude = ['deleted_at', 'created_at', 'updated_at']
-    inlines = [PromotionItemsInline, TagInline, ProductImageInline]
+    inlines = [FeatureValueInline]
 
     def collection_title(self, product):
         if product.collection:
@@ -126,38 +171,11 @@ class ProductAdmin(TranslatableAdmin):
     @admin.action(description=_('Clear inventory'))
     def clear_inventory(self, request, queryset):
         updated_count = queryset.update(inventory=0)
-        self.message_user(
-            request,
-            _('{count} products were successfully updated.').format(count=updated_count),
-            messages.ERROR
-        )
+        self.message_user(request, _('{count} products were successfully updated.').format(count=updated_count),
+                          messages.ERROR)
 
     class Media:
-        css = {
-            'all': ['shop/style.css']
-        }
-
-
-@admin.register(models.Collection)
-class CollectionAdmin(TranslatableAdmin):
-    autocomplete_fields = ['parent', 'main_feature']
-    list_display = ['title', 'products_count', 'main_feature', 'parent']
-    search_fields = ['title']
-    exclude = ['deleted_at', 'created_at', 'updated_at']
-    inlines = [TagInline]
-
-    @admin.display(ordering='products_count')
-    def products_count(self, collection):
-        url = (
-                reverse('admin:shop_product_changelist')
-                + '?'
-                + urlencode({'collection__id': str(collection.id)}))
-        return format_html('<a href="{}">{} {}</a>', url, collection.products_count, _('Products'))
-
-    def get_queryset(self, request):
-        return super().get_queryset(request).annotate(
-            products_count=Count('products')
-        )
+        css = {'all': ['shop/style.css']}
 
 
 class AddressInline(admin.TabularInline):
@@ -168,7 +186,7 @@ class AddressInline(admin.TabularInline):
 
 @admin.register(models.Customer)
 class CustomerAdmin(admin.ModelAdmin):
-    list_display = ['first_name', 'last_name', 'membership', 'orders']
+    list_display = ['id', 'first_name', 'last_name', 'membership', 'orders']
     list_editable = ['membership']
     list_per_page = 10
     list_select_related = ['user']
@@ -268,7 +286,7 @@ https://stackoverflow.com/questions/43852601/offering-choices-that-depend-on-oth
 
 @admin.register(Transaction)
 class TransactionAdmin(admin.ModelAdmin):
-    list_display = ['order_link', 'payment_status', 'total_price', 'customer', 'receipt_number']
+    list_display = ['id', 'order_link', 'payment_status', 'total_price', 'customer', 'receipt_number']
     list_filter = ['payment_status', 'customer']
     search_fields = ['order__id', 'customer__user__username', 'receipt_number']
     actions = ['mark_as_complete']
