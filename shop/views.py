@@ -14,8 +14,10 @@ from .serializers import (ProductSerializer, CollectionSerializer, ReviewSeriali
                           CartSerializer, \
                           CartItemSerializer, AddItemsSerializer, UpdateItemsSerializer,
                           CustomerSerializer, OrderSerializer, \
-                          CreateOrderSerializer, UpdateOrderSerializer, ProductImageSerializer, AddressSerializer)
-from .models import Product, Collection, OrderItem, Review, Customer, Order, ProductImage, CartItem, Cart, Address
+                          CreateOrderSerializer, UpdateOrderSerializer, ProductImageSerializer, AddressSerializer,
+                          TransactionSerializer, UpdateTransactionSerializer)
+from .models import Product, Collection, OrderItem, Review, Customer, Order, ProductImage, CartItem, Cart, Address, \
+    Transaction
 from .filters import ProductFilter
 from .permissions import IsAdminOrReadOnly, ViewCustomerHistoryPermission
 
@@ -185,7 +187,7 @@ class CollectionViewSet(ModelViewSet):
 class ReviewViewSet(ModelViewSet):
     serializer_class = ReviewSerializer
     filter_backends = [SearchFilter]
-    search_fields = ['name', 'description']
+    search_fields = ['title', 'description']
     pagination_class = DefaultPagination
 
     def get_queryset(self):
@@ -193,7 +195,25 @@ class ReviewViewSet(ModelViewSet):
         return Review.objects.filter(product_id=self.kwargs['product_pk'])
 
     def get_serializer_context(self):
-        return {'product_id': self.kwargs['product_pk']}
+        return {'product_id': self.kwargs['product_pk'], 'user_id': self.request.user.id}
+
+    @action(detail=True, methods=['GET'])
+    def replies(self, request, *args, **kwargs):
+        review = self.get_object()
+        replies = Review.objects.filter(parent_review=review)
+        serializer = self.get_serializer(replies, many=True)
+        return Response(serializer.data)
+
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        data = serializer.data
+
+        replies = Review.objects.filter(parent_review=instance)
+        reply_serializer = self.get_serializer(replies, many=True)
+        data['replies'] = reply_serializer.data
+
+        return Response(data)
 
 
 class CartViewSet(CreateModelMixin,
@@ -297,3 +317,15 @@ class ProductImageViewSet(ModelViewSet):
 class AddressViewSet(ModelViewSet):
     queryset = Address.objects.all()
     serializer_class = AddressSerializer
+
+
+class TransactionViewSet(ModelViewSet):
+    http_method_names = ['get', 'patch', 'delete', 'head', 'options']
+    permission_classes = [IsAdminUser]
+    queryset = Transaction.objects.all()
+
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return TransactionSerializer
+        elif self.request.method == 'PATCH':
+            return UpdateTransactionSerializer

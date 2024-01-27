@@ -7,45 +7,27 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db.models import Sum, F
 from django.utils import timezone
 from parler.managers import TranslatableManager
-
 from discount.models import BaseDiscount
 from shop.validator import validate_file_size
 from django.utils.translation import gettext_lazy as _, get_language
 from django.db import models
 from django.conf import settings
 from parler.models import TranslatableModel, TranslatedFields
-from core.models import BaseModel
+from core.models import BaseModel, User
 import uuid
 
 
 class MainFeature(TranslatableModel, BaseModel):
     translations: TranslatedFields = TranslatedFields(
         title=models.CharField(_('Title'), max_length=255),
-        description=models.CharField(_("Description"), max_length=500)
+        description=models.CharField(_("Description"), max_length=500),
+        value=models.CharField(_('Value'), max_length=255),
     )
 
     class Meta:
         verbose_name = _("Feature")
         verbose_name_plural = _("Features")
-
-
-class FeatureValue(TranslatableModel, BaseModel):
-    translations: TranslatedFields = TranslatedFields(
-        value=models.CharField(_('Title'), max_length=255),
-        description=models.CharField(_("Description"), max_length=500)
-    )
-    parent_feature = models.ForeignKey(MainFeature, on_delete=models.CASCADE, related_name='values',
-                                       verbose_name=_("Feature Parent"))
-
-    def __str__(self):
-        default_language = get_language() or 'en'
-        description_translation = self.translations.get(language_code=default_language)
-        value = description_translation.value if description_translation else f"Feature_Value {self.pk}"
-        return f'Feature_Value {self.pk} - {value}'
-
-    class Meta:
-        verbose_name = _("Feature Value")
-        verbose_name_plural = _("Feature Values")
+        # unique_together = [['translation__title', 'translation__value']]
 
 
 class Promotion(TranslatableModel, BaseModel):
@@ -83,9 +65,6 @@ class Collection(TranslatableModel, BaseModel):
     parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='subcollection',
                                verbose_name=_("Parent"))
 
-    main_feature = models.ManyToManyField(MainFeature, related_name='collections',
-                                          verbose_name='Features')
-
     @property
     def is_subcollection(self):
         return self.parent is not None
@@ -122,7 +101,7 @@ class Product(TranslatableModel, BaseModel):
     discount = models.ForeignKey(BaseDiscount, on_delete=models.CASCADE, verbose_name=_("Discount"),
                                  null=True, blank=True)
 
-    value_feature = models.ManyToManyField(FeatureValue, related_name='produts_feature',
+    value_feature = models.ManyToManyField(MainFeature, related_name='value_features',
                                            verbose_name='Features', blank=True)
 
     def __str__(self):
@@ -265,7 +244,7 @@ class OrderItem(BaseModel):
 
 
 class Review(BaseModel):
-    user = models.ForeignKey(Customer, on_delete=models.CASCADE, verbose_name=_("Customer"))
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, verbose_name=_("Customer"))
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews', verbose_name='Product')
     rating = models.PositiveIntegerField(_('Rating'), validators=[MinValueValidator(1), MaxValueValidator(5)])
     title = models.CharField(_('Title'), max_length=255)
@@ -275,7 +254,7 @@ class Review(BaseModel):
     active = models.BooleanField(_("Active"), default=False)
 
     def __str__(self):
-        return f"{self.user} - {self.title}"
+        return f"{self.customer} - {self.title}"
 
     class Meta:
         verbose_name = _("Review")

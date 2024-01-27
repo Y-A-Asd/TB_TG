@@ -2,7 +2,7 @@ import datetime
 from decimal import Decimal
 from core.models import AuditLog, User
 from discount.models import BaseDiscount
-from shop.models import Customer, Order, Product, Promotion, Collection, OrderItem, Review, Address
+from shop.models import Customer, Order, Product, Promotion, Collection, OrderItem, Review, Address, Transaction
 from django.dispatch import receiver
 from django.contrib.sessions.models import Session
 from django.db.models.signals import post_save, pre_delete, pre_save
@@ -84,6 +84,7 @@ def get_model_changes(old_instance, new_instance):
 @receiver(pre_save, sender=Collection)
 @receiver(pre_save, sender=Address)
 @receiver(pre_save, sender=OrderItem)
+@receiver(pre_save, sender=Transaction)
 def log_create_update(sender, instance, **kwargs):
     model_name = sender.__name__  # just for fun :-|
 

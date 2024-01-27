@@ -2,7 +2,8 @@ from decimal import Decimal
 from django.db import transaction
 from django.utils.text import slugify
 from rest_framework import serializers
-from shop.models import Product, Collection, Review, Customer, Order, OrderItem, ProductImage, CartItem, Cart, Address
+from shop.models import Product, Collection, Review, Customer, Order, OrderItem, ProductImage, CartItem, Cart, Address, \
+    Transaction
 from parler_rest.serializers import TranslatableModelSerializer, TranslatedFieldsField
 from django.utils.translation import gettext_lazy as _
 
@@ -22,7 +23,7 @@ class ProductSerializer(TranslatableModelSerializer):
 
     class Meta:
         model = Product
-        fields = ['id', 'translations', 'description', 'inventory', 'org_price',
+        fields = ['id', 'translations', 'inventory', 'org_price',
                   'price', 'price_with_tax', 'collection_id', 'promotions', 'images']
 
     images = ProductImageSerializer(many=True, read_only=True)
@@ -85,21 +86,6 @@ class CollectionSerializer(TranslatableModelSerializer):
         fields = ['id', 'translations', 'parent', 'products_count']
 
     products_count = serializers.IntegerField(read_only=True)
-
-
-class ReviewSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Review
-        fields = ['id', 'created_at', 'parent_review', 'title', 'description', 'rating', 'user']
-
-    def to_representation(self, instance):
-        if instance.active:
-            return super().to_representation(instance)
-        return None
-
-    def create(self, validated_data):
-        product_id = self.context['product_id']
-        return Review.objects.create(product_id=product_id, **validated_data)
 
 
 class CartItemSerializer(serializers.ModelSerializer):
@@ -172,12 +158,33 @@ class UpdateItemsSerializer(serializers.ModelSerializer):
             return value
 
 
-class CustomerSerializer(serializers.ModelSerializer):
-    user_id = serializers.IntegerField(read_only=True)
+class CustomerSerializer(TranslatableModelSerializer):
+    user_id = serializers.IntegerField()
 
     class Meta:
         model = Customer
         fields = ['id', 'first_name', 'last_name', 'user_id', 'birth_date', 'membership']
+
+
+class ReviewSerializer(serializers.ModelSerializer):
+    customer = CustomerSerializer(read_only=True)
+
+    class Meta:
+        model = Review
+        fields = ['id', 'created_at', 'parent_review', 'title', 'description', 'rating', 'customer']
+
+    def to_representation(self, instance):
+        if instance.active:
+            return super().to_representation(instance)
+        return None
+
+    def create(self, validated_data):
+        product_id = self.context['product_id']
+        try:
+            customer = Customer.objects.get(user_id=self.context['user_id'])
+        except Customer.DoesNotExist:
+            return serializers.ValidationError(_('User not found'))
+        return Review.objects.create(product_id=product_id, customer=customer, **validated_data)
 
 
 class OrderItemSerializer(serializers.ModelSerializer):
@@ -196,7 +203,8 @@ class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         fields = (
-            'id', 'order_status', 'customer', 'zip_code', 'path', 'city', 'province', 'first_name', 'last_name', 'orders',
+            'id', 'order_status', 'customer', 'zip_code', 'path', 'city', 'province', 'first_name', 'last_name',
+            'orders',
             'total_price')
 
     def get_total_price(self, order):
@@ -216,7 +224,7 @@ class CreateOrderSerializer(serializers.Serializer):
     def save(self, **kwargs):
         with transaction.atomic():
             cart_id = self.validated_data['cart_id']
-            customer, created = Customer.objects.get_or_create(user_id=self.context['user_id'])
+            customer = Customer.objects.get(user_id=self.context['user_id'])
             first_name = customer.first_name
             last_name = customer.last_name
             address: Address = customer.address_set.filter(default=True).first()
@@ -238,9 +246,14 @@ class CreateOrderSerializer(serializers.Serializer):
                 ) for item in cart_items
             ]
             OrderItem.objects.bulk_create(order_items)
+            "https://stackoverflow.com/questions/30632743/how-can-i-use-signals-in-django-bulk-create"
 
             Cart.objects.filter(pk=cart_id).delete()
 
+            transactions = Transaction.objects.get(order=order)
+            total_price = order.get_total_price()
+            transactions.total_price = total_price
+            transactions.save()
             return order
 
 
@@ -254,3 +267,20 @@ class AddressSerializer(serializers.ModelSerializer):
     class Meta:
         model = Address
         fields = ('id', 'zip_code', 'path', 'city', 'province', 'default')
+
+
+class TransactionSerializer(serializers.ModelSerializer):
+    order = serializers.HyperlinkedRelatedField(
+        queryset=Order.objects.all(),
+        view_name='orders-detail'
+    )
+
+    class Meta:
+        model = Transaction
+        fields = ['id', 'payment_status', 'order', 'total_price', 'customer', 'receipt_number']
+
+
+class UpdateTransactionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Transaction
+        fields = ['payment_status', 'receipt_number']

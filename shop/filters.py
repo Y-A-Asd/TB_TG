@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django_filters.rest_framework import FilterSet
 from django.utils.translation import gettext_lazy as _
-from .models import Product, Review, MainFeature, FeatureValue
+from .models import Product, Review, MainFeature
 
 
 class ProductFilter(FilterSet):
@@ -23,17 +23,4 @@ class MainFeatureFilter(admin.SimpleListFilter):
     def queryset(self, request, queryset):
         main_feature_id = self.value()
         if main_feature_id:
-            return queryset.filter(main_feature_id=main_feature_id)
-
-
-class ValueFeatureFilter(admin.SimpleListFilter):
-    title = _('Value Feature')
-    parameter_name = 'value_feature'
-
-    def lookups(self, request, model_admin):
-        return [(value_feature.id, str(value_feature)) for value_feature in FeatureValue.objects.all()]
-
-    def queryset(self, request, queryset):
-        value_feature_id = self.value()
-        if value_feature_id:
-            return queryset.filter(value_feature_id=value_feature_id)
+            return queryset.filter(main_feature__id=main_feature_id)

@@ -1,3 +1,4 @@
+from django.contrib.admin import TabularInline
 from django.db.models import F
 from django import forms
 from django.contrib import admin, messages
@@ -14,8 +15,8 @@ from parler.forms import TranslatableModelForm
 
 from tags.models import TaggedItem
 from . import models
-from .filters import MainFeatureFilter, ValueFeatureFilter
-from .models import Review, Transaction, Address, FeatureValue, \
+from .filters import MainFeatureFilter
+from .models import Review, Transaction, Address, \
     MainFeature, Order, OrderItem, SiteSettings, Product, Collection
 
 
@@ -26,32 +27,14 @@ class TagInline(GenericTabularInline):
     verbose_name_plural = _('Tags')
 
 
-class FeatureValueInline1(TranslatableTabularInline):
-    model = FeatureValue
-    extra = 1
-    exclude = ['deleted_at', 'created_at', 'updated_at']
-
-
 @admin.register(MainFeature)
 class MainFeatureAdmin(TranslatableAdmin):
-    inlines = [FeatureValueInline1]
-    list_display = ['title', 'description']
+    list_display = ['title', 'description', 'value']
     search_fields = ['title']
     exclude = ['deleted_at', 'created_at', 'updated_at']
 
     class Meta:
         model = MainFeature
-
-
-@admin.register(FeatureValue)
-class FeatureValueAdmin(TranslatableAdmin):
-    list_display = ['value', 'description', 'parent_feature']
-    search_fields = ['value']
-    list_filter = ['parent_feature']
-    exclude = ['deleted_at', 'created_at', 'updated_at']
-
-    class Meta:
-        model = FeatureValue
 
 
 class InventoryFilter(admin.SimpleListFilter):
@@ -90,20 +73,7 @@ class ProductImageInline(admin.TabularInline):
             )
 
 
-class MainFeatureFilter(admin.SimpleListFilter):
-    title = _('Main Feature')
-    parameter_name = 'main_feature'
-
-    def lookups(self, request, model_admin):
-        return [(main_feature.id, str(main_feature)) for main_feature in MainFeature.objects.all()]
-
-    def queryset(self, request, queryset):
-        main_feature_id = self.value()
-        if main_feature_id:
-            return queryset.filter(main_feature__id=main_feature_id)
-
-
-class FeatureValueInline(admin.TabularInline):
+class FeatureInline(TabularInline):
     model = Product.value_feature.through
     extra = 1
 
@@ -116,8 +86,7 @@ class CollectionAdminForm(forms.ModelForm):
 
 @admin.register(Collection)
 class CollectionAdmin(admin.ModelAdmin):
-    autocomplete_fields = ['parent', 'main_feature']
-    list_filter = ['main_feature']
+    autocomplete_fields = ['parent']
     list_display = ['title', 'products_count', 'parent']
     search_fields = ['title']
     exclude = ['deleted_at', 'created_at', 'updated_at']
@@ -133,14 +102,8 @@ class CollectionAdmin(admin.ModelAdmin):
         )
 
 
-class ProductAdminForm(TranslatableModelForm):
-    class Meta:
-        model = Product
-        exclude = []
-
 @admin.register(Product)
 class ProductAdmin(TranslatableAdmin):
-    form = ProductAdminForm
     autocomplete_fields = ['collection', 'value_feature']
 
     def get_prepopulated_fields(self, request, obj=None):
@@ -149,12 +112,13 @@ class ProductAdmin(TranslatableAdmin):
     actions = ['clear_inventory']
     list_display = ['title', 'unit_price', 'inventory_status', 'collection_title', 'min_inventory']
     list_editable = ['unit_price']
-    list_filter = ['collection', 'collection__main_feature', 'updated_at']
+    list_filter = ['collection', 'value_feature', 'updated_at', MainFeatureFilter]
     list_per_page = 10
     list_select_related = ['collection']
     search_fields = ['title']
     exclude = ['deleted_at', 'created_at', 'updated_at']
-    inlines = [FeatureValueInline]
+
+    inlines = [FeatureInline]
 
     def collection_title(self, product):
         if product.collection:
@@ -264,8 +228,8 @@ class OrderItemAdmin(admin.ModelAdmin):
 
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
-    list_display = ['user', 'product', 'title', 'parent_review', 'rating']
-    list_filter = ['user', 'product']
+    list_display = ['customer', 'product', 'title', 'parent_review', 'rating']
+    list_filter = ['customer', 'product']
     search_fields = ['name', 'description']
     date_hierarchy = 'created_at'
     exclude = ['deleted_at', 'updated_at']
