@@ -1,21 +1,20 @@
-from django.db.models import Count
 import logging
+from django.db.models import Count
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
-from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, DestroyModelMixin
 from django_filters.rest_framework import DjangoFilterBackend
+from core.models import User, AuditLog
 from .pagination import DefaultPagination
 from .serializers import (ProductSerializer, CollectionSerializer, ReviewSerializer,
-                          CartSerializer, \
-                          CartItemSerializer, AddItemsSerializer, UpdateItemsSerializer,
-                          CustomerSerializer, OrderSerializer, \
-                          CreateOrderSerializer, UpdateOrderSerializer, ProductImageSerializer, AddressSerializer,
-                          TransactionSerializer, UpdateTransactionSerializer)
+                          CartSerializer, CartItemSerializer, AddItemsSerializer, UpdateItemsSerializer,
+                          CustomerSerializer, OrderSerializer, CreateOrderSerializer, UpdateOrderSerializer,
+                          ProductImageSerializer, AddressSerializer, TransactionSerializer, UpdateTransactionSerializer,
+                          AuditLogSerializer)
 from .models import Product, Collection, OrderItem, Review, Customer, Order, ProductImage, CartItem, Cart, Address, \
     Transaction
 from .filters import ProductFilter
@@ -150,6 +149,13 @@ class ProductViewSet(ModelViewSet):
 
     """we can manually filter by overwrite get_queryset function"""
 
+    # def get_queryset(self):
+    #     queryset = Product.objects.all()
+    #     collection_id = self.request.query_params.get('collection_id')
+    #     if collection_id is not None:
+    #         queryset = queryset.filter(collection_id=collection_id)
+    #     return queryset
+
     def list(self, request, *args, **kwargs):
         # Log a message when the list view is accessed
         logger.info("List view accessed")
@@ -158,12 +164,6 @@ class ProductViewSet(ModelViewSet):
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
 
-    # def get_queryset(self):
-    #     queryset = Product.objects.all()
-    #     collection_id = self.request.query_params.get('collection_id')
-    #     if collection_id is not None:
-    #         queryset = queryset.filter(collection_id=collection_id)
-    #     return queryset
     def get_serializer_context(self):
         return {'request': self.request}
 
@@ -185,6 +185,7 @@ class CollectionViewSet(ModelViewSet):
 
 
 class ReviewViewSet(ModelViewSet):
+    http_method_names = ['get', 'post', 'head', 'options']
     serializer_class = ReviewSerializer
     filter_backends = [SearchFilter]
     search_fields = ['title', 'description']
@@ -220,8 +221,18 @@ class CartViewSet(CreateModelMixin,
                   RetrieveModelMixin,
                   DestroyModelMixin,
                   GenericViewSet):
-    queryset = Cart.objects.all().prefetch_related('items__product')
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.is_staff:
+            return Cart.objects.all().prefetch_related('items__product')
+        customer_id = Customer.objects.only('id').get(user_id=user.id)
+        return Cart.objects.all().prefetch_related('items__product').filter(customer_id=customer_id)
+
     serializer_class = CartSerializer
+
+    def get_serializer_context(self):
+        return {'user_id': self.request.user.id}
 
 
 class CartItemViewSet(ModelViewSet):
@@ -242,8 +253,13 @@ class CartItemViewSet(ModelViewSet):
 
 
 class CustomerViewSet(ModelViewSet):
+    http_method_names = ['get']
+
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
+
+    filter_backends = [SearchFilter, OrderingFilter]
+    pagination_class = DefaultPagination
     permission_classes = [IsAdminUser]
 
     """we can overwrite like this!"""
@@ -269,8 +285,11 @@ class CustomerViewSet(ModelViewSet):
 
     @action(detail=True, permission_classes=[ViewCustomerHistoryPermission])
     def history(self, request, pk):
-        # todo
-        return Response('ok')
+        user = User.objects.get(pk=pk)
+        data = AuditLog.objects.all().filter(user=user)
+        serializer = AuditLogSerializer(data, many=True)
+
+        return Response(serializer.data)
 
 
 class OrderViewSet(ModelViewSet):

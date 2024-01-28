@@ -3,15 +3,12 @@ from django.db.models import F
 from django import forms
 from django.contrib import admin, messages
 from django.contrib.contenttypes.admin import GenericTabularInline
-from django.core.exceptions import ValidationError
 from django.db.models.aggregates import Count, Sum
 from django.db.models.query import QuerySet
 from django.utils.html import format_html, urlencode
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
-from dal import autocomplete
-from parler.admin import TranslatableAdmin, TranslatableTabularInline
-from parler.forms import TranslatableModelForm
+from parler.admin import TranslatableAdmin
 
 from tags.models import TaggedItem
 from . import models
@@ -76,12 +73,6 @@ class ProductImageInline(admin.TabularInline):
 class FeatureInline(TabularInline):
     model = Product.value_feature.through
     extra = 1
-
-
-class CollectionAdminForm(forms.ModelForm):
-    class Meta:
-        model = Collection
-        fields = '__all__'
 
 
 @admin.register(Collection)

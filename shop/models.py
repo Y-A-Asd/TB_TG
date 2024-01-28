@@ -1,19 +1,13 @@
-import json
-
-from django.contrib.contenttypes.fields import GenericForeignKey
-from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db.models import Sum, F
-from django.utils import timezone
-from parler.managers import TranslatableManager
 from discount.models import BaseDiscount
 from shop.validator import validate_file_size
 from django.utils.translation import gettext_lazy as _, get_language
 from django.db import models
 from django.conf import settings
 from parler.models import TranslatableModel, TranslatedFields
-from core.models import BaseModel, User
+from core.models import BaseModel
 import uuid
 
 
@@ -27,7 +21,6 @@ class MainFeature(TranslatableModel, BaseModel):
     class Meta:
         verbose_name = _("Feature")
         verbose_name_plural = _("Features")
-        # unique_together = [['translation__title', 'translation__value']]
 
 
 class Promotion(TranslatableModel, BaseModel):
@@ -138,22 +131,6 @@ class Product(TranslatableModel, BaseModel):
         ordering = ["translations__title"]
 
 
-class Cart(BaseModel):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-
-
-class CartItem(BaseModel):
-    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, verbose_name=_("Cart"), related_name='items')
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name=_("Product"))
-    # unit_price = models.DecimalField(_('Price'),max_digits=15, decimal_places=2, null=True, blank=True)
-    quantity = models.PositiveSmallIntegerField(_("Quantity"))
-
-    class Meta:
-        unique_together = [['cart', 'product']]
-        verbose_name = _("Cart Item")
-        verbose_name_plural = _("Cart Items")
-
-
 class ProductImage(BaseModel):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
     image = models.ImageField(upload_to='shop/images', validators=[validate_file_size])
@@ -183,6 +160,23 @@ class Customer(BaseModel):
         permissions = [
             ('view_history', 'Can view history')
         ]
+
+
+class Cart(BaseModel):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    customer = models.ForeignKey(Customer, on_delete=models.PROTECT, verbose_name=_("Customer"))
+
+
+class CartItem(BaseModel):
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, verbose_name=_("Cart"), related_name='items')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name=_("Product"))
+    # unit_price = models.DecimalField(_('Price'),max_digits=15, decimal_places=2, null=True, blank=True)
+    quantity = models.PositiveSmallIntegerField(_("Quantity"))
+
+    class Meta:
+        unique_together = [['cart', 'product']]
+        verbose_name = _("Cart Item")
+        verbose_name_plural = _("Cart Items")
 
 
 class Address(BaseModel):

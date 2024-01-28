@@ -19,3 +19,4 @@ class IsAdminOrReadOnly(permissions.BasePermission):
 class ViewCustomerHistoryPermission(permissions.BasePermission):
     def has_permission(self, request, view):
         return request.user.has_perm('shop.view_history')
+

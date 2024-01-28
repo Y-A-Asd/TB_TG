@@ -2,8 +2,10 @@ from decimal import Decimal
 from django.db import transaction
 from django.utils.text import slugify
 from rest_framework import serializers
+
+from core.models import AuditLog
 from shop.models import Product, Collection, Review, Customer, Order, OrderItem, ProductImage, CartItem, Cart, Address, \
-    Transaction
+    Transaction, MainFeature
 from parler_rest.serializers import TranslatableModelSerializer, TranslatedFieldsField
 from django.utils.translation import gettext_lazy as _
 
@@ -18,13 +20,22 @@ class ProductImageSerializer(serializers.ModelSerializer):
         return ProductImage.objects.create(product_id=product_id, **validated_data)
 
 
+class FeatureSerializer(TranslatableModelSerializer):
+    translations = TranslatedFieldsField(shared_model=MainFeature)
+
+    class Meta:
+        model = MainFeature
+        fields = ['translations']
+
+
 class ProductSerializer(TranslatableModelSerializer):
     translations = TranslatedFieldsField(shared_model=Product)
+    value_feature = FeatureSerializer(many=True)
 
     class Meta:
         model = Product
         fields = ['id', 'translations', 'inventory', 'org_price',
-                  'price', 'price_with_tax', 'collection_id', 'promotions', 'images']
+                  'price', 'price_with_tax', 'collection_id', 'promotions', 'images', 'value_feature']
 
     images = ProductImageSerializer(many=True, read_only=True)
     collection_id = serializers.IntegerField(required=False)
@@ -107,6 +118,11 @@ class CartSerializer(serializers.ModelSerializer):
 
     def get_total_price(self, cart):
         return sum([item.quantity * item.product.price_after_off for item in cart.items.all()])
+
+    def save(self, **kwargs):
+        customer = Customer.objects.get(user_id=self.context['user_id'])
+        cart_id = self.validated_data['cart_id']
+        Cart.objects.create(cart_id=cart_id, customer=customer)
 
     class Meta:
         model = Cart
@@ -284,3 +300,9 @@ class UpdateTransactionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Transaction
         fields = ['payment_status', 'receipt_number']
+
+
+class AuditLogSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AuditLog
+        fields = ['user', 'action', 'timestamp', 'table_name', 'row_id', 'changes']
