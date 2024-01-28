@@ -5,7 +5,7 @@ from rest_framework import serializers
 
 from core.models import AuditLog
 from shop.models import Product, Collection, Review, Customer, Order, OrderItem, ProductImage, CartItem, Cart, Address, \
-    Transaction, MainFeature
+    Transaction, MainFeature, Promotion
 from parler_rest.serializers import TranslatableModelSerializer, TranslatedFieldsField
 from django.utils.translation import gettext_lazy as _
 
@@ -305,3 +305,11 @@ class AuditLogSerializer(serializers.ModelSerializer):
     class Meta:
         model = AuditLog
         fields = ['user', 'action', 'timestamp', 'table_name', 'row_id', 'changes']
+
+
+class PromotionSerializer(TranslatableModelSerializer):
+    translations = TranslatedFieldsField(shared_model=Promotion)
+
+    class Meta:
+        model = Promotion
+        fields = ['id', 'translations']

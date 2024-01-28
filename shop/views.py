@@ -6,7 +6,7 @@ from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
 from rest_framework.filters import SearchFilter, OrderingFilter
-from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, DestroyModelMixin
+from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, DestroyModelMixin, ListModelMixin
 from django_filters.rest_framework import DjangoFilterBackend
 from core.models import User, AuditLog
 from .pagination import DefaultPagination
@@ -14,9 +14,9 @@ from .serializers import (ProductSerializer, CollectionSerializer, ReviewSeriali
                           CartSerializer, CartItemSerializer, AddItemsSerializer, UpdateItemsSerializer,
                           CustomerSerializer, OrderSerializer, CreateOrderSerializer, UpdateOrderSerializer,
                           ProductImageSerializer, AddressSerializer, TransactionSerializer, UpdateTransactionSerializer,
-                          AuditLogSerializer)
+                          AuditLogSerializer, PromotionSerializer, SimpleProductSerializer)
 from .models import Product, Collection, OrderItem, Review, Customer, Order, ProductImage, CartItem, Cart, Address, \
-    Transaction
+    Transaction, Promotion
 from .filters import ProductFilter
 from .permissions import IsAdminOrReadOnly, ViewCustomerHistoryPermission
 
@@ -213,6 +213,22 @@ class ReviewViewSet(ModelViewSet):
         replies = Review.objects.filter(parent_review=instance)
         reply_serializer = self.get_serializer(replies, many=True)
         data['replies'] = reply_serializer.data
+
+        return Response(data)
+
+
+class PromotionViewSet(ListModelMixin, RetrieveModelMixin, GenericViewSet):
+    queryset = Promotion.objects.all()
+    serializer_class = PromotionSerializer
+
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        data = serializer.data
+
+        products = Product.objects.filter(promotions=instance)
+        products_serializer = SimpleProductSerializer(products, many=True)
+        data['products'] = products_serializer.data
 
         return Response(data)
 

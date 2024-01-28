@@ -26,6 +26,7 @@ def create_collection(api_client, language_code):
         def wrapper(collection):
             return api_client.post('/shop/collections/', collection)
     """
+
     def wrapper(collection_data):
         return api_client.post(
             '/shop/collections/',

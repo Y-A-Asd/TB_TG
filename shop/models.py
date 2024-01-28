@@ -26,22 +26,22 @@ class MainFeature(TranslatableModel, BaseModel):
 class Promotion(TranslatableModel, BaseModel):
     translations: TranslatedFields = TranslatedFields(
         title=models.CharField(_('Title'), max_length=255),
-        description=models.CharField(_("Description"), max_length=500)
+        description=models.CharField(_("Description"), max_length=500, null=True, blank=True)
     )
 
     class Meta:
         verbose_name = _("Promotion")
         verbose_name_plural = _("Promotions")
 
-    def clean(self):
-        existing_discount_item = self.discount.objects.filter(
-            content_type=self.content_type,
-            object_id=self.object_id,
-            discount__active=True
-        ).exclude(pk=self.pk)
-
-        if existing_discount_item.exists():
-            raise ValidationError(_('There is already an active discount for this item.'))
+    # def clean(self):
+    #     existing_discount_item = self.discount.objects.filter(
+    #         content_type=self.content_type,
+    #         object_id=self.object_id,
+    #         discount__active=True
+    #     ).exclude(pk=self.pk)
+    #
+    #     if existing_discount_item.exists():
+    #         raise ValidationError(_('There is already an active discount for this item.'))
 
     def __str__(self):
         default_language = get_language() or 'en'

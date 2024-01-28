@@ -12,7 +12,7 @@ from parler.admin import TranslatableAdmin
 
 from tags.models import TaggedItem
 from . import models
-from .filters import MainFeatureFilter
+from .filters import MainFeatureFilter, InventoryFilter
 from .models import Review, Transaction, Address, \
     MainFeature, Order, OrderItem, SiteSettings, Product, Collection
 
@@ -32,22 +32,6 @@ class MainFeatureAdmin(TranslatableAdmin):
 
     class Meta:
         model = MainFeature
-
-
-class InventoryFilter(admin.SimpleListFilter):
-    title = _('Inventory')
-    parameter_name = 'inventory'
-    exclude = ['deleted_at', 'created_at', 'updated_at']
-    inlines = [TagInline]
-
-    def lookups(self, request, model_admin):
-        return [
-            ('<min', _('Low')),
-        ]
-
-    def queryset(self, request, queryset: QuerySet):
-        if self.value() == '<min':
-            return queryset.filter(inventory__lt=F('min_inventory'))
 
 
 @admin.register(models.Promotion)
@@ -103,7 +87,7 @@ class ProductAdmin(TranslatableAdmin):
     actions = ['clear_inventory']
     list_display = ['title', 'unit_price', 'inventory_status', 'collection_title', 'min_inventory']
     list_editable = ['unit_price']
-    list_filter = ['collection', 'value_feature', 'updated_at', MainFeatureFilter]
+    list_filter = ['collection', 'value_feature', 'updated_at', MainFeatureFilter, InventoryFilter]
     list_per_page = 10
     list_select_related = ['collection']
     search_fields = ['title']
@@ -230,14 +214,6 @@ class ReviewAdmin(admin.ModelAdmin):
 
 
 """
-https://stackoverflow.com/questions/43852601/offering-choices-that-depend-on-other-fields-in-django-admin
-https://stackoverflow.com/questions/43852601/offering-choices-that-depend-on-other-fields-in-django-admin
-https://stackoverflow.com/questions/43852601/offering-choices-that-depend-on-other-fields-in-django-admin
-https://stackoverflow.com/questions/43852601/offering-choices-that-depend-on-other-fields-in-django-admin
-https://stackoverflow.com/questions/43852601/offering-choices-that-depend-on-other-fields-in-django-admin
-https://stackoverflow.com/questions/43852601/offering-choices-that-depend-on-other-fields-in-django-admin
-https://stackoverflow.com/questions/43852601/offering-choices-that-depend-on-other-fields-in-django-admin
-https://stackoverflow.com/questions/43852601/offering-choices-that-depend-on-other-fields-in-django-admin
 https://stackoverflow.com/questions/43852601/offering-choices-that-depend-on-other-fields-in-django-admin
 """
 
