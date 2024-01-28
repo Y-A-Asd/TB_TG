@@ -1,11 +1,10 @@
-# import pytest
-# from django.test import TestCase
-# from django.core.exceptions import ValidationError
-# from django.contrib.contenttypes.models import ContentType
-# from model_bakery import baker
-# from discount.models import BaseDiscount
-# from shop.models import Product
-#
+import pytest
+from decimal import Decimal
+from django.utils.translation import activate
+from django.core.exceptions import ValidationError
+from shop.models import Product, Collection, Promotion, BaseDiscount, MainFeature
+
+
 #
 # @pytest.mark.django_db
 # class TestDiscountItemsModel(TestCase):
@@ -40,3 +39,43 @@
 #         with self.assertRaises(ValidationError) as context:
 #             product.clean()
 #         self.assertEqual(str(context.exception), "['There is already an active discount for this item.']")
+
+
+@pytest.mark.django_db
+def test_product_price_after_off():
+    # Create necessary model instances
+    collection = Collection.objects.create(title='Test Collection')
+    promotion = Promotion.objects.create(title='Test Promotion')
+    discount = BaseDiscount.objects.create(discount=10)
+
+    main_feature = MainFeature.objects.create(
+        title='Test Feature',
+        description='Test Feature Description',
+        value='Test Feature Value'
+    )
+
+    product = Product.objects.create(
+        unit_price=1000.00,
+        inventory=10,
+        collection=collection,
+        promotions=promotion,
+        discount=discount
+    )
+    product.value_feature.add(main_feature)
+
+    assert discount.ensure_availability()
+
+    assert product.price_after_off == Decimal(900.00)
+
+    discount.mode = BaseDiscount.Mode.DirectPrice
+    discount.discount = 500
+    discount.save()
+
+    assert discount.ensure_availability()
+    assert product.price_after_off == Decimal(500.00)
+
+    discount.mode = 'InvalidMode'
+    discount.save()
+
+    with pytest.raises(ValueError):
+        product.price_after_off
