@@ -4,6 +4,11 @@ from rest_framework.test import APIClient
 
 
 @pytest.fixture()
+def language_code():
+    return 'en'
+
+
+@pytest.fixture()
 def api_client():
     return APIClient()
 

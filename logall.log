@@ -14800,3 +14800,443 @@ Traceback (most recent call last):
 AttributeError: 'Customer' object has no attribute 'active'
 2024-01-28 05:21:17,796 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/views.py changed, reloading.
 2024-01-28 05:21:19,123 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-28 06:10:45,211 %(WARNING)s - django.request - Unauthorized: /shop/collections/
+2024-01-28 06:10:45,333 %(WARNING)s - django.request - Forbidden: /shop/collections/
+2024-01-28 06:10:45,420 %(WARNING)s - django.request - Bad Request: /shop/collections/
+2024-01-28 06:10:45,685 %(WARNING)s - django.request - Bad Request: /shop/collections/
+2024-01-28 08:16:59,847 %(WARNING)s - django.request - Unauthorized: /shop/
+2024-01-28 08:17:11,758 %(WARNING)s - django.request - Unauthorized: /auth/users/
+2024-01-28 08:17:15,395 %(WARNING)s - django.request - Method Not Allowed: /auth/jwt/create
+2024-01-28 08:17:45,211 %(WARNING)s - django.request - Method Not Allowed: /auth/jwt/create
+2024-01-28 08:17:58,914 %(WARNING)s - silk.model_factory - Response to request with pk 05902781-aadc-4068-9323-d65917db11eb has content type text/javascript but was unable to parse it
+2024-01-28 08:18:00,991 %(WARNING)s - silk.model_factory - Response to request with pk 4b8c8258-01a2-4230-944a-bc9bb983011d has content type text/javascript but was unable to parse it
+2024-01-28 08:18:21,012 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py changed, reloading.
+2024-01-28 08:18:24,952 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-28 08:18:28,227 %(WARNING)s - silk.model_factory - Response to request with pk b34bbe23-11e4-45de-a877-7bd9a772d6de has content type text/javascript but was unable to parse it
+2024-01-28 08:18:35,943 %(WARNING)s - silk.model_factory - Response to request with pk 36bab7c9-3d32-49bd-b5ac-12bc7c42cb5b has content type text/javascript but was unable to parse it
+2024-01-28 08:20:13,832 %(WARNING)s - django.request - Forbidden: /shop/collections/
+2024-01-28 08:20:13,929 %(WARNING)s - django.request - Bad Request: /shop/collections/
+2024-01-28 08:20:14,014 %(WARNING)s - django.request - Bad Request: /shop/collections/
+2024-01-28 08:20:35,830 %(WARNING)s - django.request - Forbidden: /shop/collections/
+2024-01-28 08:20:35,919 %(WARNING)s - django.request - Bad Request: /shop/collections/
+2024-01-28 08:20:36,008 %(WARNING)s - django.request - Bad Request: /shop/collections/
+2024-01-28 08:32:59,446 %(WARNING)s - django.request - Unauthorized: /shop/collections/
+2024-01-28 08:32:59,492 %(WARNING)s - django.request - Forbidden: /shop/collections/
+2024-01-28 08:32:59,546 %(WARNING)s - django.request - Bad Request: /shop/collections/
+2024-01-28 08:34:30,798 %(WARNING)s - django.request - Unauthorized: /shop/collections/
+2024-01-28 08:34:30,839 %(WARNING)s - django.request - Forbidden: /shop/collections/
+2024-01-28 08:34:30,891 %(WARNING)s - django.request - Bad Request: /shop/collections/
+2024-01-28 08:35:19,358 %(WARNING)s - django.request - Unauthorized: /shop/collections/
+2024-01-28 08:35:19,409 %(WARNING)s - django.request - Forbidden: /shop/collections/
+2024-01-28 08:35:19,464 %(WARNING)s - django.request - Bad Request: /shop/collections/
+2024-01-28 08:35:28,223 %(WARNING)s - django.request - Unauthorized: /shop/collections/
+2024-01-28 08:35:28,271 %(WARNING)s - django.request - Forbidden: /shop/collections/
+2024-01-28 08:35:28,337 %(WARNING)s - django.request - Bad Request: /shop/collections/
+2024-01-28 08:37:28,190 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/models.py changed, reloading.
+2024-01-28 08:37:29,194 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-28 08:46:02,684 %(WARNING)s - django.request - Unauthorized: /shop/products/
+2024-01-28 08:46:50,960 %(WARNING)s - django.request - Unauthorized: /shop/products/
+2024-01-28 08:46:51,011 %(WARNING)s - django.request - Forbidden: /shop/products/
+2024-01-28 08:47:40,101 %(WARNING)s - django.request - Unauthorized: /shop/products/
+2024-01-28 08:47:40,134 %(WARNING)s - django.request - Forbidden: /shop/products/
+2024-01-28 08:47:40,183 %(WARNING)s - django.request - Bad Request: /shop/products/
+2024-01-28 08:47:40,294 %(WARNING)s - django.request - Bad Request: /shop/products/
+2024-01-28 08:49:12,370 %(WARNING)s - silk.model_factory - Response to request with pk ef784de3-1ec7-4e10-86d9-68692aa9c2b2 has content type text/javascript but was unable to parse it
+2024-01-28 08:49:14,726 %(WARNING)s - silk.model_factory - Response to request with pk 1a6f7b90-ce05-4350-a275-34f89b0d8a71 has content type text/javascript but was unable to parse it
+2024-01-28 08:50:25,395 %(WARNING)s - django.request - Unauthorized: /shop/products/
+2024-01-28 08:50:25,435 %(WARNING)s - django.request - Forbidden: /shop/products/
+2024-01-28 08:50:25,601 %(WARNING)s - django.request - Bad Request: /shop/products/
+2024-01-28 08:51:58,302 %(WARNING)s - django.request - Unauthorized: /shop/products/
+2024-01-28 08:51:58,335 %(WARNING)s - django.request - Forbidden: /shop/products/
+2024-01-28 08:51:58,381 %(WARNING)s - django.request - Bad Request: /shop/products/
+2024-01-28 08:51:58,440 %(WARNING)s - django.request - Bad Request: /shop/products/
+2024-01-28 08:52:29,466 %(WARNING)s - django.request - Unauthorized: /shop/products/
+2024-01-28 08:52:29,509 %(WARNING)s - django.request - Forbidden: /shop/products/
+2024-01-28 08:52:29,567 %(WARNING)s - django.request - Bad Request: /shop/products/
+2024-01-28 08:52:29,612 %(WARNING)s - django.request - Bad Request: /shop/products/
+2024-01-28 08:53:16,461 %(ERROR)s - django.request - Internal Server Error: /admin/shop/product/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/options.py", line 681, in get_field
+    return self.fields_map[field_name]
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^
+KeyError: 'inventory_status'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/utils.py", line 289, in lookup_field
+    f = _get_non_gfk_field(opts, name)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/utils.py", line 322, in _get_non_gfk_field
+    field = opts.get_field(name)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/options.py", line 683, in get_field
+    raise FieldDoesNotExist(
+django.core.exceptions.FieldDoesNotExist: Product has no field named 'inventory_status'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/test/utils.py", line 111, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/test/utils.py", line 111, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/test/utils.py", line 111, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/base.py", line 45, in render
+    return super().render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/library.py", line 258, in render
+    _dict = self.func(*resolved_args, **resolved_kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/admin_list.py", line 343, in result_list
+    "results": list(results(cl)),
+               ^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/admin_list.py", line 316, in results
+    yield ResultList(form, items_for_result(cl, res, form))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/admin_list.py", line 310, in __init__
+    super().__init__(*items)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/admin_list.py", line 217, in items_for_result
+    f, attr, value = lookup_field(field_name, result, cl.model_admin)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/utils.py", line 298, in lookup_field
+    value = attr(obj)
+            ^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py", line 122, in inventory_status
+    if product.inventory <= product.min_inventory:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: '<=' not supported between instances of 'int' and 'NoneType'
+2024-01-28 08:53:42,657 %(ERROR)s - django.request - Internal Server Error: /admin/shop/product/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/options.py", line 681, in get_field
+    return self.fields_map[field_name]
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^
+KeyError: 'inventory_status'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/utils.py", line 289, in lookup_field
+    f = _get_non_gfk_field(opts, name)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/utils.py", line 322, in _get_non_gfk_field
+    field = opts.get_field(name)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/options.py", line 683, in get_field
+    raise FieldDoesNotExist(
+django.core.exceptions.FieldDoesNotExist: Product has no field named 'inventory_status'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/test/utils.py", line 111, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/test/utils.py", line 111, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/test/utils.py", line 111, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/base.py", line 45, in render
+    return super().render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/library.py", line 258, in render
+    _dict = self.func(*resolved_args, **resolved_kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/admin_list.py", line 343, in result_list
+    "results": list(results(cl)),
+               ^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/admin_list.py", line 316, in results
+    yield ResultList(form, items_for_result(cl, res, form))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/admin_list.py", line 310, in __init__
+    super().__init__(*items)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/templatetags/admin_list.py", line 217, in items_for_result
+    f, attr, value = lookup_field(field_name, result, cl.model_admin)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/contrib/admin/utils.py", line 298, in lookup_field
+    value = attr(obj)
+            ^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py", line 122, in inventory_status
+    if product.inventory <= product.min_inventory:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: '<=' not supported between instances of 'int' and 'NoneType'
+2024-01-28 08:54:57,568 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py changed, reloading.
+2024-01-28 08:54:58,890 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-28 08:55:00,951 %(WARNING)s - silk.model_factory - Response to request with pk de1266da-a058-4536-99e2-df6a5c0ea7f8 has content type text/javascript but was unable to parse it
+2024-01-28 08:55:17,781 %(WARNING)s - silk.model_factory - Response to request with pk 3d082e8e-7aac-4457-9c22-189ae5b77d21 has content type text/javascript but was unable to parse it
+2024-01-28 08:55:34,141 %(WARNING)s - django.request - Unauthorized: /shop/products/
+2024-01-28 08:55:34,180 %(WARNING)s - django.request - Forbidden: /shop/products/
+2024-01-28 08:55:34,239 %(WARNING)s - django.request - Bad Request: /shop/products/
+2024-01-28 08:55:34,290 %(WARNING)s - django.request - Bad Request: /shop/products/
+2024-01-28 08:55:53,109 %(INFO)s - shop.views - List view accessed
+2024-01-28 08:56:00,374 %(INFO)s - shop.views - List view accessed
+2024-01-28 08:56:32,589 %(WARNING)s - silk.model_factory - Response to request with pk a68e8ed3-ec68-4321-b42e-5f4b081d4220 has content type text/javascript but was unable to parse it
+2024-01-28 08:56:41,802 %(WARNING)s - silk.model_factory - Response to request with pk d610b8e1-5493-41c4-8639-5b9964776cdb has content type text/javascript but was unable to parse it
+2024-01-28 08:58:05,822 %(WARNING)s - django.request - Unauthorized: /shop/products/
+2024-01-28 08:58:05,866 %(WARNING)s - django.request - Forbidden: /shop/products/
+2024-01-28 08:58:05,922 %(WARNING)s - django.request - Bad Request: /shop/products/
+2024-01-28 08:58:05,971 %(WARNING)s - django.request - Bad Request: /shop/products/
+2024-01-28 08:58:18,172 %(WARNING)s - django.request - Unauthorized: /shop/products/
+2024-01-28 08:58:18,213 %(WARNING)s - django.request - Forbidden: /shop/products/
+2024-01-28 08:58:18,263 %(WARNING)s - django.request - Bad Request: /shop/products/
+2024-01-28 08:58:18,309 %(WARNING)s - django.request - Bad Request: /shop/products/
+2024-01-28 08:59:42,786 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/serializers.py changed, reloading.
+2024-01-28 08:59:43,742 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-28 09:00:16,657 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/serializers.py changed, reloading.
+2024-01-28 09:00:18,461 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-28 09:00:20,096 %(WARNING)s - django.request - Unauthorized: /shop/products/
+2024-01-28 09:00:20,146 %(WARNING)s - django.request - Forbidden: /shop/products/
+2024-01-28 09:00:20,201 %(WARNING)s - django.request - Bad Request: /shop/products/
+2024-01-28 09:00:20,255 %(ERROR)s - django.request - Internal Server Error: /shop/products/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/mixins.py", line 19, in create
+    self.perform_create(serializer)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/mixins.py", line 24, in perform_create
+    serializer.save()
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/parler_rest/serializers.py", line 24, in save
+    instance = super(TranslatableModelSerializerMixin, self).save(**kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 212, in save
+    self.instance = self.create(validated_data)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/serializers.py", line 53, in create
+    validated_data['slug'] = slugify(validated_data['title'])
+                                     ~~~~~~~~~~~~~~^^^^^^^^^
+KeyError: 'title'
+2024-01-28 09:02:11,030 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/serializers.py changed, reloading.
+2024-01-28 09:02:12,294 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-28 09:02:14,606 %(WARNING)s - django.request - Unauthorized: /shop/products/
+2024-01-28 09:02:14,671 %(WARNING)s - django.request - Forbidden: /shop/products/
+2024-01-28 09:02:14,728 %(WARNING)s - django.request - Bad Request: /shop/products/
+2024-01-28 09:02:14,789 %(ERROR)s - django.request - Internal Server Error: /shop/products/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/mixins.py", line 19, in create
+    self.perform_create(serializer)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/mixins.py", line 24, in perform_create
+    serializer.save()
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/parler_rest/serializers.py", line 24, in save
+    instance = super(TranslatableModelSerializerMixin, self).save(**kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 212, in save
+    self.instance = self.create(validated_data)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/serializers.py", line 54, in create
+    validated_data['slug'] = slugify(validated_data['title'])
+                                     ~~~~~~~~~~~~~~^^^^^^^^^
+KeyError: 'title'
+2024-01-28 09:04:23,239 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/serializers.py changed, reloading.
+2024-01-28 09:04:24,043 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-28 09:04:25,345 %(WARNING)s - django.request - Unauthorized: /shop/products/
+2024-01-28 09:04:25,384 %(WARNING)s - django.request - Forbidden: /shop/products/
+2024-01-28 09:04:25,435 %(WARNING)s - django.request - Bad Request: /shop/products/
+2024-01-28 09:05:27,239 %(WARNING)s - django.request - Unauthorized: /shop/products/
+2024-01-28 09:05:27,276 %(WARNING)s - django.request - Forbidden: /shop/products/
+2024-01-28 09:05:27,341 %(WARNING)s - django.request - Bad Request: /shop/products/
+2024-01-28 09:05:27,540 %(WARNING)s - django.request - Not Found: /shop/collections/1/
+2024-01-28 09:12:54,305 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/views.py changed, reloading.
+2024-01-28 09:12:55,199 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-28 09:13:09,672 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/views.py changed, reloading.
+2024-01-28 09:13:11,904 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-28 09:13:15,786 %(WARNING)s - django.request - Unauthorized: /shop/products/
+2024-01-28 09:13:15,833 %(WARNING)s - django.request - Forbidden: /shop/products/
+2024-01-28 09:13:15,887 %(WARNING)s - django.request - Bad Request: /shop/products/

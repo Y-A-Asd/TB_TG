@@ -30,7 +30,7 @@ class FeatureSerializer(TranslatableModelSerializer):
 
 class ProductSerializer(TranslatableModelSerializer):
     translations = TranslatedFieldsField(shared_model=Product)
-    value_feature = FeatureSerializer(many=True)
+    value_feature = FeatureSerializer(many=True, required=False)
 
     class Meta:
         model = Product
@@ -39,7 +39,7 @@ class ProductSerializer(TranslatableModelSerializer):
 
     images = ProductImageSerializer(many=True, read_only=True)
     collection_id = serializers.IntegerField(required=False)
-    price = serializers.DecimalField(max_digits=15, decimal_places=2, source='price_after_off')
+    price = serializers.DecimalField(max_digits=15, decimal_places=2, source='price_after_off', required=False)
     org_price = serializers.DecimalField(max_digits=15, decimal_places=2, source='unit_price')
     price_with_tax = serializers.SerializerMethodField(method_name='calculate_tax')
 
@@ -49,12 +49,11 @@ class ProductSerializer(TranslatableModelSerializer):
         return product.unit_price * Decimal(1.1)
 
     def create(self, validated_data):
-        # Generate a slug based on the title
-        validated_data['slug'] = slugify(validated_data['title'])
+        if 'title' in validated_data:
+            validated_data['slug'] = slugify(validated_data['title'])
         return super().create(validated_data)
 
     def update(self, instance, validated_data):
-        # Update the slug if the title is modified
         if 'title' in validated_data:
             validated_data['slug'] = slugify(validated_data['title'])
         return super().update(instance, validated_data)

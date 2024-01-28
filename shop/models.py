@@ -77,7 +77,7 @@ class Collection(TranslatableModel, BaseModel):
 class Product(TranslatableModel, BaseModel):
     translations = TranslatedFields(
         title=models.CharField(_("Title"), max_length=255),
-        slug=models.SlugField(_("Slug")),
+        slug=models.SlugField(_("Slug"), null=True, blank=True),
         description=models.TextField(_("Description"), null=True, blank=True)
     )
 

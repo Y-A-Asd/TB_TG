@@ -76,7 +76,7 @@ class FeatureInline(TabularInline):
 
 
 @admin.register(Collection)
-class CollectionAdmin(admin.ModelAdmin):
+class CollectionAdmin(TranslatableAdmin):
     autocomplete_fields = ['parent']
     list_display = ['title', 'products_count', 'parent']
     search_fields = ['title']
@@ -119,9 +119,12 @@ class ProductAdmin(TranslatableAdmin):
 
     @admin.display(ordering='inventory')
     def inventory_status(self, product):
-        if product.inventory <= product.min_inventory:
-            return _('Low')
-        return _('OK')
+        if product.min_inventory:
+            if product.inventory <= product.min_inventory:
+                return _('Low')
+            return _('OK')
+        else:
+            return _('No Minimum Inventory Associated')
 
     @admin.action(description=_('Clear inventory'))
     def clear_inventory(self, request, queryset):
