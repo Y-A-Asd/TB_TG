@@ -1,3 +1,4 @@
+import uuid
 from decimal import Decimal
 from django.db import transaction
 from django.utils.text import slugify
@@ -116,12 +117,10 @@ class CartSerializer(serializers.ModelSerializer):
     total_price = serializers.SerializerMethodField()
 
     def get_total_price(self, cart):
-        return sum([item.quantity * item.product.price_after_off for item in cart.items.all()])
-
-    def save(self, **kwargs):
-        customer = Customer.objects.get(user_id=self.context['user_id'])
-        cart_id = self.validated_data['cart_id']
-        Cart.objects.create(cart_id=cart_id, customer=customer)
+        if cart.items:
+            return sum([item.quantity * item.product.price_after_off for item in cart.items.all()])
+        else:
+            return 0
 
     class Meta:
         model = Cart
@@ -279,9 +278,15 @@ class UpdateOrderSerializer(serializers.ModelSerializer):
 
 
 class AddressSerializer(serializers.ModelSerializer):
+    customer_id = serializers.IntegerField(read_only=True)
+
     class Meta:
         model = Address
-        fields = ('id', 'zip_code', 'path', 'city', 'province', 'default')
+        fields = ('id', 'zip_code', 'path', 'city', 'province', 'default', 'customer_id')
+
+    def create(self, validated_data):
+        customer_id = self.context['customer_id']
+        return Address.objects.create(customer_id=customer_id, **validated_data)
 
 
 class TransactionSerializer(serializers.ModelSerializer):

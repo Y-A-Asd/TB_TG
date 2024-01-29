@@ -1,14 +1,14 @@
-from django.core.exceptions import ValidationError
-from django.core.validators import MinValueValidator, MaxValueValidator
-from django.db.models import Sum, F
-from discount.models import BaseDiscount
-from shop.validator import validate_file_size
-from django.utils.translation import gettext_lazy as _, get_language
+import uuid
 from django.db import models
 from django.conf import settings
+from django.db.models import Sum, F
+from django.core.exceptions import ValidationError
+from django.core.validators import MinValueValidator, MaxValueValidator
+from django.utils.translation import gettext_lazy as _, get_language
 from parler.models import TranslatableModel, TranslatedFields
+from shop.validator import validate_file_size
+from discount.models import BaseDiscount
 from core.models import BaseModel
-import uuid
 
 
 class MainFeature(TranslatableModel, BaseModel):
@@ -164,7 +164,7 @@ class Customer(BaseModel):
 
 class Cart(BaseModel):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    customer = models.ForeignKey(Customer, on_delete=models.PROTECT, verbose_name=_("Customer"))
+    customer = models.ForeignKey(Customer, on_delete=models.PROTECT, verbose_name=_("Customer"), null=True, blank=True)
 
 
 class CartItem(BaseModel):
@@ -192,10 +192,13 @@ class Address(BaseModel):
         verbose_name_plural = _("Addresses")
 
     def save(self, *args, **kwargs):
-        if self.default:
-            Address.objects.filter(customer=self.customer).exclude(id=self.id).update(default=False)
+        try:
+            if self.default:
+                Address.objects.filter(customer=self.customer).exclude(id=self.id).update(default=False)
 
-        super().save(*args, **kwargs)
+            super().save(*args, **kwargs)
+        except:
+            raise ValidationError(_("Customer Not Found!"))
 
 
 class Order(BaseModel):

@@ -1,5 +1,6 @@
 import logging
 from django.db.models import Count
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import action
@@ -7,7 +8,6 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, DestroyModelMixin, ListModelMixin
-from django_filters.rest_framework import DjangoFilterBackend
 from core.models import User, AuditLog
 from .pagination import DefaultPagination
 from .serializers import (ProductSerializer, CollectionSerializer, ReviewSerializer,
@@ -239,6 +239,7 @@ class CartViewSet(CreateModelMixin,
                   GenericViewSet):
 
     def get_queryset(self):
+        # todo:fix how to get user :-|
         user = self.request.user
         if user.is_staff:
             return Cart.objects.all().prefetch_related('items__product')
@@ -327,7 +328,7 @@ class OrderViewSet(ModelViewSet):
         user = self.request.user
         if user.is_staff:
             return Order.objects.all()
-        customer_id, created = Customer.objects.only('id').get(user_id=user.id)
+        customer_id = Customer.objects.only('id').get(user_id=user.id)
         return Order.objects.filter(customer_id=customer_id)
 
     def get_serializer_class(self):
@@ -350,8 +351,19 @@ class ProductImageViewSet(ModelViewSet):
 
 
 class AddressViewSet(ModelViewSet):
-    queryset = Address.objects.all()
+    permission_classes = [IsAuthenticated]
     serializer_class = AddressSerializer
+
+    def get_serializer_context(self):
+        customer = Customer.objects.get(user_id=self.request.user.id)
+        return {'customer_id': customer.id}
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.is_staff or user.is_superuser:
+            return Address.objects.all()
+        else:
+            return Address.objects.filter(customer__user_id=user.id)
 
 
 class TransactionViewSet(ModelViewSet):

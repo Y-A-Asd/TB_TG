@@ -8,7 +8,7 @@ router.register('collections', views.CollectionViewSet)
 router.register('cart', views.CartViewSet, basename='cart')
 router.register('customers', views.CustomerViewSet)
 router.register('orders', views.OrderViewSet, basename='orders')
-router.register(r'addresses', AddressViewSet)
+router.register(r'addresses', AddressViewSet, basename='addresses')
 router.register(r'transactions', TransactionViewSet)
 router.register(r'promotions', PromotionViewSet)
 

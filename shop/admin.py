@@ -1,15 +1,12 @@
-from django.contrib.admin import TabularInline
 from django.db.models import F
-from django import forms
-from django.contrib import admin, messages
-from django.contrib.contenttypes.admin import GenericTabularInline
-from django.db.models.aggregates import Count, Sum
-from django.db.models.query import QuerySet
-from django.utils.html import format_html, urlencode
 from django.urls import reverse
+from django.contrib import admin, messages
+from django.contrib.admin import TabularInline
+from django.db.models.aggregates import Count, Sum
+from django.utils.html import format_html, urlencode
 from django.utils.translation import gettext_lazy as _
+from django.contrib.contenttypes.admin import GenericTabularInline
 from parler.admin import TranslatableAdmin
-
 from tags.models import TaggedItem
 from . import models
 from .filters import MainFeatureFilter, InventoryFilter

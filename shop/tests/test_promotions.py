@@ -29,7 +29,7 @@ class TestRetrievePromotions:
 
     def test_if_list_of_product_exist_in_promotion(self, api_client):
         promotion = baker.make(Promotion)
-        product = baker.make(Product, promotions=promotion)
+        baker.make(Product, promotions=promotion)
         response = api_client.get(f'/shop/promotions/{promotion.id}/')
         assert response.status_code == status.HTTP_200_OK
         assert 'products' in response.json()
