@@ -50,7 +50,7 @@ class TestAddingToCart:
         response = create_cartitems(product_id=product.id, quantity=1)
         assert response.status_code == status.HTTP_201_CREATED
 
-    def test_adding_invalid_item_to_cart_return_201(self, api_client, create_cartitems):
+    def test_adding_invalid_item_to_cart_return_400(self, api_client, create_cartitems):
         product = baker.make(Product)
         response = create_cartitems(product_id=product.id, quantity=0)
         assert response.status_code == status.HTTP_400_BAD_REQUEST

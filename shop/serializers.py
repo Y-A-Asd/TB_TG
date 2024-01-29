@@ -187,17 +187,17 @@ class ReviewSerializer(serializers.ModelSerializer):
         model = Review
         fields = ['id', 'created_at', 'parent_review', 'title', 'description', 'rating', 'customer']
 
-    def to_representation(self, instance):
-        if instance.active:
-            return super().to_representation(instance)
-        return None
+    # def to_representation(self, instance):
+    #     if instance.active:
+    #         return super().to_representation(instance)
+    #     return None
 
     def create(self, validated_data):
         product_id = self.context['product_id']
         try:
             customer = Customer.objects.get(user_id=self.context['user_id'])
         except Customer.DoesNotExist:
-            return serializers.ValidationError(_('User not found'))
+            raise serializers.ValidationError(_('User not found'))
         return Review.objects.create(product_id=product_id, customer=customer, **validated_data)
 
 

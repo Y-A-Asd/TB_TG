@@ -190,10 +190,11 @@ class ReviewViewSet(ModelViewSet):
     filter_backends = [SearchFilter]
     search_fields = ['title', 'description']
     pagination_class = DefaultPagination
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         logger.info('test-logs')
-        return Review.objects.filter(product_id=self.kwargs['product_pk'])
+        return Review.objects.filter(product_id=self.kwargs['product_pk'], active=True)
 
     def get_serializer_context(self):
         return {'product_id': self.kwargs['product_pk'], 'user_id': self.request.user.id}
@@ -220,6 +221,12 @@ class ReviewViewSet(ModelViewSet):
 class PromotionViewSet(ListModelMixin, RetrieveModelMixin, GenericViewSet):
     queryset = Promotion.objects.all()
     serializer_class = PromotionSerializer
+
+    def get_permissions(self):
+        if self.request.method in ['PATCH', 'DELETE', 'PUT', 'POST']:
+            return [IsAdminUser()]
+        else:
+            return []
 
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
