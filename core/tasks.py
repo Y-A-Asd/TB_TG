@@ -14,7 +14,7 @@ logger = get_task_logger(__name__)
 @shared_task
 def delete_inactive_users():
     three_days_ago = timezone.now() - timezone.timedelta(days=3)
-    inactive_users = get_user_model().objects.filter(created_at__lte=three_days_ago, is_active=False)
+    inactive_users = get_user_model().objects.filter(last_login__lte=three_days_ago, is_active=False)
     inactive_users.delete()
     logger.info(f"Deleted {inactive_users.count()} inactive users.")
 

@@ -1,4 +1,6 @@
 import uuid
+
+from django.contrib import admin
 from django.db import models
 from django.conf import settings
 from django.db.models import Sum, F
@@ -9,6 +11,10 @@ from parler.models import TranslatableModel, TranslatedFields
 from shop.validator import validate_file_size
 from discount.models import BaseDiscount
 from core.models import BaseModel
+
+admin.site.site_header = _('Site Administration')
+admin.site.index_title = _('Index Title')
+admin.site.site_title = _('Site Management')
 
 
 class MainFeature(TranslatableModel, BaseModel):

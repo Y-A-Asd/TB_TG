@@ -4,6 +4,7 @@ import pytest
 from model_bakery import baker
 from core.models import User
 
+
 @pytest.fixture()
 def create_promotion(api_client, language_code):
     def wrapper(promotion_title):

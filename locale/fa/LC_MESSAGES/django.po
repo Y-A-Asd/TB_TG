@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-26 06:15+0330\n"
-"PO-Revision-Date: 2024-01-26 06:21+0330\n"
+"POT-Creation-Date: 2024-01-31 06:07+0330\n"
+"PO-Revision-Date: 2024-01-31 07:58+0330\n"
 "Last-Translator: Anonymous User <yosofasady2@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fa\n"
@@ -27,6 +27,23 @@ msgstr "انگلیسی"
 msgid "Persian"
 msgstr "فارسی"
 
+#: core/admin.py:72
+#| msgid "Action"
+msgid "Action Revert"
+msgstr "عملیات برگشت"
+
+#: core/admin.py:75
+msgid "Please select only one row to revert."
+msgstr "در هر بار فقط یکی از تغییرات را میتوانید برگردانید"
+
+#: core/admin.py:105
+msgid "Changes reverted successfully."
+msgstr "تغییرات برگشت داده شد"
+
+#: core/apps.py:8
+msgid "Core"
+msgstr "هسته"
+
 #: core/models.py:18
 msgid "Created at"
 msgstr "تاریخ ایجاد"
@@ -39,7 +56,7 @@ msgstr "تاریخ به‌روزرسانی"
 msgid "Deleted at"
 msgstr "تاریخ حذف"
 
-#: core/models.py:35 core/models.py:89 shop/models.py:129
+#: core/models.py:35 core/models.py:89 shop/models.py:157
 msgid "User"
 msgstr "کاربر"
 
@@ -83,7 +100,7 @@ msgstr "شماره تلفن و ایمیل الزامیست"
 msgid "Phone number must start with \"09\" and have 11 digits."
 msgstr "شماره تلفن معتبر نیست 09123456789"
 
-#: core/models.py:74 shop/models.py:313
+#: core/models.py:74 shop/models.py:293
 msgid "Phone Number"
 msgstr "شماره تلفن"
 
@@ -95,7 +112,7 @@ msgstr "ایمیل"
 msgid "Password"
 msgstr "رمز عبور"
 
-#: core/models.py:79 shop/models.py:215 shop/models.py:240
+#: core/models.py:79 discount/models.py:30 shop/models.py:257
 msgid "Active"
 msgstr "فعال"
 
@@ -111,357 +128,406 @@ msgstr "آخرین ورود"
 msgid "Users"
 msgstr "کاربران"
 
-#: shop/admin.py:22 tags/models.py:23 tags/models.py:29
+#: discount/admin.py:29
+msgid "Invalid discount!(Check Mode again)"
+msgstr "تخفیف نامعتیر است ! مجدد نوع تخفیف را چک کنید!"
+
+#: discount/admin.py:32
+msgid "Invalid discount(Check Mode again)"
+msgstr "تخفیف نامعتیر است ! مجدد نوع تخفیف را چک کنید!"
+
+#: discount/admin.py:35
+#| msgid "Invalid discount(Check Mode again)"
+msgid "Invalid discount(Check Dates again)"
+msgstr "تخفیف نامعتیر است ! مجدد نوع تخفیف را چک کنید!"
+
+#: discount/apps.py:8 discount/models.py:29 discount/models.py:62
+#: shop/models.py:100
+msgid "Discount"
+msgstr "تخفیف"
+
+#: discount/models.py:24
+#| msgid "DirectPrice"
+msgid "Direct Price"
+msgstr "تخفیف میلغی"
+
+#: discount/models.py:25
+#| msgid "DiscountOff"
+msgid "Discount Off"
+msgstr "تخفیف درصدی"
+
+#: discount/models.py:26
+msgid "One Time Use"
+msgstr "یکبار مصرف"
+
+#: discount/models.py:27
+msgid "Multy Time Use"
+msgstr "چندبار مصرف"
+
+#: discount/models.py:31
+msgid "Code"
+msgstr "کد تخفیف"
+
+#: discount/models.py:34
+msgid "Mode"
+msgstr "نوع"
+
+#: discount/models.py:58
+msgid "Code-based discounts must have valid_from and valid_to dates."
+msgstr "تخفیفات دارای کد میبایست تاریخ شروع و پایان مشخص داشته باشند"
+
+#: discount/models.py:63
+msgid "Discounts"
+msgstr "تخفیفات"
+
+#: shop/admin.py:20 tags/models.py:23 tags/models.py:29
 msgid "Tag"
 msgstr "برچسب"
 
-#: shop/admin.py:23 tags/admin.py:15 tags/models.py:24
+#: shop/admin.py:21 tags/admin.py:15 tags/apps.py:8 tags/models.py:24
 msgid "Tags"
 msgstr "برچسب ها"
 
-#: shop/admin.py:55 shop/models.py:93
-msgid "Inventory"
-msgstr "موجودی"
+#: shop/admin.py:99
+#| msgid "Collection"
+msgid "No Collection"
+msgstr "بدون مجموعه"
 
-#: shop/admin.py:62 shop/admin.py:114
+#: shop/admin.py:105 shop/filters.py:37
 msgid "Low"
 msgstr "محدود"
 
-#: shop/admin.py:115
+#: shop/admin.py:106
 msgid "OK"
 msgstr "متوسط"
 
-#: shop/admin.py:117
+#: shop/admin.py:108
+#| msgid "Minimum Inventory"
+msgid "No Minimum Inventory Associated"
+msgstr "کف اخطار موجودی در نظر گرفته نشده است"
+
+#: shop/admin.py:110
 msgid "Clear inventory"
 msgstr "خالی کردن موجودی"
 
-#: shop/admin.py:122
+#: shop/admin.py:113
 #, python-brace-format
 msgid "{count} products were successfully updated."
 msgstr "{count} محصول با موفقیت به‌روزرسانی شدند."
 
-#: shop/admin.py:146 shop/models.py:108
-msgid "Products"
-msgstr "محصولات"
-
-#: shop/admin.py:176 shop/models.py:175
+#: shop/admin.py:142 shop/models.py:230
 msgid "Orders"
 msgstr "سفارش‌ها"
 
-#: shop/admin.py:206 shop/admin.py:235 shop/models.py:296
-#| msgid "Unit Price"
+#: shop/admin.py:172 shop/admin.py:201 shop/models.py:276
 msgid "Total Price"
 msgstr "قیمت کل"
 
-#: shop/admin.py:211
+#: shop/admin.py:177
 msgid "Mark selected orders as delivered"
 msgstr "تراکنش انتخاب شده ارسال شد"
 
-#: shop/admin.py:217 shop/models.py:190
+#: shop/admin.py:183 shop/models.py:246
 msgid "Order Items"
 msgstr "آیتم‌های سفارش"
 
-#: shop/admin.py:254 shop/admin.py:272
-msgid "Quantity cannot be greater than the available inventory."
-msgstr "مقدار انتخواب شده بزرگ تر از موجودی است"
-
-#: shop/admin.py:315
-msgid "Invalid discount!(Check Mode again)"
-msgstr "تخفیف نامعتیر است ! مجدد نوع تخفیف را چک کنید!"
-
-#: shop/admin.py:318
-msgid "Invalid discount(Check Mode again)"
-msgstr "تخفیف نامعتیر است ! مجدد نوع تخفیف را چک کنید!"
-
-#: shop/admin.py:350
-msgid "Content Object"
-msgstr "محتوا شیئ"
-
-#: shop/admin.py:377 shop/models.py:174 shop/models.py:182 shop/models.py:293
+#: shop/admin.py:229 shop/models.py:229 shop/models.py:238 shop/models.py:273
 msgid "Order"
 msgstr "سفارش"
 
-#: shop/admin.py:382
+#: shop/admin.py:234
 msgid "Mark selected transactions as complete"
 msgstr "تراکنش انتخاب شده پرداخت شد"
 
-#: shop/admin.py:394
-#| msgid "Site Settings"
+#: shop/admin.py:246
 msgid "General Settings"
 msgstr "تنظیمات سایت"
 
-#: shop/admin.py:395
-#| msgid "Transactions"
+#: shop/admin.py:247
 msgid "Translations"
 msgstr "تراکنش ها"
 
-#: shop/admin.py:396 shop/models.py:314
+#: shop/admin.py:248 shop/models.py:294
 msgid "Logo"
 msgstr "لوگو"
 
-#: shop/admin.py:402
+#: shop/admin.py:254
 msgid "No Image"
 msgstr "بدون تصویر"
 
-#: shop/admin.py:405
+#: shop/admin.py:257
 msgid "Logo Preview"
 msgstr "پیشنمایش لوگو"
 
-#: shop/models.py:18 shop/models.py:29 shop/models.py:42 shop/models.py:59
-#: shop/models.py:86
+#: shop/apps.py:8
+msgid "Shop"
+msgstr "فروشگاه"
+
+#: shop/filters.py:18
+#| msgid "Feature"
+msgid "Main Feature"
+msgstr "ویژگی "
+
+#: shop/filters.py:31 shop/models.py:92
+msgid "Inventory"
+msgstr "موجودی"
+
+#: shop/models.py:15
+msgid "Site Administration"
+msgstr "مدیریت سایت"
+
+#: shop/models.py:16
+#| msgid "Title"
+msgid "Index Title"
+msgstr "بخش های مدیریتی"
+
+#: shop/models.py:17
+msgid "Site Management"
+msgstr "مدیریت سایت"
+
+#: shop/models.py:22 shop/models.py:34 shop/models.py:61 shop/models.py:85
+#: shop/models.py:253
 msgid "Title"
 msgstr "عنوان"
 
-#: shop/models.py:19 shop/models.py:30 shop/models.py:43 shop/models.py:88
+#: shop/models.py:23 shop/models.py:35 shop/models.py:87
 msgid "Description"
 msgstr "توضیحات"
 
-#: shop/models.py:23
-msgid "Feature"
-msgstr "ویژگی"
-
 #: shop/models.py:24
-msgid "Features"
-msgstr "ویژگی ها "
-
-#: shop/models.py:33
-msgid "Feature Values"
-msgstr "مقدار ویژگی"
-
-#: shop/models.py:36
-#| msgid "Old Value"
 msgid "Value"
 msgstr "مقدار ویژگی"
 
-#: shop/models.py:37
-#| msgid "Old Value"
-msgid "Values"
-msgstr "مقدار های ویژگی"
+#: shop/models.py:28
+msgid "Feature"
+msgstr "ویژگی"
 
-#: shop/models.py:47
+#: shop/models.py:29
+msgid "Features"
+msgstr "ویژگی ها "
+
+#: shop/models.py:39
 msgid "Promotion"
 msgstr "تبلیغات"
 
-#: shop/models.py:48 shop/models.py:98
+#: shop/models.py:40 shop/models.py:98
 msgid "Promotions"
 msgstr "تبلیغات"
 
-#: shop/models.py:63
+#: shop/models.py:65
 msgid "Parent"
 msgstr "والد"
 
-#: shop/models.py:79 shop/models.py:96
+#: shop/models.py:78 shop/models.py:95
 msgid "Collection"
 msgstr "مجموعه"
 
-#: shop/models.py:80
+#: shop/models.py:79
 msgid "Collections"
 msgstr "مجموعه‌ها"
 
-#: shop/models.py:87
+#: shop/models.py:86
 msgid "Slug"
 msgstr "نامک"
 
-#: shop/models.py:91 shop/models.py:184
+#: shop/models.py:90 shop/models.py:240
 msgid "Unit Price"
 msgstr "قیمت واحد"
 
-#: shop/models.py:94
-#| msgid "Inventory"
+#: shop/models.py:93
 msgid "Minimum Inventory"
 msgstr "کف اخطار موجودی"
 
-#: shop/models.py:107 shop/models.py:183 shop/models.py:199
-msgid "Product"
-msgstr "محصول"
-
-#: shop/models.py:119
-msgid "Bronze"
-msgstr "برنز"
-
-#: shop/models.py:120
-msgid "Silver"
-msgstr "نقره‌ای"
-
-#: shop/models.py:121
-msgid "Gold"
-msgstr "طلایی"
-
-#: shop/models.py:123 shop/models.py:170
-msgid "First Name"
-msgstr "نام"
-
-#: shop/models.py:124 shop/models.py:171
-msgid "Last Name"
-msgstr "نام خانوادگی"
-
-#: shop/models.py:126
-msgid "Birth Date"
-msgstr "تاریخ تولد"
-
-#: shop/models.py:127
-msgid "Membership"
-msgstr "عضویت"
-
-#: shop/models.py:135 shop/models.py:148 shop/models.py:165 shop/models.py:209
-#: shop/models.py:297
-msgid "Customer"
-msgstr "مشتری"
-
-#: shop/models.py:136
-msgid "Customers"
-msgstr "مشتریان"
-
-#: shop/models.py:144 shop/models.py:166
-msgid "Zip Code"
-msgstr "کد پستی"
-
-#: shop/models.py:145 shop/models.py:167
-msgid "Path"
-msgstr "مسیر"
-
-#: shop/models.py:146 shop/models.py:168
-msgid "City"
-msgstr "شهر"
-
-#: shop/models.py:147 shop/models.py:169
-msgid "Province"
-msgstr "استان"
-
-#: shop/models.py:151 shop/models.py:311
-msgid "Address"
-msgstr "آدرس"
-
-#: shop/models.py:152
-msgid "Addresses"
-msgstr "آدرس‌ها"
-
-#: shop/models.py:157
-msgid "Not Paid"
-msgstr "پرداخت نشده"
-
-#: shop/models.py:158 shop/models.py:289
-msgid "Pending"
-msgstr "در حال انتظار"
-
-#: shop/models.py:159
-msgid "Shipping"
-msgstr "در حال ارسال"
-
-#: shop/models.py:160
-msgid "Delivered"
-msgstr "تحویل شد"
-
-#: shop/models.py:161 shop/models.py:291
-msgid "Failed"
-msgstr "ناموفق"
-
-#: shop/models.py:163 shop/models.py:294
-msgid "Payment Status"
-msgstr "وضعیت پرداخت"
-
-#: shop/models.py:186 shop/models.py:200
-msgid "Quantity"
-msgstr "تعداد"
-
-#: shop/models.py:189
-msgid "Order Item"
-msgstr "آیتم سفارش"
-
-#: shop/models.py:198
-msgid "Cart"
-msgstr "سبد خرید"
-
-#: shop/models.py:204
-msgid "Cart Item"
-msgstr "آیتم سبد خرید"
-
-#: shop/models.py:205
-msgid "Cart Items"
-msgstr "آیتم‌های سبد خرید"
-
-#: shop/models.py:211
-msgid "Rating"
-msgstr "امتیاز"
-
-#: shop/models.py:221
-msgid "Review"
-msgstr "نظر"
-
-#: shop/models.py:222
-msgid "Reviews"
-msgstr "نظر ها"
-
-#: shop/models.py:236
-#| msgid "Unit Price"
-msgid "DirectPrice"
-msgstr "تخفیف میلغی"
-
-#: shop/models.py:237
-#| msgid "Discount"
-msgid "DiscountOff"
-msgstr "تخفیف درصدی"
-
-#: shop/models.py:239 shop/models.py:250 shop/models.py:258
-msgid "Discount"
-msgstr "تخفیف"
-
-#: shop/models.py:241
-#| msgid "Zip Code"
-msgid "Code"
-msgstr "کد تخفیف"
-
-#: shop/models.py:244
-msgid "Mode"
-msgstr "نوع"
-
-#: shop/models.py:251
-#| msgid "Discount"
-msgid "Discounts"
-msgstr "تخفیفات"
-
-#: shop/models.py:273
-#| msgid "Discount"
-msgid "Discount Item"
-msgstr "تخفیف آیتم"
-
-#: shop/models.py:274
-#| msgid "Discount"
-msgid "Discount Items"
-msgstr "تخفیف آیتم ها"
-
-#: shop/models.py:284
+#: shop/models.py:132
 msgid "There is already an active discount for this item."
 msgstr "همزمان نمیتوانید دو تخفیف فعال داشته باشید"
 
-#: shop/models.py:290
+#: shop/models.py:135 shop/models.py:178 shop/models.py:239
+msgid "Product"
+msgstr "محصول"
+
+#: shop/models.py:136
+msgid "Products"
+msgstr "محصولات"
+
+#: shop/models.py:147
+msgid "Bronze"
+msgstr "برنز"
+
+#: shop/models.py:148
+msgid "Silver"
+msgstr "نقره‌ای"
+
+#: shop/models.py:149
+msgid "Gold"
+msgstr "طلایی"
+
+#: shop/models.py:151 shop/models.py:225
+msgid "First Name"
+msgstr "نام"
+
+#: shop/models.py:152 shop/models.py:226
+msgid "Last Name"
+msgstr "نام خانوادگی"
+
+#: shop/models.py:154
+msgid "Birth Date"
+msgstr "تاریخ تولد"
+
+#: shop/models.py:155
+msgid "Membership"
+msgstr "عضویت"
+
+#: shop/models.py:163 shop/models.py:173 shop/models.py:193 shop/models.py:220
+#: shop/models.py:250 shop/models.py:277
+msgid "Customer"
+msgstr "مشتری"
+
+#: shop/models.py:164
+msgid "Customers"
+msgstr "مشتریان"
+
+#: shop/models.py:177
+msgid "Cart"
+msgstr "سبد خرید"
+
+#: shop/models.py:180 shop/models.py:242
+msgid "Quantity"
+msgstr "تعداد"
+
+#: shop/models.py:184
+msgid "Cart Item"
+msgstr "آیتم سبد خرید"
+
+#: shop/models.py:185
+msgid "Cart Items"
+msgstr "آیتم‌های سبد خرید"
+
+#: shop/models.py:189 shop/models.py:221
+msgid "Zip Code"
+msgstr "کد پستی"
+
+#: shop/models.py:190 shop/models.py:222
+msgid "Path"
+msgstr "مسیر"
+
+#: shop/models.py:191 shop/models.py:223
+msgid "City"
+msgstr "شهر"
+
+#: shop/models.py:192 shop/models.py:224
+msgid "Province"
+msgstr "استان"
+
+#: shop/models.py:194
+msgid "Default"
+msgstr "آدرس اصلی"
+
+#: shop/models.py:197 shop/models.py:291
+msgid "Address"
+msgstr "آدرس"
+
+#: shop/models.py:198
+msgid "Addresses"
+msgstr "آدرس‌ها"
+
+#: shop/models.py:207
+msgid "Customer Not Found!"
+msgstr "مشتری یافت نشد!"
+
+#: shop/models.py:212
+msgid "Not Paid"
+msgstr "پرداخت نشده"
+
+#: shop/models.py:213 shop/models.py:269
+msgid "Pending"
+msgstr "در حال انتظار"
+
+#: shop/models.py:214
+msgid "Shipping"
+msgstr "در حال ارسال"
+
+#: shop/models.py:215
+msgid "Delivered"
+msgstr "تحویل شد"
+
+#: shop/models.py:216 shop/models.py:271
+msgid "Failed"
+msgstr "ناموفق"
+
+#: shop/models.py:218 shop/models.py:274
+msgid "Payment Status"
+msgstr "وضعیت پرداخت"
+
+#: shop/models.py:245
+msgid "Order Item"
+msgstr "آیتم سفارش"
+
+#: shop/models.py:252
+msgid "Rating"
+msgstr "امتیاز"
+
+#: shop/models.py:263
+msgid "Review"
+msgstr "نظر"
+
+#: shop/models.py:264
+msgid "Reviews"
+msgstr "نظر ها"
+
+#: shop/models.py:270
 msgid "Complete"
 msgstr "تکمیل شده"
 
-#: shop/models.py:298
-#| msgid "Phone Number"
+#: shop/models.py:278
 msgid "Receipt Number"
 msgstr "شماره فیش"
 
-#: shop/models.py:304
+#: shop/models.py:284
 msgid "Transaction"
 msgstr "تراکنش"
 
-#: shop/models.py:305
+#: shop/models.py:285
 msgid "Transactions"
 msgstr "تراکنش ها"
 
-#: shop/models.py:310
+#: shop/models.py:290
 msgid "Footer Text"
 msgstr "متن زیرین"
 
-#: shop/models.py:315
+#: shop/models.py:295
 msgid "Social Media Links"
 msgstr "لینک های فضای مجازی"
 
-#: shop/models.py:321 shop/models.py:322
+#: shop/models.py:301 shop/models.py:302
 msgid "Site Settings"
 msgstr "تنظیمات سایت"
+
+#: shop/serializers.py:152
+msgid "No Prodcuts found!"
+msgstr "محصولی یافت نشد"
+
+#: shop/serializers.py:158 shop/serializers.py:170
+msgid "Most be at least 1 !"
+msgstr "حداقل مقدار 1 میباشد"
+
+#: shop/serializers.py:200
+msgid "User not found"
+msgstr "کاربر یافت نشد "
+
+#: shop/serializers.py:233
+msgid "No cart found!"
+msgstr "سبد خرید پیدا نشد!"
+
+#: shop/serializers.py:235
+#| msgid "Cart Item"
+msgid "Cart is empty!"
+msgstr "سبد خرید یافت نشد!"
+
+#: shop/serializers.py:246
+msgid "You dont have address set please set your default address!"
+msgstr ""
+"آدرس اصلی برای شما در نظر گرفته نشده است لطفا آدرس اصلی هود را ثبت کنید"
 
 #: shop/validator.py:11
 #, python-brace-format
@@ -490,6 +556,37 @@ msgstr "آیتم برچسب گزاری شده"
 msgid "Tagged Items"
 msgstr "آیتم‌های برچسب گزاری شده"
 
+#: templates/admin/base_site.html:24
+msgid "Documentation"
+msgstr "سند نویسی"
+
+#: templates/admin/base_site.html:28
+#| msgid "Changes"
+msgid "Change password"
+msgstr "تغییر کدواژه"
+
+#: templates/admin/base_site.html:30
+msgid "Log out"
+msgstr "خروج"
+
+#~ msgid "Quantity cannot be greater than the available inventory."
+#~ msgstr "مقدار انتخواب شده بزرگ تر از موجودی است"
+
+#~ msgid "Content Object"
+#~ msgstr "محتوا شیئ"
+
+#~ msgid "Feature Values"
+#~ msgstr "مقدار ویژگی"
+
+#~ msgid "Values"
+#~ msgstr "مقدار های ویژگی"
+
+#~ msgid "Discount Item"
+#~ msgstr "تخفیف آیتم"
+
+#~ msgid "Discount Items"
+#~ msgstr "تخفیف آیتم ها"
+
 #~ msgid "Street"
 #~ msgstr "خیابان"
 
@@ -512,10 +609,6 @@ msgstr "آیتم‌های برچسب گزاری شده"
 #, fuzzy
 #~ msgid "Collection Title"
 #~ msgstr "عنوان مجموعه"
-
-#, fuzzy
-#~ msgid "Products Count"
-#~ msgstr "تعداد محصولات"
 
 #~ msgid "ID"
 #~ msgstr "شناسه"
