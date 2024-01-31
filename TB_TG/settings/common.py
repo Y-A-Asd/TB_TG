@@ -16,6 +16,7 @@ from datetime import timedelta
 from django.utils.translation import gettext_lazy as _
 import django
 from django.utils.translation import gettext
+
 django.utils.translation.ugettext = gettext
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -165,6 +166,11 @@ REST_FRAMEWORK = {
     )
 
 }
+# my config for otp
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
+REDIS_DB = 2
+OTP_EXPIRY_SECONDS = 300
 
 SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('JWT',),
@@ -174,7 +180,7 @@ SIMPLE_JWT = {
 DJOSER = {
     'SERIALIZERS': {
         'user_create': 'core.serializers.UserCreateSerializer'
-    }
+    },
 }
 
 PARLER_LANGUAGES = {
