@@ -318,3 +318,9 @@ class PromotionSerializer(TranslatableModelSerializer):
     class Meta:
         model = Promotion
         fields = ['id', 'translations']
+
+
+class ReportingSerializer(serializers.Serializer):
+    days = serializers.IntegerField(required=False)
+    start_at = serializers.DateTimeField(required=False)
+    end_at = serializers.DateTimeField(required=False)

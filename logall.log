@@ -893,3 +893,853 @@ AttributeError: This QueryDict instance is immutable
 2024-01-31 11:56:11,716 %(INFO)s - shop.views - test-logs
 2024-01-31 11:56:12,038 %(INFO)s - shop.views - test-logs
 2024-01-31 11:56:17,610 %(WARNING)s - django.request - Unauthorized: /shop/products/1/reviews/
+2024-01-31 12:17:52,884 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/TB_TG/settings/common.py changed, reloading.
+2024-01-31 12:17:53,999 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-31 12:18:46,808 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/TB_TG/settings/common.py changed, reloading.
+2024-01-31 12:18:47,570 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-31 12:29:21,565 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/TB_TG/settings/common.py changed, reloading.
+2024-01-31 12:29:22,905 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-01-31 16:21:47,375 %(WARNING)s - django.request - Method Not Allowed: /core/auth/jwt/create
+2024-01-31 16:21:56,669 %(WARNING)s - django.request - Unauthorized: /core/auth/jwt/create
+2024-02-01 04:47:06,290 %(WARNING)s - silk.model_factory - Response to request with pk 27e14f19-bb4e-44c1-85ab-a53c04ecea5d has content type text/javascript but was unable to parse it
+2024-02-01 04:47:06,586 %(WARNING)s - django.request - Not Found: /home/flatlife/djangopro/TB_TG/TB_TG/static/images/flag-iran.png
+2024-02-01 04:47:10,709 %(WARNING)s - silk.model_factory - Response to request with pk d41e0c5c-48f3-4db1-b85e-d61be350d3d9 has content type text/javascript but was unable to parse it
+2024-02-01 04:47:10,960 %(WARNING)s - django.request - Not Found: /home/flatlife/djangopro/TB_TG/TB_TG/static/images/flag-iran.png
+2024-02-01 04:50:26,765 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/models.py changed, reloading.
+2024-02-01 04:50:28,509 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-02-01 04:50:32,082 %(WARNING)s - silk.model_factory - Response to request with pk dc9bf01f-4652-41b9-88d5-4918ec5065cc has content type text/javascript but was unable to parse it
+2024-02-01 04:50:32,371 %(WARNING)s - django.request - Not Found: /home/flatlife/djangopro/TB_TG/TB_TG/static/images/flag-iran.png
+2024-02-01 04:51:30,704 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py changed, reloading.
+2024-02-01 04:51:31,844 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-02-01 04:52:13,679 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py changed, reloading.
+2024-02-01 04:52:14,516 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-02-01 04:52:37,138 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py changed, reloading.
+2024-02-01 04:52:37,879 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-02-01 04:55:33,541 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py changed, reloading.
+2024-02-01 04:55:34,401 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-02-01 04:55:38,522 %(WARNING)s - silk.model_factory - Response to request with pk efbc6500-feb5-49c9-abb6-8316602dd7f4 has content type text/javascript but was unable to parse it
+2024-02-01 04:55:38,828 %(WARNING)s - django.request - Not Found: /home/flatlife/djangopro/TB_TG/TB_TG/static/images/flag-iran.png
+2024-02-01 04:55:53,029 %(WARNING)s - silk.model_factory - Response to request with pk 6ee3a49d-69b9-4941-b7b3-57a802af17e2 has content type text/javascript but was unable to parse it
+2024-02-01 04:55:53,198 %(WARNING)s - django.request - Not Found: /home/flatlife/djangopro/TB_TG/TB_TG/static/images/flag-iran.png
+2024-02-01 04:55:55,370 %(WARNING)s - silk.model_factory - Response to request with pk 685299aa-0906-4904-8719-a8a4537ea028 has content type text/javascript but was unable to parse it
+2024-02-01 04:55:55,454 %(WARNING)s - django.request - Not Found: /home/flatlife/djangopro/TB_TG/TB_TG/static/images/flag-iran.png
+2024-02-01 04:56:27,588 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py changed, reloading.
+2024-02-01 04:56:29,708 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-02-01 04:57:24,687 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py changed, reloading.
+2024-02-01 04:57:25,992 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-02-01 04:57:29,003 %(WARNING)s - silk.model_factory - Response to request with pk 8986352a-f3fa-4824-9c9c-71618d93e342 has content type text/javascript but was unable to parse it
+2024-02-01 04:57:29,337 %(WARNING)s - django.request - Not Found: /home/flatlife/djangopro/TB_TG/TB_TG/static/images/flag-iran.png
+2024-02-01 04:57:30,004 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py changed, reloading.
+2024-02-01 04:57:30,957 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-02-01 04:57:33,332 %(WARNING)s - silk.model_factory - Response to request with pk 0cbe3a31-6b2c-4f49-9eea-7276e6077e7a has content type text/javascript but was unable to parse it
+2024-02-01 04:57:33,648 %(WARNING)s - django.request - Not Found: /home/flatlife/djangopro/TB_TG/TB_TG/static/images/flag-iran.png
+2024-02-01 04:58:21,809 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py changed, reloading.
+2024-02-01 04:58:23,166 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-02-01 04:58:27,123 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/admin.py changed, reloading.
+2024-02-01 04:58:28,000 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-02-01 04:58:31,396 %(WARNING)s - silk.model_factory - Response to request with pk 8d54de8c-53d1-4101-b95d-153243712c94 has content type text/javascript but was unable to parse it
+2024-02-01 04:58:31,640 %(WARNING)s - django.request - Not Found: /home/flatlife/djangopro/TB_TG/TB_TG/static/images/flag-iran.png
+2024-02-01 05:10:04,011 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/models.py changed, reloading.
+2024-02-01 05:10:05,393 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-02-01 09:46:40,418 %(WARNING)s - django.request - Unauthorized: /shop/addresses/
+2024-02-01 09:46:40,785 %(WARNING)s - django.request - Not Found: /shop/addresses/1/
+2024-02-01 09:46:41,114 %(WARNING)s - django.request - Not Found: /shop/addresses/1/
+2024-02-01 09:46:41,585 %(WARNING)s - django.request - Bad Request: /shop/cart/bd66ad18-beda-423e-93e2-040c7623c149/items/
+2024-02-01 09:46:41,919 %(WARNING)s - django.request - Unauthorized: /shop/collections/
+2024-02-01 09:46:41,985 %(WARNING)s - django.request - Forbidden: /shop/collections/
+2024-02-01 09:46:42,042 %(WARNING)s - django.request - Bad Request: /shop/collections/
+2024-02-01 09:46:42,436 %(WARNING)s - django.request - Unauthorized: /shop/customers/
+2024-02-01 09:46:42,512 %(WARNING)s - django.request - Forbidden: /shop/customers/
+2024-02-01 09:46:42,665 %(WARNING)s - django.request - Forbidden: /shop/customers/1/
+2024-02-01 09:46:43,004 %(WARNING)s - django.request - Bad Request: /shop/orders/
+2024-02-01 09:46:43,147 %(WARNING)s - django.request - Unauthorized: /shop/orders/
+2024-02-01 09:46:46,849 %(WARNING)s - django.request - Bad Request: /shop/orders/1/
+2024-02-01 09:46:48,145 %(WARNING)s - django.request - Unauthorized: /shop/products/
+2024-02-01 09:46:48,235 %(WARNING)s - django.request - Forbidden: /shop/products/
+2024-02-01 09:46:48,311 %(WARNING)s - django.request - Bad Request: /shop/products/
+2024-02-01 09:46:48,994 %(WARNING)s - django.request - Unauthorized: /shop/products/1/reviews/
+2024-02-01 09:46:49,349 %(INFO)s - shop.views - test-logs
+2024-02-01 09:46:49,473 %(INFO)s - shop.views - test-logs
+2024-02-01 09:46:49,484 %(WARNING)s - django.request - Not Found: /shop/products/1/reviews/1/
+2024-02-01 12:52:33,849 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/serializers.py changed, reloading.
+2024-02-01 12:52:39,873 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-02-01 12:52:56,769 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/serializers.py changed, reloading.
+2024-02-01 12:52:58,200 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-02-01 13:03:58,962 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/views.py changed, reloading.
+2024-02-01 13:04:02,615 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-02-01 13:04:48,126 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/urls.py changed, reloading.
+2024-02-01 13:04:51,818 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-02-01 13:05:11,139 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/urls.py changed, reloading.
+2024-02-01 13:05:13,555 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-02-01 13:05:29,034 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-02-01 13:05:52,611 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/urls.py changed, reloading.
+2024-02-01 13:05:55,521 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-02-01 13:06:33,669 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/urls.py changed, reloading.
+2024-02-01 13:06:36,495 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-02-01 13:08:00,759 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/urls.py changed, reloading.
+2024-02-01 13:08:04,638 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-02-01 13:08:24,716 %(WARNING)s - django.request - Unauthorized: /shop/products/1/reviews/
+2024-02-01 13:08:41,490 %(WARNING)s - django.request - Not Found: /shop/report
+2024-02-01 13:08:49,808 %(WARNING)s - django.request - Method Not Allowed: /shop/reporting/
+2024-02-01 13:09:23,436 %(WARNING)s - django.request - Bad Request: /shop/reporting/
+2024-02-01 13:11:14,733 %(ERROR)s - django.request - Internal Server Error: /shop/reporting/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/views.py", line 397, in post
+    total_sales = reporting_data.total_sales()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/reports.py", line 48, in total_sales
+    orders = Order.objects.filter(
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1602, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1634, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1484, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1296, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1761, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'status' into field. Choices are: city, created_at, customer, customer_id, deleted_at, first_name, id, last_name, order_status, orders, path, province, transaction, updated_at, zip_code
+2024-02-01 13:15:03,350 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/reports.py changed, reloading.
+2024-02-01 13:15:09,553 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-02-01 13:15:14,238 %(WARNING)s - django.request - Method Not Allowed: /shop/reporting/
+2024-02-01 13:15:23,437 %(ERROR)s - django.request - Internal Server Error: /shop/reporting/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/views.py", line 397, in post
+    total_sales = reporting_data.total_sales()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/reports.py", line 71, in total_sales
+    total_sales = orders.aggregate(
+                  ^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 602, in aggregate
+    return self.query.chain().get_aggregation(self.db, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 448, in get_aggregation
+    aggregate = aggregate_expr.resolve_expression(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/expressions.py", line 286, in resolve_expression
+    [
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/expressions.py", line 287, in <listcomp>
+    expr.resolve_expression(query, allow_joins, reuse, summarize)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/expressions.py", line 975, in resolve_expression
+    c.source_expressions[pos] = arg.resolve_expression(
+                                ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/aggregates.py", line 64, in resolve_expression
+    c = super().resolve_expression(query, allow_joins, reuse, summarize)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/expressions.py", line 975, in resolve_expression
+    c.source_expressions[pos] = arg.resolve_expression(
+                                ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/expressions.py", line 720, in resolve_expression
+    lhs = self.lhs.resolve_expression(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/expressions.py", line 975, in resolve_expression
+    c.source_expressions[pos] = arg.resolve_expression(
+                                ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/expressions.py", line 720, in resolve_expression
+    lhs = self.lhs.resolve_expression(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/expressions.py", line 720, in resolve_expression
+    lhs = self.lhs.resolve_expression(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/expressions.py", line 854, in resolve_expression
+    return query.resolve_ref(self.name, allow_joins, reuse, summarize)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 2003, in resolve_ref
+    join_info = self.setup_joins(
+                ^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1856, in setup_joins
+    path, final_field, targets, rest = self.names_to_path(
+                                       ^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1761, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'items' into field. Choices are: city, created_at, customer, customer_id, deleted_at, first_name, id, last_name, order_status, orders, path, province, transaction, updated_at, zip_code
+2024-02-01 13:16:42,350 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/reports.py changed, reloading.
+2024-02-01 13:16:47,985 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-02-01 13:16:55,880 %(WARNING)s - django.request - Method Not Allowed: /shop/reporting/
+2024-02-01 13:16:55,929 %(WARNING)s - django.request - Method Not Allowed: /shop/reporting/
+2024-02-01 13:17:06,694 %(ERROR)s - django.request - Internal Server Error: /shop/reporting/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/views.py", line 397, in post
+    total_sales = reporting_data.total_sales()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/reports.py", line 71, in total_sales
+    total_sales = orders.aggregate(
+                  ^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 602, in aggregate
+    return self.query.chain().get_aggregation(self.db, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 448, in get_aggregation
+    aggregate = aggregate_expr.resolve_expression(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/expressions.py", line 286, in resolve_expression
+    [
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/expressions.py", line 287, in <listcomp>
+    expr.resolve_expression(query, allow_joins, reuse, summarize)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/expressions.py", line 975, in resolve_expression
+    c.source_expressions[pos] = arg.resolve_expression(
+                                ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/aggregates.py", line 64, in resolve_expression
+    c = super().resolve_expression(query, allow_joins, reuse, summarize)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/expressions.py", line 975, in resolve_expression
+    c.source_expressions[pos] = arg.resolve_expression(
+                                ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/expressions.py", line 720, in resolve_expression
+    lhs = self.lhs.resolve_expression(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/expressions.py", line 975, in resolve_expression
+    c.source_expressions[pos] = arg.resolve_expression(
+                                ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/expressions.py", line 720, in resolve_expression
+    lhs = self.lhs.resolve_expression(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/expressions.py", line 720, in resolve_expression
+    lhs = self.lhs.resolve_expression(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/expressions.py", line 854, in resolve_expression
+    return query.resolve_ref(self.name, allow_joins, reuse, summarize)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 2019, in resolve_ref
+    transform = join_info.transform_function(targets[0], final_alias)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1879, in transform
+    return self.try_transform(wrapped, name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1416, in try_transform
+    raise FieldError(
+django.core.exceptions.FieldError: Unsupported lookup 'price' for BigAutoField or join on the field not permitted.
+2024-02-01 13:18:15,391 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/reports.py changed, reloading.
+2024-02-01 13:18:19,980 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-02-01 13:18:27,810 %(WARNING)s - django.request - Method Not Allowed: /shop/reporting/
+2024-02-01 13:18:35,376 %(ERROR)s - django.request - Internal Server Error: /shop/reporting/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/views.py", line 397, in post
+    total_sales = reporting_data.total_sales()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/reports.py", line 71, in total_sales
+    total_sales = orders.aggregate(
+                  ^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 602, in aggregate
+    return self.query.chain().get_aggregation(self.db, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 448, in get_aggregation
+    aggregate = aggregate_expr.resolve_expression(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/expressions.py", line 286, in resolve_expression
+    [
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/expressions.py", line 287, in <listcomp>
+    expr.resolve_expression(query, allow_joins, reuse, summarize)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/expressions.py", line 975, in resolve_expression
+    c.source_expressions[pos] = arg.resolve_expression(
+                                ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/aggregates.py", line 64, in resolve_expression
+    c = super().resolve_expression(query, allow_joins, reuse, summarize)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/expressions.py", line 975, in resolve_expression
+    c.source_expressions[pos] = arg.resolve_expression(
+                                ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/expressions.py", line 723, in resolve_expression
+    rhs = self.rhs.resolve_expression(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/expressions.py", line 975, in resolve_expression
+    c.source_expressions[pos] = arg.resolve_expression(
+                                ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/expressions.py", line 720, in resolve_expression
+    lhs = self.lhs.resolve_expression(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/expressions.py", line 723, in resolve_expression
+    rhs = self.rhs.resolve_expression(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/expressions.py", line 854, in resolve_expression
+    return query.resolve_ref(self.name, allow_joins, reuse, summarize)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 2003, in resolve_ref
+    join_info = self.setup_joins(
+                ^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1856, in setup_joins
+    path, final_field, targets, rest = self.names_to_path(
+                                       ^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1761, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'discount' into field. Choices are: city, created_at, customer, customer_id, deleted_at, first_name, id, last_name, order_status, orders, path, province, transaction, updated_at, zip_code
+2024-02-01 13:20:23,800 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/reports.py changed, reloading.
+2024-02-01 13:20:26,429 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-02-01 13:20:28,729 %(WARNING)s - django.request - Method Not Allowed: /shop/reporting/
+2024-02-01 13:20:36,047 %(ERROR)s - django.request - Internal Server Error: /shop/reporting/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/views.py", line 398, in post
+    favorite_products = list(reporting_data.favorite_products())
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/reports.py", line 116, in favorite_products
+    .filter(
+     ^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1602, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1634, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1461, in build_filter
+    return self._add_q(
+           ^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1634, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1484, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1296, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1761, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'orderitem' into field. Choices are: cartitem, collection, collection_id, created_at, deleted_at, discount, discount_id, id, images, inventory, min_inventory, orderitems, promotions, promotions_id, reviews, translations, unit_price, updated_at, value_feature
+2024-02-01 13:21:16,547 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/reports.py changed, reloading.
+2024-02-01 13:21:20,059 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-02-01 13:21:26,242 %(WARNING)s - django.request - Method Not Allowed: /shop/reporting/
+2024-02-01 13:21:34,011 %(ERROR)s - django.request - Internal Server Error: /shop/reporting/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/views.py", line 398, in post
+    favorite_products = list(reporting_data.favorite_products())
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/reports.py", line 120, in favorite_products
+    .annotate(
+     ^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 1630, in annotate
+    return self._annotate(args, kwargs, select=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 1678, in _annotate
+    clone.query.add_annotation(
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1187, in add_annotation
+    annotation = annotation.resolve_expression(self, allow_joins=True, reuse=None)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/aggregates.py", line 64, in resolve_expression
+    c = super().resolve_expression(query, allow_joins, reuse, summarize)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/expressions.py", line 975, in resolve_expression
+    c.source_expressions[pos] = arg.resolve_expression(
+                                ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/expressions.py", line 720, in resolve_expression
+    lhs = self.lhs.resolve_expression(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/expressions.py", line 720, in resolve_expression
+    lhs = self.lhs.resolve_expression(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/expressions.py", line 720, in resolve_expression
+    lhs = self.lhs.resolve_expression(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/expressions.py", line 854, in resolve_expression
+    return query.resolve_ref(self.name, allow_joins, reuse, summarize)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 2019, in resolve_ref
+    transform = join_info.transform_function(targets[0], final_alias)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1879, in transform
+    return self.try_transform(wrapped, name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1416, in try_transform
+    raise FieldError(
+django.core.exceptions.FieldError: Unsupported lookup 'price' for BigAutoField or join on the field not permitted.
+2024-02-01 13:22:54,453 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/reports.py changed, reloading.
+2024-02-01 13:22:58,751 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-02-01 13:23:02,979 %(WARNING)s - django.request - Method Not Allowed: /shop/reporting/
+2024-02-01 13:23:09,208 %(ERROR)s - django.request - Internal Server Error: /shop/reporting/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1879, in transform
+    return self.try_transform(wrapped, name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1416, in try_transform
+    raise FieldError(
+django.core.exceptions.FieldError: Unsupported lookup 'phone_number' for BigAutoField or join on the field not permitted.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/views.py", line 399, in post
+    best_cutomer = list(reporting_data.best_cutomer())
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/reports.py", line 154, in best_cutomer
+    .values('customer__phone_number')
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 1358, in values
+    clone = self._values(*fields, **expressions)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 1353, in _values
+    clone.query.set_values(fields)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 2491, in set_values
+    self.add_fields(field_names, True)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 2197, in add_fields
+    cols.append(join_info.transform_function(target, final_alias))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1883, in transform
+    raise last_field_exception
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1856, in setup_joins
+    path, final_field, targets, rest = self.names_to_path(
+                                       ^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1761, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'phone_number' into field. Choices are: address, birth_date, cart, created_at, deleted_at, first_name, id, last_name, membership, order, review, transaction, updated_at, user, user_id
+2024-02-01 13:24:10,116 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/reports.py changed, reloading.
+2024-02-01 13:24:13,569 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-02-01 13:24:20,173 %(WARNING)s - django.request - Method Not Allowed: /shop/reporting/
+2024-02-01 13:24:24,477 %(ERROR)s - django.request - Internal Server Error: /shop/reporting/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/views.py", line 400, in post
+    favorite_collection = list(reporting_data.favorite_collection())
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/reports.py", line 174, in favorite_collection
+    .filter(
+     ^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1602, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1634, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1461, in build_filter
+    return self._add_q(
+           ^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1634, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1484, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1296, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1761, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'food' into field. Choices are: created_at, deleted_at, id, parent, parent_id, products, subcollection, translations, updated_at
+2024-02-01 13:27:24,796 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/reports.py changed, reloading.
+2024-02-01 13:27:26,601 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-02-01 13:27:30,077 %(WARNING)s - django.request - Method Not Allowed: /shop/reporting/
+2024-02-01 13:27:48,476 %(ERROR)s - django.request - Internal Server Error: /shop/reporting/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/views.py", line 400, in post
+    favorite_collection = list(reporting_data.favorite_collection())
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/reports.py", line 174, in favorite_collection
+    .filter(
+     ^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1602, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1634, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1461, in build_filter
+    return self._add_q(
+           ^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1634, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1484, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1296, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1761, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'product' into field. Choices are: created_at, deleted_at, id, parent, parent_id, products, subcollection, translations, updated_at
+2024-02-01 13:28:06,014 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/reports.py changed, reloading.
+2024-02-01 13:28:10,941 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-02-01 13:28:24,923 %(WARNING)s - django.request - Method Not Allowed: /shop/reporting/
+2024-02-01 13:28:29,630 %(ERROR)s - django.request - Internal Server Error: /shop/reporting/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/views.py", line 401, in post
+    order_status_counts = list(reporting_data.order_status_counts())
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/reports.py", line 209, in order_status_counts
+    result_data = [
+                  ^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/reports.py", line 211, in <listcomp>
+    status=status_data['status'],
+           ~~~~~~~~~~~^^^^^^^^^^
+KeyError: 'status'
+2024-02-01 13:29:06,362 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/reports.py changed, reloading.
+2024-02-01 13:29:10,932 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-02-01 13:29:18,483 %(WARNING)s - django.request - Method Not Allowed: /shop/reporting/
+2024-02-01 13:29:18,485 %(WARNING)s - django.request - Method Not Allowed: /shop/reporting/
+2024-02-01 13:29:24,386 %(ERROR)s - django.request - Internal Server Error: /shop/reporting/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/views.py", line 401, in post
+    order_status_counts = list(reporting_data.order_status_counts())
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/reports.py", line 209, in order_status_counts
+    result_data = [
+                  ^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/reports.py", line 212, in <listcomp>
+    status_display=dict(Order.order_status_fields)[status_data['status']],
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'Order' has no attribute 'order_status_fields'
+2024-02-01 13:30:10,052 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/reports.py changed, reloading.
+2024-02-01 13:30:14,404 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-02-01 13:30:19,419 %(WARNING)s - django.request - Method Not Allowed: /shop/reporting/
+2024-02-01 13:30:23,712 %(ERROR)s - django.request - Internal Server Error: /shop/reporting/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/views.py", line 401, in post
+    order_status_counts = list(reporting_data.order_status_counts())
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/reports.py", line 209, in order_status_counts
+    result_data = [
+                  ^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/reports.py", line 210, in <listcomp>
+    OrderStatusCount(
+TypeError: OrderStatusCount.__new__() missing 1 required positional argument: 'status_display'
+2024-02-01 13:30:38,000 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/reports.py changed, reloading.
+2024-02-01 13:30:42,123 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-02-01 13:30:46,039 %(WARNING)s - django.request - Method Not Allowed: /shop/reporting/
+2024-02-01 13:31:59,248 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/views.py changed, reloading.
+2024-02-01 13:32:02,933 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-02-01 13:32:17,664 %(WARNING)s - django.request - Method Not Allowed: /shop/reporting/
+2024-02-01 13:32:56,351 %(WARNING)s - django.request - Method Not Allowed: /shop/reporting/
+2024-02-01 13:32:59,599 %(ERROR)s - django.request - Internal Server Error: /shop/reporting/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/views.py", line 398, in post
+    favorite_products = list(reporting_data.favorite_products())
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/TB_TG/shop/reports.py", line 140, in favorite_products
+    name=product.name,
+         ^^^^^^^^^^^^
+AttributeError: 'Product' object has no attribute 'name'
+2024-02-01 13:33:36,389 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/shop/reports.py changed, reloading.
+2024-02-01 13:33:40,328 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-02-01 13:33:47,288 %(WARNING)s - django.request - Method Not Allowed: /shop/reporting/
+2024-02-01 15:59:53,659 %(INFO)s - shop.views - List view accessed
+2024-02-01 16:00:00,836 %(INFO)s - shop.views - List view accessed
+2024-02-01 19:24:30,920 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/TB_TG/settings/common.py changed, reloading.
+2024-02-01 19:24:35,375 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader

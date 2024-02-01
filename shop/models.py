@@ -28,6 +28,13 @@ class MainFeature(TranslatableModel, BaseModel):
         verbose_name = _("Feature")
         verbose_name_plural = _("Features")
 
+    def __str__(self):
+        default_language = get_language() or 'en'
+        title_value_translation = self.translations.get(language_code=default_language)
+        title = title_value_translation.title
+        value = title_value_translation.value
+        return f'Feature- {self.pk} : {title} -> {value}'
+
 
 class Promotion(TranslatableModel, BaseModel):
     translations: TranslatedFields = TranslatedFields(
@@ -86,12 +93,12 @@ class Product(TranslatableModel, BaseModel):
         slug=models.SlugField(_("Slug"), null=True, blank=True),
         description=models.TextField(_("Description"), null=True, blank=True)
     )
-
     unit_price = models.DecimalField(_("Unit Price"), max_digits=15, decimal_places=2,
                                      validators=[MinValueValidator(1)])
     inventory = models.IntegerField(_("Inventory"), validators=[MinValueValidator(0)])
     min_inventory = models.IntegerField(_("Minimum Inventory"), validators=[MinValueValidator(0)],
                                         null=True, blank=True)
+
     collection = models.ForeignKey(Collection, on_delete=models.PROTECT, verbose_name=_("Collection"),
                                    related_name='products', null=True, blank=True)
     promotions = models.ForeignKey(Promotion, on_delete=models.CASCADE, null=True, blank=True,
@@ -99,9 +106,9 @@ class Product(TranslatableModel, BaseModel):
                                    related_name='products')
     discount = models.ForeignKey(BaseDiscount, on_delete=models.CASCADE, verbose_name=_("Discount"),
                                  null=True, blank=True)
-
     value_feature = models.ManyToManyField(MainFeature, related_name='value_features',
                                            verbose_name='Features', blank=True)
+    # extra_data = models.JSONField(verbose_name='Features', null=True, blank=True)
 
     def __str__(self):
         default_language = get_language() or 'en'

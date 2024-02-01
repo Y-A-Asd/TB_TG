@@ -27,6 +27,9 @@ class MainFeatureAdmin(TranslatableAdmin):
     search_fields = ['title']
     exclude = ['deleted_at', 'created_at', 'updated_at']
 
+    def get_autocomplete_fields(self, request):
+        return ['title', 'value']
+
     class Meta:
         model = MainFeature
 
@@ -54,6 +57,9 @@ class ProductImageInline(admin.TabularInline):
 class FeatureInline(TabularInline):
     model = Product.value_feature.through
     extra = 1
+
+    def get_autocomplete_fields(self, request):
+        return ['value_feature__title', 'value_feature__value']
 
 
 @admin.register(Collection)

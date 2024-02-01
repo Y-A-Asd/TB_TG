@@ -5,16 +5,18 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, DestroyModelMixin, ListModelMixin
 from core.models import User, AuditLog
 from .pagination import DefaultPagination
+from .reports import Reporting
 from .serializers import (ProductSerializer, CollectionSerializer, ReviewSerializer,
                           CartSerializer, CartItemSerializer, AddItemsSerializer, UpdateItemsSerializer,
                           CustomerSerializer, OrderSerializer, CreateOrderSerializer, UpdateOrderSerializer,
                           ProductImageSerializer, AddressSerializer, TransactionSerializer, UpdateTransactionSerializer,
-                          AuditLogSerializer, PromotionSerializer, SimpleProductSerializer)
+                          AuditLogSerializer, PromotionSerializer, SimpleProductSerializer, ReportingSerializer)
 from .models import Product, Collection, OrderItem, Review, Customer, Order, ProductImage, CartItem, Cart, Address, \
     Transaction, Promotion
 from .filters import ProductFilter
@@ -383,3 +385,27 @@ class TransactionViewSet(ModelViewSet):
             return TransactionSerializer
         elif self.request.method == 'PATCH':
             return UpdateTransactionSerializer
+
+
+class ReportingAPIView(APIView):
+    def post(self, request, *args, **kwargs):
+        serializer = ReportingSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        reporting_data = Reporting(serializer.validated_data)
+
+        total_sales = reporting_data.total_sales()
+        favorite_products = list(reporting_data.favorite_products())
+        best_cutomer = reporting_data.best_cutomer()
+        favorite_collection = list(reporting_data.favorite_collection())
+        order_status_counts = list(reporting_data.order_status_counts())
+
+        response_data = {
+            'total_sales': total_sales,
+            'favorite_products': favorite_products,
+            'best_cutomer': best_cutomer,
+            'favorite_collection': favorite_collection,
+            'order_status_counts': order_status_counts,
+        }
+
+        return Response(response_data, status=status.HTTP_200_OK)
