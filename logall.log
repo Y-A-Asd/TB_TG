@@ -2348,3 +2348,325 @@ AttributeError: 'Product' object has no attribute 'name'
 2024-02-02 14:32:20,988 %(WARNING)s - django.request - Not Found: /dashboard/
 2024-02-02 14:32:31,797 %(WARNING)s - django.request - Not Found: /dashboard/
 2024-02-02 14:32:56,546 %(WARNING)s - django.request - Not Found: /
+2024-02-02 14:35:26,674 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-02-02 15:03:51,467 %(WARNING)s - django.request - Not Found: /
+2024-02-02 15:06:33,892 %(WARNING)s - django.request - Not Found: /
+2024-02-02 15:08:14,908 %(WARNING)s - django.request - Not Found: /accounts/login/
+2024-02-02 15:08:25,472 %(WARNING)s - django.request - Not Found: /accounts/login/
+2024-02-02 15:08:41,337 %(WARNING)s - django.request - Not Found: /accounts/login/
+2024-02-02 15:08:42,860 %(WARNING)s - django.request - Not Found: /accounts/login/
+2024-02-02 15:08:44,102 %(WARNING)s - django.request - Not Found: /accounts/login/
+2024-02-02 15:09:29,202 %(WARNING)s - django.request - Not Found: /accounts/login/
+2024-02-02 15:09:34,200 %(WARNING)s - django.request - Not Found: /accounts/login/
+2024-02-02 15:09:39,553 %(WARNING)s - django.request - Not Found: /accounts/login/
+2024-02-02 15:10:01,682 %(WARNING)s - django.request - Not Found: /home/flatlife/djangopro/TB_TG/TB_TG/static/images/flag-iran.png
+2024-02-02 15:11:57,747 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/TB_TG/settings/common.py changed, reloading.
+2024-02-02 15:12:00,298 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-02-02 15:12:04,375 %(ERROR)s - django.request - Internal Server Error: /login/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 502, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'trans'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader.py", line 42, in select_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/backends/django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 196, in compile_nodelist
+    return parser.parse()
+           ^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 510, in parse
+    raise self.error(token, e)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 295, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 510, in parse
+    raise self.error(token, e)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 504, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 555, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 11: 'trans', expected 'endblock'. Did you forget to register or load this tag?
+2024-02-02 15:13:13,063 %(ERROR)s - django.request - Internal Server Error: /login/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/test/utils.py", line 111, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/test/utils.py", line 111, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/defaulttags.py", line 478, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 848, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'home' not found. 'home' is not a valid view function or pattern name.
+2024-02-02 15:13:35,742 %(ERROR)s - django.request - Internal Server Error: /login/
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/test/utils.py", line 111, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/test/utils.py", line 111, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/template/defaulttags.py", line 478, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 848, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'home' not found. 'home' is not a valid view function or pattern name.
+2024-02-02 15:13:55,959 %(WARNING)s - django.request - Not Found: /
+2024-02-02 15:16:57,242 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/front/urls.py changed, reloading.
+2024-02-02 15:16:58,408 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-02-02 15:17:09,974 %(WARNING)s - django.request - Not Found: /
+2024-02-02 15:17:15,263 %(WARNING)s - django.request - Not Found: /register/img/fav.png
+2024-02-02 15:17:26,612 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/TB_TG/settings/common.py changed, reloading.
+2024-02-02 15:17:29,928 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-02-02 15:20:26,392 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/TB_TG/urls.py changed, reloading.
+2024-02-02 15:20:27,569 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-02-02 15:21:32,950 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/front/urls.py changed, reloading.
+2024-02-02 15:21:33,904 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-02-02 15:23:45,001 %(WARNING)s - django.request - Unauthorized: /core/auth/users/
+2024-02-02 15:26:25,856 %(ERROR)s - django.request - Internal Server Error: /core/auth/users
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 127.0.0.1:8000/core/auth/users/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+2024-02-02 15:27:18,605 %(WARNING)s - django.request - Unauthorized: /core/auth/users/
+2024-02-02 15:27:55,773 %(ERROR)s - django.request - Internal Server Error: /core/auth/users
+Traceback (most recent call last):
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/flatlife/djangopro/TB_TG/.venv/lib/python3.11/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 127.0.0.1:8000/core/auth/users/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+2024-02-02 15:28:50,225 %(WARNING)s - django.request - Bad Request: /core/auth/users/
+2024-02-02 15:29:37,050 %(WARNING)s - django.request - Bad Request: /core/auth/users/
+2024-02-02 15:29:50,597 %(WARNING)s - django.request - Bad Request: /core/auth/users/
+2024-02-02 15:30:13,187 %(WARNING)s - django.request - Bad Request: /core/auth/users/
+2024-02-02 15:30:42,728 %(WARNING)s - django.request - Bad Request: /core/auth/users/
+2024-02-02 15:31:46,229 %(WARNING)s - django.request - Bad Request: /core/auth/users/
+2024-02-02 15:48:23,076 %(WARNING)s - django.request - Bad Request: /core/auth/users/
+2024-02-02 15:53:34,052 %(WARNING)s - django.request - Bad Request: /core/auth/users/
+2024-02-02 15:54:41,871 %(WARNING)s - django.request - Bad Request: /core/auth/users/
+2024-02-02 15:54:43,942 %(WARNING)s - django.request - Bad Request: /core/auth/users/
+2024-02-02 15:54:50,651 %(WARNING)s - django.request - Bad Request: /core/auth/users/
+2024-02-02 15:55:57,035 %(WARNING)s - django.request - Bad Request: /core/auth/users/
+2024-02-02 15:56:26,733 %(WARNING)s - django.request - Bad Request: /core/auth/users/
+2024-02-02 15:56:29,549 %(WARNING)s - django.request - Bad Request: /core/auth/users/
+2024-02-02 16:04:02,959 %(WARNING)s - django.request - Bad Request: /core/auth/users/
+2024-02-02 16:04:07,204 %(WARNING)s - django.request - Bad Request: /core/auth/users/
+2024-02-02 16:04:24,792 %(WARNING)s - django.request - Bad Request: /core/auth/users/
+2024-02-02 16:04:26,629 %(WARNING)s - django.request - Bad Request: /core/auth/users/
+2024-02-02 16:05:12,464 %(WARNING)s - django.request - Bad Request: /core/auth/users/
+2024-02-02 16:05:27,252 %(WARNING)s - django.request - Bad Request: /core/auth/users/
+2024-02-02 16:05:28,661 %(WARNING)s - django.request - Bad Request: /core/auth/users/
+2024-02-02 16:05:42,871 %(WARNING)s - django.request - Bad Request: /core/auth/users/
+2024-02-02 16:05:56,293 %(WARNING)s - django.request - Bad Request: /core/auth/users/
+2024-02-02 16:06:17,351 %(WARNING)s - django.request - Bad Request: /core/auth/users/
+2024-02-02 16:06:29,572 %(WARNING)s - django.request - Bad Request: /core/auth/users/
+2024-02-02 18:56:08,279 %(WARNING)s - django.request - Not Found: /login/img/fav.png
+2024-02-02 18:56:38,912 %(WARNING)s - django.request - Not Found: /register/img/fav.png
+2024-02-02 18:57:15,108 %(INFO)s - django.utils.autoreload - /home/flatlife/djangopro/TB_TG/TB_TG/front/views.py changed, reloading.
+2024-02-02 18:57:21,867 %(INFO)s - django.utils.autoreload - Watching for file changes with StatReloader
+2024-02-02 18:57:32,748 %(WARNING)s - django.request - Method Not Allowed (POST): /login/
+2024-02-02 18:57:32,915 %(WARNING)s - django.request - Method Not Allowed: /login/
+2024-02-02 18:57:40,015 %(WARNING)s - django.request - Method Not Allowed (POST): /login/
+2024-02-02 18:57:40,188 %(WARNING)s - django.request - Method Not Allowed: /login/
+2024-02-02 18:57:46,101 %(WARNING)s - django.request - Method Not Allowed (POST): /login/
+2024-02-02 18:57:46,271 %(WARNING)s - django.request - Method Not Allowed: /login/
+2024-02-02 18:57:55,068 %(WARNING)s - django.request - Method Not Allowed (POST): /login/
+2024-02-02 18:57:55,209 %(WARNING)s - django.request - Method Not Allowed: /login/
+2024-02-02 18:58:40,076 %(WARNING)s - django.request - Bad Request: /core/auth/users/
+2024-02-02 18:58:49,553 %(WARNING)s - django.request - Method Not Allowed (POST): /login/
+2024-02-02 18:58:49,717 %(WARNING)s - django.request - Method Not Allowed: /login/
+2024-02-02 19:00:19,144 %(WARNING)s - django.request - Bad Request: /core/auth/jwt/create/
+2024-02-02 19:04:52,406 %(WARNING)s - django.request - Bad Request: /core/auth/users/
+2024-02-02 19:04:52,881 %(WARNING)s - django.request - Not Found: /favicon.ico
+2024-02-02 19:06:05,944 %(WARNING)s - django.request - Method Not Allowed (POST): /login/
+2024-02-02 19:06:06,009 %(WARNING)s - django.request - Method Not Allowed: /login/
+2024-02-02 19:06:12,293 %(WARNING)s - django.request - Bad Request: /core/auth/users/
+2024-02-02 19:06:55,232 %(WARNING)s - django.request - Bad Request: /core/auth/users/
+2024-02-02 19:07:54,287 %(WARNING)s - django.request - Bad Request: /core/auth/users/
+2024-02-02 19:08:20,539 %(WARNING)s - django.request - Bad Request: /core/auth/users/
+2024-02-02 19:08:38,433 %(WARNING)s - django.request - Bad Request: /core/auth/users/
+2024-02-02 19:09:19,141 %(WARNING)s - django.request - Bad Request: /core/auth/users/
+2024-02-02 19:11:50,811 %(WARNING)s - django.request - Bad Request: /core/auth/users/
+2024-02-02 19:12:20,323 %(WARNING)s - django.request - Bad Request: /core/auth/jwt/create/
+2024-02-02 19:12:41,697 %(WARNING)s - django.request - Bad Request: /core/auth/jwt/create/
+2024-02-02 19:13:23,946 %(WARNING)s - django.request - Bad Request: /core/auth/jwt/create/
+2024-02-02 19:14:50,022 %(WARNING)s - django.request - Bad Request: /core/auth/users/
+2024-02-02 19:15:01,709 %(WARNING)s - django.request - Bad Request: /core/auth/users/
+2024-02-02 19:18:18,434 %(WARNING)s - django.request - Bad Request: /core/auth/jwt/create/
+2024-02-02 19:18:21,823 %(WARNING)s - django.request - Unauthorized: /core/auth/jwt/create/
+2024-02-02 19:18:35,009 %(WARNING)s - django.request - Not Found: /
+2024-02-02 19:23:08,120 %(WARNING)s - django.request - Not Found: /
