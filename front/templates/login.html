@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contents %}
+
+
+    <!-- Start Banner Area -->
+    <section class="banner-area organic-breadcrumb">
+        <div class="container">
+            <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+                <div class="col-first">
+                    <h1>Login/Register</h1>
+                    <nav class="d-flex align-items-center">
+                        <a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="category.html">Login/Register</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Banner Area -->
+
+    <!--================Login Box Area =================-->
+    <section class="login_box_area section_gap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="login_box_img">
+                        <img class="img-fluid" src="{% static 'img/login.jpg' %}" alt="">
+                        <div class="hover">
+                            <h4>New to our website?</h4>
+                            <p>There are advances being made in science and technology everyday, and a good example of
+                                this is the</p>
+                            <a class="primary-btn" href="">Create an Account</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="login_form_inner">
+                        <h3>Log in to enter</h3>
+                        <form class="row login_form" action="" method="post" id="loginForm" novalidate="novalidate">
+                            {% csrf_token %}
+                            <div class="col-md-12 form-group">
+                                <input type="text" class="form-control" id="phone_number" name="phone_number"
+                                       placeholder="Username" onfocus="this.placeholder = ''"
+                                       onblur="this.placeholder = 'Username'">
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <input type="password" class="form-control" id="password" name="password"
+                                       placeholder="Password" onfocus="this.placeholder = ''"
+                                       onblur="this.placeholder = 'Password'">
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <button type="submit" value="submit" class="primary-btn">Log In</button>
+                                <a href="">Forgot Password?</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <script>
+
+            // Function to get the JWT token from localStorage
+            function getToken() {
+                return localStorage.getItem('JWT');
+            }
+
+            // Function to make an authenticated request
+            function makeAuthenticatedRequest(url, method, context = null) {
+                const token = getToken();
+
+                const headers = {
+                    'Content-Type': 'application/json',
+                };
+
+                // Include the token in the headers if available
+                if (token) {
+                    headers['Authorization'] = `JWT ${token}`;
+                }
+
+                const options = {
+                    method: method,
+                    headers: headers,
+                    body: context ? JSON.stringify(context) : null,
+                };
+                console.log(options)
+
+                return fetch(url, options)
+                    .then(response => response.json())
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            }
+
+            // Function to verify if the user has a valid token
+            function verifyToken() {
+                const token = getToken();
+
+                if (token) {
+                    const endpoint = 'http://127.0.0.1:8000/core/auth/jwt/verify/';
+
+                    // Make a request to verify the token
+                    makeAuthenticatedRequest(endpoint, 'POST', context = {token: token})
+                        .then(response => {
+                            // Handle the verification response
+                            console.log(response);
+
+                            // If the token is valid, redirect or perform additional actions as needed
+                            if (response.code === 'token_not_valid') {
+                                // Token is not valid, user needs to log in
+                                console.log('Token not valid. User needs to log in.');
+                            }
+                            else {
+                                console.log('Token is valid. User is already logged in.');
+                                // Redirect to another page or perform other actions
+                                window.location.href = '/';
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+                } else {
+                    console.log('No token found. User needs to log in.');
+                }
+            }
+
+            // Verify token on page load
+            window.onload = function () {
+                verifyToken();
+            };
+
+            // Add an event listener to the login form
+            document.getElementById('loginForm').addEventListener('submit', function (event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                // Get form data
+                phone_number = document.getElementById('phone_number')
+                password = document.getElementById('password')
+
+                console.log(phone_number.value)
+                console.log(password.value)
+                // Make an asynchronous POST request using Fetch API
+                let endpoint = 'http://127.0.0.1:8000/core/auth/jwt/create/';
+
+                makeAuthenticatedRequest(endpoint, 'POST', context = {
+                    'phone_number': phone_number.value,
+                    'password': password.value
+                })
+                    .then(data => {
+                        // Handle the response data
+                        console.log(data);
+
+                        // Assuming the API response contains a JWT token
+                        let jwtToken = data.access;
+
+                        localStorage.setItem('JWT', jwtToken);
+                        console.log('JWT token set:', jwtToken);
+
+                        // Redirect or perform additional actions as needed
+
+                        // Verify the token after successful login
+                        verifyToken();
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        // Handle errors
+                    });
+            });
+        </script>
+    </section>
+    <!--================End Login Box Area =================-->
+
+{% endblock %}

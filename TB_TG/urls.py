@@ -28,6 +28,7 @@ urlpatterns = i18n_patterns(
     path('shop/', include('shop.urls')),
     path("__debug__/", include("debug_toolbar.urls")),
     path("core/", include('core.urls')),
+    path("", include('front.urls')),
 
     prefix_default_language=False
 )
