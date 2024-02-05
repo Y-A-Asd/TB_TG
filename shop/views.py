@@ -1,5 +1,5 @@
 import logging
-from django.db.models import Count
+from django.db.models import Count, Q, QuerySet, ExpressionWrapper, fields, F
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import status
 from rest_framework.response import Response
@@ -19,7 +19,7 @@ from .serializers import (ProductSerializer, CollectionSerializer, ReviewSeriali
                           AuditLogSerializer, PromotionSerializer, SimpleProductSerializer, ReportingSerializer)
 from .models import Product, Collection, OrderItem, Review, Customer, Order, ProductImage, CartItem, Cart, Address, \
     Transaction, Promotion
-from .filters import ProductFilter
+from .filters import ProductFilter, RecursiveDjangoFilterBackend
 from .permissions import IsAdminOrReadOnly, ViewCustomerHistoryPermission
 
 logger = logging.getLogger(__name__)
@@ -140,14 +140,14 @@ logger = logging.getLogger(__name__)
 
 
 class ProductViewSet(ModelViewSet):
-    queryset = Product.objects.all().prefetch_related('images')
+    # queryset = Product.objects.all().prefetch_related('images')
     serializer_class = ProductSerializer
-    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+    pagination_class = DefaultPagination
+    filter_backends = [RecursiveDjangoFilterBackend, SearchFilter, OrderingFilter]
     filterset_class = ProductFilter
     search_fields = ['title', 'description']
     ordering_fields = ['unit_price', 'updated_at']
     permission_classes = [IsAdminOrReadOnly]
-    pagination_class = DefaultPagination
 
     """we can manually filter by overwrite get_queryset function"""
 
@@ -158,11 +158,35 @@ class ProductViewSet(ModelViewSet):
     #         queryset = queryset.filter(collection_id=collection_id)
     #     return queryset
 
+    def get_queryset(self):
+        queryset = Product.objects.all().prefetch_related('images')
+        collection_id = self.request.query_params.get('collection_id')
+        print('collection_id: ', collection_id)
+
+        if collection_id:
+            q_object = RecursiveDjangoFilterBackend().get_recursive_q(collection_id)
+            queryset = queryset.filter(q_object)
+        lt = self.request.query_params.get('unit_price__lt')
+        gt = self.request.query_params.get('unit_price__gt')
+        if lt or gt:
+            unit_price_filters = RecursiveDjangoFilterBackend().get_unit_price_filters(self.request)
+            queryset = queryset.filter(unit_price_filters)
+
+        ordering = self.request.query_params.get('ordering', 'updated_at')
+        queryset = queryset.order_by(ordering)
+
+        return queryset
+
     def list(self, request, *args, **kwargs):
-        # Log a message when the list view is accessed
         logger.info("List view accessed")
 
-        queryset = self.filter_queryset(self.get_queryset())
+        queryset = self.get_queryset()
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
 
@@ -176,14 +200,50 @@ class ProductViewSet(ModelViewSet):
 
 
 class CollectionViewSet(ModelViewSet):
-    queryset = Collection.objects.annotate(products_count=Count('products')).all()
+    queryset = Collection.objects.annotate(products_count=Count('products')).filter(parent__isnull=True)
     serializer_class = CollectionSerializer
     permission_classes = [IsAdminOrReadOnly]
+
+    def get_products_count(self, collection):
+        products_count = Product.objects.filter(collection=collection).count()
+        subcollections = collection.subcollection.all()
+        for subcollection in subcollections:
+            products_count += self.get_products_count(subcollection)
+        return products_count
+
+    def update_products_count(self, data):
+        for collection_data in data:
+            collection = Collection.objects.get(id=collection_data['id'])
+            collection_data['products_count'] = self.get_products_count(collection)
+            if collection_data.get('children'):
+                self.update_products_count(collection_data['children'])
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        serializer = self.get_serializer(queryset, many=True)
+
+        data = serializer.data
+        self.update_products_count(data)
+
+        return Response(data)
 
     def destroy(self, request, *args, **kwargs):
         if Product.objects.filter(collection=kwargs['pk']).count() > 0:
             return Response({'error': 'can not be deleted!'})
-        return super.destroy(request, *args, **kwargs)
+        return super().destroy(request, *args, **kwargs)
+
+    def filter_products_by_collection(self, collection):
+        products = Product.objects.filter(collection=collection)
+        subcollections = collection.subcollection.all()
+        for subcollection in subcollections:
+            products |= self.filter_products_by_collection(subcollection)
+        return products
+
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        products = self.filter_products_by_collection(instance)
+        serializer = ProductSerializer(products, many=True)
+        return Response(serializer.data)
 
 
 class ReviewViewSet(ModelViewSet):

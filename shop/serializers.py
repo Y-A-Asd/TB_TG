@@ -91,12 +91,19 @@ class SimpleProductSerializer(TranslatableModelSerializer):
 
 class CollectionSerializer(TranslatableModelSerializer):
     translations = TranslatedFieldsField(shared_model=Collection)
+    children = serializers.SerializerMethodField()
 
     class Meta:
         model = Collection
-        fields = ['id', 'translations', 'parent', 'products_count']
+        fields = ['id', 'translations', 'parent', 'products_count', 'children']
 
     products_count = serializers.IntegerField(read_only=True)
+
+    def get_children(self, obj):
+        children_serializer = self.__class__(obj.subcollection.all(), many=True)
+        return children_serializer.data if obj.subcollection.exists() else None
+
+
 
 
 class CartItemSerializer(serializers.ModelSerializer):

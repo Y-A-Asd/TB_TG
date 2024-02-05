@@ -1,4 +1,4 @@
-from django.db.models import F
+from django.db.models import F, Q
 from django.urls import reverse
 from django.contrib import admin, messages
 from django.contrib.admin import TabularInline
@@ -66,7 +66,7 @@ class FeatureInline(TabularInline):
 class CollectionAdmin(TranslatableAdmin):
     autocomplete_fields = ['parent']
     list_display = ['title', 'products_count', 'parent']
-    search_fields = ['title']
+    search_fields = ['translations__title']
     exclude = ['deleted_at', 'created_at', 'updated_at']
 
     @admin.display(ordering='products_count')
@@ -96,7 +96,21 @@ class ProductAdmin(TranslatableAdmin):
     search_fields = ['title']
     exclude = ['deleted_at', 'created_at', 'updated_at']
 
-    inlines = [FeatureInline]
+    inlines = [FeatureInline, ProductImageInline]
+
+    def get_search_results(self, request, queryset, search_term):
+        collection_filter = request.GET.get('collection__id__exact')
+        print('collection_filter:', collection_filter)
+        if collection_filter:
+            try:
+                collection_id = int(collection_filter)
+                collection_q = Q(collection_id=collection_id) | Q(collection__parent_id=collection_id)
+                queryset = queryset.filter(collection_q)
+                print(queryset.query)
+            except ValueError:
+                pass
+        print(queryset.query)
+        return queryset, False
 
     def collection_title(self, product):
         if product.collection:

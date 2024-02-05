@@ -167,7 +167,9 @@ REST_FRAMEWORK = {
     'COERCE_DECIMAL_TO_STRING': False,
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+    ),
+    # 'DEFAULT_PAGINATION_CLASS': 'shop.pagination.DefaultPagination',
+    # 'PAGE_SIZE': 10,
 
 }
 
@@ -217,7 +219,7 @@ CELERY_BEAT_SCHEDULE = {
         'schedule': crontab(hour='*/24'),
     },
     'delete_inactive_carts': {
-        'task': 'path.to.delete_inactive_carts',
+        'task': 'core.tasks.delete_inactive_carts',
         'schedule': crontab(hour='*/24'),
     },
 }
