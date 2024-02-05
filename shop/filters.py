@@ -1,8 +1,9 @@
 from django.contrib import admin
-from django.db.models import QuerySet, F
+from django.db.models import QuerySet, F, Q
 from django_filters.rest_framework import FilterSet
 from django.utils.translation import gettext_lazy as _
-from .models import Product, Review, MainFeature
+from .models import Product, Review, MainFeature, Collection
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 class ProductFilter(FilterSet):
@@ -12,6 +13,34 @@ class ProductFilter(FilterSet):
             'collection_id': ['exact'],
             'unit_price': ['gt', 'lt'],
         }
+
+
+class RecursiveDjangoFilterBackend(DjangoFilterBackend):
+
+    def get_recursive_q(self, collection_id):
+        if collection_id:
+            q_object = Q(collection_id=collection_id)
+
+            # Include children recursively
+            child_collections = Collection.objects.filter(parent_id=collection_id)
+            for child_collection in child_collections:
+                q_object |= self.get_recursive_q(child_collection.id)
+
+            return q_object
+
+    def get_unit_price_filters(self, request):
+        gt_value = request.query_params.get('unit_price__gt')
+        lt_value = request.query_params.get('unit_price__lt')
+        if gt_value or lt_value:
+            filters = Q()
+
+            if gt_value is not None:
+                filters &= Q(unit_price__gt=gt_value)
+
+            if lt_value is not None:
+                filters &= Q(unit_price__lt=lt_value)
+
+            return filters
 
 
 class MainFeatureFilter(admin.SimpleListFilter):

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-31 06:07+0330\n"
-"PO-Revision-Date: 2024-01-31 07:58+0330\n"
+"POT-Creation-Date: 2024-02-02 15:08+0330\n"
+"PO-Revision-Date: 2024-02-02 15:11+0330\n"
 "Last-Translator: Anonymous User <yosofasady2@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fa\n"
@@ -19,16 +19,15 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
 
-#: TB_TG/settings/common.py:125
+#: TB_TG/settings/common.py:127
 msgid "English"
 msgstr "انگلیسی"
 
-#: TB_TG/settings/common.py:126
+#: TB_TG/settings/common.py:128
 msgid "Persian"
 msgstr "فارسی"
 
 #: core/admin.py:72
-#| msgid "Action"
 msgid "Action Revert"
 msgstr "عملیات برگشت"
 
@@ -56,7 +55,7 @@ msgstr "تاریخ به‌روزرسانی"
 msgid "Deleted at"
 msgstr "تاریخ حذف"
 
-#: core/models.py:35 core/models.py:89 shop/models.py:157
+#: core/models.py:35 core/models.py:89 shop/models.py:164
 msgid "User"
 msgstr "کاربر"
 
@@ -100,7 +99,7 @@ msgstr "شماره تلفن و ایمیل الزامیست"
 msgid "Phone number must start with \"09\" and have 11 digits."
 msgstr "شماره تلفن معتبر نیست 09123456789"
 
-#: core/models.py:74 shop/models.py:293
+#: core/models.py:74 shop/models.py:300
 msgid "Phone Number"
 msgstr "شماره تلفن"
 
@@ -108,11 +107,12 @@ msgstr "شماره تلفن"
 msgid "Email"
 msgstr "ایمیل"
 
-#: core/models.py:78
+#: core/models.py:78 front/templates/login.html:48
+#: front/templates/login.html:49
 msgid "Password"
 msgstr "رمز عبور"
 
-#: core/models.py:79 discount/models.py:30 shop/models.py:257
+#: core/models.py:79 discount/models.py:30 shop/models.py:264
 msgid "Active"
 msgstr "فعال"
 
@@ -137,22 +137,19 @@ msgid "Invalid discount(Check Mode again)"
 msgstr "تخفیف نامعتیر است ! مجدد نوع تخفیف را چک کنید!"
 
 #: discount/admin.py:35
-#| msgid "Invalid discount(Check Mode again)"
 msgid "Invalid discount(Check Dates again)"
 msgstr "تخفیف نامعتیر است ! مجدد نوع تخفیف را چک کنید!"
 
 #: discount/apps.py:8 discount/models.py:29 discount/models.py:62
-#: shop/models.py:100
+#: shop/models.py:107
 msgid "Discount"
 msgstr "تخفیف"
 
 #: discount/models.py:24
-#| msgid "DirectPrice"
 msgid "Direct Price"
 msgstr "تخفیف میلغی"
 
 #: discount/models.py:25
-#| msgid "DiscountOff"
 msgid "Discount Off"
 msgstr "تخفیف درصدی"
 
@@ -180,6 +177,52 @@ msgstr "تخفیفات دارای کد میبایست تاریخ شروع و پ�
 msgid "Discounts"
 msgstr "تخفیفات"
 
+#: front/templates/login.html:11 front/templates/login.html:14
+msgid "Login/Register"
+msgstr "ورود /ثبت نام"
+
+#: front/templates/login.html:13
+msgid "Home"
+msgstr "خانه"
+
+#: front/templates/login.html:30
+msgid "New to our website?"
+msgstr "اکانت ندارید ؟"
+
+#: front/templates/login.html:31
+msgid ""
+"There are advances being made in science and technology everyday, and a good"
+" example of this is the"
+msgstr ""
+
+#: front/templates/login.html:32
+#, fuzzy
+#| msgid "Created at"
+msgid "Create an Account"
+msgstr "تاریخ ایجاد"
+
+#: front/templates/login.html:38
+msgid "Log in to enter"
+msgstr "ورود"
+
+#: front/templates/login.html:43 front/templates/login.html:44
+#, fuzzy
+#| msgid "User"
+msgid "Username"
+msgstr "کاربر"
+
+#: front/templates/login.html:52
+#, fuzzy
+#| msgid "Log out"
+msgid "Log In"
+msgstr "خروج"
+
+#: front/templates/login.html:53
+#, fuzzy
+#| msgid "Password"
+msgid "Forgot Password?"
+msgstr "رمز عبور"
+
 #: shop/admin.py:20 tags/models.py:23 tags/models.py:29
 msgid "Tag"
 msgstr "برچسب"
@@ -188,74 +231,72 @@ msgstr "برچسب"
 msgid "Tags"
 msgstr "برچسب ها"
 
-#: shop/admin.py:99
-#| msgid "Collection"
+#: shop/admin.py:105
 msgid "No Collection"
 msgstr "بدون مجموعه"
 
-#: shop/admin.py:105 shop/filters.py:37
+#: shop/admin.py:111 shop/filters.py:37
 msgid "Low"
 msgstr "محدود"
 
-#: shop/admin.py:106
+#: shop/admin.py:112
 msgid "OK"
 msgstr "متوسط"
 
-#: shop/admin.py:108
-#| msgid "Minimum Inventory"
+#: shop/admin.py:114
 msgid "No Minimum Inventory Associated"
 msgstr "کف اخطار موجودی در نظر گرفته نشده است"
 
-#: shop/admin.py:110
+#: shop/admin.py:116
 msgid "Clear inventory"
 msgstr "خالی کردن موجودی"
 
-#: shop/admin.py:113
+#: shop/admin.py:119
 #, python-brace-format
 msgid "{count} products were successfully updated."
 msgstr "{count} محصول با موفقیت به‌روزرسانی شدند."
 
-#: shop/admin.py:142 shop/models.py:230
+#: shop/admin.py:148 shop/models.py:237
 msgid "Orders"
 msgstr "سفارش‌ها"
 
-#: shop/admin.py:172 shop/admin.py:201 shop/models.py:276
+#: shop/admin.py:178 shop/admin.py:207 shop/models.py:283
 msgid "Total Price"
 msgstr "قیمت کل"
 
-#: shop/admin.py:177
+#: shop/admin.py:183
 msgid "Mark selected orders as delivered"
 msgstr "تراکنش انتخاب شده ارسال شد"
 
-#: shop/admin.py:183 shop/models.py:246
+#: shop/admin.py:189 shop/models.py:253
 msgid "Order Items"
 msgstr "آیتم‌های سفارش"
 
-#: shop/admin.py:229 shop/models.py:229 shop/models.py:238 shop/models.py:273
+#: shop/admin.py:235 shop/models.py:236 shop/models.py:245 shop/models.py:280
 msgid "Order"
 msgstr "سفارش"
 
-#: shop/admin.py:234
+#: shop/admin.py:240
 msgid "Mark selected transactions as complete"
 msgstr "تراکنش انتخاب شده پرداخت شد"
 
-#: shop/admin.py:246
+#: shop/admin.py:252
 msgid "General Settings"
 msgstr "تنظیمات سایت"
 
-#: shop/admin.py:247
+#: shop/admin.py:253
 msgid "Translations"
 msgstr "تراکنش ها"
 
-#: shop/admin.py:248 shop/models.py:294
+#: shop/admin.py:254 shop/models.py:301
 msgid "Logo"
 msgstr "لوگو"
 
-#: shop/admin.py:254
+#: shop/admin.py:260
 msgid "No Image"
 msgstr "بدون تصویر"
 
-#: shop/admin.py:257
+#: shop/admin.py:263
 msgid "Logo Preview"
 msgstr "پیشنمایش لوگو"
 
@@ -264,11 +305,10 @@ msgid "Shop"
 msgstr "فروشگاه"
 
 #: shop/filters.py:18
-#| msgid "Feature"
 msgid "Main Feature"
 msgstr "ویژگی "
 
-#: shop/filters.py:31 shop/models.py:92
+#: shop/filters.py:31 shop/models.py:98
 msgid "Inventory"
 msgstr "موجودی"
 
@@ -277,7 +317,6 @@ msgid "Site Administration"
 msgstr "مدیریت سایت"
 
 #: shop/models.py:16
-#| msgid "Title"
 msgid "Index Title"
 msgstr "بخش های مدیریتی"
 
@@ -285,12 +324,12 @@ msgstr "بخش های مدیریتی"
 msgid "Site Management"
 msgstr "مدیریت سایت"
 
-#: shop/models.py:22 shop/models.py:34 shop/models.py:61 shop/models.py:85
-#: shop/models.py:253
+#: shop/models.py:22 shop/models.py:41 shop/models.py:68 shop/models.py:92
+#: shop/models.py:260
 msgid "Title"
 msgstr "عنوان"
 
-#: shop/models.py:23 shop/models.py:35 shop/models.py:87
+#: shop/models.py:23 shop/models.py:42 shop/models.py:94
 msgid "Description"
 msgstr "توضیحات"
 
@@ -306,200 +345,200 @@ msgstr "ویژگی"
 msgid "Features"
 msgstr "ویژگی ها "
 
-#: shop/models.py:39
+#: shop/models.py:46
 msgid "Promotion"
 msgstr "تبلیغات"
 
-#: shop/models.py:40 shop/models.py:98
+#: shop/models.py:47 shop/models.py:105
 msgid "Promotions"
 msgstr "تبلیغات"
 
-#: shop/models.py:65
+#: shop/models.py:72
 msgid "Parent"
 msgstr "والد"
 
-#: shop/models.py:78 shop/models.py:95
+#: shop/models.py:85 shop/models.py:102
 msgid "Collection"
 msgstr "مجموعه"
 
-#: shop/models.py:79
+#: shop/models.py:86
 msgid "Collections"
 msgstr "مجموعه‌ها"
 
-#: shop/models.py:86
+#: shop/models.py:93
 msgid "Slug"
 msgstr "نامک"
 
-#: shop/models.py:90 shop/models.py:240
+#: shop/models.py:96 shop/models.py:247
 msgid "Unit Price"
 msgstr "قیمت واحد"
 
-#: shop/models.py:93
+#: shop/models.py:99
 msgid "Minimum Inventory"
 msgstr "کف اخطار موجودی"
 
-#: shop/models.py:132
+#: shop/models.py:139
 msgid "There is already an active discount for this item."
 msgstr "همزمان نمیتوانید دو تخفیف فعال داشته باشید"
 
-#: shop/models.py:135 shop/models.py:178 shop/models.py:239
+#: shop/models.py:142 shop/models.py:185 shop/models.py:246
 msgid "Product"
 msgstr "محصول"
 
-#: shop/models.py:136
+#: shop/models.py:143
 msgid "Products"
 msgstr "محصولات"
 
-#: shop/models.py:147
+#: shop/models.py:154
 msgid "Bronze"
 msgstr "برنز"
 
-#: shop/models.py:148
+#: shop/models.py:155
 msgid "Silver"
 msgstr "نقره‌ای"
 
-#: shop/models.py:149
+#: shop/models.py:156
 msgid "Gold"
 msgstr "طلایی"
 
-#: shop/models.py:151 shop/models.py:225
+#: shop/models.py:158 shop/models.py:232
 msgid "First Name"
 msgstr "نام"
 
-#: shop/models.py:152 shop/models.py:226
+#: shop/models.py:159 shop/models.py:233
 msgid "Last Name"
 msgstr "نام خانوادگی"
 
-#: shop/models.py:154
+#: shop/models.py:161
 msgid "Birth Date"
 msgstr "تاریخ تولد"
 
-#: shop/models.py:155
+#: shop/models.py:162
 msgid "Membership"
 msgstr "عضویت"
 
-#: shop/models.py:163 shop/models.py:173 shop/models.py:193 shop/models.py:220
-#: shop/models.py:250 shop/models.py:277
+#: shop/models.py:170 shop/models.py:180 shop/models.py:200 shop/models.py:227
+#: shop/models.py:257 shop/models.py:284
 msgid "Customer"
 msgstr "مشتری"
 
-#: shop/models.py:164
+#: shop/models.py:171
 msgid "Customers"
 msgstr "مشتریان"
 
-#: shop/models.py:177
+#: shop/models.py:184
 msgid "Cart"
 msgstr "سبد خرید"
 
-#: shop/models.py:180 shop/models.py:242
+#: shop/models.py:187 shop/models.py:249
 msgid "Quantity"
 msgstr "تعداد"
 
-#: shop/models.py:184
+#: shop/models.py:191
 msgid "Cart Item"
 msgstr "آیتم سبد خرید"
 
-#: shop/models.py:185
+#: shop/models.py:192
 msgid "Cart Items"
 msgstr "آیتم‌های سبد خرید"
 
-#: shop/models.py:189 shop/models.py:221
+#: shop/models.py:196 shop/models.py:228
 msgid "Zip Code"
 msgstr "کد پستی"
 
-#: shop/models.py:190 shop/models.py:222
+#: shop/models.py:197 shop/models.py:229
 msgid "Path"
 msgstr "مسیر"
 
-#: shop/models.py:191 shop/models.py:223
+#: shop/models.py:198 shop/models.py:230
 msgid "City"
 msgstr "شهر"
 
-#: shop/models.py:192 shop/models.py:224
+#: shop/models.py:199 shop/models.py:231
 msgid "Province"
 msgstr "استان"
 
-#: shop/models.py:194
+#: shop/models.py:201
 msgid "Default"
 msgstr "آدرس اصلی"
 
-#: shop/models.py:197 shop/models.py:291
+#: shop/models.py:204 shop/models.py:298
 msgid "Address"
 msgstr "آدرس"
 
-#: shop/models.py:198
+#: shop/models.py:205
 msgid "Addresses"
 msgstr "آدرس‌ها"
 
-#: shop/models.py:207
+#: shop/models.py:214
 msgid "Customer Not Found!"
 msgstr "مشتری یافت نشد!"
 
-#: shop/models.py:212
+#: shop/models.py:219
 msgid "Not Paid"
 msgstr "پرداخت نشده"
 
-#: shop/models.py:213 shop/models.py:269
+#: shop/models.py:220 shop/models.py:276
 msgid "Pending"
 msgstr "در حال انتظار"
 
-#: shop/models.py:214
+#: shop/models.py:221
 msgid "Shipping"
 msgstr "در حال ارسال"
 
-#: shop/models.py:215
+#: shop/models.py:222
 msgid "Delivered"
 msgstr "تحویل شد"
 
-#: shop/models.py:216 shop/models.py:271
+#: shop/models.py:223 shop/models.py:278
 msgid "Failed"
 msgstr "ناموفق"
 
-#: shop/models.py:218 shop/models.py:274
+#: shop/models.py:225 shop/models.py:281
 msgid "Payment Status"
 msgstr "وضعیت پرداخت"
 
-#: shop/models.py:245
+#: shop/models.py:252
 msgid "Order Item"
 msgstr "آیتم سفارش"
 
-#: shop/models.py:252
+#: shop/models.py:259
 msgid "Rating"
 msgstr "امتیاز"
 
-#: shop/models.py:263
+#: shop/models.py:270
 msgid "Review"
 msgstr "نظر"
 
-#: shop/models.py:264
+#: shop/models.py:271
 msgid "Reviews"
 msgstr "نظر ها"
 
-#: shop/models.py:270
+#: shop/models.py:277
 msgid "Complete"
 msgstr "تکمیل شده"
 
-#: shop/models.py:278
+#: shop/models.py:285
 msgid "Receipt Number"
 msgstr "شماره فیش"
 
-#: shop/models.py:284
+#: shop/models.py:291
 msgid "Transaction"
 msgstr "تراکنش"
 
-#: shop/models.py:285
+#: shop/models.py:292
 msgid "Transactions"
 msgstr "تراکنش ها"
 
-#: shop/models.py:290
+#: shop/models.py:297
 msgid "Footer Text"
 msgstr "متن زیرین"
 
-#: shop/models.py:295
+#: shop/models.py:302
 msgid "Social Media Links"
 msgstr "لینک های فضای مجازی"
 
-#: shop/models.py:301 shop/models.py:302
+#: shop/models.py:308 shop/models.py:309
 msgid "Site Settings"
 msgstr "تنظیمات سایت"
 
@@ -520,7 +559,6 @@ msgid "No cart found!"
 msgstr "سبد خرید پیدا نشد!"
 
 #: shop/serializers.py:235
-#| msgid "Cart Item"
 msgid "Cart is empty!"
 msgstr "سبد خرید یافت نشد!"
 
@@ -556,16 +594,15 @@ msgstr "آیتم برچسب گزاری شده"
 msgid "Tagged Items"
 msgstr "آیتم‌های برچسب گزاری شده"
 
-#: templates/admin/base_site.html:24
+#: templates/admin/base_site.html:23
 msgid "Documentation"
 msgstr "سند نویسی"
 
-#: templates/admin/base_site.html:28
-#| msgid "Changes"
+#: templates/admin/base_site.html:27
 msgid "Change password"
 msgstr "تغییر کدواژه"
 
-#: templates/admin/base_site.html:30
+#: templates/admin/base_site.html:29
 msgid "Log out"
 msgstr "خروج"
 

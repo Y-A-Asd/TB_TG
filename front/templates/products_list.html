@@ -1,0 +1,294 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+{% block contents %}
+    <!-- Start Banner Area -->
+    <section class="banner-area organic-breadcrumb">
+        <div class="container">
+            <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+                <div class="col-first">
+                    <h1>{% trans "Shop" %}</h1>
+                    <nav class="d-flex align-items-center">
+                        <a href="">{% trans "Home" %}<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="">{% trans "Shop" %}<span class="lnr lnr-arrow-right"></span></a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Banner Area -->
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-3 col-lg-4 col-md-5">
+                <div class="sidebar-categories">
+                    <div class="head">{% trans "Browse Collections" %}</div>
+                    <ul class="main-categories">
+                        {# Your collections will be dynamically added here using JavaScript #}
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xl-9 col-lg-8 col-md-7">
+                <!-- Start Filter Bar -->
+                <div class="filter-bar d-flex flex-wrap align-items-center">
+                    <div class="sorting">
+                        <select id="sortingDropdown">
+                            <option value="default">{% trans "Default sorting" %}</option>
+                            <option value="price_asc">{% trans "Price: Low to High" %}</option>
+                            <option value="price_desc">{% trans "Price: High to Low" %}</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- End Filter Bar -->
+                <!-- Start Best Seller -->
+                <section class="lattest-product-area pb-40 category-list">
+                    <div class="row" id="productContainer">
+                        <!-- Your products will be dynamically added here using JavaScript -->
+                    </div>
+                </section>
+                <!-- End Best Seller -->
+                <!-- Start Filter Bar -->
+                <div class="filter-bar d-flex flex-wrap align-items-center">
+                    <div class="pagination" id="paginationContainer">
+                        <!-- Pagination links will be added dynamically here -->
+                    </div>
+                </div>
+                <!-- End Filter Bar -->
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script type="text/javascript">
+        function createSocialInfo(iconClass, text, moreClass = null) {
+            const socialInfo = document.createElement('a');
+            socialInfo.href = '';  // Add your link here
+            socialInfo.classList.add('social-info');
+
+            const iconSpan = document.createElement('span');
+            iconSpan.classList.add(iconClass);
+            iconSpan.classList.add(moreClass);
+
+            const hoverText = document.createElement('p');
+            hoverText.classList.add('hover-text');
+            hoverText.textContent = text;
+
+            socialInfo.appendChild(iconSpan);
+            socialInfo.appendChild(hoverText);
+
+            return socialInfo;
+        }
+
+        const productsPerPage = 10;
+        let currentPage = 1;
+
+        function fetchProducts(page = 1, selectedOption = 'updated_at', collectionsId = null) {
+            console.log(collectionsId == null)
+            let apiUrl = null
+            if (collectionsId == null){
+                apiUrl = `/shop/products/?page=${page}&ordering=${getSortingOrdering(selectedOption)}`;
+            }
+            else{
+                apiUrl = `/shop/products/?page=${page}&ordering=${getSortingOrdering(selectedOption)}&collection_id=${collectionsId}`;
+            }
+
+            console.log('Fetching products. Page:', page, 'Selected option:', selectedOption);
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(products => {
+                    const productContainer = document.getElementById('productContainer');
+                    productContainer.innerHTML = '';
+
+                    products.results.forEach(product => {
+                        {
+                            const currentLanguage = 'en';
+                            const translation = product.translations[currentLanguage] || product.translations.en;
+                            const productBlock = document.createElement('div');
+                            productBlock.classList.add('col-lg-4', 'col-md-6', 'single-product');
+
+                            const productImage = document.createElement('img');
+                            productImage.classList.add('img-fluid');
+                            productImage.src = product.images.length > 0 ? product.images[0].image : '{% static "img/default-product.jpg" %}';
+                            productImage.alt = product.translations.en.title;
+
+                            const productDetails = document.createElement('div');
+                            productDetails.classList.add('product-details');
+
+                            const productName = document.createElement('h6');
+                            productName.textContent = translation.title;
+
+
+                            const productPrice = document.createElement('div');
+                            productPrice.classList.add('price');
+
+                            const originalPrice = document.createElement('h6');
+                            originalPrice.textContent = `$${product.price.toFixed(2)}`;
+
+                            const discountedPrice = document.createElement('h6');
+                            if (product.org_price !== product.price) {
+                                discountedPrice.classList.add('l-through');
+                                discountedPrice.textContent = `$${product.org_price.toFixed(2)}`;
+                            }
+
+                            const productActions = document.createElement('div');
+                            productActions.classList.add('prd-bottom');
+
+                            const addToBag = createSocialInfo('ti-bag', 'add to bag', 'ti-bag');
+                            // const addToWishlist = createSocialInfo('lnr lnr-heart', 'Wishlist');
+                            const viewMore = createSocialInfo('lnr', 'view more', 'lnr-move');
+
+                            productDetails.appendChild(productName);
+                            productPrice.appendChild(originalPrice);
+                            if (discountedPrice.textContent.trim() !== '') {
+                                productPrice.appendChild(discountedPrice);
+                            }
+                            productDetails.appendChild(productPrice);
+                            productActions.appendChild(addToBag);
+                            // productActions.appendChild(addToWishlist);
+                            productActions.appendChild(viewMore);
+
+                            productBlock.appendChild(productImage);
+                            productBlock.appendChild(productDetails);
+                            productBlock.appendChild(productActions);
+
+                            productContainer.appendChild(productBlock);
+
+                            productContainer.appendChild(productBlock);
+                        }
+                    });
+
+                    updatePagination(products.count, productsPerPage);
+                })
+                .catch(error => {
+                    console.error('Error fetching products:', error);
+                });
+        }
+
+        function updatePagination(totalProducts, productsPerPage) {
+            const totalPages = Math.ceil(totalProducts / productsPerPage);
+            const paginationContainer = document.getElementById('paginationContainer');
+            paginationContainer.innerHTML = '';
+
+            for (let i = 1; i <= totalPages; i++) {
+                const pageLink = document.createElement('a');
+                pageLink.href = '#';
+                pageLink.textContent = i;
+                pageLink.addEventListener('click', () => {
+                    currentPage = i;
+                    fetchProducts(currentPage);
+                });
+
+                if (i === currentPage) {
+                    pageLink.classList.add('active');
+                }
+
+                paginationContainer.appendChild(pageLink);
+            }
+
+
+            if (currentPage > 1) {
+                const prevLink = createPaginationLink('prev-arrow', 'fa-long-arrow-left', currentPage - 1);
+                paginationContainer.insertBefore(prevLink, paginationContainer.firstChild);
+            }
+
+            if (currentPage < totalPages) {
+                const nextLink = createPaginationLink('next-arrow', 'fa-long-arrow-right', currentPage + 1);
+                paginationContainer.appendChild(nextLink);
+            }
+        }
+
+        function createPaginationLink(className, iconClass, page) {
+            const link = document.createElement('a');
+            link.href = '#';
+            link.classList.add(className);
+            link.addEventListener('click', () => {
+                currentPage = page;
+                fetchProducts(currentPage);
+            });
+
+            const icon = document.createElement('i');
+            icon.classList.add('fa');
+            icon.classList.add(iconClass);
+            link.appendChild(icon);
+
+            return link;
+        }
+
+        function getSortingOrdering(sortingOption) {
+            switch (sortingOption) {
+                case 'price_asc':
+                    return 'unit_price';
+                case 'price_desc':
+                    return '-unit_price';
+                default:
+                    return '-updated_at';
+            }
+        }
+
+        fetchProducts(currentPage);
+
+    </script>
+
+
+    <script>
+        // Fetch data from the API
+        fetch('/shop/collections/')
+            .then(response => response.json())
+            .then(data => {
+                const sidebarCategories = document.querySelector('.sidebar-categories');
+                const div = document.createElement('div');
+                div.classList.add('head');
+                div.textContent = 'Browse Collecitons'
+                generateSidebarMenu(data, sidebarCategories);
+            })
+            .catch(error => console.error('Error fetching data:', error));
+
+        function generateSidebarMenu(collections, parentElement) {
+            const ul = document.createElement('ul');
+            ul.classList.add('main-categories');
+
+            collections.forEach(collection => {
+                const currentLanguage = 'en';
+                const translation = collection.translations[currentLanguage] || collection.translations.en;
+                const li = document.createElement('li');
+                li.classList.add('main-nav-list');
+
+                const a = document.createElement('a');
+                a.setAttribute('data-toggle', 'collapse');
+                a.href = `#${translation.title}`;
+                a.setAttribute('aria-expanded', 'false');
+                a.setAttribute('aria-controls', translation.title);
+
+                const spanArrow = document.createElement('span');
+                spanArrow.classList.add('lnr', 'lnr-arrow-right');
+                console.log(collection)
+                console.log(collection.products_count)
+
+                const spanTitle = document.createElement('span');
+                spanTitle.innerHTML = `${translation.title} <span class="number">
+                    (${collection.products_count})</span>`;
+
+                a.appendChild(spanArrow);
+                a.appendChild(spanTitle);
+
+                a.addEventListener('click', () => {
+                    fetchProducts(1, 'updated_at', collection.id);
+                });
+
+                li.appendChild(a);
+
+                li.appendChild(a);
+
+                if (collection.children && collection.children.length > 0) {
+                    generateSidebarMenu(collection.children, li);
+                }
+
+                ul.appendChild(li);
+            });
+
+            parentElement.appendChild(ul);
+        }
+
+    </script>
+{% endblock %}
