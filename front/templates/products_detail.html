@@ -2,465 +2,518 @@
 {% load i18n %}
 {% load static %}
 {% block contents %}
-	<!-- Start Banner Area -->
-	<section class="banner-area organic-breadcrumb">
-		<div class="container">
-			<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
-				<div class="col-first">
-					<h1>Product Details</h1>
-					<nav class="d-flex align-items-center">
-						<a href="">Home<span class="lnr lnr-arrow-right"></span></a>
-						<a href="{% url 'front:products' %}">Shop<span class="lnr lnr-arrow-right"></span></a>
-						<a href="">product-details</a>
-					</nav>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- End Banner Area -->
+    <!-- Start Banner Area -->
+    <section class="banner-area organic-breadcrumb">
+        <div class="container" id="dog">
+            <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+                <div class="col-first">
+                    <h1>Product Details</h1>
+                    <nav class="d-flex align-items-center">
+                        <a href="">Home<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="{% url 'front:products' %}">Shop<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="">product-details</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Banner Area -->
+    <h6 id="errorMessage" class="btn-danger text-white text-center p-2"></h6>
+    <!--================Single Product Area =================-->
+    <div class="product_image_area">
+        <div class="container">
+            <div class="row s_product_inner">
+                <div class="col-lg-6">
+                    <div class="s_Product_carousel">
+                        <div class="single-prd-item">
+                            <img class="img-fluid" src="{% static 'img/category/s-p1.jpg' %}" alt="">
+                        </div>
+                        <div class="single-prd-item">
+                            <img class="img-fluid" src="{% static 'img/category/s-p1.jpg' %}" alt="">
+                        </div>
+                        <div class="single-prd-item">
+                            <img class="img-fluid" src="{% static 'img/category/s-p1.jpg' %}" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 offset-lg-1">
+                    <div class="s_product_text">
+                        <h3>Faded SkyBlu Denim Jeans</h3>
+                        <h2>$149.99</h2>
+                        <ul class="list">
+                            <li>Availibility : <span> In Stock</span></li>
+                        </ul>
+                        <p></p>
+                        <div class="product_count">
+                            <label for="qty">Quantity:</label>
+                            <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:"
+                                   class="input-text qty">
+                            <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+                                    class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i>
+                            </button>
+                            <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
+                                    class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i>
+                            </button>
+                        </div>
+                        <div class="card_area d-flex align-items-center">
+                            <a class="primary-btn" href="#">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--================End Single Product Area =================-->
 
-	<!--================Single Product Area =================-->
-	<div class="product_image_area">
-		<div class="container">
-			<div class="row s_product_inner">
-				<div class="col-lg-6">
-					<div class="s_Product_carousel">
-						<div class="single-prd-item">
-							<img class="img-fluid" src="{% static 'img/category/s-p1.jpg' %}" alt="">
-						</div>
-						<div class="single-prd-item">
-							<img class="img-fluid" src="{% static 'img/category/s-p1.jpg' %}" alt="">
-						</div>
-						<div class="single-prd-item">
-							<img class="img-fluid" src="{% static 'img/category/s-p1.jpg' %}" alt="">
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-5 offset-lg-1">
-					<div class="s_product_text">
-						<h3>Faded SkyBlu Denim Jeans</h3>
-						<h2>$149.99</h2>
-						<ul class="list">
-							<li>Availibility : <span> In Stock</span></li>
-						</ul>
-						<p></p>
-						<div class="product_count">
-							<label for="qty">Quantity:</label>
-							<input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
-							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-							 class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
-							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
-							 class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
-						</div>
-						<div class="card_area d-flex align-items-center">
-							<a class="primary-btn" href="#">Add to Cart</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--================End Single Product Area =================-->
+    <!--================Product Description Area =================-->
+    <section class="product_description_area">
+        <div class="container">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
 
-	<!--================Product Description Area =================-->
-	<section class="product_description_area">
-		<div class="container">
-			<ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                       aria-controls="profile"
+                       aria-selected="false">Specification</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
+                       aria-controls="contact"
+                       aria-selected="false">Comments</a>
+                </li>
 
-				<li class="nav-item">
-					<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
-					 aria-selected="false">Specification</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
-					 aria-selected="false">Comments</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link active" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review"
-					 aria-selected="false">Reviews</a>
-				</li>
-			</ul>
-			<div class="tab-content" id="myTabContent">
-				<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-					<div class="table-responsive">
-						<table class="table">
-							<tbody>
-								<tr>
-									<td>
-										<h5>Width</h5>
-									</td>
-									<td>
-										<h5>128mm</h5>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<h5>Height</h5>
-									</td>
-									<td>
-										<h5>508mm</h5>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<h5>Depth</h5>
-									</td>
-									<td>
-										<h5>85mm</h5>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<h5>Weight</h5>
-									</td>
-									<td>
-										<h5>52gm</h5>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<h5>Quality checking</h5>
-									</td>
-									<td>
-										<h5>yes</h5>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<h5>Freshness Duration</h5>
-									</td>
-									<td>
-										<h5>03days</h5>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<h5>When packeting</h5>
-									</td>
-									<td>
-										<h5>Without touch of hand</h5>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<h5>Each Box contains</h5>
-									</td>
-									<td>
-										<h5>60pcs</h5>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-					<div class="row">
-						<div class="col-lg-6">
-							<div class="comment_list">
-								<div class="review_item">
-									<div class="media">
-										<div class="d-flex">
-											<img src="img/product/review-1.png" alt="">
-										</div>
-										<div class="media-body">
-											<h4>Blake Ruiz</h4>
-											<h5>12th Feb, 2018 at 05:56 pm</h5>
-											<a class="reply_btn" href="#">Reply</a>
-										</div>
-									</div>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-										dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-										commodo</p>
-								</div>
-								<div class="review_item reply">
-									<div class="media">
-										<div class="d-flex">
-											<img src="img/product/review-2.png" alt="">
-										</div>
-										<div class="media-body">
-											<h4>Blake Ruiz</h4>
-											<h5>12th Feb, 2018 at 05:56 pm</h5>
-											<a class="reply_btn" href="#">Reply</a>
-										</div>
-									</div>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-										dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-										commodo</p>
-								</div>
-								<div class="review_item">
-									<div class="media">
-										<div class="d-flex">
-											<img src="img/product/review-3.png" alt="">
-										</div>
-										<div class="media-body">
-											<h4>Blake Ruiz</h4>
-											<h5>12th Feb, 2018 at 05:56 pm</h5>
-											<a class="reply_btn" href="#">Reply</a>
-										</div>
-									</div>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-										dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-										commodo</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-6">
-							<div class="review_box">
-								<h4>Post a comment</h4>
-								<form class="row contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <h5>Width</h5>
+                                </td>
+                                <td>
+                                    <h5>128mm</h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5>Height</h5>
+                                </td>
+                                <td>
+                                    <h5>508mm</h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5>Depth</h5>
+                                </td>
+                                <td>
+                                    <h5>85mm</h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5>Weight</h5>
+                                </td>
+                                <td>
+                                    <h5>52gm</h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5>Quality checking</h5>
+                                </td>
+                                <td>
+                                    <h5>yes</h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5>Freshness Duration</h5>
+                                </td>
+                                <td>
+                                    <h5>03days</h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5>When packeting</h5>
+                                </td>
+                                <td>
+                                    <h5>Without touch of hand</h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5>Each Box contains</h5>
+                                </td>
+                                <td>
+                                    <h5>60pcs</h5>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="comment_list" id="reviewList">
 
-									<div class="col-md-12">
-                                        <p>Your Rating:</p>
-                                        <ul class="list">
-                                            <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                        </ul>
-										<div class="form-group">
-											<input type="text" class="form-control" id="name" name="name" placeholder="Your Full name">
-										</div>
-									</div>
-									<div class="col-md-12">
-										<div class="form-group">
-											<input type="email" class="form-control" id="email" name="email" placeholder="Email Address">
-										</div>
-									</div>
-									<div class="col-md-12">
-										<div class="form-group">
-											<input type="text" class="form-control" id="number" name="number" placeholder="Phone Number">
-										</div>
-									</div>
-									<div class="col-md-12">
-										<div class="form-group">
-											<textarea class="form-control" name="message" id="message" rows="1" placeholder="Message"></textarea>
-										</div>
-									</div>
-									<div class="col-md-12 text-right">
-										<button type="submit" value="submit" class="btn primary-btn">Submit Now</button>
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="tab-pane fade show active" id="review" role="tabpanel" aria-labelledby="review-tab">
-					<div class="row">
-						<div class="col-lg-6">
-							<div class="row total_rate">
-								<div class="col-6">
-									<div class="box_total">
-										<h5>Overall</h5>
-										<h4>4.0</h4>
-										<h6>(03 Reviews)</h6>
-									</div>
-								</div>
-								<div class="col-6">
-									<div class="rating_list">
-										<h3>Based on 3 Reviews</h3>
-										<ul class="list">
-											<li><a href="#">5 Star <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-													 class="fa fa-star"></i><i class="fa fa-star"></i> 01</a></li>
-											<li><a href="#">4 Star <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-													 class="fa fa-star"></i><i class="fa fa-star"></i> 01</a></li>
-											<li><a href="#">3 Star <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-													 class="fa fa-star"></i><i class="fa fa-star"></i> 01</a></li>
-											<li><a href="#">2 Star <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-													 class="fa fa-star"></i><i class="fa fa-star"></i> 01</a></li>
-											<li><a href="#">1 Star <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-													 class="fa fa-star"></i><i class="fa fa-star"></i> 01</a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="review_list">
-								<div class="review_item">
-									<div class="media">
-										<div class="d-flex">
-											<img src="" alt="">
-										</div>
-										<div class="media-body">
-											<h4>Blake Ruiz</h4>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-										</div>
-									</div>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-										dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-										commodo</p>
-								</div>
-								<div class="review_item">
-									<div class="media">
-										<div class="d-flex">
-											<img src="" alt="">
-										</div>
-										<div class="media-body">
-											<h4>Blake Ruiz</h4>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-										</div>
-									</div>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-										dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-										commodo</p>
-								</div>
-								<div class="review_item">
-									<div class="media">
-										<div class="d-flex">
-											<img src="" alt="">
-										</div>
-										<div class="media-body">
-											<h4>Blake Ruiz</h4>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-										</div>
-									</div>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-										dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-										commodo</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-6">
-							<div class="review_box">
-								<h4>Add a Review</h4>
-								<p>Your Rating:</p>
-								<ul class="list">
-									<li><a href="#"><i class="fa fa-star"></i></a></li>
-									<li><a href="#"><i class="fa fa-star"></i></a></li>
-									<li><a href="#"><i class="fa fa-star"></i></a></li>
-									<li><a href="#"><i class="fa fa-star"></i></a></li>
-									<li><a href="#"><i class="fa fa-star"></i></a></li>
-								</ul>
-								<p>Outstanding</p>
-								<form class="row contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
-									<div class="col-md-12">
-										<div class="form-group">
-											<input type="text" class="form-control" id="name" name="name" placeholder="Your Full name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your Full name'">
-										</div>
-									</div>
-									<div class="col-md-12">
-										<div class="form-group">
-											<input type="email" class="form-control" id="email" name="email" placeholder="Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address'">
-										</div>
-									</div>
-									<div class="col-md-12">
-										<div class="form-group">
-											<input type="text" class="form-control" id="number" name="number" placeholder="Phone Number" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Phone Number'">
-										</div>
-									</div>
-									<div class="col-md-12">
-										<div class="form-group">
-											<textarea class="form-control" name="message" id="message" rows="1" placeholder="Review" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Review'"></textarea></textarea>
-										</div>
-									</div>
-									<div class="col-md-12 text-right">
-										<button type="submit" value="submit" class="primary-btn">Submit Now</button>
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!--================End Product Description Area =================-->
+
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="review_box">
+                                <h4>Post a comment</h4>
+                                <form class="row contact_form" action="" method="post" id="commentForm"
+                                      novalidate="novalidate">
+                                    <input type="hidden" id="parentReviewId" name="parent_review" value="">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input type="number" class="form-control" id="rating" name="name"
+                                                   placeholder="Rate" min="1" max="5">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type='text' class="form-control" id="title" name="name"
+                                                   placeholder="Title">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <textarea class="form-control" name="description" id="description" rows="1"
+                                                      placeholder="Message"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 text-right">
+                                        <button type="submit" value="submit" class="btn primary-btn">Post</button>
+                                    </div>
+                                </form>
+                                <div id="replyMessage" style="display: none; color: green; margin-top: 10px;">
+                                    You are replying to a post.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Product Description Area =================-->
 
 
 
-<script>
-    function fetchProductDetails(productId) {
-        const apiUrl = `/shop/products/${productId}/`;
+    <script>
+        function fetchProductDetails(productId) {
+            const apiUrl = `/shop/products/${productId}/`;
 
-        fetch(apiUrl)
-            .then(response => response.json())
-            .then(productData => {
-                updateProductDetails(productData);
-                console.log(productData)
-                updateProductFeatures(productData.value_feature);
-            })
-            .catch(error => {
-                console.error('Error fetching product details:', error);
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(productData => {
+                    updateProductDetails(productData);
+                    console.log(productData)
+                    updateProductFeatures(productData.value_feature);
+                })
+                .catch(error => {
+                    console.error('Error fetching product details:', error);
+                });
+        }
+
+        function updateProductDetails(productData) {
+            const productNameElement = document.querySelector('.s_product_text h3');
+            const productPriceElement = document.querySelector('.s_product_text h2');
+            const productAvailabilityElement = document.querySelector('.s_product_text ul li:nth-child(1) span');
+            const productDescriptionElement = document.querySelector('.s_product_text p');
+            const productQuantityInput = document.querySelector('.product_count input');
+            const productImageContainer = document.querySelector('.s_Product_carousel');
+
+            productNameElement.textContent = productData.translations.en.title;
+            productPriceElement.textContent = `$${productData.price.toFixed(2)}`;
+            productAvailabilityElement.textContent = productData.inventory > 0 ? 'In Stock' : 'Out of Stock';
+            productDescriptionElement.textContent = productData.translations.en.description;
+
+            updateProductImages(productData.images);
+
+            productQuantityInput.value = 1;
+        }
+
+        function updateProductImages(images) {
+            const productImageContainer = document.querySelector('.s_Product_carousel');
+
+            productImageContainer.innerHTML = '';
+
+            images.forEach(image => {
+                const imgElement = document.createElement('img');
+                imgElement.classList.add('img-fluid');
+                imgElement.src = image.image;
+                imgElement.alt = 'none';
+
+                const singlePrdItem = document.createElement('div');
+                singlePrdItem.classList.add('single-prd-item');
+                singlePrdItem.appendChild(imgElement);
+
+                productImageContainer.appendChild(singlePrdItem);
             });
-    }
+        }
 
-    function updateProductDetails(productData) {
-        const productNameElement = document.querySelector('.s_product_text h3');
-        const productPriceElement = document.querySelector('.s_product_text h2');
-        const productAvailabilityElement = document.querySelector('.s_product_text ul li:nth-child(1) span');
-        const productDescriptionElement = document.querySelector('.s_product_text p');
-        const productQuantityInput = document.querySelector('.product_count input');
-        const productImageContainer = document.querySelector('.s_Product_carousel');
+        function updateProductFeatures(features) {
+            const featuresTableBody = document.querySelector('.tab-pane.fade tbody');
+            console.log(features)
+            // Clear existing features
+            featuresTableBody.innerHTML = '';
 
-        productNameElement.textContent = productData.translations.en.title;
-        productPriceElement.textContent = `$${productData.price.toFixed(2)}`;
-        productAvailabilityElement.textContent = productData.inventory > 0 ? 'In Stock' : 'Out of Stock';
-        productDescriptionElement.textContent = productData.translations.en.description;
+            // Add new features to the table
+            features.forEach(feature => {
+                console.log(feature)
+                console.log(feature.translations.en.title)
+                const title = feature.translations.en.title;
+                const value = feature.translations.en.value;
 
-        updateProductImages(productData.images);
+                const trElement = document.createElement('tr');
+                const tdTitleElement = document.createElement('td');
+                const tdValueElement = document.createElement('td');
 
-        productQuantityInput.value = 1;
-    }
+                tdTitleElement.innerHTML = `<h5>${title}</h5>`;
+                tdValueElement.innerHTML = `<h5>${value}</h5>`;
 
-    function updateProductImages(images) {
-        const productImageContainer = document.querySelector('.s_Product_carousel');
+                trElement.appendChild(tdTitleElement);
+                trElement.appendChild(tdValueElement);
 
-        productImageContainer.innerHTML = '';
+                featuresTableBody.appendChild(trElement);
+            });
+        }
 
-        images.forEach(image => {
-            const imgElement = document.createElement('img');
-            imgElement.classList.add('img-fluid');
-            imgElement.src = image.image;
-            imgElement.alt = 'none';
+        const productId = {{ id }};
+        fetchProductDetails(productId);
+    </script>
+    <script>
+        function fetchProductReviews(productId) {
+            const apiUrl = `/shop/products/${productId}/reviews/`;
 
-            const singlePrdItem = document.createElement('div');
-            singlePrdItem.classList.add('single-prd-item');
-            singlePrdItem.appendChild(imgElement);
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(reviewsData => {
+                    updateProductReviews(reviewsData);
+                })
+                .catch(error => {
+                    console.error('Error fetching product reviews:', error);
+                });
+        }
 
-            productImageContainer.appendChild(singlePrdItem);
+        function updateProductReviews(reviewsData) {
+            const reviewList = document.getElementById('reviewList');
+
+            // Clear existing reviews
+            reviewList.innerHTML = '';
+
+            reviewsData.forEach(review => {
+                const reviewItem = createReviewHTML(review);
+                reviewList.appendChild(reviewItem);
+
+                // If the review has replies, add them recursively
+                if (review.replies && review.replies.length > 0) {
+                    const replyList = document.createElement('div');
+                    replyList.classList.add('review_item', 'reply');
+
+                    review.replies.forEach(reply => {
+                        const replyItem = createReviewHTML(reply, true);
+                        replyList.appendChild(replyItem);
+                        // Recursive call for replies of replies
+                        addNestedReplies(reply, replyList);
+                    });
+
+                    reviewList.appendChild(replyList);
+                }
+            });
+        }
+
+        function addNestedReplies(review, replyList) {
+            if (review.replies && review.replies.length > 0) {
+                const nestedReplyList = document.createElement('div');
+                nestedReplyList.classList.add('review_item', 'reply', 'nested-reply');
+
+                review.replies.forEach(reply => {
+                    const nestedReplyItem = createReviewHTML(reply, true);
+                    nestedReplyList.appendChild(nestedReplyItem);
+                    // Recursive call for nested replies
+                    addNestedReplies(reply, nestedReplyList);
+                });
+
+                replyList.appendChild(nestedReplyList);
+            }
+        }
+
+        function createReviewHTML(review, isReply = false) {
+            const reviewItem = document.createElement('div');
+            reviewItem.classList.add('review_item');
+
+            if (isReply) {
+                reviewItem.classList.add('reply');
+            }
+
+            const mediaDiv = document.createElement('div');
+            mediaDiv.classList.add('media');
+
+            const mediaBodyDiv = document.createElement('div');
+            mediaBodyDiv.classList.add('media-body');
+
+            const ratingStars = getRatingStars(review.rating);
+            mediaBodyDiv.innerHTML = `
+                <h4>${review.customer.first_name} ${review.customer.last_name}</h4>
+                <h5>${new Date(review.created_at).toLocaleString()}</h5>
+                ${ratingStars}
+                <a class="reply_btn" href="#" onclick="handleReplyButtonClick(${review.id})">Reply</a>
+            `;
+
+            const descriptionT = document.createElement('h6');
+            descriptionT.textContent = review.title;
+            const descriptionP = document.createElement('p');
+            descriptionP.textContent = review.description;
+
+            mediaDiv.appendChild(mediaBodyDiv);
+            reviewItem.appendChild(mediaDiv);
+            reviewItem.appendChild(descriptionT);
+            reviewItem.appendChild(descriptionP);
+
+            return reviewItem;
+        }
+
+        function getRatingStars(rating) {
+            const fullStars = Math.floor(rating);
+            const halfStar = rating % 1 !== 0 ? '<i class="fa fa-star-half-empty"></i>' : '';
+            const emptyStars = 5 - Math.ceil(rating);
+
+            const starsHTML = '<i class="fa fa-star"></i>'.repeat(fullStars) + halfStar + '<i class="fa fa-star-o"></i>'.repeat(emptyStars);
+
+            return starsHTML;
+        }
+
+        const productId2 = {{ id }};
+        fetchProductReviews(productId2);
+
+
+    </script>
+    <script>
+        function handleReplyButtonClick(reviewId) {
+            document.getElementById('parentReviewId').value = reviewId;
+            document.getElementById('commentForm').scrollIntoView({behavior: 'smooth'});
+
+            const replyMessage = document.getElementById('replyMessage');
+
+            document.getElementById('commentForm').addEventListener('submit', function (event) {
+                const parentReviewId = document.getElementById('parentReviewId').value;
+
+                if (parentReviewId) {
+                    replyMessage.style.display = 'block';
+                }
+            });
+        }
+
+        function displayErrorMessage(message) {
+            const errorMessageElement = document.getElementById('errorMessage');
+            errorMessageElement.textContent = message;
+        }
+
+        function getToken() {
+            return localStorage.getItem('JWT');
+        }
+
+        function makeAuthenticatedRequest(url, method, context = null) {
+            const token = getToken();
+
+            const headers = {
+                'Content-Type': 'application/json',
+            };
+
+            if (token) {
+                headers['Authorization'] = `JWT ${token}`;
+            }
+
+            const options = {
+                method: method,
+                headers: headers,
+                body: context ? JSON.stringify(context) : null,
+            };
+            console.log(options)
+
+            return fetch(url, options)
+                .then(response => {
+                    {#displayErrorMessage('Your comment has been received! It will be shown after checking')#}
+                    {#document.getElementById('rating').value = '';#}
+                    {#document.getElementById('title').value = '';#}
+                    {#document.getElementById('description').value = '';#}
+                    return response
+                })
+                .catch(error => {
+                    console.error('eeeeeee', error);
+                });
+        }
+
+        function verifyToken() {
+            const token = getToken();
+
+            if (token) {
+                const endpoint = '/core/auth/jwt/verify/';
+
+                makeAuthenticatedRequest(endpoint, 'POST', context = {token: token})
+                    .then(response => {
+                        console.log(response);
+                        if (response.code === 'token_not_valid') {
+                            console.log('Token not valid. User needs to log in.');
+                            alert('Token not valid. User needs to log in.')
+                            window.location.href = '/login/';
+                        } else {
+                            console.log('Token is valid. User is already logged in.');
+
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            } else {
+                console.log('No token found. User needs to log in.');
+                alert('No token found. User needs to log in.')
+                window.location.href = '/login/';
+            }
+        }
+
+        window.onload = function () {
+            verifyToken();
+        };
+        document.getElementById('commentForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            let rating = document.getElementById('rating')
+            let title = document.getElementById('title');
+            let description = document.getElementById('description');
+            let parentReviewId = document.getElementById('parentReviewId').value;
+
+            let endpoint = '/shop/products/{{ id }}/reviews/';
+
+            makeAuthenticatedRequest(endpoint, 'POST', context = {
+                'rating': rating.value,
+                'title': title.value,
+                'description': description.value,
+                'parent_review': parentReviewId
+            })
+                .then(data => {
+                    if (data.ok) {
+                        alert('Your comment has been received! It will be shown after checking')
+                        document.getElementById('rating').value = '';
+                        document.getElementById('title').value = '';
+                        document.getElementById('description').value = '';
+                        console.log(data);
+                    } else {
+                        throw new Error('field are empty')
+                    }
+                })
+                .catch(error => {
+                    displayErrorMessage(error)
+                    document.getElementById('dog').scrollIntoView({behavior: 'smooth'});
+                    console.error('Error:', error);
+                });
         });
-    }
+    </script>
 
-    function updateProductFeatures(features) {
-        const featuresTableBody = document.querySelector('.tab-pane.fade tbody');
-        console.log(features)
-        // Clear existing features
-        featuresTableBody.innerHTML = '';
-
-        // Add new features to the table
-        features.forEach(feature => {
-            console.log(feature)
-            console.log(feature.translations.en.title)
-            const title = feature.translations.en.title;
-            const value = feature.translations.en.value;
-
-            const trElement = document.createElement('tr');
-            const tdTitleElement = document.createElement('td');
-            const tdValueElement = document.createElement('td');
-
-            tdTitleElement.innerHTML = `<h5>${title}</h5>`;
-            tdValueElement.innerHTML = `<h5>${value}</h5>`;
-
-            trElement.appendChild(tdTitleElement);
-            trElement.appendChild(tdValueElement);
-
-            featuresTableBody.appendChild(trElement);
-        });
-    }
-
-    const productId = {{ id }};
-    fetchProductDetails(productId);
-</script>
 
 {% endblock %}

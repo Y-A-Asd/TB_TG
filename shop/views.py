@@ -4,7 +4,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import action
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.permissions import IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
 from rest_framework.filters import SearchFilter, OrderingFilter
@@ -251,12 +251,12 @@ class ReviewViewSet(ModelViewSet):
     serializer_class = ReviewSerializer
     filter_backends = [SearchFilter]
     search_fields = ['title', 'description']
-    pagination_class = DefaultPagination
-    permission_classes = [IsAuthenticated]
+    # pagination_class = DefaultPagination
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     def get_queryset(self):
         logger.info('test-logs')
-        return Review.objects.filter(product_id=self.kwargs['product_pk'], active=True)
+        return Review.objects.filter(product_id=self.kwargs['product_pk'], active=True, parent_review=None)
 
     def get_serializer_context(self):
         return {'product_id': self.kwargs['product_pk'], 'user_id': self.request.user.id}
@@ -269,11 +269,17 @@ class ReviewViewSet(ModelViewSet):
         return Response(serializer.data)
 
     def retrieve(self, request, *args, **kwargs):
-        instance = self.get_object()
-        serializer = self.get_serializer(instance)
+        review_id = kwargs.get('pk')
+
+        try:
+            review = Review.objects.get(id=review_id, active=True)
+        except Review.DoesNotExist:
+            return Response({'error': 'Review not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = self.get_serializer(review)
         data = serializer.data
 
-        replies = Review.objects.filter(parent_review=instance)
+        replies = Review.objects.filter(parent_review=review)
         reply_serializer = self.get_serializer(replies, many=True)
         data['replies'] = reply_serializer.data
 

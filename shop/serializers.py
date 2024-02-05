@@ -104,8 +104,6 @@ class CollectionSerializer(TranslatableModelSerializer):
         return children_serializer.data if obj.subcollection.exists() else None
 
 
-
-
 class CartItemSerializer(serializers.ModelSerializer):
     product = SimpleProductSerializer()
     total_price = serializers.SerializerMethodField()
@@ -189,10 +187,15 @@ class CustomerSerializer(TranslatableModelSerializer):
 
 class ReviewSerializer(serializers.ModelSerializer):
     customer = CustomerSerializer(read_only=True)
+    replies = serializers.SerializerMethodField()
 
     class Meta:
         model = Review
-        fields = ['id', 'created_at', 'parent_review', 'title', 'description', 'rating', 'customer']
+        fields = ['id', 'created_at', 'parent_review', 'title', 'description', 'rating', 'customer', 'replies']
+
+    def get_replies(self, obj):
+        children_serializer = self.__class__(obj.replies.all(), many=True)
+        return children_serializer.data if obj.replies.exists() else None
 
     # def to_representation(self, instance):
     #     if instance.active:
