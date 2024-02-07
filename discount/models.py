@@ -7,18 +7,6 @@ from django.utils.translation import gettext_lazy as _
 from core.models import BaseModel
 
 
-class UsageCount(models.Model):
-    discount = models.ForeignKey('BaseDiscount', on_delete=models.CASCADE)
-    count = models.PositiveIntegerField(default=0)
-
-    def increment(self):
-        self.count += 1
-        self.save()
-
-    def __str__(self):
-        return f"UsageCount for {self.discount.code}: {self.count}"
-
-
 class BaseDiscount(BaseModel):
     class Mode(models.TextChoices):
         DirectPrice = 'DO', _('Direct Price')
@@ -43,10 +31,6 @@ class BaseDiscount(BaseModel):
             # self.save()
             return False
         if self.valid_from and self.valid_from > now:
-            self.active = False
-            # self.save()
-            return False
-        if self.code and self.mode == self.Mode.PersonCode and self.used:
             self.active = False
             # self.save()
             return False

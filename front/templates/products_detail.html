@@ -56,7 +56,7 @@
                             </button>
                         </div>
                         <div class="card_area d-flex align-items-center">
-                            <a class="primary-btn" href="#">Add to Cart</a>
+                            <a id="addToCartBtn" class="primary-btn" href="#">Add to Cart</a>
                         </div>
                     </div>
                 </div>
@@ -514,6 +514,55 @@
                 });
         });
     </script>
+    <script>
+        document.getElementById('addToCartBtn').addEventListener('click', function (event) {
+            event.preventDefault();
 
+            const productId = {{ id }};
+            const quantity = parseInt(document.getElementById('sst').value);
+
+            let cartId = localStorage.getItem("cartId");
+
+            if (!cartId) {
+
+                createCart(productId, quantity);
+            } else {
+                addCartItem(cartId, productId, quantity);
+            }
+        });
+
+        function createCart(productId, quantity) {
+            fetch("/shop/cart/", {
+                method: "POST"
+            })
+                .then(response => response.json())
+                .then(data => {
+                    localStorage.setItem("cartId", data.id);
+                    addCartItem(data.id, productId, quantity);
+                })
+                .catch(error => console.error("Error creating cart:", error));
+        }
+
+        function addCartItem(cartId, productId, quantity) {
+            fetch(`/shop/cart/${cartId}/items/`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    "product_id": productId,
+                    "quantity": quantity
+                })
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert('Item added to cart successfully!');
+                    } else {
+                        throw new Error('Failed to add item to cart');
+                    }
+                })
+                .catch(error => console.error("Error adding item to cart:", error));
+        }
+    </script>
 
 {% endblock %}

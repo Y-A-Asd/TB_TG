@@ -182,7 +182,7 @@ class OrderAdmin(admin.ModelAdmin):
     autocomplete_fields = ['customer']
     list_filter = ['customer', 'order_status']
     inlines = [OrderItemInline]
-    list_display = ['id', 'customer', 'order_status', 'total_price', 'view_order_items', 'created_at']
+    list_display = ['id', 'customer', 'order_status', 'total_price', 'view_order_items', 'discount', 'created_at']
     search_fields = ['id', 'customer__user__username']
     actions = ['mark_as_delivered']
 

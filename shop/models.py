@@ -108,6 +108,7 @@ class Product(TranslatableModel, BaseModel):
                                  null=True, blank=True)
     value_feature = models.ManyToManyField(MainFeature, related_name='value_features',
                                            verbose_name='Features', blank=True)
+
     # extra_data = models.JSONField(verbose_name='Features', null=True, blank=True)
 
     def __str__(self):
@@ -135,8 +136,8 @@ class Product(TranslatableModel, BaseModel):
         #         discount__active=True
         #     ).exclude(pk=self.pk)
 
-        if existing_discount_item.exists():
-            raise ValidationError(_('There is already an active discount for this item.'))
+        # if existing_discount_item.exists():
+        #     raise ValidationError(_('There is already an active discount for this item.'))
 
     class Meta:
         verbose_name = _("Product")
@@ -180,7 +181,7 @@ class Cart(BaseModel):
     customer = models.ForeignKey(Customer, on_delete=models.PROTECT, verbose_name=_("Customer"), null=True, blank=True)
 
 
-class CartItem(BaseModel):
+class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, verbose_name=_("Cart"), related_name='items')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name=_("Product"))
     # unit_price = models.DecimalField(_('Price'),max_digits=15, decimal_places=2, null=True, blank=True)
@@ -231,13 +232,36 @@ class Order(BaseModel):
     province = models.CharField(_("Province"), max_length=32)
     first_name = models.CharField(_("First Name"), max_length=255)
     last_name = models.CharField(_("Last Name"), max_length=255)
+    discount = models.ForeignKey(BaseDiscount, on_delete=models.CASCADE, verbose_name=_("Discount"),
+                                 null=True, blank=True)
 
     class Meta:
         verbose_name = _("Order")
         verbose_name_plural = _("Orders")
 
     def get_total_price(self):
-        total_price = self.orders.aggregate(total_price=Sum(F('unit_price') * F('quantity')))['total_price']
+        if self.discount:
+            self.discount.ensure_availability()
+            if self.discount.active:
+                if self.discount.mode == self.discount.Mode.DirectPrice:
+                    total_price = \
+                        self.orders.aggregate(
+                            total_price=Sum(F('unit_price') * F('quantity')) - self.discount.discount)[
+                            'total_price']
+                elif self.discount.mode == self.discount.Mode.DiscountOff:
+                    total_price = self.orders.aggregate(total_price=Sum(F('unit_price') * F('quantity')) - Sum(
+                        F('unit_price') * F('quantity')) * self.discount.discount / 100)['total_price']
+                elif (self.discount.mode == self.discount.Mode.PersonCode or
+                      self.discount.mode == self.discount.Mode.EventCode):
+                    total_price = self.orders.aggregate(total_price=Sum(F('unit_price') * F('quantity')) - Sum(
+                        F('unit_price') * F('quantity')) * self.discount.discount / 100)['total_price']
+                else:
+                    raise ValueError(_(f"Invalid discount mode: {self.discount.mode}"))
+            else:
+                raise ValueError(_(f"Discount is not active!"))
+
+        else:
+            total_price = self.orders.aggregate(total_price=Sum(F('unit_price') * F('quantity')))['total_price']
         return total_price if total_price is not None else 0
 
 

@@ -146,6 +146,7 @@ STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'front/static'),
+    os.path.join(BASE_DIR, 'shop/static'),
 ]
 "python manage.py collectstatic"
 MEDIA_URL = '/media/'
@@ -203,7 +204,7 @@ PARLER_LANGUAGES = {
         {'code': 'fa'},
     ),
     'default': {
-        'fallback': 'en',
+        # 'fallback': 'en',
         'hide_untranslated': False,
     }
 }
@@ -235,7 +236,7 @@ celery command:
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/2",
+        "LOCATION": "redis://127.0.0.1:6379/3",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }

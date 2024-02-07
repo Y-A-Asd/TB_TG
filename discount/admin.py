@@ -25,7 +25,8 @@ class BaseDiscountAdminForm(forms.ModelForm):
         valid_from = cleaned_data.get('valid_from')
         valid_to = cleaned_data.get('valid_to')
         base = BaseDiscount(mode=mode, discount=discount, active=active, valid_to=valid_to, valid_from=valid_from)
-        if mode == BaseDiscount.Mode.DirectPrice and discount < 101:
+        if (mode == BaseDiscount.Mode.DirectPrice or BaseDiscount.Mode.PersonCode
+                or BaseDiscount.Mode.EventCode) and discount < 101:
             raise ValidationError({'discount': _('Invalid discount!(Check Mode again)')})
 
         if mode == BaseDiscount.Mode.DiscountOff and discount > 99:
