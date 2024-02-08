@@ -204,7 +204,7 @@ PARLER_LANGUAGES = {
         {'code': 'fa'},
     ),
     'default': {
-        # 'fallback': 'en',
+        'fallback': 'en',
         'hide_untranslated': False,
     }
 }

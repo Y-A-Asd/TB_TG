@@ -29,11 +29,11 @@ class MainFeature(TranslatableModel, BaseModel):
         verbose_name_plural = _("Features")
 
     def __str__(self):
-        default_language = get_language() or 'en'
-        title_value_translation = self.translations.get(language_code=default_language)
-        title = title_value_translation.title
-        value = title_value_translation.value
-        return f'Feature- {self.pk} : {title} -> {value}'
+        # default_language = get_language() or 'en'
+        # title_value_translation = self.translations.get(language_code=default_language)
+        # title = title_value_translation.title
+        # value = title_value_translation.value
+        return f'Feature- {self.pk}'
 
 
 class Promotion(TranslatableModel, BaseModel):
@@ -57,10 +57,10 @@ class Promotion(TranslatableModel, BaseModel):
     #         raise ValidationError(_('There is already an active discount for this item.'))
 
     def __str__(self):
-        default_language = get_language() or 'en'
-        description_translation = self.translations.get(language_code=default_language)
-        description = description_translation.description if description_translation else f"Promotion {self.pk}"
-        return f'Promotion {self.pk} - {description}'
+        # default_language = get_language() or 'en'
+        # description_translation = self.translations.get(language_code=default_language)
+        # description = description_translation.description if description_translation else f"Promotion {self.pk}"
+        return f'Promotion {self.pk} '
 
 
 class Collection(TranslatableModel, BaseModel):
@@ -77,14 +77,13 @@ class Collection(TranslatableModel, BaseModel):
 
     def __str__(self):
         default_language = get_language() or 'en'
-        title_translation = self.translations.get(language_code=default_language)
-        title = title_translation.title if title_translation else f"Collection {self.pk}"
-        return f'Collection {self.pk} - {title}'
+        print('default_language' ,default_language)
+        return f'Collection {self.pk}'
 
     class Meta:
         verbose_name = _("Collection")
         verbose_name_plural = _("Collections")
-        ordering = ["translations__title"]
+        # ordering = ["translations__title"]
 
 
 class Product(TranslatableModel, BaseModel):
@@ -112,10 +111,10 @@ class Product(TranslatableModel, BaseModel):
     # extra_data = models.JSONField(verbose_name='Features', null=True, blank=True)
 
     def __str__(self):
-        default_language = get_language() or 'en'
-        title_translation = self.translations.get(language_code=default_language)
-        title = title_translation.title if title_translation else f"Product {self.pk}"
-        return f'Product {self.pk} - {title} - {self.unit_price}'
+        # default_language = get_language() or 'en'
+        # title_translation = self.translations.get(language_code=default_language)
+        # title = title_translation.title if title_translation else f"Product {self.pk}"
+        return f'Product {self.pk}'
 
     @property
     def price_after_off(self, ):
@@ -142,7 +141,7 @@ class Product(TranslatableModel, BaseModel):
     class Meta:
         verbose_name = _("Product")
         verbose_name_plural = _("Products")
-        ordering = ["translations__title"]
+        # ordering = ["translations__title"]
 
 
 class ProductImage(BaseModel):

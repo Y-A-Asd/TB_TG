@@ -250,7 +250,7 @@
                                         </div>
                                     </form>
                                     <form id="user-form">
-                                        <input id="id" class="form-control" type="hidden">
+                                        <input id="idu" class="form-control" type="hidden">
                                         <input id="phone_number" class="form-control" type="hidden">
                                         <div class="form-group row">
                                             <label class="col-lg-3 col-form-label form-control-label">Email</label>
@@ -261,6 +261,27 @@
                                         <div class="form-group row">
                                             <div class="col-lg-9 offset-lg-3">
                                                 <input type="submit" class="btn btn-secondary" value="Save Changes">
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <form id="pass-form">
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Current
+                                                Password</label>
+                                            <div class="col-lg-9">
+                                                <input id="currpass" class="form-control" type="password">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">New
+                                                Password</label>
+                                            <div class="col-lg-9">
+                                                <input id="newpass" class="form-control" type="password">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-lg-9 offset-lg-3">
+                                                <input type="submit" class="btn btn-success" value="Save Changes">
                                             </div>
                                         </div>
                                     </form>
@@ -447,7 +468,7 @@
 
     function prefillForm2(data) {
         document.getElementById('email').value = data.email;
-        document.getElementById('id').value = data.id;
+        document.getElementById('idu').value = data.id;
         document.getElementById('phone_number').value = data.phone_number;
     }
 
@@ -455,7 +476,7 @@
         event.preventDefault();
 
         const email = document.getElementById('email').value;
-        const id = document.getElementById('id').value;
+        const id = document.getElementById('idu').value;
         const phoneNumber = document.getElementById('phone_number').value;
 
         const endpoint = '/core/auth/users/me/';
@@ -493,6 +514,49 @@
 
     const userForm = document.getElementById('user-form');
     userForm.addEventListener('submit', updateUser);
+
+
+    function updatePass(event) {
+        event.preventDefault();
+
+        const new_password = document.getElementById('newpass').value;
+        const current_password = document.getElementById('currpass').value;
+
+        const endpoint = '/core/auth/users/set_password/';
+
+        const requestBody = {
+            new_password: new_password,
+            current_password: current_password
+        };
+        console.log(requestBody)
+        const token = getToken();
+
+        const headers = {
+            'Content-Type': 'application/json',
+        };
+
+        if (token) {
+            headers['Authorization'] = `JWT ${token}`;
+        }
+
+        const options = {
+            method: 'POST',
+            headers: headers,
+            body: requestBody ? JSON.stringify(requestBody) : null,
+        };
+
+        return fetch(endpoint, options)
+            .then(response => {
+                console.log('User updated:', response);
+                alert('Password updated successfully!');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+
+    const passForm = document.getElementById('pass-form');
+    passForm.addEventListener('submit', updatePass);
 
 </script>
 <!-- Bootstrap core JavaScript-->
