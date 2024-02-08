@@ -29,3 +29,11 @@ class ProductDetailView(View):
 
     def get(self, request, id):
         return render(request, self.template_name, {'id': id})
+
+
+class CartView(TemplateView):
+    template_name = 'cart.html'
+
+
+class HomeView(TemplateView):
+    template_name = 'index.html'

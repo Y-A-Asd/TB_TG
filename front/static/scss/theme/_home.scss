@@ -302,7 +302,7 @@
 	background: #f9f9ff;
 	.exclusive-left {
 		position: realtive;
-		background: url(../img/exclusive.jpg) center no-repeat;
+		background: url(./img/exclusive.jpg) center no-repeat;
 		background-size: cover;
 		text-align: center;
 		padding: 275px 0;
@@ -725,14 +725,14 @@
 				background-size: cover;
 				margin-left: 10px;
 				&:nth-child(1) {
-					background: url(../img/ob1.jpg);
+					background: url(./img/ob1.jpg);
 					margin-left: 0;
 				}
 				&:nth-child(2) {
-					background: url(../img/ob2.jpg);
+					background: url(./img/ob2.jpg);
 				}
 				&:nth-child(3) {
-					background: url(../img/ob3.jpg);
+					background: url(./img/ob3.jpg);
 				}
 				&.active {
 					box-shadow: 2.828px 2.828px 15px 0px rgba(0, 0, 0, 0.1);
@@ -759,14 +759,14 @@
 			.owl-dots {
 				.owl-dot {
 					&:nth-child(1) {
-						background: url(../img/organic-food/ob1.jpg);
+						background: url(./img/organic-food/ob1.jpg);
 						margin-left: 0;
 					}
 					&:nth-child(2) {
-						background: url(../img/organic-food/ob2.jpg);
+						background: url(./img/organic-food/ob2.jpg);
 					}
 					&:nth-child(3) {
-						background: url(../img/organic-food/ob3.jpg);
+						background: url(./img/organic-food/ob3.jpg);
 					}
 					&.active {
 						&:after {

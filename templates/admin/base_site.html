@@ -12,10 +12,10 @@
  
 {% block userlinks %}
     <a href="{{ request|switch_i18n:'en' }}">
-        <img src="{% static 'images/flag-usa.png' %}"/>
+        <img src="{% static 'images/flag-usa.png' %}" style="width: 30px"/>
     </a> /
     <a href="{{ request|switch_i18n:'fa' }}">
-        <img class="i18n_flag" src="/home/flatlife/djangopro/TB_TG/TB_TG/static/images/flag-iran.png" style="width: 16px"/>
+        <img class="i18n_flag" src="{% static 'images/flag-iran.png' %}" style="width: 30px"/>
     </a> 
     {% if user.is_active and user.is_staff %}
         {% url 'django-admindocs-docroot' as docsroot %}

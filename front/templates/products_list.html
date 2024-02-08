@@ -23,7 +23,7 @@
                 <div class="sidebar-categories">
                     <div class="head">{% trans "Browse Collections" %}</div>
                     <ul class="main-categories">
-                        {# Your collections will be dynamically added here using JavaScript #}
+                        {# collections will be dynamically added here using JavaScript #}
                     </ul>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                 <!-- Start Best Seller -->
                 <section class="lattest-product-area pb-40 category-list">
                     <div class="row" id="productContainer">
-                        <!-- Your products will be dynamically added here using JavaScript -->
+{#                         products will be dynamically added here using JavaScript #}
                     </div>
                 </section>
                 <!-- End Best Seller -->
@@ -80,16 +80,15 @@
             return socialInfo;
         }
 
-        const productsPerPage = 10;
+        const productsPerPage = 12;
         let currentPage = 1;
 
         function fetchProducts(page = 1, selectedOption = 'updated_at', collectionsId = null) {
             console.log(collectionsId == null)
             let apiUrl = null
-            if (collectionsId == null){
+            if (collectionsId == null) {
                 apiUrl = `/shop/products/?page=${page}&ordering=${getSortingOrdering(selectedOption)}`;
-            }
-            else{
+            } else {
                 apiUrl = `/shop/products/?page=${page}&ordering=${getSortingOrdering(selectedOption)}&collection_id=${collectionsId}`;
             }
 
@@ -135,6 +134,18 @@
                             productActions.classList.add('prd-bottom');
 
                             const addToBag = createSocialInfo('ti-bag', 'add to bag', 'ti-bag');
+                            addToBag.addEventListener('click', () => {
+                                const cartId = localStorage.getItem('cartId');
+                                const productId = product.id;
+                                const quantity = 1;
+
+                                if (!cartId) {
+                                    createCartAndAddToBag(productId);
+                                } else {
+                                    addToCart(cartId, productId, quantity);
+                                }
+                            });
+
                             // const addToWishlist = createSocialInfo('lnr lnr-heart', 'Wishlist');
                             const viewMore = createSocialInfo('lnr', 'view more', 'lnr-move');
 
@@ -163,6 +174,42 @@
                 .catch(error => {
                     console.error('Error fetching products:', error);
                 });
+        }
+
+        function createCartAndAddToBag(productId) {
+            fetch('/shop/cart/', {
+                method: 'POST'
+            })
+                .then(response => response.json())
+                .then(data => {
+                    const cartId = data.id;
+                    localStorage.setItem('cartId', cartId);
+                    addToCart(cartId, productId, 1); // Add the item to the cart with quantity 1
+                })
+                .catch(error => console.error('Error creating cart:', error));
+        }
+
+        // Function to add the item to the cart
+        function addToCart(cartId, productId, quantity) {
+            fetch(`/shop/cart/${cartId}/items/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    product_id: productId,
+                    quantity: quantity
+                })
+            })
+                .then(response => {
+                    if (response.ok) {
+                        console.log('Item added to cart successfully');
+                        // You can add any additional logic here, such as updating UI to reflect the item being added to the cart
+                    } else {
+                        console.error('Failed to add item to cart:', response.statusText);
+                    }
+                })
+                .catch(error => console.error('Error adding item to cart:', error));
         }
 
         function updatePagination(totalProducts, productsPerPage) {
