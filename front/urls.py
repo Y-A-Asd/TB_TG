@@ -10,4 +10,13 @@ urlpatterns = [
     path('products/', views.ProductListView.as_view(), name='products'),
     path('products/<int:id>/', views.ProductDetailView.as_view(), name='products-detail'),
     path('cart/', views.CartView.as_view(), name='cart'),
+    path('', views.HomeView.as_view(), name='home'),
 ]
+# todo: 1. implement remaining:{profile - make order from cart}
+# todo: 2. link routes inside site
+# todo: 2.1. caching
+# todo: 3. valid error message
+# todo: 4. translations
+# todo: 5. gold
+# todo: 6(optional). blog
+# todo: 7(optional). wishlist

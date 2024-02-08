@@ -33,3 +33,7 @@ class ProductDetailView(View):
 
 class CartView(TemplateView):
     template_name = 'cart.html'
+
+
+class HomeView(TemplateView):
+    template_name = 'index.html'

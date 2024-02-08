@@ -323,14 +323,41 @@ class SiteSettings(TranslatableModel, BaseModel):
     )
     phone_number = models.CharField(_("Phone Number"), max_length=20, blank=True, null=True)
     logo = models.ImageField(_("Logo"), upload_to='site_settings/logos/', blank=True, null=True)
-    social_media_links = models.JSONField(_("Social Media Links"), blank=True, null=True)
+    telegram_link = models.CharField(_("Telegram link"), blank=True, null=True, max_length=20)
+    twitter_link = models.CharField(_("Twitter link"), blank=True, null=True, max_length=20)
+    instagram_link = models.CharField(_("Instagram link"), blank=True, null=True, max_length=20)
+    whatsapp_link = models.CharField(_("Whatsapp link"), blank=True, null=True, max_length=20)
+
+    def save(self, *args, **kwargs):
+        existing_instance = SiteSettings.objects.first()
+        if existing_instance:
+            existing_instance.phone_number = self.phone_number
+            existing_instance.logo = self.logo
+            existing_instance.telegram_link = self.telegram_link
+            existing_instance.twitter_link = self.twitter_link
+            existing_instance.instagram_link = self.instagram_link
+            existing_instance.whatsapp_link = self.whatsapp_link
+            existing_instance.save()
+        else:
+            super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"Site Settings {self.pk}"
+        return f"Site Settings"
 
     class Meta:
         verbose_name = _("Site Settings")
         verbose_name_plural = _("Site Settings")
+
+
+class HomeBanner(BaseModel):
+    product = models.ManyToManyField(Product, verbose_name='Products')
+
+    def __str__(self):
+        return f"Home Banner"
+
+    class Meta:
+        verbose_name = _("Home Banner")
+        verbose_name_plural = _("Home Banners")
 
 # class WishList(BaseModel):
 #     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name=_("Product"))

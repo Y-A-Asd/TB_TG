@@ -6,7 +6,7 @@ from rest_framework import serializers
 
 from core.models import AuditLog
 from shop.models import Product, Collection, Review, Customer, Order, OrderItem, ProductImage, CartItem, Cart, Address, \
-    Transaction, MainFeature, Promotion
+    Transaction, MainFeature, Promotion, SiteSettings, HomeBanner
 from parler_rest.serializers import TranslatableModelSerializer, TranslatedFieldsField
 from django.utils.translation import gettext_lazy as _
 
@@ -334,3 +334,22 @@ class ReportingSerializer(serializers.Serializer):
     days = serializers.IntegerField(required=False)
     start_at = serializers.DateTimeField(required=False)
     end_at = serializers.DateTimeField(required=False)
+
+
+class SiteSettingsSerializer(TranslatableModelSerializer):
+    translations = TranslatedFieldsField(shared_model=SiteSettings)
+
+    class Meta:
+        model = SiteSettings
+        fields = ['id', 'phone_number', 'logo', 'telegram_link', 'twitter_link', 'instagram_link', 'whatsapp_link',
+                  'translations']
+
+
+class HomeBannerSerializer(serializers.ModelSerializer):
+    product = ProductSerializer(many=True)
+
+    class Meta:
+        model = HomeBanner
+        fields = ['id', 'product']
+
+        read_only_fields = ['id']

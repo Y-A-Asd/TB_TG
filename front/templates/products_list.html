@@ -23,7 +23,7 @@
                 <div class="sidebar-categories">
                     <div class="head">{% trans "Browse Collections" %}</div>
                     <ul class="main-categories">
-                        {# Your collections will be dynamically added here using JavaScript #}
+                        {# collections will be dynamically added here using JavaScript #}
                     </ul>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                 <!-- Start Best Seller -->
                 <section class="lattest-product-area pb-40 category-list">
                     <div class="row" id="productContainer">
-                        <!-- Your products will be dynamically added here using JavaScript -->
+{#                         products will be dynamically added here using JavaScript #}
                     </div>
                 </section>
                 <!-- End Best Seller -->
@@ -80,7 +80,7 @@
             return socialInfo;
         }
 
-        const productsPerPage = 10;
+        const productsPerPage = 12;
         let currentPage = 1;
 
         function fetchProducts(page = 1, selectedOption = 'updated_at', collectionsId = null) {

@@ -1,12 +1,12 @@
 import logging
 from django.db.models import Count, Q, QuerySet, ExpressionWrapper, fields, F
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import status
+from rest_framework import status, generics
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly
 from rest_framework.views import APIView
-from rest_framework.viewsets import ModelViewSet, GenericViewSet
+from rest_framework.viewsets import ModelViewSet, GenericViewSet, ReadOnlyModelViewSet
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, DestroyModelMixin, ListModelMixin
 from core.models import User, AuditLog
@@ -16,9 +16,10 @@ from .serializers import (ProductSerializer, CollectionSerializer, ReviewSeriali
                           CartSerializer, CartItemSerializer, AddItemsSerializer, UpdateItemsSerializer,
                           CustomerSerializer, OrderSerializer, CreateOrderSerializer, UpdateOrderSerializer,
                           ProductImageSerializer, AddressSerializer, TransactionSerializer, UpdateTransactionSerializer,
-                          AuditLogSerializer, PromotionSerializer, SimpleProductSerializer, ReportingSerializer)
+                          AuditLogSerializer, PromotionSerializer, SimpleProductSerializer, ReportingSerializer,
+                          SiteSettingsSerializer, HomeBannerSerializer)
 from .models import Product, Collection, OrderItem, Review, Customer, Order, ProductImage, CartItem, Cart, Address, \
-    Transaction, Promotion
+    Transaction, Promotion, SiteSettings, HomeBanner
 from .filters import ProductFilter, RecursiveDjangoFilterBackend
 from .permissions import IsAdminOrReadOnly, ViewCustomerHistoryPermission
 
@@ -475,3 +476,13 @@ class ReportingAPIView(APIView):
         }
 
         return Response(response_data, status=status.HTTP_200_OK)
+
+
+class SiteSettingsViewSet(ModelViewSet):
+    queryset = SiteSettings.objects.all()
+    serializer_class = SiteSettingsSerializer
+
+
+class HomeBannerViewSet(ReadOnlyModelViewSet):
+    queryset = HomeBanner.objects.all()
+    serializer_class = HomeBannerSerializer

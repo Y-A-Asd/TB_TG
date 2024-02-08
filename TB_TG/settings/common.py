@@ -162,7 +162,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'djmailyosof@gmail.com'
-EMAIL_HOST_PASSWORD = 'wlbqpqetjidxlxvs'
+EMAIL_HOST_PASSWORD = 'wlbqpqetjidxlxvs'  # todo : put in dotenv
 
 REST_FRAMEWORK = {
     'COERCE_DECIMAL_TO_STRING': False,

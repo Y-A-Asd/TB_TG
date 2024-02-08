@@ -11,7 +11,7 @@ from tags.models import TaggedItem
 from . import models
 from .filters import MainFeatureFilter, InventoryFilter
 from .models import Review, Transaction, Address, \
-    MainFeature, Order, OrderItem, SiteSettings, Product, Collection
+    MainFeature, Order, OrderItem, SiteSettings, Product, Collection, HomeBanner
 
 
 class TagInline(GenericTabularInline):
@@ -260,17 +260,18 @@ class TransactionAdmin(admin.ModelAdmin):
 
 
 class SiteSettingsAdmin(TranslatableAdmin):
-    list_display = ['id', 'phone_number', 'logo_thumbnail']
+    list_display = ['id', 'phone_number', 'logo_thumbnail']  # Add 'logo_thumbnail' here
     readonly_fields = ['logo_thumbnail']
     fieldsets = [
-        (_('General Settings'), {'fields': ['phone_number', 'social_media_links']}),
+        (_('General Settings'),
+         {'fields': ['phone_number', 'telegram_link', 'twitter_link', 'instagram_link', 'whatsapp_link']}),
         (_('Translations'), {'fields': ['footer_text', 'address']}),
         (_('Logo'), {'fields': ['logo', 'logo_thumbnail']}),
     ]
 
     def logo_thumbnail(self, obj):
         if obj.logo:
-            return '<img src="{}" style="max-height: 100px; max-width: 150px;"/>'.format(obj.logo.url)
+            return format_html('<img src="{}" style="max-height: 100px; max-width: 150px;"/>', obj.logo.url)
         return _('No Image')
 
     logo_thumbnail.allow_tags = True
@@ -278,3 +279,15 @@ class SiteSettingsAdmin(TranslatableAdmin):
 
 
 admin.site.register(SiteSettings, SiteSettingsAdmin)
+
+
+class HomeBannerAdmin(admin.ModelAdmin):
+    list_display = ['id', 'display_products']
+
+    def display_products(self, obj):
+        return ', '.join([str(product) for product in obj.product.all()])
+
+    display_products.short_description = 'Products'
+
+
+admin.site.register(HomeBanner, HomeBannerAdmin)
