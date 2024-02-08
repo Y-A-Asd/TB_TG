@@ -2,7 +2,9 @@ from django.contrib import admin
 from django.db.models import QuerySet, F, Q
 from django_filters.rest_framework import FilterSet
 from django.utils.translation import gettext_lazy as _
-from .models import Product, Review, MainFeature, Collection
+from rest_framework.filters import BaseFilterBackend
+
+from .models import Product, Review, MainFeature, Collection, Customer
 from django_filters.rest_framework import DjangoFilterBackend
 
 
@@ -69,3 +71,12 @@ class InventoryFilter(admin.SimpleListFilter):
     def queryset(self, request, queryset: QuerySet):
         if self.value() == '<min':
             return queryset.filter(inventory__lt=F('min_inventory'))
+
+
+class CustomerFilterBackend(BaseFilterBackend):
+    def filter_queryset(self, request, queryset, view):
+        user = request.user
+        if user.is_staff:
+            return queryset
+        customer = Customer.objects.get(user=user)
+        return queryset.filter(customer=customer)

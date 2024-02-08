@@ -259,10 +259,8 @@
         function updateProductFeatures(features) {
             const featuresTableBody = document.querySelector('.tab-pane.fade tbody');
             console.log(features)
-            // Clear existing features
             featuresTableBody.innerHTML = '';
 
-            // Add new features to the table
             features.forEach(feature => {
                 console.log(feature)
                 console.log(feature.translations.en.title)
@@ -303,7 +301,6 @@
         function updateProductReviews(reviewsData) {
             const reviewList = document.getElementById('reviewList');
 
-            // Clear existing reviews
             reviewList.innerHTML = '';
 
             reviewsData.forEach(review => {

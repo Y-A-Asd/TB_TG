@@ -42,7 +42,7 @@
                 <!-- Start Best Seller -->
                 <section class="lattest-product-area pb-40 category-list">
                     <div class="row" id="productContainer">
-{#                         products will be dynamically added here using JavaScript #}
+                        {#                         products will be dynamically added here using JavaScript #}
                     </div>
                 </section>
                 <!-- End Best Seller -->
@@ -61,9 +61,9 @@
 
 
     <script type="text/javascript">
-        function createSocialInfo(iconClass, text, moreClass = null) {
+        function createSocialInfo(iconClass, text, moreClass = null, link = null) {
             const socialInfo = document.createElement('a');
-            socialInfo.href = '';  // Add your link here
+            socialInfo.href = `${link}`;
             socialInfo.classList.add('social-info');
 
             const iconSpan = document.createElement('span');
@@ -147,6 +147,7 @@
                             });
 
                             // const addToWishlist = createSocialInfo('lnr lnr-heart', 'Wishlist');
+                            {#let url = {% url 'front:products-detail' productId %}#}
                             const viewMore = createSocialInfo('lnr', 'view more', 'lnr-move');
 
                             productDetails.appendChild(productName);
@@ -184,12 +185,11 @@
                 .then(data => {
                     const cartId = data.id;
                     localStorage.setItem('cartId', cartId);
-                    addToCart(cartId, productId, 1); // Add the item to the cart with quantity 1
+                    addToCart(cartId, productId, 1);
                 })
                 .catch(error => console.error('Error creating cart:', error));
         }
 
-        // Function to add the item to the cart
         function addToCart(cartId, productId, quantity) {
             fetch(`/shop/cart/${cartId}/items/`, {
                 method: 'POST',
@@ -204,7 +204,6 @@
                 .then(response => {
                     if (response.ok) {
                         console.log('Item added to cart successfully');
-                        // You can add any additional logic here, such as updating UI to reflect the item being added to the cart
                     } else {
                         console.error('Failed to add item to cart:', response.statusText);
                     }
@@ -279,7 +278,6 @@
 
 
     <script>
-        // Fetch data from the API
         fetch('/shop/collections/')
             .then(response => response.json())
             .then(data => {

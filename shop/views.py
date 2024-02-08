@@ -20,7 +20,7 @@ from .serializers import (ProductSerializer, CollectionSerializer, ReviewSeriali
                           SiteSettingsSerializer, HomeBannerSerializer)
 from .models import Product, Collection, OrderItem, Review, Customer, Order, ProductImage, CartItem, Cart, Address, \
     Transaction, Promotion, SiteSettings, HomeBanner
-from .filters import ProductFilter, RecursiveDjangoFilterBackend
+from .filters import ProductFilter, RecursiveDjangoFilterBackend, CustomerFilterBackend
 from .permissions import IsAdminOrReadOnly, ViewCustomerHistoryPermission
 
 logger = logging.getLogger(__name__)
@@ -387,7 +387,7 @@ class CustomerViewSet(ModelViewSet):
 
 class OrderViewSet(ModelViewSet):
     http_method_names = ['get', 'patch', 'post', 'delete', 'head', 'options']
-
+    filter_backends = [CustomerFilterBackend]
     def get_permissions(self):
         if self.request.method in ['PATCH', 'DELETE']:
             return [IsAdminUser()]
