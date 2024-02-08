@@ -346,13 +346,14 @@ class CartItemViewSet(ModelViewSet):
 
 
 class CustomerViewSet(ModelViewSet):
-    http_method_names = ['get']
+    http_method_names = ['get', 'put']
 
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
 
     filter_backends = [SearchFilter, OrderingFilter]
-    pagination_class = DefaultPagination
+    search_fields = ['first_name', 'last_name', 'email']
+    ordering_fields = ['membership', 'user_id']
     permission_classes = [IsAdminUser]
 
     """we can overwrite like this!"""

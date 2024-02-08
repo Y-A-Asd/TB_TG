@@ -221,78 +221,46 @@
 
                                 </div>
                                 <div class="tab-pane" id="edit">
-                                    <form>
+                                    <form id="customer-form">
+                                        <input id="id" class="form-control" type="hidden">
+                                        <input id="user_id" class="form-control" type="hidden">
+                                        <input id="membership" class="form-control" type="hidden">
                                         <div class="form-group row">
                                             <label class="col-lg-3 col-form-label form-control-label">First name</label>
                                             <div class="col-lg-9">
-                                                <input class="form-control" type="text" value="Mark">
+                                                <input id="first-name" class="form-control" type="text">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-lg-3 col-form-label form-control-label">Last name</label>
                                             <div class="col-lg-9">
-                                                <input class="form-control" type="text" value="Jhonsan">
+                                                <input id="last-name" class="form-control" type="text">
                                             </div>
                                         </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">BirthDay</label>
+                                            <div class="col-lg-9">
+                                                <input id="birth-date" class="form-control" type="date">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-lg-9 offset-lg-3">
+                                                <input type="submit" class="btn btn-primary" value="Save Changes">
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <form id="user-form">
+                                        <input id="id" class="form-control" type="hidden">
+                                        <input id="phone_number" class="form-control" type="hidden">
                                         <div class="form-group row">
                                             <label class="col-lg-3 col-form-label form-control-label">Email</label>
                                             <div class="col-lg-9">
-                                                <input class="form-control" type="email" value="mark@example.com">
+                                                <input id="email" class="form-control" type="email">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-lg-3 col-form-label form-control-label">Change
-                                                profile</label>
-                                            <div class="col-lg-9">
-                                                <input class="form-control" type="file">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-3 col-form-label form-control-label">Website</label>
-                                            <div class="col-lg-9">
-                                                <input class="form-control" type="url" value="">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-3 col-form-label form-control-label">Address</label>
-                                            <div class="col-lg-9">
-                                                <input class="form-control" type="text" value="" placeholder="Street">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-3 col-form-label form-control-label"></label>
-                                            <div class="col-lg-6">
-                                                <input class="form-control" type="text" value="" placeholder="City">
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <input class="form-control" type="text" value="" placeholder="State">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label class="col-lg-3 col-form-label form-control-label">Username</label>
-                                            <div class="col-lg-9">
-                                                <input class="form-control" type="text" value="jhonsanmark">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-3 col-form-label form-control-label">Password</label>
-                                            <div class="col-lg-9">
-                                                <input class="form-control" type="password" value="11111122333">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-3 col-form-label form-control-label">Confirm
-                                                password</label>
-                                            <div class="col-lg-9">
-                                                <input class="form-control" type="password" value="11111122333">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-3 col-form-label form-control-label"></label>
-                                            <div class="col-lg-9">
-                                                <input type="reset" class="btn btn-secondary" value="Cancel">
-                                                <input type="button" class="btn btn-primary" value="Save Changes">
+                                            <div class="col-lg-9 offset-lg-3">
+                                                <input type="submit" class="btn btn-secondary" value="Save Changes">
                                             </div>
                                         </div>
                                     </form>
@@ -403,7 +371,7 @@
         let endpoint = "/shop/orders/"
         makeAuthenticatedRequest(endpoint, 'GET')
             .then(data => {
-                data.forEach(function(order, index) {
+                data.forEach(function (order, index) {
                     document.getElementById("orders-body").innerHTML += `
                         <tr>
                             <th scope='row'>${order.id}</th>
@@ -422,6 +390,110 @@
     window.onload = function () {
         verifyToken();
     };
+
+    function prefillForm(data) {
+        document.getElementById('first-name').value = data.first_name;
+        document.getElementById('last-name').value = data.last_name;
+        document.getElementById('birth-date').value = data.birth_date;
+        document.getElementById('membership').value = data.membership;
+        document.getElementById('id').value = data.id;
+        document.getElementById('user_id').value = data.user_id;
+    }
+
+    function updateCustomer(event) {
+        event.preventDefault();
+
+        const firstName = document.getElementById('first-name').value;
+        const lastName = document.getElementById('last-name').value;
+        const birthDate = document.getElementById('birth-date').value;
+        const id = document.getElementById('id').value;
+        const user_id = document.getElementById('user_id').value;
+        const membership = document.getElementById('membership').value;
+
+        const endpoint = '/shop/customers/me/';
+
+        makeAuthenticatedRequest(endpoint, 'PUT', {
+            first_name: firstName,
+            last_name: lastName,
+            birth_date: birthDate
+        })
+            .then(response => {
+                console.log('Customer updated:', response);
+                alert('Customer updated successfully!');
+            })
+            .catch(error => {
+                console.error('Failed to update customer:', error);
+            });
+    }
+
+    function fetchCustomerData() {
+        const endpoint = '/shop/customers/me/';
+
+        makeAuthenticatedRequest(endpoint, 'GET')
+            .then(data => {
+                prefillForm(data);
+            })
+            .catch(error => {
+                console.error('Failed to fetch customer data:', error);
+            });
+    }
+
+    window.onload = function () {
+        fetchCustomerData();
+
+        const customerForm = document.getElementById('customer-form');
+        customerForm.addEventListener('submit', updateCustomer);
+    };
+
+    function prefillForm2(data) {
+        document.getElementById('email').value = data.email;
+        document.getElementById('id').value = data.id;
+        document.getElementById('phone_number').value = data.phone_number;
+    }
+
+    function updateUser(event) {
+        event.preventDefault();
+
+        const email = document.getElementById('email').value;
+        const id = document.getElementById('id').value;
+        const phoneNumber = document.getElementById('phone_number').value;
+
+        const endpoint = '/core/auth/users/me/';
+
+        const requestBody = {
+            email: email,
+            id: id,
+            phone_number: phoneNumber
+        };
+
+        makeAuthenticatedRequest(endpoint, 'PUT', requestBody)
+            .then(response => {
+                console.log('User updated:', response);
+                alert('User updated successfully!');
+            })
+            .catch(error => {
+                console.error('Failed to update user:', error);
+            });
+    }
+
+    function fetchUserData() {
+        const endpoint = '/core/auth/users/me/';
+
+        makeAuthenticatedRequest(endpoint, 'GET')
+            .then(data => {
+                prefillForm2(data);
+            })
+            .catch(error => {
+                console.error('Failed to fetch user data:', error);
+            });
+    }
+
+
+    fetchUserData();
+
+    const userForm = document.getElementById('user-form');
+    userForm.addEventListener('submit', updateUser);
+
 </script>
 <!-- Bootstrap core JavaScript-->
 <script src="{% static 'assets/js/jquery.min.js' %}"></script>

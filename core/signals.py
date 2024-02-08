@@ -33,7 +33,7 @@ def serialize_model_instance(instance):
     for field in instance._meta.fields:
         field_value = getattr(instance, field.name)
 
-        if isinstance(field, (DateTimeField, DateField)):
+        if isinstance(field, (DateTimeField, DateField, datetime.date, datetime.datetime)):
             field_value = field_value.isoformat() if field_value else None
         elif isinstance(field, ForeignKey):
             field_value = str(field_value.pk) if field_value else None
@@ -55,7 +55,7 @@ def get_model_changes(old_instance, new_instance):
         new_value = getattr(new_instance, field.name)
 
         if old_value != new_value:
-            if any(isinstance(value, (DateTimeField, Decimal, datetime.datetime, uuid.UUID)) for value in
+            if any(isinstance(value, (DateTimeField, Decimal, datetime.date, datetime.datetime, uuid.UUID, DateField)) for value in
                    (new_value, old_value)):
                 changes[field.name] = {
                     'old_value': str(old_value),

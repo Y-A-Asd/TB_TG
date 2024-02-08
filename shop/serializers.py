@@ -177,8 +177,10 @@ class UpdateItemsSerializer(serializers.ModelSerializer):
             return value
 
 
-class CustomerSerializer(TranslatableModelSerializer):
-    user_id = serializers.IntegerField()
+class CustomerSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(read_only=True)
+    user_id = serializers.IntegerField(read_only=True)
+    membership = serializers.CharField(read_only=True)
 
     class Meta:
         model = Customer
