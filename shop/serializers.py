@@ -228,7 +228,7 @@ class OrderSerializer(serializers.ModelSerializer):
         model = Order
         fields = (
             'id', 'order_status', 'customer', 'zip_code', 'path', 'city', 'province', 'first_name', 'last_name',
-            'orders',
+            'orders', 'updated_at',
             'total_price')
 
     def get_total_price(self, order):

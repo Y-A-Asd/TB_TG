@@ -5,255 +5,436 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-  <meta name="description" content="Y.A.A"/>
-  <meta name="author" content="Y.A.A"/>
-  <title>Profile</title>
-  <!-- loader-->
-  <link href="{% static 'assets/css/pace.min.css' %}" rel="stylesheet"/>
-  <script src="{% static 'assets/js/pace.min.js' %}"></script>
-  <!--favicon-->
-  <link rel="icon" href="{% static 'assets/images/favicon.ico' %}" type="image/x-icon">
-  <!-- simplebar CSS-->
-  <link href="{% static 'assets/plugins/simplebar/css/simplebar.css' %}" rel="stylesheet"/>
-  <!-- Bootstrap core CSS-->
-  <link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet"/>
-  <!-- animate CSS-->
-  <link href="{% static 'assets/css/animate.css' %}" rel="stylesheet" type="text/css"/>
-  <!-- Icons CSS-->
-  <link href="{% static 'assets/css/icons.css' %}" rel="stylesheet" type="text/css"/>
-  <!-- Sidebar CSS-->
-  <link href="{% static 'assets/css/sidebar-menu.css' %}" rel="stylesheet"/>
-  <!-- Custom Style-->
-  <link href="{% static 'assets/css/app-style.css' %}" rel="stylesheet"/>
-  
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content="Y.A.A"/>
+    <meta name="author" content="Y.A.A"/>
+    <title>Profile</title>
+    <!-- loader-->
+    <link href="{% static 'assets/css/pace.min.css' %}" rel="stylesheet"/>
+    <script src="{% static 'assets/js/pace.min.js' %}"></script>
+    <!--favicon-->
+    <link rel="icon" href="{% static 'assets/images/favicon.ico' %}" type="image/x-icon">
+    <!-- simplebar CSS-->
+    <link href="{% static 'assets/plugins/simplebar/css/simplebar.css' %}" rel="stylesheet"/>
+    <!-- Bootstrap core CSS-->
+    <link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet"/>
+    <!-- animate CSS-->
+    <link href="{% static 'assets/css/animate.css' %}" rel="stylesheet" type="text/css"/>
+    <!-- Icons CSS-->
+    <link href="{% static 'assets/css/icons.css' %}" rel="stylesheet" type="text/css"/>
+    <!-- Sidebar CSS-->
+    <link href="{% static 'assets/css/sidebar-menu.css' %}" rel="stylesheet"/>
+    <!-- Custom Style-->
+    <link href="{% static 'assets/css/app-style.css' %}" rel="stylesheet"/>
+
 </head>
 
 <body class="bg-theme bg-theme1">
 
 <!-- start loader -->
-   <div id="pageloader-overlay" class="visible incoming"><div class="loader-wrapper-outer"><div class="loader-wrapper-inner" ><div class="loader"></div></div></div></div>
-   <!-- end loader -->
+<div id="pageloader-overlay" class="visible incoming">
+    <div class="loader-wrapper-outer">
+        <div class="loader-wrapper-inner">
+            <div class="loader"></div>
+        </div>
+    </div>
+</div>
+<!-- end loader -->
 
 <!-- Start wrapper-->
- <div id="wrapper">
+<div id="wrapper">
 
 
-<!--Start topbar header-->
-<header class="topbar-nav">
- <nav class="navbar navbar-expand fixed-top">
-  <ul class="navbar-nav mr-auto align-items-center">
-    <li class="nav-item">
-      <a class="nav-link toggle-menu" href="javascript:void();">
-       <i class="icon-menu menu-icon"></i>
-     </a>
-    </li>
-  </ul>
-     
-  <ul class="navbar-nav align-items-center right-nav-link">
-    <li class="nav-item">
-      <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown" href="#">
-        <span class="user-profile"><img src="https://via.placeholder.com/110x110" class="img-circle" alt="user avatar"></span>
-      </a>
-      <ul class="dropdown-menu dropdown-menu-right">
-       <li class="dropdown-item user-details">
-        <a href="javaScript:void();">
-           <div class="media">
-             <div class="avatar"><img class="align-self-start mr-3" src="https://via.placeholder.com/110x110" alt="user avatar"></div>
-            <div class="media-body">
-            <h6 class="mt-2 user-title">user name</h6>
-            <p class="user-subtitle">user email</p>
-            </div>
-           </div>
-          </a>
-        </li>
-        <li class="dropdown-item"><i class="icon-power mr-2"></i> Logout</li>
-      </ul>
-    </li>
-  </ul>
-</nav>
-</header>
-<!--End topbar header-->
-
-<div class="clearfix"></div>
-	
-  <div class="content-wrapper">
-    <div class="container-fluid">
-
-      <div class="row mt-3">
-
-
-        <div class="col-lg-8">
-           <div class="card">
-            <div class="card-body">
-            <ul class="nav nav-tabs nav-tabs-primary top-icon nav-justified">
-
+    <!--Start topbar header-->
+    <header class="topbar-nav">
+        <nav class="navbar navbar-expand fixed-top">
+            <ul class="navbar-nav mr-auto align-items-center">
                 <li class="nav-item">
-                    <a href="javascript:void();" data-target="#orders" data-toggle="pill" class="nav-link"><i class="icon-chart"></i> <span class="hidden-xs">Orders</span></a>
-                </li>
-                <li class="nav-item">
-                    <a href="javascript:void();" data-target="#edit" data-toggle="pill" class="nav-link"><i class="icon-note"></i> <span class="hidden-xs">Profile</span></a>
+                    <a class="nav-link toggle-menu" href="javascript:void();">
+                        <i class="icon-menu menu-icon"></i>
+                    </a>
                 </li>
             </ul>
-            <div class="tab-content p-3">
-                <div class="tab-pane" id="orders">
-                    <div class="alert alert-info alert-dismissible" role="alert">
-				   <button type="button" class="close" data-dismiss="alert">&times;</button>
-				    <div class="alert-icon">
-					 <i class="icon-info"></i>
-				    </div>
-				    <div class="alert-message">
-				      <span><strong>Info!</strong> Lorem Ipsum is simply dummy text.</span>
-				    </div>
-                  </div>
-                  <div class="table-responsive">
-                    <table class="table table-hover table-striped">
-                        <tbody>                                    
-                            <tr>
-                                <td>
-                                   <span class="float-right font-weight-bold">3 hrs ago</span> Here is your a link to the latest summary report from the..
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                   <span class="float-right font-weight-bold">Yesterday</span> There has been a request on your account since that was..
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                   <span class="float-right font-weight-bold">9/10</span> Porttitor vitae ultrices quis, dapibus id dolor. Morbi venenatis lacinia rhoncus. 
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                   <span class="float-right font-weight-bold">9/4</span> Vestibulum tincidunt ullamcorper eros eget luctus. 
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                   <span class="float-right font-weight-bold">9/4</span> Maxamillion ais the fix for tibulum tincidunt ullamcorper eros. 
-                                </td>
-                            </tr>
-                        </tbody> 
-                    </table>
-                  </div>
+
+            <ul class="navbar-nav align-items-center right-nav-link">
+                <li class="nav-item">
+                    <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown" href="#">
+                        <span class="user-profile"><img src="https://via.placeholder.com/110x110" class="img-circle"
+                                                        alt="user avatar"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li class="dropdown-item user-details">
+                            <a href="javaScript:void();">
+                                <div class="media">
+                                    <div class="avatar"><img class="align-self-start mr-3"
+                                                             src="https://via.placeholder.com/110x110"
+                                                             alt="user avatar"></div>
+                                    <div class="media-body">
+                                        <h6 class="mt-2 user-title">user name</h6>
+                                        <p class="user-subtitle">user email</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="dropdown-item"><i class="icon-power mr-2"></i> Logout</li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <!--End topbar header-->
+
+    <div class="clearfix"></div>
+
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <div class="alert alert-info alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <div class="alert-icon">
+                    <i class="icon-info"></i>
                 </div>
-                <div class="tab-pane" id="edit">
-                    <form>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">First name</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="text" value="Mark">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Last name</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="text" value="Jhonsan">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Email</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="email" value="mark@example.com">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Change profile</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="file">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Website</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="url" value="">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Address</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="text" value="" placeholder="Street">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label"></label>
-                            <div class="col-lg-6">
-                                <input class="form-control" type="text" value="" placeholder="City">
-                            </div>
-                            <div class="col-lg-3">
-                                <input class="form-control" type="text" value="" placeholder="State">
-                            </div>
-                        </div>
-                       
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Username</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="text" value="jhonsanmark">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Password</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="password" value="11111122333">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Confirm password</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="password" value="11111122333">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label"></label>
-                            <div class="col-lg-9">
-                                <input type="reset" class="btn btn-secondary" value="Cancel">
-                                <input type="button" class="btn btn-primary" value="Save Changes">
-                            </div>
-                        </div>
-                    </form>
+                <div class="alert-message">
+                    <span id="errorMessage"></span>
                 </div>
             </div>
+            <div class="row mt-3">
+
+
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <ul class="nav nav-tabs nav-tabs-primary top-icon nav-justified">
+                                <li class="nav-item">
+                                    <a href="javascript:void();" data-target="#addresses" data-toggle="pill"
+                                       class="nav-link active"><i class="icon-user"></i> <span class="hidden-xs">Addresses</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="javascript:void();" data-target="#orders" data-toggle="pill"
+                                       class="nav-link"><i class="icon-credit-card"></i> <span
+                                            class="hidden-xs">Orders</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="javascript:void();" data-target="#edit" data-toggle="pill"
+                                       class="nav-link"><i class="icon-note"></i> <span
+                                            class="hidden-xs">Profile Info</span></a>
+                                </li>
+                            </ul>
+                            <div class="tab-content p-3">
+                                <div class="tab-pane active" id="addresses">
+                                    <h5 class="mb-3">User Profile</h5>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h6>About</h6>
+                                            <p>
+                                                Web Designer, UI/UX Engineer
+                                            </p>
+                                            <h6>Hobbies</h6>
+                                            <p>
+                                                Indie music, skiing and hiking. I love the great outdoors.
+                                            </p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6>Recent badges</h6>
+                                            <a href="javascript:void();" class="badge badge-dark badge-pill">html5</a>
+                                            <a href="javascript:void();" class="badge badge-dark badge-pill">react</a>
+                                            <a href="javascript:void();" class="badge badge-dark badge-pill">codeply</a>
+                                            <a href="javascript:void();"
+                                               class="badge badge-dark badge-pill">angularjs</a>
+                                            <a href="javascript:void();" class="badge badge-dark badge-pill">css3</a>
+                                            <a href="javascript:void();" class="badge badge-dark badge-pill">jquery</a>
+                                            <a href="javascript:void();"
+                                               class="badge badge-dark badge-pill">bootstrap</a>
+                                            <a href="javascript:void();" class="badge badge-dark badge-pill">responsive-design</a>
+                                            <hr>
+                                            <span class="badge badge-primary"><i
+                                                    class="fa fa-user"></i> 900 Followers</span>
+                                            <span class="badge badge-success"><i class="fa fa-cog"></i> 43 Forks</span>
+                                            <span class="badge badge-danger"><i class="fa fa-eye"></i> 245 Views</span>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <h5 class="mt-2 mb-3"><span
+                                                    class="fa fa-clock-o ion-clock float-right"></span> Recent Activity
+                                            </h5>
+                                            <div class="table-responsive">
+                                                <table class="table table-hover table-striped">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <strong>Abby</strong> joined ACME Project Team in <strong>`Collaboration`</strong>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <strong>Gary</strong> deleted My Board1 in <strong>`Discussions`</strong>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <strong>Kensington</strong> deleted MyBoard3 in <strong>`Discussions`</strong>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <strong>John</strong> deleted My Board1 in <strong>`Discussions`</strong>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <strong>Skell</strong> deleted his post Look at Why this
+                                                            is.. in <strong>`Discussions`</strong>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/row-->
+                                </div>
+                                <div class="tab-pane" id="orders">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Hover Table</h5>
+                                                    <div class="table-responsive">
+                                                        <table class="table table-hover">
+                                                            <thead>
+                                                            <tr>
+                                                                <th scope="col">#</th>
+                                                                <th scope="col">DateTime</th>
+                                                                <th scope="col">Status</th>
+                                                                <th scope="col">Total Price</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody id="orders-body">
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><!--End Row-->
+
+                                </div>
+                                <div class="tab-pane" id="edit">
+                                    <form>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">First name</label>
+                                            <div class="col-lg-9">
+                                                <input class="form-control" type="text" value="Mark">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Last name</label>
+                                            <div class="col-lg-9">
+                                                <input class="form-control" type="text" value="Jhonsan">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Email</label>
+                                            <div class="col-lg-9">
+                                                <input class="form-control" type="email" value="mark@example.com">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Change
+                                                profile</label>
+                                            <div class="col-lg-9">
+                                                <input class="form-control" type="file">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Website</label>
+                                            <div class="col-lg-9">
+                                                <input class="form-control" type="url" value="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Address</label>
+                                            <div class="col-lg-9">
+                                                <input class="form-control" type="text" value="" placeholder="Street">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label"></label>
+                                            <div class="col-lg-6">
+                                                <input class="form-control" type="text" value="" placeholder="City">
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <input class="form-control" type="text" value="" placeholder="State">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Username</label>
+                                            <div class="col-lg-9">
+                                                <input class="form-control" type="text" value="jhonsanmark">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Password</label>
+                                            <div class="col-lg-9">
+                                                <input class="form-control" type="password" value="11111122333">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Confirm
+                                                password</label>
+                                            <div class="col-lg-9">
+                                                <input class="form-control" type="password" value="11111122333">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label"></label>
+                                            <div class="col-lg-9">
+                                                <input type="reset" class="btn btn-secondary" value="Cancel">
+                                                <input type="button" class="btn btn-primary" value="Save Changes">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
         </div>
-      </div>
-      </div>
-        
-    </div>
+    </div><!--End content-wrapper-->
 
 
-    </div>
-   </div><!--End content-wrapper-->
-
-	
-	<!--Start footer-->
-	<footer class="footer">
-      <div class="container">
-        <div class="text-center">
-          Copyright © 2024 By Y-A-Asd
+    <!--Start footer-->
+    <footer class="footer">
+        <div class="container">
+            <div class="text-center">
+                Copyright © 2024 By Y-A-Asd
+            </div>
         </div>
-      </div>
     </footer>
-	<!--End footer-->
-	
-
-   
-  </div><!--End wrapper-->
+    <!--End footer-->
 
 
-  <!-- Bootstrap core JavaScript-->
-  <script src="{% static 'assets/js/jquery.min.js' %}"></script>
-  <script src="{% static 'assets/js/popper.min.js' %}"></script>
-  <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
-	
-  <!-- simplebar js -->
-  <script src="{% static 'assets/plugins/simplebar/js/simplebar.js' %}"></script>
-  <!-- sidebar-menu js -->
-  <script src="{% static 'assets/js/sidebar-menu.js' %}"></script>
-  
-  <!-- Custom scripts -->
-  <script src="{% static 'assets/js/app-script.js' %}"></script>
-	
+</div><!--End wrapper-->
+
+<script>
+    function displayErrorMessage(message) {
+        const errorMessageElement = document.getElementById('errorMessage');
+        errorMessageElement.textContent = message;
+    }
+
+    function getToken() {
+        return localStorage.getItem('JWT');
+    }
+
+    function makeAuthenticatedRequest(url, method, context = null) {
+        const token = getToken();
+
+        const headers = {
+            'Content-Type': 'application/json',
+        };
+
+        if (token) {
+            headers['Authorization'] = `JWT ${token}`;
+        }
+
+        const options = {
+            method: method,
+            headers: headers,
+            body: context ? JSON.stringify(context) : null,
+        };
+
+        return fetch(url, options)
+            .then(response => response.json())
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+
+    function verifyToken() {
+        const token = getToken();
+
+        if (token) {
+            const endpoint = '/core/auth/jwt/verify/';
+
+            makeAuthenticatedRequest(endpoint, 'POST', context = {token: token})
+                .then(response => {
+                    console.log(response);
+                    if (response.code === 'token_not_valid') {
+                        console.log('Token not valid. User needs to log in.');
+                        alert('Token not valid. User needs to log in.')
+                        window.location.href = '/login/';
+                    } else {
+                        console.log('Token is valid. User is already logged in.');
+                        getOrders();
+                    }
+                });
+        } else {
+            console.log('No token found. User needs to log in.');
+            alert('No token found. User needs to log in.')
+            window.location.href = '/login/';
+        }
+    }
+
+    function getStatusLabel(status) {
+        switch (status) {
+            case 'N':
+                return "Not Paid";
+            case 'P':
+                return "Pending";
+            case 'S':
+                return "Shipping";
+            case 'D':
+                return "Delivered";
+            case 'F':
+                return "Failed";
+            default:
+                return "";
+        }
+    }
+
+    function getOrders() {
+        const token = getToken();
+        let endpoint = "/shop/orders/"
+        makeAuthenticatedRequest(endpoint, 'GET')
+            .then(data => {
+                data.forEach(function(order, index) {
+                    document.getElementById("orders-body").innerHTML += `
+                        <tr>
+                            <th scope='row'>${order.id}</th>
+                            <td>${new Date(order.updated_at).toLocaleString()}</td>
+                            <td>${getStatusLabel(order.order_status)}</td>
+                            <td>${order.total_price}</td>
+                        </tr>
+                    `;
+                });
+            })
+            .catch(error => {
+                console.error("Failed to fetch orders:", error);
+            });
+    }
+
+    window.onload = function () {
+        verifyToken();
+    };
+</script>
+<!-- Bootstrap core JavaScript-->
+<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+<script src="{% static 'assets/js/popper.min.js' %}"></script>
+<script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+
+<!-- simplebar js -->
+<script src="{% static 'assets/plugins/simplebar/js/simplebar.js' %}"></script>
+<!-- sidebar-menu js -->
+<script src="{% static 'assets/js/sidebar-menu.js' %}"></script>
+
+<!-- Custom scripts -->
+<script src="{% static 'assets/js/app-script.js' %}"></script>
+
 </body>
 </html>
