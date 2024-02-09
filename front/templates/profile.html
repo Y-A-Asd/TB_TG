@@ -44,7 +44,7 @@
 <!-- end loader -->
 
 <!-- Start wrapper-->
-<div id="wrapper">
+<div id="wrapper" class="toggled">
 
 
     <!--Start topbar header-->
@@ -52,9 +52,9 @@
         <nav class="navbar navbar-expand fixed-top">
             <ul class="navbar-nav mr-auto align-items-center">
                 <li class="nav-item">
-                    <a class="nav-link toggle-menu" href="javascript:void();">
-                        <i class="icon-menu menu-icon"></i>
-                    </a>
+{#                    <a class="nav-link toggle-menu" href="javascript:void();">#}
+{#                        <i class="icon-menu menu-icon"></i>#}
+{#                    </a>#}
                 </li>
             </ul>
 
@@ -123,82 +123,72 @@
                             </ul>
                             <div class="tab-content p-3">
                                 <div class="tab-pane active" id="addresses">
-                                    <h5 class="mb-3">User Profile</h5>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <h6>About</h6>
-                                            <p>
-                                                Web Designer, UI/UX Engineer
-                                            </p>
-                                            <h6>Hobbies</h6>
-                                            <p>
-                                                Indie music, skiing and hiking. I love the great outdoors.
-                                            </p>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <h6>Recent badges</h6>
-                                            <a href="javascript:void();" class="badge badge-dark badge-pill">html5</a>
-                                            <a href="javascript:void();" class="badge badge-dark badge-pill">react</a>
-                                            <a href="javascript:void();" class="badge badge-dark badge-pill">codeply</a>
-                                            <a href="javascript:void();"
-                                               class="badge badge-dark badge-pill">angularjs</a>
-                                            <a href="javascript:void();" class="badge badge-dark badge-pill">css3</a>
-                                            <a href="javascript:void();" class="badge badge-dark badge-pill">jquery</a>
-                                            <a href="javascript:void();"
-                                               class="badge badge-dark badge-pill">bootstrap</a>
-                                            <a href="javascript:void();" class="badge badge-dark badge-pill">responsive-design</a>
-                                            <hr>
-                                            <span class="badge badge-primary"><i
-                                                    class="fa fa-user"></i> 900 Followers</span>
-                                            <span class="badge badge-success"><i class="fa fa-cog"></i> 43 Forks</span>
-                                            <span class="badge badge-danger"><i class="fa fa-eye"></i> 245 Views</span>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <h5 class="mt-2 mb-3"><span
-                                                    class="fa fa-clock-o ion-clock float-right"></span> Recent Activity
-                                            </h5>
-                                            <div class="table-responsive">
-                                                <table class="table table-hover table-striped">
-                                                    <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <strong>Abby</strong> joined ACME Project Team in <strong>`Collaboration`</strong>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <strong>Gary</strong> deleted My Board1 in <strong>`Discussions`</strong>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <strong>Kensington</strong> deleted MyBoard3 in <strong>`Discussions`</strong>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <strong>John</strong> deleted My Board1 in <strong>`Discussions`</strong>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <strong>Skell</strong> deleted his post Look at Why this
-                                                            is.. in <strong>`Discussions`</strong>
-                                                        </td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
+                                    <h5 class="mb-3">Addresses</h5>
+                                    <table class="table table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Zip code</th>
+                                            <th scope="col">Province</th>
+                                            <th scope="col">City</th>
+                                            <th scope="col">Path</th>
+                                            <th scope="col">Default</th>
+                                            <th scope="col">Edit</th>
+                                            <th scope="col">Delete</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="addresses-body">
+
+                                        </tbody>
+                                    </table>
+                                    <!--/row-->
+                                    <br><br><br><br>
+                                     <form id="address-form">
+                                        <input id="addressid" class="form-control" type="hidden">
+                                        <input id="customerid" class="form-control" type="hidden">
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Zip Code</label>
+                                            <div class="col-lg-9">
+                                                <input id="zipcode" class="form-control" type="text">
                                             </div>
                                         </div>
-                                    </div>
-                                    <!--/row-->
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Province</label>
+                                            <div class="col-lg-9">
+                                                <input id="province" class="form-control" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">City</label>
+                                            <div class="col-lg-9">
+                                                <input id="city" class="form-control" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Path</label>
+                                            <div class="col-lg-9">
+                                                <input id="path" class="form-control" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Default</label>
+                                            <div class="col-lg-9 ">
+                                                <input id="default" class="icheck-material-secondary" type="checkbox">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-lg-9 offset-lg-3">
+                                                <input type="submit" class="btn btn-dark" value="Save">
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                                 <div class="tab-pane" id="orders">
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <h5 class="card-title">Hover Table</h5>
+                                                    <h5 class="card-title">Orders</h5>
                                                     <div class="table-responsive">
                                                         <table class="table table-hover">
                                                             <thead>
@@ -558,6 +548,167 @@
     const passForm = document.getElementById('pass-form');
     passForm.addEventListener('submit', updatePass);
 
+
+
+    function fetchAddresses() {
+        const endpoint = '/shop/addresses/';
+
+        makeAuthenticatedRequest(endpoint, 'GET')
+            .then(data => {
+                const addressesTable = document.getElementById('addresses-body');
+                addressesTable.innerHTML = ''; // Clear previous data
+
+                data.forEach(address => {
+                    const tr = document.createElement('tr');
+
+                    tr.innerHTML = `
+                        <td>${address.id}</td>
+                        <td>${address.zip_code}</td>
+                        <td>${address.province}</td>
+                        <td>${address.city}</td>
+                        <td>${address.path}</td>
+                        <td>${address.default ? 'Yes' : 'No'}</td>
+                        <td>
+                            <button class="btn btn-primary edit-btn" data-id="${address.id}">Edit</button>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger delete-btn" data-id="${address.id}">Delete</button>
+                        </td>
+                    `;
+
+                    addressesTable.appendChild(tr);
+                });
+            })
+            .catch(error => {
+                console.error('Failed to fetch addresses:', error);
+            });
+    }
+
+    window.onload = function () {
+        fetchAddresses();
+
+        // Add event listener for delete buttons
+        document.addEventListener('click', function(event) {
+            if (event.target.classList.contains('delete-btn')) {
+                const addressId = event.target.getAttribute('data-id');
+                deleteAddress(addressId);
+            }
+        });
+
+        // Add event listener for edit buttons
+        document.addEventListener('click', function(event) {
+            if (event.target.classList.contains('edit-btn')) {
+                const addressId = event.target.getAttribute('data-id');
+                fetchAddress(addressId);
+            }
+        });
+    };
+
+    function deleteAddress(addressId) {
+        const endpoint = `/shop/addresses/${addressId}/`;
+
+        makeAuthenticatedRequest(endpoint, 'DELETE')
+            .then(response => {
+                console.log('Address deleted:', response);
+                fetchAddresses(); // Refresh addresses table
+            })
+            .catch(error => {
+                console.error('Failed to delete address:', error);
+            });
+    }
+
+    function fetchAddress(addressId) {
+        const endpoint = `/shop/addresses/${addressId}/`;
+
+        makeAuthenticatedRequest(endpoint, 'GET')
+            .then(data => {
+                fillAddressForm(data);
+            })
+            .catch(error => {
+                console.error('Failed to fetch address:', error);
+            });
+    }
+
+    function fillAddressForm(address) {
+        document.getElementById('addressid').value = address.id;
+        document.getElementById('zipcode').value = address.zip_code;
+        document.getElementById('province').value = address.province;
+        document.getElementById('city').value = address.city;
+        document.getElementById('path').value = address.path;
+        document.getElementById('default').checked = address.default;
+    }
+
+    function updateAddress(event) {
+        event.preventDefault();
+
+        const addressId = document.getElementById('addressid').value;
+        const zipCode = document.getElementById('zipcode').value;
+        const province = document.getElementById('province').value;
+        const city = document.getElementById('city').value;
+        const path = document.getElementById('path').value;
+        const isDefault = document.getElementById('default').checked;
+
+        const endpoint = `/shop/addresses/${addressId}/`;
+
+        const requestBody = {
+            id: addressId,
+            zip_code: zipCode,
+            province: province,
+            city: city,
+            path: path,
+            default: isDefault
+        };
+
+        makeAuthenticatedRequest(endpoint, 'PUT', requestBody)
+            .then(response => {
+                console.log('Address updated:', response);
+                alert('Address updated successfully!');
+                fetchAddresses(); // Refresh addresses table
+            })
+            .catch(error => {
+                console.error('Failed to update address:', error);
+            });
+    }
+
+    function createAddress(event) {
+        event.preventDefault();
+
+        const zipCode = document.getElementById('zipcode').value;
+        const province = document.getElementById('province').value;
+        const city = document.getElementById('city').value;
+        const path = document.getElementById('path').value;
+        const isDefault = document.getElementById('default').checked;
+
+        const endpoint = '/shop/addresses/';
+
+        const requestBody = {
+            zip_code: zipCode,
+            province: province,
+            city: city,
+            path: path,
+            default: isDefault
+        };
+
+        makeAuthenticatedRequest(endpoint, 'POST', requestBody)
+            .then(response => {
+                console.log('Address created:', response);
+                alert('Address created successfully!');
+                fetchAddresses();
+            })
+            .catch(error => {
+                console.error('Failed to create address:', error);
+            });
+    }
+
+    const addressForm = document.getElementById('address-form');
+    addressForm.addEventListener('submit', function(event) {
+        const addressId = document.getElementById('addressid').value;
+        if (addressId) {
+            updateAddress(event);
+        } else {
+            createAddress(event);
+        }
+    });
 </script>
 <!-- Bootstrap core JavaScript-->
 <script src="{% static 'assets/js/jquery.min.js' %}"></script>
