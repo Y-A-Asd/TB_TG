@@ -165,6 +165,10 @@ class CartSerializer(serializers.ModelSerializer):
         fields = ['id', 'items', 'total_price']
 
 
+class ApplyDiscountSerializer(serializers.Serializer):
+    discount_code = serializers.CharField(help_text='discount_code', label='discount_code')
+
+
 class AddItemsSerializer(serializers.ModelSerializer):
     product_id = serializers.IntegerField()
 

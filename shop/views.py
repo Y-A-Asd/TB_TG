@@ -1,15 +1,20 @@
 import logging
 from django.db.models import Count, Q, QuerySet, ExpressionWrapper, fields, F
+from django.utils.translation import gettext_lazy as _
+from django.views import View
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import status, generics
+from rest_framework.exceptions import ValidationError
+from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly
 from rest_framework.views import APIView
-from rest_framework.viewsets import ModelViewSet, GenericViewSet, ReadOnlyModelViewSet
+from rest_framework.viewsets import ModelViewSet, GenericViewSet, ReadOnlyModelViewSet, ViewSet
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, DestroyModelMixin, ListModelMixin
 from core.models import User, AuditLog
+from discount.models import BaseDiscount
 from .pagination import DefaultPagination
 from .reports import Reporting
 from .serializers import (ProductSerializer, CollectionSerializer, ReviewSerializer,
@@ -17,7 +22,7 @@ from .serializers import (ProductSerializer, CollectionSerializer, ReviewSeriali
                           CustomerSerializer, OrderSerializer, CreateOrderSerializer, UpdateOrderSerializer,
                           ProductImageSerializer, AddressSerializer, TransactionSerializer, UpdateTransactionSerializer,
                           AuditLogSerializer, PromotionSerializer, SimpleProductSerializer, ReportingSerializer,
-                          SiteSettingsSerializer, HomeBannerSerializer)
+                          SiteSettingsSerializer, HomeBannerSerializer, ApplyDiscountSerializer)
 from .models import Product, Collection, OrderItem, Review, Customer, Order, ProductImage, CartItem, Cart, Address, \
     Transaction, Promotion, SiteSettings, HomeBanner
 from .filters import ProductFilter, RecursiveDjangoFilterBackend, CustomerFilterBackend
@@ -322,6 +327,31 @@ class CartViewSet(CreateModelMixin,
     def get_serializer_context(self):
         return {'user_id': self.request.user.id}
 
+    @action(detail=True, methods=['get', 'post'])
+    def apply_discount(self, request, pk=None):
+        cart = self.get_object()
+
+        if request.method == 'GET':
+            serializer = ApplyDiscountSerializer()
+            return Response(serializer.data)
+
+        serializer = ApplyDiscountSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        discount_code = serializer.validated_data['discount_code']
+
+        discount = get_object_or_404(BaseDiscount, code=discount_code)
+
+        try:
+            if not discount.ensure_availability():
+                raise ValidationError(_("Discount is not available at the moment."))
+
+            cart.discount = discount
+            cart.save()
+
+            return Response({'message': 'Discount applied successfully.'}, status=status.HTTP_200_OK)
+        except ValidationError as e:
+            return Response({'error': e.detail}, status=status.HTTP_400_BAD_REQUEST)
+
 
 class CartItemViewSet(ModelViewSet):
     http_method_names = ['get', 'post', 'patch', 'delete']
@@ -384,6 +414,7 @@ class CustomerViewSet(ModelViewSet):
 class OrderViewSet(ModelViewSet):
     http_method_names = ['get', 'patch', 'post', 'delete', 'head', 'options']
     filter_backends = [CustomerFilterBackend]
+
     def get_permissions(self):
         if self.request.method in ['PATCH', 'DELETE']:
             return [IsAdminUser()]
