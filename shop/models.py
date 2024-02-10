@@ -77,7 +77,7 @@ class Collection(TranslatableModel, BaseModel):
 
     def __str__(self):
         default_language = get_language() or 'en'
-        print('default_language' ,default_language)
+        print('default_language', default_language)
         return f'Collection {self.pk}'
 
     class Meta:
@@ -178,7 +178,8 @@ class Customer(BaseModel):
 class Cart(BaseModel):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     customer = models.ForeignKey(Customer, on_delete=models.PROTECT, verbose_name=_("Customer"), null=True, blank=True)
-
+    discount = models.ForeignKey(BaseDiscount, on_delete=models.CASCADE, verbose_name=_("Discount"),
+                                 null=True, blank=True)
 
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, verbose_name=_("Cart"), related_name='items')
@@ -199,6 +200,7 @@ class Address(BaseModel):
     province = models.CharField(_("Province"), max_length=32)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, verbose_name=_("Customer"))
     default = models.BooleanField(_("Default"), default=True)
+
 
     class Meta:
         verbose_name = _("Address")
@@ -242,11 +244,14 @@ class Order(BaseModel):
         if self.discount:
             self.discount.ensure_availability()
             if self.discount.active:
+                print(self.discount.mode)
+                print('total_price')
                 if self.discount.mode == self.discount.Mode.DirectPrice:
                     total_price = \
                         self.orders.aggregate(
                             total_price=Sum(F('unit_price') * F('quantity')) - self.discount.discount)[
                             'total_price']
+                    print(total_price)
                 elif self.discount.mode == self.discount.Mode.DiscountOff:
                     total_price = self.orders.aggregate(total_price=Sum(F('unit_price') * F('quantity')) - Sum(
                         F('unit_price') * F('quantity')) * self.discount.discount / 100)['total_price']
@@ -261,6 +266,7 @@ class Order(BaseModel):
 
         else:
             total_price = self.orders.aggregate(total_price=Sum(F('unit_price') * F('quantity')))['total_price']
+        print(total_price)
         return total_price if total_price is not None else 0
 
 

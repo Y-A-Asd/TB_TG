@@ -187,7 +187,7 @@ class OrderAdmin(admin.ModelAdmin):
     actions = ['mark_as_delivered']
 
     def total_price(self, obj):
-        return obj.orders.aggregate(total_price=Sum(F('unit_price') * F('quantity')))['total_price']
+        return obj.get_total_price()
 
     total_price.short_description = _("Total Price")
 

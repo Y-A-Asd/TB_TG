@@ -292,7 +292,7 @@
     <footer class="footer">
         <div class="container">
             <div class="text-center">
-                Copyright © 2024 By Y-A-Asd
+                Copyright © 2024 By <a href="https://github.com/Y-A-Asd" class="text-warning">Y-A-Asd</a>
             </div>
         </div>
     </footer>
@@ -398,11 +398,11 @@
             });
     }
 
-    window.onload = function () {
-        verifyToken();
-    };
+    console.log('verifing token...')
+    verifyToken();
 
     function prefillForm(data) {
+        console.log(data)
         document.getElementById('first-name').value = data.first_name;
         document.getElementById('last-name').value = data.last_name;
         document.getElementById('birth-date').value = data.birth_date;
@@ -439,7 +439,7 @@
 
     function fetchCustomerData() {
         const endpoint = '/shop/customers/me/';
-
+        console.log('DATA CALLED FOR CUSTOMER')
         makeAuthenticatedRequest(endpoint, 'GET')
             .then(data => {
                 prefillForm(data);
@@ -449,12 +449,11 @@
             });
     }
 
-    window.onload = function () {
-        fetchCustomerData();
 
-        const customerForm = document.getElementById('customer-form');
-        customerForm.addEventListener('submit', updateCustomer);
-    };
+    fetchCustomerData();
+
+    const customerForm = document.getElementById('customer-form');
+    customerForm.addEventListener('submit', updateCustomer);
 
     function prefillForm2(data) {
         document.getElementById('email').value = data.email;
@@ -587,7 +586,6 @@
     window.onload = function () {
         fetchAddresses();
 
-        // Add event listener for delete buttons
         document.addEventListener('click', function(event) {
             if (event.target.classList.contains('delete-btn')) {
                 const addressId = event.target.getAttribute('data-id');
@@ -595,7 +593,6 @@
             }
         });
 
-        // Add event listener for edit buttons
         document.addEventListener('click', function(event) {
             if (event.target.classList.contains('edit-btn')) {
                 const addressId = event.target.getAttribute('data-id');
@@ -610,7 +607,7 @@
         makeAuthenticatedRequest(endpoint, 'DELETE')
             .then(response => {
                 console.log('Address deleted:', response);
-                fetchAddresses(); // Refresh addresses table
+                fetchAddresses();
             })
             .catch(error => {
                 console.error('Failed to delete address:', error);
@@ -663,7 +660,7 @@
             .then(response => {
                 console.log('Address updated:', response);
                 alert('Address updated successfully!');
-                fetchAddresses(); // Refresh addresses table
+                fetchAddresses();
             })
             .catch(error => {
                 console.error('Failed to update address:', error);

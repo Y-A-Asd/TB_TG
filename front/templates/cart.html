@@ -101,21 +101,21 @@
                                 <p class="primary-btn">Delete</p>
                             </td>
                         </tr>
-                        <td>
-                            <h5>Subtotal</h5>
-                        </td>
-                        <td>
-                            <h5>$2160.00</h5>
-                        </td>
+
 
                         </tbody>
-
+                        <td>
+                            <h5>Total Price : </h5>
+                        </td>
+                        <td>
+                            <h5 id="totalP"></h5>
+                        </td>
 
                     </table>
+
                     <div class="cupon_text d-flex align-items-center">
                         <input type="text" placeholder="Coupon Code">
                         <a class="primary-btn" href="#">Apply</a>
-                        <a class="gray_btn" href="#">Close Coupon</a>
                     </div>
 
                     <div class="checkout_btn_inner d-flex align-items-center">
@@ -133,10 +133,8 @@
             let cartId = localStorage.getItem("cartId");
 
             if (!cartId) {
-                // If cart ID doesn't exist in local storage, create a new cart
                 createCart();
             } else {
-                // If cart ID exists, fetch cart items
                 fetchCartItems(cartId);
             }
         });
@@ -154,21 +152,18 @@
         }
 
         function fetchCartItems(cartId) {
-            fetch(`/shop/cart/${cartId}/items/`)
+            fetch(`/shop/cart/${cartId}/`)
                 .then(response => response.json())
                 .then(data => {
-                    // Populate HTML table with cart items
                     populateCartTable(data);
                 })
                 .catch(error => console.error("Error fetching cart items:", error));
         }
 
-        function populateCartTable(cartItems) {
-            // Get the table body element
+        function populateCartTable(cartItem) {
             const tableBody = document.querySelector("tbody");
-            tableBody.innerHTML = ""; // Clear the table body before populating
-
-            // Loop through each cart item and create table rows
+            tableBody.innerHTML = "";
+            let cartItems = cartItem.items
             cartItems.forEach(item => {
                 const row = document.createElement("tr");
 
@@ -195,7 +190,6 @@
                 <td><button class="btn-danger delete-button">Delete</button></td>
             `;
 
-                // Attach event listeners to the increase and decrease buttons
                 row.querySelector(".increase").addEventListener("click", () => {
                     updateQuantity(item.id, parseInt(document.getElementById(`quantity-${item.id}`).value) + 1);
                 });
@@ -210,9 +204,10 @@
                     deleteCartItem(item.id);
                 });
 
-                // Append the row to the table body
                 tableBody.appendChild(row);
             });
+            let totalP = document.getElementById('totalP')
+            totalP.textContent = cartItem.total_price
         }
 
         function updateQuantity(itemId, newQuantity) {

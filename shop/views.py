@@ -315,12 +315,7 @@ class CartViewSet(CreateModelMixin,
                   GenericViewSet):
 
     def get_queryset(self):
-        # todo:fix how to get user :-|
-        user = self.request.user
-        if user.is_staff:
-            return Cart.objects.all().prefetch_related('items__product')
-        customer_id = Customer.objects.only('id').get(user_id=user.id)
-        return Cart.objects.all().prefetch_related('items__product').filter(customer_id=customer_id)
+        return Cart.objects.all().prefetch_related('items__product')
 
     serializer_class = CartSerializer
 

@@ -3,7 +3,7 @@ from decimal import Decimal
 from django.db import transaction
 from django.utils.text import slugify
 from rest_framework import serializers
-
+from discount.models import BaseDiscount
 from core.models import AuditLog
 from shop.models import Product, Collection, Review, Customer, Order, OrderItem, ProductImage, CartItem, Cart, Address, \
     Transaction, MainFeature, Promotion, SiteSettings, HomeBanner
@@ -121,11 +121,44 @@ class CartSerializer(serializers.ModelSerializer):
     items = CartItemSerializer(many=True, read_only=True)
     total_price = serializers.SerializerMethodField()
 
+    # def get_total_price(self, cart):
+    #     if cart.items:
+    #         return sum([item.quantity * item.product.price_after_off for item in cart.items.all()])
+    #     else:
+    #         return 0
+
     def get_total_price(self, cart):
-        if cart.items:
-            return sum([item.quantity * item.product.price_after_off for item in cart.items.all()])
+        if cart.discount:
+            cart.discount.ensure_availability()
+            if cart.discount.active:
+                print(cart.discount.mode)
+                print('total_price')
+                if cart.discount.mode == cart.discount.Mode.DirectPrice:
+                    total_price = sum([item.quantity * item.product.price_after_off for item in
+                                       cart.items.all()]) - cart.discount.discount
+                    print(total_price)
+                elif cart.discount.mode == cart.discount.Mode.DiscountOff:
+                    total_price = sum(
+                        [item.quantity * item.product.price_after_off for item in cart.items.all()]) - sum(
+                        [item.quantity * item.product.price_after_off for item in
+                         cart.items.all()]) * cart.discount.discount / 100
+                elif (cart.discount.mode == cart.discount.Mode.PersonCode or
+                      cart.discount.mode == cart.discount.Mode.EventCode):
+                    total_price = sum(
+                        [item.quantity * item.product.price_after_off for item in cart.items.all()]) - sum(
+                        [item.quantity * item.product.price_after_off for item in
+                         cart.items.all()]) * cart.discount.discount / 100
+                else:
+                    raise ValueError(_(f"Invalid discount mode: {cart.discount.mode}"))
+            else:
+                raise ValueError(_(f"Discount is not active!"))
+
         else:
-            return 0
+            total_price = sum([item.quantity * item.product.price_after_off for item in
+                               cart.items.all()])
+
+        print(total_price)
+        return total_price if total_price is not None else 0
 
     class Meta:
         model = Cart
@@ -260,8 +293,9 @@ class CreateOrderSerializer(serializers.Serializer):
             province = address.province
             path = address.path
             city = address.city
+            discount = Cart.objects.only('discount').get(cart_id=cart_id)
             order = Order.objects.create(customer=customer, first_name=first_name, last_name=last_name,
-                                         zip_code=zip_code, province=province, path=path, city=city)
+                                         zip_code=zip_code, province=province, path=path, city=city, discount=discount)
             cart_items = CartItem.objects.filter(cart_id=cart_id)
             order_items = [
                 OrderItem(
