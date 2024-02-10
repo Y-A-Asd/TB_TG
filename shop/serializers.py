@@ -297,7 +297,9 @@ class CreateOrderSerializer(serializers.Serializer):
             province = address.province
             path = address.path
             city = address.city
-            discount = Cart.objects.only('discount').get(cart_id=cart_id)
+            discount = Cart.objects.get(id=cart_id)
+            discount = discount.discount
+
             order = Order.objects.create(customer=customer, first_name=first_name, last_name=last_name,
                                          zip_code=zip_code, province=province, path=path, city=city, discount=discount)
             cart_items = CartItem.objects.filter(cart_id=cart_id)

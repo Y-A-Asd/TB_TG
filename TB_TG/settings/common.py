@@ -291,3 +291,10 @@ test: (adding missing tests, refactoring tests; no production code change)
 chore: (updating grunt tasks etc; no production code change)
 
 """
+
+
+# SANDBOX MODE
+#
+# MERCHANT = "00000000-0000-0000-0000-000000000000"
+#
+# SANDBOX = True
