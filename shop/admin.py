@@ -1,4 +1,5 @@
 from django.db.models import F, Q
+from django.forms import Select
 from django.urls import reverse
 from django.contrib import admin, messages
 from django.contrib.admin import TabularInline
@@ -9,9 +10,61 @@ from django.contrib.contenttypes.admin import GenericTabularInline
 from parler.admin import TranslatableAdmin
 from tags.models import TaggedItem
 from . import models
-from .filters import MainFeatureFilter, InventoryFilter
+from .filters import InventoryFilter, MainFeatureFilter
 from .models import Review, Transaction, Address, \
-    MainFeature, Order, OrderItem, SiteSettings, Product, Collection, HomeBanner
+    MainFeature, Order, OrderItem, SiteSettings, Product, Collection, HomeBanner, FeatureKey, FeatureValue
+
+
+
+
+@admin.register(FeatureValue)
+class FeatureValueAdmin(TranslatableAdmin):
+    autocomplete_fields = ['key']
+    list_display = ['id', 'value']
+    search_fields = ['translations__value']
+
+
+class FeatureValueInline(admin.StackedInline):
+    model = FeatureValue
+    readonly_fields = ['id']
+    extra = 1
+
+
+@admin.register(FeatureKey)
+class FeatureKeyAdmin(TranslatableAdmin):
+    list_display = ['id', 'key']
+    search_fields = ['translations__key']
+    inlines = [FeatureValueInline]
+
+    def get_inline_instances(self, request, obj=None):
+        if not obj:
+            return []
+        return super().get_inline_instances(request, obj)
+
+
+@admin.register(MainFeature)
+class MainFeatureAdmin(admin.ModelAdmin):
+    exclude = ['deleted_at']
+    list_display = ['id', 'product', 'key', 'value']
+    list_filter = ['key']
+    search_fields = ['product__name']
+    autocomplete_fields = ['product', 'key', 'value']
+    # raw_id_fields = ['key', 'value']
+    readonly_fields = ['id']
+    fieldsets = (
+        (None, {
+            'fields': ('id', 'product', 'key', 'value')
+        }),
+    )
+
+
+# Include these inlines in your Product admin as needed
+class MainFeatureInline(admin.TabularInline):
+    model = MainFeature
+    extra = 1
+    exclude = ['deleted_at']
+    search_fields = ['key', 'value']
+    raw_id_fields = ['key', 'value']
 
 
 class TagInline(GenericTabularInline):
@@ -19,19 +72,6 @@ class TagInline(GenericTabularInline):
     model = TaggedItem
     verbose_name = _('Tag')
     verbose_name_plural = _('Tags')
-
-
-@admin.register(MainFeature)
-class MainFeatureAdmin(TranslatableAdmin):
-    list_display = ['title', 'description', 'value']
-    search_fields = ['title']
-    exclude = ['deleted_at', 'created_at', 'updated_at']
-
-    def get_autocomplete_fields(self, request):
-        return ['title', 'value']
-
-    class Meta:
-        model = MainFeature
 
 
 @admin.register(models.Promotion)
@@ -54,14 +94,6 @@ class ProductImageInline(admin.TabularInline):
             )
 
 
-class FeatureInline(TabularInline):
-    model = Product.value_feature.through
-    extra = 1
-
-    def get_autocomplete_fields(self, request):
-        return ['value_feature__title', 'value_feature__value']
-
-
 @admin.register(Collection)
 class CollectionAdmin(TranslatableAdmin):
     autocomplete_fields = ['parent']
@@ -82,7 +114,7 @@ class CollectionAdmin(TranslatableAdmin):
 
 @admin.register(Product)
 class ProductAdmin(TranslatableAdmin):
-    autocomplete_fields = ['collection', 'value_feature']
+    autocomplete_fields = ['collection']
 
     def get_prepopulated_fields(self, request, obj=None):
         return {'slug': ('title',)}
@@ -90,13 +122,13 @@ class ProductAdmin(TranslatableAdmin):
     actions = ['clear_inventory']
     list_display = ['title', 'unit_price', 'inventory_status', 'collection_title', 'min_inventory']
     list_editable = ['unit_price']
-    list_filter = ['collection', 'value_feature', 'updated_at', MainFeatureFilter, InventoryFilter]
+    list_filter = ['collection', 'updated_at', InventoryFilter, MainFeatureFilter]
     list_per_page = 10
     list_select_related = ['collection']
     search_fields = ['title']
     exclude = ['deleted_at', 'created_at', 'updated_at']
 
-    inlines = [FeatureInline, ProductImageInline]
+    inlines = [ProductImageInline, MainFeatureInline]
 
     def get_search_results(self, request, queryset, search_term):
         collection_filter = request.GET.get('collection__id__exact')
@@ -187,7 +219,7 @@ class OrderAdmin(admin.ModelAdmin):
     actions = ['mark_as_delivered']
 
     def total_price(self, obj):
-        return obj.orders.aggregate(total_price=Sum(F('unit_price') * F('quantity')))['total_price']
+        return obj.get_total_price()
 
     total_price.short_description = _("Total Price")
 

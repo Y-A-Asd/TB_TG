@@ -1,0 +1,724 @@
+{% load static %}
+{% load i18n %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content="Y.A.A"/>
+    <meta name="author" content="Y.A.A"/>
+    <title>Profile</title>
+    <!-- loader-->
+    <link href="{% static 'assets/css/pace.min.css' %}" rel="stylesheet"/>
+    <script src="{% static 'assets/js/pace.min.js' %}"></script>
+    <!--favicon-->
+    <link rel="icon" href="{% static 'assets/images/favicon.ico' %}" type="image/x-icon">
+    <!-- simplebar CSS-->
+    <link href="{% static 'assets/plugins/simplebar/css/simplebar.css' %}" rel="stylesheet"/>
+    <!-- Bootstrap core CSS-->
+    <link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet"/>
+    <!-- animate CSS-->
+    <link href="{% static 'assets/css/animate.css' %}" rel="stylesheet" type="text/css"/>
+    <!-- Icons CSS-->
+    <link href="{% static 'assets/css/icons.css' %}" rel="stylesheet" type="text/css"/>
+    <!-- Sidebar CSS-->
+    <link href="{% static 'assets/css/sidebar-menu.css' %}" rel="stylesheet"/>
+    <!-- Custom Style-->
+    <link href="{% static 'assets/css/app-style.css' %}" rel="stylesheet"/>
+
+</head>
+
+<body class="bg-theme bg-theme1">
+
+<!-- start loader -->
+<div id="pageloader-overlay" class="visible incoming">
+    <div class="loader-wrapper-outer">
+        <div class="loader-wrapper-inner">
+            <div class="loader"></div>
+        </div>
+    </div>
+</div>
+<!-- end loader -->
+
+<!-- Start wrapper-->
+<div id="wrapper" class="toggled">
+
+
+    <!--Start topbar header-->
+    <header class="topbar-nav">
+        <nav class="navbar navbar-expand fixed-top">
+            <ul class="navbar-nav mr-auto align-items-center">
+                <li class="nav-item">
+{#                    <a class="nav-link toggle-menu" href="javascript:void();">#}
+{#                        <i class="icon-menu menu-icon"></i>#}
+{#                    </a>#}
+                </li>
+            </ul>
+
+            <ul class="navbar-nav align-items-center right-nav-link">
+                <li class="nav-item">
+                    <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown" href="#">
+                        <span class="user-profile"><img src="https://via.placeholder.com/110x110" class="img-circle"
+                                                        alt="user avatar"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li class="dropdown-item user-details">
+                            <a href="javaScript:void();">
+                                <div class="media">
+                                    <div class="avatar"><img class="align-self-start mr-3"
+                                                             src="https://via.placeholder.com/110x110"
+                                                             alt="user avatar"></div>
+                                    <div class="media-body">
+                                        <h6 class="mt-2 user-title">user name</h6>
+                                        <p class="user-subtitle">user email</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="dropdown-item"><i class="icon-power mr-2"></i> Logout</li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <!--End topbar header-->
+
+    <div class="clearfix"></div>
+
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <div class="alert alert-info alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <div class="alert-icon">
+                    <i class="icon-info"></i>
+                </div>
+                <div class="alert-message">
+                    <span id="errorMessage"></span>
+                </div>
+            </div>
+            <div class="row mt-3">
+
+
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <ul class="nav nav-tabs nav-tabs-primary top-icon nav-justified">
+                                <li class="nav-item">
+                                    <a href="javascript:void();" data-target="#addresses" data-toggle="pill"
+                                       class="nav-link active"><i class="icon-user"></i> <span class="hidden-xs">Addresses</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="javascript:void();" data-target="#orders" data-toggle="pill"
+                                       class="nav-link"><i class="icon-credit-card"></i> <span
+                                            class="hidden-xs">Orders</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="javascript:void();" data-target="#edit" data-toggle="pill"
+                                       class="nav-link"><i class="icon-note"></i> <span
+                                            class="hidden-xs">Profile Info</span></a>
+                                </li>
+                            </ul>
+                            <div class="tab-content p-3">
+                                <div class="tab-pane active" id="addresses">
+                                    <h5 class="mb-3">Addresses</h5>
+                                    <table class="table table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Zip code</th>
+                                            <th scope="col">Province</th>
+                                            <th scope="col">City</th>
+                                            <th scope="col">Path</th>
+                                            <th scope="col">Default</th>
+                                            <th scope="col">Edit</th>
+                                            <th scope="col">Delete</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="addresses-body">
+
+                                        </tbody>
+                                    </table>
+                                    <!--/row-->
+                                    <br><br><br><br>
+                                     <form id="address-form">
+                                        <input id="addressid" class="form-control" type="hidden">
+                                        <input id="customerid" class="form-control" type="hidden">
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Zip Code</label>
+                                            <div class="col-lg-9">
+                                                <input id="zipcode" class="form-control" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Province</label>
+                                            <div class="col-lg-9">
+                                                <input id="province" class="form-control" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">City</label>
+                                            <div class="col-lg-9">
+                                                <input id="city" class="form-control" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Path</label>
+                                            <div class="col-lg-9">
+                                                <input id="path" class="form-control" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Default</label>
+                                            <div class="col-lg-9 ">
+                                                <input id="default" class="icheck-material-secondary" type="checkbox">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-lg-9 offset-lg-3">
+                                                <input type="submit" class="btn btn-dark" value="Save">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="tab-pane" id="orders">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Orders</h5>
+                                                    <div class="table-responsive">
+                                                        <table class="table table-hover">
+                                                            <thead>
+                                                            <tr>
+                                                                <th scope="col">#</th>
+                                                                <th scope="col">DateTime</th>
+                                                                <th scope="col">Status</th>
+                                                                <th scope="col">Total Price</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody id="orders-body">
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><!--End Row-->
+
+                                </div>
+                                <div class="tab-pane" id="edit">
+                                    <form id="customer-form">
+                                        <input id="id" class="form-control" type="hidden">
+                                        <input id="user_id" class="form-control" type="hidden">
+                                        <input id="membership" class="form-control" type="hidden">
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">First name</label>
+                                            <div class="col-lg-9">
+                                                <input id="first-name" class="form-control" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Last name</label>
+                                            <div class="col-lg-9">
+                                                <input id="last-name" class="form-control" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">BirthDay</label>
+                                            <div class="col-lg-9">
+                                                <input id="birth-date" class="form-control" type="date">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-lg-9 offset-lg-3">
+                                                <input type="submit" class="btn btn-primary" value="Save Changes">
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <form id="user-form">
+                                        <input id="idu" class="form-control" type="hidden">
+                                        <input id="phone_number" class="form-control" type="hidden">
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Email</label>
+                                            <div class="col-lg-9">
+                                                <input id="email" class="form-control" type="email">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-lg-9 offset-lg-3">
+                                                <input type="submit" class="btn btn-secondary" value="Save Changes">
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <form id="pass-form">
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Current
+                                                Password</label>
+                                            <div class="col-lg-9">
+                                                <input id="currpass" class="form-control" type="password">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">New
+                                                Password</label>
+                                            <div class="col-lg-9">
+                                                <input id="newpass" class="form-control" type="password">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-lg-9 offset-lg-3">
+                                                <input type="submit" class="btn btn-success" value="Save Changes">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div><!--End content-wrapper-->
+
+
+    <!--Start footer-->
+    <footer class="footer">
+        <div class="container">
+            <div class="text-center">
+                Copyright © 2024 By <a href="https://github.com/Y-A-Asd" class="text-warning">Y-A-Asd</a>
+            </div>
+        </div>
+    </footer>
+    <!--End footer-->
+
+
+</div><!--End wrapper-->
+
+<script>
+    function displayErrorMessage(message) {
+        const errorMessageElement = document.getElementById('errorMessage');
+        errorMessageElement.textContent = message;
+    }
+
+    function getToken() {
+        return localStorage.getItem('JWT');
+    }
+
+    function makeAuthenticatedRequest(url, method, context = null) {
+        const token = getToken();
+
+        const headers = {
+            'Content-Type': 'application/json',
+        };
+
+        if (token) {
+            headers['Authorization'] = `JWT ${token}`;
+        }
+
+        const options = {
+            method: method,
+            headers: headers,
+            body: context ? JSON.stringify(context) : null,
+        };
+
+        return fetch(url, options)
+            .then(response => response.json())
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+
+    function verifyToken() {
+        const token = getToken();
+
+        if (token) {
+            const endpoint = '/core/auth/jwt/verify/';
+
+            makeAuthenticatedRequest(endpoint, 'POST', context = {token: token})
+                .then(response => {
+                    console.log(response);
+                    if (response.code === 'token_not_valid') {
+                        console.log('Token not valid. User needs to log in.');
+                        alert('Token not valid. User needs to log in.')
+                        window.location.href = '/login/';
+                    } else {
+                        console.log('Token is valid. User is already logged in.');
+                        getOrders();
+                    }
+                });
+        } else {
+            console.log('No token found. User needs to log in.');
+            alert('No token found. User needs to log in.')
+            window.location.href = '/login/';
+        }
+    }
+
+    function getStatusLabel(status) {
+        switch (status) {
+            case 'N':
+                return "Not Paid";
+            case 'P':
+                return "Pending";
+            case 'S':
+                return "Shipping";
+            case 'D':
+                return "Delivered";
+            case 'F':
+                return "Failed";
+            default:
+                return "";
+        }
+    }
+
+    function getOrders() {
+        const token = getToken();
+        let endpoint = "/shop/orders/"
+        makeAuthenticatedRequest(endpoint, 'GET')
+            .then(data => {
+                data.forEach(function (order, index) {
+                    document.getElementById("orders-body").innerHTML += `
+                        <tr>
+                            <th scope='row'>${order.id}</th>
+                            <td>${new Date(order.updated_at).toLocaleString()}</td>
+                            <td>${getStatusLabel(order.order_status)}</td>
+                            <td>${order.total_price}</td>
+                        </tr>
+                    `;
+                });
+            })
+            .catch(error => {
+                console.error("Failed to fetch orders:", error);
+            });
+    }
+
+    console.log('verifing token...')
+    verifyToken();
+
+    function prefillForm(data) {
+        console.log(data)
+        document.getElementById('first-name').value = data.first_name;
+        document.getElementById('last-name').value = data.last_name;
+        document.getElementById('birth-date').value = data.birth_date;
+        document.getElementById('membership').value = data.membership;
+        document.getElementById('id').value = data.id;
+        document.getElementById('user_id').value = data.user_id;
+    }
+
+    function updateCustomer(event) {
+        event.preventDefault();
+
+        const firstName = document.getElementById('first-name').value;
+        const lastName = document.getElementById('last-name').value;
+        const birthDate = document.getElementById('birth-date').value;
+        const id = document.getElementById('id').value;
+        const user_id = document.getElementById('user_id').value;
+        const membership = document.getElementById('membership').value;
+
+        const endpoint = '/shop/customers/me/';
+
+        makeAuthenticatedRequest(endpoint, 'PUT', {
+            first_name: firstName,
+            last_name: lastName,
+            birth_date: birthDate
+        })
+            .then(response => {
+                console.log('Customer updated:', response);
+                alert('Customer updated successfully!');
+            })
+            .catch(error => {
+                console.error('Failed to update customer:', error);
+            });
+    }
+
+    function fetchCustomerData() {
+        const endpoint = '/shop/customers/me/';
+        console.log('DATA CALLED FOR CUSTOMER')
+        makeAuthenticatedRequest(endpoint, 'GET')
+            .then(data => {
+                prefillForm(data);
+            })
+            .catch(error => {
+                console.error('Failed to fetch customer data:', error);
+            });
+    }
+
+
+    fetchCustomerData();
+
+    const customerForm = document.getElementById('customer-form');
+    customerForm.addEventListener('submit', updateCustomer);
+
+    function prefillForm2(data) {
+        document.getElementById('email').value = data.email;
+        document.getElementById('idu').value = data.id;
+        document.getElementById('phone_number').value = data.phone_number;
+    }
+
+    function updateUser(event) {
+        event.preventDefault();
+
+        const email = document.getElementById('email').value;
+        const id = document.getElementById('idu').value;
+        const phoneNumber = document.getElementById('phone_number').value;
+
+        const endpoint = '/core/auth/users/me/';
+
+        const requestBody = {
+            email: email,
+            id: id,
+            phone_number: phoneNumber
+        };
+
+        makeAuthenticatedRequest(endpoint, 'PUT', requestBody)
+            .then(response => {
+                console.log('User updated:', response);
+                alert('User updated successfully!');
+            })
+            .catch(error => {
+                console.error('Failed to update user:', error);
+            });
+    }
+
+    function fetchUserData() {
+        const endpoint = '/core/auth/users/me/';
+
+        makeAuthenticatedRequest(endpoint, 'GET')
+            .then(data => {
+                prefillForm2(data);
+            })
+            .catch(error => {
+                console.error('Failed to fetch user data:', error);
+            });
+    }
+
+
+    fetchUserData();
+
+    const userForm = document.getElementById('user-form');
+    userForm.addEventListener('submit', updateUser);
+
+
+    function updatePass(event) {
+        event.preventDefault();
+
+        const new_password = document.getElementById('newpass').value;
+        const current_password = document.getElementById('currpass').value;
+
+        const endpoint = '/core/auth/users/set_password/';
+
+        const requestBody = {
+            new_password: new_password,
+            current_password: current_password
+        };
+        console.log(requestBody)
+        const token = getToken();
+
+        const headers = {
+            'Content-Type': 'application/json',
+        };
+
+        if (token) {
+            headers['Authorization'] = `JWT ${token}`;
+        }
+
+        const options = {
+            method: 'POST',
+            headers: headers,
+            body: requestBody ? JSON.stringify(requestBody) : null,
+        };
+
+        return fetch(endpoint, options)
+            .then(response => {
+                console.log('User updated:', response);
+                alert('Password updated successfully!');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+
+    const passForm = document.getElementById('pass-form');
+    passForm.addEventListener('submit', updatePass);
+
+
+
+    function fetchAddresses() {
+        const endpoint = '/shop/addresses/';
+
+        makeAuthenticatedRequest(endpoint, 'GET')
+            .then(data => {
+                const addressesTable = document.getElementById('addresses-body');
+                addressesTable.innerHTML = ''; // Clear previous data
+
+                data.forEach(address => {
+                    const tr = document.createElement('tr');
+
+                    tr.innerHTML = `
+                        <td>${address.id}</td>
+                        <td>${address.zip_code}</td>
+                        <td>${address.province}</td>
+                        <td>${address.city}</td>
+                        <td>${address.path}</td>
+                        <td>${address.default ? 'Yes' : 'No'}</td>
+                        <td>
+                            <button class="btn btn-primary edit-btn" data-id="${address.id}">Edit</button>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger delete-btn" data-id="${address.id}">Delete</button>
+                        </td>
+                    `;
+
+                    addressesTable.appendChild(tr);
+                });
+            })
+            .catch(error => {
+                console.error('Failed to fetch addresses:', error);
+            });
+    }
+
+    window.onload = function () {
+        fetchAddresses();
+
+        document.addEventListener('click', function(event) {
+            if (event.target.classList.contains('delete-btn')) {
+                const addressId = event.target.getAttribute('data-id');
+                deleteAddress(addressId);
+            }
+        });
+
+        document.addEventListener('click', function(event) {
+            if (event.target.classList.contains('edit-btn')) {
+                const addressId = event.target.getAttribute('data-id');
+                fetchAddress(addressId);
+            }
+        });
+    };
+
+    function deleteAddress(addressId) {
+        const endpoint = `/shop/addresses/${addressId}/`;
+
+        makeAuthenticatedRequest(endpoint, 'DELETE')
+            .then(response => {
+                console.log('Address deleted:', response);
+                fetchAddresses();
+            })
+            .catch(error => {
+                console.error('Failed to delete address:', error);
+            });
+    }
+
+    function fetchAddress(addressId) {
+        const endpoint = `/shop/addresses/${addressId}/`;
+
+        makeAuthenticatedRequest(endpoint, 'GET')
+            .then(data => {
+                fillAddressForm(data);
+            })
+            .catch(error => {
+                console.error('Failed to fetch address:', error);
+            });
+    }
+
+    function fillAddressForm(address) {
+        document.getElementById('addressid').value = address.id;
+        document.getElementById('zipcode').value = address.zip_code;
+        document.getElementById('province').value = address.province;
+        document.getElementById('city').value = address.city;
+        document.getElementById('path').value = address.path;
+        document.getElementById('default').checked = address.default;
+    }
+
+    function updateAddress(event) {
+        event.preventDefault();
+
+        const addressId = document.getElementById('addressid').value;
+        const zipCode = document.getElementById('zipcode').value;
+        const province = document.getElementById('province').value;
+        const city = document.getElementById('city').value;
+        const path = document.getElementById('path').value;
+        const isDefault = document.getElementById('default').checked;
+
+        const endpoint = `/shop/addresses/${addressId}/`;
+
+        const requestBody = {
+            id: addressId,
+            zip_code: zipCode,
+            province: province,
+            city: city,
+            path: path,
+            default: isDefault
+        };
+
+        makeAuthenticatedRequest(endpoint, 'PUT', requestBody)
+            .then(response => {
+                console.log('Address updated:', response);
+                alert('Address updated successfully!');
+                fetchAddresses();
+            })
+            .catch(error => {
+                console.error('Failed to update address:', error);
+            });
+    }
+
+    function createAddress(event) {
+        event.preventDefault();
+
+        const zipCode = document.getElementById('zipcode').value;
+        const province = document.getElementById('province').value;
+        const city = document.getElementById('city').value;
+        const path = document.getElementById('path').value;
+        const isDefault = document.getElementById('default').checked;
+
+        const endpoint = '/shop/addresses/';
+
+        const requestBody = {
+            zip_code: zipCode,
+            province: province,
+            city: city,
+            path: path,
+            default: isDefault
+        };
+
+        makeAuthenticatedRequest(endpoint, 'POST', requestBody)
+            .then(response => {
+                console.log('Address created:', response);
+                alert('Address created successfully!');
+                fetchAddresses();
+            })
+            .catch(error => {
+                console.error('Failed to create address:', error);
+            });
+    }
+
+    const addressForm = document.getElementById('address-form');
+    addressForm.addEventListener('submit', function(event) {
+        const addressId = document.getElementById('addressid').value;
+        if (addressId) {
+            updateAddress(event);
+        } else {
+            createAddress(event);
+        }
+    });
+</script>
+<!-- Bootstrap core JavaScript-->
+<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+<script src="{% static 'assets/js/popper.min.js' %}"></script>
+<script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+
+<!-- simplebar js -->
+<script src="{% static 'assets/plugins/simplebar/js/simplebar.js' %}"></script>
+<!-- sidebar-menu js -->
+<script src="{% static 'assets/js/sidebar-menu.js' %}"></script>
+
+<!-- Custom scripts -->
+<script src="{% static 'assets/js/app-script.js' %}"></script>
+
+</body>
+</html>

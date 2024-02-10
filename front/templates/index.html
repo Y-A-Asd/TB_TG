@@ -152,75 +152,6 @@
             </div>
         </div>
     </section>
-    <!-- end features Area -->
-
-    <!-- Start category Area -->
-    <section class="category-area">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8 col-md-12">
-                    <div class="row">
-                        <div class="col-lg-8 col-md-8">
-                            <div class="single-deal">
-                                <div class="overlay"></div>
-                                <img class="img-fluid w-100" src="img/category/c1.jpg" alt="">
-                                <a href="img/category/c1.jpg" class="img-pop-up" target="_blank">
-                                    <div class="deal-details">
-                                        <h6 class="deal-title">Sneaker for Sports</h6>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4">
-                            <div class="single-deal">
-                                <div class="overlay"></div>
-                                <img class="img-fluid w-100" src="img/category/c2.jpg" alt="">
-                                <a href="img/category/c2.jpg" class="img-pop-up" target="_blank">
-                                    <div class="deal-details">
-                                        <h6 class="deal-title">Sneaker for Sports</h6>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4">
-                            <div class="single-deal">
-                                <div class="overlay"></div>
-                                <img class="img-fluid w-100" src="img/category/c3.jpg" alt="">
-                                <a href="img/category/c3.jpg" class="img-pop-up" target="_blank">
-                                    <div class="deal-details">
-                                        <h6 class="deal-title">Product for Couple</h6>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-lg-8 col-md-8">
-                            <div class="single-deal">
-                                <div class="overlay"></div>
-                                <img class="img-fluid w-100" src="img/category/c4.jpg" alt="">
-                                <a href="img/category/c4.jpg" class="img-pop-up" target="_blank">
-                                    <div class="deal-details">
-                                        <h6 class="deal-title">Sneaker for Sports</h6>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-deal">
-                        <div class="overlay"></div>
-                        <img class="img-fluid w-100" src="img/category/c5.jpg" alt="">
-                        <a href="img/category/c5.jpg" class="img-pop-up" target="_blank">
-                            <div class="deal-details">
-                                <h6 class="deal-title">Sneaker for Sports</h6>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- End category Area -->
 
     <!-- start product Area -->
     <section class="lattest-product-area pb-40 category-list">
@@ -353,7 +284,6 @@
                             }
                         });
 
-                        updatePagination(products.count, productsPerPage);
                     })
                     .catch(error => {
                         console.error('Error fetching products:', error);
@@ -396,55 +326,7 @@
                     .catch(error => console.error('Error adding item to cart:', error));
             }
 
-            function updatePagination(totalProducts, productsPerPage) {
-                const totalPages = Math.ceil(totalProducts / productsPerPage);
-                const paginationContainer = document.getElementById('paginationContainer');
-                paginationContainer.innerHTML = '';
 
-                for (let i = 1; i <= totalPages; i++) {
-                    const pageLink = document.createElement('a');
-                    pageLink.href = '#';
-                    pageLink.textContent = i;
-                    pageLink.addEventListener('click', () => {
-                        currentPage = i;
-                        fetchProducts(currentPage);
-                    });
-
-                    if (i === currentPage) {
-                        pageLink.classList.add('active');
-                    }
-
-                    paginationContainer.appendChild(pageLink);
-                }
-
-
-                if (currentPage > 1) {
-                    const prevLink = createPaginationLink('prev-arrow', 'fa-long-arrow-left', currentPage - 1);
-                    paginationContainer.insertBefore(prevLink, paginationContainer.firstChild);
-                }
-
-                if (currentPage < totalPages) {
-                    const nextLink = createPaginationLink('next-arrow', 'fa-long-arrow-right', currentPage + 1);
-                    paginationContainer.appendChild(nextLink);
-                }
-            }
-
-            function createPaginationLink(className, iconClass, page) {
-                const link = document.createElement('a');
-                link.href = '#';
-                link.classList.add(className);
-                link.addEventListener('click', () => {
-                    currentPage = page;
-                    fetchProducts(currentPage);
-                });
-
-                const icon = document.createElement('i');
-                icon.classList.add('fa');
-                icon.classList.add(iconClass);
-                link.appendChild(icon);
-
-                return link;
-            }
 
             function getSortingOrdering(sortingOption) {
                 switch (sortingOption) {

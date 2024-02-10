@@ -17,25 +17,6 @@ admin.site.index_title = _('Index Title')
 admin.site.site_title = _('Site Management')
 
 
-class MainFeature(TranslatableModel, BaseModel):
-    translations: TranslatedFields = TranslatedFields(
-        title=models.CharField(_('Title'), max_length=255),
-        description=models.CharField(_("Description"), max_length=500),
-        value=models.CharField(_('Value'), max_length=255),
-    )
-
-    class Meta:
-        verbose_name = _("Feature")
-        verbose_name_plural = _("Features")
-
-    def __str__(self):
-        default_language = get_language() or 'en'
-        title_value_translation = self.translations.get(language_code=default_language)
-        title = title_value_translation.title
-        value = title_value_translation.value
-        return f'Feature- {self.pk} : {title} -> {value}'
-
-
 class Promotion(TranslatableModel, BaseModel):
     translations: TranslatedFields = TranslatedFields(
         title=models.CharField(_('Title'), max_length=255),
@@ -57,10 +38,10 @@ class Promotion(TranslatableModel, BaseModel):
     #         raise ValidationError(_('There is already an active discount for this item.'))
 
     def __str__(self):
-        default_language = get_language() or 'en'
-        description_translation = self.translations.get(language_code=default_language)
-        description = description_translation.description if description_translation else f"Promotion {self.pk}"
-        return f'Promotion {self.pk} - {description}'
+        # default_language = get_language() or 'en'
+        # description_translation = self.translations.get(language_code=default_language)
+        # description = description_translation.description if description_translation else f"Promotion {self.pk}"
+        return f'Promotion {self.pk} '
 
 
 class Collection(TranslatableModel, BaseModel):
@@ -77,14 +58,13 @@ class Collection(TranslatableModel, BaseModel):
 
     def __str__(self):
         default_language = get_language() or 'en'
-        title_translation = self.translations.get(language_code=default_language)
-        title = title_translation.title if title_translation else f"Collection {self.pk}"
-        return f'Collection {self.pk} - {title}'
+        print('default_language', default_language)
+        return f'Collection {self.pk}'
 
     class Meta:
         verbose_name = _("Collection")
         verbose_name_plural = _("Collections")
-        ordering = ["translations__title"]
+        # ordering = ["translations__title"]
 
 
 class Product(TranslatableModel, BaseModel):
@@ -106,16 +86,14 @@ class Product(TranslatableModel, BaseModel):
                                    related_name='products')
     discount = models.ForeignKey(BaseDiscount, on_delete=models.CASCADE, verbose_name=_("Discount"),
                                  null=True, blank=True)
-    value_feature = models.ManyToManyField(MainFeature, related_name='value_features',
-                                           verbose_name='Features', blank=True)
 
     # extra_data = models.JSONField(verbose_name='Features', null=True, blank=True)
 
     def __str__(self):
-        default_language = get_language() or 'en'
-        title_translation = self.translations.get(language_code=default_language)
-        title = title_translation.title if title_translation else f"Product {self.pk}"
-        return f'Product {self.pk} - {title} - {self.unit_price}'
+        # default_language = get_language() or 'en'
+        # title_translation = self.translations.get(language_code=default_language)
+        # title = title_translation.title if title_translation else f"Product {self.pk}"
+        return f'Product {self.pk}'
 
     @property
     def price_after_off(self, ):
@@ -142,7 +120,7 @@ class Product(TranslatableModel, BaseModel):
     class Meta:
         verbose_name = _("Product")
         verbose_name_plural = _("Products")
-        ordering = ["translations__title"]
+        # ordering = ["translations__title"]
 
 
 class ProductImage(BaseModel):
@@ -179,6 +157,8 @@ class Customer(BaseModel):
 class Cart(BaseModel):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     customer = models.ForeignKey(Customer, on_delete=models.PROTECT, verbose_name=_("Customer"), null=True, blank=True)
+    discount = models.ForeignKey(BaseDiscount, on_delete=models.CASCADE, verbose_name=_("Discount"),
+                                 null=True, blank=True)
 
 
 class CartItem(models.Model):
@@ -243,11 +223,14 @@ class Order(BaseModel):
         if self.discount:
             self.discount.ensure_availability()
             if self.discount.active:
+                print(self.discount.mode)
+                print('total_price')
                 if self.discount.mode == self.discount.Mode.DirectPrice:
                     total_price = \
                         self.orders.aggregate(
                             total_price=Sum(F('unit_price') * F('quantity')) - self.discount.discount)[
                             'total_price']
+                    print(total_price)
                 elif self.discount.mode == self.discount.Mode.DiscountOff:
                     total_price = self.orders.aggregate(total_price=Sum(F('unit_price') * F('quantity')) - Sum(
                         F('unit_price') * F('quantity')) * self.discount.discount / 100)['total_price']
@@ -262,6 +245,7 @@ class Order(BaseModel):
 
         else:
             total_price = self.orders.aggregate(total_price=Sum(F('unit_price') * F('quantity')))['total_price']
+        print(total_price)
         return total_price if total_price is not None else 0
 
 
@@ -359,6 +343,7 @@ class HomeBanner(BaseModel):
         verbose_name = _("Home Banner")
         verbose_name_plural = _("Home Banners")
 
+
 # class WishList(BaseModel):
 #     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name=_("Product"))
 #     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, verbose_name=_("Customer"))
@@ -369,3 +354,38 @@ class HomeBanner(BaseModel):
 #
 #     def __str__(self):
 #         return f'{self.customer.first_name} {self.customer.last_name}'
+
+class FeatureKey(TranslatableModel):
+    translations = TranslatedFields(
+        key=models.CharField(_('Key'), max_length=10, )
+    )
+
+    class Meta:
+        verbose_name = _("Feature Key")
+        verbose_name_plural = _("Feature Keys")
+
+    def __str__(self) -> str:
+        return f"{self.pk}"
+
+
+class FeatureValue(TranslatableModel):
+    key = models.ForeignKey(FeatureKey, on_delete=models.CASCADE, verbose_name=_('Key'))
+    translations = TranslatedFields(
+        value=models.CharField(_('Value'), max_length=10, )
+    )
+
+    class Meta:
+        verbose_name = _("Feature Value")
+        verbose_name_plural = _("Feature Value")
+
+    def __str__(self) -> str:
+        return f"{self.pk}"
+
+
+class MainFeature(BaseModel):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name=_('Product'))
+    key = models.ForeignKey(FeatureKey, on_delete=models.DO_NOTHING, verbose_name=_('Key'))
+    value = models.ForeignKey(FeatureValue, on_delete=models.DO_NOTHING, verbose_name=_('Value'))
+
+    def __str__(self) -> str:
+        return f"{self.product}: {self.pk}"

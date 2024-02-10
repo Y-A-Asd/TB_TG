@@ -3,6 +3,7 @@ from decimal import Decimal
 from django.utils.translation import activate
 from django.core.exceptions import ValidationError
 from shop.models import Product, Collection, Promotion, BaseDiscount, MainFeature
+from model_bakery import baker
 
 
 #
@@ -48,12 +49,6 @@ def test_product_price_after_off():
     promotion = Promotion.objects.create(title='Test Promotion')
     discount = BaseDiscount.objects.create(discount=10)
 
-    main_feature = MainFeature.objects.create(
-        title='Test Feature',
-        description='Test Feature Description',
-        value='Test Feature Value'
-    )
-
     product = Product.objects.create(
         unit_price=1000.00,
         inventory=10,
@@ -61,7 +56,7 @@ def test_product_price_after_off():
         promotions=promotion,
         discount=discount
     )
-    product.value_feature.add(main_feature)
+    main_feature = baker.make(MainFeature, product=product)
 
     assert discount.ensure_availability()
 

@@ -16,6 +16,7 @@
             </div>
         </div>
     </section>
+    <br>
     <!-- End Banner Area -->
     <div class="container">
         <div class="row">
@@ -26,23 +27,85 @@
                         {# collections will be dynamically added here using JavaScript #}
                     </ul>
                 </div>
+                <div class="sidebar-filter mt-50">
+                    <div class="top-filter-head">Product Filters</div>
+                    <div class="common-filter">
+                        <div class="head">Brands</div>
+                        <form action="#">
+                            <ul>
+                                <li class="filter-list"><input class="pixel-radio" type="radio" id="apple" name="brand"><label
+                                        for="apple">Apple<span>(29)</span></label></li>
+                                <li class="filter-list"><input class="pixel-radio" type="radio" id="asus"
+                                                               name="brand"><label
+                                        for="asus">Asus<span>(29)</span></label></li>
+                                <li class="filter-list"><input class="pixel-radio" type="radio" id="gionee"
+                                                               name="brand"><label for="gionee">Gionee<span>(19)</span></label>
+                                </li>
+                                <li class="filter-list"><input class="pixel-radio" type="radio" id="micromax"
+                                                               name="brand"><label
+                                        for="micromax">Micromax<span>(19)</span></label></li>
+                                <li class="filter-list"><input class="pixel-radio" type="radio" id="samsung"
+                                                               name="brand"><label
+                                        for="samsung">Samsung<span>(19)</span></label></li>
+                            </ul>
+                        </form>
+                    </div>
+                    <div class="common-filter">
+                        <div class="head">Color</div>
+                        <form action="#">
+                            <ul>
+                                <li class="filter-list"><input class="pixel-radio" type="radio" id="black" name="color"><label
+                                        for="black">Black<span>(29)</span></label></li>
+                                <li class="filter-list"><input class="pixel-radio" type="radio" id="balckleather"
+                                                               name="color"><label for="balckleather">Black
+                                    Leather<span>(29)</span></label></li>
+                                <li class="filter-list"><input class="pixel-radio" type="radio" id="blackred"
+                                                               name="color"><label for="blackred">Black
+                                    with red<span>(19)</span></label></li>
+                                <li class="filter-list"><input class="pixel-radio" type="radio" id="gold"
+                                                               name="color"><label
+                                        for="gold">Gold<span>(19)</span></label></li>
+                                <li class="filter-list"><input class="pixel-radio" type="radio" id="spacegrey"
+                                                               name="color"><label
+                                        for="spacegrey">Spacegrey<span>(19)</span></label></li>
+                            </ul>
+                        </form>
+                    </div>
+                    <div class="common-filter">
+                        <div class="head">Price</div>
+                        <div class="price-range-area">
+                            <div id="price-range"></div>
+                            <div class="value-wrapper d-flex">
+                                <div class="price">Price:</div>
+                                <span>$</span>
+                                <div id="lower-value"></div>
+                                <div class="to">to</div>
+                                <span>$</span>
+                                <div id="upper-value"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
             <div class="col-xl-9 col-lg-8 col-md-7">
                 <!-- Start Filter Bar -->
                 <div class="filter-bar d-flex flex-wrap align-items-center">
-                    <div class="sorting">
-                        <select id="sortingDropdown">
-                            <option value="default">{% trans "Default sorting" %}</option>
-                            <option value="price_asc">{% trans "Price: Low to High" %}</option>
-                            <option value="price_desc">{% trans "Price: High to Low" %}</option>
-                        </select>
+                    <div>
+                        <div class="">
+                            <div id="sortingggDropdown">
+                                <button value="default">{% trans "Default sorting" %}</button>
+                                <button value="price_asc">{% trans "Price: Low to High" %}</button>
+                                <button value="price_desc">{% trans "Price: High to Low" %}</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!-- End Filter Bar -->
                 <!-- Start Best Seller -->
                 <section class="lattest-product-area pb-40 category-list">
                     <div class="row" id="productContainer">
-{#                         products will be dynamically added here using JavaScript #}
+                        {#                         products will be dynamically added here using JavaScript #}
                     </div>
                 </section>
                 <!-- End Best Seller -->
@@ -62,8 +125,8 @@
 
     <script type="text/javascript">
         function createSocialInfo(iconClass, text, moreClass = null) {
-            const socialInfo = document.createElement('a');
-            socialInfo.href = '';  // Add your link here
+            const socialInfo = document.createElement('button');
+            socialInfo.href = ``;
             socialInfo.classList.add('social-info');
 
             const iconSpan = document.createElement('span');
@@ -83,16 +146,22 @@
         const productsPerPage = 12;
         let currentPage = 1;
 
-        function fetchProducts(page = 1, selectedOption = 'updated_at', collectionsId = null) {
-            console.log(collectionsId == null)
+        function fetchProducts(page = 1, selectedOption = 'updated_at', collectionsId = null, unit_price__gt = null, unit_price__lt = null, search = null) {
             let apiUrl = null
+            console.log(collectionsId == null)
+            console.log(search != null)
             if (collectionsId == null) {
                 apiUrl = `/shop/products/?page=${page}&ordering=${getSortingOrdering(selectedOption)}`;
             } else {
+
                 apiUrl = `/shop/products/?page=${page}&ordering=${getSortingOrdering(selectedOption)}&collection_id=${collectionsId}`;
             }
+            if (search != null) {
+                apiUrl = `/shop/products/?search=${search}`;
+            }
 
-            console.log('Fetching products. Page:', page, 'Selected option:', selectedOption);
+            console.log('Fetching products. Page:', page, 'Selected option:', selectedOption, 'search', search);
+            console.log(apiUrl);
             fetch(apiUrl)
                 .then(response => response.json())
                 .then(products => {
@@ -138,8 +207,8 @@
                                 const cartId = localStorage.getItem('cartId');
                                 const productId = product.id;
                                 const quantity = 1;
+                                if (!cartId || cartId == undefined) {
 
-                                if (!cartId) {
                                     createCartAndAddToBag(productId);
                                 } else {
                                     addToCart(cartId, productId, quantity);
@@ -147,6 +216,7 @@
                             });
 
                             // const addToWishlist = createSocialInfo('lnr lnr-heart', 'Wishlist');
+                            {#let url = {% url 'front:products-detail' productId %}#}
                             const viewMore = createSocialInfo('lnr', 'view more', 'lnr-move');
 
                             productDetails.appendChild(productName);
@@ -176,26 +246,51 @@
                 });
         }
 
+        function getToken() {
+            return localStorage.getItem('JWT');
+        }
+
         function createCartAndAddToBag(productId) {
-            fetch('/shop/cart/', {
-                method: 'POST'
-            })
+            const token = getToken();
+
+            let headers = {
+                'Content-Type': 'application/json',
+            };
+
+            if (token) {
+                headers['Authorization'] = `JWT ${token}`;
+            }
+
+            const options = {
+                method: 'POST',
+                headers: headers,
+            };
+            console.log('headers', headers)
+            fetch('/shop/cart/',
+                options
+            )
                 .then(response => response.json())
                 .then(data => {
                     const cartId = data.id;
                     localStorage.setItem('cartId', cartId);
-                    addToCart(cartId, productId, 1); // Add the item to the cart with quantity 1
+                    addToCart(cartId, productId, 1);
                 })
                 .catch(error => console.error('Error creating cart:', error));
         }
 
-        // Function to add the item to the cart
         function addToCart(cartId, productId, quantity) {
+            const token = getToken();
+
+            let headers = {
+                'Content-Type': 'application/json',
+            };
+            if (token) {
+                headers['Authorization'] = `JWT ${token}`;
+            }
+            {#console.log('headers', headers)#}
             fetch(`/shop/cart/${cartId}/items/`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: headers,
                 body: JSON.stringify({
                     product_id: productId,
                     quantity: quantity
@@ -204,9 +299,9 @@
                 .then(response => {
                     if (response.ok) {
                         console.log('Item added to cart successfully');
-                        // You can add any additional logic here, such as updating UI to reflect the item being added to the cart
                     } else {
                         console.error('Failed to add item to cart:', response.statusText);
+                        createCartAndAddToBag(productId);
                     }
                 })
                 .catch(error => console.error('Error adding item to cart:', error));
@@ -273,13 +368,36 @@
             }
         }
 
+        document.addEventListener("DOMContentLoaded", function () {
+            const searchInput = document.getElementById("search_input");
+            searchInput.addEventListener("keypress", function (event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+
+                    const searchQuery = searchInput.value.trim();
+                    console.log(searchQuery)
+                    if (searchQuery !== '') {
+                        fetchProducts(currentPage, null, null, null, null, searchQuery);
+                    }
+                }
+            });
+
+            const sortingButtonsContainer = document.getElementById("sortingggDropdown");
+
+            sortingButtonsContainer.addEventListener("click", function (event) {
+                if (event.target.tagName === 'BUTTON') {
+                    const selectedOption = event.target.value;
+
+                    fetchProducts(currentPage, selectedOption);
+                }
+            });
+        });
         fetchProducts(currentPage);
 
     </script>
 
 
     <script>
-        // Fetch data from the API
         fetch('/shop/collections/')
             .then(response => response.json())
             .then(data => {

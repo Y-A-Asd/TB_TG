@@ -1,15 +1,20 @@
 import logging
 from django.db.models import Count, Q, QuerySet, ExpressionWrapper, fields, F
+from django.utils.translation import gettext_lazy as _
+from django.views import View
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import status, generics
+from rest_framework.exceptions import ValidationError
+from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly
 from rest_framework.views import APIView
-from rest_framework.viewsets import ModelViewSet, GenericViewSet, ReadOnlyModelViewSet
+from rest_framework.viewsets import ModelViewSet, GenericViewSet, ReadOnlyModelViewSet, ViewSet
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, DestroyModelMixin, ListModelMixin
 from core.models import User, AuditLog
+from discount.models import BaseDiscount
 from .pagination import DefaultPagination
 from .reports import Reporting
 from .serializers import (ProductSerializer, CollectionSerializer, ReviewSerializer,
@@ -17,10 +22,10 @@ from .serializers import (ProductSerializer, CollectionSerializer, ReviewSeriali
                           CustomerSerializer, OrderSerializer, CreateOrderSerializer, UpdateOrderSerializer,
                           ProductImageSerializer, AddressSerializer, TransactionSerializer, UpdateTransactionSerializer,
                           AuditLogSerializer, PromotionSerializer, SimpleProductSerializer, ReportingSerializer,
-                          SiteSettingsSerializer, HomeBannerSerializer)
+                          SiteSettingsSerializer, HomeBannerSerializer, ApplyDiscountSerializer)
 from .models import Product, Collection, OrderItem, Review, Customer, Order, ProductImage, CartItem, Cart, Address, \
     Transaction, Promotion, SiteSettings, HomeBanner
-from .filters import ProductFilter, RecursiveDjangoFilterBackend
+from .filters import ProductFilter, RecursiveDjangoFilterBackend, CustomerFilterBackend
 from .permissions import IsAdminOrReadOnly, ViewCustomerHistoryPermission
 
 logger = logging.getLogger(__name__)
@@ -146,7 +151,7 @@ class ProductViewSet(ModelViewSet):
     pagination_class = DefaultPagination
     filter_backends = [RecursiveDjangoFilterBackend, SearchFilter, OrderingFilter]
     filterset_class = ProductFilter
-    search_fields = ['title', 'description']
+    search_fields = ['translations__title', 'description']
     ordering_fields = ['unit_price', 'updated_at']
     permission_classes = [IsAdminOrReadOnly]
 
@@ -160,7 +165,7 @@ class ProductViewSet(ModelViewSet):
     #     return queryset
 
     def get_queryset(self):
-        queryset = Product.objects.all().prefetch_related('images')
+        queryset = Product.objects.all().prefetch_related('images').prefetch_related('mainfeature_set')
         collection_id = self.request.query_params.get('collection_id')
         print('collection_id: ', collection_id)
 
@@ -169,9 +174,13 @@ class ProductViewSet(ModelViewSet):
             queryset = queryset.filter(q_object)
         lt = self.request.query_params.get('unit_price__lt')
         gt = self.request.query_params.get('unit_price__gt')
-        if lt or gt:
+        if lt and gt:
             unit_price_filters = RecursiveDjangoFilterBackend().get_unit_price_filters(self.request)
             queryset = queryset.filter(unit_price_filters)
+
+        search = collection_id = self.request.query_params.get('search')
+        if search:
+            queryset = queryset.filter(translations__title__contains=search)
 
         ordering = self.request.query_params.get('ordering', 'updated_at')
         queryset = queryset.order_by(ordering)
@@ -315,17 +324,55 @@ class CartViewSet(CreateModelMixin,
                   GenericViewSet):
 
     def get_queryset(self):
-        # todo:fix how to get user :-|
-        user = self.request.user
-        if user.is_staff:
-            return Cart.objects.all().prefetch_related('items__product')
-        customer_id = Customer.objects.only('id').get(user_id=user.id)
-        return Cart.objects.all().prefetch_related('items__product').filter(customer_id=customer_id)
+        return Cart.objects.all().prefetch_related('items__product')
 
     serializer_class = CartSerializer
 
     def get_serializer_context(self):
         return {'user_id': self.request.user.id}
+
+    def create(self, request, *args, **kwargs):
+        user_id = request.user.id
+        print(user_id)
+        try:
+            customer = Customer.objects.get(user_id=user_id)
+            existing_cart = Cart.objects.filter(customer_id=customer.id).order_by('-updated_at').first()
+            if existing_cart:
+                serializer = self.get_serializer(existing_cart, data=request.data)
+            else:
+                serializer = self.get_serializer(data=request.data)
+        except Customer.DoesNotExist:
+            serializer = self.get_serializer(data=request.data)
+
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+    @action(detail=True, methods=['get', 'post'])
+    def apply_discount(self, request, pk=None):
+        cart = self.get_object()
+
+        if request.method == 'GET':
+            serializer = ApplyDiscountSerializer()
+            return Response(serializer.data)
+
+        serializer = ApplyDiscountSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        discount_code = serializer.validated_data['discount_code']
+
+        discount = get_object_or_404(BaseDiscount, code=discount_code)
+
+        try:
+            if not discount.ensure_availability():
+                raise ValidationError(_("Discount is not available at the moment."))
+
+            cart.discount = discount
+            cart.save()
+
+            return Response({'message': 'Discount applied successfully.'}, status=status.HTTP_200_OK)
+        except ValidationError as e:
+            return Response({'error': e.detail}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class CartItemViewSet(ModelViewSet):
@@ -346,13 +393,14 @@ class CartItemViewSet(ModelViewSet):
 
 
 class CustomerViewSet(ModelViewSet):
-    http_method_names = ['get']
+    http_method_names = ['get', 'put']
 
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
 
     filter_backends = [SearchFilter, OrderingFilter]
-    pagination_class = DefaultPagination
+    search_fields = ['first_name', 'last_name', 'email']
+    ordering_fields = ['membership', 'user_id']
     permission_classes = [IsAdminUser]
 
     """we can overwrite like this!"""
@@ -387,6 +435,7 @@ class CustomerViewSet(ModelViewSet):
 
 class OrderViewSet(ModelViewSet):
     http_method_names = ['get', 'patch', 'post', 'delete', 'head', 'options']
+    filter_backends = [CustomerFilterBackend]
 
     def get_permissions(self):
         if self.request.method in ['PATCH', 'DELETE']:

@@ -204,7 +204,7 @@ PARLER_LANGUAGES = {
         {'code': 'fa'},
     ),
     'default': {
-        # 'fallback': 'en',
+        'fallback': 'en',
         'hide_untranslated': False,
     }
 }
@@ -221,6 +221,14 @@ CELERY_BEAT_SCHEDULE = {
     },
     'delete_inactive_carts': {
         'task': 'core.tasks.delete_inactive_carts',
+        'schedule': crontab(hour='*/24'),
+    },
+    'send_birthday_emails': {
+        'task': 'core.tasks.send_birthday_emails',
+        'schedule': crontab(hour=0, minute=0),
+    },
+    'delete_old_carts': {
+        'task': 'core.tasks.delete_old_carts',
         'schedule': crontab(hour='*/24'),
     },
 }
@@ -291,3 +299,7 @@ test: (adding missing tests, refactoring tests; no production code change)
 chore: (updating grunt tasks etc; no production code change)
 
 """
+
+MERCHANT = "00000000-0000-0220-0000-000000000000"
+
+SANDBOX = True

@@ -11,6 +11,10 @@ urlpatterns = [
     path('products/<int:id>/', views.ProductDetailView.as_view(), name='products-detail'),
     path('cart/', views.CartView.as_view(), name='cart'),
     path('', views.HomeView.as_view(), name='home'),
+    path('profile/', views.ProfileView.as_view(), name='profile'),
+    path('request/', views.send_request, name='request'),
+    path('verify/', views.verify , name='verify'),
+
 ]
 # todo: 1. implement remaining:{profile - make order from cart}
 # todo: 2. link routes inside site

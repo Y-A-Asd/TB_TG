@@ -35,92 +35,26 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>
-                                <div class="media">
-                                    <div class="d-flex">
-                                        <img src="img/cart.jpg" alt="">
-                                    </div>
-                                    <div class="media-body">
-                                        <p>Minimalistic shop for multipurpose use</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <h5>$360.00</h5>
-                            </td>
-                            <td>
-                                <div class="product_count">
-                                    <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:"
-                                           class="input-text qty">
-                                    <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-                                            class="increase items-count" type="button"><i
-                                            class="lnr lnr-chevron-up"></i></button>
-                                    <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
-                                            class="reduced items-count" type="button"><i
-                                            class="lnr lnr-chevron-down"></i></button>
-                                </div>
-                            </td>
-                            <td>
-                                <h5>$720.00</h5>
-                            </td>
-                            <td>
-                                <p class="primary-btn">Delete</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="media">
-                                    <div class="d-flex">
-                                        <img src="img/cart.jpg" alt="">
-                                    </div>
-                                    <div class="media-body">
-                                        <p>Minimalistic shop for multipurpose use</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <h5>$360.00</h5>
-                            </td>
-                            <td>
-                                <div class="product_count">
-                                    <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:"
-                                           class="input-text qty">
-                                    <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-                                            class="increase items-count" type="button"><i
-                                            class="lnr lnr-chevron-up"></i></button>
-                                    <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
-                                            class="reduced items-count" type="button"><i
-                                            class="lnr lnr-chevron-down"></i></button>
-                                </div>
-                            </td>
-                            <td>
-                                <h5>$720.00</h5>
-                            </td>
-                            <td>
-                                <p class="primary-btn">Delete</p>
-                            </td>
-                        </tr>
-                        <td>
-                            <h5>Subtotal</h5>
-                        </td>
-                        <td>
-                            <h5>$2160.00</h5>
-                        </td>
 
                         </tbody>
-
+                        <td>
+                            <h5>Total Price : </h5>
+                        </td>
+                        <td>
+                            <h5 id="totalP"></h5>
+                        </td>
 
                     </table>
-                    <div class="cupon_text d-flex align-items-center">
-                        <input type="text" placeholder="Coupon Code">
-                        <a class="primary-btn" href="#">Apply</a>
-                        <a class="gray_btn" href="#">Close Coupon</a>
+
+                    <div class=" d-flex align-items-center">
+                        <input id="discount-code-input" class="input-text m-3" type="text" placeholder="Coupon Code">
+                        <br>
+                        <button id="apply-discount-btn" class="genric-btn info circle" href="#">Apply</button>
                     </div>
 
-                    <div class="checkout_btn_inner d-flex align-items-center">
-                        <a class="gray_btn" href="#">Continue Shopping</a>
-                        <a class="primary-btn" href="#">Proceed to checkout</a>
+                    <div class=" d-flex align-items-center ">
+                        <a class="genric-btn success circle" href="#">Continue Shopping</a>
+                        <p class="genric-btn primary circle my-0 mx-3" href="#">Proceed to checkout</p>
                     </div>
                 </div>
             </div>
@@ -133,13 +67,39 @@
             let cartId = localStorage.getItem("cartId");
 
             if (!cartId) {
-                // If cart ID doesn't exist in local storage, create a new cart
                 createCart();
             } else {
-                // If cart ID exists, fetch cart items
                 fetchCartItems(cartId);
             }
+            document.querySelector("#apply-discount-btn").addEventListener("click", function (event) {
+                event.preventDefault();
+                let discountCode = document.querySelector("#discount-code-input").value;
+                applyDiscount(cartId, discountCode);
+            });
         });
+
+        function applyDiscount(cartId, discountCode) {
+            fetch(`/shop/cart/${cartId}/apply_discount/`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    discount_code: discountCode
+                })
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert('Discount applied!')
+                        fetchCartItems(cartId);
+
+                    } else {
+                        alert(`Failed to apply discount: ${response.statusText}`, )
+                        console.error("Failed to apply discount:", response.statusText);
+                    }
+                })
+                .catch(error => console.error("Error applying discount:", error));
+        }
 
         function createCart() {
             fetch("/shop/cart/", {
@@ -154,30 +114,25 @@
         }
 
         function fetchCartItems(cartId) {
-            fetch(`/shop/cart/${cartId}/items/`)
+            fetch(`/shop/cart/${cartId}/`)
                 .then(response => response.json())
                 .then(data => {
-                    // Populate HTML table with cart items
                     populateCartTable(data);
                 })
                 .catch(error => console.error("Error fetching cart items:", error));
         }
 
-        function populateCartTable(cartItems) {
-            // Get the table body element
+        function populateCartTable(cartItem) {
             const tableBody = document.querySelector("tbody");
-            tableBody.innerHTML = ""; // Clear the table body before populating
-
-            // Loop through each cart item and create table rows
+            tableBody.innerHTML = "";
+            let cartItems = cartItem.items
             cartItems.forEach(item => {
                 const row = document.createElement("tr");
 
                 row.innerHTML = `
                 <td>
                     <div class="media">
-                        <div class="d-flex">
-                            <img src="img/cart.jpg" alt="">
-                        </div>
+
                         <div class="media-body">
                             <p>${item.product.translations.en.title}</p>
                         </div>
@@ -192,10 +147,9 @@
                     </div>
                 </td>
                 <td><h5>${item.total_price}</h5></td>
-                <td><button class="btn-danger delete-button">Delete</button></td>
+                <td><button class="genric-btn danger circle delete-button">Delete</button></td>
             `;
 
-                // Attach event listeners to the increase and decrease buttons
                 row.querySelector(".increase").addEventListener("click", () => {
                     updateQuantity(item.id, parseInt(document.getElementById(`quantity-${item.id}`).value) + 1);
                 });
@@ -210,9 +164,10 @@
                     deleteCartItem(item.id);
                 });
 
-                // Append the row to the table body
                 tableBody.appendChild(row);
             });
+            let totalP = document.getElementById('totalP')
+            totalP.textContent = cartItem.total_price
         }
 
         function updateQuantity(itemId, newQuantity) {
