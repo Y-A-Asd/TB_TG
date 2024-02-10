@@ -51,6 +51,7 @@
     <header class="topbar-nav">
         <nav class="navbar navbar-expand fixed-top">
             <ul class="navbar-nav mr-auto align-items-center">
+                <li class="nav-item"><a href="{% url 'front:home' %}"><i class="icon-home">  </i></a></li>
                 <li class="nav-item">
 {#                    <a class="nav-link toggle-menu" href="javascript:void();">#}
 {#                        <i class="icon-menu menu-icon"></i>#}
@@ -59,6 +60,7 @@
             </ul>
 
             <ul class="navbar-nav align-items-center right-nav-link">
+
                 <li class="nav-item">
                     <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown" href="#">
                         <span class="user-profile"><img src="https://via.placeholder.com/110x110" class="img-circle"
@@ -73,12 +75,11 @@
                                                              alt="user avatar"></div>
                                     <div class="media-body">
                                         <h6 class="mt-2 user-title">user name</h6>
-                                        <p class="user-subtitle">user email</p>
                                     </div>
                                 </div>
                             </a>
                         </li>
-                        <li class="dropdown-item"><i class="icon-power mr-2"></i> Logout</li>
+                        <li class="dropdown-item" id="logoutItem"><i class="icon-power mr-2"></i> Logout</li>
                     </ul>
                 </li>
             </ul>
@@ -302,6 +303,14 @@
 </div><!--End wrapper-->
 
 <script>
+    const logoutItem = document.getElementById("logoutItem");
+
+    logoutItem.addEventListener("click", function() {
+        console.log("User clicked logout");
+        localStorage.removeItem('JWT');
+        window.location.href = '/'
+    });
+
     function displayErrorMessage(message) {
         const errorMessageElement = document.getElementById('errorMessage');
         errorMessageElement.textContent = message;

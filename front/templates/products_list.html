@@ -9,8 +9,8 @@
                 <div class="col-first">
                     <h1>{% trans "Shop" %}</h1>
                     <nav class="d-flex align-items-center">
-                        <a href="">{% trans "Home" %}<span class="lnr lnr-arrow-right"></span></a>
-                        <a href="">{% trans "Shop" %}<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="{% url 'front:home' %}">{% trans "Home" %}<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="{% url 'front:products' %}">{% trans "Shop" %}<span class="lnr lnr-arrow-right"></span></a>
                     </nav>
                 </div>
             </div>
@@ -221,6 +221,10 @@
                             // const addToWishlist = createSocialInfo('lnr lnr-heart', 'Wishlist');
                             {#let url = {% url 'front:products-detail' productId %}#}
                             const viewMore = createSocialInfo('lnr', 'view more', 'lnr-move');
+                            viewMore.addEventListener('click', () => {
+                                const productId = product.id;
+                                window.location.href = `/products/${productId}/`;
+                            });
 
                             productDetails.appendChild(productName);
                             productPrice.appendChild(originalPrice);
