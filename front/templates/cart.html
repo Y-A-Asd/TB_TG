@@ -113,14 +113,15 @@
 
                     </table>
 
-                    <div class="cupon_text d-flex align-items-center">
-                        <input type="text" placeholder="Coupon Code">
-                        <a class="primary-btn" href="#">Apply</a>
+                    <div class=" d-flex align-items-center">
+                        <input id="discount-code-input" class="input-text m-3" type="text" placeholder="Coupon Code">
+                        <br>
+                        <button id="apply-discount-btn" class="genric-btn info circle" href="#">Apply</button>
                     </div>
 
-                    <div class="checkout_btn_inner d-flex align-items-center">
-                        <a class="gray_btn" href="#">Continue Shopping</a>
-                        <a class="primary-btn" href="#">Proceed to checkout</a>
+                    <div class=" d-flex align-items-center ">
+                        <a class="genric-btn success circle" href="#">Continue Shopping</a>
+                        <p class="genric-btn primary circle my-0 mx-3" href="#">Proceed to checkout</p>
                     </div>
                 </div>
             </div>
@@ -137,7 +138,35 @@
             } else {
                 fetchCartItems(cartId);
             }
+            document.querySelector("#apply-discount-btn").addEventListener("click", function (event) {
+                event.preventDefault();
+                let discountCode = document.querySelector("#discount-code-input").value;
+                applyDiscount(cartId, discountCode);
+            });
         });
+
+        function applyDiscount(cartId, discountCode) {
+            fetch(`/shop/cart/${cartId}/apply_discount/`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    discount_code: discountCode
+                })
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert('Discount applied!')
+                        fetchCartItems(cartId);
+
+                    } else {
+                        alert(`Failed to apply discount: ${response.statusText}`, )
+                        console.error("Failed to apply discount:", response.statusText);
+                    }
+                })
+                .catch(error => console.error("Error applying discount:", error));
+        }
 
         function createCart() {
             fetch("/shop/cart/", {
@@ -187,7 +216,7 @@
                     </div>
                 </td>
                 <td><h5>${item.total_price}</h5></td>
-                <td><button class="btn-danger delete-button">Delete</button></td>
+                <td><button class="genric-btn danger circle delete-button">Delete</button></td>
             `;
 
                 row.querySelector(".increase").addEventListener("click", () => {
