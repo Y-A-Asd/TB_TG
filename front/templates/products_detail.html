@@ -263,15 +263,15 @@
 
             features.forEach(feature => {
                 console.log(feature)
-                console.log(feature.translations.en.title)
-                const title = feature.translations.en.title;
-                const value = feature.translations.en.value;
+                console.log(feature.key.translations.en.key)
+                const key = feature.key.translations.en.key;
+                const value = feature.value.translations.en.value;
 
                 const trElement = document.createElement('tr');
                 const tdTitleElement = document.createElement('td');
                 const tdValueElement = document.createElement('td');
 
-                tdTitleElement.innerHTML = `<h5>${title}</h5>`;
+                tdTitleElement.innerHTML = `<h5>${key}</h5>`;
                 tdValueElement.innerHTML = `<h5>${value}</h5>`;
 
                 trElement.appendChild(tdTitleElement);

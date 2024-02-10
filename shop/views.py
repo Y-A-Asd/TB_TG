@@ -151,7 +151,7 @@ class ProductViewSet(ModelViewSet):
     pagination_class = DefaultPagination
     filter_backends = [RecursiveDjangoFilterBackend, SearchFilter, OrderingFilter]
     filterset_class = ProductFilter
-    search_fields = ['title', 'description']
+    search_fields = ['translations__title', 'description']
     ordering_fields = ['unit_price', 'updated_at']
     permission_classes = [IsAdminOrReadOnly]
 
@@ -174,9 +174,13 @@ class ProductViewSet(ModelViewSet):
             queryset = queryset.filter(q_object)
         lt = self.request.query_params.get('unit_price__lt')
         gt = self.request.query_params.get('unit_price__gt')
-        if lt or gt:
+        if lt and gt:
             unit_price_filters = RecursiveDjangoFilterBackend().get_unit_price_filters(self.request)
             queryset = queryset.filter(unit_price_filters)
+
+        search = collection_id = self.request.query_params.get('search')
+        if search:
+            queryset = queryset.filter(translations__title__contains=search)
 
         ordering = self.request.query_params.get('ordering', 'updated_at')
         queryset = queryset.order_by(ordering)

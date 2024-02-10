@@ -16,6 +16,7 @@
             </div>
         </div>
     </section>
+    <br>
     <!-- End Banner Area -->
     <div class="container">
         <div class="row">
@@ -26,16 +27,78 @@
                         {# collections will be dynamically added here using JavaScript #}
                     </ul>
                 </div>
+                <div class="sidebar-filter mt-50">
+                    <div class="top-filter-head">Product Filters</div>
+                    <div class="common-filter">
+                        <div class="head">Brands</div>
+                        <form action="#">
+                            <ul>
+                                <li class="filter-list"><input class="pixel-radio" type="radio" id="apple" name="brand"><label
+                                        for="apple">Apple<span>(29)</span></label></li>
+                                <li class="filter-list"><input class="pixel-radio" type="radio" id="asus"
+                                                               name="brand"><label
+                                        for="asus">Asus<span>(29)</span></label></li>
+                                <li class="filter-list"><input class="pixel-radio" type="radio" id="gionee"
+                                                               name="brand"><label for="gionee">Gionee<span>(19)</span></label>
+                                </li>
+                                <li class="filter-list"><input class="pixel-radio" type="radio" id="micromax"
+                                                               name="brand"><label
+                                        for="micromax">Micromax<span>(19)</span></label></li>
+                                <li class="filter-list"><input class="pixel-radio" type="radio" id="samsung"
+                                                               name="brand"><label
+                                        for="samsung">Samsung<span>(19)</span></label></li>
+                            </ul>
+                        </form>
+                    </div>
+                    <div class="common-filter">
+                        <div class="head">Color</div>
+                        <form action="#">
+                            <ul>
+                                <li class="filter-list"><input class="pixel-radio" type="radio" id="black" name="color"><label
+                                        for="black">Black<span>(29)</span></label></li>
+                                <li class="filter-list"><input class="pixel-radio" type="radio" id="balckleather"
+                                                               name="color"><label for="balckleather">Black
+                                    Leather<span>(29)</span></label></li>
+                                <li class="filter-list"><input class="pixel-radio" type="radio" id="blackred"
+                                                               name="color"><label for="blackred">Black
+                                    with red<span>(19)</span></label></li>
+                                <li class="filter-list"><input class="pixel-radio" type="radio" id="gold"
+                                                               name="color"><label
+                                        for="gold">Gold<span>(19)</span></label></li>
+                                <li class="filter-list"><input class="pixel-radio" type="radio" id="spacegrey"
+                                                               name="color"><label
+                                        for="spacegrey">Spacegrey<span>(19)</span></label></li>
+                            </ul>
+                        </form>
+                    </div>
+                    <div class="common-filter">
+                        <div class="head">Price</div>
+                        <div class="price-range-area">
+                            <div id="price-range"></div>
+                            <div class="value-wrapper d-flex">
+                                <div class="price">Price:</div>
+                                <span>$</span>
+                                <div id="lower-value"></div>
+                                <div class="to">to</div>
+                                <span>$</span>
+                                <div id="upper-value"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
             <div class="col-xl-9 col-lg-8 col-md-7">
                 <!-- Start Filter Bar -->
                 <div class="filter-bar d-flex flex-wrap align-items-center">
-                    <div class="sorting">
-                        <select id="sortingDropdown">
-                            <option value="default">{% trans "Default sorting" %}</option>
-                            <option value="price_asc">{% trans "Price: Low to High" %}</option>
-                            <option value="price_desc">{% trans "Price: High to Low" %}</option>
-                        </select>
+                    <div>
+                        <div class="">
+                            <div id="sortingggDropdown">
+                                <button value="default">{% trans "Default sorting" %}</button>
+                                <button value="price_asc">{% trans "Price: Low to High" %}</button>
+                                <button value="price_desc">{% trans "Price: High to Low" %}</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!-- End Filter Bar -->
@@ -83,16 +146,22 @@
         const productsPerPage = 12;
         let currentPage = 1;
 
-        function fetchProducts(page = 1, selectedOption = 'updated_at', collectionsId = null) {
-            console.log(collectionsId == null)
+        function fetchProducts(page = 1, selectedOption = 'updated_at', collectionsId = null, unit_price__gt = null, unit_price__lt = null, search = null) {
             let apiUrl = null
+            console.log(collectionsId == null)
+            console.log(search != null)
             if (collectionsId == null) {
                 apiUrl = `/shop/products/?page=${page}&ordering=${getSortingOrdering(selectedOption)}`;
             } else {
+
                 apiUrl = `/shop/products/?page=${page}&ordering=${getSortingOrdering(selectedOption)}&collection_id=${collectionsId}`;
             }
+            if (search != null) {
+                apiUrl = `/shop/products/?search=${search}`;
+            }
 
-            console.log('Fetching products. Page:', page, 'Selected option:', selectedOption);
+            console.log('Fetching products. Page:', page, 'Selected option:', selectedOption, 'search', search);
+            console.log(apiUrl);
             fetch(apiUrl)
                 .then(response => response.json())
                 .then(products => {
@@ -272,6 +341,30 @@
             }
         }
 
+        document.addEventListener("DOMContentLoaded", function () {
+            const searchInput = document.getElementById("search_input");
+            searchInput.addEventListener("keypress", function (event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+
+                    const searchQuery = searchInput.value.trim();
+                    console.log(searchQuery)
+                    if (searchQuery !== '') {
+                        fetchProducts(currentPage, null, null, null, null, searchQuery);
+                    }
+                }
+            });
+
+            const sortingButtonsContainer = document.getElementById("sortingggDropdown");
+
+            sortingButtonsContainer.addEventListener("click", function (event) {
+                if (event.target.tagName === 'BUTTON') {
+                    const selectedOption = event.target.value;
+
+                    fetchProducts(currentPage, selectedOption);
+                }
+            });
+        });
         fetchProducts(currentPage);
 
     </script>
