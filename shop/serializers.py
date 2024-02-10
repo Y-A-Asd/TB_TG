@@ -6,7 +6,7 @@ from rest_framework import serializers
 from discount.models import BaseDiscount
 from core.models import AuditLog
 from shop.models import Product, Collection, Review, Customer, Order, OrderItem, ProductImage, CartItem, Cart, Address, \
-    Transaction, MainFeature, Promotion, SiteSettings, HomeBanner
+    Transaction, MainFeature, Promotion, SiteSettings, HomeBanner, FeatureKey, FeatureValue
 from parler_rest.serializers import TranslatableModelSerializer, TranslatedFieldsField
 from django.utils.translation import gettext_lazy as _
 
@@ -21,22 +21,41 @@ class ProductImageSerializer(serializers.ModelSerializer):
         return ProductImage.objects.create(product_id=product_id, **validated_data)
 
 
-class FeatureSerializer(TranslatableModelSerializer):
-    translations = TranslatedFieldsField(shared_model=MainFeature)
+class FeatureKeySerializer(TranslatableModelSerializer):
+    translations = TranslatedFieldsField(shared_model=FeatureKey)
+
+    class Meta:
+        model = FeatureKey
+        fields = ['id', 'translations']
+
+
+class FeatureValueSerializer(TranslatableModelSerializer):
+    translations = TranslatedFieldsField(shared_model=FeatureValue)
+
+    class Meta:
+        model = FeatureValue
+        fields = ['id', 'key', 'translations']
+
+
+class MainFeatureSerializer(TranslatableModelSerializer):
+    id = serializers.IntegerField(read_only=True)
+    key = FeatureKeySerializer()
+    value = FeatureValueSerializer()
 
     class Meta:
         model = MainFeature
-        fields = ['translations']
+        fields = ['id', 'key', 'value']
+        allow_null = True
 
 
 class ProductSerializer(TranslatableModelSerializer):
     translations = TranslatedFieldsField(shared_model=Product)
-    value_feature = FeatureSerializer(many=True, required=False)
+    value_feature = serializers.SerializerMethodField()
 
     class Meta:
         model = Product
         fields = ['id', 'translations', 'inventory', 'org_price',
-                  'price', 'price_with_tax', 'collection_id', 'promotions', 'images', 'value_feature']
+                  'price', 'price_with_tax', 'collection_id', 'promotions', 'value_feature', 'images']
 
     images = ProductImageSerializer(many=True, read_only=True)
     collection_id = serializers.IntegerField(required=False)
@@ -58,6 +77,11 @@ class ProductSerializer(TranslatableModelSerializer):
         if 'title' in validated_data:
             validated_data['slug'] = slugify(validated_data['title'])
         return super().update(instance, validated_data)
+
+    def get_value_feature(self, product):
+        main_features = MainFeature.objects.filter(product_id=product.id)
+        serializer = MainFeatureSerializer(main_features, many=True)
+        return serializer.data
 
 
 class SimpleProductSerializer(TranslatableModelSerializer):

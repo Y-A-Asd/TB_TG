@@ -165,7 +165,7 @@ class ProductViewSet(ModelViewSet):
     #     return queryset
 
     def get_queryset(self):
-        queryset = Product.objects.all().prefetch_related('images')
+        queryset = Product.objects.all().prefetch_related('images').prefetch_related('mainfeature_set')
         collection_id = self.request.query_params.get('collection_id')
         print('collection_id: ', collection_id)
 
