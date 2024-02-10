@@ -51,11 +51,11 @@
     <header class="topbar-nav">
         <nav class="navbar navbar-expand fixed-top">
             <ul class="navbar-nav mr-auto align-items-center">
-                <li class="nav-item"><a href="{% url 'front:home' %}"><i class="icon-home">  </i></a></li>
+                <li class="nav-item"><a href="{% url 'front:home' %}"><i class="icon-home"> </i></a></li>
                 <li class="nav-item">
-{#                    <a class="nav-link toggle-menu" href="javascript:void();">#}
-{#                        <i class="icon-menu menu-icon"></i>#}
-{#                    </a>#}
+                    {#                    <a class="nav-link toggle-menu" href="javascript:void();">#}
+                    {#                        <i class="icon-menu menu-icon"></i>#}
+                    {#                    </a>#}
                 </li>
             </ul>
 
@@ -144,7 +144,7 @@
                                     </table>
                                     <!--/row-->
                                     <br><br><br><br>
-                                     <form id="address-form">
+                                    <form id="address-form">
                                         <input id="addressid" class="form-control" type="hidden">
                                         <input id="customerid" class="form-control" type="hidden">
                                         <div class="form-group row">
@@ -305,7 +305,7 @@
 <script>
     const logoutItem = document.getElementById("logoutItem");
 
-    logoutItem.addEventListener("click", function() {
+    logoutItem.addEventListener("click", function () {
         console.log("User clicked logout");
         localStorage.removeItem('JWT');
         window.location.href = '/'
@@ -392,14 +392,18 @@
         makeAuthenticatedRequest(endpoint, 'GET')
             .then(data => {
                 data.forEach(function (order, index) {
-                    document.getElementById("orders-body").innerHTML += `
-                        <tr>
+                    let orders_body = document.getElementById("orders-body")
+                    orders_body.innerHTML += `
+                        <tr style="cursor: pointer">
                             <th scope='row'>${order.id}</th>
                             <td>${new Date(order.updated_at).toLocaleString()}</td>
                             <td>${getStatusLabel(order.order_status)}</td>
                             <td>${order.total_price}</td>
                         </tr>
                     `;
+                    orders_body.addEventListener("click", function () {
+                        window.location.href = `/order-detail/${order.id}/`
+                    });
                 });
             })
             .catch(error => {
@@ -557,7 +561,6 @@
     passForm.addEventListener('submit', updatePass);
 
 
-
     function fetchAddresses() {
         const endpoint = '/shop/addresses/';
 
@@ -595,14 +598,14 @@
     window.onload = function () {
         fetchAddresses();
 
-        document.addEventListener('click', function(event) {
+        document.addEventListener('click', function (event) {
             if (event.target.classList.contains('delete-btn')) {
                 const addressId = event.target.getAttribute('data-id');
                 deleteAddress(addressId);
             }
         });
 
-        document.addEventListener('click', function(event) {
+        document.addEventListener('click', function (event) {
             if (event.target.classList.contains('edit-btn')) {
                 const addressId = event.target.getAttribute('data-id');
                 fetchAddress(addressId);
@@ -707,7 +710,7 @@
     }
 
     const addressForm = document.getElementById('address-form');
-    addressForm.addEventListener('submit', function(event) {
+    addressForm.addEventListener('submit', function (event) {
         const addressId = document.getElementById('addressid').value;
         if (addressId) {
             updateAddress(event);

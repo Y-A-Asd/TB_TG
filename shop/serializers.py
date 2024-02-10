@@ -4,7 +4,7 @@ from django.db import transaction
 from django.utils.text import slugify
 from rest_framework import serializers
 from discount.models import BaseDiscount
-from core.models import AuditLog
+from core.models import AuditLog, User
 from shop.models import Product, Collection, Review, Customer, Order, OrderItem, ProductImage, CartItem, Cart, Address, \
     Transaction, MainFeature, Promotion, SiteSettings, HomeBanner, FeatureKey, FeatureValue
 from parler_rest.serializers import TranslatableModelSerializer, TranslatedFieldsField
@@ -286,16 +286,27 @@ class OrderItemSerializer(serializers.ModelSerializer):
 class OrderSerializer(serializers.ModelSerializer):
     orders = OrderItemSerializer(many=True)
     total_price = serializers.SerializerMethodField()
+    phone_number = serializers.SerializerMethodField()
+    email = serializers.SerializerMethodField()
 
     class Meta:
         model = Order
         fields = (
-            'id', 'order_status', 'customer', 'zip_code', 'path', 'city', 'province', 'first_name', 'last_name',
+            'id', 'order_status', 'customer', 'phone_number', 'email', 'zip_code', 'path', 'city', 'province',
+            'first_name', 'last_name',
             'orders', 'updated_at',
             'total_price')
 
     def get_total_price(self, order):
         return sum([item.quantity * item.unit_price for item in order.orders.all()])
+
+    def get_email(self, order):
+        user = User.objects.get(id=order.customer.user_id)
+        return user.email
+
+    def get_phone_number(self, order):
+        user = User.objects.get(id=order.customer.user_id)
+        return user.phone_number
 
 
 class CreateOrderSerializer(serializers.Serializer):

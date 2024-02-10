@@ -47,6 +47,13 @@ class ProfileView(TemplateView):
     template_name = 'profile.html'
 
 
+class OrderDetailView(View):
+    template_name = 'order_detail.html'
+
+    def get(self, request, id):
+        return render(request, self.template_name, {'id': id})
+
+
 if settings.SANDBOX:
     sandbox = 'sandbox'
 else:
