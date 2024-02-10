@@ -124,6 +124,9 @@
 
 
     <script type="text/javascript">
+
+
+
         function createSocialInfo(iconClass, text, moreClass = null) {
             const socialInfo = document.createElement('button');
             socialInfo.href = ``;
@@ -300,6 +303,10 @@
                     if (response.ok) {
                         console.log('Item added to cart successfully');
                     } else {
+                        if (response.status === 401) {
+                            console.error('Unauthorized: Token may be expired or invalid');
+                            localStorage.removeItem('JWT');
+                        }
                         console.error('Failed to add item to cart:', response.statusText);
                         createCartAndAddToBag(productId);
                     }

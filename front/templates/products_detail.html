@@ -469,8 +469,6 @@
                     });
             } else {
                 console.log('No token found. User needs to log in.');
-                alert('No token found. User needs to log in.')
-                window.location.href = '/login/';
             }
         }
 
@@ -580,6 +578,10 @@
                     if (response.ok) {
                         alert('Item added to cart successfully!');
                     } else {
+                        if (response.status === 401) {
+                            console.error('Unauthorized: Token may be expired or invalid');
+                            localStorage.removeItem('JWT');
+                        }
                         console.error('Failed to add item to cart:', response.statusText);
                         createCart(productId, quantity);
                     }
