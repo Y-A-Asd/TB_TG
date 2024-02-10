@@ -334,11 +334,14 @@ class CartViewSet(CreateModelMixin,
     def create(self, request, *args, **kwargs):
         user_id = request.user.id
         print(user_id)
-        customer = Customer.objects.get(user_id=user_id)
-        existing_cart = Cart.objects.filter(customer_id=customer.id).order_by('-updated_at').first()
-        if existing_cart:
-            serializer = self.get_serializer(existing_cart, data=request.data)
-        else:
+        try:
+            customer = Customer.objects.get(user_id=user_id)
+            existing_cart = Cart.objects.filter(customer_id=customer.id).order_by('-updated_at').first()
+            if existing_cart:
+                serializer = self.get_serializer(existing_cart, data=request.data)
+            else:
+                serializer = self.get_serializer(data=request.data)
+        except Customer.DoesNotExist:
             serializer = self.get_serializer(data=request.data)
 
         serializer.is_valid(raise_exception=True)

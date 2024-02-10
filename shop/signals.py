@@ -59,7 +59,7 @@ def update_cart_customer(sender, instance, created, **kwargs):
             user = None
     else:
         user = None
-    print(user.id)
-    cart = Cart.objects.get(id=cart_id)
-    cart.customer = Customer.objects.get(user_id=user.id)
-    cart.save()
+    if user:
+        cart = Cart.objects.get(id=cart_id)
+        cart.customer = Customer.objects.get(user_id=user.id)
+        cart.save()

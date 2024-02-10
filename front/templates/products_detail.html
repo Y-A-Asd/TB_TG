@@ -520,7 +520,7 @@
 
             let cartId = localStorage.getItem("cartId");
 
-            if (!cartId) {
+            if (!cartId || cartId == undefined) {
 
                 createCart(productId, quantity);
             } else {
@@ -528,10 +528,26 @@
             }
         });
 
+        function getToken() {
+            return localStorage.getItem('JWT');
+        }
+
         function createCart(productId, quantity) {
-            fetch("/shop/cart/", {
-                method: "POST"
-            })
+            const token = getToken();
+
+            let headers = {
+                'Content-Type': 'application/json',
+            };
+
+            if (token) {
+                headers['Authorization'] = `JWT ${token}`;
+            }
+
+            const options = {
+                method: 'POST',
+                headers: headers,
+            };
+            fetch("/shop/cart/", options)
                 .then(response => response.json())
                 .then(data => {
                     localStorage.setItem("cartId", data.id);
@@ -541,12 +557,18 @@
         }
 
         function addCartItem(cartId, productId, quantity) {
-            console.log(cartId, productId, quantity)
+            const token = getToken();
+
+            let headers = {
+                'Content-Type': 'application/json',
+            };
+            if (token) {
+                headers['Authorization'] = `JWT ${token}`;
+            }
+            {#console.log(cartId, productId, quantity)#}
             fetch(`/shop/cart/${cartId}/items/`, {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
+                headers: headers,
                 body: JSON.stringify({
                     "product_id": productId,
                     "quantity": quantity
