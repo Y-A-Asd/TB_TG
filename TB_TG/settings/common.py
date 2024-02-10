@@ -223,6 +223,14 @@ CELERY_BEAT_SCHEDULE = {
         'task': 'core.tasks.delete_inactive_carts',
         'schedule': crontab(hour='*/24'),
     },
+    'send_birthday_emails': {
+        'task': 'core.tasks.send_birthday_emails',
+        'schedule': crontab(hour=0, minute=0),
+    },
+    'delete_old_carts': {
+        'task': 'core.tasks.delete_old_carts',
+        'schedule': crontab(hour='*/24'),
+    },
 }
 """
 celery command:

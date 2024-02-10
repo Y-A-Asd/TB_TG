@@ -6,7 +6,7 @@ from django.core.mail import send_mail
 from django.utils import timezone
 from TB_TG.settings.common import EMAIL_HOST_PASSWORD
 from .models import User
-from shop.models import Promotion, Cart
+from shop.models import Promotion, Cart, Customer
 
 logger = get_task_logger(__name__)
 
@@ -50,3 +50,31 @@ def delete_inactive_carts():
     for cart in inactive_carts:
         cart.delete()
         logger.info(f"Deleted inactive cart with ID {cart.id}.")
+
+
+@shared_task
+def send_birthday_emails():
+    today = timezone.now().date()
+    customers_with_birthdays = Customer.objects.filter(birthday__month=today.month, birthday__day=today.day)
+
+    for customer in customers_with_birthdays:
+        subject = 'Happy Birthday!'
+        message = f"Dear {customer.first_name},\n\nHappy Birthday! We hope you have a fantastic day!"
+        to_email = customer.user.email
+
+        try:
+            send_mail(subject, message, 'djmailyosof@gmail.com', [to_email],
+                      auth_user='djmailyosof@gmail.com', auth_password=EMAIL_HOST_PASSWORD)
+            logger.info(f"Sent birthday email to {to_email}")
+        except Exception as e:
+            logger.error(f"Failed to send birthday email to {to_email}: {e}")
+
+
+@shared_task
+def delete_old_carts():
+    five_days_ago = timezone.now() - timezone.timedelta(days=5)
+    old_carts = Cart.objects.filter(updated_at__lte=five_days_ago)
+
+    for cart in old_carts:
+        cart.delete()
+        logger.info(f"Deleted old cart with ID {cart.id}.")
