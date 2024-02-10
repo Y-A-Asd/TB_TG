@@ -331,6 +331,21 @@ class CartViewSet(CreateModelMixin,
     def get_serializer_context(self):
         return {'user_id': self.request.user.id}
 
+    def create(self, request, *args, **kwargs):
+        user_id = request.user.id
+        print(user_id)
+        customer = Customer.objects.get(user_id=user_id)
+        existing_cart = Cart.objects.filter(customer_id=customer.id).order_by('-updated_at').first()
+        if existing_cart:
+            serializer = self.get_serializer(existing_cart, data=request.data)
+        else:
+            serializer = self.get_serializer(data=request.data)
+
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
     @action(detail=True, methods=['get', 'post'])
     def apply_discount(self, request, pk=None):
         cart = self.get_object()

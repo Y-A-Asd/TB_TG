@@ -541,6 +541,7 @@
         }
 
         function addCartItem(cartId, productId, quantity) {
+            console.log(cartId, productId, quantity)
             fetch(`/shop/cart/${cartId}/items/`, {
                 method: "POST",
                 headers: {
@@ -550,12 +551,15 @@
                     "product_id": productId,
                     "quantity": quantity
                 })
+
             })
+
                 .then(response => {
                     if (response.ok) {
                         alert('Item added to cart successfully!');
                     } else {
-                        throw new Error('Failed to add item to cart');
+                        console.error('Failed to add item to cart:', response.statusText);
+                        createCart(productId, quantity);
                     }
                 })
                 .catch(error => console.error("Error adding item to cart:", error));

@@ -275,7 +275,7 @@
                         console.log('Item added to cart successfully');
                     } else {
                         console.error('Failed to add item to cart:', response.statusText);
-
+                        createCartAndAddToBag(productId);
                     }
                 })
                 .catch(error => console.error('Error adding item to cart:', error));
