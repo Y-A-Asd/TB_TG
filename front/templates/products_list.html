@@ -125,7 +125,7 @@
 
     <script type="text/javascript">
         function createSocialInfo(iconClass, text, moreClass = null) {
-            const socialInfo = document.createElement('a');
+            const socialInfo = document.createElement('button');
             socialInfo.href = ``;
             socialInfo.classList.add('social-info');
 
@@ -275,6 +275,7 @@
                         console.log('Item added to cart successfully');
                     } else {
                         console.error('Failed to add item to cart:', response.statusText);
+
                     }
                 })
                 .catch(error => console.error('Error adding item to cart:', error));
