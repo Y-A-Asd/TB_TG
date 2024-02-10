@@ -292,9 +292,6 @@ chore: (updating grunt tasks etc; no production code change)
 
 """
 
+MERCHANT = "00000000-0000-0220-0000-000000000000"
 
-# SANDBOX MODE
-#
-# MERCHANT = "00000000-0000-0000-0000-000000000000"
-#
-# SANDBOX = True
+SANDBOX = True
