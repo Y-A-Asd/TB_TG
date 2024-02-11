@@ -61,6 +61,12 @@ class Collection(TranslatableModel, BaseModel):
         print('default_language', default_language)
         return f'Collection {self.pk}'
 
+    def get_products_count(self):
+        count = self.products.count()
+        for subcollection in self.subcollection.all():
+            count += subcollection.get_products_count()
+        return count
+
     class Meta:
         verbose_name = _("Collection")
         verbose_name_plural = _("Collections")

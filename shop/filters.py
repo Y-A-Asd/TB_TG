@@ -80,3 +80,33 @@ class CustomerFilterBackend(BaseFilterBackend):
             return queryset
         customer = Customer.objects.get(user=user)
         return queryset.filter(customer=customer)
+
+
+class CollectionFilter(admin.SimpleListFilter):
+    title = "Collection"
+    parameter_name = "collection"
+
+    def lookups(self, request, model_admin):
+        return Collection.objects.values_list("id", "id")
+
+    def get_child_collection_ids(self, collection_id):
+        child_collection_ids = set()
+        try:
+            collection = Collection.objects.get(id=collection_id)
+            child_collection_ids.add(collection.id)
+            children = collection.subcollection.all()
+            for child in children:
+                child_collection_ids.update(self.get_child_collection_ids(child.id))
+        except Collection.DoesNotExist:
+            pass
+        return child_collection_ids
+
+    def queryset(self, request, queryset):
+        if self.value():
+            try:
+                collection_id = self.value()
+                child_collection_ids = self.get_child_collection_ids(collection_id)
+                queryset = queryset.filter(collection_id__in=child_collection_ids)
+            except Collection.DoesNotExist:
+                pass
+        return queryset

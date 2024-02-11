@@ -10,11 +10,9 @@ from django.contrib.contenttypes.admin import GenericTabularInline
 from parler.admin import TranslatableAdmin
 from tags.models import TaggedItem
 from . import models
-from .filters import InventoryFilter, MainFeatureFilter
+from .filters import InventoryFilter, MainFeatureFilter, CollectionFilter
 from .models import Review, Transaction, Address, \
     MainFeature, Order, OrderItem, SiteSettings, Product, Collection, HomeBanner, FeatureKey, FeatureValue
-
-
 
 
 @admin.register(FeatureValue)
@@ -95,19 +93,20 @@ class ProductImageInline(admin.TabularInline):
 
 
 @admin.register(Collection)
-class CollectionAdmin(TranslatableAdmin):
+class CollectionAdmin(admin.ModelAdmin):
     autocomplete_fields = ['parent']
-    list_display = ['title', 'products_count', 'parent']
+    list_display = ['title', 'products_count_link', 'parent']
     search_fields = ['translations__title']
     exclude = ['deleted_at', 'created_at', 'updated_at']
 
-    @admin.display(ordering='products_count')
-    def products_count(self, collection):
-        url = reverse('admin:shop_product_changelist') + '?' + urlencode({'collection__id': str(collection.id)})
-        return format_html('<a href="{}">{} {}</a>', url, collection.products_count, 'Products')
+    def products_count_link(self, collection):
+        url = reverse('admin:shop_product_changelist') + '?' + urlencode({'collection': str(collection.id)})
+        return format_html('<a href="{}">{}</a>', url, collection.get_products_count())
+
+    products_count_link.short_description = 'Products Count'
 
     def get_queryset(self, request):
-        return super().get_queryset(request).annotate(
+        return super().get_queryset(request).select_related('parent').annotate(
             products_count=Count('products')
         )
 
@@ -122,7 +121,7 @@ class ProductAdmin(TranslatableAdmin):
     actions = ['clear_inventory']
     list_display = ['title', 'unit_price', 'inventory_status', 'collection_title', 'min_inventory']
     list_editable = ['unit_price']
-    list_filter = ['collection', 'updated_at', InventoryFilter, MainFeatureFilter]
+    list_filter = ['collection', 'updated_at', InventoryFilter, MainFeatureFilter, CollectionFilter]
     list_per_page = 10
     list_select_related = ['collection']
     search_fields = ['title']
