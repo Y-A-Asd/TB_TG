@@ -365,7 +365,7 @@ class FeatureKey(TranslatableModel):
         verbose_name_plural = _("Feature Keys")
 
     def __str__(self) -> str:
-        return f"{self.pk}"
+        return f"KEY {self.key}"
 
 
 class FeatureValue(TranslatableModel):
@@ -379,7 +379,7 @@ class FeatureValue(TranslatableModel):
         verbose_name_plural = _("Feature Value")
 
     def __str__(self) -> str:
-        return f"{self.pk}"
+        return f"VALUE {self.value}"
 
 
 class MainFeature(BaseModel):
@@ -388,4 +388,4 @@ class MainFeature(BaseModel):
     value = models.ForeignKey(FeatureValue, on_delete=models.DO_NOTHING, verbose_name=_('Value'))
 
     def __str__(self) -> str:
-        return f"{self.product}: {self.pk}"
+        return f"{self.product}: {self.key} -> {self.value}"

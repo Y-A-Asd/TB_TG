@@ -7,7 +7,7 @@ from rest_framework import status, generics
 from rest_framework.exceptions import ValidationError
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
-from rest_framework.decorators import action
+from rest_framework.decorators import action, api_view
 from rest_framework.permissions import IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet, GenericViewSet, ReadOnlyModelViewSet, ViewSet
@@ -24,7 +24,7 @@ from .serializers import (ProductSerializer, CollectionSerializer, ReviewSeriali
                           AuditLogSerializer, PromotionSerializer, SimpleProductSerializer, ReportingSerializer,
                           SiteSettingsSerializer, HomeBannerSerializer, ApplyDiscountSerializer)
 from .models import Product, Collection, OrderItem, Review, Customer, Order, ProductImage, CartItem, Cart, Address, \
-    Transaction, Promotion, SiteSettings, HomeBanner
+    Transaction, Promotion, SiteSettings, HomeBanner, MainFeature
 from .filters import ProductFilter, RecursiveDjangoFilterBackend, CustomerFilterBackend
 from .permissions import IsAdminOrReadOnly, ViewCustomerHistoryPermission
 
@@ -535,3 +535,40 @@ class SiteSettingsViewSet(ModelViewSet):
 class HomeBannerViewSet(ReadOnlyModelViewSet):
     queryset = HomeBanner.objects.all()
     serializer_class = HomeBannerSerializer
+
+
+@api_view(['GET'])
+def compare_products(request):
+    product_ids = request.GET.getlist('product_ids')
+    print(product_ids)
+    products = Product.objects.filter(id__in=product_ids)
+    data = {}
+
+    feature_keys = set()
+    for product in products:
+        main_features = MainFeature.objects.filter(product=product)
+        for main_feature in main_features:
+            print(main_feature)
+            feature_keys.add(main_feature.key)
+
+    for key in feature_keys:
+        feature_data = {}
+        for product in products:
+            print(product)
+            main_feature = MainFeature.objects.filter(product=product, key=key).first()
+            if main_feature:
+                feature_data[
+                    str(product)] = str(main_feature.value)
+            else:
+                feature_data[str(product)] = None
+        data[str(key)] = str(feature_data)
+
+    for product in products:
+        product_data = {
+            'title': product,
+            'price': product.price_after_off,
+            'collection': product.collection,
+        }
+        data[str(product)] = str(product_data)
+
+    return Response(data)

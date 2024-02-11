@@ -72,30 +72,29 @@
             <div class="order_details_table">
                 <h2>Order Details</h2>
                 <div class="table-responsive">
-					<table class="table">
-						<thead>
-							<tr>
-								<th scope="col">Product</th>
-								<th scope="col">Quantity</th>
-								<th scope="col">Total</th>
-							</tr>
-						</thead>
-						<tbody id="orderItems">
-
-						</tbody>
+                    <table class="table">
+                        <thead>
                         <tr>
-								<td>
-									<h4>Total</h4>
-								</td>
-								<td>
-									<h5></h5>
-								</td>
-								<td>
-									<p id="total"></p>
-								</td>
-							</tr>
-					</table>
-				</div>
+                            <th scope="col">Product</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                        </thead>
+                        <tbody id="orderItems">
+                        </tbody>
+                        <tr>
+                            <td>
+                                <h4>Total</h4>
+                            </td>
+                            <td>
+                                <h5></h5>
+                            </td>
+                            <td>
+                                <p id="total"></p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
     </section>
@@ -130,7 +129,7 @@
                     if (response.ok) {
                         return response.json()
                     } else {
-                        if (response.status === 401){
+                        if (response.status === 401) {
                             alert('Token not valid. User needs to log in.');
                             localStorage.removeItem('JWT');
                             window.location.href = '/login/'
