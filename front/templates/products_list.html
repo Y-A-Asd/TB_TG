@@ -97,8 +97,11 @@
                                 <button value="default">{% trans "Default sorting" %}</button>
                                 <button value="price_asc">{% trans "Price: Low to High" %}</button>
                                 <button value="price_desc">{% trans "Price: High to Low" %}</button>
+
                             </div>
                         </div>
+                        <br>
+                        <button id="compare-button">{% trans "Compare" %}</button>
                     </div>
                 </div>
                 <!-- End Filter Bar -->
@@ -124,8 +127,17 @@
 
 
     <script type="text/javascript">
-
-
+        let selectedProducts = [];
+        console.log(selectedProducts)
+        const compareButtonClicked = (productId) => {
+            const index = selectedProducts.indexOf(productId);
+            if (index === -1) {
+                selectedProducts.push(productId);
+            } else {
+                selectedProducts.splice(index, 1);
+            }
+            console.log('Selected products:', selectedProducts);
+        }
 
         function createSocialInfo(iconClass, text, moreClass = null) {
             const socialInfo = document.createElement('button');
@@ -220,10 +232,16 @@
 
                             // const addToWishlist = createSocialInfo('lnr lnr-heart', 'Wishlist');
                             {#let url = {% url 'front:products-detail' productId %}#}
+
                             const viewMore = createSocialInfo('lnr', 'view more', 'lnr-move');
                             viewMore.addEventListener('click', () => {
                                 const productId = product.id;
                                 window.location.href = `/products/${productId}/`;
+                            });
+
+                            const compare = createSocialInfo('lnr', 'compare', 'lnr-sync');
+                            compare.addEventListener('click', () => {
+                                compareButtonClicked(product.id);
                             });
 
                             productDetails.appendChild(productName);
@@ -235,6 +253,7 @@
                             productActions.appendChild(addToBag);
                             // productActions.appendChild(addToWishlist);
                             productActions.appendChild(viewMore);
+                            productActions.appendChild(compare);
 
                             productBlock.appendChild(productImage);
                             productBlock.appendChild(productDetails);
@@ -393,18 +412,26 @@
                 }
             });
 
-            const sortingButtonsContainer = document.getElementById("sortingggDropdown");
 
-            sortingButtonsContainer.addEventListener("click", function (event) {
-                if (event.target.tagName === 'BUTTON') {
-                    const selectedOption = event.target.value;
-
-                    fetchProducts(currentPage, selectedOption);
-                }
-            });
         });
         fetchProducts(currentPage);
 
+
+        const compareButton = document.getElementById('compare-button');
+        compareButton.addEventListener('click', function () {
+            const compareUrl = '/compare/?product_ids=' + selectedProducts.join('&product_ids=');
+            window.location.href = compareUrl;
+        });
+
+        const sortingButtonsContainer = document.getElementById("sortingggDropdown");
+
+        sortingButtonsContainer.addEventListener("click", function (event) {
+            if (event.target.tagName === 'BUTTON') {
+                const selectedOption = event.target.value;
+
+                fetchProducts(currentPage, selectedOption);
+            }
+        });
     </script>
 
 

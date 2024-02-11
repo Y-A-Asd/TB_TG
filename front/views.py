@@ -47,6 +47,10 @@ class ProfileView(TemplateView):
     template_name = 'profile.html'
 
 
+class CompareView(TemplateView):
+    template_name = 'compare.html'
+
+
 class OrderDetailView(View):
     template_name = 'order_detail.html'
 

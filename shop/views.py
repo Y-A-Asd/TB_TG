@@ -544,6 +544,19 @@ def compare_products(request):
     products = Product.objects.filter(id__in=product_ids)
     data = {}
 
+    productattr = ['title', 'price_after_off', 'collection']
+    for attr in productattr:
+        product_attrs = {}
+        for product in products:
+            if attr == 'collection':
+                product_attrs[str(product.title)] = str(eval(f'product.{attr}.title'))
+            else:
+                product_attrs[str(product.title)] = str(eval(f'product.{attr}'))
+
+        if attr == 'price_after_off':
+            attr = 'price'
+        data[attr.capitalize()] = product_attrs
+
     feature_keys = set()
     for product in products:
         main_features = MainFeature.objects.filter(product=product)
@@ -558,17 +571,9 @@ def compare_products(request):
             main_feature = MainFeature.objects.filter(product=product, key=key).first()
             if main_feature:
                 feature_data[
-                    str(product)] = str(main_feature.value)
+                    str(product.title)] = str(main_feature.value.value)
             else:
-                feature_data[str(product)] = None
-        data[str(key)] = str(feature_data)
-
-    for product in products:
-        product_data = {
-            'title': product,
-            'price': product.price_after_off,
-            'collection': product.collection,
-        }
-        data[str(product)] = str(product_data)
+                feature_data[str(product.title)] = None
+        data[str(key.key)] = feature_data
 
     return Response(data)

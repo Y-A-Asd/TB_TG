@@ -37,11 +37,11 @@ class Promotion(TranslatableModel, BaseModel):
     #     if existing_discount_item.exists():
     #         raise ValidationError(_('There is already an active discount for this item.'))
 
-    def __str__(self):
+    def __repr__(self):
         # default_language = get_language() or 'en'
         # description_translation = self.translations.get(language_code=default_language)
         # description = description_translation.description if description_translation else f"Promotion {self.pk}"
-        return f'Promotion {self.pk} '
+        return f'{self.title} '
 
 
 class Collection(TranslatableModel, BaseModel):
@@ -56,10 +56,8 @@ class Collection(TranslatableModel, BaseModel):
     def is_subcollection(self):
         return self.parent is not None
 
-    def __str__(self):
-        default_language = get_language() or 'en'
-        print('default_language', default_language)
-        return f'Collection {self.pk}'
+    def __repr__(self):
+        return f'{self.title}'
 
     def get_products_count(self):
         count = self.products.count()
@@ -95,11 +93,11 @@ class Product(TranslatableModel, BaseModel):
 
     # extra_data = models.JSONField(verbose_name='Features', null=True, blank=True)
 
-    def __str__(self):
+    def __repr__(self):
         # default_language = get_language() or 'en'
         # title_translation = self.translations.get(language_code=default_language)
         # title = title_translation.title if title_translation else f"Product {self.pk}"
-        return f'Product {self.pk}'
+        return f'{self.title}'
 
     @property
     def price_after_off(self, ):
@@ -370,8 +368,8 @@ class FeatureKey(TranslatableModel):
         verbose_name = _("Feature Key")
         verbose_name_plural = _("Feature Keys")
 
-    def __str__(self) -> str:
-        return f"KEY {self.key}"
+    def __repr__(self) -> str:
+        return f"{self.key}"
 
 
 class FeatureValue(TranslatableModel):
@@ -384,8 +382,8 @@ class FeatureValue(TranslatableModel):
         verbose_name = _("Feature Value")
         verbose_name_plural = _("Feature Value")
 
-    def __str__(self) -> str:
-        return f"VALUE {self.value}"
+    def __repr__(self) -> str:
+        return f"{self.value}"
 
 
 class MainFeature(BaseModel):
@@ -393,5 +391,5 @@ class MainFeature(BaseModel):
     key = models.ForeignKey(FeatureKey, on_delete=models.DO_NOTHING, verbose_name=_('Key'))
     value = models.ForeignKey(FeatureValue, on_delete=models.DO_NOTHING, verbose_name=_('Value'))
 
-    def __str__(self) -> str:
-        return f"{self.product}: {self.key} -> {self.value}"
+    def __repr__(self) -> str:
+        return f"{str(self.product)}: {self.key} -> {self.value}"
