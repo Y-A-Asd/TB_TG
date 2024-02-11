@@ -104,6 +104,16 @@
                         <button id="compare-button">{% trans "Compare" %}</button>
                     </div>
                 </div>
+                <div class="filter-bar d-flex flex-wrap align-items-center">
+                    <div>
+                        <div class="">
+                            <div id="Filters">
+                                <h2 class="text-white">Current Filters</h2>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!-- End Filter Bar -->
                 <!-- Start Best Seller -->
                 <section class="lattest-product-area pb-40 category-list">
@@ -127,6 +137,15 @@
 
 
     <script type="text/javascript">
+
+        let currentCollectionsId = null;
+        let currentUnitPriceGt = null;
+        let currentUnitPriceLt = null;
+        let currentSearch = null;
+        let currentOrdering = null;
+        let currentFeatureKey = null;
+        let currentFeatureValue = null;
+
         let selectedProducts = [];
         console.log(selectedProducts)
         const compareButtonClicked = (productId) => {
@@ -158,25 +177,43 @@
             return socialInfo;
         }
 
-        const productsPerPage = 12;
+        const productsPerPage = 1;
         let currentPage = 1;
 
-        function fetchProducts(page = 1, selectedOption = 'updated_at', collectionsId = null, unit_price__gt = null, unit_price__lt = null, search = null) {
+        function fetchProducts(page = 1, selectedOption = 'updated_at', collectionsId = null, unit_price__gt = null,
+                               unit_price__lt = null, search = null, feature_key = null, feature_value = null) {
             let apiUrl = null
-            console.log(collectionsId == null)
-            console.log(search != null)
-            if (collectionsId == null) {
-                apiUrl = `/shop/products/?page=${page}&ordering=${getSortingOrdering(selectedOption)}`;
-            } else {
+            apiUrl = `/shop/products/?page=${page}&ordering=${getSortingOrdering(selectedOption)}`;
 
-                apiUrl = `/shop/products/?page=${page}&ordering=${getSortingOrdering(selectedOption)}&collection_id=${collectionsId}`;
+            if (collectionsId != null) {
+                apiUrl += `&collection_id=${collectionsId}`;
+                addFilterToCurrentFilters('Collection', collectionsId);
+            }
+            if (selectedOption != null) {
+                apiUrl += `&ordering=${getSortingOrdering(selectedOption)}`;
+                addFilterToCurrentFilters('Ordering', selectedOption);
+            }
+            if (unit_price__gt != null) {
+                apiUrl += `&unit_price__gt=${unit_price__gt}`;
+                addFilterToCurrentFilters('Price Greater Than', unit_price__gt);
+            }
+            if (unit_price__lt != null) {
+                apiUrl += `&unit_price__lt=${unit_price__lt}`;
+                addFilterToCurrentFilters('Price Less Than', unit_price__lt);
             }
             if (search != null) {
-                apiUrl = `/shop/products/?search=${search}`;
+                apiUrl += `&search=${search}`;
+                addFilterToCurrentFilters('Search', search);
             }
-
-            console.log('Fetching products. Page:', page, 'Selected option:', selectedOption, 'search', search);
-            console.log(apiUrl);
+            if (feature_key != null) {
+                apiUrl += `&feature_key=${feature_key}`;
+                addFilterToCurrentFilters('Feature_key', feature_key);
+            }
+            if (feature_value != null) {
+                apiUrl += `&feature_value=${feature_value}`;
+                addFilterToCurrentFilters('Feature_value', feature_value);
+            }
+            console.log(apiUrl)
             fetch(apiUrl)
                 .then(response => response.json())
                 .then(products => {
@@ -270,6 +307,83 @@
                 .catch(error => {
                     console.error('Error fetching products:', error);
                 });
+
+            function addFilterToCurrentFilters(filterName, filterValue) {
+                const existingButton = Array.from(document.querySelectorAll('#Filters button')).find(button => {
+                    return button.textContent.startsWith(`${filterName}:`);
+                });
+
+                if (existingButton) {
+                    existingButton.textContent = `${filterName}: ${filterValue}`;
+                } else {
+                    switch (filterName) {
+                        case 'Collection':
+                            currentCollectionsId = filterValue;
+                            break;
+                        case 'Ordering':
+                            currentOrdering = filterValue;
+                            break;
+                        case 'Price Greater Than':
+                            currentUnitPriceGt = filterValue;
+                            break;
+                        case 'Price Less Than':
+                            currentUnitPriceLt = filterValue;
+                            break;
+                        case 'Search':
+                            currentSearch = filterValue;
+                            break;
+                        case 'Feature_key':
+                            currentFeatureKey = filterValue;
+                            break;
+                        case 'Feature_value':
+                            currentFeatureValue = filterValue;
+                            break;
+                        default:
+                            break;
+                    }
+
+                    const filtersContainer = document.getElementById('Filters');
+                    const filterButton = document.createElement('button');
+                    filterButton.textContent = `${filterName}: ${filterValue}`;
+                    filterButton.classList.add('btn', 'btn-sm', 'btn-primary', 'mr-2');
+                    filterButton.addEventListener('click', () => {
+                        removeFilterFromApiUrl(filterName, filterValue);
+                        filtersContainer.removeChild(filterButton);
+                        fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue);
+                    });
+                    filtersContainer.appendChild(filterButton);
+                }
+            }
+
+
+            function removeFilterFromApiUrl(filterName, filterValue) {
+
+                switch (filterName) {
+                    case 'Collection':
+                        currentCollectionsId = null;
+                        break;
+                    case 'Ordering':
+                        currentOrdering = null;
+                        break;
+                    case 'Price Greater Than':
+                        currentUnitPriceGt = null;
+                        break;
+                    case 'Price Less Than':
+                        currentUnitPriceLt = null;
+                        break;
+                    case 'Search':
+                        currentSearch = null;
+                        break;
+                    case 'Feature_key':
+                        currentFeatureKey = null;
+                        break;
+                    case 'Feature_value':
+                        currentFeatureValue = null;
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
 
         function getToken() {
@@ -343,12 +457,11 @@
             paginationContainer.innerHTML = '';
 
             for (let i = 1; i <= totalPages; i++) {
-                const pageLink = document.createElement('a');
-                pageLink.href = '#';
+                const pageLink = document.createElement('button');
                 pageLink.textContent = i;
                 pageLink.addEventListener('click', () => {
                     currentPage = i;
-                    fetchProducts(currentPage);
+                    fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue);
                 });
 
                 if (i === currentPage) {
@@ -371,12 +484,11 @@
         }
 
         function createPaginationLink(className, iconClass, page) {
-            const link = document.createElement('a');
-            link.href = '#';
+            const link = document.createElement('button');
             link.classList.add(className);
             link.addEventListener('click', () => {
                 currentPage = page;
-                fetchProducts(currentPage);
+                fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue);
             });
 
             const icon = document.createElement('i');
@@ -407,14 +519,15 @@
                     const searchQuery = searchInput.value.trim();
                     console.log(searchQuery)
                     if (searchQuery !== '') {
-                        fetchProducts(currentPage, null, null, null, null, searchQuery);
+                        currentSearch = searchQuery
+                        fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue);
                     }
                 }
             });
 
 
         });
-        fetchProducts(currentPage);
+        fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue);
 
 
         const compareButton = document.getElementById('compare-button');
@@ -428,14 +541,11 @@
         sortingButtonsContainer.addEventListener("click", function (event) {
             if (event.target.tagName === 'BUTTON') {
                 const selectedOption = event.target.value;
-
-                fetchProducts(currentPage, selectedOption);
+                currentOrdering = selectedOption
+                fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue);
             }
         });
-    </script>
 
-
-    <script>
         fetch('/shop/collections/')
             .then(response => response.json())
             .then(data => {
@@ -476,7 +586,8 @@
                 a.appendChild(spanTitle);
 
                 a.addEventListener('click', () => {
-                    fetchProducts(1, 'updated_at', collection.id);
+                    currentCollectionsId = collection.id
+                    fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue);
                 });
 
                 li.appendChild(a);

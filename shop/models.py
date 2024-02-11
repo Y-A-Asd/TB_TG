@@ -393,3 +393,6 @@ class MainFeature(BaseModel):
 
     def __repr__(self) -> str:
         return f"{str(self.product)}: {self.key} -> {self.value}"
+
+    def __str__(self) -> str:
+            return f"{str(self.product)}: {self.key.key} -> {self.value.value}"

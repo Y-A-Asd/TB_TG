@@ -178,12 +178,19 @@ class ProductViewSet(ModelViewSet):
             unit_price_filters = RecursiveDjangoFilterBackend().get_unit_price_filters(self.request)
             queryset = queryset.filter(unit_price_filters)
 
-        search = collection_id = self.request.query_params.get('search')
+        search = self.request.query_params.get('search')
         if search:
             queryset = queryset.filter(translations__title__contains=search)
 
+        feature_key = self.request.query_params.get('feature_key')
+        feature_value = self.request.query_params.get('feature_value')
+        if feature_key:
+            queryset = queryset.filter(mainfeature__key__id=feature_key)
+        if feature_value:
+            queryset = queryset.filter(mainfeature__value__id=feature_value)
+
         ordering = self.request.query_params.get('ordering', 'updated_at')
-        queryset = queryset.order_by(ordering)
+        queryset = queryset.order_by(ordering).distinct()
 
         return queryset
 
