@@ -8,7 +8,7 @@ from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils.translation import gettext_lazy as _, get_language
 from parler.models import TranslatableModel, TranslatedFields
-from shop.validator import validate_file_size
+from shop.validator import validate_file_size, validate_key_value_relationship
 from discount.models import BaseDiscount
 from core.models import BaseModel
 
@@ -43,6 +43,9 @@ class Promotion(TranslatableModel, BaseModel):
         # description = description_translation.description if description_translation else f"Promotion {self.pk}"
         return f'{self.title} '
 
+    def __str__(self):
+        return f'{self.title}'
+
 
 class Collection(TranslatableModel, BaseModel):
     translations = TranslatedFields(
@@ -57,6 +60,9 @@ class Collection(TranslatableModel, BaseModel):
         return self.parent is not None
 
     def __repr__(self):
+        return f'{self.title}'
+
+    def __str__(self):
         return f'{self.title}'
 
     def get_products_count(self):
@@ -371,6 +377,9 @@ class FeatureKey(TranslatableModel):
     def __repr__(self) -> str:
         return f"{self.key}"
 
+    def __str__(self) -> str:
+        return f"{self.key}"
+
 
 class FeatureValue(TranslatableModel):
     key = models.ForeignKey(FeatureKey, on_delete=models.CASCADE, verbose_name=_('Key'))
@@ -385,14 +394,16 @@ class FeatureValue(TranslatableModel):
     def __repr__(self) -> str:
         return f"{self.value}"
 
+    def __str__(self) -> str:
+        return f"{self.value}"
+
 
 class MainFeature(BaseModel):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name=_('Product'))
     key = models.ForeignKey(FeatureKey, on_delete=models.DO_NOTHING, verbose_name=_('Key'))
     value = models.ForeignKey(FeatureValue, on_delete=models.DO_NOTHING, verbose_name=_('Value'))
-
     def __repr__(self) -> str:
         return f"{str(self.product)}: {self.key} -> {self.value}"
 
     def __str__(self) -> str:
-            return f"{str(self.product)}: {self.key.key} -> {self.value.value}"
+        return f"{str(self.product)}: {self.key.key} -> {self.value.value}"

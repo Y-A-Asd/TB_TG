@@ -1,5 +1,6 @@
+from django.core.exceptions import ValidationError
 from django.db.models import F, Q
-from django.forms import Select
+from django.forms import Select, ModelForm
 from django.urls import reverse
 from django.contrib import admin, messages
 from django.contrib.admin import TabularInline
@@ -13,6 +14,7 @@ from . import models
 from .filters import InventoryFilter, MainFeatureFilter, CollectionFilter
 from .models import Review, Transaction, Address, \
     MainFeature, Order, OrderItem, SiteSettings, Product, Collection, HomeBanner, FeatureKey, FeatureValue
+from .validator import validate_key_value_relationship
 
 
 @admin.register(FeatureValue)
@@ -40,8 +42,27 @@ class FeatureKeyAdmin(TranslatableAdmin):
         return super().get_inline_instances(request, obj)
 
 
+class MainFeatureAdminForm(ModelForm):
+    class Meta:
+        model = MainFeature
+        fields = ['id', 'product', 'key', 'value']
+
+    def clean(self):
+        cleaned_data = super().clean()
+        print(cleaned_data)
+        key_id = cleaned_data.get('key').id
+        value_id = cleaned_data.get('value').id
+        if key_id and value_id:
+            try:
+                validate_key_value_relationship(key_id, value_id)
+            except ValidationError as e:
+                self.add_error('value', e)
+        return cleaned_data
+
+
 @admin.register(MainFeature)
 class MainFeatureAdmin(admin.ModelAdmin):
+    form = MainFeatureAdminForm
     exclude = ['deleted_at']
     list_display = ['id', 'product', 'key', 'value']
     list_filter = ['key']
@@ -56,7 +77,6 @@ class MainFeatureAdmin(admin.ModelAdmin):
     )
 
 
-# Include these inlines in your Product admin as needed
 class MainFeatureInline(admin.TabularInline):
     model = MainFeature
     extra = 1

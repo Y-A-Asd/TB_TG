@@ -1,4 +1,5 @@
 from rest_framework.exceptions import ValidationError
+from django.core.exceptions import ValidationError as VE
 from tags.models import Tag, TaggedItem
 from django.utils.translation import gettext_lazy as _
 from django.contrib.contenttypes.models import ContentType
@@ -47,4 +48,16 @@ def validate_allowed_content_type(model, tag_label):
     if model not in allowed_content_types:
         raise ValidationError(_(f"{model} is not an allowed content type for discounts."))
 
+
 # validate_allowed_content_type(Product, "special_tag")
+
+def validate_key_value_relationship(key_id, value_id):
+    print(key_id, value_id)
+    from .models import FeatureValue
+    try:
+        feature_key_id = FeatureValue.objects.get(id=value_id).key.id
+    except FeatureValue.DoesNotExist:
+        raise VE(_('Invalid value ID.'))
+
+    if key_id != feature_key_id:
+        raise VE(_('The value must be associated with the specified key.'))
