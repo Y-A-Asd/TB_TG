@@ -548,7 +548,7 @@ class HomeBannerViewSet(ReadOnlyModelViewSet):
 @api_view(['GET'])
 def compare_products(request):
     product_ids = request.GET.getlist('product_ids')
-    print(product_ids)
+    # print(product_ids)
     products = Product.objects.filter(id__in=product_ids)
     data = {}
 
@@ -565,25 +565,28 @@ def compare_products(request):
             attr = 'price'
         data[attr.capitalize()] = product_attrs
 
-    feature_keys = set()
+    feature_keys = []
     for product in products:
         main_features = MainFeature.objects.filter(product=product)
         for main_feature in main_features:
-            print(main_feature)
-            feature_keys.add(main_feature.key)
+            # print(main_feature)
+            feature_keys.append(main_feature.key)
 
     for key in feature_keys:
         feature_data = {}
         for product in products:
-            print(product)
-            main_feature = MainFeature.objects.filter(product=product, key=key).first()
-            if main_feature:
+            # print(product)
+            main_features = MainFeature.objects.filter(product=product, key=key)
+            if main_features:
+                values = []
+                for main_feature in main_features:
+                    values.append(str(main_feature.value.value))
                 feature_data[
-                    str(product.title)] = str(main_feature.value.value)
+                    str(product.title)] = str(', '.join(values))
             else:
                 feature_data[str(product.title)] = None
         data[str(key.key)] = feature_data
-
+    print('data', data)
     return Response(data)
 
 
