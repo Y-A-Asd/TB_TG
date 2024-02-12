@@ -34,16 +34,16 @@
                     </ul>
 
                     <div class="common-filter">
-                        <div class="head">Price</div>
+                        <h5 class="head">Price</h5>
                         <div class="price-range-area">
                             <div id="price-range"></div>
                             <div class="value-wrapper d-flex">
-                                <div class="price">Price:</div>
-                                <span>$</span>
-                                <div id="lower-value"></div>
-                                <div class="to">to</div>
-                                <span>$</span>
-                                <div id="upper-value"></div>
+                                <h5 class="price">Price:</h5>
+                                <h6>$</h6>
+                                <h6 id="lower-value"></h6>
+                                <h6 class="to">to</h6>
+                                <h6>$</h6>
+                                <h6 id="upper-value"></h6>
                             </div>
                         </div>
                     </div>
@@ -487,6 +487,30 @@
                 }
             });
 
+            const lowerValue = document.getElementById('lower-value');
+            const upperValue = document.getElementById('upper-value');
+
+            let initialLowerValue = lowerValue.textContent;
+            let initialUpperValue = upperValue.textContent;
+
+            function checkForChanges() {
+                if (lowerValue.textContent !== initialLowerValue) {
+                    initialLowerValue = lowerValue.textContent;
+                    currentUnitPriceGt = parseInt(lowerValue.textContent);
+                    console.log('Changed low value:', currentUnitPriceGt);
+                    fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue);
+                }
+
+                if (upperValue.textContent !== initialUpperValue) {
+                    initialUpperValue = upperValue.textContent;
+                    currentUnitPriceLt = parseInt(upperValue.textContent);
+                    console.log('Changed high value:', currentUnitPriceLt);
+                    fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue);
+                }
+            }
+
+            setInterval(checkForChanges, 100);
+
 
         });
         fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue);
@@ -581,6 +605,7 @@
                     const br = document.createElement('br');
 
                     const keyHeader = document.createElement('h6');
+                    keyHeader.style.cursor = 'pointer'
                     keyHeader.textContent = translation.key;
 
                     const keyProductCount = document.createElement('span');
@@ -605,6 +630,7 @@
                         valueItem.classList.add('filter-list', 'text-capitalize', 'bold');
 
                         const valueHeader = document.createElement('h6');
+                        valueHeader.style.cursor = 'pointer'
                         const valueTranslation = value.translations.en || value.translations[Object.keys(value.translations)[0]];
                         valueHeader.textContent = valueTranslation.value;
 
