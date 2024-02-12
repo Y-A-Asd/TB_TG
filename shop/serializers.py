@@ -21,6 +21,35 @@ class ProductImageSerializer(serializers.ModelSerializer):
         return ProductImage.objects.create(product_id=product_id, **validated_data)
 
 
+class FeatureValueFullSerializer(TranslatableModelSerializer):
+    translations = TranslatedFieldsField(shared_model=FeatureValue)
+    product_count = serializers.SerializerMethodField()
+
+    class Meta:
+        model = FeatureValue
+        fields = ['id', 'translations', 'product_count']
+
+    def get_product_count(self, obj):
+        return MainFeature.objects.filter(value=obj).count()
+
+
+class FeatureKeyFullSerializer(TranslatableModelSerializer):
+    translations = TranslatedFieldsField(shared_model=FeatureKey)
+    values = serializers.SerializerMethodField()
+    key_product_count = serializers.SerializerMethodField()
+
+    class Meta:
+        model = FeatureKey
+        fields = ['id', 'translations', 'key_product_count', 'values']
+
+    def get_values(self, obj):
+        children_serializer = FeatureValueFullSerializer(obj.values.all(), many=True)
+        return children_serializer.data if obj.values.exists() else None
+
+    def get_key_product_count(self, obj):
+        return MainFeature.objects.filter(key=obj).values('product').count()
+
+
 class FeatureKeySerializer(TranslatableModelSerializer):
     translations = TranslatedFieldsField(shared_model=FeatureKey)
 

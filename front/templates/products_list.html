@@ -28,49 +28,11 @@
                     </ul>
                 </div>
                 <div class="sidebar-filter mt-50">
-                    <div class="top-filter-head">Product Filters</div>
-                    <div class="common-filter">
-                        <div class="head">Brands</div>
-                        <form action="#">
-                            <ul>
-                                <li class="filter-list"><input class="pixel-radio" type="radio" id="apple" name="brand"><label
-                                        for="apple">Apple<span>(29)</span></label></li>
-                                <li class="filter-list"><input class="pixel-radio" type="radio" id="asus"
-                                                               name="brand"><label
-                                        for="asus">Asus<span>(29)</span></label></li>
-                                <li class="filter-list"><input class="pixel-radio" type="radio" id="gionee"
-                                                               name="brand"><label for="gionee">Gionee<span>(19)</span></label>
-                                </li>
-                                <li class="filter-list"><input class="pixel-radio" type="radio" id="micromax"
-                                                               name="brand"><label
-                                        for="micromax">Micromax<span>(19)</span></label></li>
-                                <li class="filter-list"><input class="pixel-radio" type="radio" id="samsung"
-                                                               name="brand"><label
-                                        for="samsung">Samsung<span>(19)</span></label></li>
-                            </ul>
-                        </form>
-                    </div>
-                    <div class="common-filter">
-                        <div class="head">Color</div>
-                        <form action="#">
-                            <ul>
-                                <li class="filter-list"><input class="pixel-radio" type="radio" id="black" name="color"><label
-                                        for="black">Black<span>(29)</span></label></li>
-                                <li class="filter-list"><input class="pixel-radio" type="radio" id="balckleather"
-                                                               name="color"><label for="balckleather">Black
-                                    Leather<span>(29)</span></label></li>
-                                <li class="filter-list"><input class="pixel-radio" type="radio" id="blackred"
-                                                               name="color"><label for="blackred">Black
-                                    with red<span>(19)</span></label></li>
-                                <li class="filter-list"><input class="pixel-radio" type="radio" id="gold"
-                                                               name="color"><label
-                                        for="gold">Gold<span>(19)</span></label></li>
-                                <li class="filter-list"><input class="pixel-radio" type="radio" id="spacegrey"
-                                                               name="color"><label
-                                        for="spacegrey">Spacegrey<span>(19)</span></label></li>
-                            </ul>
-                        </form>
-                    </div>
+                    <div class="head">{% trans "Filters" %}</div>
+                    <ul class="common-filter">
+
+                    </ul>
+
                     <div class="common-filter">
                         <div class="head">Price</div>
                         <div class="price-range-area">
@@ -603,6 +565,72 @@
 
             parentElement.appendChild(ul);
         }
+
+
+        fetch('/shop/features/')
+            .then(response => response.json())
+            .then(data => {
+                const commonFilter = document.querySelector('.common-filter');
+
+                data.forEach(feature => {
+                    const translation = feature.translations.en || feature.translations[Object.keys(feature.translations)[0]];
+
+                    const keyItem = document.createElement('li');
+                    keyItem.classList.add('filter-list', 'text-capitalize', 'bold');
+
+                    const br = document.createElement('br');
+
+                    const keyHeader = document.createElement('h6');
+                    keyHeader.textContent = translation.key;
+
+                    const keyProductCount = document.createElement('span');
+                    keyProductCount.classList.add('number');
+                    keyProductCount.textContent = `(${feature.key_product_count})`;
+
+
+                    keyHeader.appendChild(keyProductCount);
+                    keyItem.appendChild(keyHeader);
+
+
+                    keyHeader.addEventListener('click', () => {
+                        currentFeatureKey = feature.id;
+                        fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue);
+                    });
+
+                    const valueList = document.createElement('ul');
+                    valueList.classList.add('filter-list', 'text-capitalize', 'bold');
+
+                    feature.values.forEach(value => {
+                        const valueItem = document.createElement('li');
+                        valueItem.classList.add('filter-list', 'text-capitalize', 'bold');
+
+                        const valueHeader = document.createElement('h6');
+                        const valueTranslation = value.translations.en || value.translations[Object.keys(value.translations)[0]];
+                        valueHeader.textContent = valueTranslation.value;
+
+                        const valueProductCount = document.createElement('span');
+                        valueProductCount.classList.add('number');
+                        valueProductCount.textContent = `(${value.product_count})`;
+
+                        valueHeader.appendChild(valueProductCount);
+                        valueItem.appendChild(valueHeader);
+
+                        valueItem.addEventListener('click', () => {
+                            currentFeatureKey = feature.id;
+                            currentFeatureValue = value.id;
+                            fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue);
+                        });
+
+                        valueList.appendChild(valueItem);
+                    });
+
+                    keyItem.appendChild(valueList);
+                    commonFilter.appendChild(keyItem);
+                    keyItem.appendChild(br);
+                });
+            })
+            .catch(error => console.error('Error fetching features:', error));
+
 
     </script>
 {% endblock %}

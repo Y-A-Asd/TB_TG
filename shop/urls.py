@@ -13,6 +13,7 @@ router.register(r'transactions', views.TransactionViewSet)
 router.register(r'promotions', views.PromotionViewSet)
 router.register(r'site-settings', views.SiteSettingsViewSet)
 router.register(r'home-banners', views.HomeBannerViewSet)
+router.register(r'features', views.FeatureViewSet, basename='features')
 
 cart_router = routers.NestedDefaultRouter(router, r'cart', lookup='cart')
 cart_router.register('items', views.CartItemViewSet, basename='cart-items')

@@ -213,25 +213,27 @@ CELERY_BROKER_URL = 'redis://localhost:6379/1'
 CELERY_BEAT_SCHEDULE = {
     'delete_inactive_users': {
         'task': 'core.tasks.delete_inactive_users',
-        'schedule': crontab(hour='*/24'),
+        'schedule': crontab(minute='1'),
     },
     'send_promotion_emails': {
         'task': 'core.tasks.send_promotion_emails',
-        'schedule': crontab(hour='*/24'),
+        'schedule': crontab(minute='1'),
     },
     'delete_inactive_carts': {
         'task': 'core.tasks.delete_inactive_carts',
-        'schedule': crontab(hour='*/24'),
+        'schedule': crontab(minute='1'),
     },
     'send_birthday_emails': {
         'task': 'core.tasks.send_birthday_emails',
-        'schedule': crontab(hour=0, minute=0),
+        'schedule': crontab(minute='1'),
     },
     'delete_old_carts': {
         'task': 'core.tasks.delete_old_carts',
         'schedule': crontab(hour='*/24'),
     },
 }
+CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
+
 """
 celery command:
     celery -A TB_TG beat -> apply beat worker

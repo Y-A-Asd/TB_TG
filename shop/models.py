@@ -105,6 +105,9 @@ class Product(TranslatableModel, BaseModel):
         # title = title_translation.title if title_translation else f"Product {self.pk}"
         return f'{self.title}'
 
+    def __str__(self):
+        return f'{self.title}'
+
     @property
     def price_after_off(self, ):
         if self.discount:
@@ -382,7 +385,7 @@ class FeatureKey(TranslatableModel):
 
 
 class FeatureValue(TranslatableModel):
-    key = models.ForeignKey(FeatureKey, on_delete=models.CASCADE, verbose_name=_('Key'))
+    key = models.ForeignKey(FeatureKey, on_delete=models.CASCADE, verbose_name=_('Key'), related_name='values')
     translations = TranslatedFields(
         value=models.CharField(_('Value'), max_length=10, )
     )
@@ -402,8 +405,9 @@ class MainFeature(BaseModel):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name=_('Product'))
     key = models.ForeignKey(FeatureKey, on_delete=models.DO_NOTHING, verbose_name=_('Key'))
     value = models.ForeignKey(FeatureValue, on_delete=models.DO_NOTHING, verbose_name=_('Value'))
+
     def __repr__(self) -> str:
-        return f"{str(self.product)}: {self.key} -> {self.value}"
+        return f"{self.product.title}: {self.key} -> {self.value}"
 
     def __str__(self) -> str:
-        return f"{str(self.product)}: {self.key.key} -> {self.value.value}"
+        return f"{self.product.title}: {self.key.key} -> {self.value.value}"

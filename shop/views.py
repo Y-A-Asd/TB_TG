@@ -22,9 +22,10 @@ from .serializers import (ProductSerializer, CollectionSerializer, ReviewSeriali
                           CustomerSerializer, OrderSerializer, CreateOrderSerializer, UpdateOrderSerializer,
                           ProductImageSerializer, AddressSerializer, TransactionSerializer, UpdateTransactionSerializer,
                           AuditLogSerializer, PromotionSerializer, SimpleProductSerializer, ReportingSerializer,
-                          SiteSettingsSerializer, HomeBannerSerializer, ApplyDiscountSerializer)
+                          SiteSettingsSerializer, HomeBannerSerializer, ApplyDiscountSerializer,
+                          FeatureKeyFullSerializer)
 from .models import Product, Collection, OrderItem, Review, Customer, Order, ProductImage, CartItem, Cart, Address, \
-    Transaction, Promotion, SiteSettings, HomeBanner, MainFeature
+    Transaction, Promotion, SiteSettings, HomeBanner, MainFeature, FeatureKey
 from .filters import ProductFilter, RecursiveDjangoFilterBackend, CustomerFilterBackend
 from .permissions import IsAdminOrReadOnly, ViewCustomerHistoryPermission
 
@@ -584,3 +585,8 @@ def compare_products(request):
         data[str(key.key)] = feature_data
 
     return Response(data)
+
+
+class FeatureViewSet(ModelViewSet):
+    queryset = FeatureKey.objects.all()
+    serializer_class = FeatureKeyFullSerializer
