@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-13 00:12+0330\n"
+"POT-Creation-Date: 2024-02-13 01:50+0330\n"
 "PO-Revision-Date: 2024-01-31 08:04+0330\n"
 "Last-Translator: Anonymous User <yosofasady2@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -180,16 +180,78 @@ msgstr "Code-based discounts must have valid_from and valid_to dates."
 msgid "Discounts"
 msgstr "Discounts"
 
+#: front/templates/base.html:64 front/templates/login.html:13
+#: front/templates/products_list.html:13 front/templates/register.html:13
+#: front/templates/set_password.html:13 front/templates/verify_otp.html:13
+msgid "Home"
+msgstr ""
+
+#: front/templates/base.html:68 front/templates/products_list.html:11
+#: front/templates/products_list.html:14 shop/apps.py:8
+msgid "Shop"
+msgstr "Shop"
+
+#: front/templates/base.html:80
+msgid "Blog"
+msgstr ""
+
+#: front/templates/base.html:87
+msgid "Login / Register"
+msgstr ""
+
+#: front/templates/base.html:90
+msgid "About Me"
+msgstr ""
+
+#: front/templates/base.html:128
+msgid "About Us"
+msgstr ""
+
+#: front/templates/base.html:134 shop/models.py:198 shop/models.py:319
+msgid "Address"
+msgstr "Address"
+
+#: front/templates/base.html:141
+msgid "Follow Us"
+msgstr ""
+
+#: front/templates/base.html:142
+msgid "Let us be social"
+msgstr ""
+
+#: front/templates/index.html:119
+#, fuzzy
+#| msgid "Delivered"
+msgid "Free Delivery"
+msgstr "Delivered"
+
+#: front/templates/index.html:120 front/templates/index.html:130
+#: front/templates/index.html:140 front/templates/index.html:150
+msgid "Free Shipping on all order"
+msgstr ""
+
+#: front/templates/index.html:129
+msgid "Return Policy"
+msgstr ""
+
+#: front/templates/index.html:139
+msgid "24/7 Support"
+msgstr ""
+
+#: front/templates/index.html:149
+msgid "Secure Payment"
+msgstr ""
+
+#: front/templates/index.html:166
+#, fuzzy
+#| msgid "Products"
+msgid "Latest Products"
+msgstr "Products"
+
 #: front/templates/login.html:11 front/templates/login.html:14
 #: front/templates/register.html:11 front/templates/register.html:14
 #: front/templates/set_password.html:14 front/templates/verify_otp.html:14
 msgid "Login/Register"
-msgstr ""
-
-#: front/templates/login.html:13 front/templates/products_list.html:12
-#: front/templates/register.html:13 front/templates/set_password.html:13
-#: front/templates/verify_otp.html:13
-msgid "Home"
 msgstr ""
 
 #: front/templates/login.html:30 front/templates/set_password.html:30
@@ -231,40 +293,59 @@ msgstr "Log out"
 msgid "Forgot Password?"
 msgstr "Password"
 
-#: front/templates/products_list.html:10 front/templates/products_list.html:13
-#: shop/apps.py:8
-msgid "Shop"
-msgstr "Shop"
-
-#: front/templates/products_list.html:25
+#: front/templates/products_list.html:26
 #, fuzzy
 #| msgid "No Collection"
 msgid "Browse Collections"
 msgstr "No Collection"
 
-#: front/templates/products_list.html:31
+#: front/templates/products_list.html:32
 msgid "Filters"
 msgstr ""
 
-#: front/templates/products_list.html:59
+#: front/templates/products_list.html:38
+#, fuzzy
+#| msgid "Unit Price"
+msgid "Price"
+msgstr "Unit Price"
+
+#: front/templates/products_list.html:42
+#, fuzzy
+#| msgid "Unit Price"
+msgid "Price:"
+msgstr "Unit Price"
+
+#: front/templates/products_list.html:45
+msgid "to"
+msgstr ""
+
+#: front/templates/products_list.html:60
 #, fuzzy
 #| msgid "Default"
 msgid "Default sorting"
 msgstr "Default"
 
-#: front/templates/products_list.html:60
+#: front/templates/products_list.html:61
 msgid "Price: Low to High"
 msgstr ""
 
-#: front/templates/products_list.html:61
+#: front/templates/products_list.html:62
 msgid "Price: High to Low"
 msgstr ""
 
-#: front/templates/products_list.html:66
+#: front/templates/products_list.html:67
 #, fuzzy
 #| msgid "Complete"
 msgid "Compare"
 msgstr "Complete"
+
+#: front/templates/products_list.html:74
+msgid "Current Filters"
+msgstr ""
+
+#: front/templates/products_list.html:152 shop/models.py:75 shop/models.py:92
+msgid "Collection"
+msgstr "Collection"
 
 #: front/templates/register.html:30 front/templates/verify_otp.html:30
 msgid "Do you have account?"
@@ -377,27 +458,15 @@ msgstr "Order"
 msgid "Mark selected transactions as complete"
 msgstr "Mark selected transactions as complete"
 
-#: shop/admin.py:317
-msgid "General Settings"
-msgstr "General Settings"
-
-#: shop/admin.py:319
-msgid "Translations"
-msgstr "Translations"
-
-#: shop/admin.py:320 shop/models.py:322
-msgid "Logo"
-msgstr "Logo"
-
-#: shop/admin.py:326
+#: shop/admin.py:322
 msgid "No Image"
 msgstr "No Image"
 
-#: shop/admin.py:329
+#: shop/admin.py:325
 msgid "Logo Preview"
 msgstr "Logo Preview"
 
-#: shop/filters.py:49
+#: shop/filters.py:49 shop/models.py:397
 msgid "Main Feature"
 msgstr "Main Feature"
 
@@ -437,10 +506,6 @@ msgstr "Promotions"
 msgid "Parent"
 msgstr "Parent"
 
-#: shop/models.py:75 shop/models.py:92
-msgid "Collection"
-msgstr "Collection"
-
 #: shop/models.py:76
 msgid "Collections"
 msgstr "Collections"
@@ -457,7 +522,7 @@ msgstr "Unit Price"
 msgid "Minimum Inventory"
 msgstr "Minimum Inventory"
 
-#: shop/models.py:134 shop/models.py:179 shop/models.py:267 shop/models.py:405
+#: shop/models.py:134 shop/models.py:179 shop/models.py:267 shop/models.py:392
 msgid "Product"
 msgstr "Product"
 
@@ -538,10 +603,6 @@ msgstr "Province"
 msgid "Default"
 msgstr "Default"
 
-#: shop/models.py:198 shop/models.py:319
-msgid "Address"
-msgstr "Address"
-
 #: shop/models.py:199
 msgid "Addresses"
 msgstr "Addresses"
@@ -619,6 +680,10 @@ msgstr "Transactions"
 msgid "Footer Text"
 msgstr "Footer Text"
 
+#: shop/models.py:322
+msgid "Logo"
+msgstr "Logo"
+
 #: shop/models.py:323
 msgid "Telegram link"
 msgstr ""
@@ -635,43 +700,49 @@ msgstr ""
 msgid "Whatsapp link"
 msgstr ""
 
-#: shop/models.py:345 shop/models.py:346
+#: shop/models.py:332 shop/models.py:333
 msgid "Site Settings"
 msgstr "Site Settings"
 
-#: shop/models.py:356
+#: shop/models.py:343
 msgid "Home Banner"
 msgstr ""
 
-#: shop/models.py:357
+#: shop/models.py:344
 msgid "Home Banners"
 msgstr ""
 
-#: shop/models.py:373 shop/models.py:388 shop/models.py:406
+#: shop/models.py:360 shop/models.py:375 shop/models.py:393
 msgid "Key"
 msgstr ""
 
-#: shop/models.py:377
+#: shop/models.py:364
 #, fuzzy
 #| msgid "Feature"
 msgid "Feature Key"
 msgstr "Feature"
 
-#: shop/models.py:378
+#: shop/models.py:365
 #, fuzzy
 #| msgid "Features"
 msgid "Feature Keys"
 msgstr "Features"
 
-#: shop/models.py:390 shop/models.py:407
+#: shop/models.py:377 shop/models.py:394
 msgid "Value"
 msgstr "Value"
 
-#: shop/models.py:394 shop/models.py:395
+#: shop/models.py:381 shop/models.py:382
 #, fuzzy
 #| msgid "Feature"
 msgid "Feature Value"
 msgstr "Feature"
+
+#: shop/models.py:398
+#, fuzzy
+#| msgid "Main Feature"
+msgid "Main Features"
+msgstr "Main Feature"
 
 #: shop/serializers.py:205
 #, fuzzy, python-brace-format
@@ -753,6 +824,12 @@ msgstr "Change password"
 #: templates/admin/base_site.html:29
 msgid "Log out"
 msgstr "Log out"
+
+#~ msgid "General Settings"
+#~ msgstr "General Settings"
+
+#~ msgid "Translations"
+#~ msgstr "Translations"
 
 #~ msgid "There is already an active discount for this item."
 #~ msgstr "There is already an active discount for this item."

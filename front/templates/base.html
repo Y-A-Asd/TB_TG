@@ -3,7 +3,8 @@
 {% get_current_language as LANGUAGE_CODE %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ LANGUAGE_CODE }}" {% if LANGUAGE_CODE == "fa" %}dir="rtl"{% endif %}>
+{#<html lang="en">#}
 <head>
 
 
@@ -82,7 +83,7 @@
                                 <li class="nav-item"><a class="nav-link" href="single-blog.html">Blog Details</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item"><a class="nav-link"
+                        <li class="nav-item mx-3"><a class="nav-link"
                                                 href="{% url 'front:login' %}">{% trans 'Login / Register' %}</a>
                         </li>
                         <li class="nav-item"><a class="nav-link"

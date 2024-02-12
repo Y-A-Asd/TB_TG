@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-13 00:12+0330\n"
-"PO-Revision-Date: 2024-02-13 00:28+0330\n"
+"POT-Creation-Date: 2024-02-13 01:50+0330\n"
+"PO-Revision-Date: 2024-02-13 01:49+0330\n"
 "Last-Translator: Anonymous User <yosofasadi2@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fa\n"
@@ -180,17 +180,75 @@ msgstr "تخفیفات دارای کد میبایست تاریخ شروع و پ�
 msgid "Discounts"
 msgstr "تخفیفات"
 
+#: front/templates/base.html:64 front/templates/login.html:13
+#: front/templates/products_list.html:13 front/templates/register.html:13
+#: front/templates/set_password.html:13 front/templates/verify_otp.html:13
+msgid "Home"
+msgstr "خانه"
+
+#: front/templates/base.html:68 front/templates/products_list.html:11
+#: front/templates/products_list.html:14 shop/apps.py:8
+msgid "Shop"
+msgstr "فروشگاه"
+
+#: front/templates/base.html:80
+msgid "Blog"
+msgstr "بلاگ"
+
+#: front/templates/base.html:87
+msgid "Login / Register"
+msgstr "ورود /ثبت نام"
+
+#: front/templates/base.html:90
+msgid "About Me"
+msgstr "درباره من"
+
+#: front/templates/base.html:128
+msgid "About Us"
+msgstr "درباره ما"
+
+#: front/templates/base.html:134 shop/models.py:198 shop/models.py:319
+msgid "Address"
+msgstr "آدرس"
+
+#: front/templates/base.html:141
+msgid "Follow Us"
+msgstr "ما را دنبال کنید"
+
+#: front/templates/base.html:142
+msgid "Let us be social"
+msgstr "در فضا مجازی کنار ما باشید!"
+
+#: front/templates/index.html:119
+msgid "Free Delivery"
+msgstr "ارسال رایگان"
+
+#: front/templates/index.html:120 front/templates/index.html:130
+#: front/templates/index.html:140 front/templates/index.html:150
+msgid "Free Shipping on all order"
+msgstr "ارسال رایگان"
+
+#: front/templates/index.html:129
+msgid "Return Policy"
+msgstr "سیاست برگشت"
+
+#: front/templates/index.html:139
+msgid "24/7 Support"
+msgstr "پشتیبانی 24 ساعته"
+
+#: front/templates/index.html:149
+msgid "Secure Payment"
+msgstr "پرداخت امن"
+
+#: front/templates/index.html:166
+msgid "Latest Products"
+msgstr "آخرین محصولات"
+
 #: front/templates/login.html:11 front/templates/login.html:14
 #: front/templates/register.html:11 front/templates/register.html:14
 #: front/templates/set_password.html:14 front/templates/verify_otp.html:14
 msgid "Login/Register"
 msgstr "ورود /ثبت نام"
-
-#: front/templates/login.html:13 front/templates/products_list.html:12
-#: front/templates/register.html:13 front/templates/set_password.html:13
-#: front/templates/verify_otp.html:13
-msgid "Home"
-msgstr "خانه"
 
 #: front/templates/login.html:30 front/templates/set_password.html:30
 msgid "New to our website?"
@@ -199,12 +257,11 @@ msgstr "اکانت ندارید ؟"
 #: front/templates/login.html:31 front/templates/register.html:31
 #: front/templates/set_password.html:31 front/templates/verify_otp.html:31
 msgid ""
-"There are advances being made in science and technology everyday, and a good"
-" example of this is the"
+"There are advances being made in science and technology everyday, and a good "
+"example of this is the"
 msgstr "خوش آمدید"
 
 #: front/templates/login.html:32 front/templates/set_password.html:32
-#| msgid "Created at"
 msgid "Create an Account"
 msgstr "ساخت حساب کاربری"
 
@@ -213,63 +270,70 @@ msgid "Log in to enter"
 msgstr "ورود"
 
 #: front/templates/login.html:43 front/templates/login.html:44
-#| msgid "User"
 msgid "Username"
 msgstr "نام کاربری"
 
 #: front/templates/login.html:52 front/templates/verify_otp.html:48
-#| msgid "Log out"
 msgid "Log In"
 msgstr "ورود"
 
 #: front/templates/login.html:53
-#| msgid "Password"
 msgid "Forgot Password?"
 msgstr "رمز عبور را فراموش کرده اید؟"
 
-#: front/templates/products_list.html:10 front/templates/products_list.html:13
-#: shop/apps.py:8
-msgid "Shop"
-msgstr "فروشگاه"
-
-#: front/templates/products_list.html:25
-#| msgid "No Collection"
+#: front/templates/products_list.html:26
 msgid "Browse Collections"
 msgstr "مجموعه ها"
 
-#: front/templates/products_list.html:31
+#: front/templates/products_list.html:32
 msgid "Filters"
 msgstr "فیلتر ها"
 
-#: front/templates/products_list.html:59
-#| msgid "Default"
+#: front/templates/products_list.html:38
+msgid "Price"
+msgstr "قیمت "
+
+#: front/templates/products_list.html:42
+msgid "Price:"
+msgstr "قیمت : "
+
+#: front/templates/products_list.html:45
+msgid "to"
+msgstr "تا"
+
+#: front/templates/products_list.html:60
 msgid "Default sorting"
 msgstr "جدید ترین ها"
 
-#: front/templates/products_list.html:60
+#: front/templates/products_list.html:61
 msgid "Price: Low to High"
 msgstr "قیمت: از کم به زیاد"
 
-#: front/templates/products_list.html:61
+#: front/templates/products_list.html:62
 msgid "Price: High to Low"
 msgstr "قیمت از زیاد به کم"
 
-#: front/templates/products_list.html:66
-#| msgid "Complete"
+#: front/templates/products_list.html:67
 msgid "Compare"
 msgstr "مقایسه"
+
+#: front/templates/products_list.html:74
+msgid "Current Filters"
+msgstr "فیلتر های اعمال شده"
+
+#: front/templates/products_list.html:152 shop/models.py:75 shop/models.py:92
+msgid "Collection"
+msgstr "مجموعه"
 
 #: front/templates/register.html:30 front/templates/verify_otp.html:30
 msgid "Do you have account?"
 msgstr "حساب کاربری دارید؟"
 
 #: front/templates/register.html:32 front/templates/verify_otp.html:32
-#| msgid "Last Login"
 msgid "Login"
 msgstr "ورود"
 
 #: front/templates/register.html:38 front/templates/register.html:57
-#| msgid "Login/Register"
 msgid "Register"
 msgstr "ثبت نام"
 
@@ -278,32 +342,26 @@ msgid "Phone"
 msgstr "تلفن"
 
 #: front/templates/set_password.html:11 front/templates/set_password.html:53
-#| msgid "Password"
 msgid "Set Password"
 msgstr "ایجاد رمز عبور"
 
 #: front/templates/set_password.html:38
-#| msgid "Password"
 msgid "Set New Password"
 msgstr "ایجاد رمز عبور"
 
 #: front/templates/set_password.html:43 front/templates/set_password.html:44
-#| msgid "Password"
 msgid "Current Password"
 msgstr " رمز عبور فعلی"
 
 #: front/templates/set_password.html:48 front/templates/set_password.html:49
-#| msgid "Password"
 msgid "New Password"
 msgstr "رمز عبور جدید"
 
 #: front/templates/verify_otp.html:11
-#| msgid "Zip Code"
 msgid "Verify Code"
 msgstr "کد تایید"
 
 #: front/templates/verify_otp.html:38
-#| msgid "Description"
 msgid "Verification"
 msgstr "احراز هویت"
 
@@ -364,27 +422,15 @@ msgstr "سفارش"
 msgid "Mark selected transactions as complete"
 msgstr "تراکنش انتخاب شده پرداخت شد"
 
-#: shop/admin.py:317
-msgid "General Settings"
-msgstr "تنظیمات سایت"
-
-#: shop/admin.py:319
-msgid "Translations"
-msgstr "تراکنش ها"
-
-#: shop/admin.py:320 shop/models.py:322
-msgid "Logo"
-msgstr "لوگو"
-
-#: shop/admin.py:326
+#: shop/admin.py:322
 msgid "No Image"
 msgstr "بدون تصویر"
 
-#: shop/admin.py:329
+#: shop/admin.py:325
 msgid "Logo Preview"
 msgstr "پیشنمایش لوگو"
 
-#: shop/filters.py:49
+#: shop/filters.py:49 shop/models.py:397
 msgid "Main Feature"
 msgstr "ویژگی "
 
@@ -424,10 +470,6 @@ msgstr "تبلیغات"
 msgid "Parent"
 msgstr "والد"
 
-#: shop/models.py:75 shop/models.py:92
-msgid "Collection"
-msgstr "مجموعه"
-
 #: shop/models.py:76
 msgid "Collections"
 msgstr "مجموعه‌ها"
@@ -444,7 +486,7 @@ msgstr "قیمت واحد"
 msgid "Minimum Inventory"
 msgstr "کف اخطار موجودی"
 
-#: shop/models.py:134 shop/models.py:179 shop/models.py:267 shop/models.py:405
+#: shop/models.py:134 shop/models.py:179 shop/models.py:267 shop/models.py:392
 msgid "Product"
 msgstr "محصول"
 
@@ -525,10 +567,6 @@ msgstr "استان"
 msgid "Default"
 msgstr "آدرس اصلی"
 
-#: shop/models.py:198 shop/models.py:319
-msgid "Address"
-msgstr "آدرس"
-
 #: shop/models.py:199
 msgid "Addresses"
 msgstr "آدرس‌ها"
@@ -567,7 +605,6 @@ msgid "Invalid discount mode: {self.discount.mode}"
 msgstr "حالت در نظر گرفته شده نامعتبر است"
 
 #: shop/models.py:257 shop/serializers.py:207
-#| msgid "Discount Item"
 msgid "Discount is not active!"
 msgstr "تخفیف غیر فعال است!"
 
@@ -607,6 +644,10 @@ msgstr "تراکنش ها"
 msgid "Footer Text"
 msgstr "متن زیرین"
 
+#: shop/models.py:322
+msgid "Logo"
+msgstr "لوگو"
+
 #: shop/models.py:323
 msgid "Telegram link"
 msgstr "لینک تلگرام"
@@ -623,44 +664,44 @@ msgstr "لینک اینستاگرام"
 msgid "Whatsapp link"
 msgstr "لینک واتساپ"
 
-#: shop/models.py:345 shop/models.py:346
+#: shop/models.py:332 shop/models.py:333
 msgid "Site Settings"
 msgstr "تنظیمات سایت"
 
-#: shop/models.py:356
+#: shop/models.py:343
 msgid "Home Banner"
 msgstr "پوستر صفحه اصلی"
 
-#: shop/models.py:357
+#: shop/models.py:344
 msgid "Home Banners"
 msgstr "پوستر های صفحه اصلی"
 
-#: shop/models.py:373 shop/models.py:388 shop/models.py:406
+#: shop/models.py:360 shop/models.py:375 shop/models.py:393
 msgid "Key"
 msgstr "کلید"
 
-#: shop/models.py:377
-#| msgid "Feature"
+#: shop/models.py:364
 msgid "Feature Key"
 msgstr "کلید ویژگی"
 
-#: shop/models.py:378
-#| msgid "Features"
+#: shop/models.py:365
 msgid "Feature Keys"
 msgstr "کلید های ویژگی "
 
-#: shop/models.py:390 shop/models.py:407
+#: shop/models.py:377 shop/models.py:394
 msgid "Value"
 msgstr "مقدار ویژگی"
 
-#: shop/models.py:394 shop/models.py:395
-#| msgid "Feature Values"
+#: shop/models.py:381 shop/models.py:382
 msgid "Feature Value"
 msgstr "مقدار ویژگی"
 
+#: shop/models.py:398
+msgid "Main Features"
+msgstr "ویژگی ها"
+
 #: shop/serializers.py:205
 #, python-brace-format
-#| msgid "Invalid discount(Check Mode again)"
 msgid "Invalid discount mode: {cart.discount.mode}"
 msgstr "تخفیف نامعتیر است ! مجدد حالت تخفیف را چک کنید!"
 
@@ -739,6 +780,12 @@ msgstr "تغییر کدواژه"
 #: templates/admin/base_site.html:29
 msgid "Log out"
 msgstr "خروج"
+
+#~ msgid "General Settings"
+#~ msgstr "تنظیمات سایت"
+
+#~ msgid "Translations"
+#~ msgstr "تراکنش ها"
 
 #~ msgid "There is already an active discount for this item."
 #~ msgstr "همزمان نمیتوانید دو تخفیف فعال داشته باشید"

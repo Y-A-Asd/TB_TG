@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 {% load static %}
 {% block contents %}
     <!-- Start Banner Area -->
@@ -7,10 +8,10 @@
         <div class="container">
             <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
                 <div class="col-first">
-                    <h1>{% trans "Shop" %}</h1>
+                    <h1 class="text-danger">{% trans "Shop" %}</h1>
                     <nav class="d-flex align-items-center">
-                        <a href="{% url 'front:home' %}">{% trans "Home" %}<span class="lnr lnr-arrow-right"></span></a>
-                        <a href="{% url 'front:products' %}">{% trans "Shop" %}<span class="lnr lnr-arrow-right"></span></a>
+                        <a class="text-danger" href="{% url 'front:home' %}">{% trans "Home" %}<span class="lnr lnr-arrow-right"></span></a>
+                        <a class="text-danger" href="{% url 'front:products' %}">{% trans "Shop" %}<span class="lnr lnr-arrow-right"></span></a>
                     </nav>
                 </div>
             </div>
@@ -34,14 +35,14 @@
                     </ul>
 
                     <div class="common-filter">
-                        <h5 class="head">Price</h5>
+                        <h5 class="head">{% trans 'Price' %}</h5>
                         <div class="price-range-area">
                             <div id="price-range"></div>
                             <div class="value-wrapper d-flex">
-                                <h5 class="price">Price:</h5>
+                                <h5 class="price">{% trans 'Price:' %}</h5>
                                 <h6>$</h6>
                                 <h6 id="lower-value"></h6>
-                                <h6 class="to">to</h6>
+                                <h6 class="to">{% trans 'to' %}</h6>
                                 <h6>$</h6>
                                 <h6 id="upper-value"></h6>
                             </div>
@@ -70,7 +71,7 @@
                     <div>
                         <div class="">
                             <div id="Filters">
-                                <h2 class="text-white">Current Filters</h2>
+                                <h2 class="text-white">{% trans 'Current Filters' %}</h2>
 
                             </div>
                         </div>
@@ -122,7 +123,6 @@
 
         function createSocialInfo(iconClass, text, moreClass = null) {
             const socialInfo = document.createElement('button');
-            socialInfo.href = ``;
             socialInfo.classList.add('social-info');
 
             const iconSpan = document.createElement('span');
@@ -149,31 +149,31 @@
 
             if (collectionsId != null) {
                 apiUrl += `&collection_id=${collectionsId}`;
-                addFilterToCurrentFilters('Collection', collectionsId);
+                addFilterToCurrentFilters('{% trans 'Collection' %}', collectionsId);
             }
             if (selectedOption != null) {
                 apiUrl += `&ordering=${getSortingOrdering(selectedOption)}`;
-                addFilterToCurrentFilters('Ordering', selectedOption);
+                addFilterToCurrentFilters('{% trans 'Ordering' %}', selectedOption);
             }
             if (unit_price__gt != null) {
                 apiUrl += `&unit_price__gt=${unit_price__gt}`;
-                addFilterToCurrentFilters('Price Greater Than', unit_price__gt);
+                addFilterToCurrentFilters('{% trans 'Price Greater Than' %}', unit_price__gt);
             }
             if (unit_price__lt != null) {
                 apiUrl += `&unit_price__lt=${unit_price__lt}`;
-                addFilterToCurrentFilters('Price Less Than', unit_price__lt);
+                addFilterToCurrentFilters('{% trans 'Price Less Than' %}', unit_price__lt);
             }
             if (search != null) {
                 apiUrl += `&search=${search}`;
-                addFilterToCurrentFilters('Search', search);
+                addFilterToCurrentFilters('{% trans 'Search' %}', search);
             }
             if (feature_key != null) {
                 apiUrl += `&feature_key=${feature_key}`;
-                addFilterToCurrentFilters('Feature_key', feature_key);
+                addFilterToCurrentFilters('{% trans 'Feature_key' %}', feature_key);
             }
             if (feature_value != null) {
                 apiUrl += `&feature_value=${feature_value}`;
-                addFilterToCurrentFilters('Feature_value', feature_value);
+                addFilterToCurrentFilters('{% trans 'Feature_value' %}', feature_value);
             }
             console.log(apiUrl)
             fetch(apiUrl)
@@ -184,15 +184,15 @@
 
                     products.results.forEach(product => {
                         {
-                            const currentLanguage = 'en';
-                            const translation = product.translations[currentLanguage] || product.translations.en;
+                            const currentLanguage = '{{ LANGUAGE_CODE }}';
+                            const translation = product.translations[currentLanguage] || product.translations.{{ LANGUAGE_CODE }};
                             const productBlock = document.createElement('div');
                             productBlock.classList.add('col-lg-4', 'col-md-6', 'single-product');
 
                             const productImage = document.createElement('img');
                             productImage.classList.add('img-fluid');
                             productImage.src = product.images.length > 0 ? product.images[0].image : '{% static "img/default-product.jpg" %}';
-                            productImage.alt = product.translations.en.title;
+                            productImage.alt = product.translations.{{ LANGUAGE_CODE }}.title;
 
                             const productDetails = document.createElement('div');
                             productDetails.classList.add('product-details');
@@ -216,7 +216,7 @@
                             const productActions = document.createElement('div');
                             productActions.classList.add('prd-bottom');
 
-                            const addToBag = createSocialInfo('ti-bag', 'add to bag', 'ti-bag');
+                            const addToBag = createSocialInfo('ti-bag', '{% trans 'Add to bag' %}', 'ti-bag');
                             addToBag.addEventListener('click', () => {
                                 const cartId = localStorage.getItem('cartId');
                                 const productId = product.id;
@@ -232,13 +232,13 @@
                             // const addToWishlist = createSocialInfo('lnr lnr-heart', 'Wishlist');
                             {#let url = {% url 'front:products-detail' productId %}#}
 
-                            const viewMore = createSocialInfo('lnr', 'view more', 'lnr-move');
+                            const viewMore = createSocialInfo('lnr', '{% trans 'View more' %}', 'lnr-move');
                             viewMore.addEventListener('click', () => {
                                 const productId = product.id;
                                 window.location.href = `/products/${productId}/`;
                             });
 
-                            const compare = createSocialInfo('lnr', 'compare', 'lnr-sync');
+                            const compare = createSocialInfo('lnr', '{% trans 'Compare' %}', 'lnr-sync');
                             compare.addEventListener('click', () => {
                                 compareButtonClicked(product.id);
                             });
