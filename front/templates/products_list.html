@@ -10,8 +10,10 @@
                 <div class="col-first">
                     <h1 class="text-danger">{% trans "Shop" %}</h1>
                     <nav class="d-flex align-items-center">
-                        <a class="text-danger" href="{% url 'front:home' %}">{% trans "Home" %}<span class="lnr lnr-arrow-right"></span></a>
-                        <a class="text-danger" href="{% url 'front:products' %}">{% trans "Shop" %}<span class="lnr lnr-arrow-right"></span></a>
+                        <a class="text-danger" href="{% url 'front:home' %}">{% trans "Home" %}<span
+                                class="lnr lnr-arrow-right"></span></a>
+                        <a class="text-danger" href="{% url 'front:products' %}">{% trans "Shop" %}<span
+                                class="lnr lnr-arrow-right"></span></a>
                     </nav>
                 </div>
             </div>
@@ -277,27 +279,39 @@
 
                 if (existingButton) {
                     existingButton.textContent = `${filterName}: ${filterValue}`;
+                    if (filterName == '{% trans 'Feature_key' %}') {
+                        const elements = document.querySelectorAll('.btn.btn-sm.btn-primary.mr-2')
+                        console.log(elements)
+                        for (let i = 0; i < elements.length; i++) {
+                            console.log(elements[i])
+                            if (elements[i].textContent.includes('{% trans 'Feature_value' %}')) {
+                                console.log('findddddd2')
+                                elements[i].remove();
+                            }
+                        }
+                    }
                 } else {
                     switch (filterName) {
-                        case 'Collection':
+                        case '{% trans 'Collection' %}':
                             currentCollectionsId = filterValue;
                             break;
-                        case 'Ordering':
+                        case '{% trans 'Ordering' %}':
                             currentOrdering = filterValue;
                             break;
-                        case 'Price Greater Than':
+                        case '{% trans 'Price Greater Than' %}':
                             currentUnitPriceGt = filterValue;
                             break;
-                        case 'Price Less Than':
+                        case '{% trans 'Price Less Than' %}':
                             currentUnitPriceLt = filterValue;
                             break;
-                        case 'Search':
+                        case '{% trans 'Search' %}':
                             currentSearch = filterValue;
                             break;
-                        case 'Feature_key':
+                        case '{% trans 'Feature_key' %}':
                             currentFeatureKey = filterValue;
+                            currentFeatureValue = null;
                             break;
-                        case 'Feature_value':
+                        case '{% trans 'Feature_value' %}':
                             currentFeatureValue = filterValue;
                             break;
                         default:
@@ -310,6 +324,17 @@
                     filterButton.classList.add('btn', 'btn-sm', 'btn-primary', 'mr-2');
                     filterButton.addEventListener('click', () => {
                         removeFilterFromApiUrl(filterName, filterValue);
+                        if (filterName == '{% trans 'Feature_key' %}') {
+                            const elements = document.querySelectorAll('.btn.btn-sm.btn-primary.mr-2')
+                            console.log(elements)
+                            for (let i = 0; i < elements.length; i++) {
+                                console.log(elements[i])
+                                if (elements[i].textContent.includes('{% trans 'Feature_value' %}')) {
+                                    console.log('findddddd')
+                                    filtersContainer.removeChild(elements[i]);
+                                }
+                            }
+                        }
                         filtersContainer.removeChild(filterButton);
                         fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue);
                     });
@@ -321,25 +346,26 @@
             function removeFilterFromApiUrl(filterName, filterValue) {
 
                 switch (filterName) {
-                    case 'Collection':
+                    case '{% trans 'Collection' %}':
                         currentCollectionsId = null;
                         break;
-                    case 'Ordering':
+                    case '{% trans 'Ordering' %}':
                         currentOrdering = null;
                         break;
-                    case 'Price Greater Than':
+                    case '{% trans 'Price Greater Than' %}':
                         currentUnitPriceGt = null;
                         break;
-                    case 'Price Less Than':
+                    case '{% trans 'Price Less Than' %}':
                         currentUnitPriceLt = null;
                         break;
-                    case 'Search':
+                    case '{% trans 'Search' %}':
                         currentSearch = null;
                         break;
-                    case 'Feature_key':
+                    case '{% trans 'Feature_key' %}':
                         currentFeatureKey = null;
+                        currentFeatureValue = null;
                         break;
-                    case 'Feature_value':
+                    case '{% trans 'Feature_value' %}':
                         currentFeatureValue = null;
                         break;
                     default:
@@ -548,8 +574,8 @@
             ul.classList.add('main-categories');
 
             collections.forEach(collection => {
-                const currentLanguage = 'en';
-                const translation = collection.translations[currentLanguage] || collection.translations.en;
+                const currentLanguage = '{{ LANGUAGE_CODE }}';
+                const translation = collection.translations.{{ LANGUAGE_CODE }};
                 const li = document.createElement('li');
                 li.classList.add('main-nav-list');
 
@@ -597,7 +623,7 @@
                 const commonFilter = document.querySelector('.common-filter');
 
                 data.forEach(feature => {
-                    const translation = feature.translations.en || feature.translations[Object.keys(feature.translations)[0]];
+                    const translation = feature.translations.{{ LANGUAGE_CODE }} || feature.translations[Object.keys(feature.translations)[0]];
 
                     const keyItem = document.createElement('li');
                     keyItem.classList.add('filter-list', 'text-capitalize', 'bold');
@@ -619,6 +645,7 @@
 
                     keyHeader.addEventListener('click', () => {
                         currentFeatureKey = feature.id;
+                        currentFeatureValue = null;
                         fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue);
                     });
 
@@ -631,7 +658,7 @@
 
                         const valueHeader = document.createElement('h6');
                         valueHeader.style.cursor = 'pointer'
-                        const valueTranslation = value.translations.en || value.translations[Object.keys(value.translations)[0]];
+                        const valueTranslation = value.translations.{{ LANGUAGE_CODE }} || value.translations[Object.keys(value.translations)[0]];
                         valueHeader.textContent = valueTranslation.value;
 
                         const valueProductCount = document.createElement('span');

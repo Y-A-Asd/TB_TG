@@ -357,7 +357,7 @@ class HomeBanner(BaseModel):
 
 class FeatureKey(TranslatableModel):
     translations = TranslatedFields(
-        key=models.CharField(_('Key'), max_length=10, )
+        key=models.CharField(_('Key'), max_length=50, )
     )
 
     class Meta:
@@ -374,7 +374,7 @@ class FeatureKey(TranslatableModel):
 class FeatureValue(TranslatableModel):
     key = models.ForeignKey(FeatureKey, on_delete=models.CASCADE, verbose_name=_('Key'), related_name='values')
     translations = TranslatedFields(
-        value=models.CharField(_('Value'), max_length=10, )
+        value=models.CharField(_('Value'), max_length=50, )
     )
 
     class Meta:

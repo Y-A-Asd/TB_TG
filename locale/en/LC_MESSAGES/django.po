@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-13 01:50+0330\n"
+"POT-Creation-Date: 2024-02-13 02:06+0330\n"
 "PO-Revision-Date: 2024-01-31 08:04+0330\n"
 "Last-Translator: Anonymous User <yosofasady2@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -333,7 +333,7 @@ msgstr ""
 msgid "Price: High to Low"
 msgstr ""
 
-#: front/templates/products_list.html:67
+#: front/templates/products_list.html:67 front/templates/products_list.html:241
 #, fuzzy
 #| msgid "Complete"
 msgid "Compare"
@@ -346,6 +346,44 @@ msgstr ""
 #: front/templates/products_list.html:152 shop/models.py:75 shop/models.py:92
 msgid "Collection"
 msgstr "Collection"
+
+#: front/templates/products_list.html:156
+#, fuzzy
+#| msgid "Order"
+msgid "Ordering"
+msgstr "Order"
+
+#: front/templates/products_list.html:160
+msgid "Price Greater Than"
+msgstr ""
+
+#: front/templates/products_list.html:164
+msgid "Price Less Than"
+msgstr ""
+
+#: front/templates/products_list.html:168
+msgid "Search"
+msgstr ""
+
+#: front/templates/products_list.html:172
+#, fuzzy
+#| msgid "Feature"
+msgid "Feature_key"
+msgstr "Feature"
+
+#: front/templates/products_list.html:176
+#, fuzzy
+#| msgid "Feature"
+msgid "Feature_value"
+msgstr "Feature"
+
+#: front/templates/products_list.html:219
+msgid "Add to bag"
+msgstr ""
+
+#: front/templates/products_list.html:235
+msgid "View more"
+msgstr ""
 
 #: front/templates/register.html:30 front/templates/verify_otp.html:30
 msgid "Do you have account?"

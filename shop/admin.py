@@ -113,7 +113,7 @@ class ProductImageInline(admin.TabularInline):
 
 
 @admin.register(Collection)
-class CollectionAdmin(admin.ModelAdmin):
+class CollectionAdmin(TranslatableAdmin):
     autocomplete_fields = ['parent']
     list_display = ['title', 'products_count_link', 'parent']
     search_fields = ['translations__title']

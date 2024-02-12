@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-13 01:50+0330\n"
-"PO-Revision-Date: 2024-02-13 01:49+0330\n"
+"POT-Creation-Date: 2024-02-13 02:06+0330\n"
+"PO-Revision-Date: 2024-02-13 02:08+0330\n"
 "Last-Translator: Anonymous User <yosofasadi2@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fa\n"
@@ -257,8 +257,8 @@ msgstr "اکانت ندارید ؟"
 #: front/templates/login.html:31 front/templates/register.html:31
 #: front/templates/set_password.html:31 front/templates/verify_otp.html:31
 msgid ""
-"There are advances being made in science and technology everyday, and a good "
-"example of this is the"
+"There are advances being made in science and technology everyday, and a good"
+" example of this is the"
 msgstr "خوش آمدید"
 
 #: front/templates/login.html:32 front/templates/set_password.html:32
@@ -314,6 +314,7 @@ msgid "Price: High to Low"
 msgstr "قیمت از زیاد به کم"
 
 #: front/templates/products_list.html:67
+#: front/templates/products_list.html:241
 msgid "Compare"
 msgstr "مقایسه"
 
@@ -324,6 +325,41 @@ msgstr "فیلتر های اعمال شده"
 #: front/templates/products_list.html:152 shop/models.py:75 shop/models.py:92
 msgid "Collection"
 msgstr "مجموعه"
+
+#: front/templates/products_list.html:156
+#| msgid "Order"
+msgid "Ordering"
+msgstr "ترتیب"
+
+#: front/templates/products_list.html:160
+msgid "Price Greater Than"
+msgstr "قیمت بیشتر از "
+
+#: front/templates/products_list.html:164
+msgid "Price Less Than"
+msgstr "قیمت کمتر از "
+
+#: front/templates/products_list.html:168
+msgid "Search"
+msgstr "جستجو"
+
+#: front/templates/products_list.html:172
+#| msgid "Feature Key"
+msgid "Feature_key"
+msgstr "کلید ویژگی"
+
+#: front/templates/products_list.html:176
+#| msgid "Feature Value"
+msgid "Feature_value"
+msgstr "مقدار ویژگی"
+
+#: front/templates/products_list.html:219
+msgid "Add to bag"
+msgstr "اضافه کردن به سبد "
+
+#: front/templates/products_list.html:235
+msgid "View more"
+msgstr "توضیحات"
 
 #: front/templates/register.html:30 front/templates/verify_otp.html:30
 msgid "Do you have account?"
