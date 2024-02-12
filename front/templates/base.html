@@ -1,4 +1,6 @@
 {% load static %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -58,9 +60,11 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                     <ul class="nav navbar-nav menu_nav ml-auto">
-                        <li class="nav-item"><a class="nav-link" href="{% url 'front:home' %}">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'front:home' %}">{% trans 'Home' %}</a>
+                        </li>
                         <li class="nav-item submenu dropdown">
-                            <a href="{% url 'front:products' %}" class="nav-link dropdown-toggle" role="button">Shop</a>
+                            <a href="{% url 'front:products' %}" class="nav-link dropdown-toggle"
+                               role="button">{% trans 'Shop' %}</a>
                             {#								<ul class="dropdown-menu">#}
                             {#									<li class="nav-item"><a class="nav-link" href="category.html">Shop Category</a></li>#}
                             {#									<li class="nav-item"><a class="nav-link" href="single-product.html">Product Details</a></li>#}
@@ -72,15 +76,17 @@
                         <li class="nav-item submenu dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-haspopup="true"
-                               aria-expanded="false">Blog</a>
+                               aria-expanded="false">{% trans 'Blog' %}</a>
                             <ul class="dropdown-menu">
                                 <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
                                 <li class="nav-item"><a class="nav-link" href="single-blog.html">Blog Details</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'front:login' %}">Login / Register</a>
+                        <li class="nav-item"><a class="nav-link"
+                                                href="{% url 'front:login' %}">{% trans 'Login / Register' %}</a>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="https://yousofasadi.vercel.app/">About Me</a>
+                        <li class="nav-item"><a class="nav-link"
+                                                href="https://yousofasadi.vercel.app/">{% trans 'About Me' %}</a>
                         </li>
 
                     </ul>
@@ -118,21 +124,21 @@
         <div class="row">
             <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="single-footer-widget">
-                    <h6>About Us</h6>
-                    <p id="aboutUsText">footer text</p>
+                    <h6>{% trans 'About Us' %}</h6>
+                    <p id="aboutUsText"></p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="single-footer-widget">
-                    <h6>Address</h6>
-                    <p id="addressText">address</p>
+                    <h6>{% trans 'Address' %}</h6>
+                    <p id="addressText"></p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6"></div>
             <div class="col-lg-2 col-md-6 col-sm-6">
                 <div class="single-footer-widget">
-                    <h6>Follow Us</h6>
-                    <p>Let us be social</p>
+                    <h6>{% trans 'Follow Us' %}</h6>
+                    <p>{% trans 'Let us be social' %}</p>
                     <div class="footer-social d-flex align-items-center">
                         <a href="#" id="telegramLink"><i class="fa fa-telegram"></i></a>
                         <a href="#" id="instagramLink"><i class="fa fa-instagram"></i></a>
@@ -154,14 +160,15 @@
     </div>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
+            console.log('{{ LANGUAGE_CODE }}')
             fetch("/shop/site-settings/")
                 .then(response => response.json())
                 .then(data => {
                     const siteSettings = data[0];
 
-                    document.getElementById("aboutUsText").textContent = siteSettings.translations.en.footer_text;
+                    document.getElementById("aboutUsText").textContent = siteSettings.translations.{{ LANGUAGE_CODE }}.footer_text;
 
-                    document.getElementById("addressText").textContent = siteSettings.translations.en.address;
+                    document.getElementById("addressText").textContent = siteSettings.translations.{{ LANGUAGE_CODE }}.address;
 
                     document.getElementById("telegramLink").href = siteSettings.telegram_link;
                     document.getElementById("instagramLink").href = siteSettings.instagram_link;

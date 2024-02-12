@@ -311,14 +311,10 @@ class TransactionAdmin(admin.ModelAdmin):
 
 
 class SiteSettingsAdmin(TranslatableAdmin):
-    list_display = ['id', 'phone_number', 'logo_thumbnail']  # Add 'logo_thumbnail' here
-    readonly_fields = ['logo_thumbnail']
-    fieldsets = [
-        (_('General Settings'),
-         {'fields': ['phone_number', 'telegram_link', 'twitter_link', 'instagram_link', 'whatsapp_link']}),
-        (_('Translations'), {'fields': ['footer_text', 'address']}),
-        (_('Logo'), {'fields': ['logo', 'logo_thumbnail']}),
-    ]
+    list_display = ['id', 'phone_number', 'logo', 'logo_thumbnail', 'telegram_link', 'twitter_link', 'instagram_link',
+                    'whatsapp_link', 'footer_text', 'address']  # Add 'logo_thumbnail' here
+    readonly_fields = ['id', 'logo_thumbnail']
+    exclude = ['deleted_at', 'created_at', 'updated_at']
 
     def logo_thumbnail(self, obj):
         if obj.logo:
