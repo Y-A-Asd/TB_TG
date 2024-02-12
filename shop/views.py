@@ -7,7 +7,7 @@ from rest_framework import status, generics
 from rest_framework.exceptions import ValidationError
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
-from rest_framework.decorators import action
+from rest_framework.decorators import action, api_view
 from rest_framework.permissions import IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet, GenericViewSet, ReadOnlyModelViewSet, ViewSet
@@ -22,9 +22,10 @@ from .serializers import (ProductSerializer, CollectionSerializer, ReviewSeriali
                           CustomerSerializer, OrderSerializer, CreateOrderSerializer, UpdateOrderSerializer,
                           ProductImageSerializer, AddressSerializer, TransactionSerializer, UpdateTransactionSerializer,
                           AuditLogSerializer, PromotionSerializer, SimpleProductSerializer, ReportingSerializer,
-                          SiteSettingsSerializer, HomeBannerSerializer, ApplyDiscountSerializer)
+                          SiteSettingsSerializer, HomeBannerSerializer, ApplyDiscountSerializer,
+                          FeatureKeyFullSerializer)
 from .models import Product, Collection, OrderItem, Review, Customer, Order, ProductImage, CartItem, Cart, Address, \
-    Transaction, Promotion, SiteSettings, HomeBanner
+    Transaction, Promotion, SiteSettings, HomeBanner, MainFeature, FeatureKey
 from .filters import ProductFilter, RecursiveDjangoFilterBackend, CustomerFilterBackend
 from .permissions import IsAdminOrReadOnly, ViewCustomerHistoryPermission
 
@@ -178,12 +179,19 @@ class ProductViewSet(ModelViewSet):
             unit_price_filters = RecursiveDjangoFilterBackend().get_unit_price_filters(self.request)
             queryset = queryset.filter(unit_price_filters)
 
-        search = collection_id = self.request.query_params.get('search')
+        search = self.request.query_params.get('search')
         if search:
             queryset = queryset.filter(translations__title__contains=search)
 
+        feature_key = self.request.query_params.get('feature_key')
+        feature_value = self.request.query_params.get('feature_value')
+        if feature_key:
+            queryset = queryset.filter(mainfeature__key__id=feature_key)
+        if feature_value:
+            queryset = queryset.filter(mainfeature__value__id=feature_value)
+
         ordering = self.request.query_params.get('ordering', 'updated_at')
-        queryset = queryset.order_by(ordering)
+        queryset = queryset.order_by(ordering).distinct()
 
         return queryset
 
@@ -535,3 +543,53 @@ class SiteSettingsViewSet(ModelViewSet):
 class HomeBannerViewSet(ReadOnlyModelViewSet):
     queryset = HomeBanner.objects.all()
     serializer_class = HomeBannerSerializer
+
+
+@api_view(['GET'])
+def compare_products(request):
+    product_ids = request.GET.getlist('product_ids')
+    # print(product_ids)
+    products = Product.objects.filter(id__in=product_ids)
+    data = {}
+
+    productattr = ['title', 'price_after_off', 'collection']
+    for attr in productattr:
+        product_attrs = {}
+        for product in products:
+            if attr == 'collection':
+                product_attrs[str(product.title)] = str(eval(f'product.{attr}.title'))
+            else:
+                product_attrs[str(product.title)] = str(eval(f'product.{attr}'))
+
+        if attr == 'price_after_off':
+            attr = 'price'
+        data[attr.capitalize()] = product_attrs
+
+    feature_keys = []
+    for product in products:
+        main_features = MainFeature.objects.filter(product=product)
+        for main_feature in main_features:
+            # print(main_feature)
+            feature_keys.append(main_feature.key)
+
+    for key in feature_keys:
+        feature_data = {}
+        for product in products:
+            # print(product)
+            main_features = MainFeature.objects.filter(product=product, key=key)
+            if main_features:
+                values = []
+                for main_feature in main_features:
+                    values.append(str(main_feature.value.value))
+                feature_data[
+                    str(product.title)] = str(', '.join(values))
+            else:
+                feature_data[str(product.title)] = None
+        data[str(key.key)] = feature_data
+    print('data', data)
+    return Response(data)
+
+
+class FeatureViewSet(ModelViewSet):
+    queryset = FeatureKey.objects.all()
+    serializer_class = FeatureKeyFullSerializer

@@ -9,7 +9,7 @@
                 <div class="col-first">
                     <h1>Product Details</h1>
                     <nav class="d-flex align-items-center">
-                        <a href="">Home<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="{% url 'front:home' %}">Home<span class="lnr lnr-arrow-right"></span></a>
                         <a href="{% url 'front:products' %}">Shop<span class="lnr lnr-arrow-right"></span></a>
                         <a href="">product-details</a>
                     </nav>
@@ -469,8 +469,6 @@
                     });
             } else {
                 console.log('No token found. User needs to log in.');
-                alert('No token found. User needs to log in.')
-                window.location.href = '/login/';
             }
         }
 
@@ -580,6 +578,10 @@
                     if (response.ok) {
                         alert('Item added to cart successfully!');
                     } else {
+                        if (response.status === 401) {
+                            console.error('Unauthorized: Token may be expired or invalid');
+                            localStorage.removeItem('JWT');
+                        }
                         console.error('Failed to add item to cart:', response.statusText);
                         createCart(productId, quantity);
                     }

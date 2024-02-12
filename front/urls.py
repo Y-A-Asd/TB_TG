@@ -10,10 +10,12 @@ urlpatterns = [
     path('products/', views.ProductListView.as_view(), name='products'),
     path('products/<int:id>/', views.ProductDetailView.as_view(), name='products-detail'),
     path('cart/', views.CartView.as_view(), name='cart'),
+    path('order-detail/<int:id>/', views.OrderDetailView.as_view(), name='order-detail'),
+    path('compare/', views.CompareView.as_view(), name='compare'),
     path('', views.HomeView.as_view(), name='home'),
     path('profile/', views.ProfileView.as_view(), name='profile'),
     path('request/', views.send_request, name='request'),
-    path('verify/', views.verify , name='verify'),
+    path('verify/', views.verify, name='verify'),
 
 ]
 # todo: 1. implement remaining:{profile - make order from cart}

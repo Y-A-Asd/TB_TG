@@ -1,8 +1,6 @@
 from django.urls import path
 from rest_framework_nested import routers
 from . import views
-from .views import AddressViewSet, TransactionViewSet, PromotionViewSet, ReportingAPIView, SiteSettingsViewSet, \
-    HomeBannerViewSet
 
 router = routers.DefaultRouter()
 router.register('products', views.ProductViewSet, basename='products')
@@ -10,11 +8,12 @@ router.register('collections', views.CollectionViewSet)
 router.register('cart', views.CartViewSet, basename='cart')
 router.register('customers', views.CustomerViewSet)
 router.register('orders', views.OrderViewSet, basename='orders')
-router.register(r'addresses', AddressViewSet, basename='addresses')
-router.register(r'transactions', TransactionViewSet)
-router.register(r'promotions', PromotionViewSet)
-router.register(r'site-settings', SiteSettingsViewSet)
-router.register(r'home-banners', HomeBannerViewSet)
+router.register(r'addresses', views.AddressViewSet, basename='addresses')
+router.register(r'transactions', views.TransactionViewSet)
+router.register(r'promotions', views.PromotionViewSet)
+router.register(r'site-settings', views.SiteSettingsViewSet)
+router.register(r'home-banners', views.HomeBannerViewSet)
+router.register(r'features', views.FeatureViewSet, basename='features')
 
 cart_router = routers.NestedDefaultRouter(router, r'cart', lookup='cart')
 cart_router.register('items', views.CartItemViewSet, basename='cart-items')
@@ -27,5 +26,6 @@ urlpatterns = [
     *router.urls,
     *product_router.urls,
     *cart_router.urls,
-    path('reporting/', ReportingAPIView.as_view(), name='reporting'),
+    path('reporting/', views.ReportingAPIView.as_view(), name='reporting'),
+    path('compare/', views.compare_products, name='compare_products'),
 ]

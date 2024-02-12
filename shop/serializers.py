@@ -4,7 +4,7 @@ from django.db import transaction
 from django.utils.text import slugify
 from rest_framework import serializers
 from discount.models import BaseDiscount
-from core.models import AuditLog
+from core.models import AuditLog, User
 from shop.models import Product, Collection, Review, Customer, Order, OrderItem, ProductImage, CartItem, Cart, Address, \
     Transaction, MainFeature, Promotion, SiteSettings, HomeBanner, FeatureKey, FeatureValue
 from parler_rest.serializers import TranslatableModelSerializer, TranslatedFieldsField
@@ -19,6 +19,35 @@ class ProductImageSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         product_id = self.context['product_id']
         return ProductImage.objects.create(product_id=product_id, **validated_data)
+
+
+class FeatureValueFullSerializer(TranslatableModelSerializer):
+    translations = TranslatedFieldsField(shared_model=FeatureValue)
+    product_count = serializers.SerializerMethodField()
+
+    class Meta:
+        model = FeatureValue
+        fields = ['id', 'translations', 'product_count']
+
+    def get_product_count(self, obj):
+        return MainFeature.objects.filter(value=obj).count()
+
+
+class FeatureKeyFullSerializer(TranslatableModelSerializer):
+    translations = TranslatedFieldsField(shared_model=FeatureKey)
+    values = serializers.SerializerMethodField()
+    key_product_count = serializers.SerializerMethodField()
+
+    class Meta:
+        model = FeatureKey
+        fields = ['id', 'translations', 'key_product_count', 'values']
+
+    def get_values(self, obj):
+        children_serializer = FeatureValueFullSerializer(obj.values.all(), many=True)
+        return children_serializer.data if obj.values.exists() else None
+
+    def get_key_product_count(self, obj):
+        return MainFeature.objects.filter(key=obj).values('product').count()
 
 
 class FeatureKeySerializer(TranslatableModelSerializer):
@@ -286,16 +315,27 @@ class OrderItemSerializer(serializers.ModelSerializer):
 class OrderSerializer(serializers.ModelSerializer):
     orders = OrderItemSerializer(many=True)
     total_price = serializers.SerializerMethodField()
+    phone_number = serializers.SerializerMethodField()
+    email = serializers.SerializerMethodField()
 
     class Meta:
         model = Order
         fields = (
-            'id', 'order_status', 'customer', 'zip_code', 'path', 'city', 'province', 'first_name', 'last_name',
+            'id', 'order_status', 'customer', 'phone_number', 'email', 'zip_code', 'path', 'city', 'province',
+            'first_name', 'last_name',
             'orders', 'updated_at',
             'total_price')
 
     def get_total_price(self, order):
         return sum([item.quantity * item.unit_price for item in order.orders.all()])
+
+    def get_email(self, order):
+        user = User.objects.get(id=order.customer.user_id)
+        return user.email
+
+    def get_phone_number(self, order):
+        user = User.objects.get(id=order.customer.user_id)
+        return user.phone_number
 
 
 class CreateOrderSerializer(serializers.Serializer):

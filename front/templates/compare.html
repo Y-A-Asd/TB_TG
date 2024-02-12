@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+{% block contents %}
+
+    <!-- Start Banner Area -->
+    <section class="banner-area organic-breadcrumb">
+        <div class="container">
+            <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+                <div class="col-first">
+                    <h1>Compare</h1>
+                    <nav class="d-flex align-items-center">
+                        <a href="{% url 'front:home' %}">Home<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="{% url 'front:products' %}">Shop</a>
+                        <a href="">Compare</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Banner Area -->
+
+    <!--================Cart Area =================-->
+    <section class="cart_area">
+        <div class="container">
+            <div class="cart_inner">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <script>
+        const getQueryParameters = () => {
+            const searchParams = new URLSearchParams(window.location.search);
+            const productIds = searchParams.getAll('product_ids');
+            return productIds;
+        }
+
+        const fetchComparisonData = (productIds) => {
+            const apiUrl = `/shop/compare/?product_ids=${productIds.join('&product_ids=')}`;
+            return fetch(apiUrl)
+                .then(response => response.json());
+
+        }
+
+
+        const generateTable = (comparisonData) => {
+            const productIds = getQueryParameters()
+
+            const featureCount = Object.keys(comparisonData).length
+            const productKey = Object.keys(comparisonData).slice(0, 1)
+            const featureKey = Object.keys(comparisonData).filter(key => !productKey.includes(key))
+            const productTitles = Object.keys(comparisonData[productKey[0]])
+            console.log(featureCount)// 5
+            console.log(productKey)// ['Title']
+            console.log(featureKey)// ['Price', 'Collection', 'Color', 'Brand']
+            console.log(productTitles)// ['Product 1', 'Product 2']
+            console.log(comparisonData)
+
+            const table = document.querySelector('.table');
+            const thead = table.querySelector('thead');
+            const tbody = table.querySelector('tbody');
+            thead.innerHTML = ``
+            tbody.innerHTML = ``
+
+            const theadtr = document.createElement('tr');
+            const theadth = document.createElement('th');
+            const theadh = document.createElement('h6');
+            theadh.textContent = 'Title'
+            theadth.appendChild(theadh);
+            theadtr.appendChild(theadth);
+
+            productTitles.forEach(product => {
+                console.log(product)
+                const theadth = document.createElement('th');
+                theadth.textContent = product;
+                theadtr.appendChild(theadth);
+
+
+            })
+            thead.appendChild(theadtr);
+
+            featureKey.forEach(feature => {
+                const tbodytr = document.createElement('tr');
+                const tbodytb = document.createElement('td');
+                const tbodyh = document.createElement('h6');
+                tbodyh.textContent = feature
+                tbodytb.append(tbodyh)
+                tbodytr.append(tbodytb)
+                productTitles.forEach(key => {
+                    value = comparisonData[feature][key]
+                    const tbodytb = document.createElement('td');
+                    tbodytb.textContent = value
+                    tbodytr.append(tbodytb)
+
+
+                })
+                tbody.appendChild(tbodytr);
+
+
+            })
+            const tbodytr = document.createElement('tr');
+            const tbodytb = document.createElement('tb');
+
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const productIds = getQueryParameters();
+            fetchComparisonData(productIds)
+                .then(comparisonData => generateTable(comparisonData));
+        });
+    </script>
+    <!--================End Cart Area =================-->
+{% endblock %}
