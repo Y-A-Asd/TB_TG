@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-13 02:06+0330\n"
-"PO-Revision-Date: 2024-02-13 02:08+0330\n"
+"POT-Creation-Date: 2024-02-13 03:28+0330\n"
+"PO-Revision-Date: 2024-02-13 03:28+0330\n"
 "Last-Translator: Anonymous User <yosofasadi2@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fa\n"
@@ -181,13 +181,15 @@ msgid "Discounts"
 msgstr "تخفیفات"
 
 #: front/templates/base.html:64 front/templates/login.html:13
+#: front/templates/products_detail.html:13
 #: front/templates/products_list.html:13 front/templates/register.html:13
 #: front/templates/set_password.html:13 front/templates/verify_otp.html:13
 msgid "Home"
 msgstr "خانه"
 
-#: front/templates/base.html:68 front/templates/products_list.html:11
-#: front/templates/products_list.html:14 shop/apps.py:8
+#: front/templates/base.html:68 front/templates/products_detail.html:15
+#: front/templates/products_list.html:11 front/templates/products_list.html:15
+#: shop/apps.py:8
 msgid "Shop"
 msgstr "فروشگاه"
 
@@ -281,83 +283,164 @@ msgstr "ورود"
 msgid "Forgot Password?"
 msgstr "رمز عبور را فراموش کرده اید؟"
 
-#: front/templates/products_list.html:26
+#: front/templates/products_detail.html:11
+msgid "Product Details"
+msgstr "جزئیات محصول"
+
+#: front/templates/products_detail.html:17
+msgid "product-details"
+msgstr "جزئیات محصول"
+
+#: front/templates/products_detail.html:47
+msgid "Availibility"
+msgstr "وضعیت موجودی"
+
+#: front/templates/products_detail.html:51 shop/models.py:181
+#: shop/models.py:270
+msgid "Quantity"
+msgstr "تعداد"
+
+#: front/templates/products_detail.html:62
+msgid "Add to Cart"
+msgstr "اضافه کردن به سبد "
+
+#: front/templates/products_detail.html:79
+msgid "Specification"
+msgstr "مشخصات"
+
+#: front/templates/products_detail.html:84
+msgid "Comments"
+msgstr "نظرات"
+
+#: front/templates/products_detail.html:108
+msgid "Post a comment"
+msgstr "ثبت نظر"
+
+#: front/templates/products_detail.html:115
+msgid "Rate"
+msgstr "نمره"
+
+#: front/templates/products_detail.html:119 shop/models.py:22
+#: shop/models.py:52 shop/models.py:82 shop/models.py:281
+msgid "Title"
+msgstr "عنوان"
+
+#: front/templates/products_detail.html:125
+msgid "Message"
+msgstr "پیام"
+
+#: front/templates/products_detail.html:130
+msgid "Post"
+msgstr "ثبت"
+
+#: front/templates/products_detail.html:134
+msgid "You are replying to a post."
+msgstr "شما در حال پاسخ دادن به نظر دیگری هستید"
+
+#: front/templates/products_detail.html:173
+msgid "In Stock"
+msgstr "موجود"
+
+#: front/templates/products_detail.html:173
+msgid "Out of Stock"
+msgstr "نا موجود"
+
+#: front/templates/products_detail.html:303
+msgid "Reply"
+msgstr "پاسخ"
+
+#: front/templates/products_list.html:28
 msgid "Browse Collections"
 msgstr "مجموعه ها"
 
-#: front/templates/products_list.html:32
+#: front/templates/products_list.html:34
 msgid "Filters"
 msgstr "فیلتر ها"
 
-#: front/templates/products_list.html:38
+#: front/templates/products_list.html:40
 msgid "Price"
 msgstr "قیمت "
 
-#: front/templates/products_list.html:42
+#: front/templates/products_list.html:44
 msgid "Price:"
 msgstr "قیمت : "
 
-#: front/templates/products_list.html:45
+#: front/templates/products_list.html:47
 msgid "to"
 msgstr "تا"
 
-#: front/templates/products_list.html:60
+#: front/templates/products_list.html:62
 msgid "Default sorting"
 msgstr "جدید ترین ها"
 
-#: front/templates/products_list.html:61
+#: front/templates/products_list.html:63
 msgid "Price: Low to High"
 msgstr "قیمت: از کم به زیاد"
 
-#: front/templates/products_list.html:62
+#: front/templates/products_list.html:64
 msgid "Price: High to Low"
 msgstr "قیمت از زیاد به کم"
 
-#: front/templates/products_list.html:67
-#: front/templates/products_list.html:241
+#: front/templates/products_list.html:69
+#: front/templates/products_list.html:243
 msgid "Compare"
 msgstr "مقایسه"
 
-#: front/templates/products_list.html:74
+#: front/templates/products_list.html:76
 msgid "Current Filters"
 msgstr "فیلتر های اعمال شده"
 
-#: front/templates/products_list.html:152 shop/models.py:75 shop/models.py:92
+#: front/templates/products_list.html:154
+#: front/templates/products_list.html:295
+#: front/templates/products_list.html:350 shop/models.py:75 shop/models.py:92
 msgid "Collection"
 msgstr "مجموعه"
 
-#: front/templates/products_list.html:156
-#| msgid "Order"
+#: front/templates/products_list.html:158
+#: front/templates/products_list.html:298
+#: front/templates/products_list.html:353
 msgid "Ordering"
 msgstr "ترتیب"
 
-#: front/templates/products_list.html:160
+#: front/templates/products_list.html:162
+#: front/templates/products_list.html:301
+#: front/templates/products_list.html:356
 msgid "Price Greater Than"
 msgstr "قیمت بیشتر از "
 
-#: front/templates/products_list.html:164
+#: front/templates/products_list.html:166
+#: front/templates/products_list.html:304
+#: front/templates/products_list.html:359
 msgid "Price Less Than"
 msgstr "قیمت کمتر از "
 
-#: front/templates/products_list.html:168
+#: front/templates/products_list.html:170
+#: front/templates/products_list.html:307
+#: front/templates/products_list.html:362
 msgid "Search"
 msgstr "جستجو"
 
-#: front/templates/products_list.html:172
-#| msgid "Feature Key"
+#: front/templates/products_list.html:174
+#: front/templates/products_list.html:282
+#: front/templates/products_list.html:310
+#: front/templates/products_list.html:327
+#: front/templates/products_list.html:365
 msgid "Feature_key"
 msgstr "کلید ویژگی"
 
-#: front/templates/products_list.html:176
-#| msgid "Feature Value"
+#: front/templates/products_list.html:178
+#: front/templates/products_list.html:287
+#: front/templates/products_list.html:314
+#: front/templates/products_list.html:332
+#: front/templates/products_list.html:369
 msgid "Feature_value"
 msgstr "مقدار ویژگی"
 
-#: front/templates/products_list.html:219
+#: front/templates/products_list.html:221
 msgid "Add to bag"
 msgstr "اضافه کردن به سبد "
 
-#: front/templates/products_list.html:235
+#: front/templates/products_list.html:237
 msgid "View more"
 msgstr "توضیحات"
 
@@ -486,10 +569,6 @@ msgstr "بخش های مدیریتی"
 msgid "Site Management"
 msgstr "مدیریت سایت"
 
-#: shop/models.py:22 shop/models.py:52 shop/models.py:82 shop/models.py:281
-msgid "Title"
-msgstr "عنوان"
-
 #: shop/models.py:23 shop/models.py:84
 msgid "Description"
 msgstr "توضیحات"
@@ -570,10 +649,6 @@ msgstr "مشتریان"
 #: shop/models.py:178
 msgid "Cart"
 msgstr "سبد خرید"
-
-#: shop/models.py:181 shop/models.py:270
-msgid "Quantity"
-msgstr "تعداد"
 
 #: shop/models.py:185
 msgid "Cart Item"

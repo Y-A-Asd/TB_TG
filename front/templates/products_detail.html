@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 {% load static %}
 {% block contents %}
     <!-- Start Banner Area -->
@@ -7,11 +8,13 @@
         <div class="container" id="dog">
             <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
                 <div class="col-first">
-                    <h1>Product Details</h1>
+                    <h1 class="text-danger">{% trans 'Product Details' %}</h1>
                     <nav class="d-flex align-items-center">
-                        <a href="{% url 'front:home' %}">Home<span class="lnr lnr-arrow-right"></span></a>
-                        <a href="{% url 'front:products' %}">Shop<span class="lnr lnr-arrow-right"></span></a>
-                        <a href="">product-details</a>
+                        <a class="text-danger" href="{% url 'front:home' %}">{% trans 'Home' %}<span
+                                class="lnr lnr-arrow-right"></span></a>
+                        <a class="text-danger" href="{% url 'front:products' %}">{% trans 'Shop' %}<span
+                                class="lnr lnr-arrow-right"></span></a>
+                        <a class="text-danger" href="">{% trans 'product-details' %}</a>
                     </nav>
                 </div>
             </div>
@@ -38,14 +41,14 @@
                 </div>
                 <div class="col-lg-5 offset-lg-1">
                     <div class="s_product_text">
-                        <h3>Faded SkyBlu Denim Jeans</h3>
-                        <h2>$149.99</h2>
+                        <h3></h3>
+                        <h2></h2>
                         <ul class="list">
-                            <li>Availibility : <span> In Stock</span></li>
+                            <li>{% trans 'Availibility' %} : <span> In Stock</span></li>
                         </ul>
                         <p></p>
-                        <div class="product_count">
-                            <label for="qty">Quantity:</label>
+                        <div class="product_count" dir="ltr">
+                            <label for="qty">{% trans 'Quantity' %}:</label>
                             <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:"
                                    class="input-text qty">
                             <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
@@ -56,7 +59,7 @@
                             </button>
                         </div>
                         <div class="card_area d-flex align-items-center">
-                            <a id="addToCartBtn" class="primary-btn" href="#">Add to Cart</a>
+                            <a id="addToCartBtn" class="primary-btn" href="#">{% trans 'Add to Cart' %}</a>
                         </div>
                     </div>
                 </div>
@@ -73,12 +76,12 @@
                 <li class="nav-item">
                     <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
                        aria-controls="profile"
-                       aria-selected="false">Specification</a>
+                       aria-selected="false">{% trans 'Specification' %}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
                        aria-controls="contact"
-                       aria-selected="false">Comments</a>
+                       aria-selected="false">{% trans 'Comments' %}</a>
                 </li>
 
             </ul>
@@ -87,70 +90,7 @@
                     <div class="table-responsive">
                         <table class="table">
                             <tbody>
-                            <tr>
-                                <td>
-                                    <h5>Width</h5>
-                                </td>
-                                <td>
-                                    <h5>128mm</h5>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <h5>Height</h5>
-                                </td>
-                                <td>
-                                    <h5>508mm</h5>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <h5>Depth</h5>
-                                </td>
-                                <td>
-                                    <h5>85mm</h5>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <h5>Weight</h5>
-                                </td>
-                                <td>
-                                    <h5>52gm</h5>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <h5>Quality checking</h5>
-                                </td>
-                                <td>
-                                    <h5>yes</h5>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <h5>Freshness Duration</h5>
-                                </td>
-                                <td>
-                                    <h5>03days</h5>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <h5>When packeting</h5>
-                                </td>
-                                <td>
-                                    <h5>Without touch of hand</h5>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <h5>Each Box contains</h5>
-                                </td>
-                                <td>
-                                    <h5>60pcs</h5>
-                                </td>
-                            </tr>
+
                             </tbody>
                         </table>
                     </div>
@@ -165,32 +105,33 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="review_box">
-                                <h4>Post a comment</h4>
+                                <h4>{% trans 'Post a comment' %}</h4>
                                 <form class="row contact_form" action="" method="post" id="commentForm"
                                       novalidate="novalidate">
                                     <input type="hidden" id="parentReviewId" name="parent_review" value="">
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <input type="number" class="form-control" id="rating" name="name"
-                                                   placeholder="Rate" min="1" max="5">
+                                                   placeholder="{% trans 'Rate' %}" min="1" max="5">
                                         </div>
                                         <div class="form-group">
                                             <input type='text' class="form-control" id="title" name="name"
-                                                   placeholder="Title">
+                                                   placeholder="{% trans 'Title' %}">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <textarea class="form-control" name="description" id="description" rows="1"
-                                                      placeholder="Message"></textarea>
+                                                      placeholder="{% trans 'Message' %}"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-12 text-right">
-                                        <button type="submit" value="submit" class="btn primary-btn">Post</button>
+                                        <button type="submit" value="submit"
+                                                class="btn primary-btn">{% trans 'Post' %}</button>
                                     </div>
                                 </form>
                                 <div id="replyMessage" style="display: none; color: green; margin-top: 10px;">
-                                    You are replying to a post.
+                                    {% trans 'You are replying to a post.' %}
                                 </div>
                             </div>
                         </div>
@@ -227,10 +168,10 @@
             const productQuantityInput = document.querySelector('.product_count input');
             const productImageContainer = document.querySelector('.s_Product_carousel');
 
-            productNameElement.textContent = productData.translations.en.title;
+            productNameElement.textContent = productData.translations.{{ LANGUAGE_CODE }}.title;
             productPriceElement.textContent = `$${productData.price.toFixed(2)}`;
-            productAvailabilityElement.textContent = productData.inventory > 0 ? 'In Stock' : 'Out of Stock';
-            productDescriptionElement.textContent = productData.translations.en.description;
+            productAvailabilityElement.textContent = productData.inventory > 0 ? '{% trans 'In Stock' %}' : '{% trans 'Out of Stock' %}';
+            productDescriptionElement.textContent = productData.translations.{{ LANGUAGE_CODE }}.description;
 
             updateProductImages(productData.images);
 
@@ -263,9 +204,9 @@
 
             features.forEach(feature => {
                 console.log(feature)
-                console.log(feature.key.translations.en.key)
-                const key = feature.key.translations.en.key;
-                const value = feature.value.translations.en.value;
+                console.log(feature.key.translations.{{ LANGUAGE_CODE }}.key)
+                const key = feature.key.translations.{{ LANGUAGE_CODE }}.key;
+                const value = feature.value.translations.{{ LANGUAGE_CODE }}.value;
 
                 const trElement = document.createElement('tr');
                 const tdTitleElement = document.createElement('td');
@@ -359,7 +300,7 @@
                 <h4>${review.customer.first_name} ${review.customer.last_name}</h4>
                 <h5>${new Date(review.created_at).toLocaleString()}</h5>
                 ${ratingStars}
-                <a class="reply_btn" href="#" onclick="handleReplyButtonClick(${review.id})">Reply</a>
+                <a class="reply_btn" href="#" onclick="handleReplyButtonClick(${review.id})">{% trans 'Reply' %}</a>
             `;
 
             const descriptionT = document.createElement('h6');

@@ -336,6 +336,7 @@
                             }
                         }
                         filtersContainer.removeChild(filterButton);
+                        currentPage = 1;
                         fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue);
                     });
                     filtersContainer.appendChild(filterButton);
@@ -508,6 +509,7 @@
                     console.log(searchQuery)
                     if (searchQuery !== '') {
                         currentSearch = searchQuery
+                        currentPage = 1
                         fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue);
                     }
                 }
@@ -524,6 +526,7 @@
                     initialLowerValue = lowerValue.textContent;
                     currentUnitPriceGt = parseInt(lowerValue.textContent);
                     console.log('Changed low value:', currentUnitPriceGt);
+                    currentPage = 1
                     fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue);
                 }
 
@@ -531,6 +534,7 @@
                     initialUpperValue = upperValue.textContent;
                     currentUnitPriceLt = parseInt(upperValue.textContent);
                     console.log('Changed high value:', currentUnitPriceLt);
+                    currentPage = 1
                     fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue);
                 }
             }
@@ -539,6 +543,7 @@
 
 
         });
+        currentPage = 1
         fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue);
 
 
@@ -554,6 +559,7 @@
             if (event.target.tagName === 'BUTTON') {
                 const selectedOption = event.target.value;
                 currentOrdering = selectedOption
+                currentPage = 1
                 fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue);
             }
         });
@@ -599,6 +605,7 @@
 
                 a.addEventListener('click', () => {
                     currentCollectionsId = collection.id
+                    currentPage = 1
                     fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue);
                 });
 
@@ -646,6 +653,7 @@
                     keyHeader.addEventListener('click', () => {
                         currentFeatureKey = feature.id;
                         currentFeatureValue = null;
+                        currentPage = 1
                         fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue);
                     });
 
@@ -671,6 +679,7 @@
                         valueItem.addEventListener('click', () => {
                             currentFeatureKey = feature.id;
                             currentFeatureValue = value.id;
+                            currentPage = 1
                             fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue);
                         });
 
