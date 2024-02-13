@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-13 04:33+0330\n"
-"PO-Revision-Date: 2024-02-13 04:34+0330\n"
+"POT-Creation-Date: 2024-02-13 05:12+0330\n"
+"PO-Revision-Date: 2024-02-13 05:13+0330\n"
 "Last-Translator: Anonymous User <yosofasadi2@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fa\n"
@@ -208,24 +208,28 @@ msgstr "ورود /ثبت نام"
 msgid "About Me"
 msgstr "درباره من"
 
-#: front/templates/base.html:130
+#: front/templates/base.html:114
+#| msgid "Search"
+msgid "Search Here"
+msgstr "جستجو کنید"
+
+#: front/templates/base.html:132
 msgid "About Us"
 msgstr "درباره ما"
 
-#: front/templates/base.html:136 shop/models.py:198 shop/models.py:319
+#: front/templates/base.html:138 shop/models.py:198 shop/models.py:319
 msgid "Address"
 msgstr "آدرس"
 
-#: front/templates/base.html:143
+#: front/templates/base.html:145
 msgid "Follow Us"
 msgstr "ما را دنبال کنید"
 
-#: front/templates/base.html:144
+#: front/templates/base.html:146
 msgid "Let us be social"
 msgstr "در فضا مجازی کنار ما باشید!"
 
 #: front/templates/cart.html:12
-#| msgid "Shipping"
 msgid "Shopping Cart"
 msgstr "سبد خرید"
 
@@ -265,7 +269,6 @@ msgid "Total Price"
 msgstr "قیمت کل"
 
 #: front/templates/cart.html:51
-#| msgid "Zip Code"
 msgid "Coupon Code"
 msgstr "کد تخفیف"
 

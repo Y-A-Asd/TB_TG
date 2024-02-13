@@ -16,4 +16,5 @@ def switch_i18n_prefix(path, language):
 @register.filter
 def switch_i18n(request, language):
     """takes in a request object and gets the path from it"""
+    print('language', language)
     return switch_lang_code(request.get_full_path(), language)

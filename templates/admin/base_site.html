@@ -1,22 +1,25 @@
 {% extends "admin/base_site.html" %}
- 
+
 {% load i18n %}
 
 <!-- custom filter module -->
 {% load i18n_switcher %}
 {% load static %}
- 
+
 {% block extrahead %}
-    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" />
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}"/>
 {% endblock %}
- 
+
 {% block userlinks %}
-    <a href="{{ request|switch_i18n:'en' }}">
-        <img src="{% static 'images/flag-usa.png' %}" style="width: 30px"/>
-    </a> /
-    <a href="{{ request|switch_i18n:'fa' }}">
-        <img class="i18n_flag" src="{% static 'images/flag-iran.png' %}" style="width: 30px"/>
-    </a> 
+
+    <form style="display: inline-block; margin: 10px" id="language-form" action="{% url 'front:set_language' %}" method="post">
+        {% csrf_token %}
+        <button style="border-radius: 1000px" class="" type="submit" name="language_code" value="fa"><img class="i18n_flag"
+                                                                                src="{% static 'images/flag-iran.png' %}"
+                                                                                style="width: 30px;"/></button>
+        <button style="border-radius: 1000px" type="submit" name="language_code" value="en"><img src="{% static 'images/flag-usa.png' %}"
+                                                                   style="width: 30px"/></button>
+    </form>
     {% if user.is_active and user.is_staff %}
         {% url 'django-admindocs-docroot' as docsroot %}
         {% if docsroot %}

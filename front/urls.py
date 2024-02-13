@@ -16,6 +16,7 @@ urlpatterns = [
     path('profile/', views.ProfileView.as_view(), name='profile'),
     path('request/', views.send_request, name='request'),
     path('verify/', views.verify, name='verify'),
+    path('set_language/', views.set_language, name='set_language'),
 
 ]
 # todo: 1. implement remaining:{profile - make order from cart}
