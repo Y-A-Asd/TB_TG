@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 {% load static %}
 {% block contents %}
 
@@ -8,10 +9,10 @@
         <div class="container">
             <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
                 <div class="col-first">
-                    <h1>Shopping Cart</h1>
+                    <h1 class="text-danger" >{% trans 'Shopping Cart' %}</h1>
                     <nav class="d-flex align-items-center">
-                        <a href="{% url 'front:home' %}">Home<span class="lnr lnr-arrow-right"></span></a>
-                        <a href="{% url 'front:cart' %}">Cart</a>
+                        <a class="text-danger"  href="{% url 'front:home' %}">{% trans 'Home' %}<span class="lnr lnr-arrow-right"></span></a>
+                        <a class="text-danger"  href="{% url 'front:cart' %}">{% trans 'Cart' %}</a>
                     </nav>
                 </div>
             </div>
@@ -27,18 +28,18 @@
                     <table class="table">
                         <thead>
                         <tr>
-                            <th scope="col">Product</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Total</th>
-                            <th scope="col">Delete</th>
+                            <th scope="col">{% trans 'Product' %}</th>
+                            <th scope="col">{% trans 'Price' %}</th>
+                            <th scope="col">{% trans 'Quantity' %}</th>
+                            <th scope="col">{% trans 'Total' %}</th>
+                            <th scope="col">{% trans 'Delete' %}</th>
                         </tr>
                         </thead>
                         <tbody>
 
                         </tbody>
                         <td>
-                            <h5>Total Price : </h5>
+                            <h5>{% trans 'Total Price' %} : </h5>
                         </td>
                         <td>
                             <h5 id="totalP"></h5>
@@ -47,14 +48,14 @@
                     </table>
 
                     <div class=" d-flex align-items-center">
-                        <input id="discount-code-input" class="input-text m-3" type="text" placeholder="Coupon Code">
+                        <input id="discount-code-input" class="input-text m-3" type="text" placeholder="{% trans 'Coupon Code' %}">
                         <br>
-                        <button id="apply-discount-btn" class="genric-btn info circle" href="#">Apply</button>
+                        <button id="apply-discount-btn" class="genric-btn info circle" href="#">{% trans 'Apply' %}</button>
                     </div>
 
                     <div class=" d-flex align-items-center ">
-                        <a class="genric-btn success circle" href="#">Continue Shopping</a>
-                        <p class="genric-btn primary circle my-0 mx-3" href="#">Proceed to checkout</p>
+                        <a class="genric-btn success circle" href="#">{% trans 'Continue Shopping' %}</a>
+                        <p class="genric-btn primary circle my-0 mx-3" href="#">{% trans 'Proceed to checkout' %}</p>
                     </div>
                 </div>
             </div>
@@ -134,12 +135,12 @@
                     <div class="media">
 
                         <div class="media-body">
-                            <p>${item.product.translations.en.title}</p>
+                            <p>${item.product.translations.{{ LANGUAGE_CODE }}.title}</p>
                         </div>
                     </div>
                 </td>
                 <td><h5>${item.product.price}</h5></td>
-                <td>
+                <td dir="ltr">
                     <div class="product_count">
                         <input id="quantity-${item.id}" type="text" name="qty" maxlength="12" value="${item.quantity}" title="Quantity:" class="input-text qty">
                         <button class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
@@ -147,7 +148,7 @@
                     </div>
                 </td>
                 <td><h5>${item.total_price}</h5></td>
-                <td><button class="genric-btn danger circle delete-button">Delete</button></td>
+                <td><button class="genric-btn danger circle delete-button">{% trans 'Delete' %}</button></td>
             `;
 
                 row.querySelector(".increase").addEventListener("click", () => {

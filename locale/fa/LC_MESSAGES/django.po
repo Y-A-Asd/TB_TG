@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-13 04:25+0330\n"
-"PO-Revision-Date: 2024-02-13 04:27+0330\n"
+"POT-Creation-Date: 2024-02-13 04:33+0330\n"
+"PO-Revision-Date: 2024-02-13 04:34+0330\n"
 "Last-Translator: Anonymous User <yosofasadi2@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fa\n"
@@ -180,8 +180,9 @@ msgstr "تخفیفات دارای کد میبایست تاریخ شروع و پ�
 msgid "Discounts"
 msgstr "تخفیفات"
 
-#: front/templates/base.html:66 front/templates/compare.html:14
-#: front/templates/login.html:13 front/templates/order_detail.html:14
+#: front/templates/base.html:66 front/templates/cart.html:14
+#: front/templates/compare.html:14 front/templates/login.html:13
+#: front/templates/order_detail.html:14
 #: front/templates/products_detail.html:13
 #: front/templates/products_list.html:13 front/templates/register.html:13
 #: front/templates/set_password.html:13 front/templates/verify_otp.html:13
@@ -222,6 +223,63 @@ msgstr "ما را دنبال کنید"
 #: front/templates/base.html:144
 msgid "Let us be social"
 msgstr "در فضا مجازی کنار ما باشید!"
+
+#: front/templates/cart.html:12
+#| msgid "Shipping"
+msgid "Shopping Cart"
+msgstr "سبد خرید"
+
+#: front/templates/cart.html:15 shop/models.py:178
+msgid "Cart"
+msgstr "سبد خرید"
+
+#: front/templates/cart.html:31 front/templates/order_detail.html:80
+#: shop/models.py:134 shop/models.py:179 shop/models.py:267 shop/models.py:392
+msgid "Product"
+msgstr "محصول"
+
+#: front/templates/cart.html:32 front/templates/products_list.html:40
+#: shop/views.py:563
+msgid "Price"
+msgstr "قیمت "
+
+#: front/templates/cart.html:33 front/templates/order_detail.html:81
+#: front/templates/products_detail.html:51 shop/models.py:181
+#: shop/models.py:270
+msgid "Quantity"
+msgstr "تعداد"
+
+#: front/templates/cart.html:34 front/templates/order_detail.html:37
+#: front/templates/order_detail.html:82 front/templates/order_detail.html:89
+msgid "Total"
+msgstr "قیمت کل"
+
+#: front/templates/cart.html:35 front/templates/cart.html:151
+#: front/templates/profile.html:136 front/templates/profile.html:584
+msgid "Delete"
+msgstr "حذف"
+
+#: front/templates/cart.html:42 front/templates/profile.html:198
+#: shop/admin.py:243 shop/admin.py:272 shop/models.py:304
+msgid "Total Price"
+msgstr "قیمت کل"
+
+#: front/templates/cart.html:51
+#| msgid "Zip Code"
+msgid "Coupon Code"
+msgstr "کد تخفیف"
+
+#: front/templates/cart.html:53
+msgid "Apply"
+msgstr "اعمال"
+
+#: front/templates/cart.html:57
+msgid "Continue Shopping"
+msgstr "ادامه خرید"
+
+#: front/templates/cart.html:58
+msgid "Proceed to checkout"
+msgstr "ثبت سفارش"
 
 #: front/templates/compare.html:12 front/templates/compare.html:16
 #: front/templates/products_list.html:69
@@ -298,7 +356,6 @@ msgid "Forgot Password?"
 msgstr "رمز عبور را فراموش کرده اید؟"
 
 #: front/templates/order_detail.html:12 front/templates/order_detail.html:16
-#| msgid "Product Details"
 msgid "Order Detail"
 msgstr "جزئیات سفارش"
 
@@ -307,32 +364,22 @@ msgid "Your order has been received."
 msgstr "سفارش شما دریافت شده"
 
 #: front/templates/order_detail.html:31
-#| msgid "Order Item"
 msgid "Order Info"
 msgstr "جزئیات سفارش"
 
 #: front/templates/order_detail.html:33
-#| msgid "Order Item"
 msgid "Order number"
 msgstr "شماره سفارش"
 
 #: front/templates/order_detail.html:35
-#| msgid "DateTime"
 msgid "Date"
 msgstr "تاریخ"
-
-#: front/templates/order_detail.html:37 front/templates/order_detail.html:82
-#: front/templates/order_detail.html:89
-#| msgid "Total Price"
-msgid "Total"
-msgstr "قیمت کل"
 
 #: front/templates/order_detail.html:39 shop/models.py:219 shop/models.py:302
 msgid "Payment Status"
 msgstr "وضعیت پرداخت"
 
 #: front/templates/order_detail.html:46
-#| msgid "Customer Not Found!"
 msgid "Customer Information"
 msgstr "اطلاعات مشتری"
 
@@ -345,7 +392,6 @@ msgid "Last Name"
 msgstr "نام خانوادگی"
 
 #: front/templates/order_detail.html:60
-#| msgid "Shipping"
 msgid "Shipping Address"
 msgstr "مشخصات آدرس"
 
@@ -370,20 +416,8 @@ msgid "Zip Code"
 msgstr "کد پستی"
 
 #: front/templates/order_detail.html:75
-#| msgid "Product Details"
 msgid "Order Details"
 msgstr "جزئیات سفارش"
-
-#: front/templates/order_detail.html:80 shop/models.py:134 shop/models.py:179
-#: shop/models.py:267 shop/models.py:392
-msgid "Product"
-msgstr "محصول"
-
-#: front/templates/order_detail.html:81
-#: front/templates/products_detail.html:51 shop/models.py:181
-#: shop/models.py:270
-msgid "Quantity"
-msgstr "تعداد"
 
 #: front/templates/order_detail.html:221 front/templates/profile.html:371
 #: shop/models.py:213
@@ -477,10 +511,6 @@ msgstr "مجموعه ها"
 #: front/templates/products_list.html:34
 msgid "Filters"
 msgstr "فیلتر ها"
-
-#: front/templates/products_list.html:40 shop/views.py:563
-msgid "Price"
-msgstr "قیمت "
 
 #: front/templates/products_list.html:44
 msgid "Price:"
@@ -588,10 +618,6 @@ msgstr "آدرس اصلی"
 msgid "Edit"
 msgstr "ویرایش"
 
-#: front/templates/profile.html:136 front/templates/profile.html:584
-msgid "Delete"
-msgstr "حذف"
-
 #: front/templates/profile.html:180
 msgid "Save"
 msgstr "ذخیره"
@@ -603,11 +629,6 @@ msgstr "روز و ساعت"
 #: front/templates/profile.html:197
 msgid "Status"
 msgstr "وضعیت"
-
-#: front/templates/profile.html:198 shop/admin.py:243 shop/admin.py:272
-#: shop/models.py:304
-msgid "Total Price"
-msgstr "قیمت کل"
 
 #: front/templates/profile.html:218
 msgid "First name"
@@ -810,10 +831,6 @@ msgstr "مشتری"
 #: shop/models.py:163
 msgid "Customers"
 msgstr "مشتریان"
-
-#: shop/models.py:178
-msgid "Cart"
-msgstr "سبد خرید"
 
 #: shop/models.py:185
 msgid "Cart Item"

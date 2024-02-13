@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-13 04:25+0330\n"
+"POT-Creation-Date: 2024-02-13 04:33+0330\n"
 "PO-Revision-Date: 2024-01-31 08:04+0330\n"
 "Last-Translator: Anonymous User <yosofasady2@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -180,9 +180,9 @@ msgstr "Code-based discounts must have valid_from and valid_to dates."
 msgid "Discounts"
 msgstr "Discounts"
 
-#: front/templates/base.html:66 front/templates/compare.html:14
-#: front/templates/login.html:13 front/templates/order_detail.html:14
-#: front/templates/products_detail.html:13
+#: front/templates/base.html:66 front/templates/cart.html:14
+#: front/templates/compare.html:14 front/templates/login.html:13
+#: front/templates/order_detail.html:14 front/templates/products_detail.html:13
 #: front/templates/products_list.html:13 front/templates/register.html:13
 #: front/templates/set_password.html:13 front/templates/verify_otp.html:13
 msgid "Home"
@@ -221,6 +221,71 @@ msgstr ""
 
 #: front/templates/base.html:144
 msgid "Let us be social"
+msgstr ""
+
+#: front/templates/cart.html:12
+#, fuzzy
+#| msgid "Shipping"
+msgid "Shopping Cart"
+msgstr "Shipping"
+
+#: front/templates/cart.html:15 shop/models.py:178
+msgid "Cart"
+msgstr "Cart"
+
+#: front/templates/cart.html:31 front/templates/order_detail.html:80
+#: shop/models.py:134 shop/models.py:179 shop/models.py:267 shop/models.py:392
+msgid "Product"
+msgstr "Product"
+
+#: front/templates/cart.html:32 front/templates/products_list.html:40
+#: shop/views.py:563
+#, fuzzy
+#| msgid "Unit Price"
+msgid "Price"
+msgstr "Unit Price"
+
+#: front/templates/cart.html:33 front/templates/order_detail.html:81
+#: front/templates/products_detail.html:51 shop/models.py:181
+#: shop/models.py:270
+msgid "Quantity"
+msgstr "Quantity"
+
+#: front/templates/cart.html:34 front/templates/order_detail.html:37
+#: front/templates/order_detail.html:82 front/templates/order_detail.html:89
+#, fuzzy
+#| msgid "Total Price"
+msgid "Total"
+msgstr "Total Price"
+
+#: front/templates/cart.html:35 front/templates/cart.html:151
+#: front/templates/profile.html:136 front/templates/profile.html:584
+#, fuzzy
+#| msgid "Deleted at"
+msgid "Delete"
+msgstr "Deleted at"
+
+#: front/templates/cart.html:42 front/templates/profile.html:198
+#: shop/admin.py:243 shop/admin.py:272 shop/models.py:304
+msgid "Total Price"
+msgstr "Total Price"
+
+#: front/templates/cart.html:51
+#, fuzzy
+#| msgid "Zip Code"
+msgid "Coupon Code"
+msgstr "Zip Code"
+
+#: front/templates/cart.html:53
+msgid "Apply"
+msgstr ""
+
+#: front/templates/cart.html:57
+msgid "Continue Shopping"
+msgstr ""
+
+#: front/templates/cart.html:58
+msgid "Proceed to checkout"
 msgstr ""
 
 #: front/templates/compare.html:12 front/templates/compare.html:16
@@ -336,13 +401,6 @@ msgstr "Order Item"
 msgid "Date"
 msgstr ""
 
-#: front/templates/order_detail.html:37 front/templates/order_detail.html:82
-#: front/templates/order_detail.html:89
-#, fuzzy
-#| msgid "Total Price"
-msgid "Total"
-msgstr "Total Price"
-
 #: front/templates/order_detail.html:39 shop/models.py:219 shop/models.py:302
 msgid "Payment Status"
 msgstr "Payment Status"
@@ -392,16 +450,6 @@ msgstr "Zip Code"
 #| msgid "Products"
 msgid "Order Details"
 msgstr "Products"
-
-#: front/templates/order_detail.html:80 shop/models.py:134 shop/models.py:179
-#: shop/models.py:267 shop/models.py:392
-msgid "Product"
-msgstr "Product"
-
-#: front/templates/order_detail.html:81 front/templates/products_detail.html:51
-#: shop/models.py:181 shop/models.py:270
-msgid "Quantity"
-msgstr "Quantity"
 
 #: front/templates/order_detail.html:221 front/templates/profile.html:371
 #: shop/models.py:213
@@ -503,12 +551,6 @@ msgstr "No Collection"
 #: front/templates/products_list.html:34
 msgid "Filters"
 msgstr ""
-
-#: front/templates/products_list.html:40 shop/views.py:563
-#, fuzzy
-#| msgid "Unit Price"
-msgid "Price"
-msgstr "Unit Price"
 
 #: front/templates/products_list.html:44
 #, fuzzy
@@ -628,12 +670,6 @@ msgstr "Default"
 msgid "Edit"
 msgstr ""
 
-#: front/templates/profile.html:136 front/templates/profile.html:584
-#, fuzzy
-#| msgid "Deleted at"
-msgid "Delete"
-msgstr "Deleted at"
-
 #: front/templates/profile.html:180
 msgid "Save"
 msgstr ""
@@ -647,11 +683,6 @@ msgstr ""
 #| msgid "Payment Status"
 msgid "Status"
 msgstr "Payment Status"
-
-#: front/templates/profile.html:198 shop/admin.py:243 shop/admin.py:272
-#: shop/models.py:304
-msgid "Total Price"
-msgstr "Total Price"
 
 #: front/templates/profile.html:218
 #, fuzzy
@@ -876,10 +907,6 @@ msgstr "Customer"
 #: shop/models.py:163
 msgid "Customers"
 msgstr "Customers"
-
-#: shop/models.py:178
-msgid "Cart"
-msgstr "Cart"
 
 #: shop/models.py:185
 msgid "Cart Item"
