@@ -68,9 +68,9 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                     <ul class="nav navbar-nav menu_nav ml-auto">
-                        <li class="nav-item"><a class="nav-link" href="{% url 'front:home' %}">{% trans 'Home' %}</a>
+                        <li class="nav-item mx-3"><a class="nav-link" href="{% url 'front:home' %}">{% trans 'Home' %}</a>
                         </li>
-                        <li class="nav-item submenu dropdown">
+                        <li class="nav-item submenu dropdown mx-3">
                             <a href="{% url 'front:products' %}" class="nav-link dropdown-toggle"
                                role="button">{% trans 'Shop' %}</a>
                             {#								<ul class="dropdown-menu">#}
@@ -81,7 +81,7 @@
                             {#									<li class="nav-item"><a class="nav-link" href="confirmation.html">Confirmation</a></li>#}
                             {#								</ul>#}
                         </li>
-                        <li class="nav-item submenu dropdown">
+                        <li class="nav-item submenu dropdown mx-3">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-haspopup="true"
                                aria-expanded="false">{% trans 'Blog' %}</a>
@@ -90,10 +90,10 @@
                                 <li class="nav-item"><a class="nav-link" href="single-blog.html">Blog Details</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item mx-5"><a class="nav-link"
+                        <li class="nav-item mx-3"><a class="nav-link"
                                                      href="{% url 'front:login' %}">{% trans 'Login / Register' %}</a>
                         </li>
-                        <li class="nav-item"><a class="nav-link"
+                        <li class="nav-item mx-3"><a class="nav-link"
                                                 href="https://yousofasadi.vercel.app/">{% trans 'About Me' %}</a>
                         </li>
 

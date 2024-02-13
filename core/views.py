@@ -3,9 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
 from djoser.views import UserViewSet as BaseUserViewSet
-from djoser.views import TokenCreateView
-from rest_framework_simplejwt.views import TokenObtainPairView
-
+from django.utils.translation import gettext_lazy as _
 from .models import User
 from .otp import Authentication
 from django.conf import settings
@@ -25,6 +23,10 @@ class UserCreateView(BaseUserViewSet, APIView):
 
         otp_key = f'otp:{user.email}'
         print(user.email)
+        redis_connection = redis.StrictRedis(host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=settings.REDIS_DB)
+        otp_is_send = redis_connection.get(otp_key)
+        if otp_is_send:
+            return Response({'error': _('Wait until last code expire')}, status=status.HTTP_201_CREATED)
         otp, otp_expiry = Authentication.send_otp_email(user.email, otp_key)
         print('here')
 
