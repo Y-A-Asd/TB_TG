@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-13 03:28+0330\n"
+"POT-Creation-Date: 2024-02-13 04:04+0330\n"
 "PO-Revision-Date: 2024-01-31 08:04+0330\n"
 "Last-Translator: Anonymous User <yosofasady2@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -103,8 +103,8 @@ msgstr "Phone number must start with \"09\" and have 11 digits."
 msgid "Phone Number"
 msgstr "Phone Number"
 
-#: core/models.py:78 front/templates/register.html:48
-#: front/templates/register.html:49
+#: core/models.py:78 front/templates/profile.html:246
+#: front/templates/register.html:48 front/templates/register.html:49
 msgid "Email"
 msgstr "Email"
 
@@ -163,8 +163,7 @@ msgstr "One Time Use"
 msgid "Multy Time Use"
 msgstr "Multy Time Use"
 
-#: discount/models.py:19 front/templates/verify_otp.html:43
-#: front/templates/verify_otp.html:44
+#: discount/models.py:19
 msgid "Code"
 msgstr "Code"
 
@@ -180,14 +179,15 @@ msgstr "Code-based discounts must have valid_from and valid_to dates."
 msgid "Discounts"
 msgstr "Discounts"
 
-#: front/templates/base.html:64 front/templates/login.html:13
-#: front/templates/products_detail.html:13
+#: front/templates/base.html:64 front/templates/compare.html:14
+#: front/templates/login.html:13 front/templates/products_detail.html:13
 #: front/templates/products_list.html:13 front/templates/register.html:13
 #: front/templates/set_password.html:13 front/templates/verify_otp.html:13
 msgid "Home"
 msgstr ""
 
-#: front/templates/base.html:68 front/templates/products_detail.html:15
+#: front/templates/base.html:68 front/templates/compare.html:15
+#: front/templates/products_detail.html:15
 #: front/templates/products_list.html:11 front/templates/products_list.html:15
 #: shop/apps.py:8
 msgid "Shop"
@@ -220,6 +220,19 @@ msgstr ""
 #: front/templates/base.html:142
 msgid "Let us be social"
 msgstr ""
+
+#: front/templates/compare.html:12 front/templates/compare.html:16
+#: front/templates/products_list.html:69 front/templates/products_list.html:243
+#, fuzzy
+#| msgid "Complete"
+msgid "Compare"
+msgstr "Complete"
+
+#: front/templates/compare.html:78 front/templates/products_detail.html:119
+#: shop/models.py:22 shop/models.py:52 shop/models.py:82 shop/models.py:281
+#: shop/views.py:567
+msgid "Title"
+msgstr "Title"
 
 #: front/templates/index.html:119
 #, fuzzy
@@ -338,11 +351,6 @@ msgstr ""
 msgid "Rate"
 msgstr ""
 
-#: front/templates/products_detail.html:119 shop/models.py:22 shop/models.py:52
-#: shop/models.py:82 shop/models.py:281
-msgid "Title"
-msgstr "Title"
-
 #: front/templates/products_detail.html:125
 msgid "Message"
 msgstr ""
@@ -377,7 +385,7 @@ msgstr "No Collection"
 msgid "Filters"
 msgstr ""
 
-#: front/templates/products_list.html:40
+#: front/templates/products_list.html:40 shop/views.py:563
 #, fuzzy
 #| msgid "Unit Price"
 msgid "Price"
@@ -407,12 +415,6 @@ msgstr ""
 msgid "Price: High to Low"
 msgstr ""
 
-#: front/templates/products_list.html:69 front/templates/products_list.html:243
-#, fuzzy
-#| msgid "Complete"
-msgid "Compare"
-msgstr "Complete"
-
 #: front/templates/products_list.html:76
 msgid "Current Filters"
 msgstr ""
@@ -420,6 +422,7 @@ msgstr ""
 #: front/templates/products_list.html:154
 #: front/templates/products_list.html:295
 #: front/templates/products_list.html:350 shop/models.py:75 shop/models.py:92
+#: shop/views.py:565
 msgid "Collection"
 msgstr "Collection"
 
@@ -477,6 +480,119 @@ msgstr ""
 msgid "View more"
 msgstr ""
 
+#: front/templates/profile.html:81
+#, fuzzy
+#| msgid "Logo"
+msgid "Logout"
+msgstr "Logo"
+
+#: front/templates/profile.html:111 front/templates/profile.html:126
+#: shop/models.py:199
+msgid "Addresses"
+msgstr "Addresses"
+
+#: front/templates/profile.html:116 front/templates/profile.html:191
+#: shop/admin.py:213 shop/models.py:233
+msgid "Orders"
+msgstr "Orders"
+
+#: front/templates/profile.html:121
+msgid "Profile Info"
+msgstr ""
+
+#: front/templates/profile.html:131 front/templates/profile.html:150
+#: shop/models.py:190 shop/models.py:222
+msgid "Zip Code"
+msgstr "Zip Code"
+
+#: front/templates/profile.html:132 front/templates/profile.html:156
+#: shop/models.py:193 shop/models.py:225
+msgid "Province"
+msgstr "Province"
+
+#: front/templates/profile.html:133 front/templates/profile.html:162
+#: shop/models.py:192 shop/models.py:224
+msgid "City"
+msgstr "City"
+
+#: front/templates/profile.html:134 front/templates/profile.html:168
+#: shop/models.py:191 shop/models.py:223
+msgid "Path"
+msgstr "Path"
+
+#: front/templates/profile.html:135 front/templates/profile.html:174
+#: shop/models.py:195
+msgid "Default"
+msgstr "Default"
+
+#: front/templates/profile.html:136
+msgid "Edit"
+msgstr ""
+
+#: front/templates/profile.html:137
+#, fuzzy
+#| msgid "Deleted at"
+msgid "Delete"
+msgstr "Deleted at"
+
+#: front/templates/profile.html:181
+msgid "Save"
+msgstr ""
+
+#: front/templates/profile.html:197
+msgid "DateTime"
+msgstr ""
+
+#: front/templates/profile.html:198
+#, fuzzy
+#| msgid "Payment Status"
+msgid "Status"
+msgstr "Payment Status"
+
+#: front/templates/profile.html:199 shop/admin.py:243 shop/admin.py:272
+#: shop/models.py:304
+msgid "Total Price"
+msgstr "Total Price"
+
+#: front/templates/profile.html:219
+#, fuzzy
+#| msgid "First Name"
+msgid "First name"
+msgstr "First Name"
+
+#: front/templates/profile.html:225
+#, fuzzy
+#| msgid "Last Name"
+msgid "Last name"
+msgstr "Last Name"
+
+#: front/templates/profile.html:231
+#, fuzzy
+#| msgid "Birth Date"
+msgid "BirthDay"
+msgstr "Birth Date"
+
+#: front/templates/profile.html:238 front/templates/profile.html:253
+#: front/templates/profile.html:272
+#, fuzzy
+#| msgid "Changes"
+msgid "Save Changes"
+msgstr "Changes"
+
+#: front/templates/profile.html:259 front/templates/set_password.html:43
+#: front/templates/set_password.html:44
+#, fuzzy
+#| msgid "Password"
+msgid "Current Password"
+msgstr "Password"
+
+#: front/templates/profile.html:265 front/templates/set_password.html:48
+#: front/templates/set_password.html:49
+#, fuzzy
+#| msgid "Password"
+msgid "New Password"
+msgstr "Password"
+
 #: front/templates/register.html:30 front/templates/verify_otp.html:30
 msgid "Do you have account?"
 msgstr ""
@@ -507,19 +623,8 @@ msgstr "Password"
 msgid "Set New Password"
 msgstr "Password"
 
-#: front/templates/set_password.html:43 front/templates/set_password.html:44
-#, fuzzy
-#| msgid "Password"
-msgid "Current Password"
-msgstr "Password"
-
-#: front/templates/set_password.html:48 front/templates/set_password.html:49
-#, fuzzy
-#| msgid "Password"
-msgid "New Password"
-msgstr "Password"
-
-#: front/templates/verify_otp.html:11
+#: front/templates/verify_otp.html:11 front/templates/verify_otp.html:43
+#: front/templates/verify_otp.html:44
 #, fuzzy
 #| msgid "Zip Code"
 msgid "Verify Code"
@@ -563,14 +668,6 @@ msgstr "Clear inventory"
 #, python-brace-format
 msgid "{count} products were successfully updated."
 msgstr "{count} products were successfully updated."
-
-#: shop/admin.py:213 shop/models.py:233
-msgid "Orders"
-msgstr "Orders"
-
-#: shop/admin.py:243 shop/admin.py:272 shop/models.py:304
-msgid "Total Price"
-msgstr "Total Price"
 
 #: shop/admin.py:248
 msgid "Mark selected orders as delivered"
@@ -704,30 +801,6 @@ msgstr "Cart Item"
 #: shop/models.py:186
 msgid "Cart Items"
 msgstr "Cart Items"
-
-#: shop/models.py:190 shop/models.py:222
-msgid "Zip Code"
-msgstr "Zip Code"
-
-#: shop/models.py:191 shop/models.py:223
-msgid "Path"
-msgstr "Path"
-
-#: shop/models.py:192 shop/models.py:224
-msgid "City"
-msgstr "City"
-
-#: shop/models.py:193 shop/models.py:225
-msgid "Province"
-msgstr "Province"
-
-#: shop/models.py:195
-msgid "Default"
-msgstr "Default"
-
-#: shop/models.py:199
-msgid "Addresses"
-msgstr "Addresses"
 
 #: shop/models.py:208
 msgid "Customer Not Found!"
@@ -919,7 +992,7 @@ msgstr ""
 msgid "The value must be associated with the specified key."
 msgstr ""
 
-#: shop/views.py:376
+#: shop/views.py:374
 msgid "Discount is not available at the moment."
 msgstr ""
 
