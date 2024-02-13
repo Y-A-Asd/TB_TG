@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-13 04:04+0330\n"
-"PO-Revision-Date: 2024-02-13 04:06+0330\n"
+"POT-Creation-Date: 2024-02-13 04:25+0330\n"
+"PO-Revision-Date: 2024-02-13 04:27+0330\n"
 "Last-Translator: Anonymous User <yosofasadi2@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fa\n"
@@ -99,12 +99,13 @@ msgstr "شماره تلفن و ایمیل الزامیست"
 msgid "Phone number must start with \"09\" and have 11 digits."
 msgstr "شماره تلفن معتبر نیست 09123456789"
 
-#: core/models.py:75 shop/models.py:321
+#: core/models.py:75 front/templates/order_detail.html:51 shop/models.py:321
 msgid "Phone Number"
 msgstr "شماره تلفن"
 
-#: core/models.py:78 front/templates/profile.html:246
-#: front/templates/register.html:48 front/templates/register.html:49
+#: core/models.py:78 front/templates/order_detail.html:53
+#: front/templates/profile.html:245 front/templates/register.html:48
+#: front/templates/register.html:49
 msgid "Email"
 msgstr "ایمیل"
 
@@ -179,45 +180,46 @@ msgstr "تخفیفات دارای کد میبایست تاریخ شروع و پ�
 msgid "Discounts"
 msgstr "تخفیفات"
 
-#: front/templates/base.html:64 front/templates/compare.html:14
-#: front/templates/login.html:13 front/templates/products_detail.html:13
+#: front/templates/base.html:66 front/templates/compare.html:14
+#: front/templates/login.html:13 front/templates/order_detail.html:14
+#: front/templates/products_detail.html:13
 #: front/templates/products_list.html:13 front/templates/register.html:13
 #: front/templates/set_password.html:13 front/templates/verify_otp.html:13
 msgid "Home"
 msgstr "خانه"
 
-#: front/templates/base.html:68 front/templates/compare.html:15
+#: front/templates/base.html:70 front/templates/compare.html:15
 #: front/templates/products_detail.html:15
 #: front/templates/products_list.html:11 front/templates/products_list.html:15
 #: shop/apps.py:8
 msgid "Shop"
 msgstr "فروشگاه"
 
-#: front/templates/base.html:80
+#: front/templates/base.html:82
 msgid "Blog"
 msgstr "بلاگ"
 
-#: front/templates/base.html:87
+#: front/templates/base.html:89
 msgid "Login / Register"
 msgstr "ورود /ثبت نام"
 
-#: front/templates/base.html:90
+#: front/templates/base.html:92
 msgid "About Me"
 msgstr "درباره من"
 
-#: front/templates/base.html:128
+#: front/templates/base.html:130
 msgid "About Us"
 msgstr "درباره ما"
 
-#: front/templates/base.html:134 shop/models.py:198 shop/models.py:319
+#: front/templates/base.html:136 shop/models.py:198 shop/models.py:319
 msgid "Address"
 msgstr "آدرس"
 
-#: front/templates/base.html:141
+#: front/templates/base.html:143
 msgid "Follow Us"
 msgstr "ما را دنبال کنید"
 
-#: front/templates/base.html:142
+#: front/templates/base.html:144
 msgid "Let us be social"
 msgstr "در فضا مجازی کنار ما باشید!"
 
@@ -295,6 +297,123 @@ msgstr "ورود"
 msgid "Forgot Password?"
 msgstr "رمز عبور را فراموش کرده اید؟"
 
+#: front/templates/order_detail.html:12 front/templates/order_detail.html:16
+#| msgid "Product Details"
+msgid "Order Detail"
+msgstr "جزئیات سفارش"
+
+#: front/templates/order_detail.html:27
+msgid "Your order has been received."
+msgstr "سفارش شما دریافت شده"
+
+#: front/templates/order_detail.html:31
+#| msgid "Order Item"
+msgid "Order Info"
+msgstr "جزئیات سفارش"
+
+#: front/templates/order_detail.html:33
+#| msgid "Order Item"
+msgid "Order number"
+msgstr "شماره سفارش"
+
+#: front/templates/order_detail.html:35
+#| msgid "DateTime"
+msgid "Date"
+msgstr "تاریخ"
+
+#: front/templates/order_detail.html:37 front/templates/order_detail.html:82
+#: front/templates/order_detail.html:89
+#| msgid "Total Price"
+msgid "Total"
+msgstr "قیمت کل"
+
+#: front/templates/order_detail.html:39 shop/models.py:219 shop/models.py:302
+msgid "Payment Status"
+msgstr "وضعیت پرداخت"
+
+#: front/templates/order_detail.html:46
+#| msgid "Customer Not Found!"
+msgid "Customer Information"
+msgstr "اطلاعات مشتری"
+
+#: front/templates/order_detail.html:48 shop/models.py:150 shop/models.py:226
+msgid "First Name"
+msgstr "نام"
+
+#: front/templates/order_detail.html:50 shop/models.py:151 shop/models.py:227
+msgid "Last Name"
+msgstr "نام خانوادگی"
+
+#: front/templates/order_detail.html:60
+#| msgid "Shipping"
+msgid "Shipping Address"
+msgstr "مشخصات آدرس"
+
+#: front/templates/order_detail.html:62 front/templates/profile.html:131
+#: front/templates/profile.html:155 shop/models.py:193 shop/models.py:225
+msgid "Province"
+msgstr "استان"
+
+#: front/templates/order_detail.html:64 front/templates/profile.html:132
+#: front/templates/profile.html:161 shop/models.py:192 shop/models.py:224
+msgid "City"
+msgstr "شهر"
+
+#: front/templates/order_detail.html:66 front/templates/profile.html:133
+#: front/templates/profile.html:167 shop/models.py:191 shop/models.py:223
+msgid "Path"
+msgstr "مسیر"
+
+#: front/templates/order_detail.html:68 front/templates/profile.html:130
+#: front/templates/profile.html:149 shop/models.py:190 shop/models.py:222
+msgid "Zip Code"
+msgstr "کد پستی"
+
+#: front/templates/order_detail.html:75
+#| msgid "Product Details"
+msgid "Order Details"
+msgstr "جزئیات سفارش"
+
+#: front/templates/order_detail.html:80 shop/models.py:134 shop/models.py:179
+#: shop/models.py:267 shop/models.py:392
+msgid "Product"
+msgstr "محصول"
+
+#: front/templates/order_detail.html:81
+#: front/templates/products_detail.html:51 shop/models.py:181
+#: shop/models.py:270
+msgid "Quantity"
+msgstr "تعداد"
+
+#: front/templates/order_detail.html:221 front/templates/profile.html:371
+#: shop/models.py:213
+msgid "Not Paid"
+msgstr "پرداخت نشده"
+
+#: front/templates/order_detail.html:223 front/templates/profile.html:373
+#: shop/models.py:214 shop/models.py:297
+msgid "Pending"
+msgstr "در حال انتظار"
+
+#: front/templates/order_detail.html:225 front/templates/profile.html:375
+#: shop/models.py:215
+msgid "Shipping"
+msgstr "در حال ارسال"
+
+#: front/templates/order_detail.html:227 front/templates/profile.html:377
+#: shop/models.py:216
+msgid "Delivered"
+msgstr "تحویل شد"
+
+#: front/templates/order_detail.html:229 front/templates/profile.html:379
+#: shop/models.py:217 shop/models.py:299
+msgid "Failed"
+msgstr "ناموفق"
+
+#: front/templates/order_detail.html:231
+msgid "Unknown"
+msgstr "نامشخص"
+
 #: front/templates/products_detail.html:11
 msgid "Product Details"
 msgstr "جزئیات محصول"
@@ -306,11 +425,6 @@ msgstr "جزئیات محصول"
 #: front/templates/products_detail.html:47
 msgid "Availibility"
 msgstr "وضعیت موجودی"
-
-#: front/templates/products_detail.html:51 shop/models.py:181
-#: shop/models.py:270
-msgid "Quantity"
-msgstr "تعداد"
 
 #: front/templates/products_detail.html:62
 msgid "Add to Cart"
@@ -447,104 +561,77 @@ msgstr "اضافه کردن به سبد "
 msgid "View more"
 msgstr "توضیحات"
 
-#: front/templates/profile.html:81
-#| msgid "Logo"
+#: front/templates/profile.html:80
 msgid "Logout"
 msgstr "خروج"
 
-#: front/templates/profile.html:111 front/templates/profile.html:126
+#: front/templates/profile.html:110 front/templates/profile.html:125
 #: shop/models.py:199
 msgid "Addresses"
 msgstr "آدرس‌ها"
 
-#: front/templates/profile.html:116 front/templates/profile.html:191
+#: front/templates/profile.html:115 front/templates/profile.html:190
 #: shop/admin.py:213 shop/models.py:233
 msgid "Orders"
 msgstr "سفارش‌ها"
 
-#: front/templates/profile.html:121
+#: front/templates/profile.html:120
 msgid "Profile Info"
 msgstr "نمایه"
 
-#: front/templates/profile.html:131 front/templates/profile.html:150
-#: shop/models.py:190 shop/models.py:222
-msgid "Zip Code"
-msgstr "کد پستی"
-
-#: front/templates/profile.html:132 front/templates/profile.html:156
-#: shop/models.py:193 shop/models.py:225
-msgid "Province"
-msgstr "استان"
-
-#: front/templates/profile.html:133 front/templates/profile.html:162
-#: shop/models.py:192 shop/models.py:224
-msgid "City"
-msgstr "شهر"
-
-#: front/templates/profile.html:134 front/templates/profile.html:168
-#: shop/models.py:191 shop/models.py:223
-msgid "Path"
-msgstr "مسیر"
-
-#: front/templates/profile.html:135 front/templates/profile.html:174
+#: front/templates/profile.html:134 front/templates/profile.html:173
 #: shop/models.py:195
 msgid "Default"
 msgstr "آدرس اصلی"
 
-#: front/templates/profile.html:136
+#: front/templates/profile.html:135 front/templates/profile.html:581
 msgid "Edit"
 msgstr "ویرایش"
 
-#: front/templates/profile.html:137
-#| msgid "Deleted at"
+#: front/templates/profile.html:136 front/templates/profile.html:584
 msgid "Delete"
 msgstr "حذف"
 
-#: front/templates/profile.html:181
+#: front/templates/profile.html:180
 msgid "Save"
 msgstr "ذخیره"
 
-#: front/templates/profile.html:197
+#: front/templates/profile.html:196
 msgid "DateTime"
 msgstr "روز و ساعت"
 
-#: front/templates/profile.html:198
-#| msgid "Payment Status"
+#: front/templates/profile.html:197
 msgid "Status"
 msgstr "وضعیت"
 
-#: front/templates/profile.html:199 shop/admin.py:243 shop/admin.py:272
+#: front/templates/profile.html:198 shop/admin.py:243 shop/admin.py:272
 #: shop/models.py:304
 msgid "Total Price"
 msgstr "قیمت کل"
 
-#: front/templates/profile.html:219
-#| msgid "First Name"
+#: front/templates/profile.html:218
 msgid "First name"
 msgstr "نام"
 
-#: front/templates/profile.html:225
-#| msgid "Last Name"
+#: front/templates/profile.html:224
 msgid "Last name"
 msgstr "نام خانوادگی"
 
-#: front/templates/profile.html:231
-#| msgid "Birth Date"
+#: front/templates/profile.html:230
 msgid "BirthDay"
 msgstr "تاریخ تولد"
 
-#: front/templates/profile.html:238 front/templates/profile.html:253
-#: front/templates/profile.html:272
-#| msgid "Changes"
+#: front/templates/profile.html:237 front/templates/profile.html:252
+#: front/templates/profile.html:271
 msgid "Save Changes"
 msgstr "ذخیره تغییرات"
 
-#: front/templates/profile.html:259 front/templates/set_password.html:43
+#: front/templates/profile.html:258 front/templates/set_password.html:43
 #: front/templates/set_password.html:44
 msgid "Current Password"
 msgstr " رمز عبور فعلی"
 
-#: front/templates/profile.html:265 front/templates/set_password.html:48
+#: front/templates/profile.html:264 front/templates/set_password.html:48
 #: front/templates/set_password.html:49
 msgid "New Password"
 msgstr "رمز عبور جدید"
@@ -691,10 +778,6 @@ msgstr "قیمت واحد"
 msgid "Minimum Inventory"
 msgstr "کف اخطار موجودی"
 
-#: shop/models.py:134 shop/models.py:179 shop/models.py:267 shop/models.py:392
-msgid "Product"
-msgstr "محصول"
-
 #: shop/models.py:135
 msgid "Products"
 msgstr "محصولات"
@@ -710,14 +793,6 @@ msgstr "نقره‌ای"
 #: shop/models.py:148
 msgid "Gold"
 msgstr "طلایی"
-
-#: shop/models.py:150 shop/models.py:226
-msgid "First Name"
-msgstr "نام"
-
-#: shop/models.py:151 shop/models.py:227
-msgid "Last Name"
-msgstr "نام خانوادگی"
 
 #: shop/models.py:153
 msgid "Birth Date"
@@ -751,30 +826,6 @@ msgstr "آیتم‌های سبد خرید"
 #: shop/models.py:208
 msgid "Customer Not Found!"
 msgstr "مشتری یافت نشد!"
-
-#: shop/models.py:213
-msgid "Not Paid"
-msgstr "پرداخت نشده"
-
-#: shop/models.py:214 shop/models.py:297
-msgid "Pending"
-msgstr "در حال انتظار"
-
-#: shop/models.py:215
-msgid "Shipping"
-msgstr "در حال ارسال"
-
-#: shop/models.py:216
-msgid "Delivered"
-msgstr "تحویل شد"
-
-#: shop/models.py:217 shop/models.py:299
-msgid "Failed"
-msgstr "ناموفق"
-
-#: shop/models.py:219 shop/models.py:302
-msgid "Payment Status"
-msgstr "وضعیت پرداخت"
 
 #: shop/models.py:255
 #, python-brace-format

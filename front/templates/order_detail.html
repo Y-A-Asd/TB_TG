@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 {% load static %}
 {% block contents %}
 
@@ -8,10 +9,11 @@
         <div class="container">
             <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
                 <div class="col-first">
-                    <h1>Order Detail</h1>
+                    <h1 class="text-danger">{% trans 'Order Detail' %}</h1>
                     <nav class="d-flex align-items-center">
-                        <a href="{% url 'front:home' %}">Home<span class="lnr lnr-arrow-right"></span></a>
-                        <a href="">Order Detail</a>
+                        <a class="text-danger" href="{% url 'front:home' %}">{% trans 'Home' %}<span
+                                class="lnr lnr-arrow-right"></span></a>
+                        <a class="text-danger" href="">{% trans 'Order Detail' %}</a>
                     </nav>
                 </div>
             </div>
@@ -22,69 +24,69 @@
     <!--================Order Details Area =================-->
     <section class="order_details section_gap">
         <div class="container">
-            <h3 class="title_confirmation">Your order has been received.</h3>
+            <h3 class="title_confirmation">{% trans 'Your order has been received.' %}</h3>
             <div class="row order_d_inner">
                 <div class="col-lg-4">
                     <div class="details_item">
-                        <h4>Order Info</h4>
+                        <h4>{% trans 'Order Info' %}</h4>
                         <ul class="list">
-                            <li><span>Order number</span>
+                            <li><span>{% trans 'Order number' %}</span>
                                 <h6 id="orderNumber"></h6></li>
-                            <li><span>Date</span>
+                            <li><span>{% trans 'Date' %}</span>
                                 <h6 id="orderDate"></h6></li>
-                            <li><span>Total</span>
+                            <li><span>{% trans 'Total' %}</span>
                                 <h6 id="orderTotal"></h6></li>
-                            <li><span>Payment Status</span>
+                            <li><span>{% trans 'Payment Status' %}</span>
                                 <h6 id="paymentStatus"></h6></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="details_item">
-                        <h4>Customer Information</h4>
+                        <h4>{% trans 'Customer Information' %}</h4>
                         <ul class="list">
-                            <li><span>First Name</span>
+                            <li><span>{% trans 'First Name' %}</span>
                                 <h6 id="firstName"></h6></li>
-                            <li><span>Last Name</span><h6 id="lastName"></h6></li>
-                            <li><span>Phone Number</span>
+                            <li><span>{% trans 'Last Name' %}</span><h6 id="lastName"></h6></li>
+                            <li><span>{% trans 'Phone Number' %}</span>
                                 <h6 id="phoneNumber"></h6></li>
-                            <li><span>Email</span>
+                            <li><span>{% trans 'Email' %}</span>
                                 <h6 id="email"></h6></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="details_item">
-                        <h4>Shipping Address</h4>
+                        <h4>{% trans 'Shipping Address' %}</h4>
                         <ul class="list">
-                            <li><span>Province</span>
+                            <li><span>{% trans 'Province' %}</span>
                                 <h6 id="province"></h6></li>
-                            <li><span>City</span>
+                            <li><span>{% trans 'City' %}</span>
                                 <h6 id="city"></h6></li>
-                            <li><span>Path</span>
+                            <li><span>{% trans 'Path' %}</span>
                                 <h6 id="path"></h6></li>
-                            <li><span>Zip Code</span>
+                            <li><span>{% trans 'Zip Code' %}</span>
                                 <h6 id="zipCode"></h6></li>
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="order_details_table">
-                <h2>Order Details</h2>
+                <h2>{% trans 'Order Details' %}</h2>
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
                         <tr>
-                            <th scope="col">Product</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Total</th>
+                            <th scope="col">{% trans 'Product' %}</th>
+                            <th scope="col">{% trans 'Quantity' %}</th>
+                            <th scope="col">{% trans 'Total' %}</th>
                         </tr>
                         </thead>
                         <tbody id="orderItems">
                         </tbody>
                         <tr>
                             <td>
-                                <h4>Total</h4>
+                                <h4>{% trans 'Total' %}</h4>
                             </td>
                             <td>
                                 <h5></h5>
@@ -197,7 +199,7 @@
                     const row = document.createElement('tr');
                     row.innerHTML = `
 								<td>
-									<p>${order.product.translations.en.title}</p>
+									<p>${order.product.translations.{{ LANGUAGE_CODE }}.title}</p>
 								</td>
 								<td>
 									<h5>x ${order.quantity}</h5>
@@ -216,17 +218,17 @@
         function getOrderStatusLabel(status) {
             switch (status) {
                 case 'N':
-                    return 'Not Paid';
+                    return '{% trans 'Not Paid' %} ';
                 case 'P':
-                    return 'Pending';
+                    return '{% trans 'Pending' %}';
                 case 'S':
-                    return 'Shipping';
+                    return '{% trans 'Shipping' %}';
                 case 'D':
-                    return 'Delivered';
+                    return '{% trans 'Delivered' %}';
                 case 'F':
-                    return 'Failed';
+                    return '{% trans 'Failed' %}';
                 default:
-                    return 'Unknown';
+                    return '{% trans 'Unknown' %}';
             }
         }
     </script>
