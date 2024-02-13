@@ -325,19 +325,6 @@ class SiteSettings(TranslatableModel, BaseModel):
     instagram_link = models.CharField(_("Instagram link"), blank=True, null=True, max_length=20)
     whatsapp_link = models.CharField(_("Whatsapp link"), blank=True, null=True, max_length=20)
 
-    def save(self, *args, **kwargs):
-        existing_instance = SiteSettings.objects.first()
-        if existing_instance:
-            existing_instance.phone_number = self.phone_number
-            existing_instance.logo = self.logo
-            existing_instance.telegram_link = self.telegram_link
-            existing_instance.twitter_link = self.twitter_link
-            existing_instance.instagram_link = self.instagram_link
-            existing_instance.whatsapp_link = self.whatsapp_link
-            existing_instance.save()
-        else:
-            super().save(*args, **kwargs)
-
     def __str__(self):
         return f"Site Settings"
 
@@ -370,7 +357,7 @@ class HomeBanner(BaseModel):
 
 class FeatureKey(TranslatableModel):
     translations = TranslatedFields(
-        key=models.CharField(_('Key'), max_length=10, )
+        key=models.CharField(_('Key'), max_length=50, )
     )
 
     class Meta:
@@ -387,7 +374,7 @@ class FeatureKey(TranslatableModel):
 class FeatureValue(TranslatableModel):
     key = models.ForeignKey(FeatureKey, on_delete=models.CASCADE, verbose_name=_('Key'), related_name='values')
     translations = TranslatedFields(
-        value=models.CharField(_('Value'), max_length=10, )
+        value=models.CharField(_('Value'), max_length=50, )
     )
 
     class Meta:
@@ -405,6 +392,10 @@ class MainFeature(BaseModel):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name=_('Product'))
     key = models.ForeignKey(FeatureKey, on_delete=models.DO_NOTHING, verbose_name=_('Key'))
     value = models.ForeignKey(FeatureValue, on_delete=models.DO_NOTHING, verbose_name=_('Value'))
+
+    class Meta:
+        verbose_name = _("Main Feature")
+        verbose_name_plural = _("Main Features")
 
     def __repr__(self) -> str:
         return f"{self.product.title}: {self.key} -> {self.value}"

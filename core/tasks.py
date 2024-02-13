@@ -55,7 +55,7 @@ def delete_inactive_carts():
 @shared_task
 def send_birthday_emails():
     today = timezone.now().date()
-    customers_with_birthdays = Customer.objects.filter(birth_date__month=today.month, birthday__day=today.day)
+    customers_with_birthdays = Customer.objects.filter(birth_date__month=today.month, birth_date__day=today.day)
 
     for customer in customers_with_birthdays:
         subject = 'Happy Birthday!'

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 {% load static %}
 {% block contents %}
 
@@ -8,11 +9,11 @@
         <div class="container">
             <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
                 <div class="col-first">
-                    <h1>Compare</h1>
+                    <h1 class="text-danger" >{% trans 'Compare' %}</h1>
                     <nav class="d-flex align-items-center">
-                        <a href="{% url 'front:home' %}">Home<span class="lnr lnr-arrow-right"></span></a>
-                        <a href="{% url 'front:products' %}">Shop</a>
-                        <a href="">Compare</a>
+                        <a class="text-danger"  href="{% url 'front:home' %}">{% trans 'Home' %}<span class="lnr lnr-arrow-right"></span></a>
+                        <a class="text-danger"  href="{% url 'front:products' %}">{% trans 'Shop' %}</a>
+                        <a class="text-danger"  href="">{% trans 'Compare' %}</a>
                     </nav>
                 </div>
             </div>
@@ -74,7 +75,7 @@
             const theadtr = document.createElement('tr');
             const theadth = document.createElement('th');
             const theadh = document.createElement('h6');
-            theadh.textContent = 'Title'
+            theadh.textContent = '{% trans 'Title' %}'
             theadth.appendChild(theadh);
             theadtr.appendChild(theadth);
 

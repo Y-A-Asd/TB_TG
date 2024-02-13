@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 {% load static %}
 {% block contents %}
     <!-- start banner Area -->
@@ -26,10 +27,10 @@
                                             bannerContent.classList.add('banner-content');
 
                                             const title = document.createElement('h1');
-                                            title.textContent = product.translations.en.title;
+                                            title.textContent = product.translations.{{ LANGUAGE_CODE }}.title;
 
                                             const description = document.createElement('p');
-                                            description.textContent = product.translations.en.description;
+                                            description.textContent = product.translations.{{ LANGUAGE_CODE }}.description;
 
                                             const addButton = document.createElement('a');
                                             addButton.classList.add('add-btn');
@@ -49,7 +50,7 @@
                                             const productImage = document.createElement('img');
                                             productImage.classList.add('img-fluid');
                                             productImage.src = product.images.length > 0 ? product.images[0].image : '{% static 'img/banner/banner-img.png' %}';
-                                            productImage.alt = product.translations.en.title;
+                                            productImage.alt = product.translations.{{ LANGUAGE_CODE }}.title;
 
                                             addButton.appendChild(addText);
 
@@ -115,8 +116,8 @@
                         <div class="f-icon">
                             <img src="{% static 'img/features/f-icon1.png' %}" alt="">
                         </div>
-                        <h6>Free Delivery</h6>
-                        <p>Free Shipping on all order</p>
+                        <h6>{% trans 'Free Delivery' %}</h6>
+                        <p>{% trans 'Free Shipping on all order' %}</p>
                     </div>
                 </div>
                 <!-- single features -->
@@ -125,8 +126,8 @@
                         <div class="f-icon">
                             <img src="{% static 'img/features/f-icon2.png' %}" alt="">
                         </div>
-                        <h6>Return Policy</h6>
-                        <p>Free Shipping on all order</p>
+                        <h6>{% trans 'Return Policy' %}</h6>
+                        <p>{% trans 'Free Shipping on all order' %}</p>
                     </div>
                 </div>
                 <!-- single features -->
@@ -135,8 +136,8 @@
                         <div class="f-icon">
                             <img src="{% static 'img/features/f-icon3.png' %}" alt="">
                         </div>
-                        <h6>24/7 Support</h6>
-                        <p>Free Shipping on all order</p>
+                        <h6>{% trans '24/7 Support' %}</h6>
+                        <p>{% trans 'Free Shipping on all order' %}</p>
                     </div>
                 </div>
                 <!-- single features -->
@@ -145,8 +146,8 @@
                         <div class="f-icon">
                             <img src="{% static 'img/features/f-icon4.png' %}" alt="">
                         </div>
-                        <h6>Secure Payment</h6>
-                        <p>Free Shipping on all order</p>
+                        <h6>{% trans 'Secure Payment' %}</h6>
+                        <p>{% trans 'Free Shipping on all order' %}</p>
                     </div>
                 </div>
             </div>
@@ -162,11 +163,8 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-6 text-center">
                         <div class="section-title">
-                            <h1>Latest Products</h1>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                incididunt ut labore et
-                                dolore
-                                magna aliqua.</p>
+                            <h1>{% trans 'Latest Products' %}</h1>
+
                         </div>
                     </div>
                 </div>
@@ -177,8 +175,7 @@
         </div>
         <script type="text/javascript">
             function createSocialInfo(iconClass, text, moreClass = null) {
-                const socialInfo = document.createElement('a');
-                socialInfo.href = '';  // Add your link here
+                const socialInfo = document.createElement('button');
                 socialInfo.classList.add('social-info');
 
                 const iconSpan = document.createElement('span');
@@ -216,7 +213,7 @@
 
                         products.results.forEach(product => {
                             {
-                                const currentLanguage = 'en';
+                                const currentLanguage = '{{ LANGUAGE_CODE }}';
                                 const translation = product.translations[currentLanguage] || product.translations.en;
                                 const productBlock = document.createElement('div');
                                 productBlock.classList.add('col-lg-4', 'col-md-6', 'single-product');
@@ -224,7 +221,7 @@
                                 const productImage = document.createElement('img');
                                 productImage.classList.add('img-fluid');
                                 productImage.src = product.images.length > 0 ? product.images[0].image : '{% static "img/default-product.jpg" %}';
-                                productImage.alt = product.translations.en.title;
+                                productImage.alt = product.translations.{{ LANGUAGE_CODE }}.title;
 
                                 const productDetails = document.createElement('div');
                                 productDetails.classList.add('product-details');
@@ -271,7 +268,6 @@
                                 }
                                 productDetails.appendChild(productPrice);
                                 productActions.appendChild(addToBag);
-                                // productActions.appendChild(addToWishlist);
                                 productActions.appendChild(viewMore);
 
                                 productBlock.appendChild(productImage);
@@ -298,12 +294,11 @@
                     .then(data => {
                         const cartId = data.id;
                         localStorage.setItem('cartId', cartId);
-                        addToCart(cartId, productId, 1); // Add the item to the cart with quantity 1
+                        addToCart(cartId, productId, 1);
                     })
                     .catch(error => console.error('Error creating cart:', error));
             }
 
-            // Function to add the item to the cart
             function addToCart(cartId, productId, quantity) {
                 fetch(`/shop/cart/${cartId}/items/`, {
                     method: 'POST',
@@ -318,7 +313,6 @@
                     .then(response => {
                         if (response.ok) {
                             console.log('Item added to cart successfully');
-                            // You can add any additional logic here, such as updating UI to reflect the item being added to the cart
                         } else {
                             console.error('Failed to add item to cart:', response.statusText);
                         }

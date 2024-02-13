@@ -1,16 +1,14 @@
 import logging
 from django.db.models import Count, Q, QuerySet, ExpressionWrapper, fields, F
-from django.utils.translation import gettext_lazy as _
-from django.views import View
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import status, generics
+from django.utils.translation import gettext_lazy as _, activate, get_language
+from rest_framework import status
 from rest_framework.exceptions import ValidationError
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.decorators import action, api_view
 from rest_framework.permissions import IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly
 from rest_framework.views import APIView
-from rest_framework.viewsets import ModelViewSet, GenericViewSet, ReadOnlyModelViewSet, ViewSet
+from rest_framework.viewsets import ModelViewSet, GenericViewSet, ReadOnlyModelViewSet
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, DestroyModelMixin, ListModelMixin
 from core.models import User, AuditLog
@@ -552,18 +550,24 @@ def compare_products(request):
     products = Product.objects.filter(id__in=product_ids)
     data = {}
 
-    productattr = ['title', 'price_after_off', 'collection']
+    productattr = ['Title', 'Price_after_off', 'Collection']
     for attr in productattr:
         product_attrs = {}
         for product in products:
             if attr == 'collection':
-                product_attrs[str(product.title)] = str(eval(f'product.{attr}.title'))
+                product_attrs[str(product.title)] = str(eval(f'product.{attr.lower()}.title'))
             else:
-                product_attrs[str(product.title)] = str(eval(f'product.{attr}'))
+                product_attrs[str(product.title)] = str(eval(f'product.{attr.lower()}'))
 
-        if attr == 'price_after_off':
-            attr = 'price'
-        data[attr.capitalize()] = product_attrs
+        if attr == 'Price_after_off':
+            attr = _('Price')
+        if attr == 'Collection':
+            attr = _('Collection')
+        if attr == 'Title':
+            attr = _('Title')
+
+        attr = str(attr)
+        data[attr] = product_attrs
 
     feature_keys = []
     for product in products:
@@ -586,7 +590,7 @@ def compare_products(request):
             else:
                 feature_data[str(product.title)] = None
         data[str(key.key)] = feature_data
-    print('data', data)
+    # print('data', data)
     return Response(data)
 
 
