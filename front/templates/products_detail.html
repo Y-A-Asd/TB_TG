@@ -376,12 +376,15 @@
 
             return fetch(url, options)
                 .then(response => {
-                    {#displayErrorMessage('Your comment has been received! It will be shown after checking')#}
-                    {#document.getElementById('rating').value = '';#}
-                    {#document.getElementById('title').value = '';#}
-                    {#document.getElementById('description').value = '';#}
-                    return response
-                })
+                        if (response.ok) {
+                            return response.json()
+                        } else {
+                            return response.json().then(errorJson => {
+                                alert(JSON.stringify(errorJson))
+                                throw new Error(JSON.stringify(errorJson));
+                            });
+                        }
+                    })
                 .catch(error => {
                     console.error('eeeeeee', error);
                 });
@@ -433,14 +436,11 @@
                 'parent_review': parentReviewId
             })
                 .then(data => {
-                    if (data.ok) {
+                    if (data) {
                         alert('Your comment has been received! It will be shown after checking')
                         document.getElementById('rating').value = '';
                         document.getElementById('title').value = '';
                         document.getElementById('description').value = '';
-                        console.log(data);
-                    } else {
-                        throw new Error('field are empty')
                     }
                 })
                 .catch(error => {
@@ -521,9 +521,11 @@
                     } else {
                         if (response.status === 401) {
                             console.error('Unauthorized: Token may be expired or invalid');
+                            alert('Unauthorized: Token may be expired or invalid')
                             localStorage.removeItem('JWT');
                         }
                         console.error('Failed to add item to cart:', response.statusText);
+                        alert(`Failed to add item to cart: ${response.statusText}`)
                         createCart(productId, quantity);
                     }
                 })

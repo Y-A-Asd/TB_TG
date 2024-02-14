@@ -15,21 +15,23 @@ class UserCreateView(BaseUserViewSet, APIView):
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        print(dict(serializer.validated_data))
+        # print(dict(serializer.validated_data))
         try:
             user = User.objects.get(phone_number=serializer.validated_data['phone_number'])
         except User.DoesNotExist:
-            user = User.objects.create_user(**serializer.validated_data)
+            user = User(**serializer.validated_data)
 
         otp_key = f'otp:{user.email}'
-        print(user.email)
         redis_connection = redis.StrictRedis(host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=settings.REDIS_DB)
         otp_is_send = redis_connection.get(otp_key)
         if otp_is_send:
             return Response({'error': _('Wait until last code expire')}, status=status.HTTP_201_CREATED)
-        otp, otp_expiry = Authentication.send_otp_email(user.email, otp_key)
+        try:
+            otp, otp_expiry = Authentication.send_otp_email(user.email, otp_key)
+        except ConnectionError :
+            return Response({'error': _('server side error!')}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         print('here')
-
+        user.save()
         return Response({'otp_expiry': otp_expiry}, status=status.HTTP_201_CREATED)
 
 
@@ -49,12 +51,12 @@ class VerifyOtpView(APIView):
         print(otp_key)
         stored_otp = redis.StrictRedis(host=settings.REDIS_HOST, port=settings.REDIS_PORT,
                                        db=settings.REDIS_DB).get(otp_key)
-        print(stored_otp, entered_otp, stored_otp.decode('utf-8'))
-        if stored_otp and stored_otp.decode('utf-8') == entered_otp:
+        print(stored_otp, entered_otp)
+        if stored_otp == entered_otp:
             user = get_user_model().objects.get(email=email)
             user.is_active = True
             user.save()
 
-            return Response({'message': 'User verified successfully'}, status=status.HTTP_200_OK)
+            return Response({'message': _('User verified successfully')}, status=status.HTTP_200_OK)
         else:
-            return Response({'message': 'Invalid OTP'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'message': _('Invalid Code')}, status=status.HTTP_400_BAD_REQUEST)
