@@ -18,6 +18,7 @@ urlpatterns = [
     path('verify/', views.verify, name='verify'),
     path('set_language/', views.set_language, name='set_language'),
     path('blogs/<int:id>/', views.BlogDetailView.as_view(), name='blog_detail'),
+    path('blogs/', views.BlogListView.as_view(), name='blogs'),
 
 ]
 # todo: 1. implement remaining:{profile - make order from cart}

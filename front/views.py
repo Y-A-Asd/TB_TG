@@ -40,6 +40,10 @@ class CartView(TemplateView):
     template_name = 'cart.html'
 
 
+class BlogListView(TemplateView):
+    template_name = 'blogs.html'
+
+
 class BlogDetailView(View):
     template_name = 'blog_detail.html'
 
