@@ -24,7 +24,7 @@ class Blog(TranslatableModel, BaseModel):
 
 class BlogComment(BaseModel):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, verbose_name=_("Customer"))
-    blog = models.ForeignKey(Blog, on_delete=models.CASCADE, verbose_name=_("Blog"))
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE, verbose_name=_("Blog"), related_name='comments')
     subject = models.CharField(_("Subject"), max_length=255)
     message = models.TextField(_("Message"))
     active = models.BooleanField(_("Active"), default=False)
