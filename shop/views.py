@@ -188,6 +188,15 @@ class ProductViewSet(ModelViewSet):
         if feature_value:
             queryset = queryset.filter(mainfeature__value__id=feature_value)
 
+        secondhand = self.request.query_params.get('secondhand')
+        print('secondhand', secondhand)
+        if secondhand == 'true':
+            secondhand = True
+            queryset = queryset.filter(secondhand=secondhand)
+        if secondhand == 'false':
+            secondhand = False
+            queryset = queryset.filter(secondhand=secondhand)
+
         ordering = self.request.query_params.get('ordering', 'updated_at')
         queryset = queryset.order_by(ordering).distinct()
 

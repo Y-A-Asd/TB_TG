@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.db.models import QuerySet, F, Q
-from django_filters.rest_framework import FilterSet
+from django_filters.rest_framework import FilterSet, BooleanFilter
 from django.utils.translation import gettext_lazy as _
 from rest_framework.filters import BaseFilterBackend
 
@@ -9,11 +9,13 @@ from django_filters.rest_framework import DjangoFilterBackend
 
 
 class ProductFilter(FilterSet):
+    secondhand = BooleanFilter(field_name='secondhand')
     class Meta:
         model = Product
         fields = {
             'collection_id': ['exact'],
             'unit_price': ['gt', 'lt'],
+            'secondhand': ['exact'],
         }
 
 

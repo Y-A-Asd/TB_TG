@@ -139,9 +139,9 @@ class ProductAdmin(TranslatableAdmin):
         return {'slug': ('title',)}
 
     actions = ['clear_inventory']
-    list_display = ['title', 'unit_price', 'inventory_status', 'collection_title', 'min_inventory']
+    list_display = ['title', 'unit_price', 'inventory_status', 'collection_title', 'min_inventory', 'secondhand']
     list_editable = ['unit_price']
-    list_filter = ['collection', 'updated_at', InventoryFilter, MainFeatureFilter, CollectionFilter]
+    list_filter = ['collection', 'updated_at', InventoryFilter, MainFeatureFilter, CollectionFilter, 'secondhand']
     list_per_page = 10
     list_select_related = ['collection']
     search_fields = ['title']

@@ -66,6 +66,12 @@
                             </div>
                         </div>
                         <br>
+                        <div id="seccondhand">
+                            <button value="true">{% trans "Second hand Only" %}</button>
+                            <button value="false">{% trans "New Only" %}</button>
+                        </div>
+
+                        <br>
                         <button id="compare-button">{% trans "Compare" %}</button>
                     </div>
                 </div>
@@ -110,6 +116,7 @@
         let currentOrdering = null;
         let currentFeatureKey = null;
         let currentFeatureValue = null;
+        let currentSecondHand = null;
 
         let selectedProducts = [];
         console.log(selectedProducts)
@@ -145,7 +152,7 @@
         let currentPage = 1;
 
         function fetchProducts(page = 1, selectedOption = 'updated_at', collectionsId = null, unit_price__gt = null,
-                               unit_price__lt = null, search = null, feature_key = null, feature_value = null) {
+                               unit_price__lt = null, search = null, feature_key = null, feature_value = null, secondhand = null) {
             let apiUrl = null
             apiUrl = `/shop/products/?page=${page}&ordering=${getSortingOrdering(selectedOption)}`;
 
@@ -176,6 +183,10 @@
             if (feature_value != null) {
                 apiUrl += `&feature_value=${feature_value}`;
                 addFilterToCurrentFilters('{% trans 'Feature_value' %}', feature_value);
+            }
+            if (secondhand != null) {
+                apiUrl += `&secondhand=${secondhand}`;
+                addFilterToCurrentFilters('{% trans 'SecondHand' %}', secondhand);
             }
             console.log(apiUrl)
             fetch(apiUrl)
@@ -314,6 +325,9 @@
                         case '{% trans 'Feature_value' %}':
                             currentFeatureValue = filterValue;
                             break;
+                        case '{% trans 'SecondHand' %}':
+                            currentSecondHand = filterValue;
+                            break;
                         default:
                             break;
                     }
@@ -337,7 +351,7 @@
                         }
                         filtersContainer.removeChild(filterButton);
                         currentPage = 1;
-                        fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue);
+                        fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue, currentSecondHand);
                     });
                     filtersContainer.appendChild(filterButton);
                 }
@@ -368,6 +382,9 @@
                         break;
                     case '{% trans 'Feature_value' %}':
                         currentFeatureValue = null;
+                        break;
+                    case '{% trans 'SecondHand' %}':
+                        currentSecondHand = null;
                         break;
                     default:
                         break;
@@ -450,7 +467,7 @@
                 pageLink.textContent = i;
                 pageLink.addEventListener('click', () => {
                     currentPage = i;
-                    fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue);
+                    fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue, currentSecondHand);
                 });
 
                 if (i === currentPage) {
@@ -477,7 +494,7 @@
             link.classList.add(className);
             link.addEventListener('click', () => {
                 currentPage = page;
-                fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue);
+                fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue, currentSecondHand);
             });
 
             const icon = document.createElement('i');
@@ -510,7 +527,7 @@
                     if (searchQuery !== '') {
                         currentSearch = searchQuery
                         currentPage = 1
-                        fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue);
+                        fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue, currentSecondHand);
                     }
                 }
             });
@@ -527,7 +544,7 @@
                     currentUnitPriceGt = parseInt(lowerValue.textContent);
                     console.log('Changed low value:', currentUnitPriceGt);
                     currentPage = 1
-                    fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue);
+                    fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue, currentSecondHand);
                 }
 
                 if (upperValue.textContent !== initialUpperValue) {
@@ -535,7 +552,7 @@
                     currentUnitPriceLt = parseInt(upperValue.textContent);
                     console.log('Changed high value:', currentUnitPriceLt);
                     currentPage = 1
-                    fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue);
+                    fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue, currentSecondHand);
                 }
             }
 
@@ -544,7 +561,7 @@
 
         });
         currentPage = 1
-        fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue);
+        fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue, currentSecondHand);
 
 
         const compareButton = document.getElementById('compare-button');
@@ -560,7 +577,7 @@
                 const selectedOption = event.target.value;
                 currentOrdering = selectedOption
                 currentPage = 1
-                fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue);
+                fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue, currentSecondHand);
             }
         });
 
@@ -606,7 +623,7 @@
                 a.addEventListener('click', () => {
                     currentCollectionsId = collection.id
                     currentPage = 1
-                    fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue);
+                    fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue, currentSecondHand);
                 });
 
                 li.appendChild(a);
@@ -654,7 +671,7 @@
                         currentFeatureKey = feature.id;
                         currentFeatureValue = null;
                         currentPage = 1
-                        fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue);
+                        fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue, currentSecondHand);
                     });
 
                     const valueList = document.createElement('ul');
@@ -680,7 +697,7 @@
                             currentFeatureKey = feature.id;
                             currentFeatureValue = value.id;
                             currentPage = 1
-                            fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue);
+                            fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue, currentSecondHand);
                         });
 
                         valueList.appendChild(valueItem);
@@ -692,6 +709,21 @@
                 });
             })
             .catch(error => console.error('Error fetching features:', error));
+
+        const secondHandOnlyButton = document.querySelector('#seccondhand button[value="true"]');
+        const newOnlyButton = document.querySelector('#seccondhand button[value="false"]');
+
+        secondHandOnlyButton.addEventListener('click', function () {
+            currentSecondHand = true;
+            fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue, currentSecondHand);
+
+        });
+
+        newOnlyButton.addEventListener('click', function () {
+            currentSecondHand = false;
+            fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue, currentSecondHand);
+
+        });
 
 
     </script>

@@ -84,7 +84,7 @@ class ProductSerializer(TranslatableModelSerializer):
     class Meta:
         model = Product
         fields = ['id', 'translations', 'inventory', 'org_price',
-                  'price', 'price_with_tax', 'collection_id', 'promotions', 'value_feature', 'images']
+                  'price', 'price_with_tax', 'collection_id', 'promotions', 'value_feature', 'images', 'secondhand']
 
     images = ProductImageSerializer(many=True, read_only=True)
     collection_id = serializers.IntegerField(required=False)
