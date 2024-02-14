@@ -150,7 +150,7 @@ class ProductViewSet(ModelViewSet):
     pagination_class = DefaultPagination
     filter_backends = [RecursiveDjangoFilterBackend, SearchFilter, OrderingFilter]
     filterset_class = ProductFilter
-    search_fields = ['translations__title', 'description']
+    search_fields = ['translations__title', 'translations__description']
     ordering_fields = ['unit_price', 'updated_at']
     permission_classes = [IsAdminOrReadOnly]
 

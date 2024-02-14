@@ -7,7 +7,8 @@ from parler.models import TranslatableModel
 from blog.models import BlogComment, Blog
 from core.models import AuditLog, User
 from discount.models import BaseDiscount
-from shop.models import Customer, Order, Product, Promotion, Collection, OrderItem, Review, Address, Transaction
+from shop.models import Customer, Order, Product, Promotion, Collection, OrderItem, Review, Address, Transaction, \
+    MainFeature, FeatureKey, FeatureValue
 from django.dispatch import receiver
 from django.contrib.sessions.models import Session
 from django.db.models.signals import post_save, pre_delete, pre_save
@@ -85,6 +86,9 @@ def get_model_changes(old_instance, new_instance):
 @receiver(pre_save, sender=Review)
 @receiver(pre_save, sender=Order)
 @receiver(pre_save, sender=Product)
+@receiver(pre_save, sender=FeatureKey)
+@receiver(pre_save, sender=FeatureValue)
+@receiver(pre_save, sender=MainFeature)
 @receiver(pre_save, sender=TranslatableModel)
 @receiver(pre_save, sender=Promotion)
 @receiver(pre_save, sender=BaseDiscount)
@@ -98,7 +102,7 @@ def log_create_update(sender, instance, **kwargs):
     model_name = sender.__name__  # just for fun :-|
     try:
         old_instance = sender._default_manager.get(pk=instance.pk)  #:-)
-        print('old_instance', old_instance)
+        # print('old_instance', old_instance)
     except sender.DoesNotExist:
         action = 'CREATE'
         old_value = None
@@ -107,8 +111,8 @@ def log_create_update(sender, instance, **kwargs):
         action = 'UPDATE'
         old_value = serialize_model_instance(old_instance)
         changes = get_model_changes(old_instance, instance)
-        print('old_value', old_value)
-        print('changes', changes)
+        # print('old_value', old_value)
+        # print('changes', changes)
 
     table_name = sender._meta.db_table
     row_id = instance.id
