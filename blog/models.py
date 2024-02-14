@@ -7,7 +7,7 @@ from shop.models import Customer
 
 class Blog(TranslatableModel, BaseModel):
     translations = TranslatedFields(
-        title=models.CharField(_("Title"), max_length=255),
+        title=models.CharField(_("Title"), max_length=255, unique=True),
         body=models.TextField(_("Body"), null=True, blank=True)
     )
     thumbnail = models.ImageField(_('Thumbnail'), upload_to='blogs/thumbnail/')
