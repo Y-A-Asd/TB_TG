@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets, filters, mixins
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 from blog.models import BlogComment, Blog
 from blog.serializers import BlogSerializer, BlogCommentSerializer
@@ -17,6 +18,14 @@ class BlogViewSet(mixins.RetrieveModelMixin,
     filter_backends = [filters.SearchFilter]
     search_fields = ['translations__title', 'translations__body']
     ordering = ['-updated_at']
+
+    # https://stackoverflow.com/questions/56228485/how-can-i-make-a-view-count-in-django-rest-framework
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        instance.views += 1
+        instance.save()
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
 
 
 class BlogCommentViewSet(viewsets.ModelViewSet):

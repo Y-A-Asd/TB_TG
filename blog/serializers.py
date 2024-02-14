@@ -10,10 +10,14 @@ from .models import Blog, BlogComment
 class BlogSerializer(TranslatableModelSerializer):
     views = serializers.IntegerField(read_only=True)
     author = CustomerSerializer()
+    comments_count = serializers.SerializerMethodField()
 
     class Meta:
         model = Blog
-        fields = ('id', 'title', 'body', 'thumbnail', 'views', 'author', 'updated_at')
+        fields = ('id', 'title', 'body', 'thumbnail', 'views', 'author', 'updated_at', 'comments_count')
+
+    def get_comments_count(self, obj):
+        return BlogComment.objects.filter(blog=obj, active=True).count()
 
 
 class BlogCommentSerializer(serializers.ModelSerializer):
