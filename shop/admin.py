@@ -157,10 +157,10 @@ class ProductAdmin(TranslatableAdmin):
                 collection_id = int(collection_filter)
                 collection_q = Q(collection_id=collection_id) | Q(collection__parent_id=collection_id)
                 queryset = queryset.filter(collection_q)
-                print(queryset.query)
+                # print(queryset.query)
             except ValueError:
                 pass
-        print(queryset.query)
+        # print(queryset.query)
         return queryset, False
 
     def collection_title(self, product):

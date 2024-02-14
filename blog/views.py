@@ -10,7 +10,7 @@ from shop.pagination import DefaultPagination
 class BlogViewSet(mixins.RetrieveModelMixin,
                   mixins.ListModelMixin,
                   GenericViewSet):
-    queryset = Blog.objects.all()
+    queryset = Blog.objects.all().prefetch_related('author', 'comments')
     serializer_class = BlogSerializer
     pagination_class = DefaultPagination
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
@@ -20,7 +20,7 @@ class BlogViewSet(mixins.RetrieveModelMixin,
 
 
 class BlogCommentViewSet(viewsets.ModelViewSet):
-    queryset = BlogComment.objects.all()
+    queryset = BlogComment.objects.all().select_related('customer', 'blog')
     serializer_class = BlogCommentSerializer
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
     search_fields = ['subject', 'message']

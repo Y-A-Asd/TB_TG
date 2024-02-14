@@ -1,5 +1,10 @@
 import datetime
 from decimal import Decimal
+
+from django.apps import apps
+from parler.models import TranslatableModel
+
+from blog.models import BlogComment, Blog
 from core.models import AuditLog, User
 from discount.models import BaseDiscount
 from shop.models import Customer, Order, Product, Promotion, Collection, OrderItem, Review, Address, Transaction
@@ -55,7 +60,8 @@ def get_model_changes(old_instance, new_instance):
         new_value = getattr(new_instance, field.name)
 
         if old_value != new_value:
-            if any(isinstance(value, (DateTimeField, Decimal, datetime.date, datetime.datetime, uuid.UUID, DateField)) for value in
+            if any(isinstance(value, (DateTimeField, Decimal, datetime.date, datetime.datetime, uuid.UUID, DateField))
+                   for value in
                    (new_value, old_value)):
                 changes[field.name] = {
                     'old_value': str(old_value),
@@ -79,17 +85,20 @@ def get_model_changes(old_instance, new_instance):
 @receiver(pre_save, sender=Review)
 @receiver(pre_save, sender=Order)
 @receiver(pre_save, sender=Product)
+@receiver(pre_save, sender=TranslatableModel)
 @receiver(pre_save, sender=Promotion)
 @receiver(pre_save, sender=BaseDiscount)
 @receiver(pre_save, sender=Collection)
 @receiver(pre_save, sender=Address)
 @receiver(pre_save, sender=OrderItem)
 @receiver(pre_save, sender=Transaction)
+@receiver(pre_save, sender=Blog)
+@receiver(pre_save, sender=BlogComment)
 def log_create_update(sender, instance, **kwargs):
     model_name = sender.__name__  # just for fun :-|
-
     try:
         old_instance = sender._default_manager.get(pk=instance.pk)  #:-)
+        print('old_instance', old_instance)
     except sender.DoesNotExist:
         action = 'CREATE'
         old_value = None
@@ -98,8 +107,8 @@ def log_create_update(sender, instance, **kwargs):
         action = 'UPDATE'
         old_value = serialize_model_instance(old_instance)
         changes = get_model_changes(old_instance, instance)
-        # print(old_value)
-        # print(changes)
+        print('old_value', old_value)
+        print('changes', changes)
 
     table_name = sender._meta.db_table
     row_id = instance.id
@@ -134,3 +143,21 @@ def log_create_update(sender, instance, **kwargs):
         old_value=old_value,
         changes=changes,
     )
+
+
+def models_with_translations():
+    models_with_translation = []
+    for model in apps.get_models():
+        if 'translation' in model.__name__.lower():
+            models_with_translation.append(model)
+    return models_with_translation
+
+
+def create_signal_recivers_for_models_with_translation():
+    models_with_translation = models_with_translations()
+    print(models_with_translation)
+    for model in models_with_translation:
+        pre_save.connect(log_create_update, sender=model)
+
+
+create_signal_recivers_for_models_with_translation()
