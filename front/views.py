@@ -1,5 +1,6 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
+from django.utils.translation import activate
 from django.views import View
 from django.views.generic import TemplateView
 from django.conf import settings
@@ -37,6 +38,17 @@ class ProductDetailView(View):
 
 class CartView(TemplateView):
     template_name = 'cart.html'
+
+
+class BlogListView(TemplateView):
+    template_name = 'blogs.html'
+
+
+class BlogDetailView(View):
+    template_name = 'blog_detail.html'
+
+    def get(self, request, id):
+        return render(request, self.template_name, {'id': id})
 
 
 class HomeView(TemplateView):
@@ -131,3 +143,13 @@ def verify(request, authority):
             return {'status': False, 'code': str(response['Status'])}
     print(response)
     return response
+
+
+def set_language(request):
+    if request.method == 'POST':
+        language_code = request.POST.get('language_code')
+        request.session['language_code'] = language_code
+        print(language_code)
+        settings.LANGUAGE_CODE = language_code
+        activate(language_code)
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

@@ -78,8 +78,8 @@ class AuditlogAdmin(admin.ModelAdmin):
         log_entry = queryset.first()
         after_log = AuditLog.objects.all().filter(row_id=log_entry.row_id, timestamp__gte=log_entry.timestamp)
 
-        app_name, model_name = log_entry.table_name.split('_')
-
+        app_name, model_name = log_entry.table_name.split('_', 1)
+        model_name: str = model_name.replace("_", "")
         # mage mishe inghadar ziba bashe ?? :-)
 
         model_class = apps.get_model(app_label=app_name, model_name=model_name)
@@ -96,8 +96,11 @@ class AuditlogAdmin(admin.ModelAdmin):
                             pk=(field_data['old_value']))
 
                     setattr(model_instance, field_name, field_data['old_value'])
-                    if model_instance.deleted_at == "None":
-                        model_instance.deleted_at = None
+                    try:
+                        if model_instance.deleted_at == "None":
+                            model_instance.deleted_at = None
+                    except AttributeError:
+                        pass
 
                 model_instance.save()
                 changes[field_name] = str(field_data)

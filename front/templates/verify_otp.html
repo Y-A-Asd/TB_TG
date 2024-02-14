@@ -89,6 +89,7 @@
                             return response.json()
                         } else {
                             return response.json().then(errorJson => {
+                                alert(JSON.stringify(errorJson))
                                 throw new Error(JSON.stringify(errorJson));
                             });
                         }
@@ -143,9 +144,12 @@
                     'otp': otp.value
                 })
                     .then(data => {
-                        console.log(data);
-                        alert('Your account is active now please login!')
-                        window.location.href = '/login';
+                        if (data){
+                            console.log(data);
+                            alert('Your account is active now please login!')
+                            window.location.href = '/login';
+                        }
+
                     })
                     .catch(error => {
                         console.error('Error:', error);

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-13 04:33+0330\n"
+"POT-Creation-Date: 2024-02-13 05:12+0330\n"
 "PO-Revision-Date: 2024-01-31 08:04+0330\n"
 "Last-Translator: Anonymous User <yosofasady2@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -207,19 +207,23 @@ msgstr ""
 msgid "About Me"
 msgstr ""
 
-#: front/templates/base.html:130
+#: front/templates/base.html:114
+msgid "Search Here"
+msgstr ""
+
+#: front/templates/base.html:132
 msgid "About Us"
 msgstr ""
 
-#: front/templates/base.html:136 shop/models.py:198 shop/models.py:319
+#: front/templates/base.html:138 shop/models.py:198 shop/models.py:319
 msgid "Address"
 msgstr "Address"
 
-#: front/templates/base.html:143
+#: front/templates/base.html:145
 msgid "Follow Us"
 msgstr ""
 
-#: front/templates/base.html:144
+#: front/templates/base.html:146
 msgid "Let us be social"
 msgstr ""
 

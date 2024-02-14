@@ -29,6 +29,7 @@ urlpatterns = i18n_patterns(
     path("__debug__/", include("debug_toolbar.urls")),
     path("core/", include('core.urls')),
     path("", include('front.urls', namespace='front')),
+    path("blog/", include('blog.urls', namespace='blog')),
 
     prefix_default_language=False
 )

@@ -139,9 +139,9 @@ class ProductAdmin(TranslatableAdmin):
         return {'slug': ('title',)}
 
     actions = ['clear_inventory']
-    list_display = ['title', 'unit_price', 'inventory_status', 'collection_title', 'min_inventory']
+    list_display = ['title', 'unit_price', 'inventory_status', 'collection_title', 'min_inventory', 'secondhand']
     list_editable = ['unit_price']
-    list_filter = ['collection', 'updated_at', InventoryFilter, MainFeatureFilter, CollectionFilter]
+    list_filter = ['collection', 'updated_at', InventoryFilter, MainFeatureFilter, CollectionFilter, 'secondhand']
     list_per_page = 10
     list_select_related = ['collection']
     search_fields = ['title']
@@ -157,10 +157,10 @@ class ProductAdmin(TranslatableAdmin):
                 collection_id = int(collection_filter)
                 collection_q = Q(collection_id=collection_id) | Q(collection__parent_id=collection_id)
                 queryset = queryset.filter(collection_q)
-                print(queryset.query)
+                # print(queryset.query)
             except ValueError:
                 pass
-        print(queryset.query)
+        # print(queryset.query)
         return queryset, False
 
     def collection_title(self, product):

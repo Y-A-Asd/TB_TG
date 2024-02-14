@@ -96,7 +96,7 @@ class Product(TranslatableModel, BaseModel):
                                    related_name='products')
     discount = models.ForeignKey(BaseDiscount, on_delete=models.CASCADE, verbose_name=_("Discount"),
                                  null=True, blank=True)
-
+    secondhand = models.BooleanField(_('Seccond Hand'), default=False, )
     # extra_data = models.JSONField(verbose_name='Features', null=True, blank=True)
 
     def __repr__(self):

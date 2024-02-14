@@ -8,10 +8,10 @@
         <div class="container">
             <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
                 <div class="col-first">
-                    <h1 class="text-danger" >{% trans 'Login/Register' %}</h1>
+                    <h1 class="text-danger">{% trans 'Login/Register' %}</h1>
                     <nav class="d-flex align-items-center">
-                        <a class="text-danger"  href="">{% trans 'Home' %}<span class="lnr lnr-arrow-right"></span></a>
-                        <a class="text-danger"  href="">{% trans 'Login/Register' %}</a>
+                        <a class="text-danger" href="">{% trans 'Home' %}<span class="lnr lnr-arrow-right"></span></a>
+                        <a class="text-danger" href="">{% trans 'Login/Register' %}</a>
                     </nav>
                 </div>
             </div>
@@ -94,11 +94,11 @@
                 return fetch(url, options)
 
                     .then(response => {
-                        console.log(response);
                         if (response.ok) {
                             return response.json()
                         } else {
                             return response.json().then(errorJson => {
+                                alert(JSON.stringify(errorJson))
                                 throw new Error(JSON.stringify(errorJson));
                             });
                         }
@@ -138,6 +138,7 @@
             window.onload = function () {
                 verifyToken();
             };
+
             document.getElementById('loginForm').addEventListener('submit', function (event) {
                 event.preventDefault();
 
@@ -156,9 +157,11 @@
                     'password': password.value
                 })
                     .then(data => {
-                        console.log(data)
-                        localStorage.setItem('email', email.value);
-                        window.location.href = '/verify-otp';
+                        if (data) {
+                            console.log(data)
+                            localStorage.setItem('email', email.value);
+                            window.location.href = '/verify-otp';
+                        }
                     })
                     .catch(error => {
                         displayErrorMessage(error);
@@ -226,19 +229,55 @@
 <div class="s_Product_carousel owl-carousel owl-theme owl-loaded">
 
 
-
-					<div class="owl-stage-outer"><div class="owl-stage" style="transform: translate3d(-1080px, 0px, 0px); transition: all 0.5s ease 0s; width: 3780px;"><div class="owl-item cloned" style="width: 540px; margin-right: 0px;"><div class="single-prd-item">
-							<img class="img-fluid" src="/static/img/category/s-p1.jpg" alt="">
-						</div></div><div class="owl-item cloned" style="width: 540px; margin-right: 0px;"><div class="single-prd-item">
-							<img class="img-fluid" src="/static/img/category/s-p1.jpg" alt="">
-						</div></div><div class="owl-item active" style="width: 540px; margin-right: 0px;"><div class="single-prd-item">
-							<img class="img-fluid" src="/static/img/category/s-p1.jpg" alt="">
-						</div></div><div class="owl-item" style="width: 540px; margin-right: 0px;"><div class="single-prd-item">
-							<img class="img-fluid" src="/static/img/category/s-p1.jpg" alt="">
-						</div></div><div class="owl-item" style="width: 540px; margin-right: 0px;"><div class="single-prd-item">
-							<img class="img-fluid" src="/static/img/category/s-p1.jpg" alt="">
-						</div></div><div class="owl-item cloned" style="width: 540px; margin-right: 0px;"><div class="single-prd-item">
-							<img class="img-fluid" src="/static/img/category/s-p1.jpg" alt="">
-						</div></div><div class="owl-item cloned" style="width: 540px; margin-right: 0px;"><div class="single-prd-item">
-							<img class="img-fluid" src="/static/img/category/s-p1.jpg" alt="">
-						</div></div></div></div><div class="owl-controls"><div class="owl-nav"><div class="owl-prev" style="display: none;">prev</div><div class="owl-next" style="display: none;">next</div></div><div class="owl-dots" style=""><div class="owl-dot active"><span></span></div><div class="owl-dot"><span></span></div><div class="owl-dot"><span></span></div></div></div></div>
+    <div class="owl-stage-outer">
+        <div class="owl-stage"
+             style="transform: translate3d(-1080px, 0px, 0px); transition: all 0.5s ease 0s; width: 3780px;">
+            <div class="owl-item cloned" style="width: 540px; margin-right: 0px;">
+                <div class="single-prd-item">
+                    <img class="img-fluid" src="/static/img/category/s-p1.jpg" alt="">
+                </div>
+            </div>
+            <div class="owl-item cloned" style="width: 540px; margin-right: 0px;">
+                <div class="single-prd-item">
+                    <img class="img-fluid" src="/static/img/category/s-p1.jpg" alt="">
+                </div>
+            </div>
+            <div class="owl-item active" style="width: 540px; margin-right: 0px;">
+                <div class="single-prd-item">
+                    <img class="img-fluid" src="/static/img/category/s-p1.jpg" alt="">
+                </div>
+            </div>
+            <div class="owl-item" style="width: 540px; margin-right: 0px;">
+                <div class="single-prd-item">
+                    <img class="img-fluid" src="/static/img/category/s-p1.jpg" alt="">
+                </div>
+            </div>
+            <div class="owl-item" style="width: 540px; margin-right: 0px;">
+                <div class="single-prd-item">
+                    <img class="img-fluid" src="/static/img/category/s-p1.jpg" alt="">
+                </div>
+            </div>
+            <div class="owl-item cloned" style="width: 540px; margin-right: 0px;">
+                <div class="single-prd-item">
+                    <img class="img-fluid" src="/static/img/category/s-p1.jpg" alt="">
+                </div>
+            </div>
+            <div class="owl-item cloned" style="width: 540px; margin-right: 0px;">
+                <div class="single-prd-item">
+                    <img class="img-fluid" src="/static/img/category/s-p1.jpg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="owl-controls">
+        <div class="owl-nav">
+            <div class="owl-prev" style="display: none;">prev</div>
+            <div class="owl-next" style="display: none;">next</div>
+        </div>
+        <div class="owl-dots" style="">
+            <div class="owl-dot active"><span></span></div>
+            <div class="owl-dot"><span></span></div>
+            <div class="owl-dot"><span></span></div>
+        </div>
+    </div>
+</div>

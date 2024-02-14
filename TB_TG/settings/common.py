@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django_filters',
     'rest_framework',
     'rosetta',
+    'blog',
     'front',
     'discount',
     'core',

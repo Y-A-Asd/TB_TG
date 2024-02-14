@@ -17,7 +17,6 @@ def switch_lang_code(path, language):
 
     # Split the parts of the path
     parts = path.split('/')
-    print(parts)
 
     # Add or substitute the new language prefix
     if parts[1] in lang_codes:

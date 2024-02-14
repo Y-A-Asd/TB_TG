@@ -48,6 +48,11 @@
 <header class="header_area sticky-header">
     <div class="main_menu">
         <nav class="navbar navbar-expand-lg navbar-light main_box">
+            <form class="m-4" id="language-form" action="{% url 'front:set_language' %}" method="post">
+                {% csrf_token %}
+                <input class="self" type="submit" name="language_code" value="fa">
+                <input type="submit" name="language_code" value="en">
+            </form>
             <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <a id="logo_top" class="navbar-brand logo_h" href="{% url 'front:home' %}">
@@ -63,9 +68,9 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                     <ul class="nav navbar-nav menu_nav ml-auto">
-                        <li class="nav-item"><a class="nav-link" href="{% url 'front:home' %}">{% trans 'Home' %}</a>
+                        <li class="nav-item mx-3"><a class="nav-link" href="{% url 'front:home' %}">{% trans 'Home' %}</a>
                         </li>
-                        <li class="nav-item submenu dropdown">
+                        <li class="nav-item submenu dropdown mx-3">
                             <a href="{% url 'front:products' %}" class="nav-link dropdown-toggle"
                                role="button">{% trans 'Shop' %}</a>
                             {#								<ul class="dropdown-menu">#}
@@ -76,7 +81,7 @@
                             {#									<li class="nav-item"><a class="nav-link" href="confirmation.html">Confirmation</a></li>#}
                             {#								</ul>#}
                         </li>
-                        <li class="nav-item submenu dropdown">
+                        <li class="nav-item submenu dropdown mx-3">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-haspopup="true"
                                aria-expanded="false">{% trans 'Blog' %}</a>
@@ -85,10 +90,10 @@
                                 <li class="nav-item"><a class="nav-link" href="single-blog.html">Blog Details</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item mx-5"><a class="nav-link"
+                        <li class="nav-item mx-3"><a class="nav-link"
                                                      href="{% url 'front:login' %}">{% trans 'Login / Register' %}</a>
                         </li>
-                        <li class="nav-item"><a class="nav-link"
+                        <li class="nav-item mx-3"><a class="nav-link"
                                                 href="https://yousofasadi.vercel.app/">{% trans 'About Me' %}</a>
                         </li>
 
@@ -111,7 +116,7 @@
     <div class="search_input" id="search_input_box">
         <div class="container">
             <form class="d-flex justify-content-between">
-                <input type="text" class="form-control" id="search_input" placeholder="Search Here">
+                <input type="text" class="form-control" id="search_input" placeholder="{% trans 'Search Here' %}">
                 <button type="submit" class="btn"></button>
                 <span class="lnr lnr-cross" id="close_search" title="Close Search"></span>
             </form>
@@ -202,5 +207,6 @@
 <script src="{% static 'js/owl.carousel.min.js' %}"></script>
 <!--gmaps Js-->
 <script src="{% static 'js/gmaps.min.js' %}"></script>
+
 </body>
 </html>

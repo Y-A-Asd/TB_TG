@@ -77,7 +77,8 @@
                                 </div>
                             </a>
                         </li>
-                        <li class="dropdown-item" id="logoutItem"><i class="icon-power mr-2"></i>{% trans 'Logout' %} </li>
+                        <li class="dropdown-item" id="logoutItem"><i class="icon-power mr-2"></i>{% trans 'Logout' %}
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -107,7 +108,8 @@
                             <ul class="nav nav-tabs nav-tabs-primary top-icon nav-justified">
                                 <li class="nav-item">
                                     <a href="javascript:void();" data-target="#addresses" data-toggle="pill"
-                                       class="nav-link active"><i class="zmdi zmdi-bookmark"></i> <span class="hidden-xs">{% trans 'Addresses' %}</span></a>
+                                       class="nav-link active"><i class="zmdi zmdi-bookmark"></i> <span
+                                            class="hidden-xs">{% trans 'Addresses' %}</span></a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="javascript:void();" data-target="#orders" data-toggle="pill"
@@ -234,7 +236,8 @@
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-lg-9 offset-lg-3">
-                                                <input type="submit" class="btn btn-primary" value="{% trans 'Save Changes' %}">
+                                                <input type="submit" class="btn btn-primary"
+                                                       value="{% trans 'Save Changes' %}">
                                             </div>
                                         </div>
                                     </form>
@@ -249,7 +252,8 @@
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-lg-9 offset-lg-3">
-                                                <input type="submit" class="btn btn-secondary" value="{% trans 'Save Changes' %}">
+                                                <input type="submit" class="btn btn-secondary"
+                                                       value="{% trans 'Save Changes' %}">
                                             </div>
                                         </div>
                                     </form>
@@ -268,7 +272,8 @@
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-lg-9 offset-lg-3">
-                                                <input type="submit" class="btn btn-success" value="{% trans 'Save Changes' %}">
+                                                <input type="submit" class="btn btn-success"
+                                                       value="{% trans 'Save Changes' %}">
                                             </div>
                                         </div>
                                     </form>
@@ -334,7 +339,16 @@
         };
 
         return fetch(url, options)
-            .then(response => response.json())
+            .then(response => {
+                if (response.ok) {
+                    return response.json()
+                } else {
+                    return response.json().then(errorJson => {
+                        alert(JSON.stringify(errorJson))
+                        throw new Error(JSON.stringify(errorJson));
+                    });
+                }
+            })
             .catch(error => {
                 console.error('Error:', error);
             });
@@ -439,8 +453,10 @@
             birth_date: birthDate
         })
             .then(response => {
-                console.log('Customer updated:', response);
-                alert('Customer updated successfully!');
+                if (response) {
+                    console.log('Customer updated:', response);
+                    alert('Customer updated successfully!');
+                }
             })
             .catch(error => {
                 console.error('Failed to update customer:', error);
@@ -489,8 +505,10 @@
 
         makeAuthenticatedRequest(endpoint, 'PUT', requestBody)
             .then(response => {
-                console.log('User updated:', response);
-                alert('User updated successfully!');
+                if (response) {
+                    console.log('User updated:', response);
+                    alert('User updated successfully!');
+                }
             })
             .catch(error => {
                 console.error('Failed to update user:', error);
@@ -547,8 +565,15 @@
 
         return fetch(endpoint, options)
             .then(response => {
-                console.log('User updated:', response);
-                alert('Password updated successfully!');
+                if (response.ok) {
+                    console.log('User updated:', response);
+                    alert('Password updated successfully!');
+                } else {
+                    return response.json().then(errorJson => {
+                        alert(JSON.stringify(errorJson))
+                        throw new Error(JSON.stringify(errorJson));
+                    });
+                }
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -698,9 +723,13 @@
 
         makeAuthenticatedRequest(endpoint, 'POST', requestBody)
             .then(response => {
-                console.log('Address created:', response);
-                alert('Address created successfully!');
-                fetchAddresses();
+                if (response) {
+                    console.log('Address created:', response);
+                    alert('Address created successfully!');
+                    fetchAddresses();
+                }
+
+
             })
             .catch(error => {
                 console.error('Failed to create address:', error);
