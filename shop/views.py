@@ -523,10 +523,15 @@ class ReportingAPIView(APIView):
         reporting_data = Reporting(serializer.validated_data)
 
         total_sales = reporting_data.total_sales()
+        print('total_sales', total_sales)
         favorite_products = list(reporting_data.favorite_products())
+        print('favorite_products', favorite_products)
         best_cutomer = reporting_data.best_cutomer()
+        print('best_cutomer', best_cutomer)
         favorite_collection = list(reporting_data.favorite_collection())
+        print('favorite_collection', favorite_collection)
         order_status_counts = list(reporting_data.order_status_counts())
+        print('order_status_counts', order_status_counts)
 
         response_data = {
             'total_sales': total_sales,

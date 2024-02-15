@@ -333,7 +333,7 @@ class OrderSerializer(serializers.ModelSerializer):
             'total_price')
 
     def get_total_price(self, order):
-        return sum([item.quantity * item.unit_price for item in order.orders.all()])
+        return order.get_total_price()
 
     def get_email(self, order):
         user = User.objects.get(id=order.customer.user_id)
