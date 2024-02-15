@@ -16,7 +16,7 @@
     <!-- Mobile Specific Meta -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon-->
-    <link rel="shortcut icon" href="img/fav.png">
+    <link rel="shortcut icon" href="">
     <!-- Author Meta -->
     <meta name="author" content="CodePixar">
     <!-- Meta Description -->
@@ -82,13 +82,7 @@
                             {#								</ul>#}
                         </li>
                         <li class="nav-item submenu dropdown mx-3">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-haspopup="true"
-                               aria-expanded="false">{% trans 'Blog' %}</a>
-                            <ul class="dropdown-menu">
-                                <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
-                                <li class="nav-item"><a class="nav-link" href="single-blog.html">Blog Details</a></li>
-                            </ul>
+                            <a href="{% url 'front:blogs' %}" class="nav-link dropdown-toggle">{% trans 'Blog' %}</a>
                         </li>
                         <li class="nav-item mx-3"><a class="nav-link"
                                                      href="{% url 'front:login' %}">{% trans 'Login / Register' %}</a>
@@ -176,9 +170,9 @@
                 .then(data => {
                     const siteSettings = data[0];
 
-                    document.getElementById("aboutUsText").textContent = siteSettings.translations.{{ LANGUAGE_CODE }}.footer_text;
+                    document.getElementById("aboutUsText").textContent = siteSettings.footer_text;
 
-                    document.getElementById("addressText").textContent = siteSettings.translations.{{ LANGUAGE_CODE }}.address;
+                    document.getElementById("addressText").textContent = siteSettings.address;
 
                     document.getElementById("telegramLink").href = siteSettings.telegram_link;
                     document.getElementById("instagramLink").href = siteSettings.instagram_link;
