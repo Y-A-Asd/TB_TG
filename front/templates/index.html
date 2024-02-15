@@ -76,28 +76,6 @@
             <div class="row fullscreen align-items-center justify-content-start">
                 <div class="col-lg-12">
                     <div class="active-banner-slider owl-carousel" id="product-slider">
-                        <!-- single-slide -->
-                        {#                        <div class="row single-slide align-items-center d-flex">#}
-                        {#                            <div class="col-lg-5 col-md-6">#}
-                        {#                                <div class="banner-content">#}
-                        {#                                    <h1>Nike New <br>Collection!</h1>#}
-                        {#                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor#}
-                        {#                                        incididunt ut labore et#}
-                        {#                                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>#}
-                        {#                                    <div class="add-bag d-flex align-items-center">#}
-                        {#                                        <a class="add-btn" href="{% url 'front:products' %}"><span#}
-                        {#                                                class="lnr lnr-cross"></span></a>#}
-                        {#                                        <span class="add-text text-uppercase">Shop Now</span>#}
-                        {#                                    </div>#}
-                        {#                                </div>#}
-                        {#                            </div>#}
-                        {#                            <div class="col-lg-7">#}
-                        {#                                <div class="banner-img">#}
-                        {#                                    <img class="img-fluid" src="{% static 'img/banner/banner-img.png' %}" alt="">#}
-                        {#                                </div>#}
-                        {#                            </div>#}
-                        {#                        </div>#}
-                        <!-- single-slide -->
 
                     </div>
                 </div>
@@ -169,6 +147,22 @@
                     </div>
                 </div>
                 <div class="row" id="productContainer">
+                    {#                         products will be dynamically added here using JavaScript #}
+                </div>
+            </div>
+        </div>
+
+        <div class="single-product-slider">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 text-center">
+                        <div class="section-title">
+                            <h1>{% trans 'Best Sales Products' %}</h1>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="bestProductContainer">
                     {#                         products will be dynamically added here using JavaScript #}
                 </div>
             </div>
@@ -496,122 +490,254 @@
             }
 
 
-             function getSortingOrdering(sortingOption) {
-            switch (sortingOption) {
-                case 'price_asc':
-                    return 'unit_price';
-                case 'price_desc':
-                    return '-unit_price';
-                default:
-                    return '-updated_at';
+            function getSortingOrdering(sortingOption) {
+                switch (sortingOption) {
+                    case 'price_asc':
+                        return 'unit_price';
+                    case 'price_desc':
+                        return '-unit_price';
+                    case 'best_sales':
+                        return 'best_sales';
+                    default:
+                        return '-updated_at';
+                }
             }
-        }
+
+            function fetchBestSalesProducts(page = 1, selectedOption = 'best_sales', collectionsId = null, unit_price__gt = null,
+                                   unit_price__lt = null, search = null, feature_key = null, feature_value = null) {
+                let apiUrl = null
+                apiUrl = `/shop/products/?page=${page}&ordering=${getSortingOrdering(selectedOption)}`;
+
+                if (collectionsId != null) {
+                    apiUrl += `&collection_id=${collectionsId}`;
+                    addFilterToCurrentFilters('{% trans 'Collection' %}', collectionsId);
+                }
+                if (selectedOption != null) {
+                    apiUrl += `&ordering=${getSortingOrdering(selectedOption)}`;
+                    addFilterToCurrentFilters('{% trans 'Ordering' %}', selectedOption);
+                }
+                if (unit_price__gt != null) {
+                    apiUrl += `&unit_price__gt=${unit_price__gt}`;
+                    addFilterToCurrentFilters('{% trans 'Price Greater Than' %}', unit_price__gt);
+                }
+                if (unit_price__lt != null) {
+                    apiUrl += `&unit_price__lt=${unit_price__lt}`;
+                    addFilterToCurrentFilters('{% trans 'Price Less Than' %}', unit_price__lt);
+                }
+                if (search != null) {
+                    apiUrl += `&search=${search}`;
+                    addFilterToCurrentFilters('{% trans 'Search' %}', search);
+                }
+                if (feature_key != null) {
+                    apiUrl += `&feature_key=${feature_key}`;
+                    addFilterToCurrentFilters('{% trans 'Feature_key' %}', feature_key);
+                }
+                if (feature_value != null) {
+                    apiUrl += `&feature_value=${feature_value}`;
+                    addFilterToCurrentFilters('{% trans 'Feature_value' %}', feature_value);
+                }
+                console.log(apiUrl)
+                fetch(apiUrl)
+                    .then(response => response.json())
+                    .then(products => {
+                        const bestProductContainer = document.getElementById('bestProductContainer');
+                        bestProductContainer.innerHTML = '';
+
+                        products.results.forEach(product => {
+                            {
+                                const currentLanguage = '{{ LANGUAGE_CODE }}';
+                                const translation = product.translations[currentLanguage] || product.translations.{{ LANGUAGE_CODE }};
+                                const productBlock = document.createElement('div');
+                                productBlock.classList.add('col-lg-4', 'col-md-6', 'single-product');
+
+                                const productImage = document.createElement('img');
+                                productImage.classList.add('img-fluid');
+                                productImage.src = product.images.length > 0 ? product.images[0].image : '{% static "img/default-product.jpg" %}';
+                                productImage.alt = product.translations.{{ LANGUAGE_CODE }}.title;
+
+                                const productDetails = document.createElement('div');
+                                productDetails.classList.add('product-details');
+
+                                const productName = document.createElement('h6');
+                                productName.textContent = translation.title;
+
+
+                                const productPrice = document.createElement('div');
+                                productPrice.classList.add('price');
+
+                                const originalPrice = document.createElement('h6');
+                                originalPrice.textContent = `$${product.price.toFixed(2)}`;
+
+                                const discountedPrice = document.createElement('h6');
+                                if (product.org_price !== product.price) {
+                                    discountedPrice.classList.add('l-through');
+                                    discountedPrice.textContent = `$${product.org_price.toFixed(2)}`;
+                                }
+
+                                const productActions = document.createElement('div');
+                                productActions.classList.add('prd-bottom');
+
+                                const addToBag = createSocialInfo('ti-bag', '{% trans 'Add to bag' %}', 'ti-bag');
+                                addToBag.addEventListener('click', () => {
+                                    const cartId = localStorage.getItem('cartId');
+                                    const productId = product.id;
+                                    const quantity = 1;
+                                    if (!cartId || cartId == undefined) {
+
+                                        createCartAndAddToBag(productId);
+                                    } else {
+                                        addToCart(cartId, productId, quantity);
+                                    }
+                                });
+
+                                // const addToWishlist = createSocialInfo('lnr lnr-heart', 'Wishlist');
+                                {#let url = {% url 'front:products-detail' productId %}#}
+
+                                const viewMore = createSocialInfo('lnr', '{% trans 'View more' %}', 'lnr-move');
+                                viewMore.addEventListener('click', () => {
+                                    const productId = product.id;
+                                    window.location.href = `/products/${productId}/`;
+                                });
+
+
+                                productDetails.appendChild(productName);
+                                productPrice.appendChild(originalPrice);
+                                if (discountedPrice.textContent.trim() !== '') {
+                                    productPrice.appendChild(discountedPrice);
+                                }
+                                productDetails.appendChild(productPrice);
+                                productActions.appendChild(addToBag);
+                                // productActions.appendChild(addToWishlist);
+                                productActions.appendChild(viewMore);
+
+                                productBlock.appendChild(productImage);
+                                productBlock.appendChild(productDetails);
+                                productBlock.appendChild(productActions);
+
+                                bestProductContainer.appendChild(productBlock);
+
+                                bestProductContainer.appendChild(productBlock);
+                            }
+                        });
+
+                        updatePagination(products.count, productsPerPage);
+                    })
+                    .catch(error => {
+                        console.error('Error fetching products:', error);
+                    });
+
+                function addFilterToCurrentFilters(filterName, filterValue) {
+                    const existingButton = Array.from(document.querySelectorAll('#Filters button')).find(button => {
+                        return button.textContent.startsWith(`${filterName}:`);
+                    });
+
+                    if (existingButton) {
+                        existingButton.textContent = `${filterName}: ${filterValue}`;
+                        if (filterName == '{% trans 'Feature_key' %}') {
+                            const elements = document.querySelectorAll('.btn.btn-sm.btn-primary.mr-2')
+                            console.log(elements)
+                            for (let i = 0; i < elements.length; i++) {
+                                console.log(elements[i])
+                                if (elements[i].textContent.includes('{% trans 'Feature_value' %}')) {
+                                    console.log('findddddd2')
+                                    elements[i].remove();
+                                }
+                            }
+                        }
+                    } else {
+                        switch (filterName) {
+                            case '{% trans 'Collection' %}':
+                                currentCollectionsId = filterValue;
+                                break;
+                            case '{% trans 'Ordering' %}':
+                                currentOrdering = filterValue;
+                                break;
+                            case '{% trans 'Price Greater Than' %}':
+                                currentUnitPriceGt = filterValue;
+                                break;
+                            case '{% trans 'Price Less Than' %}':
+                                currentUnitPriceLt = filterValue;
+                                break;
+                            case '{% trans 'Search' %}':
+                                currentSearch = filterValue;
+                                break;
+                            case '{% trans 'Feature_key' %}':
+                                currentFeatureKey = filterValue;
+                                currentFeatureValue = null;
+                                break;
+                            case '{% trans 'Feature_value' %}':
+                                currentFeatureValue = filterValue;
+                                break;
+                            default:
+                                break;
+                        }
+
+                        const filtersContainer = document.getElementById('Filters');
+                        const filterButton = document.createElement('button');
+                        filterButton.textContent = `${filterName}: ${filterValue}`;
+                        filterButton.classList.add('btn', 'btn-sm', 'btn-primary', 'mr-2');
+                        filterButton.addEventListener('click', () => {
+                            removeFilterFromApiUrl(filterName, filterValue);
+                            if (filterName == '{% trans 'Feature_key' %}') {
+                                const elements = document.querySelectorAll('.btn.btn-sm.btn-primary.mr-2')
+                                console.log(elements)
+                                for (let i = 0; i < elements.length; i++) {
+                                    console.log(elements[i])
+                                    if (elements[i].textContent.includes('{% trans 'Feature_value' %}')) {
+                                        console.log('findddddd')
+                                        filtersContainer.removeChild(elements[i]);
+                                    }
+                                }
+                            }
+                            filtersContainer.removeChild(filterButton);
+                            currentPage = 1;
+                            fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue);
+                        });
+                        filtersContainer.appendChild(filterButton);
+                    }
+                }
+
+
+                function removeFilterFromApiUrl(filterName, filterValue) {
+
+                    switch (filterName) {
+                        case '{% trans 'Collection' %}':
+                            currentCollectionsId = null;
+                            break;
+                        case '{% trans 'Ordering' %}':
+                            currentOrdering = null;
+                            break;
+                        case '{% trans 'Price Greater Than' %}':
+                            currentUnitPriceGt = null;
+                            break;
+                        case '{% trans 'Price Less Than' %}':
+                            currentUnitPriceLt = null;
+                            break;
+                        case '{% trans 'Search' %}':
+                            currentSearch = null;
+                            break;
+                        case '{% trans 'Feature_key' %}':
+                            currentFeatureKey = null;
+                            currentFeatureValue = null;
+                            break;
+                        case '{% trans 'Feature_value' %}':
+                            currentFeatureValue = null;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
 
 
             fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue);
+            fetchBestSalesProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue);
+
 
         </script>
 
     </section>
     <!-- end product Area -->
-
-    <!-- Start exclusive deal Area -->
-    {#	<section class="exclusive-deal-area">#}
-    {#		<div class="container-fluid">#}
-    {#			<div class="row justify-content-center align-items-center">#}
-    {#				<div class="col-lg-6 no-padding exclusive-left">#}
-    {#					<div class="row clock_sec clockdiv" id="clockdiv">#}
-    {#						<div class="col-lg-12">#}
-    {#							<h1>Exclusive Hot Deal Ends Soon!</h1>#}
-    {#							<p>Who are in extremely love with eco friendly system.</p>#}
-    {#						</div>#}
-    {#						<div class="col-lg-12">#}
-    {#							<div class="row clock-wrap">#}
-    {#								<div class="col clockinner1 clockinner">#}
-    {#									<h1 class="days">150</h1>#}
-    {#									<span class="smalltext">Days</span>#}
-    {#								</div>#}
-    {#								<div class="col clockinner clockinner1">#}
-    {#									<h1 class="hours">23</h1>#}
-    {#									<span class="smalltext">Hours</span>#}
-    {#								</div>#}
-    {#								<div class="col clockinner clockinner1">#}
-    {#									<h1 class="minutes">47</h1>#}
-    {#									<span class="smalltext">Mins</span>#}
-    {#								</div>#}
-    {#								<div class="col clockinner clockinner1">#}
-    {#									<h1 class="seconds">59</h1>#}
-    {#									<span class="smalltext">Secs</span>#}
-    {#								</div>#}
-    {#							</div>#}
-    {#						</div>#}
-    {#					</div>#}
-    {#					<a href="" class="primary-btn">Shop Now</a>#}
-    {#				</div>#}
-    {#				<div class="col-lg-6 no-padding exclusive-right">#}
-    {#					<div class="active-exclusive-product-slider">#}
-    {#						<!-- single exclusive carousel -->#}
-    {#						<div class="single-exclusive-slider">#}
-    {#							<img class="img-fluid" src="img/product/e-p1.png" alt="">#}
-    {#							<div class="product-details">#}
-    {#								<div class="price">#}
-    {#									<h6>$150.00</h6>#}
-    {#									<h6 class="l-through">$210.00</h6>#}
-    {#								</div>#}
-    {#								<h4>addidas New Hammer sole#}
-    {#									for Sports person</h4>#}
-    {#								<div class="add-bag d-flex align-items-center justify-content-center">#}
-    {#									<a class="add-btn" href=""><span class="ti-bag"></span></a>#}
-    {#									<span class="add-text text-uppercase">Add to Bag</span>#}
-    {#								</div>#}
-    {#							</div>#}
-    {#						</div>#}
-    {#						<!-- single exclusive carousel -->#}
-    {#						<div class="single-exclusive-slider">#}
-    {#							<img class="img-fluid" src="img/product/e-p1.png" alt="">#}
-    {#							<div class="product-details">#}
-    {#								<div class="price">#}
-    {#									<h6>$150.00</h6>#}
-    {#									<h6 class="l-through">$210.00</h6>#}
-    {#								</div>#}
-    {#								<h4>addidas New Hammer sole#}
-    {#									for Sports person</h4>#}
-    {#								<div class="add-bag d-flex align-items-center justify-content-center">#}
-    {#									<a class="add-btn" href=""><span class="ti-bag"></span></a>#}
-    {#									<span class="add-text text-uppercase">Add to Bag</span>#}
-    {#								</div>#}
-    {#							</div>#}
-    {#						</div>#}
-    {#					</div>#}
-    {#				</div>#}
-    {#			</div>#}
-    {#		</div>#}
-    {#	</section>#}
-    {#	<!-- End exclusive deal Area -->#}
-    {##}
-    {#	<!-- Start brand Area -->#}
-    {#	<section class="brand-area section_gap">#}
-    {#		<div class="container">#}
-    {#			<div class="row">#}
-    {#				<a class="col single-img" href="#">#}
-    {#					<img class="img-fluid d-block mx-auto" src="img/brand/1.png" alt="">#}
-    {#				</a>#}
-    {#				<a class="col single-img" href="#">#}
-    {#					<img class="img-fluid d-block mx-auto" src="img/brand/2.png" alt="">#}
-    {#				</a>#}
-    {#				<a class="col single-img" href="#">#}
-    {#					<img class="img-fluid d-block mx-auto" src="img/brand/3.png" alt="">#}
-    {#				</a>#}
-    {#				<a class="col single-img" href="#">#}
-    {#					<img class="img-fluid d-block mx-auto" src="img/brand/4.png" alt="">#}
-    {#				</a>#}
-    {#				<a class="col single-img" href="#">#}
-    {#					<img class="img-fluid d-block mx-auto" src="img/brand/5.png" alt="">#}
-    {#				</a>#}
-    {#			</div>#}
-    {#		</div>#}
-    {#	</section>#}
-    <!-- End brand Area -->
 
 
 

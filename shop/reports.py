@@ -188,7 +188,7 @@ class Reporting:
                 collection_data = CollectionData(
                     id=collection.pk,
                     name=collection.title,
-                    total_sales=collection.total_sales,
+                    total_sales=round(collection.total_sales, 2),
                 )
                 yield collection_data
 

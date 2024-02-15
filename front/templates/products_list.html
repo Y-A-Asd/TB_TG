@@ -62,7 +62,7 @@
                                 <button value="default">{% trans "Default sorting" %}</button>
                                 <button value="price_asc">{% trans "Price: Low to High" %}</button>
                                 <button value="price_desc">{% trans "Price: High to Low" %}</button>
-
+                                <button value="best_sales">{% trans "Best Sales" %}</button>
                             </div>
                         </div>
                         <br>
@@ -506,15 +506,17 @@
         }
 
         function getSortingOrdering(sortingOption) {
-            switch (sortingOption) {
-                case 'price_asc':
-                    return 'unit_price';
-                case 'price_desc':
-                    return '-unit_price';
-                default:
-                    return '-updated_at';
+                switch (sortingOption) {
+                    case 'price_asc':
+                        return 'unit_price';
+                    case 'price_desc':
+                        return '-unit_price';
+                    case 'best_sales':
+                        return 'best_sales';
+                    default:
+                        return '-updated_at';
+                }
             }
-        }
 
         document.addEventListener("DOMContentLoaded", function () {
             const searchInput = document.getElementById("search_input");

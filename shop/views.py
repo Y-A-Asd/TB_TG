@@ -1,5 +1,7 @@
 import logging
-from django.db.models import Count, Q, QuerySet, ExpressionWrapper, fields, F
+
+from django.core.exceptions import FieldError
+from django.db.models import Count, Q, QuerySet, ExpressionWrapper, fields, F, Sum, DecimalField
 from django.utils.translation import gettext_lazy as _, activate, get_language
 from rest_framework import status
 from rest_framework.exceptions import ValidationError
@@ -194,7 +196,14 @@ class ProductViewSet(ModelViewSet):
             queryset = queryset.filter(secondhand=secondhand_bool)
 
         ordering = self.request.query_params.get('ordering', 'updated_at')
-        queryset = queryset.order_by(ordering)
+        try:
+            queryset = queryset.order_by(ordering)
+        except FieldError:
+            """https://stackoverflow.com/questions/40950251/django-rest-ordering-custom"""
+            """حوصلشو نداشتم :-/"""
+            if ordering == 'best_sales':
+                print('get this ordering')
+                queryset = self.order_by_best_sales(queryset)
 
         print(queryset.query)
         return queryset.distinct()
@@ -203,6 +212,10 @@ class ProductViewSet(ModelViewSet):
         logger.info("List view accessed")
 
         queryset = self.get_queryset()
+
+        # ordering = self.request.query_params.get('ordering')
+        # if ordering == 'best_sales':
+        #     queryset = self.order_by_best_sales(queryset)
 
         page = self.paginate_queryset(queryset)
         if page is not None:
@@ -219,6 +232,18 @@ class ProductViewSet(ModelViewSet):
         if OrderItem.objects.filter(product_id=kwargs['pk']).count() > 0:
             return Response({'error': 'can not be deleted!'})
         return super.destroy(request, *args, **kwargs)
+
+    def order_by_best_sales(self, queryset):
+        return (
+            queryset.annotate(
+                used_products=Sum('orderitems__quantity', distinct=True),
+                total_sales=Sum(
+                    (F('orderitems__unit_price') * 1.0000000001 * F('orderitems__quantity')),
+                    output_field=DecimalField()
+                )
+            )
+            .order_by('-used_products')
+        )
 
 
 class CollectionViewSet(ModelViewSet):
