@@ -48,11 +48,11 @@ class VerifyOtpView(APIView):
         entered_otp = request.data.get('otp', '')
 
         otp_key = f'otp:{email}'
-        # print(otp_key)
+        print(otp_key)
         stored_otp = redis.StrictRedis(host=settings.REDIS_HOST, port=settings.REDIS_PORT,
                                        db=settings.REDIS_DB).get(otp_key)
-        # print(stored_otp, entered_otp)
-        if stored_otp == entered_otp:
+        print(stored_otp, entered_otp)
+        if str(stored_otp) == str(entered_otp):
             user = get_user_model().objects.get(email=email)
             user.is_active = True
             user.save()

@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'core',
     'shop',
     'tags',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [

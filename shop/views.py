@@ -164,13 +164,13 @@ class ProductViewSet(ModelViewSet):
     #     return queryset
 
     def get_queryset(self):
-        queryset = Product.objects.all().prefetch_related('images').prefetch_related('mainfeature_set')
-        collection_id = self.request.query_params.get('collection_id')
-        print('collection_id: ', collection_id)
+        queryset = Product.objects.select_related('collection').prefetch_related('images', 'mainfeature_set')
 
+        collection_id = self.request.query_params.get('collection_id')
         if collection_id:
             q_object = RecursiveDjangoFilterBackend().get_recursive_q(collection_id)
             queryset = queryset.filter(q_object)
+
         lt = self.request.query_params.get('unit_price__lt')
         gt = self.request.query_params.get('unit_price__gt')
         if lt and gt:
@@ -189,18 +189,15 @@ class ProductViewSet(ModelViewSet):
             queryset = queryset.filter(mainfeature__value__id=feature_value)
 
         secondhand = self.request.query_params.get('secondhand')
-        print('secondhand', secondhand)
-        if secondhand == 'true':
-            secondhand = True
-            queryset = queryset.filter(secondhand=secondhand)
-        if secondhand == 'false':
-            secondhand = False
-            queryset = queryset.filter(secondhand=secondhand)
+        if secondhand in ('true', 'false'):
+            secondhand_bool = secondhand == 'true'
+            queryset = queryset.filter(secondhand=secondhand_bool)
 
         ordering = self.request.query_params.get('ordering', 'updated_at')
-        queryset = queryset.order_by(ordering).distinct()
+        queryset = queryset.order_by(ordering)
 
-        return queryset
+        print(queryset.query)
+        return queryset.distinct()
 
     def list(self, request, *args, **kwargs):
         logger.info("List view accessed")
