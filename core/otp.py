@@ -31,4 +31,4 @@ class Authentication:
                       auth_password=settings.EMAIL_HOST_PASSWORD)
             return otp, otp_expiry
         except Exception as e:
-            return None
+            raise ConnectionError

@@ -40,6 +40,17 @@ class CartView(TemplateView):
     template_name = 'cart.html'
 
 
+class BlogListView(TemplateView):
+    template_name = 'blogs.html'
+
+
+class BlogDetailView(View):
+    template_name = 'blog_detail.html'
+
+    def get(self, request, id):
+        return render(request, self.template_name, {'id': id})
+
+
 class HomeView(TemplateView):
     template_name = 'index.html'
 

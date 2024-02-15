@@ -94,6 +94,7 @@
                         return response.json()}
                         else {
                             return response.json().then(errorJson => {
+                                alert(JSON.stringify(errorJson))
                                 throw new Error(JSON.stringify(errorJson));
                             });
                         }

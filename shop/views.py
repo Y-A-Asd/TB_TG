@@ -150,7 +150,7 @@ class ProductViewSet(ModelViewSet):
     pagination_class = DefaultPagination
     filter_backends = [RecursiveDjangoFilterBackend, SearchFilter, OrderingFilter]
     filterset_class = ProductFilter
-    search_fields = ['translations__title', 'description']
+    search_fields = ['translations__title', 'translations__description']
     ordering_fields = ['unit_price', 'updated_at']
     permission_classes = [IsAdminOrReadOnly]
 
@@ -187,6 +187,15 @@ class ProductViewSet(ModelViewSet):
             queryset = queryset.filter(mainfeature__key__id=feature_key)
         if feature_value:
             queryset = queryset.filter(mainfeature__value__id=feature_value)
+
+        secondhand = self.request.query_params.get('secondhand')
+        print('secondhand', secondhand)
+        if secondhand == 'true':
+            secondhand = True
+            queryset = queryset.filter(secondhand=secondhand)
+        if secondhand == 'false':
+            secondhand = False
+            queryset = queryset.filter(secondhand=secondhand)
 
         ordering = self.request.query_params.get('ordering', 'updated_at')
         queryset = queryset.order_by(ordering).distinct()
