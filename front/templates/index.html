@@ -27,10 +27,10 @@
                             bannerContent.classList.add('banner-content');
 
                             const title = document.createElement('h1');
-                            title.textContent = product.translations.{{ LANGUAGE_CODE }}.title;
+                            title.textContent = product.title;
 
                             const description = document.createElement('p');
-                            description.textContent = product.translations.{{ LANGUAGE_CODE }}.description;
+                            description.textContent = product.description;
 
                             const addButton = document.createElement('a');
                             addButton.classList.add('add-btn');
@@ -50,7 +50,7 @@
                             const productImage = document.createElement('img');
                             productImage.classList.add('img-fluid');
                             productImage.src = product.images.length > 0 ? product.images[0].image : '{% static 'img/banner/banner-img.png' %}';
-                            productImage.alt = product.translations.{{ LANGUAGE_CODE }}.title;
+                            productImage.alt = product.title;
 
                             addButton.appendChild(addText);
 
@@ -240,21 +240,21 @@
 
                         products.results.forEach(product => {
                             {
-                                const currentLanguage = '{{ LANGUAGE_CODE }}';
-                                const translation = product.translations[currentLanguage] || product.translations.{{ LANGUAGE_CODE }};
+                                {#const currentLanguage = '{{ LANGUAGE_CODE }}';#}
+                                {#const translation = product.translations[currentLanguage] || product.translations.{{ LANGUAGE_CODE }};#}
                                 const productBlock = document.createElement('div');
                                 productBlock.classList.add('col-lg-4', 'col-md-6', 'single-product');
 
                                 const productImage = document.createElement('img');
                                 productImage.classList.add('img-fluid');
                                 productImage.src = product.images.length > 0 ? product.images[0].image : '{% static "img/default-product.jpg" %}';
-                                productImage.alt = product.translations.{{ LANGUAGE_CODE }}.title;
+                                productImage.alt = product.title;
 
                                 const productDetails = document.createElement('div');
                                 productDetails.classList.add('product-details');
 
                                 const productName = document.createElement('h6');
-                                productName.textContent = translation.title;
+                                productName.textContent = product.title;
 
 
                                 const productPrice = document.createElement('div');
@@ -315,7 +315,7 @@
                             }
                         });
 
-                        updatePagination(products.count, productsPerPage);
+                        {#updatePagination(products.count, productsPerPage);#}
                     })
                     .catch(error => {
                         console.error('Error fetching products:', error);
@@ -545,21 +545,21 @@
 
                         products.results.forEach(product => {
                             {
-                                const currentLanguage = '{{ LANGUAGE_CODE }}';
-                                const translation = product.translations[currentLanguage] || product.translations.{{ LANGUAGE_CODE }};
+                                {#const currentLanguage = '{{ LANGUAGE_CODE }}';#}
+                                {#const translation = product.translations[currentLanguage] || product.translations.{{ LANGUAGE_CODE }};#}
                                 const productBlock = document.createElement('div');
                                 productBlock.classList.add('col-lg-4', 'col-md-6', 'single-product');
 
                                 const productImage = document.createElement('img');
                                 productImage.classList.add('img-fluid');
                                 productImage.src = product.images.length > 0 ? product.images[0].image : '{% static "img/default-product.jpg" %}';
-                                productImage.alt = product.translations.{{ LANGUAGE_CODE }}.title;
+                                productImage.alt = product.title;
 
                                 const productDetails = document.createElement('div');
                                 productDetails.classList.add('product-details');
 
                                 const productName = document.createElement('h6');
-                                productName.textContent = translation.title;
+                                productName.textContent = product.title;
 
 
                                 const productPrice = document.createElement('div');
@@ -620,7 +620,7 @@
                             }
                         });
 
-                        updatePagination(products.count, productsPerPage);
+                        {#updatePagination(products.count, productsPerPage);#}
                     })
                     .catch(error => {
                         console.error('Error fetching products:', error);
