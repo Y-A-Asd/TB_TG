@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'djoser',
+    'drf_yasg',
+    'solo',
     'silk',
     'parler',
     "debug_toolbar",
@@ -53,7 +55,6 @@ INSTALLED_APPS = [
     'core',
     'shop',
     'tags',
-    'drf_yasg',
 ]
 
 MIDDLEWARE = [

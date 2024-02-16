@@ -3,7 +3,7 @@ from django.db.models import F, Q
 from django.forms import Select, ModelForm
 from django.urls import reverse
 from django.contrib import admin, messages
-from django.contrib.admin import TabularInline
+from solo.admin import SingletonModelAdmin
 from django.db.models.aggregates import Count, Sum
 from django.utils.html import format_html, urlencode
 from django.utils.translation import gettext_lazy as _
@@ -310,7 +310,7 @@ class TransactionAdmin(admin.ModelAdmin):
         return self.readonly_fields
 
 
-class SiteSettingsAdmin(TranslatableAdmin):
+class SiteSettingsAdmin(TranslatableAdmin, SingletonModelAdmin):
     list_display = ['id', 'phone_number', 'logo', 'logo_thumbnail', 'telegram_link', 'twitter_link', 'instagram_link',
                     'whatsapp_link', 'footer_text', 'address']  # Add 'logo_thumbnail' here
     readonly_fields = ['id', 'logo_thumbnail']
@@ -328,8 +328,9 @@ class SiteSettingsAdmin(TranslatableAdmin):
 admin.site.register(SiteSettings, SiteSettingsAdmin)
 
 
-class HomeBannerAdmin(admin.ModelAdmin):
+class HomeBannerAdmin(SingletonModelAdmin):
     list_display = ['id', 'display_products']
+    exclude = ['deleted_at', 'created_at', 'updated_at']
 
     def display_products(self, obj):
         return ', '.join([str(product) for product in obj.product.all()])

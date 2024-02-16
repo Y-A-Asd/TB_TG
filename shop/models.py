@@ -11,6 +11,7 @@ from parler.models import TranslatableModel, TranslatedFields
 from shop.validator import validate_file_size, validate_key_value_relationship
 from discount.models import BaseDiscount
 from core.models import BaseModel
+from solo.models import SingletonModel
 
 admin.site.site_header = _('Site Administration')
 admin.site.index_title = _('Index Title')
@@ -313,7 +314,7 @@ class Transaction(BaseModel):
         verbose_name_plural = _("Transactions")
 
 
-class SiteSettings(TranslatableModel, BaseModel):
+class SiteSettings(TranslatableModel, BaseModel, SingletonModel):
     translations = TranslatedFields(
         footer_text=models.TextField(_("Footer Text"), blank=True, null=True),
         address=models.TextField(_("Address"), blank=True, null=True)
@@ -333,7 +334,7 @@ class SiteSettings(TranslatableModel, BaseModel):
         verbose_name_plural = _("Site Settings")
 
 
-class HomeBanner(BaseModel):
+class HomeBanner(BaseModel, SingletonModel):
     product = models.ManyToManyField(Product, verbose_name='Products')
 
     def __str__(self):
