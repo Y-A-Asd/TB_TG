@@ -161,7 +161,8 @@
                             if (data) {
                                 console.log(data)
                                 localStorage.setItem('email', email.value);
-                                window.location.href = '/verify-otp';
+                                alert('Your account is active now please login!')
+                                window.location.href = '/login';
                             }
                         })
                         .catch(error => {

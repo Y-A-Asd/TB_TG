@@ -160,7 +160,7 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
-COMPRESS_ENABLED = True
+# COMPRESS_ENABLED = True
 COMPRESS_CSS_HASHING_METHOD = 'content'
 """https://django-compressor.readthedocs.io/en/stable/settings.html"""
 COMPRESS_CACHE_BACKEND = 'memcache'

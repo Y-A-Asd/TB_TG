@@ -50,7 +50,7 @@
                             </div>
                             <div class="col-md-12 form-group">
                                 <button type="submit" value="submit" class="primary-btn">{% trans 'Log In' %}</button>
-                                <a href="">{% trans 'Forgot Password?' %}</a>
+                                <a href="{% url 'front:verify-otp' %}">{% trans 'Login With Code' %}</a>
                             </div>
                         </form>
                     </div>

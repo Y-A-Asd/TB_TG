@@ -28,19 +28,20 @@
                     <div class="login_box_img">
                         <img class="img-fluid" src="{% static 'img/login.jpg' %}" alt="">
                         <div class="hover">
-                            <h4>{% trans 'Do you have account?' %}</h4>
+                            <h4>{% trans 'New to our website?' %}</h4>
                             <p>{% trans 'There are advances being made in science and technology everyday, and a good example of this is the' %}</p>
-                            <a class="primary-btn" href="{% url 'front:login' %}">{% trans 'Login' %}</a>
+                            <a class="primary-btn" href="{% url 'front:register' %}">{% trans 'Create an Account' %}</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="login_form_inner">
                         <h3>{% trans 'Verification' %}</h3>
-                        <form class="row login_form" action="" method="post" id="loginForm" novalidate="novalidate">
+                        <form class="row login_form" action="" method="post" id="loginForm" novalidate="novalidate"
+                              hidden="">
                             {% csrf_token %}
                             <div class="col-md-12 form-group">
-                                <input type="text" class="form-control" id="content" name="content"
+                                <input type="text" class="form-control" id="otp" name="otp"
                                        placeholder="{% trans 'Verify Code' %}" onfocus="this.placeholder = ''"
                                        onblur="this.placeholder = '{% trans 'Verify Code' %}'">
                             </div>
@@ -49,6 +50,21 @@
                                 <button type="submit" value="submit" class="primary-btn">{% trans 'Log In' %}</button>
                             </div>
                         </form>
+                        <form class="row login_form" action="" method="post" id="loginEmailForm"
+                              novalidate="novalidate">
+                            {% csrf_token %}
+                            <div class="col-md-12 form-group">
+                                <input type="text" class="form-control" id="email" name="email"
+                                       placeholder="{% trans 'Email' %}" onfocus="this.placeholder = ''"
+                                       onblur="this.placeholder = '{% trans 'Email' %}'">
+                            </div>
+
+                            <div class="col-md-12 form-group">
+                                <button type="submit" value="submit"
+                                        class="primary-btn">{% trans 'Send Code' %}</button>
+                            </div>
+                        </form>
+                        <a href="{% url 'front:login' %}">{% trans 'Login With Password' %}</a>
                     </div>
                 </div>
             </div>
@@ -129,10 +145,11 @@
                 window.onload = function () {
                     verifyToken();
                 };
+
                 document.getElementById('loginForm').addEventListener('submit', function (event) {
                     event.preventDefault();
 
-                    let otp = document.getElementById('content')
+                    let otp = document.getElementById('otp')
                     let email = localStorage.getItem('email');
 
 
@@ -147,11 +164,39 @@
                         .then(data => {
                             if (data) {
                                 console.log(data);
-                                alert('Your account is active now please login!')
-                                window.location.href = '/login';
+                                alert('You are logged in!')
+                                let jwtToken = data.access;
+                                localStorage.setItem('JWT', jwtToken);
+                                verifyToken();
                             }
 
                         })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+                });
+                document.getElementById('loginEmailForm').addEventListener('submit', function (event) {
+                    event.preventDefault();
+
+                    let email = document.getElementById('email')
+                    let endpoint = '/core/login-otp/';
+
+                    makeAuthenticatedRequest
+                    (endpoint, 'POST', context = {
+                        'email': email.value
+                    })
+                        .then(data => {
+                                if (data.error) {
+                                    alert(data.error);
+                                } else {
+                                    console.log(data);
+                                    alert('Check you email!')
+                                    document.getElementById('loginEmailForm').style.display = 'none';
+                                    document.getElementById('loginForm').removeAttribute('hidden');
+                                }
+
+                            }
+                        )
                         .catch(error => {
                             console.error('Error:', error);
                         });

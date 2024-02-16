@@ -49,6 +49,7 @@ class UserLoginOTPView(APIView):
             return Response({'error': _('Wait until last code expire')}, status=status.HTTP_201_CREATED)
         try:
             otp, otp_expiry = Authentication.send_otp_email(user.email, otp_key)
+            return Response({'message': _('Code Send, Check you email')}, status=status.HTTP_201_CREATED)
         except ConnectionError:
             return Response({'error': _('server side error!')}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
