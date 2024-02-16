@@ -23,6 +23,8 @@ class BaseDiscount(BaseModel):
                             max_length=2,
                             choices=Mode,
                             default=Mode.DiscountOff)
+    limit_price = models.DecimalField(_("Limit Price"), max_digits=12, decimal_places=2, null=True, blank=True)
+    max_price = models.DecimalField(_("Max Price"), max_digits=12, decimal_places=2, null=True, blank=True)
 
     def ensure_availability(self):
         now = timezone.now()
@@ -37,7 +39,7 @@ class BaseDiscount(BaseModel):
         return True
 
     def clean(self):
-        if self.code and not (self.valid_from and self.valid_to):
+        if self.code and not (self.valid_from and self.valid_to and self.limit_price and self.max_price):
             raise ValidationError({
                 'code': _("Code-based discounts must have valid_from and valid_to dates.")
             })
