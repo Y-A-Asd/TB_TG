@@ -234,6 +234,9 @@ class Order(BaseModel):
         verbose_name = _("Order")
         verbose_name_plural = _("Orders")
 
+    def __str__(self):
+        return f"{self.id} - {self.customer} - {self.order_status}"
+
     def get_total_price(self):
         """get total price of order base on discount applied"""
         if self.discount:
@@ -286,6 +289,9 @@ class OrderItem(BaseModel):
     class Meta:
         verbose_name = _("Order Item")
         verbose_name_plural = _("Order Items")
+
+    def __str__(self):
+        return f"{self.order} - {self.product}"
 
 
 class Review(BaseModel):

@@ -2,6 +2,7 @@
 {% load i18n %}
 {% get_current_language as LANGUAGE_CODE %}
 {% load static %}
+{% load compress %}
 {% block contents %}
     <!-- Start Banner Area -->
     <section class="banner-area organic-breadcrumb">
@@ -106,7 +107,7 @@
 
 
 
-
+{% compress js %}
     <script type="text/javascript">
 
         let currentCollectionsId = null;
@@ -729,4 +730,6 @@
 
 
     </script>
+{% endcompress %}
+
 {% endblock %}

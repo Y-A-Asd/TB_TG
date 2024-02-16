@@ -16,8 +16,8 @@ from datetime import timedelta
 from django.utils.translation import gettext_lazy as _
 import django
 from django.utils.translation import gettext
+from django.conf.global_settings import CACHES
 
-django.utils.translation.ugettext = gettext
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'djoser',
     'drf_yasg',
+    "compressor",
     'solo',
     'silk',
     'parler',
@@ -57,7 +58,12 @@ INSTALLED_APPS = [
     'tags',
 ]
 
+"""https://tech.raturi.in/compress-and-minify-files-django"""
+
 MIDDLEWARE = [
+    'django.middleware.gzip.GZipMiddleware',  # This one
+    'htmlmin.middleware.HtmlMinifyMiddleware',  # This one
+    'htmlmin.middleware.MarkRequestMiddleware',  # This one
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -147,6 +153,29 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+)
+
+COMPRESS_ENABLED = True
+COMPRESS_CSS_HASHING_METHOD = 'content'
+"""https://django-compressor.readthedocs.io/en/stable/settings.html"""
+COMPRESS_CACHE_BACKEND = 'memcache'
+COMPRESS_FILTERS = {
+    'css': [
+        'compressor.filters.css_default.CssAbsoluteFilter',
+        'compressor.filters.cssmin.rCSSMinFilter',
+    ],
+    'js': [
+        'compressor.filters.jsmin.JSMinFilter',
+    ]
+}
+HTML_MINIFY = True
+KEEP_COMMENTS_ON_MINIFYING = True
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'front/static'),
     os.path.join(BASE_DIR, 'shop/static'),
@@ -253,8 +282,17 @@ CACHES = {
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
-    }
+    },
 }
+"""
+    sudo systemctl start memcached
+"""
+CACHES['memcache'] = {
+
+    "BACKEND": "django.core.cache.backends.memcached.PyMemcacheCache",
+    "LOCATION": "127.0.0.1:11211",
+}
+print('CACHES', CACHES)
 """
 how to use cache in class base views:
     @method_decorator(cache_page(60) -> 1 minute cache

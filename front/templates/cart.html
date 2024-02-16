@@ -2,8 +2,8 @@
 {% load i18n %}
 {% get_current_language as LANGUAGE_CODE %}
 {% load static %}
+{% load compress %}
 {% block contents %}
-
     <!-- Start Banner Area -->
     <section class="banner-area organic-breadcrumb">
         <div class="container">
@@ -62,7 +62,7 @@
         </div>
     </section>
     <!--================End Cart Area =================-->
-
+    {% compress js %}
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             let cartId = localStorage.getItem("cartId");
@@ -209,6 +209,7 @@
                 .catch(error => console.error("Error deleting item:", error));
         }
     </script>
+    {% endcompress %}
 
 
 {% endblock %}

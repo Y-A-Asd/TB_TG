@@ -2,18 +2,19 @@
 {% load i18n %}
 {% get_current_language as LANGUAGE_CODE %}
 {% load static %}
+{% load compress %}
 {% block contents %}
-
     <!-- Start Banner Area -->
     <section class="banner-area organic-breadcrumb">
         <div class="container">
             <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
                 <div class="col-first">
-                    <h1 class="text-danger" >{% trans 'Compare' %}</h1>
+                    <h1 class="text-danger">{% trans 'Compare' %}</h1>
                     <nav class="d-flex align-items-center">
-                        <a class="text-danger"  href="{% url 'front:home' %}">{% trans 'Home' %}<span class="lnr lnr-arrow-right"></span></a>
-                        <a class="text-danger"  href="{% url 'front:products' %}">{% trans 'Shop' %}</a>
-                        <a class="text-danger"  href="">{% trans 'Compare' %}</a>
+                        <a class="text-danger" href="{% url 'front:home' %}">{% trans 'Home' %}<span
+                                class="lnr lnr-arrow-right"></span></a>
+                        <a class="text-danger" href="{% url 'front:products' %}">{% trans 'Shop' %}</a>
+                        <a class="text-danger" href="">{% trans 'Compare' %}</a>
                     </nav>
                 </div>
             </div>
@@ -37,87 +38,88 @@
         </div>
     </section>
 
+    {% compress js %}
+        <script>
+            const getQueryParameters = () => {
+                const searchParams = new URLSearchParams(window.location.search);
+                const productIds = searchParams.getAll('product_ids');
+                return productIds;
+            }
 
-    <script>
-        const getQueryParameters = () => {
-            const searchParams = new URLSearchParams(window.location.search);
-            const productIds = searchParams.getAll('product_ids');
-            return productIds;
-        }
+            const fetchComparisonData = (productIds) => {
+                const apiUrl = `/shop/compare/?product_ids=${productIds.join('&product_ids=')}`;
+                return fetch(apiUrl)
+                    .then(response => response.json());
 
-        const fetchComparisonData = (productIds) => {
-            const apiUrl = `/shop/compare/?product_ids=${productIds.join('&product_ids=')}`;
-            return fetch(apiUrl)
-                .then(response => response.json());
-
-        }
+            }
 
 
-        const generateTable = (comparisonData) => {
-            const productIds = getQueryParameters()
+            const generateTable = (comparisonData) => {
+                const productIds = getQueryParameters()
 
-            const featureCount = Object.keys(comparisonData).length
-            const productKey = Object.keys(comparisonData).slice(0, 1)
-            const featureKey = Object.keys(comparisonData).filter(key => !productKey.includes(key))
-            const productTitles = Object.keys(comparisonData[productKey[0]])
-            console.log(featureCount)// 5
-            console.log(productKey)// ['Title']
-            console.log(featureKey)// ['Price', 'Collection', 'Color', 'Brand']
-            console.log(productTitles)// ['Product 1', 'Product 2']
-            console.log(comparisonData)
+                const featureCount = Object.keys(comparisonData).length
+                const productKey = Object.keys(comparisonData).slice(0, 1)
+                const featureKey = Object.keys(comparisonData).filter(key => !productKey.includes(key))
+                const productTitles = Object.keys(comparisonData[productKey[0]])
+                console.log(featureCount)// 5
+                console.log(productKey)// ['Title']
+                console.log(featureKey)// ['Price', 'Collection', 'Color', 'Brand']
+                console.log(productTitles)// ['Product 1', 'Product 2']
+                console.log(comparisonData)
 
-            const table = document.querySelector('.table');
-            const thead = table.querySelector('thead');
-            const tbody = table.querySelector('tbody');
-            thead.innerHTML = ``
-            tbody.innerHTML = ``
+                const table = document.querySelector('.table');
+                const thead = table.querySelector('thead');
+                const tbody = table.querySelector('tbody');
+                thead.innerHTML = ``
+                tbody.innerHTML = ``
 
-            const theadtr = document.createElement('tr');
-            const theadth = document.createElement('th');
-            const theadh = document.createElement('h6');
-            theadh.textContent = '{% trans 'Title' %}'
-            theadth.appendChild(theadh);
-            theadtr.appendChild(theadth);
-
-            productTitles.forEach(product => {
-                console.log(product)
+                const theadtr = document.createElement('tr');
                 const theadth = document.createElement('th');
-                theadth.textContent = product;
+                const theadh = document.createElement('h6');
+                theadh.textContent = '{% trans 'Title' %}'
+                theadth.appendChild(theadh);
                 theadtr.appendChild(theadth);
 
-
-            })
-            thead.appendChild(theadtr);
-
-            featureKey.forEach(feature => {
-                const tbodytr = document.createElement('tr');
-                const tbodytb = document.createElement('td');
-                const tbodyh = document.createElement('h6');
-                tbodyh.textContent = feature
-                tbodytb.append(tbodyh)
-                tbodytr.append(tbodytb)
-                productTitles.forEach(key => {
-                    value = comparisonData[feature][key]
-                    const tbodytb = document.createElement('td');
-                    tbodytb.textContent = value
-                    tbodytr.append(tbodytb)
+                productTitles.forEach(product => {
+                    console.log(product)
+                    const theadth = document.createElement('th');
+                    theadth.textContent = product;
+                    theadtr.appendChild(theadth);
 
 
                 })
-                tbody.appendChild(tbodytr);
+                thead.appendChild(theadtr);
+
+                featureKey.forEach(feature => {
+                    const tbodytr = document.createElement('tr');
+                    const tbodytb = document.createElement('td');
+                    const tbodyh = document.createElement('h6');
+                    tbodyh.textContent = feature
+                    tbodytb.append(tbodyh)
+                    tbodytr.append(tbodytb)
+                    productTitles.forEach(key => {
+                        value = comparisonData[feature][key]
+                        const tbodytb = document.createElement('td');
+                        tbodytb.textContent = value
+                        tbodytr.append(tbodytb)
 
 
-            })
-            const tbodytr = document.createElement('tr');
-            const tbodytb = document.createElement('tb');
+                    })
+                    tbody.appendChild(tbodytr);
 
-        }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const productIds = getQueryParameters();
-            fetchComparisonData(productIds)
-                .then(comparisonData => generateTable(comparisonData));
-        });
-    </script>
+                })
+                const tbodytr = document.createElement('tr');
+                const tbodytb = document.createElement('tb');
+
+            }
+
+            document.addEventListener('DOMContentLoaded', () => {
+                const productIds = getQueryParameters();
+                fetchComparisonData(productIds)
+                    .then(comparisonData => generateTable(comparisonData));
+            });
+        </script>
+    {% endcompress %}
     <!--================End Cart Area =================-->
 {% endblock %}
