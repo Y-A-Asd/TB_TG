@@ -1,8 +1,11 @@
+import logging
 import random
 import redis
 from django.core.mail import send_mail
 from django.conf import settings
 from django.utils import timezone
+
+security_logger = logging.getLogger('security_logger')
 
 
 class Authentication:
@@ -29,6 +32,7 @@ class Authentication:
             recipient_list = [to_email, ]
             send_mail(subject, message, email_from, recipient_list, auth_user=email_from,
                       auth_password=settings.EMAIL_HOST_PASSWORD)
+            security_logger.info(f'otp send to user {to_email} : {otp}')
             return otp, otp_expiry
         except Exception as e:
             raise ConnectionError

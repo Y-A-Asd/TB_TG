@@ -1,8 +1,7 @@
 import logging
-
 from django.core.exceptions import FieldError
-from django.db.models import Count, Q, QuerySet, ExpressionWrapper, fields, F, Sum, DecimalField
-from django.utils.translation import gettext_lazy as _, activate, get_language
+from django.db.models import Count, F, Sum, DecimalField
+from django.utils.translation import gettext_lazy as _
 from rest_framework import status
 from rest_framework.exceptions import ValidationError
 from rest_framework.generics import get_object_or_404
@@ -29,9 +28,7 @@ from .models import Product, Collection, OrderItem, Review, Customer, Order, Pro
 from .filters import ProductFilter, RecursiveDjangoFilterBackend, CustomerFilterBackend
 from .permissions import IsAdminOrReadOnly, ViewCustomerHistoryPermission
 
-logger = logging.getLogger(__name__)
-# logger.info()
-
+views_logger = logging.getLogger('views_logger')
 
 # Create your views here.
 """class api view example"""
@@ -202,25 +199,23 @@ class ProductViewSet(ModelViewSet):
             """https://stackoverflow.com/questions/40950251/django-rest-ordering-custom"""
             """:-/"""
             if ordering == 'best_sales':
-                print('get this ordering')
                 queryset = self.order_by_best_sales(queryset)
 
-        print(queryset.query)
+        views_logger.info("Filtering queryset for products.")
+
         return queryset.distinct()
 
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
-
-        # ordering = self.request.query_params.get('ordering')
-        # if ordering == 'best_sales':
-        #     queryset = self.order_by_best_sales(queryset)
-
         page = self.paginate_queryset(queryset)
         if page is not None:
             serializer = self.get_serializer(page, many=True)
             return self.get_paginated_response(serializer.data)
 
         serializer = self.get_serializer(queryset, many=True)
+
+        views_logger.info(f"Listing product page {page} for products.")
+
         return Response(serializer.data)
 
     def get_serializer_context(self):
@@ -300,7 +295,6 @@ class ReviewViewSet(ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly]
 
     def get_queryset(self):
-        logger.info('test-logs')
         return Review.objects.filter(product_id=self.kwargs['product_pk'], active=True, parent_review=None)
 
     def get_serializer_context(self):
@@ -368,7 +362,6 @@ class CartViewSet(CreateModelMixin,
 
     def create(self, request, *args, **kwargs):
         user_id = request.user.id
-        print(user_id)
         try:
             customer = Customer.objects.get(user_id=user_id)
             existing_cart = Cart.objects.filter(customer_id=customer.id).order_by('-updated_at').first()
@@ -506,7 +499,6 @@ class ProductImageViewSet(ModelViewSet):
         return {'product_id': self.kwargs['product_pk']}
 
     def get_queryset(self):
-        # print(self.kwargs)
         return ProductImage.objects.filter(prodcut_id=self.kwargs['product_pk'])
 
 
@@ -546,15 +538,10 @@ class ReportingAPIView(APIView):
         reporting_data = Reporting(serializer.validated_data)
 
         total_sales = reporting_data.total_sales()
-        print('total_sales', total_sales)
         favorite_products = list(reporting_data.favorite_products())
-        print('favorite_products', favorite_products)
         best_cutomer = reporting_data.best_cutomer()
-        print('best_cutomer', best_cutomer)
         favorite_collection = list(reporting_data.favorite_collection())
-        print('favorite_collection', favorite_collection)
         order_status_counts = list(reporting_data.order_status_counts())
-        print('order_status_counts', order_status_counts)
 
         response_data = {
             'total_sales': total_sales,
@@ -580,7 +567,6 @@ class HomeBannerViewSet(ReadOnlyModelViewSet):
 @api_view(['GET'])
 def compare_products(request):
     product_ids = request.GET.getlist('product_ids')
-    # print(product_ids)
     products = Product.objects.filter(id__in=product_ids)
     data = {}
 
@@ -607,13 +593,11 @@ def compare_products(request):
     for product in products:
         main_features = MainFeature.objects.filter(product=product)
         for main_feature in main_features:
-            # print(main_feature)
             feature_keys.append(main_feature.key)
 
     for key in feature_keys:
         feature_data = {}
         for product in products:
-            # print(product)
             main_features = MainFeature.objects.filter(product=product, key=key)
             if main_features:
                 values = []
@@ -624,7 +608,6 @@ def compare_products(request):
             else:
                 feature_data[str(product.title)] = None
         data[str(key.key)] = feature_data
-    # print('data', data)
     return Response(data)
 
 

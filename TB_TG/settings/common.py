@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
+import logging
 import os
 from pathlib import Path
 from celery.schedules import crontab
@@ -30,6 +31,8 @@ INTERNAL_IPS = [
     "127.0.0.1",
     # ...
 ]
+
+
 
 # Application definition
 
@@ -302,19 +305,29 @@ LOGGING = {
     'version': 1.0,
     'disable_existing_loggers': False,
     'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
+        'security': {
+            'class': 'logging.FileHandler',
+            'filename': 'security.log',
+            'formatter': 'verbose',
+            'level': 'INFO',
         },
-        'file': {
+        'views': {
             'class': 'logging.FileHandler',
             'filename': 'logall.log',
             'formatter': 'verbose',
+            'level': 'INFO',
         }
     },
     'loggers': {
-        '': {
-            'handlers': ['console', 'file'],
-            'level': os.getenv('LOG_LEVEL', 'INFO')
+        'security_logger': {
+            'handlers': ['security'],
+            'level': os.getenv('LOG_LEVEL', 'INFO'),
+            'propagate': False,
+        },
+        'views_logger': {
+            'handlers': ['views'],
+            'level': os.getenv('LOG_LEVEL', 'INFO'),
+            'propagate': False,
         }
     },
     'formatters': {
@@ -324,6 +337,8 @@ LOGGING = {
         }
     }
 }
+
+
 
 CART_SESSION_ID = 'cart'
 
