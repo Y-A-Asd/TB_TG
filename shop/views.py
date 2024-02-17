@@ -200,7 +200,7 @@ class ProductViewSet(ModelViewSet):
             queryset = queryset.order_by(ordering)
         except FieldError:
             """https://stackoverflow.com/questions/40950251/django-rest-ordering-custom"""
-            """حوصلشو نداشتم :-/"""
+            """:-/"""
             if ordering == 'best_sales':
                 print('get this ordering')
                 queryset = self.order_by_best_sales(queryset)
@@ -209,8 +209,6 @@ class ProductViewSet(ModelViewSet):
         return queryset.distinct()
 
     def list(self, request, *args, **kwargs):
-        logger.info("List view accessed")
-
         queryset = self.get_queryset()
 
         # ordering = self.request.query_params.get('ordering')

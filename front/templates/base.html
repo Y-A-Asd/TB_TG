@@ -2,7 +2,7 @@
 {% load i18n %}
 {% get_current_language as LANGUAGE_CODE %}
 {% load compress %}
-
+{% load cache %}
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}" {% if LANGUAGE_CODE == "fa" %}dir="rtl"{% endif %}>
 {#<html lang="en">#}
@@ -47,165 +47,171 @@
     {% endcompress %}
 </head>
 <body>
+{% cache 3600 header %}
+    <header class="header_area sticky-header">
+        <div class="main_menu">
+            <nav class="navbar navbar-expand-lg navbar-light main_box">
+                <form class="m-4" id="language-form" action="{% url 'front:set_language' %}" method="post">
+                    {% csrf_token %}
+                    <input class="self" type="submit" name="language_code" value="fa">
+                    <input type="submit" name="language_code" value="en">
+                </form>
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <a id="logo_top" class="navbar-brand logo_h" href="{% url 'front:home' %}">
+                        <img id="logoImage" class="img-fluid" style="width: 110px" src="{% static 'img/logo.png' %}"
+                             alt="">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent"
+                            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav menu_nav ml-auto">
+                            <li class="nav-item mx-3"><a class="nav-link"
+                                                         href="{% url 'front:home' %}">{% trans 'Home' %}</a>
+                            </li>
+                            <li class="nav-item submenu dropdown mx-3">
+                                <a href="{% url 'front:products' %}" class="nav-link dropdown-toggle"
+                                   role="button">{% trans 'Shop' %}</a>
+                                {#								<ul class="dropdown-menu">#}
+                                {#									<li class="nav-item"><a class="nav-link" href="category.html">Shop Category</a></li>#}
+                                {#									<li class="nav-item"><a class="nav-link" href="single-product.html">Product Details</a></li>#}
+                                {#									<li class="nav-item"><a class="nav-link" href="checkout.html">Product Checkout</a></li>#}
+                                {#									<li class="nav-item"><a class="nav-link" href="cart.html">Shopping Cart</a></li>#}
+                                {#									<li class="nav-item"><a class="nav-link" href="confirmation.html">Confirmation</a></li>#}
+                                {#								</ul>#}
+                            </li>
+                            <li class="nav-item submenu dropdown mx-3">
+                                <a href="{% url 'front:blogs' %}"
+                                   class="nav-link dropdown-toggle">{% trans 'Blog' %}</a>
+                            </li>
+                            <li class="nav-item mx-3"><a class="nav-link"
+                                                         href="{% url 'front:login' %}">{% trans 'Login / Register' %}</a>
+                            </li>
+                            <li class="nav-item mx-3"><a class="nav-link"
+                                                         href="https://yousofasadi.vercel.app/">{% trans 'About Me' %}</a>
+                            </li>
 
-<header class="header_area sticky-header">
-    <div class="main_menu">
-        <nav class="navbar navbar-expand-lg navbar-light main_box">
-            <form class="m-4" id="language-form" action="{% url 'front:set_language' %}" method="post">
-                {% csrf_token %}
-                <input class="self" type="submit" name="language_code" value="fa">
-                <input type="submit" name="language_code" value="en">
-            </form>
-            <div class="container">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <a id="logo_top" class="navbar-brand logo_h" href="{% url 'front:home' %}">
-                    <img id="logoImage" class="img-fluid" style="width: 110px" src="{% static 'img/logo.png' %}" alt="">
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse"
-                        data-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
-                    <ul class="nav navbar-nav menu_nav ml-auto">
-                        <li class="nav-item mx-3"><a class="nav-link" href="{% url 'front:home' %}">{% trans 'Home' %}</a>
-                        </li>
-                        <li class="nav-item submenu dropdown mx-3">
-                            <a href="{% url 'front:products' %}" class="nav-link dropdown-toggle"
-                               role="button">{% trans 'Shop' %}</a>
-                            {#								<ul class="dropdown-menu">#}
-                            {#									<li class="nav-item"><a class="nav-link" href="category.html">Shop Category</a></li>#}
-                            {#									<li class="nav-item"><a class="nav-link" href="single-product.html">Product Details</a></li>#}
-                            {#									<li class="nav-item"><a class="nav-link" href="checkout.html">Product Checkout</a></li>#}
-                            {#									<li class="nav-item"><a class="nav-link" href="cart.html">Shopping Cart</a></li>#}
-                            {#									<li class="nav-item"><a class="nav-link" href="confirmation.html">Confirmation</a></li>#}
-                            {#								</ul>#}
-                        </li>
-                        <li class="nav-item submenu dropdown mx-3">
-                            <a href="{% url 'front:blogs' %}" class="nav-link dropdown-toggle">{% trans 'Blog' %}</a>
-                        </li>
-                        <li class="nav-item mx-3"><a class="nav-link"
-                                                     href="{% url 'front:login' %}">{% trans 'Login / Register' %}</a>
-                        </li>
-                        <li class="nav-item mx-3"><a class="nav-link"
-                                                href="https://yousofasadi.vercel.app/">{% trans 'About Me' %}</a>
-                        </li>
-
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="nav-item"><a href="{% url 'front:cart' %}" class="cart"><span class="ti-bag"></span></a>
-                        </li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="nav-item"><a href="{% url 'front:profile' %}" class="user-details"><span
-                                class="ti-user"></span></a></li>
-                        <li class="nav-item">
-                            <button class="search"><span class="lnr lnr-magnifier" id="search"></span></button>
-                        </li>
-                    </ul>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="nav-item"><a href="{% url 'front:cart' %}" class="cart"><span
+                                    class="ti-bag"></span></a>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="nav-item"><a href="{% url 'front:profile' %}" class="user-details"><span
+                                    class="ti-user"></span></a></li>
+                            <li class="nav-item">
+                                <button class="search"><span class="lnr lnr-magnifier" id="search"></span></button>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </nav>
-    </div>
-    <div class="search_input" id="search_input_box">
-        <div class="container">
-            <form class="d-flex justify-content-between">
-                <input type="text" class="form-control" id="search_input" placeholder="{% trans 'Search Here' %}">
-                <button type="submit" class="btn"></button>
-                <span class="lnr lnr-cross" id="close_search" title="Close Search"></span>
-            </form>
+            </nav>
         </div>
-    </div>
-</header>
-
+        <div class="search_input" id="search_input_box">
+            <div class="container">
+                <form class="d-flex justify-content-between">
+                    <input type="text" class="form-control" id="search_input" placeholder="{% trans 'Search Here' %}">
+                    <button type="submit" class="btn"></button>
+                    <span class="lnr lnr-cross" id="close_search" title="Close Search"></span>
+                </form>
+            </div>
+        </div>
+    </header>
+{% endcache %}
 {% block contents %}
 
 {% endblock %}
 
-
-<footer class="footer-area section_gap">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="single-footer-widget">
-                    <h6>{% trans 'About Us' %}</h6>
-                    <p id="aboutUsText"></p>
+{% cache 3600 footer %}
+    <footer class="footer-area section_gap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="single-footer-widget">
+                        <h6>{% trans 'About Us' %}</h6>
+                        <p id="aboutUsText"></p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="single-footer-widget">
-                    <h6>{% trans 'Address' %}</h6>
-                    <p id="addressText"></p>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="single-footer-widget">
+                        <h6>{% trans 'Address' %}</h6>
+                        <p id="addressText"></p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6"></div>
-            <div class="col-lg-2 col-md-6 col-sm-6">
-                <div class="single-footer-widget">
-                    <h6>{% trans 'Follow Us' %}</h6>
-                    <p>{% trans 'Let us be social' %}</p>
-                    <div class="footer-social d-flex align-items-center">
-                        <a href="#" id="telegramLink"><i class="fa fa-telegram"></i></a>
-                        <a href="#" id="instagramLink"><i class="fa fa-instagram"></i></a>
-                        <a href="#" id="whatsappLink"><i class="fa fa-whatsapp"></i></a>
-                        <a href="#" id="twitterLink"><i class="fa fa-twitter"></i></a>
+                <div class="col-lg-3 col-md-6 col-sm-6"></div>
+                <div class="col-lg-2 col-md-6 col-sm-6">
+                    <div class="single-footer-widget">
+                        <h6>{% trans 'Follow Us' %}</h6>
+                        <p>{% trans 'Let us be social' %}</p>
+                        <div class="footer-social d-flex align-items-center">
+                            <a href="#" id="telegramLink"><i class="fa fa-telegram"></i></a>
+                            <a href="#" id="instagramLink"><i class="fa fa-instagram"></i></a>
+                            <a href="#" id="whatsappLink"><i class="fa fa-whatsapp"></i></a>
+                            <a href="#" id="twitterLink"><i class="fa fa-twitter"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
+                <p class="footer-text m-0">
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+                    All rights reserved | Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a
+                        href="https://github.com/Y-A-Asd" target="_blank">Y-A-Asd</a>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                </p>
+            </div>
         </div>
-        <div class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
-            <p class="footer-text m-0">
-                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                Copyright &copy;<script>document.write(new Date().getFullYear());</script>
-                All rights reserved | Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a
-                    href="https://github.com/Y-A-Asd" target="_blank">Y-A-Asd</a>
-                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            </p>
-        </div>
-    </div>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            console.log('{{ LANGUAGE_CODE }}')
-            fetch("/shop/site-settings/")
-                .then(response => response.json())
-                .then(data => {
-                    const siteSettings = data[0];
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                console.log('{{ LANGUAGE_CODE }}')
+                fetch("/shop/site-settings/")
+                    .then(response => response.json())
+                    .then(data => {
+                        const siteSettings = data[0];
 
-                    document.getElementById("aboutUsText").textContent = siteSettings.footer_text;
+                        document.getElementById("aboutUsText").textContent = siteSettings.footer_text;
 
-                    document.getElementById("addressText").textContent = siteSettings.address;
+                        document.getElementById("addressText").textContent = siteSettings.address;
 
-                    document.getElementById("telegramLink").href = siteSettings.telegram_link;
-                    document.getElementById("instagramLink").href = siteSettings.instagram_link;
-                    document.getElementById("whatsappLink").href = siteSettings.whatsapp_link;
-                    document.getElementById("twitterLink").href = siteSettings.twitter_link;
+                        document.getElementById("telegramLink").href = siteSettings.telegram_link;
+                        document.getElementById("instagramLink").href = siteSettings.instagram_link;
+                        document.getElementById("whatsappLink").href = siteSettings.whatsapp_link;
+                        document.getElementById("twitterLink").href = siteSettings.twitter_link;
 
-                    const logoUrl = siteSettings.logo;
-                    document.getElementById("logoImage").src = logoUrl;
-                })
-                .catch(error => console.error("Error fetching site settings:", error));
-        });
-    </script>
-</footer>
+                        const logoUrl = siteSettings.logo;
+                        document.getElementById("logoImage").src = logoUrl;
+                    })
+                    .catch(error => console.error("Error fetching site settings:", error));
+            });
+        </script>
+    </footer>
+{% endcache %}
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
         integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
         crossorigin="anonymous"></script>
 {% compress js %}
-<script src="{% static 'js/vendor/jquery-2.2.4.min.js' %}"></script>
+    <script src="{% static 'js/vendor/jquery-2.2.4.min.js' %}"></script>
 
-<script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
-<script src="{% static 'js/jquery.ajaxchimp.min.js' %}"></script>
-<script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
-<script src="{% static 'js/jquery.sticky.js' %}"></script>
-<script src="{% static 'js/nouislider.min.js' %}"></script>
-<script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery.ajaxchimp.min.js' %}"></script>
+    <script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'js/jquery.sticky.js' %}"></script>
+    <script src="{% static 'js/nouislider.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
 
-<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
-<script src="{% static 'js/owl.carousel.min.js' %}"></script>
-<!--gmaps Js-->
-<script src="{% static 'js/gmaps.min.js' %}"></script>
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <!--gmaps Js-->
+    <script src="{% static 'js/gmaps.min.js' %}"></script>
 {% endcompress %}
 
 </body>
