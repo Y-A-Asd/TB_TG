@@ -107,7 +107,7 @@ class Reporting:
 
         try:
             time_filter = Q(orderitems__order__created_at__gte=timezone.now()
-                            - timezone.timedelta(days=self.days))
+                                                               - timezone.timedelta(days=self.days))
         except AttributeError:
             time_filter = Q(orderitems__order__created_at__range=[self.start_at, self.end_at])
 
@@ -120,8 +120,7 @@ class Reporting:
             .annotate(
                 used_products=Sum('orderitems__quantity', distinct=True),
                 total_sales=Sum(
-                    ((F('orderitems__unit_price') * 1.0000000001 * F('orderitems__quantity')) - (
-                            F('orderitems__unit_price') * 1.0000000001 * F('orderitems__quantity')))
+                    (F('orderitems__unit_price') * 1.0000000001 * F('orderitems__quantity'))
                     , output_field=DecimalField()
                 )
 
@@ -138,12 +137,12 @@ class Reporting:
                 product_data = ProductData(
                     id=product.pk,
                     name=product.title,
-                    total_sales=product.total_sales,
+                    total_sales=round(product.total_sales, 2),
                     counts=product.used_products,
-                    collection=product.collection,
+                    collection=product.collection.title,
                 )
                 yield product_data
-    
+
     def best_cutomer(self):
         orders = Order.objects.filter(
             self.time_filter,
@@ -156,7 +155,7 @@ class Reporting:
             .order_by('-order_count')
         )
         if best_customer_data:
-            return list(best_customer_data[0].values())[0]
+            return list(best_customer_data[0].values())
         else:
             return 'No user found'
 
@@ -165,7 +164,7 @@ class Reporting:
 
         try:
             time_filter = Q(products__orderitems__order__created_at__gte=timezone.now()
-                                                                    - timezone.timedelta(days=self.days))
+                                                                         - timezone.timedelta(days=self.days))
         except AttributeError:
             time_filter = Q(products__orderitems__order__created_at__range=[self.start_at, self.end_at])
 
@@ -178,7 +177,6 @@ class Reporting:
             .annotate(
                 total_sales=Sum(
                     F('products__orderitems__quantity') * 1.0000000001 * F('products__orderitems__unit_price')
-                    - F('products__orderitems__quantity') * 1.0000000001 * F('products__orderitems__unit_price')
                     , output_field=DecimalField()
                 )
             )
@@ -190,10 +188,9 @@ class Reporting:
                 collection_data = CollectionData(
                     id=collection.pk,
                     name=collection.title,
-                    total_sales=collection.total_sales,
+                    total_sales=round(collection.total_sales, 2),
                 )
                 yield collection_data
-
 
     def order_status_counts(self):
 

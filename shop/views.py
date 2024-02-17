@@ -1,6 +1,7 @@
 import logging
-from django.db.models import Count, Q, QuerySet, ExpressionWrapper, fields, F
-from django.utils.translation import gettext_lazy as _, activate, get_language
+from django.core.exceptions import FieldError
+from django.db.models import Count, F, Sum, DecimalField
+from django.utils.translation import gettext_lazy as _
 from rest_framework import status
 from rest_framework.exceptions import ValidationError
 from rest_framework.generics import get_object_or_404
@@ -27,9 +28,7 @@ from .models import Product, Collection, OrderItem, Review, Customer, Order, Pro
 from .filters import ProductFilter, RecursiveDjangoFilterBackend, CustomerFilterBackend
 from .permissions import IsAdminOrReadOnly, ViewCustomerHistoryPermission
 
-logger = logging.getLogger(__name__)
-# logger.info()
-
+views_logger = logging.getLogger('views_logger')
 
 # Create your views here.
 """class api view example"""
@@ -164,13 +163,13 @@ class ProductViewSet(ModelViewSet):
     #     return queryset
 
     def get_queryset(self):
-        queryset = Product.objects.all().prefetch_related('images').prefetch_related('mainfeature_set')
-        collection_id = self.request.query_params.get('collection_id')
-        print('collection_id: ', collection_id)
+        queryset = Product.objects.select_related('collection').prefetch_related('images', 'mainfeature_set')
 
+        collection_id = self.request.query_params.get('collection_id')
         if collection_id:
             q_object = RecursiveDjangoFilterBackend().get_recursive_q(collection_id)
             queryset = queryset.filter(q_object)
+
         lt = self.request.query_params.get('unit_price__lt')
         gt = self.request.query_params.get('unit_price__gt')
         if lt and gt:
@@ -189,30 +188,34 @@ class ProductViewSet(ModelViewSet):
             queryset = queryset.filter(mainfeature__value__id=feature_value)
 
         secondhand = self.request.query_params.get('secondhand')
-        print('secondhand', secondhand)
-        if secondhand == 'true':
-            secondhand = True
-            queryset = queryset.filter(secondhand=secondhand)
-        if secondhand == 'false':
-            secondhand = False
-            queryset = queryset.filter(secondhand=secondhand)
+        if secondhand in ('true', 'false'):
+            secondhand_bool = secondhand == 'true'
+            queryset = queryset.filter(secondhand=secondhand_bool)
 
         ordering = self.request.query_params.get('ordering', 'updated_at')
-        queryset = queryset.order_by(ordering).distinct()
+        try:
+            queryset = queryset.order_by(ordering)
+        except FieldError:
+            """https://stackoverflow.com/questions/40950251/django-rest-ordering-custom"""
+            """:-/"""
+            if ordering == 'best_sales':
+                queryset = self.order_by_best_sales(queryset)
 
-        return queryset
+        views_logger.info("Filtering queryset for products.")
+
+        return queryset.distinct()
 
     def list(self, request, *args, **kwargs):
-        logger.info("List view accessed")
-
         queryset = self.get_queryset()
-
         page = self.paginate_queryset(queryset)
         if page is not None:
             serializer = self.get_serializer(page, many=True)
             return self.get_paginated_response(serializer.data)
 
         serializer = self.get_serializer(queryset, many=True)
+
+        views_logger.info(f"Listing product page {page} for products.")
+
         return Response(serializer.data)
 
     def get_serializer_context(self):
@@ -222,6 +225,18 @@ class ProductViewSet(ModelViewSet):
         if OrderItem.objects.filter(product_id=kwargs['pk']).count() > 0:
             return Response({'error': 'can not be deleted!'})
         return super.destroy(request, *args, **kwargs)
+
+    def order_by_best_sales(self, queryset):
+        return (
+            queryset.annotate(
+                used_products=Sum('orderitems__quantity', distinct=True),
+                total_sales=Sum(
+                    (F('orderitems__unit_price') * 1.0000000001 * F('orderitems__quantity')),
+                    output_field=DecimalField()
+                )
+            )
+            .order_by('-used_products')
+        )
 
 
 class CollectionViewSet(ModelViewSet):
@@ -280,7 +295,6 @@ class ReviewViewSet(ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly]
 
     def get_queryset(self):
-        logger.info('test-logs')
         return Review.objects.filter(product_id=self.kwargs['product_pk'], active=True, parent_review=None)
 
     def get_serializer_context(self):
@@ -348,7 +362,6 @@ class CartViewSet(CreateModelMixin,
 
     def create(self, request, *args, **kwargs):
         user_id = request.user.id
-        print(user_id)
         try:
             customer = Customer.objects.get(user_id=user_id)
             existing_cart = Cart.objects.filter(customer_id=customer.id).order_by('-updated_at').first()
@@ -486,7 +499,6 @@ class ProductImageViewSet(ModelViewSet):
         return {'product_id': self.kwargs['product_pk']}
 
     def get_queryset(self):
-        # print(self.kwargs)
         return ProductImage.objects.filter(prodcut_id=self.kwargs['product_pk'])
 
 
@@ -555,7 +567,6 @@ class HomeBannerViewSet(ReadOnlyModelViewSet):
 @api_view(['GET'])
 def compare_products(request):
     product_ids = request.GET.getlist('product_ids')
-    # print(product_ids)
     products = Product.objects.filter(id__in=product_ids)
     data = {}
 
@@ -582,13 +593,11 @@ def compare_products(request):
     for product in products:
         main_features = MainFeature.objects.filter(product=product)
         for main_feature in main_features:
-            # print(main_feature)
             feature_keys.append(main_feature.key)
 
     for key in feature_keys:
         feature_data = {}
         for product in products:
-            # print(product)
             main_features = MainFeature.objects.filter(product=product, key=key)
             if main_features:
                 values = []
@@ -599,7 +608,6 @@ def compare_products(request):
             else:
                 feature_data[str(product.title)] = None
         data[str(key.key)] = feature_data
-    # print('data', data)
     return Response(data)
 
 

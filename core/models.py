@@ -77,7 +77,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     email = models.EmailField(unique=True, verbose_name=_("Email"))
     password = models.CharField(max_length=128, verbose_name=_("Password"))
-    is_active = models.BooleanField(default=False, verbose_name=_("Active"))
+    is_active = models.BooleanField(default=True, verbose_name=_("Active"))
     is_staff = models.BooleanField(default=False, verbose_name=_("Staff"))
     last_login = models.DateTimeField(auto_now_add=True, verbose_name=_('Last Login'))
 

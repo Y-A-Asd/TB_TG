@@ -2,6 +2,7 @@
 {% load i18n %}
 {% get_current_language as LANGUAGE_CODE %}
 {% load static %}
+{% load compress %}
 {% block contents %}
     <!-- Start Banner Area -->
     <section class="banner-area organic-breadcrumb">
@@ -62,7 +63,7 @@
                                 <button value="default">{% trans "Default sorting" %}</button>
                                 <button value="price_asc">{% trans "Price: Low to High" %}</button>
                                 <button value="price_desc">{% trans "Price: High to Low" %}</button>
-
+                                <button value="best_sales">{% trans "Best Sales" %}</button>
                             </div>
                         </div>
                         <br>
@@ -106,7 +107,7 @@
 
 
 
-
+{% compress js %}
     <script type="text/javascript">
 
         let currentCollectionsId = null;
@@ -198,20 +199,20 @@
                     products.results.forEach(product => {
                         {
                             const currentLanguage = '{{ LANGUAGE_CODE }}';
-                            const translation = product.translations[currentLanguage] || product.translations.{{ LANGUAGE_CODE }};
+                            {#const translation = product.translations[currentLanguage] || product.translations.{{ LANGUAGE_CODE }};#}
                             const productBlock = document.createElement('div');
                             productBlock.classList.add('col-lg-4', 'col-md-6', 'single-product');
 
                             const productImage = document.createElement('img');
                             productImage.classList.add('img-fluid');
                             productImage.src = product.images.length > 0 ? product.images[0].image : '{% static "img/default-product.jpg" %}';
-                            productImage.alt = product.translations.{{ LANGUAGE_CODE }}.title;
+                            productImage.alt = product.title;
 
                             const productDetails = document.createElement('div');
                             productDetails.classList.add('product-details');
 
                             const productName = document.createElement('h6');
-                            productName.textContent = translation.title;
+                            productName.textContent = product.title;
 
 
                             const productPrice = document.createElement('div');
@@ -506,15 +507,17 @@
         }
 
         function getSortingOrdering(sortingOption) {
-            switch (sortingOption) {
-                case 'price_asc':
-                    return 'unit_price';
-                case 'price_desc':
-                    return '-unit_price';
-                default:
-                    return '-updated_at';
+                switch (sortingOption) {
+                    case 'price_asc':
+                        return 'unit_price';
+                    case 'price_desc':
+                        return '-unit_price';
+                    case 'best_sales':
+                        return 'best_sales';
+                    default:
+                        return '-updated_at';
+                }
             }
-        }
 
         document.addEventListener("DOMContentLoaded", function () {
             const searchInput = document.getElementById("search_input");
@@ -556,7 +559,7 @@
                 }
             }
 
-            setInterval(checkForChanges, 100);
+            setInterval(checkForChanges, 200);
 
 
         });
@@ -597,16 +600,16 @@
             ul.classList.add('main-categories');
 
             collections.forEach(collection => {
-                const currentLanguage = '{{ LANGUAGE_CODE }}';
-                const translation = collection.translations.{{ LANGUAGE_CODE }};
+                {#const currentLanguage = '{{ LANGUAGE_CODE }}';#}
+                {#const translation = collection.translations.{{ LANGUAGE_CODE }};#}
                 const li = document.createElement('li');
                 li.classList.add('main-nav-list');
 
                 const a = document.createElement('a');
                 a.setAttribute('data-toggle', 'collapse');
-                a.href = `#${translation.title}`;
+                a.href = `#${collection.title}`;
                 a.setAttribute('aria-expanded', 'false');
-                a.setAttribute('aria-controls', translation.title);
+                a.setAttribute('aria-controls', collection.title);
 
                 const spanArrow = document.createElement('span');
                 spanArrow.classList.add('lnr', 'lnr-arrow-right');
@@ -614,7 +617,7 @@
                 console.log(collection.products_count)
 
                 const spanTitle = document.createElement('span');
-                spanTitle.innerHTML = `${translation.title} <span class="number">
+                spanTitle.innerHTML = `${collection.title} <span class="number">
                     (${collection.products_count})</span>`;
 
                 a.appendChild(spanArrow);
@@ -647,7 +650,7 @@
                 const commonFilter = document.querySelector('.common-filter');
 
                 data.forEach(feature => {
-                    const translation = feature.translations.{{ LANGUAGE_CODE }} || feature.translations[Object.keys(feature.translations)[0]];
+                    {#const translation = feature.translations.{{ LANGUAGE_CODE }} || feature.translations[Object.keys(feature.translations)[0]];#}
 
                     const keyItem = document.createElement('li');
                     keyItem.classList.add('filter-list', 'text-capitalize', 'bold');
@@ -656,7 +659,7 @@
 
                     const keyHeader = document.createElement('h6');
                     keyHeader.style.cursor = 'pointer'
-                    keyHeader.textContent = translation.key;
+                    keyHeader.textContent = feature.key;
 
                     const keyProductCount = document.createElement('span');
                     keyProductCount.classList.add('number');
@@ -683,8 +686,8 @@
 
                         const valueHeader = document.createElement('h6');
                         valueHeader.style.cursor = 'pointer'
-                        const valueTranslation = value.translations.{{ LANGUAGE_CODE }} || value.translations[Object.keys(value.translations)[0]];
-                        valueHeader.textContent = valueTranslation.value;
+                        {#const valueTranslation = value.translations.{{ LANGUAGE_CODE }} || value.translations[Object.keys(value.translations)[0]];#}
+                        valueHeader.textContent = value.value;
 
                         const valueProductCount = document.createElement('span');
                         valueProductCount.classList.add('number');
@@ -727,4 +730,6 @@
 
 
     </script>
+{% endcompress %}
+
 {% endblock %}

@@ -2,7 +2,9 @@
 {% load i18n %}
 {% get_current_language as LANGUAGE_CODE %}
 {% load static %}
+{% load compress %}
 {% block contents %}
+
     <!-- Start Banner Area -->
     <section class="banner-area organic-breadcrumb">
         <div class="container" id="dog">
@@ -143,239 +145,239 @@
     <!--================End Product Description Area =================-->
 
 
+    {% compress js %}
+        <script>
+            function fetchProductDetails(productId) {
+                const apiUrl = `/shop/products/${productId}/`;
 
-    <script>
-        function fetchProductDetails(productId) {
-            const apiUrl = `/shop/products/${productId}/`;
+                fetch(apiUrl)
+                    .then(response => response.json())
+                    .then(productData => {
+                        updateProductDetails(productData);
+                        console.log(productData)
+                        updateProductFeatures(productData.value_feature);
+                    })
+                    .catch(error => {
+                        console.error('Error fetching product details:', error);
+                    });
+            }
 
-            fetch(apiUrl)
-                .then(response => response.json())
-                .then(productData => {
-                    updateProductDetails(productData);
-                    console.log(productData)
-                    updateProductFeatures(productData.value_feature);
-                })
-                .catch(error => {
-                    console.error('Error fetching product details:', error);
+            function updateProductDetails(productData) {
+                const productNameElement = document.querySelector('.s_product_text h3');
+                const productPriceElement = document.querySelector('.s_product_text h2');
+                const productAvailabilityElement = document.querySelector('.s_product_text ul li:nth-child(1) span');
+                const productDescriptionElement = document.querySelector('.s_product_text p');
+                const productQuantityInput = document.querySelector('.product_count input');
+                const productImageContainer = document.querySelector('.s_Product_carousel');
+
+                productNameElement.textContent = productData.translations.{{ LANGUAGE_CODE }}.title;
+                productPriceElement.textContent = `$${productData.price.toFixed(2)}`;
+                productAvailabilityElement.textContent = productData.inventory > 0 ? '{% trans 'In Stock' %}' : '{% trans 'Out of Stock' %}';
+                productDescriptionElement.textContent = productData.translations.{{ LANGUAGE_CODE }}.description;
+
+                updateProductImages(productData.images);
+
+                productQuantityInput.value = 1;
+            }
+
+            function updateProductImages(images) {
+                const productImageContainer = document.querySelector('.s_Product_carousel');
+
+                productImageContainer.innerHTML = '';
+
+                images.forEach(image => {
+                    const imgElement = document.createElement('img');
+                    imgElement.classList.add('img-fluid');
+                    imgElement.src = image.image;
+                    imgElement.alt = 'none';
+
+                    const singlePrdItem = document.createElement('div');
+                    singlePrdItem.classList.add('single-prd-item');
+                    singlePrdItem.appendChild(imgElement);
+
+                    productImageContainer.appendChild(singlePrdItem);
                 });
-        }
+            }
 
-        function updateProductDetails(productData) {
-            const productNameElement = document.querySelector('.s_product_text h3');
-            const productPriceElement = document.querySelector('.s_product_text h2');
-            const productAvailabilityElement = document.querySelector('.s_product_text ul li:nth-child(1) span');
-            const productDescriptionElement = document.querySelector('.s_product_text p');
-            const productQuantityInput = document.querySelector('.product_count input');
-            const productImageContainer = document.querySelector('.s_Product_carousel');
+            function updateProductFeatures(features) {
+                const featuresTableBody = document.querySelector('.tab-pane.fade tbody');
+                console.log(features)
+                featuresTableBody.innerHTML = '';
 
-            productNameElement.textContent = productData.translations.{{ LANGUAGE_CODE }}.title;
-            productPriceElement.textContent = `$${productData.price.toFixed(2)}`;
-            productAvailabilityElement.textContent = productData.inventory > 0 ? '{% trans 'In Stock' %}' : '{% trans 'Out of Stock' %}';
-            productDescriptionElement.textContent = productData.translations.{{ LANGUAGE_CODE }}.description;
+                features.forEach(feature => {
+                    console.log(feature)
+                    console.log(feature.key.translations.{{ LANGUAGE_CODE }}.key)
+                    const key = feature.key.translations.{{ LANGUAGE_CODE }}.key;
+                    const value = feature.value.translations.{{ LANGUAGE_CODE }}.value;
 
-            updateProductImages(productData.images);
+                    const trElement = document.createElement('tr');
+                    const tdTitleElement = document.createElement('td');
+                    const tdValueElement = document.createElement('td');
 
-            productQuantityInput.value = 1;
-        }
+                    tdTitleElement.innerHTML = `<h5>${key}</h5>`;
+                    tdValueElement.innerHTML = `<h5>${value}</h5>`;
 
-        function updateProductImages(images) {
-            const productImageContainer = document.querySelector('.s_Product_carousel');
+                    trElement.appendChild(tdTitleElement);
+                    trElement.appendChild(tdValueElement);
 
-            productImageContainer.innerHTML = '';
-
-            images.forEach(image => {
-                const imgElement = document.createElement('img');
-                imgElement.classList.add('img-fluid');
-                imgElement.src = image.image;
-                imgElement.alt = 'none';
-
-                const singlePrdItem = document.createElement('div');
-                singlePrdItem.classList.add('single-prd-item');
-                singlePrdItem.appendChild(imgElement);
-
-                productImageContainer.appendChild(singlePrdItem);
-            });
-        }
-
-        function updateProductFeatures(features) {
-            const featuresTableBody = document.querySelector('.tab-pane.fade tbody');
-            console.log(features)
-            featuresTableBody.innerHTML = '';
-
-            features.forEach(feature => {
-                console.log(feature)
-                console.log(feature.key.translations.{{ LANGUAGE_CODE }}.key)
-                const key = feature.key.translations.{{ LANGUAGE_CODE }}.key;
-                const value = feature.value.translations.{{ LANGUAGE_CODE }}.value;
-
-                const trElement = document.createElement('tr');
-                const tdTitleElement = document.createElement('td');
-                const tdValueElement = document.createElement('td');
-
-                tdTitleElement.innerHTML = `<h5>${key}</h5>`;
-                tdValueElement.innerHTML = `<h5>${value}</h5>`;
-
-                trElement.appendChild(tdTitleElement);
-                trElement.appendChild(tdValueElement);
-
-                featuresTableBody.appendChild(trElement);
-            });
-        }
-
-        const productId = {{ id }};
-        fetchProductDetails(productId);
-    </script>
-    <script>
-        function fetchProductReviews(productId) {
-            const apiUrl = `/shop/products/${productId}/reviews/`;
-
-            fetch(apiUrl)
-                .then(response => response.json())
-                .then(reviewsData => {
-                    updateProductReviews(reviewsData);
-                })
-                .catch(error => {
-                    console.error('Error fetching product reviews:', error);
+                    featuresTableBody.appendChild(trElement);
                 });
-        }
+            }
 
-        function updateProductReviews(reviewsData) {
-            const reviewList = document.getElementById('reviewList');
+            const productId = {{ id }};
+            fetchProductDetails(productId);
+        </script>
+        <script>
+            function fetchProductReviews(productId) {
+                const apiUrl = `/shop/products/${productId}/reviews/`;
 
-            reviewList.innerHTML = '';
+                fetch(apiUrl)
+                    .then(response => response.json())
+                    .then(reviewsData => {
+                        updateProductReviews(reviewsData);
+                    })
+                    .catch(error => {
+                        console.error('Error fetching product reviews:', error);
+                    });
+            }
 
-            reviewsData.forEach(review => {
-                const reviewItem = createReviewHTML(review);
-                reviewList.appendChild(reviewItem);
+            function updateProductReviews(reviewsData) {
+                const reviewList = document.getElementById('reviewList');
 
-                // If the review has replies, add them recursively
+                reviewList.innerHTML = '';
+
+                reviewsData.forEach(review => {
+                    const reviewItem = createReviewHTML(review);
+                    reviewList.appendChild(reviewItem);
+
+                    // If the review has replies, add them recursively
+                    if (review.replies && review.replies.length > 0) {
+                        const replyList = document.createElement('div');
+                        replyList.classList.add('review_item', 'reply');
+
+                        review.replies.forEach(reply => {
+                            const replyItem = createReviewHTML(reply, true);
+                            replyList.appendChild(replyItem);
+                            // Recursive call for replies of replies
+                            addNestedReplies(reply, replyList);
+                        });
+
+                        reviewList.appendChild(replyList);
+                    }
+                });
+            }
+
+            function addNestedReplies(review, replyList) {
                 if (review.replies && review.replies.length > 0) {
-                    const replyList = document.createElement('div');
-                    replyList.classList.add('review_item', 'reply');
+                    const nestedReplyList = document.createElement('div');
+                    nestedReplyList.classList.add('review_item', 'reply', 'nested-reply');
 
                     review.replies.forEach(reply => {
-                        const replyItem = createReviewHTML(reply, true);
-                        replyList.appendChild(replyItem);
-                        // Recursive call for replies of replies
-                        addNestedReplies(reply, replyList);
+                        const nestedReplyItem = createReviewHTML(reply, true);
+                        nestedReplyList.appendChild(nestedReplyItem);
+                        // Recursive call for nested replies
+                        addNestedReplies(reply, nestedReplyList);
                     });
 
-                    reviewList.appendChild(replyList);
+                    replyList.appendChild(nestedReplyList);
                 }
-            });
-        }
-
-        function addNestedReplies(review, replyList) {
-            if (review.replies && review.replies.length > 0) {
-                const nestedReplyList = document.createElement('div');
-                nestedReplyList.classList.add('review_item', 'reply', 'nested-reply');
-
-                review.replies.forEach(reply => {
-                    const nestedReplyItem = createReviewHTML(reply, true);
-                    nestedReplyList.appendChild(nestedReplyItem);
-                    // Recursive call for nested replies
-                    addNestedReplies(reply, nestedReplyList);
-                });
-
-                replyList.appendChild(nestedReplyList);
-            }
-        }
-
-        function createReviewHTML(review, isReply = false) {
-            const reviewItem = document.createElement('div');
-            reviewItem.classList.add('review_item');
-
-            if (isReply) {
-                reviewItem.classList.add('reply');
             }
 
-            const mediaDiv = document.createElement('div');
-            mediaDiv.classList.add('media');
+            function createReviewHTML(review, isReply = false) {
+                const reviewItem = document.createElement('div');
+                reviewItem.classList.add('review_item');
 
-            const mediaBodyDiv = document.createElement('div');
-            mediaBodyDiv.classList.add('media-body');
+                if (isReply) {
+                    reviewItem.classList.add('reply');
+                }
 
-            const ratingStars = getRatingStars(review.rating);
-            mediaBodyDiv.innerHTML = `
+                const mediaDiv = document.createElement('div');
+                mediaDiv.classList.add('media');
+
+                const mediaBodyDiv = document.createElement('div');
+                mediaBodyDiv.classList.add('media-body');
+
+                const ratingStars = getRatingStars(review.rating);
+                mediaBodyDiv.innerHTML = `
                 <h4>${review.customer.first_name} ${review.customer.last_name}</h4>
                 <h5>${new Date(review.created_at).toLocaleString()}</h5>
                 ${ratingStars}
                 <a class="reply_btn" href="#" onclick="handleReplyButtonClick(${review.id})">{% trans 'Reply' %}</a>
             `;
 
-            const descriptionT = document.createElement('h6');
-            descriptionT.textContent = review.title;
-            const descriptionP = document.createElement('p');
-            descriptionP.textContent = review.description;
+                const descriptionT = document.createElement('h6');
+                descriptionT.textContent = review.title;
+                const descriptionP = document.createElement('p');
+                descriptionP.textContent = review.description;
 
-            mediaDiv.appendChild(mediaBodyDiv);
-            reviewItem.appendChild(mediaDiv);
-            reviewItem.appendChild(descriptionT);
-            reviewItem.appendChild(descriptionP);
+                mediaDiv.appendChild(mediaBodyDiv);
+                reviewItem.appendChild(mediaDiv);
+                reviewItem.appendChild(descriptionT);
+                reviewItem.appendChild(descriptionP);
 
-            return reviewItem;
-        }
-
-        function getRatingStars(rating) {
-            const fullStars = Math.floor(rating);
-            const halfStar = rating % 1 !== 0 ? '<i class="fa fa-star-half-empty"></i>' : '';
-            const emptyStars = 5 - Math.ceil(rating);
-
-            const starsHTML = '<i class="fa fa-star"></i>'.repeat(fullStars) + halfStar + '<i class="fa fa-star-o"></i>'.repeat(emptyStars);
-
-            return starsHTML;
-        }
-
-        const productId2 = {{ id }};
-        fetchProductReviews(productId2);
-
-
-    </script>
-    <script>
-        function handleReplyButtonClick(reviewId) {
-            document.getElementById('parentReviewId').value = reviewId;
-            document.getElementById('commentForm').scrollIntoView({behavior: 'smooth'});
-
-            const replyMessage = document.getElementById('replyMessage');
-
-            document.getElementById('commentForm').addEventListener('submit', function (event) {
-                const parentReviewId = document.getElementById('parentReviewId').value;
-
-                if (parentReviewId) {
-                    replyMessage.style.display = 'block';
-                }
-            });
-        }
-
-        function displayErrorMessage(message) {
-            const errorMessageElement = document.getElementById('errorMessage');
-            errorMessageElement.textContent = message;
-        }
-
-        function getToken() {
-            return localStorage.getItem('JWT');
-        }
-
-        function makeAuthenticatedRequest(url, method, context = null) {
-            const token = getToken();
-
-            const headers = {
-                'Content-Type': 'application/json',
-            };
-
-            if (token) {
-                headers['Authorization'] = `JWT ${token}`;
+                return reviewItem;
             }
 
-            const options = {
-                method: method,
-                headers: headers,
-                body: context ? JSON.stringify(context) : null,
-            };
-            console.log(options)
+            function getRatingStars(rating) {
+                const fullStars = Math.floor(rating);
+                const halfStar = rating % 1 !== 0 ? '<i class="fa fa-star-half-empty"></i>' : '';
+                const emptyStars = 5 - Math.ceil(rating);
 
-            return fetch(url, options)
-                .then(response => {
+                const starsHTML = '<i class="fa fa-star"></i>'.repeat(fullStars) + halfStar + '<i class="fa fa-star-o"></i>'.repeat(emptyStars);
+
+                return starsHTML;
+            }
+
+            const productId2 = {{ id }};
+            fetchProductReviews(productId2);
+
+
+        </script>
+        <script>
+            function handleReplyButtonClick(reviewId) {
+                document.getElementById('parentReviewId').value = reviewId;
+                document.getElementById('commentForm').scrollIntoView({behavior: 'smooth'});
+
+                const replyMessage = document.getElementById('replyMessage');
+
+                document.getElementById('commentForm').addEventListener('submit', function (event) {
+                    const parentReviewId = document.getElementById('parentReviewId').value;
+
+                    if (parentReviewId) {
+                        replyMessage.style.display = 'block';
+                    }
+                });
+            }
+
+            function displayErrorMessage(message) {
+                const errorMessageElement = document.getElementById('errorMessage');
+                errorMessageElement.textContent = message;
+            }
+
+            function getToken() {
+                return localStorage.getItem('JWT');
+            }
+
+            function makeAuthenticatedRequest(url, method, context = null) {
+                const token = getToken();
+
+                const headers = {
+                    'Content-Type': 'application/json',
+                };
+
+                if (token) {
+                    headers['Authorization'] = `JWT ${token}`;
+                }
+
+                const options = {
+                    method: method,
+                    headers: headers,
+                    body: context ? JSON.stringify(context) : null,
+                };
+                console.log(options)
+
+                return fetch(url, options)
+                    .then(response => {
                         if (response.ok) {
                             return response.json()
                         } else {
@@ -385,151 +387,152 @@
                             });
                         }
                     })
-                .catch(error => {
-                    console.error('eeeeeee', error);
-                });
-        }
+                    .catch(error => {
+                        console.error('eeeeeee', error);
+                    });
+            }
 
-        function verifyToken() {
-            const token = getToken();
-            console.log('verifing...')
-            if (token) {
-                const endpoint = '/core/auth/jwt/verify/';
+            function verifyToken() {
+                const token = getToken();
+                console.log('verifing...')
+                if (token) {
+                    const endpoint = '/core/auth/jwt/verify/';
 
-                makeAuthenticatedRequest(endpoint, 'POST', context = {token: token})
-                    .then(response => {
-                        console.log(response);
-                        if (response.code === 'token_not_valid') {
-                            console.log('Token not valid. User needs to log in.');
-                            alert('Token not valid. User needs to log in.')
-                        } else {
-                            console.log('Token is valid. User is already logged in.');
+                    makeAuthenticatedRequest(endpoint, 'POST', context = {token: token})
+                        .then(response => {
+                            console.log(response);
+                            if (response.code === 'token_not_valid') {
+                                console.log('Token not valid. User needs to log in.');
+                                alert('Token not valid. User needs to log in.')
+                            } else {
+                                console.log('Token is valid. User is already logged in.');
 
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+                } else {
+                    console.log('No token found. User needs to log in.');
+                }
+            }
+
+            window.onload = function () {
+                verifyToken();
+            };
+            document.getElementById('commentForm').addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                let rating = document.getElementById('rating')
+                let title = document.getElementById('title');
+                let description = document.getElementById('description');
+                let parentReviewId = document.getElementById('parentReviewId').value;
+
+                let endpoint = '/shop/products/{{ id }}/reviews/';
+
+                makeAuthenticatedRequest(endpoint, 'POST', context = {
+                    'rating': rating.value,
+                    'title': title.value,
+                    'description': description.value,
+                    'parent_review': parentReviewId
+                })
+                    .then(data => {
+                        if (data) {
+                            alert('Your comment has been received! It will be shown after checking')
+                            document.getElementById('rating').value = '';
+                            document.getElementById('title').value = '';
+                            document.getElementById('description').value = '';
                         }
                     })
                     .catch(error => {
+                        displayErrorMessage(error)
+                        document.getElementById('dog').scrollIntoView({behavior: 'smooth'});
                         console.error('Error:', error);
                     });
-            } else {
-                console.log('No token found. User needs to log in.');
-            }
-        }
+            });
+        </script>
+        <script>
+            document.getElementById('addToCartBtn').addEventListener('click', function (event) {
+                event.preventDefault();
 
-        window.onload = function () {
-            verifyToken();
-        };
-        document.getElementById('commentForm').addEventListener('submit', function (event) {
-            event.preventDefault();
+                const productId = {{ id }};
+                const quantity = parseInt(document.getElementById('sst').value);
 
-            let rating = document.getElementById('rating')
-            let title = document.getElementById('title');
-            let description = document.getElementById('description');
-            let parentReviewId = document.getElementById('parentReviewId').value;
+                let cartId = localStorage.getItem("cartId");
 
-            let endpoint = '/shop/products/{{ id }}/reviews/';
+                if (!cartId || cartId == undefined) {
 
-            makeAuthenticatedRequest(endpoint, 'POST', context = {
-                'rating': rating.value,
-                'title': title.value,
-                'description': description.value,
-                'parent_review': parentReviewId
-            })
-                .then(data => {
-                    if (data) {
-                        alert('Your comment has been received! It will be shown after checking')
-                        document.getElementById('rating').value = '';
-                        document.getElementById('title').value = '';
-                        document.getElementById('description').value = '';
-                    }
-                })
-                .catch(error => {
-                    displayErrorMessage(error)
-                    document.getElementById('dog').scrollIntoView({behavior: 'smooth'});
-                    console.error('Error:', error);
-                });
-        });
-    </script>
-    <script>
-        document.getElementById('addToCartBtn').addEventListener('click', function (event) {
-            event.preventDefault();
+                    createCart(productId, quantity);
+                } else {
+                    addCartItem(cartId, productId, quantity);
+                }
+            });
 
-            const productId = {{ id }};
-            const quantity = parseInt(document.getElementById('sst').value);
-
-            let cartId = localStorage.getItem("cartId");
-
-            if (!cartId || cartId == undefined) {
-
-                createCart(productId, quantity);
-            } else {
-                addCartItem(cartId, productId, quantity);
-            }
-        });
-
-        function getToken() {
-            return localStorage.getItem('JWT');
-        }
-
-        function createCart(productId, quantity) {
-            const token = getToken();
-
-            let headers = {
-                'Content-Type': 'application/json',
-            };
-
-            if (token) {
-                headers['Authorization'] = `JWT ${token}`;
+            function getToken() {
+                return localStorage.getItem('JWT');
             }
 
-            const options = {
-                method: 'POST',
-                headers: headers,
-            };
-            fetch("/shop/cart/", options)
-                .then(response => response.json())
-                .then(data => {
-                    localStorage.setItem("cartId", data.id);
-                    addCartItem(data.id, productId, quantity);
-                })
-                .catch(error => console.error("Error creating cart:", error));
-        }
+            function createCart(productId, quantity) {
+                const token = getToken();
 
-        function addCartItem(cartId, productId, quantity) {
-            const token = getToken();
+                let headers = {
+                    'Content-Type': 'application/json',
+                };
 
-            let headers = {
-                'Content-Type': 'application/json',
-            };
-            if (token) {
-                headers['Authorization'] = `JWT ${token}`;
+                if (token) {
+                    headers['Authorization'] = `JWT ${token}`;
+                }
+
+                const options = {
+                    method: 'POST',
+                    headers: headers,
+                };
+                fetch("/shop/cart/", options)
+                    .then(response => response.json())
+                    .then(data => {
+                        localStorage.setItem("cartId", data.id);
+                        addCartItem(data.id, productId, quantity);
+                    })
+                    .catch(error => console.error("Error creating cart:", error));
             }
-            {#console.log(cartId, productId, quantity)#}
-            fetch(`/shop/cart/${cartId}/items/`, {
-                method: "POST",
-                headers: headers,
-                body: JSON.stringify({
-                    "product_id": productId,
-                    "quantity": quantity
+
+            function addCartItem(cartId, productId, quantity) {
+                const token = getToken();
+
+                let headers = {
+                    'Content-Type': 'application/json',
+                };
+                if (token) {
+                    headers['Authorization'] = `JWT ${token}`;
+                }
+                {#console.log(cartId, productId, quantity)#}
+                fetch(`/shop/cart/${cartId}/items/`, {
+                    method: "POST",
+                    headers: headers,
+                    body: JSON.stringify({
+                        "product_id": productId,
+                        "quantity": quantity
+                    })
+
                 })
 
-            })
-
-                .then(response => {
-                    if (response.ok) {
-                        alert('Item added to cart successfully!');
-                    } else {
-                        if (response.status === 401) {
-                            console.error('Unauthorized: Token may be expired or invalid');
-                            alert('Unauthorized: Token may be expired or invalid')
-                            localStorage.removeItem('JWT');
+                    .then(response => {
+                        if (response.ok) {
+                            alert('Item added to cart successfully!');
+                        } else {
+                            if (response.status === 401) {
+                                console.error('Unauthorized: Token may be expired or invalid');
+                                alert('Unauthorized: Token may be expired or invalid')
+                                localStorage.removeItem('JWT');
+                            }
+                            console.error('Failed to add item to cart:', response.statusText);
+                            alert(`Failed to add item to cart: ${response.statusText}`)
+                            createCart(productId, quantity);
                         }
-                        console.error('Failed to add item to cart:', response.statusText);
-                        alert(`Failed to add item to cart: ${response.statusText}`)
-                        createCart(productId, quantity);
-                    }
-                })
-                .catch(error => console.error("Error adding item to cart:", error));
-        }
-    </script>
+                    })
+                    .catch(error => console.error("Error adding item to cart:", error));
+            }
+        </script>
+    {% endcompress %}
 
 {% endblock %}

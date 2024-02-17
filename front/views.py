@@ -1,4 +1,5 @@
 from django.http import HttpResponse, HttpResponseRedirect
+from django.views.decorators.cache import cache_page
 from django.shortcuts import render
 from django.utils.translation import activate
 from django.views import View
@@ -44,6 +45,9 @@ class BlogListView(TemplateView):
     template_name = 'blogs.html'
 
 
+cached_template_blog_list_view = cache_page(3600)(BlogListView.as_view())
+
+
 class BlogDetailView(View):
     template_name = 'blog_detail.html'
 
@@ -51,8 +55,14 @@ class BlogDetailView(View):
         return render(request, self.template_name, {'id': id})
 
 
+cached_template_blog_detail_view = cache_page(3600)(BlogDetailView.as_view())
+
+
 class HomeView(TemplateView):
     template_name = 'index.html'
+
+
+cached_template_home_view = cache_page(1800)(HomeView.as_view())
 
 
 class ProfileView(TemplateView):

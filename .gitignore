@@ -3,3 +3,4 @@ __pycache__/
 .static/
 db.sqlite3
 logall.log
+security.log

@@ -11,6 +11,7 @@ from parler.models import TranslatableModel, TranslatedFields
 from shop.validator import validate_file_size, validate_key_value_relationship
 from discount.models import BaseDiscount
 from core.models import BaseModel
+from solo.models import SingletonModel
 
 admin.site.site_header = _('Site Administration')
 admin.site.index_title = _('Index Title')
@@ -97,6 +98,7 @@ class Product(TranslatableModel, BaseModel):
     discount = models.ForeignKey(BaseDiscount, on_delete=models.CASCADE, verbose_name=_("Discount"),
                                  null=True, blank=True)
     secondhand = models.BooleanField(_('Seccond Hand'), default=False, )
+
     # extra_data = models.JSONField(verbose_name='Features', null=True, blank=True)
 
     def __repr__(self):
@@ -232,25 +234,40 @@ class Order(BaseModel):
         verbose_name = _("Order")
         verbose_name_plural = _("Orders")
 
+    def __str__(self):
+        return f"{self.id} - {self.customer} - {self.order_status}"
+
     def get_total_price(self):
+        """get total price of order base on discount applied"""
         if self.discount:
             self.discount.ensure_availability()
             if self.discount.active:
-                print(self.discount.mode)
-                print('total_price')
+                # print(self.discount.mode)
+                # print('total_price')
                 if self.discount.mode == self.discount.Mode.DirectPrice:
                     total_price = \
                         self.orders.aggregate(
                             total_price=Sum(F('unit_price') * F('quantity')) - self.discount.discount)[
                             'total_price']
-                    print(total_price)
+                    # print(total_price)
                 elif self.discount.mode == self.discount.Mode.DiscountOff:
                     total_price = self.orders.aggregate(total_price=Sum(F('unit_price') * F('quantity')) - Sum(
                         F('unit_price') * F('quantity')) * self.discount.discount / 100)['total_price']
                 elif (self.discount.mode == self.discount.Mode.PersonCode or
                       self.discount.mode == self.discount.Mode.EventCode):
-                    total_price = self.orders.aggregate(total_price=Sum(F('unit_price') * F('quantity')) - Sum(
-                        F('unit_price') * F('quantity')) * self.discount.discount / 100)['total_price']
+
+                    total_price_with_out_off = self.orders.aggregate(total_price=Sum(F('unit_price') * F('quantity')))[
+                        'total_price']
+
+                    if total_price_with_out_off > self.discount.max_price:
+                        total_price = total_price_with_out_off - self.discount.max_price
+
+                    elif total_price_with_out_off < self.discount.limit_price:
+                        total_price = total_price_with_out_off
+
+                    else:
+                        total_price = self.orders.aggregate(total_price=Sum(F('unit_price') * F('quantity')) - Sum(
+                            F('unit_price') * F('quantity')) * self.discount.discount / 100)['total_price']
                 else:
                     raise ValueError(_(f"Invalid discount mode: {self.discount.mode}"))
             else:
@@ -258,7 +275,7 @@ class Order(BaseModel):
 
         else:
             total_price = self.orders.aggregate(total_price=Sum(F('unit_price') * F('quantity')))['total_price']
-        print(total_price)
+        # print(total_price)
         return total_price if total_price is not None else 0
 
 
@@ -272,6 +289,9 @@ class OrderItem(BaseModel):
     class Meta:
         verbose_name = _("Order Item")
         verbose_name_plural = _("Order Items")
+
+    def __str__(self):
+        return f"{self.order} - {self.product}"
 
 
 class Review(BaseModel):
@@ -313,7 +333,7 @@ class Transaction(BaseModel):
         verbose_name_plural = _("Transactions")
 
 
-class SiteSettings(TranslatableModel, BaseModel):
+class SiteSettings(TranslatableModel, BaseModel, SingletonModel):
     translations = TranslatedFields(
         footer_text=models.TextField(_("Footer Text"), blank=True, null=True),
         address=models.TextField(_("Address"), blank=True, null=True)
@@ -333,7 +353,7 @@ class SiteSettings(TranslatableModel, BaseModel):
         verbose_name_plural = _("Site Settings")
 
 
-class HomeBanner(BaseModel):
+class HomeBanner(BaseModel, SingletonModel):
     product = models.ManyToManyField(Product, verbose_name='Products')
 
     def __str__(self):

@@ -2,109 +2,90 @@
 {% load i18n %}
 {% get_current_language as LANGUAGE_CODE %}
 {% load static %}
+{% load compress %}
 {% block contents %}
     <!-- start banner Area -->
-    <section class="banner-area">
-        <script>
-            // Fetch data from the API
-            fetch('/shop/home-banners/')
-                .then(response => response.json())
-                .then(data => {
-                    const productSlider = document.getElementById('product-slider');
+    {% compress js %}
+        <section class="banner-area">
+            <script>
+                // Fetch data from the API
+                fetch('/shop/home-banners/')
+                    .then(response => response.json())
+                    .then(data => {
+                        const productSlider = document.getElementById('product-slider');
 
-                    if (data.length > 0 && data[0].product.length > 0) {
-                        const banner = data[0];
-                        const products = banner.product;
+                        if (data.length > 0 && data[0].product.length > 0) {
+                            const banner = data[0];
+                            const products = banner.product;
 
-                        products.forEach(product => {
-                            const slide = document.createElement('div');
-                            slide.classList.add('row', 'single-slide', 'align-items-center', 'd-flex');
+                            products.forEach(product => {
+                                const slide = document.createElement('div');
+                                slide.classList.add('row', 'single-slide', 'align-items-center', 'd-flex');
 
-                            const contentCol = document.createElement('div');
-                            contentCol.classList.add('col-lg-5', 'col-md-6');
+                                const contentCol = document.createElement('div');
+                                contentCol.classList.add('col-lg-5', 'col-md-6');
 
-                            const bannerContent = document.createElement('div');
-                            bannerContent.classList.add('banner-content');
+                                const bannerContent = document.createElement('div');
+                                bannerContent.classList.add('banner-content');
 
-                            const title = document.createElement('h1');
-                            title.textContent = product.translations.{{ LANGUAGE_CODE }}.title;
+                                const title = document.createElement('h1');
+                                title.textContent = product.title;
 
-                            const description = document.createElement('p');
-                            description.textContent = product.translations.{{ LANGUAGE_CODE }}.description;
+                                const description = document.createElement('p');
+                                description.textContent = product.description;
 
-                            const addButton = document.createElement('a');
-                            addButton.classList.add('add-btn');
-                            addButton.href = "{% url 'front:products' %}";
-                            addButton.innerHTML = '<span class="lnr lnr-cross"></span>';
+                                const addButton = document.createElement('a');
+                                addButton.classList.add('add-btn');
+                                addButton.href = "{% url 'front:products' %}";
+                                addButton.innerHTML = '<span class="lnr lnr-cross"></span>';
 
-                            const addText = document.createElement('span');
-                            addText.classList.add('add-text', 'text-uppercase');
-                            addText.textContent = 'Shop Now';
+                                const addText = document.createElement('span');
+                                addText.classList.add('add-text', 'text-uppercase');
+                                addText.textContent = 'Shop Now';
 
-                            const imgCol = document.createElement('div');
-                            imgCol.classList.add('col-lg-7');
+                                const imgCol = document.createElement('div');
+                                imgCol.classList.add('col-lg-7');
 
-                            const bannerImg = document.createElement('div');
-                            bannerImg.classList.add('banner-img');
+                                const bannerImg = document.createElement('div');
+                                bannerImg.classList.add('banner-img');
 
-                            const productImage = document.createElement('img');
-                            productImage.classList.add('img-fluid');
-                            productImage.src = product.images.length > 0 ? product.images[0].image : '{% static 'img/banner/banner-img.png' %}';
-                            productImage.alt = product.translations.{{ LANGUAGE_CODE }}.title;
+                                const productImage = document.createElement('img');
+                                productImage.classList.add('img-fluid');
+                                productImage.src = product.images.length > 0 ? product.images[0].image : '{% static 'img/banner/banner-img.png' %}';
+                                productImage.alt = product.title;
 
-                            addButton.appendChild(addText);
+                                addButton.appendChild(addText);
 
-                            bannerContent.appendChild(title);
-                            bannerContent.appendChild(description);
-                            bannerContent.appendChild(addButton);
+                                bannerContent.appendChild(title);
+                                bannerContent.appendChild(description);
+                                bannerContent.appendChild(addButton);
 
-                            contentCol.appendChild(bannerContent);
+                                contentCol.appendChild(bannerContent);
 
-                            bannerImg.appendChild(productImage);
-                            imgCol.appendChild(bannerImg);
+                                bannerImg.appendChild(productImage);
+                                imgCol.appendChild(bannerImg);
 
-                            slide.appendChild(contentCol);
-                            slide.appendChild(imgCol);
+                                slide.appendChild(contentCol);
+                                slide.appendChild(imgCol);
 
-                            productSlider.appendChild(slide);
-                        });
-                    }
-                })
-                .catch(error => console.error('Error fetching data:', error));
-        </script>
-        <div class="container">
-            <div class="row fullscreen align-items-center justify-content-start">
-                <div class="col-lg-12">
-                    <div class="active-banner-slider owl-carousel" id="product-slider">
-                        <!-- single-slide -->
-                        {#                        <div class="row single-slide align-items-center d-flex">#}
-                        {#                            <div class="col-lg-5 col-md-6">#}
-                        {#                                <div class="banner-content">#}
-                        {#                                    <h1>Nike New <br>Collection!</h1>#}
-                        {#                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor#}
-                        {#                                        incididunt ut labore et#}
-                        {#                                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>#}
-                        {#                                    <div class="add-bag d-flex align-items-center">#}
-                        {#                                        <a class="add-btn" href="{% url 'front:products' %}"><span#}
-                        {#                                                class="lnr lnr-cross"></span></a>#}
-                        {#                                        <span class="add-text text-uppercase">Shop Now</span>#}
-                        {#                                    </div>#}
-                        {#                                </div>#}
-                        {#                            </div>#}
-                        {#                            <div class="col-lg-7">#}
-                        {#                                <div class="banner-img">#}
-                        {#                                    <img class="img-fluid" src="{% static 'img/banner/banner-img.png' %}" alt="">#}
-                        {#                                </div>#}
-                        {#                            </div>#}
-                        {#                        </div>#}
-                        <!-- single-slide -->
+                                productSlider.appendChild(slide);
+                            });
+                        }
+                    })
+                    .catch(error => console.error('Error fetching data:', error));
+            </script>
+            <div class="container">
+                <div class="row fullscreen align-items-center justify-content-start">
+                    <div class="col-lg-12">
+                        <div class="active-banner-slider owl-carousel" id="product-slider">
 
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <!-- End banner Area -->
+        </section>
+        <!-- End banner Area -->
+    {% endcompress %}
 
     <!-- start features Area -->
     <section class="features-area section_gap">
@@ -173,445 +154,594 @@
                 </div>
             </div>
         </div>
-        <script type="text/javascript">
 
-            let currentCollectionsId = null;
-            let currentUnitPriceGt = null;
-            let currentUnitPriceLt = null;
-            let currentSearch = null;
-            let currentOrdering = null;
-            let currentFeatureKey = null;
-            let currentFeatureValue = null;
+        <div class="single-product-slider">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 text-center">
+                        <div class="section-title">
+                            <h1>{% trans 'Best Sales Products' %}</h1>
 
-            function createSocialInfo(iconClass, text, moreClass = null) {
-                const socialInfo = document.createElement('button');
-                socialInfo.classList.add('social-info');
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="bestProductContainer">
+                    {#                         products will be dynamically added here using JavaScript #}
+                </div>
+            </div>
+        </div>
+        {% compress js %}
+            <script type="text/javascript">
 
-                const iconSpan = document.createElement('span');
-                iconSpan.classList.add(iconClass);
-                iconSpan.classList.add(moreClass);
+                let currentCollectionsId = null;
+                let currentUnitPriceGt = null;
+                let currentUnitPriceLt = null;
+                let currentSearch = null;
+                let currentOrdering = null;
+                let currentFeatureKey = null;
+                let currentFeatureValue = null;
 
-                const hoverText = document.createElement('p');
-                hoverText.classList.add('hover-text');
-                hoverText.textContent = text;
+                function createSocialInfo(iconClass, text, moreClass = null) {
+                    const socialInfo = document.createElement('button');
+                    socialInfo.classList.add('social-info');
 
-                socialInfo.appendChild(iconSpan);
-                socialInfo.appendChild(hoverText);
+                    const iconSpan = document.createElement('span');
+                    iconSpan.classList.add(iconClass);
+                    iconSpan.classList.add(moreClass);
 
-                return socialInfo;
-            }
+                    const hoverText = document.createElement('p');
+                    hoverText.classList.add('hover-text');
+                    hoverText.textContent = text;
 
-            const productsPerPage = 1;
-            let currentPage = 1;
+                    socialInfo.appendChild(iconSpan);
+                    socialInfo.appendChild(hoverText);
 
-            function fetchProducts(page = 1, selectedOption = 'updated_at', collectionsId = null, unit_price__gt = null,
-                                   unit_price__lt = null, search = null, feature_key = null, feature_value = null) {
-                let apiUrl = null
-                apiUrl = `/shop/products/?page=${page}&ordering=${getSortingOrdering(selectedOption)}`;
-
-                if (collectionsId != null) {
-                    apiUrl += `&collection_id=${collectionsId}`;
-                    addFilterToCurrentFilters('{% trans 'Collection' %}', collectionsId);
+                    return socialInfo;
                 }
-                if (selectedOption != null) {
-                    apiUrl += `&ordering=${getSortingOrdering(selectedOption)}`;
-                    addFilterToCurrentFilters('{% trans 'Ordering' %}', selectedOption);
-                }
-                if (unit_price__gt != null) {
-                    apiUrl += `&unit_price__gt=${unit_price__gt}`;
-                    addFilterToCurrentFilters('{% trans 'Price Greater Than' %}', unit_price__gt);
-                }
-                if (unit_price__lt != null) {
-                    apiUrl += `&unit_price__lt=${unit_price__lt}`;
-                    addFilterToCurrentFilters('{% trans 'Price Less Than' %}', unit_price__lt);
-                }
-                if (search != null) {
-                    apiUrl += `&search=${search}`;
-                    addFilterToCurrentFilters('{% trans 'Search' %}', search);
-                }
-                if (feature_key != null) {
-                    apiUrl += `&feature_key=${feature_key}`;
-                    addFilterToCurrentFilters('{% trans 'Feature_key' %}', feature_key);
-                }
-                if (feature_value != null) {
-                    apiUrl += `&feature_value=${feature_value}`;
-                    addFilterToCurrentFilters('{% trans 'Feature_value' %}', feature_value);
-                }
-                console.log(apiUrl)
-                fetch(apiUrl)
-                    .then(response => response.json())
-                    .then(products => {
-                        const productContainer = document.getElementById('productContainer');
-                        productContainer.innerHTML = '';
 
-                        products.results.forEach(product => {
-                            {
-                                const currentLanguage = '{{ LANGUAGE_CODE }}';
-                                const translation = product.translations[currentLanguage] || product.translations.{{ LANGUAGE_CODE }};
-                                const productBlock = document.createElement('div');
-                                productBlock.classList.add('col-lg-4', 'col-md-6', 'single-product');
+                const productsPerPage = 1;
+                let currentPage = 1;
 
-                                const productImage = document.createElement('img');
-                                productImage.classList.add('img-fluid');
-                                productImage.src = product.images.length > 0 ? product.images[0].image : '{% static "img/default-product.jpg" %}';
-                                productImage.alt = product.translations.{{ LANGUAGE_CODE }}.title;
+                function fetchProducts(page = 1, selectedOption = 'updated_at', collectionsId = null, unit_price__gt = null,
+                                       unit_price__lt = null, search = null, feature_key = null, feature_value = null) {
+                    let apiUrl = null
+                    apiUrl = `/shop/products/?page=${page}&ordering=${getSortingOrdering(selectedOption)}`;
 
-                                const productDetails = document.createElement('div');
-                                productDetails.classList.add('product-details');
+                    if (collectionsId != null) {
+                        apiUrl += `&collection_id=${collectionsId}`;
+                        addFilterToCurrentFilters('{% trans 'Collection' %}', collectionsId);
+                    }
+                    if (selectedOption != null) {
+                        apiUrl += `&ordering=${getSortingOrdering(selectedOption)}`;
+                        addFilterToCurrentFilters('{% trans 'Ordering' %}', selectedOption);
+                    }
+                    if (unit_price__gt != null) {
+                        apiUrl += `&unit_price__gt=${unit_price__gt}`;
+                        addFilterToCurrentFilters('{% trans 'Price Greater Than' %}', unit_price__gt);
+                    }
+                    if (unit_price__lt != null) {
+                        apiUrl += `&unit_price__lt=${unit_price__lt}`;
+                        addFilterToCurrentFilters('{% trans 'Price Less Than' %}', unit_price__lt);
+                    }
+                    if (search != null) {
+                        apiUrl += `&search=${search}`;
+                        addFilterToCurrentFilters('{% trans 'Search' %}', search);
+                    }
+                    if (feature_key != null) {
+                        apiUrl += `&feature_key=${feature_key}`;
+                        addFilterToCurrentFilters('{% trans 'Feature_key' %}', feature_key);
+                    }
+                    if (feature_value != null) {
+                        apiUrl += `&feature_value=${feature_value}`;
+                        addFilterToCurrentFilters('{% trans 'Feature_value' %}', feature_value);
+                    }
+                    console.log(apiUrl)
+                    fetch(apiUrl)
+                        .then(response => response.json())
+                        .then(products => {
+                            const productContainer = document.getElementById('productContainer');
+                            productContainer.innerHTML = '';
 
-                                const productName = document.createElement('h6');
-                                productName.textContent = translation.title;
+                            products.results.forEach(product => {
+                                {
+                                    {#const currentLanguage = '{{ LANGUAGE_CODE }}';#}
+                                    {#const translation = product.translations[currentLanguage] || product.translations.{{ LANGUAGE_CODE }};#}
+                                    const productBlock = document.createElement('div');
+                                    productBlock.classList.add('col-lg-4', 'col-md-6', 'single-product');
+
+                                    const productImage = document.createElement('img');
+                                    productImage.classList.add('img-fluid');
+                                    productImage.src = product.images.length > 0 ? product.images[0].image : '{% static "img/default-product.jpg" %}';
+                                    productImage.alt = product.title;
+
+                                    const productDetails = document.createElement('div');
+                                    productDetails.classList.add('product-details');
+
+                                    const productName = document.createElement('h6');
+                                    productName.textContent = product.title;
 
 
-                                const productPrice = document.createElement('div');
-                                productPrice.classList.add('price');
+                                    const productPrice = document.createElement('div');
+                                    productPrice.classList.add('price');
 
-                                const originalPrice = document.createElement('h6');
-                                originalPrice.textContent = `$${product.price.toFixed(2)}`;
+                                    const originalPrice = document.createElement('h6');
+                                    originalPrice.textContent = `$${product.price.toFixed(2)}`;
 
-                                const discountedPrice = document.createElement('h6');
-                                if (product.org_price !== product.price) {
-                                    discountedPrice.classList.add('l-through');
-                                    discountedPrice.textContent = `$${product.org_price.toFixed(2)}`;
-                                }
-
-                                const productActions = document.createElement('div');
-                                productActions.classList.add('prd-bottom');
-
-                                const addToBag = createSocialInfo('ti-bag', '{% trans 'Add to bag' %}', 'ti-bag');
-                                addToBag.addEventListener('click', () => {
-                                    const cartId = localStorage.getItem('cartId');
-                                    const productId = product.id;
-                                    const quantity = 1;
-                                    if (!cartId || cartId == undefined) {
-
-                                        createCartAndAddToBag(productId);
-                                    } else {
-                                        addToCart(cartId, productId, quantity);
+                                    const discountedPrice = document.createElement('h6');
+                                    if (product.org_price !== product.price) {
+                                        discountedPrice.classList.add('l-through');
+                                        discountedPrice.textContent = `$${product.org_price.toFixed(2)}`;
                                     }
-                                });
 
-                                // const addToWishlist = createSocialInfo('lnr lnr-heart', 'Wishlist');
-                                {#let url = {% url 'front:products-detail' productId %}#}
+                                    const productActions = document.createElement('div');
+                                    productActions.classList.add('prd-bottom');
 
-                                const viewMore = createSocialInfo('lnr', '{% trans 'View more' %}', 'lnr-move');
-                                viewMore.addEventListener('click', () => {
-                                    const productId = product.id;
-                                    window.location.href = `/products/${productId}/`;
-                                });
+                                    const addToBag = createSocialInfo('ti-bag', '{% trans 'Add to bag' %}', 'ti-bag');
+                                    addToBag.addEventListener('click', () => {
+                                        const cartId = localStorage.getItem('cartId');
+                                        const productId = product.id;
+                                        const quantity = 1;
+                                        if (!cartId || cartId == undefined) {
+
+                                            createCartAndAddToBag(productId);
+                                        } else {
+                                            addToCart(cartId, productId, quantity);
+                                        }
+                                    });
+
+                                    // const addToWishlist = createSocialInfo('lnr lnr-heart', 'Wishlist');
+                                    {#let url = {% url 'front:products-detail' productId %}#}
+
+                                    const viewMore = createSocialInfo('lnr', '{% trans 'View more' %}', 'lnr-move');
+                                    viewMore.addEventListener('click', () => {
+                                        const productId = product.id;
+                                        window.location.href = `/products/${productId}/`;
+                                    });
 
 
-                                productDetails.appendChild(productName);
-                                productPrice.appendChild(originalPrice);
-                                if (discountedPrice.textContent.trim() !== '') {
-                                    productPrice.appendChild(discountedPrice);
+                                    productDetails.appendChild(productName);
+                                    productPrice.appendChild(originalPrice);
+                                    if (discountedPrice.textContent.trim() !== '') {
+                                        productPrice.appendChild(discountedPrice);
+                                    }
+                                    productDetails.appendChild(productPrice);
+                                    productActions.appendChild(addToBag);
+                                    // productActions.appendChild(addToWishlist);
+                                    productActions.appendChild(viewMore);
+
+                                    productBlock.appendChild(productImage);
+                                    productBlock.appendChild(productDetails);
+                                    productBlock.appendChild(productActions);
+
+                                    productContainer.appendChild(productBlock);
+
+                                    productContainer.appendChild(productBlock);
                                 }
-                                productDetails.appendChild(productPrice);
-                                productActions.appendChild(addToBag);
-                                // productActions.appendChild(addToWishlist);
-                                productActions.appendChild(viewMore);
+                            });
 
-                                productBlock.appendChild(productImage);
-                                productBlock.appendChild(productDetails);
-                                productBlock.appendChild(productActions);
-
-                                productContainer.appendChild(productBlock);
-
-                                productContainer.appendChild(productBlock);
-                            }
+                            {#updatePagination(products.count, productsPerPage);#}
+                        })
+                        .catch(error => {
+                            console.error('Error fetching products:', error);
                         });
 
-                        updatePagination(products.count, productsPerPage);
-                    })
-                    .catch(error => {
-                        console.error('Error fetching products:', error);
-                    });
+                    function addFilterToCurrentFilters(filterName, filterValue) {
+                        const existingButton = Array.from(document.querySelectorAll('#Filters button')).find(button => {
+                            return button.textContent.startsWith(`${filterName}:`);
+                        });
 
-                function addFilterToCurrentFilters(filterName, filterValue) {
-                    const existingButton = Array.from(document.querySelectorAll('#Filters button')).find(button => {
-                        return button.textContent.startsWith(`${filterName}:`);
-                    });
-
-                    if (existingButton) {
-                        existingButton.textContent = `${filterName}: ${filterValue}`;
-                        if (filterName == '{% trans 'Feature_key' %}') {
-                            const elements = document.querySelectorAll('.btn.btn-sm.btn-primary.mr-2')
-                            console.log(elements)
-                            for (let i = 0; i < elements.length; i++) {
-                                console.log(elements[i])
-                                if (elements[i].textContent.includes('{% trans 'Feature_value' %}')) {
-                                    console.log('findddddd2')
-                                    elements[i].remove();
-                                }
-                            }
-                        }
-                    } else {
-                        switch (filterName) {
-                            case '{% trans 'Collection' %}':
-                                currentCollectionsId = filterValue;
-                                break;
-                            case '{% trans 'Ordering' %}':
-                                currentOrdering = filterValue;
-                                break;
-                            case '{% trans 'Price Greater Than' %}':
-                                currentUnitPriceGt = filterValue;
-                                break;
-                            case '{% trans 'Price Less Than' %}':
-                                currentUnitPriceLt = filterValue;
-                                break;
-                            case '{% trans 'Search' %}':
-                                currentSearch = filterValue;
-                                break;
-                            case '{% trans 'Feature_key' %}':
-                                currentFeatureKey = filterValue;
-                                currentFeatureValue = null;
-                                break;
-                            case '{% trans 'Feature_value' %}':
-                                currentFeatureValue = filterValue;
-                                break;
-                            default:
-                                break;
-                        }
-
-                        const filtersContainer = document.getElementById('Filters');
-                        const filterButton = document.createElement('button');
-                        filterButton.textContent = `${filterName}: ${filterValue}`;
-                        filterButton.classList.add('btn', 'btn-sm', 'btn-primary', 'mr-2');
-                        filterButton.addEventListener('click', () => {
-                            removeFilterFromApiUrl(filterName, filterValue);
+                        if (existingButton) {
+                            existingButton.textContent = `${filterName}: ${filterValue}`;
                             if (filterName == '{% trans 'Feature_key' %}') {
                                 const elements = document.querySelectorAll('.btn.btn-sm.btn-primary.mr-2')
                                 console.log(elements)
                                 for (let i = 0; i < elements.length; i++) {
                                     console.log(elements[i])
                                     if (elements[i].textContent.includes('{% trans 'Feature_value' %}')) {
-                                        console.log('findddddd')
-                                        filtersContainer.removeChild(elements[i]);
+                                        console.log('findddddd2')
+                                        elements[i].remove();
                                     }
                                 }
                             }
-                            filtersContainer.removeChild(filterButton);
-                            currentPage = 1;
-                            fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue);
-                        });
-                        filtersContainer.appendChild(filterButton);
-                    }
-                }
-
-
-                function removeFilterFromApiUrl(filterName, filterValue) {
-
-                    switch (filterName) {
-                        case '{% trans 'Collection' %}':
-                            currentCollectionsId = null;
-                            break;
-                        case '{% trans 'Ordering' %}':
-                            currentOrdering = null;
-                            break;
-                        case '{% trans 'Price Greater Than' %}':
-                            currentUnitPriceGt = null;
-                            break;
-                        case '{% trans 'Price Less Than' %}':
-                            currentUnitPriceLt = null;
-                            break;
-                        case '{% trans 'Search' %}':
-                            currentSearch = null;
-                            break;
-                        case '{% trans 'Feature_key' %}':
-                            currentFeatureKey = null;
-                            currentFeatureValue = null;
-                            break;
-                        case '{% trans 'Feature_value' %}':
-                            currentFeatureValue = null;
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            }
-
-            function getToken() {
-                return localStorage.getItem('JWT');
-            }
-
-            function createCartAndAddToBag(productId) {
-                const token = getToken();
-
-                let headers = {
-                    'Content-Type': 'application/json',
-                };
-
-                if (token) {
-                    headers['Authorization'] = `JWT ${token}`;
-                }
-
-                const options = {
-                    method: 'POST',
-                    headers: headers,
-                };
-                console.log('headers', headers)
-                fetch('/shop/cart/',
-                    options
-                )
-                    .then(response => response.json())
-                    .then(data => {
-                        const cartId = data.id;
-                        localStorage.setItem('cartId', cartId);
-                        addToCart(cartId, productId, 1);
-                    })
-                    .catch(error => console.error('Error creating cart:', error));
-            }
-
-            function addToCart(cartId, productId, quantity) {
-                const token = getToken();
-
-                let headers = {
-                    'Content-Type': 'application/json',
-                };
-                if (token) {
-                    headers['Authorization'] = `JWT ${token}`;
-                }
-                {#console.log('headers', headers)#}
-                fetch(`/shop/cart/${cartId}/items/`, {
-                    method: 'POST',
-                    headers: headers,
-                    body: JSON.stringify({
-                        product_id: productId,
-                        quantity: quantity
-                    })
-                })
-                    .then(response => {
-                        if (response.ok) {
-                            console.log('Item added to cart successfully');
                         } else {
-                            if (response.status === 401) {
-                                console.error('Unauthorized: Token may be expired or invalid');
-                                localStorage.removeItem('JWT');
+                            switch (filterName) {
+                                case '{% trans 'Collection' %}':
+                                    currentCollectionsId = filterValue;
+                                    break;
+                                case '{% trans 'Ordering' %}':
+                                    currentOrdering = filterValue;
+                                    break;
+                                case '{% trans 'Price Greater Than' %}':
+                                    currentUnitPriceGt = filterValue;
+                                    break;
+                                case '{% trans 'Price Less Than' %}':
+                                    currentUnitPriceLt = filterValue;
+                                    break;
+                                case '{% trans 'Search' %}':
+                                    currentSearch = filterValue;
+                                    break;
+                                case '{% trans 'Feature_key' %}':
+                                    currentFeatureKey = filterValue;
+                                    currentFeatureValue = null;
+                                    break;
+                                case '{% trans 'Feature_value' %}':
+                                    currentFeatureValue = filterValue;
+                                    break;
+                                default:
+                                    break;
                             }
-                            console.error('Failed to add item to cart:', response.statusText);
-                            createCartAndAddToBag(productId);
+
+                            const filtersContainer = document.getElementById('Filters');
+                            const filterButton = document.createElement('button');
+                            filterButton.textContent = `${filterName}: ${filterValue}`;
+                            filterButton.classList.add('btn', 'btn-sm', 'btn-primary', 'mr-2');
+                            filterButton.addEventListener('click', () => {
+                                removeFilterFromApiUrl(filterName, filterValue);
+                                if (filterName == '{% trans 'Feature_key' %}') {
+                                    const elements = document.querySelectorAll('.btn.btn-sm.btn-primary.mr-2')
+                                    console.log(elements)
+                                    for (let i = 0; i < elements.length; i++) {
+                                        console.log(elements[i])
+                                        if (elements[i].textContent.includes('{% trans 'Feature_value' %}')) {
+                                            console.log('findddddd')
+                                            filtersContainer.removeChild(elements[i]);
+                                        }
+                                    }
+                                }
+                                filtersContainer.removeChild(filterButton);
+                                currentPage = 1;
+                                fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue);
+                            });
+                            filtersContainer.appendChild(filterButton);
                         }
+                    }
+
+
+                    function removeFilterFromApiUrl(filterName, filterValue) {
+
+                        switch (filterName) {
+                            case '{% trans 'Collection' %}':
+                                currentCollectionsId = null;
+                                break;
+                            case '{% trans 'Ordering' %}':
+                                currentOrdering = null;
+                                break;
+                            case '{% trans 'Price Greater Than' %}':
+                                currentUnitPriceGt = null;
+                                break;
+                            case '{% trans 'Price Less Than' %}':
+                                currentUnitPriceLt = null;
+                                break;
+                            case '{% trans 'Search' %}':
+                                currentSearch = null;
+                                break;
+                            case '{% trans 'Feature_key' %}':
+                                currentFeatureKey = null;
+                                currentFeatureValue = null;
+                                break;
+                            case '{% trans 'Feature_value' %}':
+                                currentFeatureValue = null;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+
+                function getToken() {
+                    return localStorage.getItem('JWT');
+                }
+
+                function createCartAndAddToBag(productId) {
+                    const token = getToken();
+
+                    let headers = {
+                        'Content-Type': 'application/json',
+                    };
+
+                    if (token) {
+                        headers['Authorization'] = `JWT ${token}`;
+                    }
+
+                    const options = {
+                        method: 'POST',
+                        headers: headers,
+                    };
+                    console.log('headers', headers)
+                    fetch('/shop/cart/',
+                        options
+                    )
+                        .then(response => response.json())
+                        .then(data => {
+                            const cartId = data.id;
+                            localStorage.setItem('cartId', cartId);
+                            addToCart(cartId, productId, 1);
+                        })
+                        .catch(error => console.error('Error creating cart:', error));
+                }
+
+                function addToCart(cartId, productId, quantity) {
+                    const token = getToken();
+
+                    let headers = {
+                        'Content-Type': 'application/json',
+                    };
+                    if (token) {
+                        headers['Authorization'] = `JWT ${token}`;
+                    }
+                    {#console.log('headers', headers)#}
+                    fetch(`/shop/cart/${cartId}/items/`, {
+                        method: 'POST',
+                        headers: headers,
+                        body: JSON.stringify({
+                            product_id: productId,
+                            quantity: quantity
+                        })
                     })
-                    .catch(error => console.error('Error adding item to cart:', error));
-            }
+                        .then(response => {
+                            if (response.ok) {
+                                console.log('Item added to cart successfully');
+                            } else {
+                                if (response.status === 401) {
+                                    console.error('Unauthorized: Token may be expired or invalid');
+                                    localStorage.removeItem('JWT');
+                                }
+                                console.error('Failed to add item to cart:', response.statusText);
+                                createCartAndAddToBag(productId);
+                            }
+                        })
+                        .catch(error => console.error('Error adding item to cart:', error));
+                }
 
 
-             function getSortingOrdering(sortingOption) {
-            switch (sortingOption) {
-                case 'price_asc':
-                    return 'unit_price';
-                case 'price_desc':
-                    return '-unit_price';
-                default:
-                    return '-updated_at';
-            }
-        }
+                function getSortingOrdering(sortingOption) {
+                    switch (sortingOption) {
+                        case 'price_asc':
+                            return 'unit_price';
+                        case 'price_desc':
+                            return '-unit_price';
+                        case 'best_sales':
+                            return 'best_sales';
+                        default:
+                            return '-updated_at';
+                    }
+                }
+
+                function fetchBestSalesProducts(page = 1, selectedOption = 'best_sales', collectionsId = null, unit_price__gt = null,
+                                                unit_price__lt = null, search = null, feature_key = null, feature_value = null) {
+                    let apiUrl = null
+                    apiUrl = `/shop/products/?page=${page}&ordering=${getSortingOrdering(selectedOption)}`;
+
+                    if (collectionsId != null) {
+                        apiUrl += `&collection_id=${collectionsId}`;
+                        addFilterToCurrentFilters('{% trans 'Collection' %}', collectionsId);
+                    }
+                    if (selectedOption != null) {
+                        apiUrl += `&ordering=${getSortingOrdering(selectedOption)}`;
+                        addFilterToCurrentFilters('{% trans 'Ordering' %}', selectedOption);
+                    }
+                    if (unit_price__gt != null) {
+                        apiUrl += `&unit_price__gt=${unit_price__gt}`;
+                        addFilterToCurrentFilters('{% trans 'Price Greater Than' %}', unit_price__gt);
+                    }
+                    if (unit_price__lt != null) {
+                        apiUrl += `&unit_price__lt=${unit_price__lt}`;
+                        addFilterToCurrentFilters('{% trans 'Price Less Than' %}', unit_price__lt);
+                    }
+                    if (search != null) {
+                        apiUrl += `&search=${search}`;
+                        addFilterToCurrentFilters('{% trans 'Search' %}', search);
+                    }
+                    if (feature_key != null) {
+                        apiUrl += `&feature_key=${feature_key}`;
+                        addFilterToCurrentFilters('{% trans 'Feature_key' %}', feature_key);
+                    }
+                    if (feature_value != null) {
+                        apiUrl += `&feature_value=${feature_value}`;
+                        addFilterToCurrentFilters('{% trans 'Feature_value' %}', feature_value);
+                    }
+                    console.log(apiUrl)
+                    fetch(apiUrl)
+                        .then(response => response.json())
+                        .then(products => {
+                            const bestProductContainer = document.getElementById('bestProductContainer');
+                            bestProductContainer.innerHTML = '';
+
+                            products.results.forEach(product => {
+                                {
+                                    {#const currentLanguage = '{{ LANGUAGE_CODE }}';#}
+                                    {#const translation = product.translations[currentLanguage] || product.translations.{{ LANGUAGE_CODE }};#}
+                                    const productBlock = document.createElement('div');
+                                    productBlock.classList.add('col-lg-4', 'col-md-6', 'single-product');
+
+                                    const productImage = document.createElement('img');
+                                    productImage.classList.add('img-fluid');
+                                    productImage.src = product.images.length > 0 ? product.images[0].image : '{% static "img/default-product.jpg" %}';
+                                    productImage.alt = product.title;
+
+                                    const productDetails = document.createElement('div');
+                                    productDetails.classList.add('product-details');
+
+                                    const productName = document.createElement('h6');
+                                    productName.textContent = product.title;
 
 
-            fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue);
+                                    const productPrice = document.createElement('div');
+                                    productPrice.classList.add('price');
 
-        </script>
+                                    const originalPrice = document.createElement('h6');
+                                    originalPrice.textContent = `$${product.price.toFixed(2)}`;
 
+                                    const discountedPrice = document.createElement('h6');
+                                    if (product.org_price !== product.price) {
+                                        discountedPrice.classList.add('l-through');
+                                        discountedPrice.textContent = `$${product.org_price.toFixed(2)}`;
+                                    }
+
+                                    const productActions = document.createElement('div');
+                                    productActions.classList.add('prd-bottom');
+
+                                    const addToBag = createSocialInfo('ti-bag', '{% trans 'Add to bag' %}', 'ti-bag');
+                                    addToBag.addEventListener('click', () => {
+                                        const cartId = localStorage.getItem('cartId');
+                                        const productId = product.id;
+                                        const quantity = 1;
+                                        if (!cartId || cartId == undefined) {
+
+                                            createCartAndAddToBag(productId);
+                                        } else {
+                                            addToCart(cartId, productId, quantity);
+                                        }
+                                    });
+
+                                    // const addToWishlist = createSocialInfo('lnr lnr-heart', 'Wishlist');
+                                    {#let url = {% url 'front:products-detail' productId %}#}
+
+                                    const viewMore = createSocialInfo('lnr', '{% trans 'View more' %}', 'lnr-move');
+                                    viewMore.addEventListener('click', () => {
+                                        const productId = product.id;
+                                        window.location.href = `/products/${productId}/`;
+                                    });
+
+
+                                    productDetails.appendChild(productName);
+                                    productPrice.appendChild(originalPrice);
+                                    if (discountedPrice.textContent.trim() !== '') {
+                                        productPrice.appendChild(discountedPrice);
+                                    }
+                                    productDetails.appendChild(productPrice);
+                                    productActions.appendChild(addToBag);
+                                    // productActions.appendChild(addToWishlist);
+                                    productActions.appendChild(viewMore);
+
+                                    productBlock.appendChild(productImage);
+                                    productBlock.appendChild(productDetails);
+                                    productBlock.appendChild(productActions);
+
+                                    bestProductContainer.appendChild(productBlock);
+
+                                    bestProductContainer.appendChild(productBlock);
+                                }
+                            });
+
+                            {#updatePagination(products.count, productsPerPage);#}
+                        })
+                        .catch(error => {
+                            console.error('Error fetching products:', error);
+                        });
+
+                    function addFilterToCurrentFilters(filterName, filterValue) {
+                        const existingButton = Array.from(document.querySelectorAll('#Filters button')).find(button => {
+                            return button.textContent.startsWith(`${filterName}:`);
+                        });
+
+                        if (existingButton) {
+                            existingButton.textContent = `${filterName}: ${filterValue}`;
+                            if (filterName == '{% trans 'Feature_key' %}') {
+                                const elements = document.querySelectorAll('.btn.btn-sm.btn-primary.mr-2')
+                                console.log(elements)
+                                for (let i = 0; i < elements.length; i++) {
+                                    console.log(elements[i])
+                                    if (elements[i].textContent.includes('{% trans 'Feature_value' %}')) {
+                                        console.log('findddddd2')
+                                        elements[i].remove();
+                                    }
+                                }
+                            }
+                        } else {
+                            switch (filterName) {
+                                case '{% trans 'Collection' %}':
+                                    currentCollectionsId = filterValue;
+                                    break;
+                                case '{% trans 'Ordering' %}':
+                                    currentOrdering = filterValue;
+                                    break;
+                                case '{% trans 'Price Greater Than' %}':
+                                    currentUnitPriceGt = filterValue;
+                                    break;
+                                case '{% trans 'Price Less Than' %}':
+                                    currentUnitPriceLt = filterValue;
+                                    break;
+                                case '{% trans 'Search' %}':
+                                    currentSearch = filterValue;
+                                    break;
+                                case '{% trans 'Feature_key' %}':
+                                    currentFeatureKey = filterValue;
+                                    currentFeatureValue = null;
+                                    break;
+                                case '{% trans 'Feature_value' %}':
+                                    currentFeatureValue = filterValue;
+                                    break;
+                                default:
+                                    break;
+                            }
+
+                            const filtersContainer = document.getElementById('Filters');
+                            const filterButton = document.createElement('button');
+                            filterButton.textContent = `${filterName}: ${filterValue}`;
+                            filterButton.classList.add('btn', 'btn-sm', 'btn-primary', 'mr-2');
+                            filterButton.addEventListener('click', () => {
+                                removeFilterFromApiUrl(filterName, filterValue);
+                                if (filterName == '{% trans 'Feature_key' %}') {
+                                    const elements = document.querySelectorAll('.btn.btn-sm.btn-primary.mr-2')
+                                    console.log(elements)
+                                    for (let i = 0; i < elements.length; i++) {
+                                        console.log(elements[i])
+                                        if (elements[i].textContent.includes('{% trans 'Feature_value' %}')) {
+                                            console.log('findddddd')
+                                            filtersContainer.removeChild(elements[i]);
+                                        }
+                                    }
+                                }
+                                filtersContainer.removeChild(filterButton);
+                                currentPage = 1;
+                                fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue);
+                            });
+                            filtersContainer.appendChild(filterButton);
+                        }
+                    }
+
+
+                    function removeFilterFromApiUrl(filterName, filterValue) {
+
+                        switch (filterName) {
+                            case '{% trans 'Collection' %}':
+                                currentCollectionsId = null;
+                                break;
+                            case '{% trans 'Ordering' %}':
+                                currentOrdering = null;
+                                break;
+                            case '{% trans 'Price Greater Than' %}':
+                                currentUnitPriceGt = null;
+                                break;
+                            case '{% trans 'Price Less Than' %}':
+                                currentUnitPriceLt = null;
+                                break;
+                            case '{% trans 'Search' %}':
+                                currentSearch = null;
+                                break;
+                            case '{% trans 'Feature_key' %}':
+                                currentFeatureKey = null;
+                                currentFeatureValue = null;
+                                break;
+                            case '{% trans 'Feature_value' %}':
+                                currentFeatureValue = null;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+
+
+                fetchProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue);
+                fetchBestSalesProducts(currentPage, currentOrdering, currentCollectionsId, currentUnitPriceGt, currentUnitPriceLt, currentSearch, currentFeatureKey, currentFeatureValue);
+
+
+            </script>
+        {% endcompress %}
     </section>
     <!-- end product Area -->
-
-    <!-- Start exclusive deal Area -->
-    {#	<section class="exclusive-deal-area">#}
-    {#		<div class="container-fluid">#}
-    {#			<div class="row justify-content-center align-items-center">#}
-    {#				<div class="col-lg-6 no-padding exclusive-left">#}
-    {#					<div class="row clock_sec clockdiv" id="clockdiv">#}
-    {#						<div class="col-lg-12">#}
-    {#							<h1>Exclusive Hot Deal Ends Soon!</h1>#}
-    {#							<p>Who are in extremely love with eco friendly system.</p>#}
-    {#						</div>#}
-    {#						<div class="col-lg-12">#}
-    {#							<div class="row clock-wrap">#}
-    {#								<div class="col clockinner1 clockinner">#}
-    {#									<h1 class="days">150</h1>#}
-    {#									<span class="smalltext">Days</span>#}
-    {#								</div>#}
-    {#								<div class="col clockinner clockinner1">#}
-    {#									<h1 class="hours">23</h1>#}
-    {#									<span class="smalltext">Hours</span>#}
-    {#								</div>#}
-    {#								<div class="col clockinner clockinner1">#}
-    {#									<h1 class="minutes">47</h1>#}
-    {#									<span class="smalltext">Mins</span>#}
-    {#								</div>#}
-    {#								<div class="col clockinner clockinner1">#}
-    {#									<h1 class="seconds">59</h1>#}
-    {#									<span class="smalltext">Secs</span>#}
-    {#								</div>#}
-    {#							</div>#}
-    {#						</div>#}
-    {#					</div>#}
-    {#					<a href="" class="primary-btn">Shop Now</a>#}
-    {#				</div>#}
-    {#				<div class="col-lg-6 no-padding exclusive-right">#}
-    {#					<div class="active-exclusive-product-slider">#}
-    {#						<!-- single exclusive carousel -->#}
-    {#						<div class="single-exclusive-slider">#}
-    {#							<img class="img-fluid" src="img/product/e-p1.png" alt="">#}
-    {#							<div class="product-details">#}
-    {#								<div class="price">#}
-    {#									<h6>$150.00</h6>#}
-    {#									<h6 class="l-through">$210.00</h6>#}
-    {#								</div>#}
-    {#								<h4>addidas New Hammer sole#}
-    {#									for Sports person</h4>#}
-    {#								<div class="add-bag d-flex align-items-center justify-content-center">#}
-    {#									<a class="add-btn" href=""><span class="ti-bag"></span></a>#}
-    {#									<span class="add-text text-uppercase">Add to Bag</span>#}
-    {#								</div>#}
-    {#							</div>#}
-    {#						</div>#}
-    {#						<!-- single exclusive carousel -->#}
-    {#						<div class="single-exclusive-slider">#}
-    {#							<img class="img-fluid" src="img/product/e-p1.png" alt="">#}
-    {#							<div class="product-details">#}
-    {#								<div class="price">#}
-    {#									<h6>$150.00</h6>#}
-    {#									<h6 class="l-through">$210.00</h6>#}
-    {#								</div>#}
-    {#								<h4>addidas New Hammer sole#}
-    {#									for Sports person</h4>#}
-    {#								<div class="add-bag d-flex align-items-center justify-content-center">#}
-    {#									<a class="add-btn" href=""><span class="ti-bag"></span></a>#}
-    {#									<span class="add-text text-uppercase">Add to Bag</span>#}
-    {#								</div>#}
-    {#							</div>#}
-    {#						</div>#}
-    {#					</div>#}
-    {#				</div>#}
-    {#			</div>#}
-    {#		</div>#}
-    {#	</section>#}
-    {#	<!-- End exclusive deal Area -->#}
-    {##}
-    {#	<!-- Start brand Area -->#}
-    {#	<section class="brand-area section_gap">#}
-    {#		<div class="container">#}
-    {#			<div class="row">#}
-    {#				<a class="col single-img" href="#">#}
-    {#					<img class="img-fluid d-block mx-auto" src="img/brand/1.png" alt="">#}
-    {#				</a>#}
-    {#				<a class="col single-img" href="#">#}
-    {#					<img class="img-fluid d-block mx-auto" src="img/brand/2.png" alt="">#}
-    {#				</a>#}
-    {#				<a class="col single-img" href="#">#}
-    {#					<img class="img-fluid d-block mx-auto" src="img/brand/3.png" alt="">#}
-    {#				</a>#}
-    {#				<a class="col single-img" href="#">#}
-    {#					<img class="img-fluid d-block mx-auto" src="img/brand/4.png" alt="">#}
-    {#				</a>#}
-    {#				<a class="col single-img" href="#">#}
-    {#					<img class="img-fluid d-block mx-auto" src="img/brand/5.png" alt="">#}
-    {#				</a>#}
-    {#			</div>#}
-    {#		</div>#}
-    {#	</section>#}
-    <!-- End brand Area -->
 
 
 

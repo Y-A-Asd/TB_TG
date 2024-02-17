@@ -19,6 +19,19 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+
+schema_view = get_schema_view(
+    openapi.Info(
+        title="TB_TG",
+        default_version="v1",
+        description="Online Shop",
+        terms_of_service="",
+        contact=openapi.Contact(email="yosofasady2@gmail.com"),
+    ),
+    public=True,
+)
 
 """https://automationpanda.com/2018/04/21/django-admin-translations/"""
 
@@ -27,10 +40,11 @@ urlpatterns = i18n_patterns(
     path('rosetta/', include('rosetta.urls')),
     path('shop/', include('shop.urls')),
     path("__debug__/", include("debug_toolbar.urls")),
-    path("core/", include('core.urls')),
+    path("core/", include('core.urls', namespace='core')),
     path("", include('front.urls', namespace='front')),
     path("blog/", include('blog.urls', namespace='blog')),
-
+    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     prefix_default_language=False
 )
 

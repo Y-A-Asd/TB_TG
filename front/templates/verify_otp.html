@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load i18n %}
+{% load compress %}
 {% block contents %}
 
     <!-- Start Banner Area -->
@@ -8,10 +9,10 @@
         <div class="container">
             <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
                 <div class="col-first">
-                    <h1 class="text-danger" >{% trans 'Verify Code' %}</h1>
+                    <h1 class="text-danger">{% trans 'Verify Code' %}</h1>
                     <nav class="d-flex align-items-center">
-                        <a class="text-danger"  href="">{% trans 'Home' %}<span class="lnr lnr-arrow-right"></span></a>
-                        <a class="text-danger"  href="">{% trans 'Login/Register' %}</a>
+                        <a class="text-danger" href="">{% trans 'Home' %}<span class="lnr lnr-arrow-right"></span></a>
+                        <a class="text-danger" href="">{% trans 'Login/Register' %}</a>
                     </nav>
                 </div>
             </div>
@@ -27,19 +28,20 @@
                     <div class="login_box_img">
                         <img class="img-fluid" src="{% static 'img/login.jpg' %}" alt="">
                         <div class="hover">
-                            <h4>{% trans 'Do you have account?' %}</h4>
+                            <h4>{% trans 'New to our website?' %}</h4>
                             <p>{% trans 'There are advances being made in science and technology everyday, and a good example of this is the' %}</p>
-                            <a class="primary-btn" href="{% url 'front:login' %}">{% trans 'Login' %}</a>
+                            <a class="primary-btn" href="{% url 'front:register' %}">{% trans 'Create an Account' %}</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="login_form_inner">
                         <h3>{% trans 'Verification' %}</h3>
-                        <form class="row login_form" action="" method="post" id="loginForm" novalidate="novalidate">
+                        <form class="row login_form" action="" method="post" id="loginForm" novalidate="novalidate"
+                              hidden="">
                             {% csrf_token %}
                             <div class="col-md-12 form-group">
-                                <input type="text" class="form-control" id="content" name="content"
+                                <input type="text" class="form-control" id="otp" name="otp"
                                        placeholder="{% trans 'Verify Code' %}" onfocus="this.placeholder = ''"
                                        onblur="this.placeholder = '{% trans 'Verify Code' %}'">
                             </div>
@@ -48,114 +50,159 @@
                                 <button type="submit" value="submit" class="primary-btn">{% trans 'Log In' %}</button>
                             </div>
                         </form>
+                        <form class="row login_form" action="" method="post" id="loginEmailForm"
+                              novalidate="novalidate">
+                            {% csrf_token %}
+                            <div class="col-md-12 form-group">
+                                <input type="text" class="form-control" id="email" name="email"
+                                       placeholder="{% trans 'Email' %}" onfocus="this.placeholder = ''"
+                                       onblur="this.placeholder = '{% trans 'Email' %}'">
+                            </div>
+
+                            <div class="col-md-12 form-group">
+                                <button type="submit" value="submit"
+                                        class="primary-btn">{% trans 'Send Code' %}</button>
+                            </div>
+                        </form>
+                        <a href="{% url 'front:login' %}">{% trans 'Login With Password' %}</a>
                     </div>
                 </div>
             </div>
         </div>
 
-
-        <script>
-            function displayErrorMessage(message) {
-                const errorMessageElement = document.getElementById('errorMessage');
-                errorMessageElement.textContent = message;
-            }
-
-            function getToken() {
-                return localStorage.getItem('JWT');
-            }
-
-            function makeAuthenticatedRequest(url, method, context = null) {
-                const token = getToken();
-
-                const headers = {
-                    'Content-Type': 'application/json',
-                };
-
-                if (token) {
-                    headers['Authorization'] = `JWT ${token}`;
+        {% compress js %}
+            <script>
+                function displayErrorMessage(message) {
+                    const errorMessageElement = document.getElementById('errorMessage');
+                    errorMessageElement.textContent = message;
                 }
 
-                const options = {
-                    method: method,
-                    headers: headers,
-                    body: context ? JSON.stringify(context) : null,
-                };
-                console.log(options)
+                function getToken() {
+                    return localStorage.getItem('JWT');
+                }
 
-                return fetch(url, options)
-                    .then(response => {
-                        console.log(response)
-                        if (response.ok) {
-                            return response.json()
-                        } else {
-                            return response.json().then(errorJson => {
-                                alert(JSON.stringify(errorJson))
-                                throw new Error(JSON.stringify(errorJson));
-                            });
-                        }
-                    })
-                    .catch(error => {
-                        displayErrorMessage(error);
-                        console.error('eeeeeee', error);
-                    });
-            }
+                function makeAuthenticatedRequest(url, method, context = null) {
+                    const token = getToken();
 
-            function verifyToken() {
-                const token = getToken();
+                    const headers = {
+                        'Content-Type': 'application/json',
+                    };
 
-                if (token) {
-                    const endpoint = '/core/auth/jwt/verify/';
+                    if (token) {
+                        headers['Authorization'] = `JWT ${token}`;
+                    }
 
-                    makeAuthenticatedRequest(endpoint, 'POST', context = {token: token})
+                    const options = {
+                        method: method,
+                        headers: headers,
+                        body: context ? JSON.stringify(context) : null,
+                    };
+                    console.log(options)
+
+                    return fetch(url, options)
                         .then(response => {
-                            console.log(response);
-                            if (response.code === 'token_not_valid') {
-                                console.log('Token not valid. User needs to log in.');
+                            console.log(response)
+                            if (response.ok) {
+                                return response.json()
                             } else {
-                                console.log('Token is valid. User is already logged in.');
-                                alert('Token is valid. User is already logged in.')
-                                window.location.href = '/';
+                                return response.json().then(errorJson => {
+                                    alert(JSON.stringify(errorJson))
+                                    throw new Error(JSON.stringify(errorJson));
+                                });
                             }
+                        })
+                        .catch(error => {
+                            displayErrorMessage(error);
+                            console.error('eeeeeee', error);
+                        });
+                }
+
+                function verifyToken() {
+                    const token = getToken();
+
+                    if (token) {
+                        const endpoint = '/core/auth/jwt/verify/';
+
+                        makeAuthenticatedRequest(endpoint, 'POST', context = {token: token})
+                            .then(response => {
+                                console.log(response);
+                                if (response.code === 'token_not_valid') {
+                                    console.log('Token not valid. User needs to log in.');
+                                } else {
+                                    console.log('Token is valid. User is already logged in.');
+                                    alert('Token is valid. User is already logged in.')
+                                    window.location.href = '/';
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                            });
+                    } else {
+                        console.log('No token found. User needs to log in.');
+                    }
+                }
+
+                window.onload = function () {
+                    verifyToken();
+                };
+
+                document.getElementById('loginForm').addEventListener('submit', function (event) {
+                    event.preventDefault();
+
+                    let otp = document.getElementById('otp')
+                    let email = localStorage.getItem('email');
+
+
+                    console.log(otp.value)
+                    console.log(email)
+                    let endpoint = '/core/verify-otp/';
+
+                    makeAuthenticatedRequest(endpoint, 'POST', context = {
+                        'email': email,
+                        'otp': otp.value
+                    })
+                        .then(data => {
+                            if (data) {
+                                console.log(data);
+                                alert('You are logged in!')
+                                let jwtToken = data.access;
+                                localStorage.setItem('JWT', jwtToken);
+                                verifyToken();
+                            }
+
                         })
                         .catch(error => {
                             console.error('Error:', error);
                         });
-                } else {
-                    console.log('No token found. User needs to log in.');
-                }
-            }
+                });
+                document.getElementById('loginEmailForm').addEventListener('submit', function (event) {
+                    event.preventDefault();
 
-            window.onload = function () {
-                verifyToken();
-            };
-            document.getElementById('loginForm').addEventListener('submit', function (event) {
-                event.preventDefault();
+                    let email = document.getElementById('email')
+                    let endpoint = '/core/login-otp/';
 
-                let otp = document.getElementById('content')
-                let email = localStorage.getItem('email');
-
-
-                console.log(otp.value)
-                console.log(email)
-                let endpoint = '/core/verify-otp/';
-
-                makeAuthenticatedRequest(endpoint, 'POST', context = {
-                    'email': email,
-                    'otp': otp.value
-                })
-                    .then(data => {
-                        if (data){
-                            console.log(data);
-                            alert('Your account is active now please login!')
-                            window.location.href = '/login';
-                        }
-
+                    makeAuthenticatedRequest
+                    (endpoint, 'POST', context = {
+                        'email': email.value
                     })
-                    .catch(error => {
-                        console.error('Error:', error);
-                    });
-            });
-        </script>
+                        .then(data => {
+                                if (data.error) {
+                                    alert(data.error);
+                                } else {
+                                    console.log(data);
+                                    alert('Check you email!')
+                                    document.getElementById('loginEmailForm').style.display = 'none';
+                                    document.getElementById('loginForm').removeAttribute('hidden');
+                                }
+
+                            }
+                        )
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+                });
+            </script>
+        {% endcompress %}
     </section>
     <!--================End Login Box Area =================-->
 

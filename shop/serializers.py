@@ -27,7 +27,7 @@ class FeatureValueFullSerializer(TranslatableModelSerializer):
 
     class Meta:
         model = FeatureValue
-        fields = ['id', 'translations', 'product_count']
+        fields = ['id', 'translations', 'product_count', 'value']
 
     def get_product_count(self, obj):
         return MainFeature.objects.filter(value=obj).count()
@@ -40,7 +40,7 @@ class FeatureKeyFullSerializer(TranslatableModelSerializer):
 
     class Meta:
         model = FeatureKey
-        fields = ['id', 'translations', 'key_product_count', 'values']
+        fields = ['id', 'translations', 'key_product_count', 'values', 'key']
 
     def get_values(self, obj):
         children_serializer = FeatureValueFullSerializer(obj.values.all(), many=True)
@@ -55,7 +55,7 @@ class FeatureKeySerializer(TranslatableModelSerializer):
 
     class Meta:
         model = FeatureKey
-        fields = ['id', 'translations']
+        fields = ['id', 'translations', 'key']
 
 
 class FeatureValueSerializer(TranslatableModelSerializer):
@@ -63,7 +63,7 @@ class FeatureValueSerializer(TranslatableModelSerializer):
 
     class Meta:
         model = FeatureValue
-        fields = ['id', 'key', 'translations']
+        fields = ['id', 'key', 'translations', 'value']
 
 
 class MainFeatureSerializer(TranslatableModelSerializer):
@@ -84,7 +84,8 @@ class ProductSerializer(TranslatableModelSerializer):
     class Meta:
         model = Product
         fields = ['id', 'translations', 'inventory', 'org_price',
-                  'price', 'price_with_tax', 'collection_id', 'promotions', 'value_feature', 'images', 'secondhand']
+                  'price', 'price_with_tax', 'collection_id', 'promotions', 'value_feature', 'images', 'secondhand',
+                  'title', 'description', 'slug']
 
     images = ProductImageSerializer(many=True, read_only=True)
     collection_id = serializers.IntegerField(required=False)
@@ -120,7 +121,7 @@ class SimpleProductSerializer(TranslatableModelSerializer):
 
     class Meta:
         model = Product
-        fields = ['id', 'translations', 'org_price', 'price']
+        fields = ['id', 'translations', 'org_price', 'price', 'title', 'description']
 
     """validation example"""
     # def validate(self,data):
@@ -148,7 +149,7 @@ class CollectionSerializer(TranslatableModelSerializer):
 
     class Meta:
         model = Collection
-        fields = ['id', 'translations', 'parent', 'products_count', 'children']
+        fields = ['id', 'translations', 'parent', 'products_count', 'children', 'title']
 
     products_count = serializers.IntegerField(read_only=True)
 
@@ -332,7 +333,7 @@ class OrderSerializer(serializers.ModelSerializer):
             'total_price')
 
     def get_total_price(self, order):
-        return sum([item.quantity * item.unit_price for item in order.orders.all()])
+        return order.get_total_price()
 
     def get_email(self, order):
         user = User.objects.get(id=order.customer.user_id)
@@ -438,7 +439,7 @@ class PromotionSerializer(TranslatableModelSerializer):
 
     class Meta:
         model = Promotion
-        fields = ['id', 'translations']
+        fields = ['id', 'translations', 'title', 'description']
 
 
 class ReportingSerializer(serializers.Serializer):
@@ -453,7 +454,7 @@ class SiteSettingsSerializer(TranslatableModelSerializer):
     class Meta:
         model = SiteSettings
         fields = ['id', 'phone_number', 'logo', 'telegram_link', 'twitter_link', 'instagram_link', 'whatsapp_link',
-                  'translations']
+                  'translations', 'footer_text', 'address']
 
 
 class HomeBannerSerializer(serializers.ModelSerializer):

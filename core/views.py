@@ -1,25 +1,49 @@
 # views.py
+import logging
+
+import redis
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
+from rest_framework_simplejwt.tokens import RefreshToken
 from djoser.views import UserViewSet as BaseUserViewSet
 from django.utils.translation import gettext_lazy as _
+from django.contrib.auth import get_user_model
+from django.conf import settings
 from .models import User
 from .otp import Authentication
-from django.conf import settings
-from django.contrib.auth import get_user_model, authenticate
-import redis
+
+security_logger = logging.getLogger('security_logger')
 
 
 class UserCreateView(BaseUserViewSet, APIView):
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        # print(dict(serializer.validated_data))
         try:
             user = User.objects.get(phone_number=serializer.validated_data['phone_number'])
+            return Response({'message': _('You already registered!')}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
         except User.DoesNotExist:
             user = User(**serializer.validated_data)
+        user.save()
+        security_logger.info(f'new user created with phone_number {serializer.validated_data["phone_number"]}')
+        return Response({'message': _('Account created !')}, status=status.HTTP_201_CREATED)
+
+
+class UserLoginOTPView(APIView):
+    """
+    {
+    "email": "user@user.user",
+    }
+    """
+
+    def post(self, request, *args, **kwargs):
+        email = request.data.get('email', '')
+        security_logger.info(f'user with email {email} wants to log in with code')
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            return Response({'message': _('Invalid Email')}, status=status.HTTP_400_BAD_REQUEST)
 
         otp_key = f'otp:{user.email}'
         redis_connection = redis.StrictRedis(host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=settings.REDIS_DB)
@@ -28,11 +52,11 @@ class UserCreateView(BaseUserViewSet, APIView):
             return Response({'error': _('Wait until last code expire')}, status=status.HTTP_201_CREATED)
         try:
             otp, otp_expiry = Authentication.send_otp_email(user.email, otp_key)
-        except ConnectionError :
+            security_logger.info(f'send code for user {email} : {otp}')
+            return Response({'message': _('Code Send, Check you email')}, status=status.HTTP_201_CREATED)
+        except ConnectionError:
+            security_logger.info(f'server can not send email!')
             return Response({'error': _('server side error!')}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-        # print('here')
-        user.save()
-        return Response({'otp_expiry': otp_expiry}, status=status.HTTP_201_CREATED)
 
 
 class VerifyOtpView(APIView):
@@ -48,15 +72,17 @@ class VerifyOtpView(APIView):
         entered_otp = request.data.get('otp', '')
 
         otp_key = f'otp:{email}'
-        # print(otp_key)
+        print(otp_key)
         stored_otp = redis.StrictRedis(host=settings.REDIS_HOST, port=settings.REDIS_PORT,
                                        db=settings.REDIS_DB).get(otp_key)
-        # print(stored_otp, entered_otp)
-        if stored_otp == entered_otp:
+        security_logger.info(f'user {email} entered code: {entered_otp} -> actual code: {stored_otp}')
+        if str(stored_otp.decode('utf_8')) == str(entered_otp):
             user = get_user_model().objects.get(email=email)
-            user.is_active = True
-            user.save()
-
-            return Response({'message': _('User verified successfully')}, status=status.HTTP_200_OK)
+            refresh = RefreshToken.for_user(user)
+            security_logger.info(f'user {email} login with code!')
+            return Response({
+                'refresh': str(refresh),
+                'access': str(refresh.access_token),
+            }, status=status.HTTP_200_OK)
         else:
             return Response({'message': _('Invalid Code')}, status=status.HTTP_400_BAD_REQUEST)

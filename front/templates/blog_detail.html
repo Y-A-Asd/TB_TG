@@ -2,8 +2,8 @@
 {% load i18n %}
 {% get_current_language as LANGUAGE_CODE %}
 {% load static %}
+{% load compress %}
 {% block contents %}
-
     <!-- Start Banner Area -->
     <section class="banner-area organic-breadcrumb">
         <div class="container">
@@ -61,12 +61,14 @@
                         <h4>Leave a Comment</h4>
                         <form id="commentForm">
                             <div class="form-group">
-                                <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject"
+                                <input type="text" class="form-control" id="subject" name="subject"
+                                       placeholder="Subject"
                                        onfocus="this.placeholder = ''"
                                        onblur="this.placeholder = 'Subject'">
                             </div>
                             <div class="form-group">
-                                <textarea class="form-control mb-10" rows="5" name="message" id="message" placeholder="Messege"
+                                <textarea class="form-control mb-10" rows="5" name="message" id="message"
+                                          placeholder="Messege"
                                           onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'"
                                           required=""></textarea>
                             </div>
@@ -78,32 +80,32 @@
         </div>
     </section>
 
-
-    <script>
-        fetch('/blog/blogs/{{ id }}/')
-            .then(response => response.json())
-            .then(data => {
-                console.log(data.thumbnail)
-                document.getElementById('blog-thumbnail').src = data.thumbnail;
-                document.getElementById('blog-title').textContent = data.title;
-                document.getElementById('blog-body').textContent = data.body;
-                document.getElementById('author-info').textContent = `${data.author.first_name} ${data.author.last_name}`
-                const options = {year: 'numeric', month: 'short', day: 'numeric'};
-                document.getElementById('updated-at').textContent = new Date(data.updated_at).toLocaleDateString(undefined, options);
-                document.getElementById('views-count').textContent = data.views + "{% trans ' Views' %}";
-                document.getElementById('comments-count').textContent = data.comments_count + "{% trans ' Comments' %}";
-            })
-            .catch(error => console.error('Error fetching blog details:', error));
-
-        fetch('/blog/blogs/{{ id }}/comments/')
-            .then(response => response.json())
-            .then(comments => {
-                const commentList = document.getElementById('comment-list');
-                comments.forEach(comment => {
-                    const div = document.createElement('div');
-                    div.className = 'single-comment justify-content-between d-flex';
+    {% compress js %}
+        <script>
+            fetch('/blog/blogs/{{ id }}/')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data.thumbnail)
+                    document.getElementById('blog-thumbnail').src = data.thumbnail;
+                    document.getElementById('blog-title').textContent = data.title;
+                    document.getElementById('blog-body').textContent = data.body;
+                    document.getElementById('author-info').textContent = `${data.author.first_name} ${data.author.last_name}`
                     const options = {year: 'numeric', month: 'short', day: 'numeric'};
-                    div.innerHTML = `
+                    document.getElementById('updated-at').textContent = new Date(data.updated_at).toLocaleDateString(undefined, options);
+                    document.getElementById('views-count').textContent = data.views + "{% trans ' Views' %}";
+                    document.getElementById('comments-count').textContent = data.comments_count + "{% trans ' Comments' %}";
+                })
+                .catch(error => console.error('Error fetching blog details:', error));
+
+            fetch('/blog/blogs/{{ id }}/comments/')
+                .then(response => response.json())
+                .then(comments => {
+                    const commentList = document.getElementById('comment-list');
+                    comments.forEach(comment => {
+                        const div = document.createElement('div');
+                        div.className = 'single-comment justify-content-between d-flex';
+                        const options = {year: 'numeric', month: 'short', day: 'numeric'};
+                        div.innerHTML = `
                     <div class="user justify-content-between d-flex">
                         <div class="desc">
                             <p class="text-capitalize m-0"><a>${comment.customer.first_name} ${comment.customer.last_name}</a></p>
@@ -113,107 +115,106 @@
                         </div>
                     </div>
                 `;
-                    commentList.appendChild(div);
-                });
-            })
-            .catch(error => console.error('Error fetching comments:', error));
+                        commentList.appendChild(div);
+                    });
+                })
+                .catch(error => console.error('Error fetching comments:', error));
 
 
-
-
-        function getToken() {
-            return localStorage.getItem('JWT');
-        }
-
-        function makeAuthenticatedRequest(url, method, context = null) {
-            const token = getToken();
-
-            const headers = {
-                'Content-Type': 'application/json',
-            };
-
-            if (token) {
-                headers['Authorization'] = `JWT ${token}`;
+            function getToken() {
+                return localStorage.getItem('JWT');
             }
 
-            const options = {
-                method: method,
-                headers: headers,
-                body: context ? JSON.stringify(context) : null,
-            };
-            console.log(options)
+            function makeAuthenticatedRequest(url, method, context = null) {
+                const token = getToken();
 
-            return fetch(url, options)
-                .then(response => {
-                    if (response.ok) {
-                        return response.json()
-                    } else {
-                        return response.json().then(errorJson => {
-                            alert(JSON.stringify(errorJson))
-                            throw new Error(JSON.stringify(errorJson));
-                        });
-                    }
-                })
-                .catch(error => {
-                    console.error('eeeeeee', error);
-                });
-        }
+                const headers = {
+                    'Content-Type': 'application/json',
+                };
 
-        function verifyToken() {
-            const token = getToken();
+                if (token) {
+                    headers['Authorization'] = `JWT ${token}`;
+                }
 
-            if (token) {
-                const endpoint = '/core/auth/jwt/verify/';
+                const options = {
+                    method: method,
+                    headers: headers,
+                    body: context ? JSON.stringify(context) : null,
+                };
+                console.log(options)
 
-                makeAuthenticatedRequest(endpoint, 'POST', context = {token: token})
+                return fetch(url, options)
                     .then(response => {
-                        console.log(response);
-                        if (response.code === 'token_not_valid') {
-                            console.log('Token not valid. User needs to log in.');
-                            alert('Token not valid. User needs to log in.')
-
+                        if (response.ok) {
+                            return response.json()
                         } else {
-                            console.log('Token is valid. User is already logged in.');
-
+                            return response.json().then(errorJson => {
+                                alert(JSON.stringify(errorJson))
+                                throw new Error(JSON.stringify(errorJson));
+                            });
                         }
                     })
                     .catch(error => {
+                        console.error('eeeeeee', error);
+                    });
+            }
+
+            function verifyToken() {
+                const token = getToken();
+
+                if (token) {
+                    const endpoint = '/core/auth/jwt/verify/';
+
+                    makeAuthenticatedRequest(endpoint, 'POST', context = {token: token})
+                        .then(response => {
+                            console.log(response);
+                            if (response.code === 'token_not_valid') {
+                                console.log('Token not valid. User needs to log in.');
+                                alert('Token not valid. User needs to log in.')
+
+                            } else {
+                                console.log('Token is valid. User is already logged in.');
+
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+                } else {
+                    console.log('No token found. User needs to log in.');
+                }
+            }
+
+            window.onload = function () {
+                verifyToken();
+            };
+
+            document.getElementById('commentForm').addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                let subject = document.getElementById('subject')
+                let message = document.getElementById('message');
+
+                let endpoint = '/blog/blogs/{{ id }}/comments/';
+
+                makeAuthenticatedRequest(endpoint, 'POST', context = {
+                    'subject': subject.value,
+                    'message': message.value,
+                })
+                    .then(data => {
+                        if (data) {
+                            alert('Your comment has been received! It will be shown after checking')
+                            document.getElementById('subject').value = '';
+                            document.getElementById('message').value = '';
+                        }
+                    })
+                    .catch(error => {
+                        alert(error)
+                        document.getElementById('dog').scrollIntoView({behavior: 'smooth'});
                         console.error('Error:', error);
                     });
-            } else {
-                console.log('No token found. User needs to log in.');
-            }
-        }
-
-        window.onload = function () {
-            verifyToken();
-        };
-
-        document.getElementById('commentForm').addEventListener('submit', function (event) {
-            event.preventDefault();
-
-            let subject = document.getElementById('subject')
-            let message = document.getElementById('message');
-
-            let endpoint = '/blog/blogs/{{ id }}/comments/';
-
-            makeAuthenticatedRequest(endpoint, 'POST', context = {
-                'subject': subject.value,
-                'message': message.value,
-            })
-                .then(data => {
-                    if (data) {
-                        alert('Your comment has been received! It will be shown after checking')
-                        document.getElementById('subject').value = '';
-                        document.getElementById('message').value = '';
-                    }
-                })
-                .catch(error => {
-                    alert(error)
-                    document.getElementById('dog').scrollIntoView({behavior: 'smooth'});
-                    console.error('Error:', error);
-                });
-        });
-    </script>
+            });
+        </script>
+    {% endcompress %}
     <!--================Blog Area =================-->
 {% endblock %}
