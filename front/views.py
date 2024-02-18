@@ -87,57 +87,6 @@ class OrderDetailView(View):
         return render(request, self.template_name, {'id': id})
 
 
-def send_request(request, amount):
-
-    description = "توضیحات مربوط به تراکنش را در این قسمت وارد کنید"
-    CallbackURL = 'http://127.0.0.1:8000/verify/'
-
-    data = {
-        "MerchantID": settings.MERCHANT,
-        "Amount": amount,
-        "Description": description,
-        "CallbackURL": CallbackURL,
-    }
-    print(data)
-    data = json.dumps(data)
-    headers = {'content-type': 'application/json', 'content-length': str(len(data))}
-    try:
-        response = requests.post(ZP_API_REQUEST, data=data, headers=headers, timeout=10)
-        if response.status_code == 200:
-            response = response.json()
-            print('response: ', response)
-            if response['Status'] == 100:
-                return HttpResponse('OK')
-            else:
-                return {'status': False, 'code': str(response['Status'])}
-        return HttpResponse('Not OK')
-
-    except requests.exceptions.Timeout:
-        return {'status': False, 'code': 'timeout'}
-    except requests.exceptions.ConnectionError:
-        return {'status': False, 'code': 'connection error'}
-
-
-def verify(request, amount, authority):
-
-    data = {
-        "MerchantID": settings.MERCHANT,
-        "Amount": amount,
-        "Authority": authority,
-    }
-    data = json.dumps(data)
-    headers = {'content-type': 'application/json', 'content-length': str(len(data))}
-    response = requests.post(ZP_API_VERIFY, data=data, headers=headers)
-
-    if response.status_code == 200:
-        response = response.json()
-        if response['Status'] == 100:
-            return {'status': True, 'RefID': response['RefID']}
-        else:
-            return {'status': False, 'code': str(response['Status'])}
-    return response
-
-
 def set_language(request):
     if request.method == 'POST':
         language_code = request.POST.get('language_code')

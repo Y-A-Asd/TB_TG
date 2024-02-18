@@ -28,4 +28,5 @@ urlpatterns = [
     *cart_router.urls,
     path('reporting/', views.ReportingAPIView.as_view(), name='reporting'),
     path('compare/', views.compare_products, name='compare_products'),
+    path('payment-veify/', views.VerifyAPIView.as_view(), name='payment-veify'),
 ]

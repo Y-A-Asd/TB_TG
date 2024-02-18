@@ -1,4 +1,6 @@
 import logging
+
+from django.conf import settings
 from django.core.exceptions import FieldError
 from django.db.models import Count, F, Sum, DecimalField
 from django.utils.translation import gettext_lazy as _
@@ -12,6 +14,8 @@ from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet, GenericViewSet, ReadOnlyModelViewSet
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, DestroyModelMixin, ListModelMixin
+from zeep import Client
+
 from core.models import User, AuditLog
 from discount.models import BaseDiscount
 from .pagination import DefaultPagination
@@ -22,7 +26,7 @@ from .serializers import (ProductSerializer, CollectionSerializer, ReviewSeriali
                           ProductImageSerializer, AddressSerializer, TransactionSerializer, UpdateTransactionSerializer,
                           AuditLogSerializer, PromotionSerializer, SimpleProductSerializer, ReportingSerializer,
                           SiteSettingsSerializer, HomeBannerSerializer, ApplyDiscountSerializer,
-                          FeatureKeyFullSerializer)
+                          FeatureKeyFullSerializer, SendRequestSerializer, VerifySerializer)
 from .models import Product, Collection, OrderItem, Review, Customer, Order, ProductImage, CartItem, Cart, Address, \
     Transaction, Promotion, SiteSettings, HomeBanner, MainFeature, FeatureKey
 from .filters import ProductFilter, RecursiveDjangoFilterBackend, CustomerFilterBackend
@@ -490,6 +494,29 @@ class OrderViewSet(ModelViewSet):
             return UpdateOrderSerializer
         return OrderSerializer
 
+    @action(detail=True, methods=['post'], url_path='payment-request')
+    def payment_request(self, request, pk=None):
+        order = self.get_object()
+
+        client = Client(settings.ZP_API)
+        domain = request.get_host()
+        phone_number = order.customer.user.phone_number
+        email = order.customer.user.email
+        amount = order.get_total_price()
+        description = f'user {phone_number} wants to pay {amount}'
+        MERCHANT = settings.MERCHANT
+        CallbackURL = domain + '/core/zar-request/'
+        print('CallbackURL', CallbackURL)
+        print('CallbackURL', type(CallbackURL))
+
+        result = client.service.PaymentRequest(MERCHANT, amount, description, email, phone_number, CallbackURL)
+        if result.Status == 100:
+            return Response(
+                {'redirect': settings.ZP_API_STARTPAY + str(result.Authority), 'Authority': str(result.Authority)},
+                status=status.HTTP_200_OK)
+        else:
+            return Response({'Error code': str(result.Status)}, status=status.HTTP_400_BAD_REQUEST)
+
 
 class ProductImageViewSet(ModelViewSet):
     serializer_class = ProductImageSerializer
@@ -613,3 +640,25 @@ def compare_products(request):
 class FeatureViewSet(ModelViewSet):
     queryset = FeatureKey.objects.all()
     serializer_class = FeatureKeyFullSerializer
+
+
+class VerifyAPIView(APIView):
+    serializer_class = VerifySerializer
+
+    def post(self, request, *args, **kwargs):
+        client = Client(settings.ZP_API)
+
+        MERCHANT = settings.MERCHANT
+        amount = request.data.get('total_price', '')
+        Authority = request.data.get('Authority', '')
+        result = client.service.PaymentVerification(MERCHANT, Authority, amount)
+        print(result.Status)
+        print(result.RefID)
+
+        if result.Status == 100:
+            # obj.is_paid = True
+            return Response({'details': 'Transaction success. RefID: ' + str(result.RefID)}, status=200)
+        elif result.Status == 101:
+            return Response({'details': 'Transaction submitted'}, status=200)
+        else:
+            return Response({'details': 'Transaction failed . error code : ' + str(result.Status)}, status=200)

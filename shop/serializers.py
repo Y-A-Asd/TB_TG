@@ -465,3 +465,15 @@ class HomeBannerSerializer(serializers.ModelSerializer):
         fields = ['id', 'product']
 
         read_only_fields = ['id']
+
+
+class SendRequestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Transaction
+        fields = ['phone_number', 'total_price']
+
+
+class VerifySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Transaction
+        fields = ['total_price', 'Authority']
