@@ -22,9 +22,10 @@ def create_transaction_for_new_order(sender, instance: Order, created, **kwargs)
         sleep(0.5)
         total_price = order.get_total_price()
         customer = instance.customer
+        phone_number = customer.user.phone_number
         receipt_number = None
         Transaction.objects.create(order=order, customer=customer, total_price=total_price,
-                                   receipt_number=receipt_number)
+                                   receipt_number=receipt_number, phone_number=phone_number)
     else:
         transaction = Transaction.objects.get(order=order)
         total_price = order.get_total_price()

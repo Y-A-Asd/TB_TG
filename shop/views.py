@@ -291,7 +291,6 @@ class ReviewViewSet(ModelViewSet):
     serializer_class = ReviewSerializer
     filter_backends = [SearchFilter]
     search_fields = ['title', 'description']
-    # pagination_class = DefaultPagination
     permission_classes = [IsAuthenticatedOrReadOnly]
 
     def get_queryset(self):

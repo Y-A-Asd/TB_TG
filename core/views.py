@@ -1,17 +1,22 @@
 # views.py
+import json
 import logging
-
 import redis
+import requests
+from django.urls import reverse
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, permissions
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from djoser.views import UserViewSet as BaseUserViewSet
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import get_user_model
 from django.conf import settings
+from .serializers import SendRequestSerializer
 from .models import User
 from .otp import Authentication
+from django.conf import settings
+import subprocess
 
 security_logger = logging.getLogger('security_logger')
 
@@ -86,3 +91,103 @@ class VerifyOtpView(APIView):
             }, status=status.HTTP_200_OK)
         else:
             return Response({'message': _('Invalid Code')}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class ZarinpalRequestView(APIView):
+    """
+    {
+        "phone_number": "09353220545",
+        "total_price": "10000",
+    }
+    """
+    serializer_class = SendRequestSerializer
+
+    # permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request, *args, **kwargs):
+        phone_number = request.data.get('phone_number', '')
+        total_price = request.data.get('total_price', '')
+        description = f'user {phone_number} wants to pay {total_price}'
+        MERCHANT = settings.MERCHANT
+        ZP_API_REQUEST = settings.ZP_API_REQUEST
+        ZP_API_STARTPAY = settings.ZP_API_STARTPAY
+        CallbackURL = 'http://yoursite.com/verify'
+
+        try:
+            curl_command = [
+                'curl',
+                '-X', 'POST', f'{ZP_API_REQUEST}',
+                '-H', 'accept: application/json',
+                '-H', 'content-type: application/json',
+                '-d',
+                json.dumps({
+                    'merchant_id': MERCHANT,
+                    'amount': int(total_price),
+                    'callback_url': CallbackURL,
+                    'description': description
+                })
+            ]
+            print(curl_command)
+            try:
+                result = subprocess.run(curl_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+                if result.returncode == 0:
+                    print(result.stdout)
+                    try:
+                        json_response = json.loads(result.stdout)
+                        print(json_response)
+                    except json.JSONDecodeError as e:
+                        print(f"Error decoding JSON response: {e}")
+                else:
+                    print(f"Error executing curl command. Error message:\n{result.stderr}")
+            except FileNotFoundError:
+                print("Curl executable not found. Make sure curl is installed.")
+
+        #     if response.status_code == 200:
+        #         print('status 200')
+        #         response = response.json()
+        #         if response['Status'] == 100:
+        #             print('status 100')
+        #             return Response({'status': True, 'url': ZP_API_STARTPAY + str(response['Authority']),
+        #                              'authority': response['Authority']})
+        #         else:
+        #             return Response({'status': False, 'code': str(response['Status'])})
+        #     return Response({'status': False, 'code': str(response.status_code)})
+        #
+        except requests.exceptions.Timeout:
+            return Response({'status': False, 'code': 'timeout'}, status=status.HTTP_504_GATEWAY_TIMEOUT)
+        except requests.exceptions.ConnectionError:
+            return Response({'status': False, 'code': 'connection error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class ZarinpalVerifyView(APIView):
+    """
+    {
+        "Authority": "######",
+        "total_price": "10000",
+    }
+    """
+    serializer_class = SendRequestSerializer
+
+    # permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        ZP_API_VERIFY = settings.ZP_API_VERIFY
+        Authority = request.data.get('Authority', '')
+        total_price = request.data.get('total_price', '')
+        MERCHANT = settings.MERCHANT
+
+        data = {
+            "MerchantID": MERCHANT,
+            "Amount": total_price,
+            "Authority": Authority,
+        }
+        data = json.dumps(data)
+        headers = {'content-type': 'application/json', 'content-length': str(len(data))}
+        response = requests.post(ZP_API_VERIFY, data=data, headers=headers)
+        if response.status_code == 200:
+            response = response.json()
+            if response['Status'] == 100:
+                return Response({'status': True, 'RefID': response['RefID']})
+            else:
+                return Response({'status': False, 'code': str(response['Status'])})
+        return Response({'status': False, 'code': str(response.status_code)})

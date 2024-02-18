@@ -324,6 +324,8 @@ class Transaction(BaseModel):
     total_price = models.DecimalField(_("Total Price"), max_digits=10, decimal_places=2)
     customer = models.ForeignKey(Customer, on_delete=models.PROTECT, verbose_name=_("Customer"))
     receipt_number = models.CharField(_("Receipt Number"), max_length=255, null=True)
+    phone_number = models.CharField(_('Phone Number'), max_length=13)
+    Authority = models.CharField(max_length=50, null=True, blank=True)
 
     def __str__(self):
         return f"Transaction for Order #{self.order.pk} - {self.get_payment_status_display()}"
