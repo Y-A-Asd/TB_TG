@@ -1,4 +1,6 @@
-from shop.models import Product
+from django.utils.translation import activate
+
+from shop.models import Product, Collection, FeatureKey, FeatureValue, MainFeature
 from rest_framework import status
 import pytest
 from model_bakery import baker
@@ -57,4 +59,75 @@ class TestRetrieveProduct:
         product = baker.make(Product)
         response = api_client.get(f'/shop/products/{product.id}/')
 
+        assert response.status_code == status.HTTP_200_OK
+
+
+@pytest.mark.django_db
+class TestCompareProducts:
+    def test_compare_view(self, api_client, create_product):
+        activate('en')
+        collection = baker.make(Collection)
+        product1 = baker.make(Product, id=1, collection=collection)
+        product2 = baker.make(Product, id=2, collection=collection)
+        key = FeatureKey.objects.create(
+            key='test'
+        )
+
+        value = FeatureValue.objects.create(
+            value='test value',
+            key=key
+        )
+
+        main_feature = MainFeature.objects.create(
+            product=product1,
+            key=key,
+            value=value
+        )
+        main_feature = MainFeature.objects.create(
+            product=product2,
+            key=key,
+            value=value
+        )
+        response = api_client.get(f'/shop/compare/?product_ids=1&product_ids=2')
+        assert response.status_code == status.HTTP_200_OK
+
+
+@pytest.mark.django_db
+class TestFilterProducts:
+    def test_filter_view(self, api_client, create_product):
+        collection = baker.make(Collection)
+        product1 = baker.make(Product, id=1, collection=collection)
+        product2 = baker.make(Product, id=2, collection=collection)
+        key = FeatureKey.objects.create(
+            key='test'
+        )
+        value = FeatureValue.objects.create(
+            value='test value',
+            key=key
+        )
+
+        main_feature = MainFeature.objects.create(
+            product=product1,
+            key=key,
+            value=value
+        )
+        main_feature = MainFeature.objects.create(
+            product=product2,
+            key=key,
+            value=value
+        )
+
+        response = api_client.get(f'/shop/products/?collection_id={collection.id}')
+        assert response.status_code == status.HTTP_200_OK
+        response = api_client.get(f'/shop/products/?unit_price__lt=100000&unit_price__gt=10')
+        assert response.status_code == status.HTTP_200_OK
+        response = api_client.get(f'/shop/products/?search=a')
+        assert response.status_code == status.HTTP_200_OK
+        response = api_client.get(f'/shop/products/?feature_key={key.id}')
+        assert response.status_code == status.HTTP_200_OK
+        response = api_client.get(f'/shop/products/?feature_value={value.id}')
+        assert response.status_code == status.HTTP_200_OK
+        response = api_client.get(f'/shop/products/?secondhand=true')
+        assert response.status_code == status.HTTP_200_OK
+        response = api_client.get(f'/shop/products/?ordering=best_sales')
         assert response.status_code == status.HTTP_200_OK

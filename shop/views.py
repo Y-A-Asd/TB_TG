@@ -602,7 +602,8 @@ def compare_products(request):
     for attr in productattr:
         product_attrs = {}
         for product in products:
-            if attr == 'collection':
+            print(product.title)
+            if attr == 'Collection':
                 product_attrs[str(product.title)] = str(eval(f'product.{attr.lower()}.title'))
             else:
                 product_attrs[str(product.title)] = str(eval(f'product.{attr.lower()}'))

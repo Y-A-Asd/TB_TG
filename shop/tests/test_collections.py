@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from rest_framework import status
 import pytest
 from model_bakery import baker
-from shop.models import Collection
+from shop.models import Collection, Product
 
 """
 ALWAYS TEST BEHAVIOUR, NOT IMPLEMENTATION
@@ -83,3 +83,14 @@ class TestRetrieveCollection:
         #     'products_count': 0,
         #     'parent': None
         # }
+
+
+@pytest.mark.django_db
+class TestListCollection:
+    def test_if_collection_exists_return_200(self, api_client):
+        collection = baker.make(Collection)
+        product1 = baker.make(Product, id=1, collection=collection)
+        product2 = baker.make(Product, id=2, collection=collection)
+        response = api_client.get(f'/shop/collections/')
+
+        assert response.status_code == status.HTTP_200_OK
