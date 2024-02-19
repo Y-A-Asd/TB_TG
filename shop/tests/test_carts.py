@@ -162,6 +162,14 @@ class TestCartDetail:
         )
         assert response.status_code == status.HTTP_200_OK
 
+        response = api_client.get(
+            f'/shop/cart/{cart_id}/',
+            {},
+            format='json'
+        )
+        assert response.status_code == status.HTTP_200_OK
+        assert 'items' in response.data
+
     def test_cart_discount_invalid(self, api_client, create_cartitems, auth):
         now = timezone.now()
         valid_from = now - timedelta(days=10)
