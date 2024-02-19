@@ -2,7 +2,6 @@
 {% load i18n %}
 {% get_current_language as LANGUAGE_CODE %}
 {% load static %}
-{% load compress %}
 {% block contents %}
     <!-- Start Banner Area -->
     <section class="banner-area organic-breadcrumb">
@@ -38,7 +37,6 @@
         </div>
     </section>
 
-    {% compress js %}
         <script>
             const getQueryParameters = () => {
                 const searchParams = new URLSearchParams(window.location.search);
@@ -120,6 +118,5 @@
                     .then(comparisonData => generateTable(comparisonData));
             });
         </script>
-    {% endcompress %}
     <!--================End Cart Area =================-->
 {% endblock %}
