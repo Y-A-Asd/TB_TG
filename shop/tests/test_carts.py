@@ -67,7 +67,7 @@ class TestUpdatingCart:
         )
         assert response.status_code == status.HTTP_201_CREATED
         cart_id = response.data['id']
-        product = baker.make(Product)
+        product = baker.make(Product, inventory=10)
         response = api_client.post(
             f'/shop/cart/{cart_id}/items/',
             {
@@ -87,6 +87,7 @@ class TestUpdatingCart:
         assert response.status_code == status.HTTP_200_OK
         item = CartItem.objects.get(product_id=product.id)
         assert item.quantity == 2
+
 
 @pytest.mark.django_db
 class TestCartDetail:

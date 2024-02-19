@@ -39,7 +39,7 @@ def create_cart(api_client):
 @pytest.fixture()
 def create_cartitems(api_client, create_cart):
     def wrapper():
-        product = baker.make(Product, unit_price=10)
+        product = baker.make(Product, unit_price=10, inventory=10)
         cart_id = create_cart().data['id']
         return api_client.post(
             f'/shop/cart/{cart_id}/items/',
@@ -91,6 +91,8 @@ class TestCreateOrderWithCart:
         api_client.force_authenticate(user)
         create_address('a', 'a', 'a', 'a', )
         response = create_order()
+        print('response', response.data)
+        print('response', response)
         order_id = response.data['id']
         # transaction = Transaction.objects.filter(order_id=order_id).exists()
         assert Transaction.objects.filter(order_id=order_id).exists()

@@ -497,25 +497,27 @@ class OrderViewSet(ModelViewSet):
     @action(detail=True, methods=['post'], url_path='payment-request')
     def payment_request(self, request, pk=None):
         order = self.get_object()
+        try:
+            client = Client(settings.ZP_API)
+            domain = request.get_host()
+            phone_number = order.customer.user.phone_number
+            email = order.customer.user.email
+            amount = order.get_total_price()
+            description = f'user {phone_number} wants to pay {amount}'
+            MERCHANT = settings.MERCHANT
+            CallbackURL = domain + '/core/zar-request/'
+            print('CallbackURL', CallbackURL)
+            print('CallbackURL', type(CallbackURL))
 
-        client = Client(settings.ZP_API)
-        domain = request.get_host()
-        phone_number = order.customer.user.phone_number
-        email = order.customer.user.email
-        amount = order.get_total_price()
-        description = f'user {phone_number} wants to pay {amount}'
-        MERCHANT = settings.MERCHANT
-        CallbackURL = domain + '/core/zar-request/'
-        print('CallbackURL', CallbackURL)
-        print('CallbackURL', type(CallbackURL))
-
-        result = client.service.PaymentRequest(MERCHANT, amount, description, email, phone_number, CallbackURL)
-        if result.Status == 100:
-            return Response(
-                {'redirect': settings.ZP_API_STARTPAY + str(result.Authority), 'Authority': str(result.Authority)},
-                status=status.HTTP_200_OK)
-        else:
-            return Response({'Error code': str(result.Status)}, status=status.HTTP_400_BAD_REQUEST)
+            result = client.service.PaymentRequest(MERCHANT, amount, description, email, phone_number, CallbackURL)
+            if result.Status == 100:
+                return Response(
+                    {'redirect': settings.ZP_API_STARTPAY + str(result.Authority), 'Authority': str(result.Authority)},
+                    status=status.HTTP_200_OK)
+            else:
+                return Response({'Error code': str(result.Status)}, status=status.HTTP_400_BAD_REQUEST)
+        except ConnectionError:
+            return Response({'Error code': '503'}, status=status.HTTP_503_SERVICE_UNAVAILABLE)
 
 
 class ProductImageViewSet(ModelViewSet):
