@@ -198,10 +198,17 @@ class CartSerializer(serializers.ModelSerializer):
                          cart.items.all()]) * cart.discount.discount / 100
                 elif (cart.discount.mode == cart.discount.Mode.PersonCode or
                       cart.discount.mode == cart.discount.Mode.EventCode):
-                    total_price = sum(
-                        [item.quantity * item.product.price_after_off for item in cart.items.all()]) - sum(
-                        [item.quantity * item.product.price_after_off for item in
-                         cart.items.all()]) * cart.discount.discount / 100
+                    total_price_with_out_off = sum(
+                        [item.quantity * item.product.price_after_off for item in cart.items.all()])
+                    if total_price_with_out_off > cart.discount.max_price:
+                        total_price = total_price_with_out_off - cart.discount.max_price
+
+                    elif total_price_with_out_off < cart.discount.limit_price:
+                        total_price = total_price_with_out_off
+
+                    else:
+                        total_price = total_price_with_out_off - total_price_with_out_off * cart.discount.discount / 100
+
                 else:
                     raise ValueError(_(f"Invalid discount mode: {cart.discount.mode}"))
             else:
@@ -387,6 +394,8 @@ class CreateOrderSerializer(serializers.Serializer):
             # Cart.objects.filter(pk=cart_id).delete()
 
             transactions = Transaction.objects.get(order=order)
+            print(order.discount)
+            print(order.get_total_price())
             total_price = order.get_total_price()
             transactions.total_price = total_price
             transactions.save()
