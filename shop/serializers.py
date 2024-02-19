@@ -383,8 +383,8 @@ class CreateOrderSerializer(serializers.Serializer):
             ]
             OrderItem.objects.bulk_create(order_items)
             "https://stackoverflow.com/questions/30632743/how-can-i-use-signals-in-django-bulk-create"
-
-            Cart.objects.filter(pk=cart_id).delete()
+            print('done saving')
+            # Cart.objects.filter(pk=cart_id).delete()
 
             transactions = Transaction.objects.get(order=order)
             total_price = order.get_total_price()
@@ -476,4 +476,4 @@ class SendRequestSerializer(serializers.ModelSerializer):
 class VerifySerializer(serializers.ModelSerializer):
     class Meta:
         model = Transaction
-        fields = ['total_price', 'Authority']
+        fields = ['order', 'total_price', 'Authority']

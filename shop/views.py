@@ -643,22 +643,44 @@ class FeatureViewSet(ModelViewSet):
 
 
 class VerifyAPIView(APIView):
+    """
+    {
+"order_id": "1",
+"total_price": "1000",
+"Authority": "000000000000000000000000000001349929"
+}
+    """
     serializer_class = VerifySerializer
 
     def post(self, request, *args, **kwargs):
         client = Client(settings.ZP_API)
 
         MERCHANT = settings.MERCHANT
-        amount = request.data.get('total_price', '')
+        order_id = request.data.get('order_id', '')
+        amount = int(request.data.get('total_price', ''))
         Authority = request.data.get('Authority', '')
+        transaction = Transaction.objects.get(order_id=order_id)
+        order = transaction.order
+        print(amount)
+        print(type(amount))
         result = client.service.PaymentVerification(MERCHANT, Authority, amount)
-        print(result.Status)
-        print(result.RefID)
-
+        print(result)
         if result.Status == 100:
-            # obj.is_paid = True
+            transaction.receipt_number = str(result.RefID)
+            transaction.Authority = Authority
+            transaction.payment_status = 'C'
+            customer = transaction.customer
+            order.order_status = 'P'
+            order.save()
+            cart = Cart.objects.filter(customer=customer.id)
+            cart.delete()
+            transaction.save()
             return Response({'details': 'Transaction success. RefID: ' + str(result.RefID)}, status=200)
         elif result.Status == 101:
             return Response({'details': 'Transaction submitted'}, status=200)
         else:
+            transaction.payment_status = 'F'
+            order.order_status = 'F'
+            order.save()
+            transaction.save()
             return Response({'details': 'Transaction failed . error code : ' + str(result.Status)}, status=200)

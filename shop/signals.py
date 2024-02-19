@@ -3,7 +3,7 @@ from time import sleep
 
 from django.conf import settings
 from django.dispatch import receiver
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_save
 
 from core.models import User
 from .models import Customer, Order, Transaction, OrderItem, CartItem, Cart
@@ -20,7 +20,7 @@ def create_transaction_for_new_order(sender, instance: Order, created, **kwargs)
     order = instance
     if created:
         sleep(0.5)
-        total_price = order.get_total_price()
+        total_price = 0
         customer = instance.customer
         phone_number = customer.user.phone_number
         receipt_number = None
@@ -64,3 +64,4 @@ def update_cart_customer(sender, instance, created, **kwargs):
         cart = Cart.objects.get(id=cart_id)
         cart.customer = Customer.objects.get(user_id=user.id)
         cart.save()
+
