@@ -508,7 +508,7 @@ class OrderViewSet(ModelViewSet):
             CallbackURL = domain + '/core/zar-request/'
             print('CallbackURL', CallbackURL)
             print('CallbackURL', type(CallbackURL))
-
+            print(MERCHANT, amount, description, email, phone_number, CallbackURL)
             result = client.service.PaymentRequest(MERCHANT, amount, description, email, phone_number, CallbackURL)
             if result.Status == 100:
                 return Response(
@@ -559,6 +559,11 @@ class TransactionViewSet(ModelViewSet):
 
 
 class ReportingAPIView(APIView):
+    """
+    {
+        "days": "1"
+    }
+    """
     def post(self, request, *args, **kwargs):
         serializer = ReportingSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
