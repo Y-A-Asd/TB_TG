@@ -67,11 +67,10 @@ class TestRetrieveCustomers:
 
         assert response.status_code == status.HTTP_200_OK
 
-    def test_if_promotion_exists_and_not_admin_return_200(self, api_client, auth):
+    def test_if_customer_exists_not_auth_return_403(self, api_client, auth):
         auth()
         user = baker.make(get_user_model(), id=2)
         customer = Customer.objects.get(user_id=user.id)
         response = api_client.get(f'/shop/customers/{customer.id}/')
 
         assert response.status_code == status.HTTP_403_FORBIDDEN
-

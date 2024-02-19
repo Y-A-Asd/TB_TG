@@ -36,6 +36,11 @@ class BaseDiscount(BaseModel):
             self.active = False
             # self.save()
             return False
+        if self.code:
+            if self.code and (self.valid_to and self.valid_from):
+                pass
+            else:
+                return False
         return True
 
     def clean(self):

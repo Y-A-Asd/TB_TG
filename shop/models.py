@@ -242,14 +242,14 @@ class Order(BaseModel):
         if self.discount:
             self.discount.ensure_availability()
             if self.discount.active:
-                # print(self.discount.mode)
-                # print('total_price')
+                print(self.discount.mode)
+                print('total_price')
                 if self.discount.mode == self.discount.Mode.DirectPrice:
                     total_price = \
                         self.orders.aggregate(
                             total_price=Sum(F('unit_price') * F('quantity')) - self.discount.discount)[
                             'total_price']
-                    # print(total_price)
+                    print(total_price)
                 elif self.discount.mode == self.discount.Mode.DiscountOff:
                     total_price = self.orders.aggregate(total_price=Sum(F('unit_price') * F('quantity')) - Sum(
                         F('unit_price') * F('quantity')) * self.discount.discount / 100)['total_price']
@@ -275,7 +275,7 @@ class Order(BaseModel):
 
         else:
             total_price = self.orders.aggregate(total_price=Sum(F('unit_price') * F('quantity')))['total_price']
-        # print(total_price)
+        print('last total', total_price)
         return total_price if total_price is not None else 0
 
 
@@ -324,6 +324,8 @@ class Transaction(BaseModel):
     total_price = models.DecimalField(_("Total Price"), max_digits=10, decimal_places=2)
     customer = models.ForeignKey(Customer, on_delete=models.PROTECT, verbose_name=_("Customer"))
     receipt_number = models.CharField(_("Receipt Number"), max_length=255, null=True)
+    phone_number = models.CharField(_('Phone Number'), max_length=13)
+    Authority = models.CharField(max_length=50, null=True, blank=True)
 
     def __str__(self):
         return f"Transaction for Order #{self.order.pk} - {self.get_payment_status_display()}"

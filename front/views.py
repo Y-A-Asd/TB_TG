@@ -1,8 +1,10 @@
 from django.http import HttpResponse, HttpResponseRedirect
+from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django.shortcuts import render
 from django.utils.translation import activate
 from django.views import View
+from django.views.decorators.vary import vary_on_headers
 from django.views.generic import TemplateView
 from django.conf import settings
 import requests
@@ -45,7 +47,7 @@ class BlogListView(TemplateView):
     template_name = 'blogs.html'
 
 
-cached_template_blog_list_view = cache_page(3600)(BlogListView.as_view())
+cached_template_blog_list_view = cache_page(60 * 60 * 10)(BlogListView.as_view())
 
 
 class BlogDetailView(View):
@@ -55,18 +57,23 @@ class BlogDetailView(View):
         return render(request, self.template_name, {'id': id})
 
 
-cached_template_blog_detail_view = cache_page(3600)(BlogDetailView.as_view())
+cached_template_blog_detail_view = cache_page(60 * 60 * 10)(BlogDetailView.as_view())
 
 
 class HomeView(TemplateView):
     template_name = 'index.html'
 
 
-cached_template_home_view = cache_page(1800)(HomeView.as_view())
+cached_template_home_view = cache_page(60 * 60 * 5)(HomeView.as_view())
 
 
 class ProfileView(TemplateView):
     template_name = 'profile.html'
+
+    @method_decorator(cache_page(60 * 15))
+    @method_decorator(vary_on_headers("Authorization"))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
 
 
 class CompareView(TemplateView):
@@ -80,86 +87,10 @@ class OrderDetailView(View):
         return render(request, self.template_name, {'id': id})
 
 
-if settings.SANDBOX:
-    sandbox = 'sandbox'
-else:
-    sandbox = 'www'
-
-ZP_API_REQUEST = f"https://{sandbox}.zarinpal.com/pg/rest/WebGate/PaymentRequest.json"
-ZP_API_VERIFY = f"https://{sandbox}.zarinpal.com/pg/rest/WebGate/PaymentVerification.json"
-ZP_API_STARTPAY = f"https://{sandbox}.zarinpal.com/pg/StartPay/"
-print(ZP_API_VERIFY, ZP_API_STARTPAY, ZP_API_REQUEST)
-amount = 1000
-description = "توضیحات مربوط به تراکنش را در این قسمت وارد کنید"
-phone = '09353220545'  # Optional
-
-CallbackURL = 'http://127.0.0.1:8000/verify/'
-
-
-def send_request(request):
-    data = {
-        "MerchantID": settings.MERCHANT,
-        "Amount": amount,
-        "Description": description,
-        "CallbackURL": CallbackURL,
-    }
-    print(data)
-    data = json.dumps(data)
-    headers = {'content-type': 'application/json', 'content-length': str(len(data))}
-    try:
-        response = requests.post(ZP_API_REQUEST, data=data, headers=headers, timeout=10)
-        # print('here 1')
-
-        if response.status_code == 200:
-            response = response.json()
-            # print('here 2')
-            print('response: ', response)
-            if response['Status'] == 100:
-                # print('here 3')
-                print({'status': True, 'url': ZP_API_STARTPAY + str(response['Authority']),
-                       'authority': response['Authority']})
-                verify(request, response['Authority'])
-                return HttpResponse('OK')
-                # print('here 4')
-            else:
-                # print('here 5')
-                return {'status': False, 'code': str(response['Status'])}
-        print(response)
-        return HttpResponse('Not OK')
-
-    except requests.exceptions.Timeout:
-        return {'status': False, 'code': 'timeout'}
-    except requests.exceptions.ConnectionError:
-        return {'status': False, 'code': 'connection error'}
-
-
-def verify(request, authority):
-    data = {
-        "MerchantID": settings.MERCHANT,
-        "Amount": amount,
-        "Authority": authority,
-    }
-    data = json.dumps(data)
-    headers = {'content-type': 'application/json', 'content-length': str(len(data))}
-    response = requests.post(ZP_API_VERIFY, data=data, headers=headers)
-
-    if response.status_code == 200:
-        response = response.json()
-        if response['Status'] == 100:
-            print({'status': True, 'RefID': response['RefID']})
-            return {'status': True, 'RefID': response['RefID']}
-        else:
-            print({'status': False, 'code': str(response['Status'])})
-            return {'status': False, 'code': str(response['Status'])}
-    print(response)
-    return response
-
-
 def set_language(request):
     if request.method == 'POST':
         language_code = request.POST.get('language_code')
         request.session['language_code'] = language_code
-        print(language_code)
         settings.LANGUAGE_CODE = language_code
         activate(language_code)
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

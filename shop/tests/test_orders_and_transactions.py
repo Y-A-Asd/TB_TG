@@ -39,7 +39,7 @@ def create_cart(api_client):
 @pytest.fixture()
 def create_cartitems(api_client, create_cart):
     def wrapper():
-        product = baker.make(Product, unit_price=10)
+        product = baker.make(Product, unit_price=10, inventory=10)
         cart_id = create_cart().data['id']
         return api_client.post(
             f'/shop/cart/{cart_id}/items/',
@@ -91,6 +91,8 @@ class TestCreateOrderWithCart:
         api_client.force_authenticate(user)
         create_address('a', 'a', 'a', 'a', )
         response = create_order()
+        print('response', response.data)
+        print('response', response)
         order_id = response.data['id']
         # transaction = Transaction.objects.filter(order_id=order_id).exists()
         assert Transaction.objects.filter(order_id=order_id).exists()
@@ -150,3 +152,43 @@ class TestRetrieveOrders:
         for order_data in response.data:
             assert 'total_price' in order_data
 
+    def test_retrieve_single_order(self, api_client, auth):
+        user = baker.make(User)
+        api_client.force_authenticate(user)
+        order1 = baker.make(Order, customer=user.customer, id=1)
+
+        response = api_client.get('/shop/orders/1/')
+        assert response.status_code == status.HTTP_200_OK
+
+    def test_retrieve_orders_and_payment_request(self, api_client, auth):
+        user = baker.make(User, phone_number='09353220545', email='yosof@gmail.com')
+        api_client.force_authenticate(user)
+        order1 = baker.make(Order, customer=user.customer, id=1)
+
+        response = api_client.post('/shop/orders/1/payment-request/')
+        print(response.data)
+        assert response.status_code == status.HTTP_400_BAD_REQUEST
+
+
+@pytest.mark.django_db
+class TestReporting:
+    def test_retrieve_reports_authenticated_user(self, api_client, auth):
+        user = baker.make(User)
+        api_client.force_authenticate(user)
+        response = api_client.post('/shop/reporting/', {
+            "days": "1"
+        })
+        assert response.status_code == status.HTTP_200_OK
+
+@pytest.mark.django_db
+class TestVerifyPayment:
+    def test_verify_payment_view(self, api_client, auth):
+        user = baker.make(User)
+        api_client.force_authenticate(user)
+        order1 = baker.make(Order, customer=user.customer, id=1)
+        response = api_client.post('http://127.0.0.1:8000/shop/payment-verify/', {
+            "order_id": "1",
+            "total_price": "1000",
+            "Authority": "000000000000000000000000000001349929"
+        })
+        assert response.status_code == status.HTTP_200_OK

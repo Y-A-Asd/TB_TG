@@ -32,8 +32,6 @@ INTERNAL_IPS = [
     # ...
 ]
 
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -295,7 +293,6 @@ CACHES['memcache'] = {
     "BACKEND": "django.core.cache.backends.memcached.PyMemcacheCache",
     "LOCATION": "127.0.0.1:11211",
 }
-print('CACHES', CACHES)
 """
 how to use cache in class base views:
     @method_decorator(cache_page(60) -> 1 minute cache
@@ -338,8 +335,6 @@ LOGGING = {
     }
 }
 
-
-
 CART_SESSION_ID = 'cart'
 
 """
@@ -361,3 +356,12 @@ chore: (updating grunt tasks etc; no production code change)
 MERCHANT = "00000000-0000-0220-0000-000000000000"
 
 SANDBOX = True
+if SANDBOX:
+    sandbox = 'sandbox'
+else:
+    sandbox = 'www'
+
+ZP_API = f"https://{sandbox}.zarinpal.com/pg/services/WebGate/wsdl"
+ZP_API_REQUEST = f"https://{sandbox}.zarinpal.com/pg/v4/payment/request.json"
+ZP_API_STARTPAY = f"https://{sandbox}.zarinpal.com/pg/StartPay/"
+ZP_API_VERIFY = f"https://{sandbox}.zarinpal.com/pg/v4/payment/verify.json"

@@ -1,6 +1,4 @@
-# views.py
 import logging
-
 import redis
 from rest_framework.response import Response
 from rest_framework import status
@@ -9,9 +7,9 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from djoser.views import UserViewSet as BaseUserViewSet
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import get_user_model
-from django.conf import settings
 from .models import User
 from .otp import Authentication
+from django.conf import settings
 
 security_logger = logging.getLogger('security_logger')
 

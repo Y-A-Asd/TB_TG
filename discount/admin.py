@@ -10,7 +10,7 @@ from discount.models import BaseDiscount
 class BaseDiscountAdminForm(forms.ModelForm):
     class Meta:
         model = BaseDiscount
-        fields = ['code', 'discount', 'mode', 'active', 'valid_from', 'valid_to']
+        fields = ['code', 'discount', 'mode', 'active', 'valid_from', 'valid_to', 'limit_price', 'max_price']
 
     def clean(self):
         """

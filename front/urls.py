@@ -14,18 +14,8 @@ urlpatterns = [
     path('compare/', views.CompareView.as_view(), name='compare'),
     path('', views.cached_template_home_view, name='home'),
     path('profile/', views.ProfileView.as_view(), name='profile'),
-    path('request/', views.send_request, name='request'),
-    path('verify/', views.verify, name='verify'),
     path('set_language/', views.set_language, name='set_language'),
     path('blogs/<int:id>/', views.cached_template_blog_detail_view, name='blog_detail'),
     path('blogs/', views.cached_template_blog_list_view, name='blogs'),
 
 ]
-# todo: 1. implement remaining:{profile - make order from cart}
-# todo: 2. link routes inside site
-# todo: 2.1. caching
-# todo: 3. valid error message
-# todo: 4. translations
-# todo: 5. gold
-# todo: 6(optional). blog
-# todo: 7(optional). wishlist
