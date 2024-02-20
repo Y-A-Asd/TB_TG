@@ -246,19 +246,15 @@ CELERY_BROKER_URL = 'redis://localhost:6379/1'
 CELERY_BEAT_SCHEDULE = {
     'delete_inactive_users': {
         'task': 'core.tasks.delete_inactive_users',
-        'schedule': crontab(minute='1'),
+        'schedule': timedelta(seconds=1),
     },
     'send_promotion_emails': {
         'task': 'core.tasks.send_promotion_emails',
-        'schedule': crontab(minute='1'),
-    },
-    'delete_inactive_carts': {
-        'task': 'core.tasks.delete_inactive_carts',
-        'schedule': crontab(minute='1'),
+        'schedule': timedelta(seconds=1),
     },
     'send_birthday_emails': {
         'task': 'core.tasks.send_birthday_emails',
-        'schedule': crontab(minute='1'),
+        'schedule': timedelta(seconds=1),
     },
     'delete_old_carts': {
         'task': 'core.tasks.delete_old_carts',

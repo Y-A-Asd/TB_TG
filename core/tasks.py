@@ -43,16 +43,6 @@ def send_promotion_emails():
 
 
 @shared_task
-def delete_inactive_carts():
-    three_days_ago = timezone.now() - timezone.timedelta(days=3)
-    inactive_carts = Cart.objects.filter(updated_at__lte=three_days_ago)
-
-    for cart in inactive_carts:
-        cart.delete()
-        logger.info(f"Deleted inactive cart with ID {cart.id}.")
-
-
-@shared_task
 def send_birthday_emails():
     today = timezone.now().date()
     customers_with_birthdays = Customer.objects.filter(birth_date__month=today.month, birth_date__day=today.day)
