@@ -402,7 +402,7 @@
 
     function getOrders() {
         const token = getToken();
-        let endpoint = "/shop/orders/"
+        let endpoint = "/api-v1/orders/"
         makeAuthenticatedRequest(endpoint, 'GET')
             .then(data => {
                 data.forEach(function (order, index) {
@@ -449,7 +449,7 @@
         const user_id = document.getElementById('user_id').value;
         const membership = document.getElementById('membership').value;
 
-        const endpoint = '/shop/customers/me/';
+        const endpoint = '/api-v1/customers/me/';
 
         makeAuthenticatedRequest(endpoint, 'PUT', {
             first_name: firstName,
@@ -468,7 +468,7 @@
     }
 
     function fetchCustomerData() {
-        const endpoint = '/shop/customers/me/';
+        const endpoint = '/api-v1/customers/me/';
         console.log('DATA CALLED FOR CUSTOMER')
         makeAuthenticatedRequest(endpoint, 'GET')
             .then(data => {
@@ -589,7 +589,7 @@
 
 
     function fetchAddresses() {
-        const endpoint = '/shop/addresses/';
+        const endpoint = '/api-v1/addresses/';
 
         makeAuthenticatedRequest(endpoint, 'GET')
             .then(data => {
@@ -641,7 +641,7 @@
     };
 
     function deleteAddress(addressId) {
-        const endpoint = `/shop/addresses/${addressId}/`;
+        const endpoint = `/api-v1/addresses/${addressId}/`;
 
         makeAuthenticatedRequest(endpoint, 'DELETE')
             .then(response => {
@@ -654,7 +654,7 @@
     }
 
     function fetchAddress(addressId) {
-        const endpoint = `/shop/addresses/${addressId}/`;
+        const endpoint = `/api-v1/addresses/${addressId}/`;
 
         makeAuthenticatedRequest(endpoint, 'GET')
             .then(data => {
@@ -684,7 +684,7 @@
         const path = document.getElementById('path').value;
         const isDefault = document.getElementById('default').checked;
 
-        const endpoint = `/shop/addresses/${addressId}/`;
+        const endpoint = `/api-v1/addresses/${addressId}/`;
 
         const requestBody = {
             id: addressId,
@@ -715,7 +715,7 @@
         const path = document.getElementById('path').value;
         const isDefault = document.getElementById('default').checked;
 
-        const endpoint = '/shop/addresses/';
+        const endpoint = '/api-v1/addresses/';
 
         const requestBody = {
             zip_code: zipCode,

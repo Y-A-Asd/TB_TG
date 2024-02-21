@@ -9,7 +9,7 @@ from core.models import User
 def create_promotion(api_client, language_code):
     def wrapper(promotion_title):
         return api_client.post(
-            '/shop/promotions/',
+            '/api-v1/promotions/',
             {
                 "translations": {language_code: promotion_title},
 
@@ -26,7 +26,7 @@ class TestRetrievePromotions:
         user = baker.make(User)
         api_client.force_authenticate(user)
         promotion = baker.make(Promotion)
-        response = api_client.get(f'/shop/promotions/{promotion.id}/')
+        response = api_client.get(f'/api-v1/promotions/{promotion.id}/')
 
         assert response.status_code == status.HTTP_200_OK
 
@@ -35,6 +35,6 @@ class TestRetrievePromotions:
         api_client.force_authenticate(user)
         promotion = baker.make(Promotion)
         baker.make(Product, promotions=promotion)
-        response = api_client.get(f'/shop/promotions/{promotion.id}/')
+        response = api_client.get(f'/api-v1/promotions/{promotion.id}/')
         assert response.status_code == status.HTTP_200_OK
         assert 'products' in response.json()

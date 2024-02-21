@@ -9,7 +9,7 @@ from shop.models import Collection, Customer
 def create_address(api_client):
     def wrapper(zip_code, path, city, province):
         return api_client.post(
-            '/shop/addresses/',
+            '/api-v1/addresses/',
             {
                 'zip_code': zip_code,
                 'path': path,
@@ -58,7 +58,7 @@ class TestRetrieveAddress:
         api_client.force_authenticate(user2)
 
         response = api_client.get(
-            f'/shop/addresses/{address_id}/',
+            f'/api-v1/addresses/{address_id}/',
             {},
             format='json'
         )
@@ -74,7 +74,7 @@ class TestRetrieveAddress:
         address_id = response.data['id']
 
         response = api_client.get(
-            f'/shop/addresses/{address_id}/',
+            f'/api-v1/addresses/{address_id}/',
             {},
             format='json'
         )
@@ -99,7 +99,7 @@ class TestUpdateAddress:
         api_client.force_authenticate(user2)
 
         response = api_client.patch(
-            f'/shop/addresses/{address_id}/',
+            f'/api-v1/addresses/{address_id}/',
             {
                 'zip_code': 'new_zip_code',
                 'path': 'new_path',
@@ -120,7 +120,7 @@ class TestUpdateAddress:
         address_id = response.data['id']
 
         response = api_client.patch(
-            f'/shop/addresses/{address_id}/',
+            f'/api-v1/addresses/{address_id}/',
             {
                 'zip_code': 'new_zip',
                 'path': 'new_path',

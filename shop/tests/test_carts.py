@@ -14,7 +14,7 @@ from shop.models import Product, CartItem
 def create_cart(api_client):
     def wrapper():
         return api_client.post(
-            '/shop/cart/',
+            '/api-v1/cart/',
             {},
             format='json'
         )
@@ -27,7 +27,7 @@ def create_cartitems(api_client, create_cart):
     def wrapper(product_id, quantity):
         cart_id = create_cart().data['id']
         return api_client.post(
-            f'/shop/cart/{cart_id}/items/',
+            f'/api-v1/cart/{cart_id}/items/',
             {
                 "product_id": product_id,
                 "quantity": quantity
@@ -65,7 +65,7 @@ class TestUpdatingCart:
 
     def test_update_item_to_cart_return_200(self, api_client, create_cartitems):
         response = api_client.post(
-            '/shop/cart/',
+            '/api-v1/cart/',
             {},
             format='json'
         )
@@ -73,7 +73,7 @@ class TestUpdatingCart:
         cart_id = response.data['id']
         product = baker.make(Product, inventory=10)
         response = api_client.post(
-            f'/shop/cart/{cart_id}/items/',
+            f'/api-v1/cart/{cart_id}/items/',
             {
                 "product_id": product.id,
                 "quantity": 1
@@ -82,7 +82,7 @@ class TestUpdatingCart:
         )
         assert response.status_code == status.HTTP_201_CREATED
         response = api_client.patch(
-            f'/shop/cart/{cart_id}/items/{product.id}/',
+            f'/api-v1/cart/{cart_id}/items/{product.id}/',
             {
                 "quantity": 2
             },
@@ -98,7 +98,7 @@ class TestCartDetail:
     def test_cart_detail_return_201(self, api_client, create_cartitems, auth):
         auth(is_staff=True)
         response = api_client.post(
-            '/shop/cart/',
+            '/api-v1/cart/',
             {},
             format='json'
         )
@@ -106,7 +106,7 @@ class TestCartDetail:
         cart_id = response.data['id']
         product = baker.make(Product)
         response = api_client.post(
-            f'/shop/cart/{cart_id}/items/',
+            f'/api-v1/cart/{cart_id}/items/',
             {
                 "product_id": product.id,
                 "quantity": 1
@@ -115,7 +115,7 @@ class TestCartDetail:
         )
         assert response.status_code == status.HTTP_201_CREATED
         response = api_client.get(
-            f'/shop/cart/{cart_id}/',
+            f'/api-v1/cart/{cart_id}/',
             {},
             format='json'
         )
@@ -131,7 +131,7 @@ class TestCartDetail:
                                                valid_from=valid_from, valid_to=valid_to)
         auth(is_staff=True)
         response = api_client.post(
-            '/shop/cart/',
+            '/api-v1/cart/',
             {},
             format='json'
         )
@@ -139,7 +139,7 @@ class TestCartDetail:
         cart_id = response.data['id']
         product = baker.make(Product)
         response = api_client.post(
-            f'/shop/cart/{cart_id}/items/',
+            f'/api-v1/cart/{cart_id}/items/',
             {
                 "product_id": product.id,
                 "quantity": 1
@@ -148,7 +148,7 @@ class TestCartDetail:
         )
         assert response.status_code == status.HTTP_201_CREATED
         response = api_client.get(
-            f'/shop/cart/{cart_id}/',
+            f'/api-v1/cart/{cart_id}/',
             {},
             format='json'
         )
@@ -156,14 +156,14 @@ class TestCartDetail:
         assert 'items' in response.data
 
         response = api_client.post(
-            f'/shop/cart/{cart_id}/apply_discount/',
+            f'/api-v1/cart/{cart_id}/apply_discount/',
             {"discount_code": discount.code},
             format='json'
         )
         assert response.status_code == status.HTTP_200_OK
 
         response = api_client.get(
-            f'/shop/cart/{cart_id}/',
+            f'/api-v1/cart/{cart_id}/',
             {},
             format='json'
         )
@@ -177,7 +177,7 @@ class TestCartDetail:
         discount = BaseDiscount.objects.create(discount=10, code='discount', limit_price=1, max_price=1000)
         auth(is_staff=True)
         response = api_client.post(
-            '/shop/cart/',
+            '/api-v1/cart/',
             {},
             format='json'
         )
@@ -185,7 +185,7 @@ class TestCartDetail:
         cart_id = response.data['id']
         product = baker.make(Product)
         response = api_client.post(
-            f'/shop/cart/{cart_id}/items/',
+            f'/api-v1/cart/{cart_id}/items/',
             {
                 "product_id": product.id,
                 "quantity": 1
@@ -194,7 +194,7 @@ class TestCartDetail:
         )
         assert response.status_code == status.HTTP_201_CREATED
         response = api_client.get(
-            f'/shop/cart/{cart_id}/',
+            f'/api-v1/cart/{cart_id}/',
             {},
             format='json'
         )
@@ -202,21 +202,21 @@ class TestCartDetail:
         assert 'items' in response.data
 
         response = api_client.post(
-            f'/shop/cart/{cart_id}/apply_discount/',
+            f'/api-v1/cart/{cart_id}/apply_discount/',
             {"discount_code": discount.code},
             format='json'
         )
         assert response.status_code == status.HTTP_400_BAD_REQUEST
 
         response = api_client.post(
-            f'/shop/cart/{cart_id}/apply_discount/',
+            f'/api-v1/cart/{cart_id}/apply_discount/',
             {"discount_code": 'a', },
             format='json'
         )
         assert response.status_code == status.HTTP_404_NOT_FOUND
 
         response = api_client.get(
-            f'/shop/cart/{cart_id}/apply_discount/',
+            f'/api-v1/cart/{cart_id}/apply_discount/',
             format='json'
         )
         assert response.status_code == status.HTTP_200_OK

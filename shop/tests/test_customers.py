@@ -12,7 +12,7 @@ def create_customer(api_client):
         user = baker.make(get_user_model(), id=999999)
         print(user.id)
         return api_client.post(
-            '/shop/customers/',
+            '/api-v1/customers/',
             {
                 'user_id': user.id,
                 'first_name': customer_first_name,
@@ -63,7 +63,7 @@ class TestRetrieveCustomers:
         auth(is_staff=True)
         user = baker.make(get_user_model(), id=1)
         customer = Customer.objects.get(user_id=user.id)
-        response = api_client.get(f'/shop/customers/{customer.id}/')
+        response = api_client.get(f'/api-v1/customers/{customer.id}/')
 
         assert response.status_code == status.HTTP_200_OK
 
@@ -71,6 +71,6 @@ class TestRetrieveCustomers:
         auth()
         user = baker.make(get_user_model(), id=2)
         customer = Customer.objects.get(user_id=user.id)
-        response = api_client.get(f'/shop/customers/{customer.id}/')
+        response = api_client.get(f'/api-v1/customers/{customer.id}/')
 
         assert response.status_code == status.HTTP_403_FORBIDDEN

@@ -149,7 +149,7 @@
                 console.log(phone_number.value)
                 console.log(password.value)
                 console.log(email.value)
-                let endpoint = '/core/users/';
+                let endpoint = '/core/auth/users/';
 
                 makeAuthenticatedRequest(endpoint, 'POST', context = {
                     'phone_number': phone_number.value,

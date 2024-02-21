@@ -46,7 +46,7 @@
     <!--================Blog Area =================-->
     {% compress js %}
         <script>
-            const blogPerPage = 1;
+            const blogPerPage = 2;
             let currentPage = 1;
 
             function fetchblogs(page = 1) {
@@ -76,7 +76,7 @@
                         <div class="blog_post">
                             <img class="img-fluid" src="${data.thumbnail}" alt="" id="blog-thumbnail">
                             <div class="blog_details">
-                                <a href="single-blog.html">
+                                <a href="">
                                     <h2 id="blog-title">${data.title}</h2>
                                 </a>
                                 <a id="view_more" class="genric-btn primary">{% trans 'View More' %}</a>

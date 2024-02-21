@@ -5,4 +5,4 @@ class DefaultPagination(PageNumberPagination):
     """
         remember to fix pagination in blog and product list views js
     """
-    page_size = 1
+    page_size = 2

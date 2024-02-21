@@ -82,7 +82,7 @@
         });
 
         function applyDiscount(cartId, discountCode) {
-            fetch(`/shop/cart/${cartId}/apply_discount/`, {
+            fetch(`/api-v1/cart/${cartId}/apply_discount/`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -105,7 +105,7 @@
         }
 
         function createCart() {
-            fetch("/shop/cart/", {
+            fetch("/api-v1/cart/", {
                 method: "POST"
             })
                 .then(response => response.json())
@@ -117,7 +117,7 @@
         }
 
         function fetchCartItems(cartId) {
-            fetch(`/shop/cart/${cartId}/`)
+            fetch(`/api-v1/cart/${cartId}/`)
                 .then(response => response.json())
                 .then(data => {
                     populateCartTable(data);
@@ -175,7 +175,7 @@
 
         function updateQuantity(itemId, newQuantity) {
             const cartId = localStorage.getItem("cartId");
-            fetch(`/shop/cart/${cartId}/items/${itemId}/`, {
+            fetch(`/api-v1/cart/${cartId}/items/${itemId}/`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json"
@@ -196,7 +196,7 @@
 
         function deleteCartItem(itemId) {
             const cartId = localStorage.getItem("cartId");
-            fetch(`/shop/cart/${cartId}/items/${itemId}/`, {
+            fetch(`/api-v1/cart/${cartId}/items/${itemId}/`, {
                 method: "DELETE"
             })
                 .then(response => {
@@ -276,7 +276,7 @@
         }
 
         function createOrder() {
-            const endpoint = '/shop/orders/';
+            const endpoint = '/api-v1/orders/';
             let cart_id = localStorage.getItem("cartId")
             console.log('cart_id', cart_id)
             makeAuthenticatedRequest(endpoint, 'POST', {
@@ -290,13 +290,13 @@
                         alert('Order Create Pay Now');
                         let order_id = response.id
                         let amount = response.total_price
-                        const paymentEndpoint = '/shop/orders/' + order_id + '/payment-request/'
+                        const paymentEndpoint = '/api-v1/orders/' + order_id + '/payment-request/'
                         makeAuthenticatedRequest(paymentEndpoint, 'POST')
                             .then(paymentResponse => {
                                 console.log(paymentResponse)
                                 let Authority = paymentResponse.Authority
                                 let redirect = paymentResponse.redirect
-                                const verifyPaymentEndpoint = '/shop/payment-verify/'
+                                const verifyPaymentEndpoint = '/api-v1/payment-verify/'
                                 console.log(verifyPaymentEndpoint)
                                 console.log(order_id)
                                 console.log(amount)

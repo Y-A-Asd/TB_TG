@@ -45,7 +45,7 @@
             }
 
             const fetchComparisonData = (productIds) => {
-                const apiUrl = `/shop/compare/?product_ids=${productIds.join('&product_ids=')}`;
+                const apiUrl = `/api-v1/compare/?product_ids=${productIds.join('&product_ids=')}`;
                 return fetch(apiUrl)
                     .then(response => response.json());
 
