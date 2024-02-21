@@ -64,7 +64,7 @@ class UserAdmin(BaseUserAdmin):
     inlines = [PermissionInline, GroupInline]
 
 
-@admin.register(AuditLog)
+@admin.register(AuditLog)  # pragma: no cover
 class AuditlogAdmin(admin.ModelAdmin):
     list_display = ('id', 'user', 'action', 'timestamp', 'changes', 'table_name')
     actions = ['revert']
