@@ -10,7 +10,7 @@ from model_bakery import baker
 def create_product(api_client, language_code):
     def wrapper(product_title, unit_price, inventory):
         return api_client.post(
-            '/shop/products/',
+            '/api-v1/products/',
             {
                 "translations": {language_code: product_title},
                 'org_price': unit_price,
@@ -57,7 +57,7 @@ class TestCreateProduct:
 class TestRetrieveProduct:
     def test_if_product_exists_return_200(self, api_client):
         product = baker.make(Product)
-        response = api_client.get(f'/shop/products/{product.id}/')
+        response = api_client.get(f'/api-v1/products/{product.id}/')
 
         assert response.status_code == status.HTTP_200_OK
 
@@ -88,7 +88,7 @@ class TestCompareProducts:
             key=key,
             value=value
         )
-        response = api_client.get(f'/shop/compare/?product_ids=1&product_ids=2')
+        response = api_client.get(f'/api-v1/compare/?product_ids=1&product_ids=2')
         assert response.status_code == status.HTTP_200_OK
 
 
@@ -117,17 +117,17 @@ class TestFilterProducts:
             value=value
         )
 
-        response = api_client.get(f'/shop/products/?collection_id={collection.id}')
+        response = api_client.get(f'/api-v1/products/?collection_id={collection.id}')
         assert response.status_code == status.HTTP_200_OK
-        response = api_client.get(f'/shop/products/?unit_price__lt=100000&unit_price__gt=10')
+        response = api_client.get(f'/api-v1/products/?unit_price__lt=100000&unit_price__gt=10')
         assert response.status_code == status.HTTP_200_OK
-        response = api_client.get(f'/shop/products/?search=a')
+        response = api_client.get(f'/api-v1/products/?search=a')
         assert response.status_code == status.HTTP_200_OK
-        response = api_client.get(f'/shop/products/?feature_key={key.id}')
+        response = api_client.get(f'/api-v1/products/?feature_key={key.id}')
         assert response.status_code == status.HTTP_200_OK
-        response = api_client.get(f'/shop/products/?feature_value={value.id}')
+        response = api_client.get(f'/api-v1/products/?feature_value={value.id}')
         assert response.status_code == status.HTTP_200_OK
-        response = api_client.get(f'/shop/products/?secondhand=true')
+        response = api_client.get(f'/api-v1/products/?secondhand=true')
         assert response.status_code == status.HTTP_200_OK
-        response = api_client.get(f'/shop/products/?ordering=best_sales')
+        response = api_client.get(f'/api-v1/products/?ordering=best_sales')
         assert response.status_code == status.HTTP_200_OK

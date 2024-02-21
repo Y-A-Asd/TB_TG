@@ -11,7 +11,7 @@ from shop.models import Order, Transaction, Product
 def create_address(api_client):
     def wrapper(zip_code, path, city, province):
         return api_client.post(
-            '/shop/addresses/',
+            '/api-v1/addresses/',
             {
                 'zip_code': zip_code,
                 'path': path,
@@ -28,7 +28,7 @@ def create_address(api_client):
 def create_cart(api_client):
     def wrapper():
         return api_client.post(
-            '/shop/cart/',
+            '/api-v1/cart/',
             {},
             format='json'
         )
@@ -42,7 +42,7 @@ def create_cartitems(api_client, create_cart):
         product = baker.make(Product, unit_price=10, inventory=10)
         cart_id = create_cart().data['id']
         return api_client.post(
-            f'/shop/cart/{cart_id}/items/',
+            f'/api-v1/cart/{cart_id}/items/',
             {
                 "product_id": product.id,
                 "quantity": 1
@@ -58,7 +58,7 @@ def create_order(api_client, auth, create_cart, create_cartitems):
     response, cart_id = create_cartitems()
 
     def wrapper():
-        return api_client.post('/shop/orders/',
+        return api_client.post('/api-v1/orders/',
                                {
                                    'cart_id': cart_id
                                }, format='json')
@@ -112,7 +112,7 @@ class TestUpdateOrder:
             'order_status': 'S'
         }
 
-        update_url = f'/shop/orders/{order_id}/'
+        update_url = f'/api-v1/orders/{order_id}/'
         response = api_client.patch(update_url, update_data, format='json')
         print(response.data)
         assert response.status_code == status.HTTP_200_OK
@@ -132,7 +132,7 @@ class TestUpdateOrder:
             'order_status': 'invalid_status'
         }
 
-        update_url = f'/shop/orders/{order_id}/'
+        update_url = f'/api-v1/orders/{order_id}/'
         response = api_client.patch(update_url, update_data, format='json')
         assert response.status_code == status.HTTP_400_BAD_REQUEST
 
@@ -146,7 +146,7 @@ class TestRetrieveOrders:
         order1 = baker.make(Order, customer=user.customer)
         order2 = baker.make(Order, customer=user.customer)
 
-        response = api_client.get('/shop/orders/')
+        response = api_client.get('/api-v1/orders/')
         assert response.status_code == status.HTTP_200_OK
 
         for order_data in response.data:
@@ -157,7 +157,7 @@ class TestRetrieveOrders:
         api_client.force_authenticate(user)
         order1 = baker.make(Order, customer=user.customer, id=1)
 
-        response = api_client.get('/shop/orders/1/')
+        response = api_client.get('/api-v1/orders/1/')
         assert response.status_code == status.HTTP_200_OK
 
     def test_retrieve_orders_and_payment_request(self, api_client, auth):
@@ -165,7 +165,7 @@ class TestRetrieveOrders:
         api_client.force_authenticate(user)
         order1 = baker.make(Order, customer=user.customer, id=1)
 
-        response = api_client.post('/shop/orders/1/payment-request/')
+        response = api_client.post('/api-v1/orders/1/payment-request/')
         print(response.data)
         assert response.status_code == status.HTTP_400_BAD_REQUEST
 
@@ -175,7 +175,7 @@ class TestReporting:
     def test_retrieve_reports_authenticated_user(self, api_client, auth):
         user = baker.make(User)
         api_client.force_authenticate(user)
-        response = api_client.post('/shop/reporting/', {
+        response = api_client.post('/api-v1/reporting/', {
             "days": "1"
         })
         assert response.status_code == status.HTTP_200_OK
@@ -186,7 +186,7 @@ class TestVerifyPayment:
         user = baker.make(User)
         api_client.force_authenticate(user)
         order1 = baker.make(Order, customer=user.customer, id=1)
-        response = api_client.post('http://127.0.0.1:8000/shop/payment-verify/', {
+        response = api_client.post('http://127.0.0.1:8000/api-v1/payment-verify/', {
             "order_id": "1",
             "total_price": "1000",
             "Authority": "000000000000000000000000000001349929"

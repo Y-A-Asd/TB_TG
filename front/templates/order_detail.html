@@ -174,7 +174,7 @@
         };
 
         const orderId = {{ id }};
-        const orderEndpoint = `/shop/orders/${orderId}/`;
+        const orderEndpoint = `/api-v1/orders/${orderId}/`;
 
         makeAuthenticatedRequest(orderEndpoint, 'GET')
             .then(orderData => {

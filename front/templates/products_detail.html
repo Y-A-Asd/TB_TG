@@ -146,7 +146,7 @@
 
     <script>
         function fetchProductDetails(productId) {
-            const apiUrl = `/shop/products/${productId}/`;
+            const apiUrl = `/api-v1/products/${productId}/`;
 
             fetch(apiUrl)
                 .then(response => response.json())
@@ -227,7 +227,7 @@
     </script>
     <script>
         function fetchProductReviews(productId) {
-            const apiUrl = `/shop/products/${productId}/reviews/`;
+            const apiUrl = `/api-v1/products/${productId}/reviews/`;
 
             fetch(apiUrl)
                 .then(response => response.json())
@@ -426,7 +426,7 @@
             let description = document.getElementById('description');
             let parentReviewId = document.getElementById('parentReviewId').value;
 
-            let endpoint = '/shop/products/{{ id }}/reviews/';
+            let endpoint = '/api-v1/products/{{ id }}/reviews/';
 
             makeAuthenticatedRequest(endpoint, 'POST', context = {
                 'rating': rating.value,
@@ -485,7 +485,7 @@
                 method: 'POST',
                 headers: headers,
             };
-            fetch("/shop/cart/", options)
+            fetch("/api-v1/cart/", options)
                 .then(response => response.json())
                 .then(data => {
                     localStorage.setItem("cartId", data.id);
@@ -504,7 +504,7 @@
                 headers['Authorization'] = `JWT ${token}`;
             }
             {#console.log(cartId, productId, quantity)#}
-            fetch(`/shop/cart/${cartId}/items/`, {
+            fetch(`/api-v1/cart/${cartId}/items/`, {
                 method: "POST",
                 headers: headers,
                 body: JSON.stringify({

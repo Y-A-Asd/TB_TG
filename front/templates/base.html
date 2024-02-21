@@ -169,7 +169,7 @@
         <script>
             document.addEventListener("DOMContentLoaded", function () {
                 console.log('{{ LANGUAGE_CODE }}')
-                fetch("/shop/site-settings/")
+                fetch("/api-v1/site-settings/")
                     .then(response => response.json())
                     .then(data => {
                         const siteSettings = data[0];

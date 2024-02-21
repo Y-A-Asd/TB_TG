@@ -24,13 +24,13 @@ def create_review(api_client, language_code):
     """
     def create_review(api_client):
         def wrapper(collection):
-            return api_client.post('/shop/collections/', collection)
+            return api_client.post('/api-v1/collections/', collection)
     """
 
     def wrapper(parent=None, rate=4):
         product = baker.make(Product)
         return api_client.post(
-            f'/shop/products/{product.id}/reviews/',
+            f'/api-v1/products/{product.id}/reviews/',
             {
                 "parent_review": parent,
                 "title": "sdf",
@@ -72,7 +72,7 @@ class TestRetrieveReview:
         product = baker.make(Product)
 
         parent_review = api_client.post(
-            f'/shop/products/{product.id}/reviews/',
+            f'/api-v1/products/{product.id}/reviews/',
             {
                 "parent_review": None,
                 "title": "sdf",
@@ -86,7 +86,7 @@ class TestRetrieveReview:
         review.active = True
         review.save()
         reply = api_client.post(
-            f'/shop/products/{product.id}/reviews/',
+            f'/api-v1/products/{product.id}/reviews/',
             {
                 "parent_review": parent_review_id,
                 "title": "sdf",
@@ -100,7 +100,7 @@ class TestRetrieveReview:
         review.active = True
         review.save()
         response = api_client.get(
-            f'/shop/products/{product.id}/reviews/{parent_review_id}/')
+            f'/api-v1/products/{product.id}/reviews/{parent_review_id}/')
 
         assert response.status_code == status.HTTP_200_OK
         assert 'replies' in response.data
@@ -111,7 +111,7 @@ class TestRetrieveReview:
         product = baker.make(Product)
 
         parent_review = api_client.post(
-            f'/shop/products/{product.id}/reviews/',
+            f'/api-v1/products/{product.id}/reviews/',
             {
                 "parent_review": None,
                 "title": "sdf",
@@ -122,7 +122,7 @@ class TestRetrieveReview:
         )
         parent_review_id = parent_review.data['id']
         response = api_client.get(
-            f'/shop/products/{product.id}/reviews/{parent_review_id}/')
+            f'/api-v1/products/{product.id}/reviews/{parent_review_id}/')
         assert response.status_code == status.HTTP_404_NOT_FOUND
 
     def test_retrieve_replies(self, api_client, create_review):
@@ -131,7 +131,7 @@ class TestRetrieveReview:
         product = baker.make(Product)
 
         parent_review = api_client.post(
-            f'/shop/products/{product.id}/reviews/',
+            f'/api-v1/products/{product.id}/reviews/',
             {
                 "parent_review": None,
                 "title": "sdf",
@@ -145,7 +145,7 @@ class TestRetrieveReview:
         review.active = True
         review.save()
         reply = api_client.post(
-            f'/shop/products/{product.id}/reviews/',
+            f'/api-v1/products/{product.id}/reviews/',
             {
                 "parent_review": parent_review_id,
                 "title": "sdf",
@@ -159,12 +159,12 @@ class TestRetrieveReview:
         review.active = True
         review.save()
         response = api_client.get(
-            f'/shop/products/{product.id}/reviews/{parent_review_id}/')
+            f'/api-v1/products/{product.id}/reviews/{parent_review_id}/')
 
         assert response.status_code == status.HTTP_200_OK
         assert 'replies' in response.data
 
         response = api_client.get(
-            f'/shop/products/{product.id}/reviews/{parent_review_id}/replies/')
+            f'/api-v1/products/{product.id}/reviews/{parent_review_id}/replies/')
 
         assert response.status_code == status.HTTP_200_OK

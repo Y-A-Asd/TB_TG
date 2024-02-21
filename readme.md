@@ -68,6 +68,9 @@ A full-stack online shop built with Django, JavaScript, HTML, and CSS.
 - **API Documentation with Swagger**: Utilize Swagger for API documentation by configuring an endpoint with `/schema_view/`
   to render Swagger UI, enhancing API usability and accessibility.
 
+
+- **<span style="color:orange;">Selenium</span> Test Features**: Add Selenium tests for each feature to ensure functionality and user experience across the application.
+
 ## Installation
 
 1. Clone the repository:

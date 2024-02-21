@@ -38,7 +38,7 @@ schema_view = get_schema_view(
 urlpatterns = i18n_patterns(
     path('admin/', admin.site.urls),
     path('rosetta/', include('rosetta.urls')),
-    path('shop/', include('shop.urls')),
+    path('api-v1/', include('shop.urls')),
     path("__debug__/", include("debug_toolbar.urls")),
     path("core/", include('core.urls', namespace='core')),
     path("", include('front.urls', namespace='front')),

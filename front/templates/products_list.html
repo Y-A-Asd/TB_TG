@@ -147,13 +147,13 @@
             return socialInfo;
         }
 
-        const productsPerPage = 1;
+        const productsPerPage = 2;
         let currentPage = 1;
 
         function fetchProducts(page = 1, selectedOption = 'updated_at', collectionsId = null, unit_price__gt = null,
                                unit_price__lt = null, search = null, feature_key = null, feature_value = null, secondhand = null) {
             let apiUrl = null
-            apiUrl = `/shop/products/?page=${page}&ordering=${getSortingOrdering(selectedOption)}`;
+            apiUrl = `/api-v1/products/?page=${page}&ordering=${getSortingOrdering(selectedOption)}`;
 
             if (collectionsId != null) {
                 apiUrl += `&collection_id=${collectionsId}`;
@@ -411,7 +411,7 @@
                 headers: headers,
             };
             console.log('headers', headers)
-            fetch('/shop/cart/',
+            fetch('/api-v1/cart/',
                 options
             )
                 .then(response => response.json())
@@ -433,7 +433,7 @@
                 headers['Authorization'] = `JWT ${token}`;
             }
             {#console.log('headers', headers)#}
-            fetch(`/shop/cart/${cartId}/items/`, {
+            fetch(`/api-v1/cart/${cartId}/items/`, {
                 method: 'POST',
                 headers: headers,
                 body: JSON.stringify({
@@ -582,7 +582,7 @@
             }
         });
 
-        fetch('/shop/collections/')
+        fetch('/api-v1/collections/')
             .then(response => response.json())
             .then(data => {
                 const sidebarCategories = document.querySelector('.sidebar-categories');
@@ -642,7 +642,7 @@
         }
 
 
-        fetch('/shop/features/')
+        fetch('/api-v1/features/')
             .then(response => response.json())
             .then(data => {
                 const commonFilter = document.querySelector('.common-filter');

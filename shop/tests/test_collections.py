@@ -24,12 +24,12 @@ def create_collection(api_client, language_code):
     """
     def create_collection(api_client):
         def wrapper(collection):
-            return api_client.post('/shop/collections/', collection)
+            return api_client.post('/api-v1/collections/', collection)
     """
 
     def wrapper(collection_data):
         return api_client.post(
-            '/shop/collections/',
+            '/api-v1/collections/',
             {
                 "translations": {language_code: collection_data}
             },
@@ -74,7 +74,7 @@ class TestCreateCollection:
 class TestRetrieveCollection:
     def test_if_collection_exists_return_200(self, api_client):
         collection = baker.make(Collection)
-        response = api_client.get(f'/shop/collections/{collection.id}/')
+        response = api_client.get(f'/api-v1/collections/{collection.id}/')
 
         assert response.status_code == status.HTTP_200_OK
         # assert response.data == {
@@ -91,6 +91,6 @@ class TestListCollection:
         collection = baker.make(Collection)
         product1 = baker.make(Product, id=1, collection=collection)
         product2 = baker.make(Product, id=2, collection=collection)
-        response = api_client.get(f'/shop/collections/')
+        response = api_client.get(f'/api-v1/collections/')
 
         assert response.status_code == status.HTTP_200_OK
