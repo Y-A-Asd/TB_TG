@@ -391,19 +391,24 @@ class CartViewSet(CreateModelMixin,
         serializer = ApplyDiscountSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         discount_code = serializer.validated_data['discount_code']
-
-        discount = get_object_or_404(BaseDiscount, code=discount_code)
-
         try:
+            discount = BaseDiscount.objects.get(code=discount_code)
             if not discount.ensure_availability():
                 raise ValidationError(_("Discount is not available at the moment."))
+            total_price = CartSerializer(data=cart)
+            total_price = total_price.get_total_price(cart)
+            print('total_price', total_price)
 
+            if total_price < discount.limit_price:
+                raise ValidationError(_("Total price is below the discount limit."))
             cart.discount = discount
             cart.save()
 
             return Response({'message': 'Discount applied successfully.'}, status=status.HTTP_200_OK)
         except ValidationError as e:
             return Response({'error': e.detail}, status=status.HTTP_400_BAD_REQUEST)
+        except BaseDiscount.DoesNotExist:
+            return Response({'error': _('Discount Code Not Found')}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class CartItemViewSet(ModelViewSet):

@@ -174,6 +174,7 @@ class CartSerializer(serializers.ModelSerializer):
     id = serializers.UUIDField(read_only=True)
     items = CartItemSerializer(many=True, read_only=True)
     total_price = serializers.SerializerMethodField()
+    org_price = serializers.SerializerMethodField()
 
     # def get_total_price(self, cart):
     #     if cart.items:
@@ -221,9 +222,14 @@ class CartSerializer(serializers.ModelSerializer):
         print(total_price)
         return total_price if total_price is not None else 0
 
+    def get_org_price(self, cart):
+        org_price = sum([item.quantity * item.product.price_after_off for item in
+                         cart.items.all()])
+        return org_price if org_price is not None else 0
+
     class Meta:
         model = Cart
-        fields = ['id', 'items', 'total_price']
+        fields = ['id', 'items', 'total_price', 'org_price']
 
 
 class ApplyDiscountSerializer(serializers.Serializer):
@@ -246,12 +252,12 @@ class AddItemsSerializer(serializers.ModelSerializer):
             cart_item = CartItem.objects.get(cart_id=cart_id, product_id=product_id)
             cart_item.quantity += quantity
             if cart_item.quantity > product_inventory:
-                return self.instance
+                raise serializers.ValidationError(_(f'You can not add more then inventory {product_inventory} !'))
             cart_item.save()
             self.instance = cart_item
         except CartItem.DoesNotExist:
             if quantity > product_inventory:
-                return self.instance
+                raise serializers.ValidationError(_(f'You can not add more then inventory {product_inventory} !'))
             self.instance = CartItem.objects.create(cart_id=cart_id, **self.validated_data)
         return self.instance
 
