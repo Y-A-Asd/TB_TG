@@ -668,7 +668,7 @@ class VerifyAPIView(APIView):
     """
     serializer_class = VerifySerializer
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs): # pragma: no cover
         client = Client(settings.ZP_API)
 
         MERCHANT = settings.MERCHANT
@@ -682,23 +682,31 @@ class VerifyAPIView(APIView):
         result = client.service.PaymentVerification(MERCHANT, Authority, amount)
         print(result)
         if result.Status == 100:
-            transaction.receipt_number = str(result.RefID)  # pragma: no cover
-            transaction.Authority = Authority  # pragma: no cover
-            transaction.payment_status = 'C'  # pragma: no cover
-            customer = transaction.customer  # pragma: no cover
-            order.order_status = 'P'  # pragma: no cover
-            order.save()  # pragma: no cover
-            cart = Cart.objects.filter(customer=customer.id)  # pragma: no cover
-            cart.delete()  # pragma: no cover
-            transaction.save()  # pragma: no cover
+            transaction.receipt_number = str(result.RefID)
+            transaction.Authority = Authority
+            transaction.payment_status = 'C'
+            customer = transaction.customer
+            order.order_status = 'P'
+            order.save()
+            cart = Cart.objects.filter(customer=customer.id)
+            cart.delete()
+            transaction.save()
             return Response({'details': 'Transaction success. RefID: ' + str(result.RefID)},
-                            status=200)  # pragma: no cover
+                            status=200)
         elif result.Status == 101:
             return Response({'details': 'Transaction submitted'}, status=200)
         else:
-            transaction.payment_status = 'F'  # pragma: no cover
-            order.order_status = 'F'  # pragma: no cover
-            order.save()  # pragma: no cover
-            transaction.save()  # pragma: no cover
+            transaction.payment_status = 'F'
+            order.order_status = 'F'
+            order.save()
+            transaction.save()
+            new_inventories = []
+            order_items = OrderItem.objects.filter(order_id=order.id)
+            for items in order_items:
+                product = items.product
+                quantity = items.quantity
+                product.inventory += quantity
+                new_inventories.append(product)
+            Product.objects.bulk_update(new_inventories, ['inventory'])
             return Response({'details': 'Transaction failed . error code : ' + str(result.Status)},
-                            status=200)  # pragma: no cover
+                            status=200)

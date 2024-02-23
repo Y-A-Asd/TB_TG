@@ -286,8 +286,9 @@ class UpdateItemsSerializer(serializers.ModelSerializer):
 
         product_id = instance.product_id
         product_inventory = Product.objects.get(id=product_id).inventory
-
         if quantity > product_inventory:
+            instance.quantity = product_inventory
+            instance.save()
             raise serializers.ValidationError(_(f'You cannot add more than inventory {product_inventory}!'))
 
         return instance
@@ -399,6 +400,7 @@ class CreateOrderSerializer(serializers.Serializer):
             order = Order.objects.create(customer=customer, first_name=first_name, last_name=last_name,
                                          zip_code=zip_code, province=province, path=path, city=city, discount=discount)
             cart_items = CartItem.objects.filter(cart_id=cart_id)
+            new_inventories = []
             order_items = []
             for item in cart_items:
                 if item.quantity <= item.product.inventory:
@@ -409,10 +411,14 @@ class CreateOrderSerializer(serializers.Serializer):
                         unit_price=item.product.price_after_off
                     )
                     order_items.append(order_item)
+                    product = item.product
+                    product.inventory -= item.quantity
+                    new_inventories.append(product)
                 else:
                     raise serializers.ValidationError(
                         _(f'product {item.product.title} has limited inventory: {item.product.inventory}'))
             OrderItem.objects.bulk_create(order_items)
+            Product.objects.bulk_update(new_inventories, ['inventory'])
             "https://stackoverflow.com/questions/30632743/how-can-i-use-signals-in-django-bulk-create"
             print('done saving')
             # Cart.objects.filter(pk=cart_id).delete()
