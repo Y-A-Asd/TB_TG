@@ -170,7 +170,7 @@
 
             productNameElement.textContent = productData.translations.{{ LANGUAGE_CODE }}.title;
             productPriceElement.textContent = `$${productData.price.toFixed(2)}`;
-            productAvailabilityElement.textContent = productData.inventory > 0 ? '{% trans 'In Stock' %}' : '{% trans 'Out of Stock' %}';
+            productAvailabilityElement.textContent = productData.inventory;
             productDescriptionElement.textContent = productData.translations.{{ LANGUAGE_CODE }}.description;
 
             updateProductImages(productData.images);
@@ -522,6 +522,11 @@
                             console.error('Unauthorized: Token may be expired or invalid');
                             alert('Unauthorized: Token may be expired or invalid')
                             localStorage.removeItem('JWT');
+                        } else if (response.status === 400) {
+                            response.json().then(response => {
+                                alert(response[0])
+                            })
+                            return;
                         }
                         console.error('Failed to add item to cart:', response.statusText);
                         alert(`Failed to add item to cart: ${response.statusText}`)

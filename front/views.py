@@ -64,7 +64,7 @@ class HomeView(TemplateView):
     template_name = 'index.html'
 
 
-cached_template_home_view = cache_page(60 * 60 * 5)(HomeView.as_view())
+# cached_template_home_view = cache_page(60 * 15)(HomeView.as_view())
 
 
 class ProfileView(TemplateView):

@@ -194,6 +194,10 @@ font-weight: bold;">${cartItem.org_price}</span><br>     ${cartItem.total_price}
                         fetchCartItems(cartId);
                     } else {
                         console.error("Failed to update quantity:", response.statusText);
+                         response.json().then(response => {
+                                alert(response[0])
+                            })
+                        return;
                     }
                 })
                 .catch(error => console.error("Error updating quantity:", error));
@@ -320,12 +324,19 @@ font-weight: bold;">${cartItem.org_price}</span><br>     ${cartItem.total_price}
                                         window.location.href = `/order-detail/${order_id}/`
                                     })
                             })
+                        .catch(error => {
+                            console.error(error);
+                            alert(error)
+                            location.reload();
+                        });
                     }
                     console.log('end of it')
                 })
 
                 .catch(error => {
                     console.error(error);
+                    alert(error)
+                    location.reload();
                 });
 
         }

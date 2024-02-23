@@ -479,7 +479,10 @@ class OrderViewSet(ModelViewSet):
         return [IsAuthenticated()]
 
     def create(self, request, *args, **kwargs):
-        serializer = CreateOrderSerializer(data=request.data, context={'user_id': self.request.user.id})
+        try:
+            serializer = CreateOrderSerializer(data=request.data, context={'user_id': self.request.user.id})
+        except serializer.ValidationError :
+            return Response(_('Item deleted from your cart because limit inventory'), status=status.HTTP_400_BAD_REQUEST)
         serializer.is_valid(raise_exception=True)
         order = serializer.save()
         serializer = OrderSerializer(order)

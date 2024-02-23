@@ -279,6 +279,19 @@ class UpdateItemsSerializer(serializers.ModelSerializer):
         model = CartItem
         fields = ['quantity']
 
+    def save(self, **kwargs):
+        instance = super().save(**kwargs)
+        cart_id = self.context.get('cart_id')
+        quantity = self.validated_data['quantity']
+
+        product_id = instance.product_id
+        product_inventory = Product.objects.get(id=product_id).inventory
+
+        if quantity > product_inventory:
+            raise serializers.ValidationError(_(f'You cannot add more than inventory {product_inventory}!'))
+
+        return instance
+
     def validate_quantity(self, value):
         if value < 1:
             raise serializers.ValidationError(_('Most be at least 1 !'))
@@ -386,14 +399,19 @@ class CreateOrderSerializer(serializers.Serializer):
             order = Order.objects.create(customer=customer, first_name=first_name, last_name=last_name,
                                          zip_code=zip_code, province=province, path=path, city=city, discount=discount)
             cart_items = CartItem.objects.filter(cart_id=cart_id)
-            order_items = [
-                OrderItem(
-                    order=order,
-                    product=item.product,
-                    quantity=item.quantity,
-                    unit_price=item.product.price_after_off
-                ) for item in cart_items
-            ]
+            order_items = []
+            for item in cart_items:
+                if item.quantity <= item.product.inventory:
+                    order_item = OrderItem(
+                        order=order,
+                        product=item.product,
+                        quantity=item.quantity,
+                        unit_price=item.product.price_after_off
+                    )
+                    order_items.append(order_item)
+                else:
+                    raise serializers.ValidationError(
+                        _(f'product {item.product.title} has limited inventory: {item.product.inventory}'))
             OrderItem.objects.bulk_create(order_items)
             "https://stackoverflow.com/questions/30632743/how-can-i-use-signals-in-django-bulk-create"
             print('done saving')
