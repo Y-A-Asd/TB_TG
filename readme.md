@@ -69,6 +69,16 @@ A full-stack online shop built with Django, JavaScript, HTML, and CSS.
   to render Swagger UI, enhancing API usability and accessibility.
 
 
+
+- **Celery Tasks & Flower Monitoring**:
+
+- **delete_inactive_users**: Deletes inactive users after three days.
+- **send_promotion_emails**: Sends recent promotions via email.
+- **send_birthday_emails**: Sends birthday greetings via email.
+- **delete_old_carts**: Deletes old carts after five days.
+Flower is used for Celery monitoring.
+
+
 - **<span style="color:orange;">Selenium</span> Test Features**: Add Selenium tests for each feature to ensure functionality and user experience across the application.
 
 ## Installation
