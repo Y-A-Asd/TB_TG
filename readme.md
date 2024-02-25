@@ -80,7 +80,6 @@ A full-stack online shop built with Django, JavaScript, HTML, and CSS.
 
     - delete_old_carts**: Deletes old carts after five days.
 
-Flower is used for Celery monitoring.
 
 
 - **<span style="color:orange;">Selenium</span> Test Features**: Add Selenium tests for each feature to ensure functionality and user experience across the application.
