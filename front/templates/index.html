@@ -170,7 +170,6 @@
                 </div>
             </div>
         </div>
-        {% compress js %}
             <script type="text/javascript">
 
                 let currentCollectionsId = null;
@@ -479,14 +478,21 @@
                         })
                     })
                         .then(response => {
+                        console.log(response.status)
                             if (response.ok) {
-                                console.log('Item added to cart successfully');
+                                alert('Item added to cart successfully');
                             } else {
                                 if (response.status === 401) {
                                     console.error('Unauthorized: Token may be expired or invalid');
                                     localStorage.removeItem('JWT');
+                                } else if (response.status === 400) {
+                                    response.json().then(response => {
+                                        alert(response[0])
+                                    })
+                                    return;
                                 }
                                 console.error('Failed to add item to cart:', response.statusText);
+                                alert(`Failed to add item to cart: ${response.statusText}`)
                                 createCartAndAddToBag(productId);
                             }
                         })
@@ -739,7 +745,6 @@
 
 
             </script>
-        {% endcompress %}
     </section>
     <!-- end product Area -->
 

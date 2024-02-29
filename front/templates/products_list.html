@@ -448,8 +448,14 @@
                         if (response.status === 401) {
                             console.error('Unauthorized: Token may be expired or invalid');
                             localStorage.removeItem('JWT');
+                        } else if (response.status === 400) {
+                            response.json().then(response => {
+                                alert(response[0])
+                            })
+                            return;
                         }
-                        console.error('Failed to add item to cart:', response.statusText);
+                        console.log('Failed to add item to cart:', response.statusText);
+                        console.log('Failed to add item to cart:', response.status);
                         createCartAndAddToBag(productId);
                     }
                 })

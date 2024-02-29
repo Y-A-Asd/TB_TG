@@ -42,7 +42,7 @@
                             <h5>{% trans 'Total Price' %} : </h5>
                         </td>
                         <td>
-                            <h5 id="totalP"></h5>
+                            <h5 id="totalP" class="font-weight-bold"></h5>
                         </td>
 
                     </table>
@@ -56,7 +56,8 @@
                     </div>
 
                     <div class=" d-flex align-items-center ">
-                        <a class="genric-btn success circle" href="{% url 'front:products' %}">{% trans 'Continue Shopping' %}</a>
+                        <a class="genric-btn success circle"
+                           href="{% url 'front:products' %}">{% trans 'Continue Shopping' %}</a>
                         <p class="genric-btn primary circle my-0 mx-3" id="order">{% trans 'Proceed to checkout' %}</p>
                     </div>
                 </div>
@@ -97,23 +98,22 @@
                         fetchCartItems(cartId);
 
                     } else {
-                        alert(`Failed to apply discount: ${response.statusText}`,)
-                        console.error("Failed to apply discount:", response.statusText);
+                        response.json().then(response => {
+                            alert(`Failed to apply discount: ${response.error}`,)
+                            console.error("Failed to apply discount:", response.statusText);
+                        })
                     }
                 })
                 .catch(error => console.error("Error applying discount:", error));
         }
 
         function createCart() {
-            fetch("/api-v1/cart/", {
-                method: "POST"
-            })
-                .then(response => response.json())
-                .then(data => {
-                    localStorage.setItem("cartId", data.id);
-                    fetchCartItems(data.id);
-                })
-                .catch(error => console.error("Error creating cart:", error));
+            let endpoint = "/api-v1/cart/"
+            makeAuthenticatedRequest(endpoint, 'POST')
+                .then(response => {
+                    localStorage.setItem("cartId", response.id);
+                    fetchCartItems(response.id);
+                });
         }
 
         function fetchCartItems(cartId) {
@@ -169,8 +169,13 @@
 
                 tableBody.appendChild(row);
             });
-            let totalP = document.getElementById('totalP')
-            totalP.textContent = cartItem.total_price
+            let totalP = document.getElementById('totalP');
+            if (cartItem.org_price !== cartItem.total_price) {
+                totalP.innerHTML = `<span class="text-danger border-danger" style="text-decoration: line-through;
+font-weight: bold;">${cartItem.org_price}</span><br>     ${cartItem.total_price}`;
+            } else {
+                totalP.textContent = cartItem.total_price;
+            }
         }
 
         function updateQuantity(itemId, newQuantity) {
@@ -189,6 +194,10 @@
                         fetchCartItems(cartId);
                     } else {
                         console.error("Failed to update quantity:", response.statusText);
+                         response.json().then(response => {
+                                alert(response[0])
+                            })
+                        return;
                     }
                 })
                 .catch(error => console.error("Error updating quantity:", error));
@@ -315,12 +324,19 @@
                                         window.location.href = `/order-detail/${order_id}/`
                                     })
                             })
+                        .catch(error => {
+                            console.error(error);
+                            alert(error)
+                            location.reload();
+                        });
                     }
                     console.log('end of it')
                 })
 
                 .catch(error => {
                     console.error(error);
+                    alert(error)
+                    location.reload();
                 });
 
         }

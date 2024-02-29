@@ -174,6 +174,7 @@ class CartSerializer(serializers.ModelSerializer):
     id = serializers.UUIDField(read_only=True)
     items = CartItemSerializer(many=True, read_only=True)
     total_price = serializers.SerializerMethodField()
+    org_price = serializers.SerializerMethodField()
 
     # def get_total_price(self, cart):
     #     if cart.items:
@@ -221,9 +222,14 @@ class CartSerializer(serializers.ModelSerializer):
         print(total_price)
         return total_price if total_price is not None else 0
 
+    def get_org_price(self, cart):
+        org_price = sum([item.quantity * item.product.price_after_off for item in
+                         cart.items.all()])
+        return org_price if org_price is not None else 0
+
     class Meta:
         model = Cart
-        fields = ['id', 'items', 'total_price']
+        fields = ['id', 'items', 'total_price', 'org_price']
 
 
 class ApplyDiscountSerializer(serializers.Serializer):
@@ -246,12 +252,12 @@ class AddItemsSerializer(serializers.ModelSerializer):
             cart_item = CartItem.objects.get(cart_id=cart_id, product_id=product_id)
             cart_item.quantity += quantity
             if cart_item.quantity > product_inventory:
-                return self.instance
+                raise serializers.ValidationError(_(f'You can not add more then inventory {product_inventory} !'))
             cart_item.save()
             self.instance = cart_item
         except CartItem.DoesNotExist:
             if quantity > product_inventory:
-                return self.instance
+                raise serializers.ValidationError(_(f'You can not add more then inventory {product_inventory} !'))
             self.instance = CartItem.objects.create(cart_id=cart_id, **self.validated_data)
         return self.instance
 
@@ -272,6 +278,20 @@ class UpdateItemsSerializer(serializers.ModelSerializer):
     class Meta:
         model = CartItem
         fields = ['quantity']
+
+    def save(self, **kwargs):
+        instance = super().save(**kwargs)
+        cart_id = self.context.get('cart_id')
+        quantity = self.validated_data['quantity']
+
+        product_id = instance.product_id
+        product_inventory = Product.objects.get(id=product_id).inventory
+        if quantity > product_inventory:
+            instance.quantity = product_inventory
+            instance.save()
+            raise serializers.ValidationError(_(f'You cannot add more than inventory {product_inventory}!'))
+
+        return instance
 
     def validate_quantity(self, value):
         if value < 1:
@@ -380,15 +400,25 @@ class CreateOrderSerializer(serializers.Serializer):
             order = Order.objects.create(customer=customer, first_name=first_name, last_name=last_name,
                                          zip_code=zip_code, province=province, path=path, city=city, discount=discount)
             cart_items = CartItem.objects.filter(cart_id=cart_id)
-            order_items = [
-                OrderItem(
-                    order=order,
-                    product=item.product,
-                    quantity=item.quantity,
-                    unit_price=item.product.price_after_off
-                ) for item in cart_items
-            ]
+            new_inventories = []
+            order_items = []
+            for item in cart_items:
+                if item.quantity <= item.product.inventory:
+                    order_item = OrderItem(
+                        order=order,
+                        product=item.product,
+                        quantity=item.quantity,
+                        unit_price=item.product.price_after_off
+                    )
+                    order_items.append(order_item)
+                    product = item.product
+                    product.inventory -= item.quantity
+                    new_inventories.append(product)
+                else:
+                    raise serializers.ValidationError(
+                        _(f'product {item.product.title} has limited inventory: {item.product.inventory}'))
             OrderItem.objects.bulk_create(order_items)
+            Product.objects.bulk_update(new_inventories, ['inventory'])
             "https://stackoverflow.com/questions/30632743/how-can-i-use-signals-in-django-bulk-create"
             print('done saving')
             # Cart.objects.filter(pk=cart_id).delete()

@@ -391,19 +391,24 @@ class CartViewSet(CreateModelMixin,
         serializer = ApplyDiscountSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         discount_code = serializer.validated_data['discount_code']
-
-        discount = get_object_or_404(BaseDiscount, code=discount_code)
-
         try:
+            discount = BaseDiscount.objects.get(code=discount_code)
             if not discount.ensure_availability():
                 raise ValidationError(_("Discount is not available at the moment."))
+            total_price = CartSerializer(data=cart)
+            total_price = total_price.get_total_price(cart)
+            print('total_price', total_price)
 
+            if total_price < discount.limit_price:
+                raise ValidationError(_("Total price is below the discount limit."))
             cart.discount = discount
             cart.save()
 
             return Response({'message': 'Discount applied successfully.'}, status=status.HTTP_200_OK)
         except ValidationError as e:
             return Response({'error': e.detail}, status=status.HTTP_400_BAD_REQUEST)
+        except BaseDiscount.DoesNotExist:
+            return Response({'error': _('Discount Code Not Found')}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class CartItemViewSet(ModelViewSet):
@@ -474,7 +479,10 @@ class OrderViewSet(ModelViewSet):
         return [IsAuthenticated()]
 
     def create(self, request, *args, **kwargs):
-        serializer = CreateOrderSerializer(data=request.data, context={'user_id': self.request.user.id})
+        try:
+            serializer = CreateOrderSerializer(data=request.data, context={'user_id': self.request.user.id})
+        except serializer.ValidationError :
+            return Response(_('Item deleted from your cart because limit inventory'), status=status.HTTP_400_BAD_REQUEST)
         serializer.is_valid(raise_exception=True)
         order = serializer.save()
         serializer = OrderSerializer(order)
@@ -660,7 +668,7 @@ class VerifyAPIView(APIView):
     """
     serializer_class = VerifySerializer
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs): # pragma: no cover
         client = Client(settings.ZP_API)
 
         MERCHANT = settings.MERCHANT
@@ -674,23 +682,31 @@ class VerifyAPIView(APIView):
         result = client.service.PaymentVerification(MERCHANT, Authority, amount)
         print(result)
         if result.Status == 100:
-            transaction.receipt_number = str(result.RefID)  # pragma: no cover
-            transaction.Authority = Authority  # pragma: no cover
-            transaction.payment_status = 'C'  # pragma: no cover
-            customer = transaction.customer  # pragma: no cover
-            order.order_status = 'P'  # pragma: no cover
-            order.save()  # pragma: no cover
-            cart = Cart.objects.filter(customer=customer.id)  # pragma: no cover
-            cart.delete()  # pragma: no cover
-            transaction.save()  # pragma: no cover
+            transaction.receipt_number = str(result.RefID)
+            transaction.Authority = Authority
+            transaction.payment_status = 'C'
+            customer = transaction.customer
+            order.order_status = 'P'
+            order.save()
+            cart = Cart.objects.filter(customer=customer.id)
+            cart.delete()
+            transaction.save()
             return Response({'details': 'Transaction success. RefID: ' + str(result.RefID)},
-                            status=200)  # pragma: no cover
+                            status=200)
         elif result.Status == 101:
             return Response({'details': 'Transaction submitted'}, status=200)
         else:
-            transaction.payment_status = 'F'  # pragma: no cover
-            order.order_status = 'F'  # pragma: no cover
-            order.save()  # pragma: no cover
-            transaction.save()  # pragma: no cover
+            transaction.payment_status = 'F'
+            order.order_status = 'F'
+            order.save()
+            transaction.save()
+            new_inventories = []
+            order_items = OrderItem.objects.filter(order_id=order.id)
+            for items in order_items:
+                product = items.product
+                quantity = items.quantity
+                product.inventory += quantity
+                new_inventories.append(product)
+            Product.objects.bulk_update(new_inventories, ['inventory'])
             return Response({'details': 'Transaction failed . error code : ' + str(result.Status)},
-                            status=200)  # pragma: no cover
+                            status=200)
