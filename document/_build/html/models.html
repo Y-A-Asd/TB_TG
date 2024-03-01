@@ -77,6 +77,9 @@
 <li class="toctree-l3"><a class="reference internal" href="#collection">Collection</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#product">Product</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#productimage">ProductImage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#feature-key">Feature Key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#feature-value">Feature Value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#main-feature">Main Feature</a></li>
 </ul>
 </li>
 </ul>
@@ -113,30 +116,30 @@
 <h2>Blog App<a class="headerlink" href="#blog-app" title="Link to this heading"></a></h2>
 <section id="blog">
 <h3>Blog<a class="headerlink" href="#blog" title="Link to this heading"></a></h3>
-<p>The <cite>Blog</cite> model represents a blog post in the system.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Blog</span></code> model represents a blog post in the system.</p>
 <ul class="simple">
 <li><p><strong>Fields</strong>:</p>
 <ul>
-<li><p><cite>title</cite>: Title of the blog post.</p></li>
-<li><p><cite>body</cite>: Body content of the blog post.</p></li>
-<li><p><cite>thumbnail</cite>: Image thumbnail for the blog post.</p></li>
-<li><p><cite>views</cite>: Number of views the blog post has.</p></li>
-<li><p><cite>author</cite>: Author of the blog post.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">title</span></code>: Title of the blog post.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">body</span></code>: Body content of the blog post.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">thumbnail</span></code>: Image thumbnail for the blog post.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">views</span></code>: Number of views the blog post has.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">author</span></code>: Author of the blog post.</p></li>
 </ul>
 </li>
 </ul>
 </section>
 <section id="blogcomment">
 <h3>BlogComment<a class="headerlink" href="#blogcomment" title="Link to this heading"></a></h3>
-<p>The <cite>BlogComment</cite> model represents a comment on a blog post.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">BlogComment</span></code> model represents a comment on a blog post.</p>
 <ul class="simple">
 <li><p><strong>Fields</strong>:</p>
 <ul>
-<li><p><cite>customer</cite>: The customer who posted the comment.</p></li>
-<li><p><cite>blog</cite>: The blog post the comment is associated with.</p></li>
-<li><p><cite>subject</cite>: Subject of the comment.</p></li>
-<li><p><cite>message</cite>: Content of the comment.</p></li>
-<li><p><cite>active</cite>: Boolean field indicating whether the comment is active or not.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">customer</span></code>: The customer who posted the comment.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">blog</span></code>: The blog post the comment is associated with.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">subject</span></code>: Subject of the comment.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">message</span></code>: Content of the comment.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">active</span></code>: Boolean field indicating whether the comment is active or not.</p></li>
 </ul>
 </li>
 </ul>
@@ -146,18 +149,18 @@
 <h2>Discount App<a class="headerlink" href="#discount-app" title="Link to this heading"></a></h2>
 <section id="basediscount">
 <h3>BaseDiscount<a class="headerlink" href="#basediscount" title="Link to this heading"></a></h3>
-<p>The <cite>BaseDiscount</cite> model represents a base discount available in the system.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">BaseDiscount</span></code> model represents a base discount available in the system.</p>
 <ul class="simple">
 <li><p><strong>Fields</strong>:</p>
 <ul>
-<li><p><cite>discount</cite>: The discount value.</p></li>
-<li><p><cite>active</cite>: Boolean field indicating whether the discount is active or not.</p></li>
-<li><p><cite>code</cite>: Discount code (optional).</p></li>
-<li><p><cite>valid_from</cite>: Start date of the discount validity period.</p></li>
-<li><p><cite>valid_to</cite>: End date of the discount validity period.</p></li>
-<li><p><cite>mode</cite>: The mode of the discount.</p></li>
-<li><p><cite>limit_price</cite>: The minimum price required for the discount to apply.</p></li>
-<li><p><cite>max_price</cite>: The maximum price for which the discount is applicable.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">discount</span></code>: The discount value.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">active</span></code>: Boolean field indicating whether the discount is active or not.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">code</span></code>: Discount code (optional).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">valid_from</span></code>: Start date of the discount validity period.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">valid_to</span></code>: End date of the discount validity period.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mode</span></code>: The mode of the discount.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">limit_price</span></code>: The minimum price required for the discount to apply.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">max_price</span></code>: The maximum price for which the discount is applicable.</p></li>
 </ul>
 </li>
 </ul>
@@ -167,46 +170,46 @@
 <h2>Core App<a class="headerlink" href="#core-app" title="Link to this heading"></a></h2>
 <section id="basemodel">
 <h3>BaseModel<a class="headerlink" href="#basemodel" title="Link to this heading"></a></h3>
-<p>The <cite>BaseModel</cite> class serves as the base model for other models in the system, providing common fields and functionality such as created_at, updated_at, and logical deletion.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">BaseModel</span></code> class serves as the base model for other models in the system, providing common fields and functionality such as created_at, updated_at, and logical deletion.</p>
 <ul class="simple">
 <li><p><strong>Fields</strong>:</p>
 <ul>
-<li><p><cite>created_at</cite>: The datetime when the object was created.</p></li>
-<li><p><cite>updated_at</cite>: The datetime when the object was last updated.</p></li>
-<li><p><cite>deleted_at</cite>: The datetime when the object was soft-deleted.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">created_at</span></code>: The datetime when the object was created.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">updated_at</span></code>: The datetime when the object was last updated.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">deleted_at</span></code>: The datetime when the object was soft-deleted.</p></li>
 </ul>
 </li>
 </ul>
 </section>
 <section id="auditlog">
 <h3>AuditLog<a class="headerlink" href="#auditlog" title="Link to this heading"></a></h3>
-<p>The <cite>AuditLog</cite> model records changes made to other models in the system.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">AuditLog</span></code> model records changes made to other models in the system.</p>
 <ul class="simple">
 <li><p><strong>Fields</strong>:</p>
 <ul>
-<li><p><cite>user</cite>: The user who performed the action.</p></li>
-<li><p><cite>action</cite>: The type of action performed (CREATE, UPDATE, DELETE).</p></li>
-<li><p><cite>timestamp</cite>: The datetime when the action was performed.</p></li>
-<li><p><cite>table_name</cite>: The name of the table/model being modified.</p></li>
-<li><p><cite>row_id</cite>: The ID of the modified row.</p></li>
-<li><p><cite>old_value</cite>: The previous value of the modified row.</p></li>
-<li><p><cite>changes</cite>: The changes made to the row.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">user</span></code>: The user who performed the action.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">action</span></code>: The type of action performed (CREATE, UPDATE, DELETE).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">timestamp</span></code>: The datetime when the action was performed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">table_name</span></code>: The name of the table/model being modified.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">row_id</span></code>: The ID of the modified row.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">old_value</span></code>: The previous value of the modified row.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">changes</span></code>: The changes made to the row.</p></li>
 </ul>
 </li>
 </ul>
 </section>
 <section id="user">
 <h3>User<a class="headerlink" href="#user" title="Link to this heading"></a></h3>
-<p>The <cite>User</cite> model represents a user in the system.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">User</span></code> model represents a user in the system.</p>
 <ul class="simple">
 <li><p><strong>Fields</strong>:</p>
 <ul>
-<li><p><cite>phone_number</cite>: The user’s phone number.</p></li>
-<li><p><cite>email</cite>: The user’s email address.</p></li>
-<li><p><cite>password</cite>: The user’s password (hashed).</p></li>
-<li><p><cite>is_active</cite>: Boolean field indicating whether the user is active.</p></li>
-<li><p><cite>is_staff</cite>: Boolean field indicating whether the user is a staff member.</p></li>
-<li><p><cite>last_login</cite>: The datetime when the user last logged in.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">phone_number</span></code>: The user’s phone number.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">email</span></code>: The user’s email address.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">password</span></code>: The user’s password (hashed).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">is_active</span></code>: Boolean field indicating whether the user is active.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">is_staff</span></code>: Boolean field indicating whether the user is a staff member.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">last_login</span></code>: The datetime when the user last logged in.</p></li>
 </ul>
 </li>
 </ul>
@@ -216,123 +219,123 @@
 <h2>Shop App<a class="headerlink" href="#shop-app" title="Link to this heading"></a></h2>
 <section id="customer">
 <h3>Customer<a class="headerlink" href="#customer" title="Link to this heading"></a></h3>
-<p>The <cite>Customer</cite> model represents a customer in the system.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Customer</span></code> model represents a customer in the system.</p>
 <ul class="simple">
 <li><p><strong>Fields</strong>:</p>
 <ul>
-<li><p><cite>first_name</cite>: The customer’s first name.</p></li>
-<li><p><cite>last_name</cite>: The customer’s last name.</p></li>
-<li><p><cite>birth_date</cite>: The customer’s birth date.</p></li>
-<li><p><cite>membership</cite>: The customer’s membership status.</p></li>
-<li><p><cite>user</cite>: The user associated with the customer.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">first_name</span></code>: The customer’s first name.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">last_name</span></code>: The customer’s last name.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">birth_date</span></code>: The customer’s birth date.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">membership</span></code>: The customer’s membership status.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">user</span></code>: The user associated with the customer.</p></li>
 </ul>
 </li>
 </ul>
 </section>
 <section id="cart">
 <h3>Cart<a class="headerlink" href="#cart" title="Link to this heading"></a></h3>
-<p>The <cite>Cart</cite> model represents a shopping cart in the system.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Cart</span></code> model represents a shopping cart in the system.</p>
 <ul class="simple">
 <li><p><strong>Fields</strong>:</p>
 <ul>
-<li><p><cite>customer</cite>: The customer who owns the cart.</p></li>
-<li><p><cite>discount</cite>: The discount applied to the cart.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">customer</span></code>: The customer who owns the cart.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">discount</span></code>: The discount applied to the cart.</p></li>
 </ul>
 </li>
 </ul>
 </section>
 <section id="cartitem">
 <h3>CartItem<a class="headerlink" href="#cartitem" title="Link to this heading"></a></h3>
-<p>The <cite>CartItem</cite> model represents an item in a shopping cart.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">CartItem</span></code> model represents an item in a shopping cart.</p>
 <ul class="simple">
 <li><p><strong>Fields</strong>:</p>
 <ul>
-<li><p><cite>cart</cite>: The cart to which the item belongs.</p></li>
-<li><p><cite>product</cite>: The product being added to the cart.</p></li>
-<li><p><cite>quantity</cite>: The quantity of the product in the cart.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cart</span></code>: The cart to which the item belongs.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">product</span></code>: The product being added to the cart.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">quantity</span></code>: The quantity of the product in the cart.</p></li>
 </ul>
 </li>
 </ul>
 </section>
 <section id="address">
 <h3>Address<a class="headerlink" href="#address" title="Link to this heading"></a></h3>
-<p>The <cite>Address</cite> model represents a customer’s address in the system.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Address</span></code> model represents a customer’s address in the system.</p>
 <ul class="simple">
 <li><p><strong>Fields</strong>:</p>
 <ul>
-<li><p><cite>zip_code</cite>: The postal code of the address.</p></li>
-<li><p><cite>path</cite>: The street address.</p></li>
-<li><p><cite>city</cite>: The city of the address.</p></li>
-<li><p><cite>province</cite>: The province of the address.</p></li>
-<li><p><cite>customer</cite>: The customer associated with the address.</p></li>
-<li><p><cite>default</cite>: Boolean field indicating whether the address is the default address for the customer.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">zip_code</span></code>: The postal code of the address.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">path</span></code>: The street address.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">city</span></code>: The city of the address.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">province</span></code>: The province of the address.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">customer</span></code>: The customer associated with the address.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">default</span></code>: Boolean field indicating whether the address is the default address for the customer.</p></li>
 </ul>
 </li>
 </ul>
 </section>
 <section id="order">
 <h3>Order<a class="headerlink" href="#order" title="Link to this heading"></a></h3>
-<p>The <cite>Order</cite> model represents an order placed by a customer.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Order</span></code> model represents an order placed by a customer.</p>
 <ul class="simple">
 <li><p><strong>Fields</strong>:</p>
 <ul>
-<li><p><cite>order_status</cite>: The status of the order.</p></li>
-<li><p><cite>customer</cite>: The customer who placed the order.</p></li>
-<li><p><cite>zip_code</cite>: The postal code of the order.</p></li>
-<li><p><cite>path</cite>: The street address of the order.</p></li>
-<li><p><cite>city</cite>: The city of the order.</p></li>
-<li><p><cite>province</cite>: The province of the order.</p></li>
-<li><p><cite>first_name</cite>: The first name of the customer placing the order.</p></li>
-<li><p><cite>last_name</cite>: The last name of the customer placing the order.</p></li>
-<li><p><cite>discount</cite>: The discount applied to the order.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">order_status</span></code>: The status of the order.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">customer</span></code>: The customer who placed the order.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">zip_code</span></code>: The postal code of the order.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">path</span></code>: The street address of the order.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">city</span></code>: The city of the order.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">province</span></code>: The province of the order.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">first_name</span></code>: The first name of the customer placing the order.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">last_name</span></code>: The last name of the customer placing the order.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">discount</span></code>: The discount applied to the order.</p></li>
 </ul>
 </li>
 </ul>
 </section>
 <section id="orderitem">
 <h3>OrderItem<a class="headerlink" href="#orderitem" title="Link to this heading"></a></h3>
-<p>The <cite>OrderItem</cite> model represents an item in an order.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">OrderItem</span></code> model represents an item in an order.</p>
 <ul class="simple">
 <li><p><strong>Fields</strong>:</p>
 <ul>
-<li><p><cite>order</cite>: The order to which the item belongs.</p></li>
-<li><p><cite>product</cite>: The product being ordered.</p></li>
-<li><p><cite>unit_price</cite>: The unit price of the product.</p></li>
-<li><p><cite>quantity</cite>: The quantity of the product ordered.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">order</span></code>: The order to which the item belongs.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">product</span></code>: The product being ordered.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">unit_price</span></code>: The unit price of the product.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">quantity</span></code>: The quantity of the product ordered.</p></li>
 </ul>
 </li>
 </ul>
 </section>
 <section id="review">
 <h3>Review<a class="headerlink" href="#review" title="Link to this heading"></a></h3>
-<p>The <cite>Review</cite> model represents a review left by a customer for a product.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Review</span></code> model represents a review left by a customer for a product.</p>
 <ul class="simple">
 <li><p><strong>Fields</strong>:</p>
 <ul>
-<li><p><cite>customer</cite>: The customer who left the review.</p></li>
-<li><p><cite>product</cite>: The product being reviewed.</p></li>
-<li><p><cite>rating</cite>: The rating given by the customer.</p></li>
-<li><p><cite>title</cite>: The title of the review.</p></li>
-<li><p><cite>description</cite>: The description of the review.</p></li>
-<li><p><cite>parent_review</cite>: The parent review if this is a reply to another review.</p></li>
-<li><p><cite>active</cite>: Boolean field indicating whether the review is active.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">customer</span></code>: The customer who left the review.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">product</span></code>: The product being reviewed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rating</span></code>: The rating given by the customer.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">title</span></code>: The title of the review.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">description</span></code>: The description of the review.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">parent_review</span></code>: The parent review if this is a reply to another review.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">active</span></code>: Boolean field indicating whether the review is active.</p></li>
 </ul>
 </li>
 </ul>
 </section>
 <section id="transaction">
 <h3>Transaction<a class="headerlink" href="#transaction" title="Link to this heading"></a></h3>
-<p>The <cite>Transaction</cite> model represents a transaction associated with an order.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Transaction</span></code> model represents a transaction associated with an order.</p>
 <ul class="simple">
 <li><p><strong>Fields</strong>:</p>
 <ul>
-<li><p><cite>order</cite>: The order associated with the transaction.</p></li>
-<li><p><cite>payment_status</cite>: The payment status of the transaction.</p></li>
-<li><p><cite>total_price</cite>: The total price of the transaction.</p></li>
-<li><p><cite>customer</cite>: The customer associated with the transaction.</p></li>
-<li><p><cite>receipt_number</cite>: The receipt number of the transaction.</p></li>
-<li><p><cite>phone_number</cite>: The phone number associated with the transaction.</p></li>
-<li><p><cite>Authority</cite>: The authority of the transaction.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">order</span></code>: The order associated with the transaction.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">payment_status</span></code>: The payment status of the transaction.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">total_price</span></code>: The total price of the transaction.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">customer</span></code>: The customer associated with the transaction.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">receipt_number</span></code>: The receipt number of the transaction.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">phone_number</span></code>: The phone number associated with the transaction.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Authority</span></code>: The authority of the transaction.</p></li>
 </ul>
 </li>
 </ul>
@@ -343,38 +346,38 @@
 <ul class="simple">
 <li><p><strong>Fields</strong>:</p>
 <ul>
-<li><p><cite>title</cite>: The title of the promotion.</p></li>
-<li><p><cite>description</cite>: The description of the promotion.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">title</span></code>: The title of the promotion.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">description</span></code>: The description of the promotion.</p></li>
 </ul>
 </li>
 </ul>
 </section>
 <section id="collection">
 <h3>Collection<a class="headerlink" href="#collection" title="Link to this heading"></a></h3>
-<p>The <cite>Collection</cite> model represents a collection of products in the system.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Collection</span></code> model represents a collection of products in the system.</p>
 <ul class="simple">
 <li><p><strong>Fields</strong>:</p>
 <ul>
-<li><p><cite>title</cite>: The title of the collection.</p></li>
-<li><p><cite>parent</cite>: The parent collection if this is a subcollection.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">title</span></code>: The title of the collection.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">parent</span></code>: The parent collection if this is a subcollection.</p></li>
 </ul>
 </li>
 </ul>
 </section>
 <section id="product">
 <h3>Product<a class="headerlink" href="#product" title="Link to this heading"></a></h3>
-<p>The <cite>Product</cite> model represents a product in the system.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Product</span></code> model represents a product in the system.</p>
 <ul class="simple">
 <li><p><strong>Fields</strong>:</p>
 <ul>
-<li><p><cite>title</cite>: The title of the product.</p></li>
-<li><p><cite>description</cite>: The description of the product.</p></li>
-<li><p><cite>unit_price</cite>: The unit price of the product.</p></li>
-<li><p><cite>inventory</cite>: The inventory count of the product.</p></li>
-<li><p><cite>collection</cite>: The collection to which the product belongs.</p></li>
-<li><p><cite>promotions</cite>: The promotions associated with the product.</p></li>
-<li><p><cite>discount</cite>: The discount applied to the product.</p></li>
-<li><p><cite>secondhand</cite>: Boolean field indicating whether the product is secondhand.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">title</span></code>: The title of the product.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">description</span></code>: The description of the product.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">unit_price</span></code>: The unit price of the product.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">inventory</span></code>: The inventory count of the product.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">collection</span></code>: The collection to which the product belongs.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">promotions</span></code>: The promotions associated with the product.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">discount</span></code>: The discount applied to the product.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">secondhand</span></code>: Boolean field indicating whether the product is secondhand.</p></li>
 </ul>
 </li>
 </ul>
@@ -385,11 +388,74 @@
 <ul class="simple">
 <li><p><strong>Fields</strong>:</p>
 <ul>
-<li><p><cite>product</cite>: The product associated with the image.</p></li>
-<li><p><cite>image</cite>: The image file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">product</span></code>: The product associated with the image.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">image</span></code>: The image file.</p></li>
 </ul>
 </li>
 </ul>
+</section>
+<section id="feature-key">
+<h3>Feature Key<a class="headerlink" href="#feature-key" title="Link to this heading"></a></h3>
+<p>Model representing a feature key.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">key</span></code> (CharField): The key of the feature.</p></li>
+</ul>
+</dd>
+<dt>Meta:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">verbose_name</span></code>: “Feature Key”</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">verbose_name_plural</span></code>: “Feature Keys”</p></li>
+</ul>
+</dd>
+<dt>Methods:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">__repr__</span></code>: Return a string representation of the feature key.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">__str__</span></code>: Return a string representation of the feature key.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="feature-value">
+<h3>Feature Value<a class="headerlink" href="#feature-value" title="Link to this heading"></a></h3>
+<p>Model representing a feature value.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">key</span></code> (ForeignKey): The feature key.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">value</span></code> (CharField): The value of the feature.</p></li>
+</ul>
+</dd>
+<dt>Meta:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">verbose_name</span></code>: “Feature Value”</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">verbose_name_plural</span></code>: “Feature Values”</p></li>
+</ul>
+</dd>
+<dt>Methods:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">__repr__</span></code>: Return a string representation of the feature value.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">__str__</span></code>: Return a string representation of the feature value.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="main-feature">
+<h3>Main Feature<a class="headerlink" href="#main-feature" title="Link to this heading"></a></h3>
+<p>Model representing a main feature.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">product</span></code> (ForeignKey): The product associated with the main feature.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">key</span></code> (ForeignKey): The feature key.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">value</span></code> (ForeignKey): The feature value.</p></li>
+</ul>
+</dd>
+<dt>Meta:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">verbose_name</span></code>: “Main Feature”</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">verbose_name_plural</span></code>: “Main Features”</p></li>
+</ul>
+</dd>
+<dt>Methods:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">__repr__</span></code>: Return a string representation of the main feature.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">__str__</span></code>: Return a string representation of the main feature.</p></li>
+</ul>
+</dd>
+</dl>
 </section>
 </section>
 </section>

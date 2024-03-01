@@ -33,7 +33,7 @@ class Blog(TranslatableModel, BaseModel):
 
 
 class BlogComment(BaseModel):
-     """
+    """
     Model representing a comment on a blog post.
 
     Attributes:

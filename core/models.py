@@ -42,7 +42,7 @@ class BaseModel(models.Model):
 
 
 class AuditLog(models.Model):
-     """
+    """
     Model to record changes made to other models in the system.
 
     Attributes:

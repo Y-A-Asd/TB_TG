@@ -179,7 +179,7 @@ class ProductImage(BaseModel):
 
 
 class Customer(BaseModel):
-     """
+    """
     Model representing a customer.
 
     Attributes:
@@ -215,7 +215,7 @@ class Customer(BaseModel):
 
 
 class Cart(BaseModel):
-     """
+    """
     Model representing a shopping cart.
 
     Attributes:
@@ -250,7 +250,7 @@ class CartItem(models.Model):
 
 
 class Address(BaseModel):
-     """
+    """
     Model representing a customer's address.
 
     Attributes:
@@ -283,7 +283,7 @@ class Address(BaseModel):
 
 
 class Order(BaseModel):
-     """
+    """
     Model representing an order.
 
     Attributes:
@@ -420,7 +420,7 @@ class Review(BaseModel):
 
 
 class Transaction(BaseModel):
-     """
+    """
     Model representing a transaction.
 
     Attributes:

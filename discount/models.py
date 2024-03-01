@@ -8,7 +8,7 @@ from core.models import BaseModel
 
 
 class BaseDiscount(BaseModel):
-     """
+    """
     Model representing a base discount.
 
     Attributes:
