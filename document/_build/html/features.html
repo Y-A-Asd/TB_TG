@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Features of Django Online Shop TB_TG &mdash; TB_TG 1.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/fonts.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=8d563738"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="installation.html" />
+    <link rel="prev" title="Introduction to Django Online Shop TB_TG" href="introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            TB_TG
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Django Online Shop TB_TG</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Features of Django Online Shop TB_TG</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#user-authentication-jwt">User Authentication (JWT)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#product-dynamic-filtering">Product Dynamic Filtering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#shopping-cart">Shopping Cart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#checkout-with-zarinpal">Checkout with Zarinpal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#blog-and-comments">Blog and Comments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#admin-panel">Admin Panel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#audit-log">Audit Log</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#product-reviews">Product Reviews</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#translation">Translation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dynamic-sitesettings-django-solo">Dynamic SiteSettings (Django Solo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#performance-testing-with-silk-and-locust">Performance Testing with Silk and Locust</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#test-coverage-90">Test Coverage 90%</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#self-relational-category-system">Self-Relational Category System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#caching-with-django-compressor-and-redis">Caching with Django-Compressor and Redis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#api-documentation-with-swagger">API Documentation with Swagger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#celery-tasks-flower-monitoring">Celery Tasks &amp; Flower Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#selenium-test-features">Selenium Test Features</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">TB_TG</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Features of Django Online Shop TB_TG</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/features.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="features-of-django-online-shop-tb-tg">
+<h1>Features of Django Online Shop TB_TG<a class="headerlink" href="#features-of-django-online-shop-tb-tg" title="Link to this heading"></a></h1>
+<section id="user-authentication-jwt">
+<h2>User Authentication (JWT)<a class="headerlink" href="#user-authentication-jwt" title="Link to this heading"></a></h2>
+<p>The Django Online Shop TB_TG provides secure user authentication using JSON Web Tokens (JWT). Users can sign up, log in, and log out securely, ensuring the protection of their accounts and personal information.</p>
+</section>
+<section id="product-dynamic-filtering">
+<h2>Product Dynamic Filtering<a class="headerlink" href="#product-dynamic-filtering" title="Link to this heading"></a></h2>
+<p>Easily find products on the Django Online Shop TB_TG using dynamic filtering options. Users can filter products based on various criteria such as category, price range, etc., enabling them to quickly find the products they’re interested in purchasing.</p>
+</section>
+<section id="shopping-cart">
+<h2>Shopping Cart<a class="headerlink" href="#shopping-cart" title="Link to this heading"></a></h2>
+<p>The shopping cart feature allows users to add products to their cart, update quantities, and remove items as needed. This provides a seamless shopping experience, allowing users to easily manage their selections before proceeding to checkout.</p>
+</section>
+<section id="checkout-with-zarinpal">
+<h2>Checkout with Zarinpal<a class="headerlink" href="#checkout-with-zarinpal" title="Link to this heading"></a></h2>
+<p>Enable users to securely process payments using the Zarinpal payment gateway. Users can proceed to checkout, enter shipping and payment details, and securely complete their purchases, ensuring a smooth and secure transaction process.</p>
+</section>
+<section id="blog-and-comments">
+<h2>Blog and Comments<a class="headerlink" href="#blog-and-comments" title="Link to this heading"></a></h2>
+<p>Engage with the community through the blog feature on the Django Online Shop TB_TG. Users can read articles, leave comments, and interact with other users, fostering community engagement and interaction.</p>
+</section>
+<section id="admin-panel">
+<h2>Admin Panel<a class="headerlink" href="#admin-panel" title="Link to this heading"></a></h2>
+<p>Administrators have access to a comprehensive admin dashboard, allowing them to efficiently manage products, orders, users, and other site content. The admin panel provides administrators with the tools they need to effectively oversee and maintain the online shop.</p>
+</section>
+<section id="audit-log">
+<h2>Audit Log<a class="headerlink" href="#audit-log" title="Link to this heading"></a></h2>
+<p>Keep track of important actions and changes made within the system with the audit log feature. This provides transparency and accountability, allowing administrators to monitor and review activity within the online shop.</p>
+</section>
+<section id="product-reviews">
+<h2>Product Reviews<a class="headerlink" href="#product-reviews" title="Link to this heading"></a></h2>
+<p>Users can leave reviews and ratings for products on the Django Online Shop TB_TG, helping other users make informed purchasing decisions. Product reviews provide valuable feedback and insights, enhancing the shopping experience for all users.</p>
+</section>
+<section id="translation">
+<h2>Translation<a class="headerlink" href="#translation" title="Link to this heading"></a></h2>
+<p>Implement multi-language support to ensure the website is accessible to users from different linguistic backgrounds. Multi-language support enhances user experience and inclusivity, allowing users to access the online shop in their preferred language.</p>
+</section>
+<section id="dynamic-sitesettings-django-solo">
+<h2>Dynamic SiteSettings (Django Solo)<a class="headerlink" href="#dynamic-sitesettings-django-solo" title="Link to this heading"></a></h2>
+<p>Enable easy site customization for administrators with multi-language support for accessibility. Dynamic SiteSettings allow administrators to customize various aspects of the site, ensuring it meets their specific needs and preferences.</p>
+</section>
+<section id="performance-testing-with-silk-and-locust">
+<h2>Performance Testing with Silk and Locust<a class="headerlink" href="#performance-testing-with-silk-and-locust" title="Link to this heading"></a></h2>
+<p>Utilize Silk and Locust for comprehensive performance testing to assess system behavior under varying loads. Performance testing ensures application scalability and reliability, providing users with a smooth and responsive experience.</p>
+</section>
+<section id="test-coverage-90">
+<h2>Test Coverage 90%<a class="headerlink" href="#test-coverage-90" title="Link to this heading"></a></h2>
+<p>Aim for 90% test coverage using pytest and coverage to improve code quality and reliability. Comprehensive test coverage helps identify and address issues early in the development process, ensuring a stable and reliable application.</p>
+</section>
+<section id="self-relational-category-system">
+<h2>Self-Relational Category System<a class="headerlink" href="#self-relational-category-system" title="Link to this heading"></a></h2>
+<p>Organize products hierarchically with a self-relational category system, simplifying navigation and management for users and administrators. The category system enhances shop scalability and organization, providing a structured and intuitive browsing experience.</p>
+</section>
+<section id="caching-with-django-compressor-and-redis">
+<h2>Caching with Django-Compressor and Redis<a class="headerlink" href="#caching-with-django-compressor-and-redis" title="Link to this heading"></a></h2>
+<p>Optimize performance using Django-Compressor for CSS and JavaScript caching, and Redis cache for efficient view caching. Caching improves response times and reduces server load, ensuring a fast and responsive user experience.</p>
+</section>
+<section id="api-documentation-with-swagger">
+<h2>API Documentation with Swagger<a class="headerlink" href="#api-documentation-with-swagger" title="Link to this heading"></a></h2>
+<p>Utilize Swagger for API documentation by configuring an endpoint with /schema_view/ to render Swagger UI. API documentation enhances usability and accessibility, providing developers with the information they need to integrate with the online shop.</p>
+</section>
+<section id="celery-tasks-flower-monitoring">
+<h2>Celery Tasks &amp; Flower Monitoring<a class="headerlink" href="#celery-tasks-flower-monitoring" title="Link to this heading"></a></h2>
+<p>Schedule tasks and monitor background processes with Celery Tasks and Flower Monitoring. Celery Tasks automate various processes within the online shop, while Flower Monitoring provides administrators with insights into task execution and performance.</p>
+</section>
+<section id="selenium-test-features">
+<h2>Selenium Test Features<a class="headerlink" href="#selenium-test-features" title="Link to this heading"></a></h2>
+<p>Add Selenium tests for each feature to ensure functionality and user experience across the application. Selenium tests automate browser interactions, allowing for comprehensive testing of the online shop’s features and functionalities.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="introduction.html" class="btn btn-neutral float-left" title="Introduction to Django Online Shop TB_TG" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Yousof-A-Asadi.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

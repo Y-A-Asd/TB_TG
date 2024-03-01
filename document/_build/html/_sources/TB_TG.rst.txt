@@ -1,0 +1,53 @@
+TB\_TG package
+==============
+
+Submodules
+----------
+
+TB\_TG.asgi module
+------------------
+
+.. automodule:: TB_TG.asgi
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+TB\_TG.my\_celery module
+------------------------
+
+.. automodule:: TB_TG.my_celery
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+TB\_TG.translation\_conf module
+-------------------------------
+
+.. automodule:: TB_TG.translation_conf
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+TB\_TG.urls module
+------------------
+
+.. automodule:: TB_TG.urls
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+TB\_TG.wsgi module
+------------------
+
+.. automodule:: TB_TG.wsgi
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: TB_TG
+   :members:
+   :undoc-members:
+   :show-inheritance:

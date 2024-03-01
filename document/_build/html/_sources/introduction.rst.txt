@@ -1,0 +1,35 @@
+Introduction to Django Online Shop TB_TG
+=========================================
+
+Welcome to the documentation for the Django Online Shop TB_TG! This documentation aims to provide you with comprehensive information on how to install, configure, and use our full-stack online shop built with Django, JavaScript, HTML, and CSS.
+
+Purpose
+-------
+
+The Django Online Shop TB_TG is designed to provide users with a robust e-commerce platform that includes various features to enhance the shopping experience for both customers and administrators.
+
+Key Features
+------------
+
+Below are some of the key features offered by the Django Online Shop TB_TG:
+
+- **User Authentication (JWT):** Secure sign-up, log-in, and log-out functionalities using JSON Web Tokens (JWT).
+- **Product Dynamic Filtering:** Easily find products based on various criteria such as category, price range, etc.
+- **Shopping Cart:** Seamless shopping experience with the ability to add, update, and remove items from the cart.
+- **Checkout with Zarinpal:** Secure payment processing using the Zarinpal payment gateway.
+- **Blog and Comments:** Engage with the community through a blog feature with comments.
+- **Admin Panel:** Comprehensive dashboard for administrators to manage products, orders, users, and more.
+- **Audit Log:** Keep track of important actions and changes within the system.
+- **Product Reviews:** Allow users to leave reviews and ratings for products.
+- **Translation:** Multi-language support for improved accessibility.
+- **Dynamic SiteSettings (Django Solo):** Easy site customization with multi-language support.
+- **Performance Testing with Silk and Locust:** Ensure scalability and reliability through performance testing.
+- **Test Coverage 90%:** Improve code quality and reliability with extensive test coverage.
+- **Self-Relational Category System:** Hierarchical organization of products for enhanced navigation.
+- **Caching with Django-Compressor and Redis:** Optimize performance with efficient caching.
+- **API Documentation with Swagger:** User-friendly API documentation for developers.
+- **Celery Tasks & Flower Monitoring:** Scheduled tasks and monitoring for background processes.
+- **Selenium Test Features:** Automated tests to ensure functionality and user experience.
+
+We hope this documentation will help you get started with the Django Online Shop TB_TG and make the most out of its features. If you have any questions or need further assistance, feel free to reach out to us.
+

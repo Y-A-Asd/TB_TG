@@ -1,0 +1,61 @@
+discount package
+================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   discount.migrations
+
+Submodules
+----------
+
+discount.admin module
+---------------------
+
+.. automodule:: discount.admin
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+discount.apps module
+--------------------
+
+.. automodule:: discount.apps
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+discount.models module
+----------------------
+
+.. automodule:: discount.models
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+discount.tests module
+---------------------
+
+.. automodule:: discount.tests
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+discount.views module
+---------------------
+
+.. automodule:: discount.views
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: discount
+   :members:
+   :undoc-members:
+   :show-inheritance:

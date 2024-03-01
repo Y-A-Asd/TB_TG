@@ -1,0 +1,21 @@
+tags.templatetags package
+=========================
+
+Submodules
+----------
+
+tags.templatetags.i18n\_switcher module
+---------------------------------------
+
+.. automodule:: tags.templatetags.i18n_switcher
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: tags.templatetags
+   :members:
+   :undoc-members:
+   :show-inheritance:

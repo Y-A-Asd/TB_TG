@@ -1,0 +1,62 @@
+tags package
+============
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   tags.migrations
+   tags.templatetags
+
+Submodules
+----------
+
+tags.admin module
+-----------------
+
+.. automodule:: tags.admin
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+tags.apps module
+----------------
+
+.. automodule:: tags.apps
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+tags.models module
+------------------
+
+.. automodule:: tags.models
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+tags.tests module
+-----------------
+
+.. automodule:: tags.tests
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+tags.views module
+-----------------
+
+.. automodule:: tags.views
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: tags
+   :members:
+   :undoc-members:
+   :show-inheritance:

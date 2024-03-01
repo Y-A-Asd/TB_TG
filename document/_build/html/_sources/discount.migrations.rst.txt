@@ -1,0 +1,37 @@
+discount.migrations package
+===========================
+
+Submodules
+----------
+
+discount.migrations.0001\_initial module
+----------------------------------------
+
+.. automodule:: discount.migrations.0001_initial
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+discount.migrations.0002\_delete\_usagecount module
+---------------------------------------------------
+
+.. automodule:: discount.migrations.0002_delete_usagecount
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+discount.migrations.0003\_basediscount\_limit\_price\_basediscount\_max\_price module
+-------------------------------------------------------------------------------------
+
+.. automodule:: discount.migrations.0003_basediscount_limit_price_basediscount_max_price
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: discount.migrations
+   :members:
+   :undoc-members:
+   :show-inheritance:

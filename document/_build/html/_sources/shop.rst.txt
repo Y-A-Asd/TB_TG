@@ -1,0 +1,117 @@
+shop package
+============
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   shop.migrations
+
+Submodules
+----------
+
+shop.admin module
+-----------------
+
+.. automodule:: shop.admin
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+shop.apps module
+----------------
+
+.. automodule:: shop.apps
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+shop.filters module
+-------------------
+
+.. automodule:: shop.filters
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+shop.models module
+------------------
+
+.. automodule:: shop.models
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+shop.pagination module
+----------------------
+
+.. automodule:: shop.pagination
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+shop.permissions module
+-----------------------
+
+.. automodule:: shop.permissions
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+shop.reports module
+-------------------
+
+.. automodule:: shop.reports
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+shop.serializers module
+-----------------------
+
+.. automodule:: shop.serializers
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+shop.signals module
+-------------------
+
+.. automodule:: shop.signals
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+shop.urls module
+----------------
+
+.. automodule:: shop.urls
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+shop.validator module
+---------------------
+
+.. automodule:: shop.validator
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+shop.views module
+-----------------
+
+.. automodule:: shop.views
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: shop
+   :members:
+   :undoc-members:
+   :show-inheritance:
