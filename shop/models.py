@@ -19,6 +19,13 @@ admin.site.site_title = _('Site Management')
 
 
 class Promotion(TranslatableModel, BaseModel):
+    """
+    Model representing a promotion.
+
+    Attributes:
+        title (CharField): The title of the promotion.
+        description (CharField, optional): The description of the promotion.
+    """
     translations: TranslatedFields = TranslatedFields(
         title=models.CharField(_('Title'), max_length=255),
         description=models.CharField(_("Description"), max_length=500, null=True, blank=True)
@@ -49,6 +56,13 @@ class Promotion(TranslatableModel, BaseModel):
 
 
 class Collection(TranslatableModel, BaseModel):
+    """
+    Model representing a collection of products.
+
+    Attributes:
+        title (CharField): The title of the collection.
+        parent (ForeignKey, optional): The parent collection if this is a sub-collection.
+    """
     translations = TranslatedFields(
         title=models.CharField(_('Title'), max_length=255)
     )
@@ -79,6 +93,20 @@ class Collection(TranslatableModel, BaseModel):
 
 
 class Product(TranslatableModel, BaseModel):
+    """
+    Model representing a product.
+
+    Attributes:
+        title (CharField): The title of the product.
+        description (TextField, optional): The description of the product.
+        unit_price (DecimalField): The unit price of the product.
+        inventory (IntegerField): The inventory count of the product.
+        min_inventory (IntegerField, optional): The minimum inventory threshold.
+        collection (ForeignKey, optional): The collection to which the product belongs.
+        promotions (ForeignKey, optional): The promotions associated with the product.
+        discount (ForeignKey, optional): The discount associated with the product.
+        secondhand (BooleanField): Indicates whether the product is secondhand.
+    """
     translations = TranslatedFields(
         title=models.CharField(_("Title"), max_length=255),
         slug=models.SlugField(_("Slug"), null=True, blank=True),
@@ -139,11 +167,28 @@ class Product(TranslatableModel, BaseModel):
 
 
 class ProductImage(BaseModel):
+    """
+    Model representing an image of a product.
+
+    Attributes:
+        product (ForeignKey): The product to which the image belongs.
+        image (ImageField): The image file.
+    """
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
     image = models.ImageField(upload_to='shop/images', validators=[validate_file_size])
 
 
 class Customer(BaseModel):
+     """
+    Model representing a customer.
+
+    Attributes:
+        first_name (CharField): The first name of the customer.
+        last_name (CharField): The last name of the customer.
+        birth_date (DateField, optional): The birth date of the customer.
+        membership (CharField): The membership status of the customer.
+        user (OneToOneField): The user associated with the customer.
+    """
     class MembershipStatus(models.TextChoices):
         MEMBERSHIP_BRONZE = 'B', _('Bronze')
         MEMBERSHIP_SILVER = 'S', _('Silver')
@@ -170,6 +215,14 @@ class Customer(BaseModel):
 
 
 class Cart(BaseModel):
+     """
+    Model representing a shopping cart.
+
+    Attributes:
+        id (UUIDField): The unique identifier for the cart.
+        customer (ForeignKey, optional): The customer associated with the cart.
+        discount (ForeignKey, optional): The discount applied to the cart.
+    """
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     customer = models.ForeignKey(Customer, on_delete=models.PROTECT, verbose_name=_("Customer"), null=True, blank=True)
     discount = models.ForeignKey(BaseDiscount, on_delete=models.CASCADE, verbose_name=_("Discount"),
@@ -177,6 +230,14 @@ class Cart(BaseModel):
 
 
 class CartItem(models.Model):
+    """
+    Model representing an item in a shopping cart.
+
+    Attributes:
+        cart (ForeignKey): The cart to which the item belongs.
+        product (ForeignKey): The product being added to the cart.
+        quantity (PositiveSmallIntegerField): The quantity of the product in the cart.
+    """
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, verbose_name=_("Cart"), related_name='items')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name=_("Product"))
     # unit_price = models.DecimalField(_('Price'),max_digits=15, decimal_places=2, null=True, blank=True)
@@ -189,6 +250,17 @@ class CartItem(models.Model):
 
 
 class Address(BaseModel):
+     """
+    Model representing a customer's address.
+
+    Attributes:
+        zip_code (CharField): The postal code of the address.
+        path (CharField): The street address.
+        city (CharField): The city of the address.
+        province (CharField): The province of the address.
+        customer (ForeignKey): The customer associated with the address.
+        default (BooleanField): Indicates whether the address is the default address for the customer.
+    """
     zip_code = models.CharField(_("Zip Code"), max_length=10)
     path = models.CharField(_("Path"), max_length=1025)
     city = models.CharField(_("City"), max_length=255)
@@ -211,6 +283,20 @@ class Address(BaseModel):
 
 
 class Order(BaseModel):
+     """
+    Model representing an order.
+
+    Attributes:
+        order_status (CharField): The status of the order.
+        customer (ForeignKey): The customer who placed the order.
+        zip_code (CharField): The postal code of the order.
+        path (CharField): The street address of the order.
+        city (CharField): The city of the order.
+        province (CharField): The province of the order.
+        first_name (CharField): The first name of the customer placing the order.
+        last_name (CharField): The last name of the customer placing the order.
+        discount (ForeignKey, optional): The discount applied to the order.
+    """
     class OrderStatus(models.TextChoices):
         ORDER_STATUS_NOT_PAID = 'N', _('Not Paid')
         ORDER_STATUS_PENDING = 'P', _('Pending')
@@ -280,6 +366,15 @@ class Order(BaseModel):
 
 
 class OrderItem(BaseModel):
+    """
+    Model representing an item in an order.
+
+    Attributes:
+        order (ForeignKey): The order to which the item belongs.
+        product (ForeignKey): The product being ordered.
+        unit_price (DecimalField): The unit price of the product.
+        quantity (PositiveSmallIntegerField): The quantity of the product ordered.
+    """
     order = models.ForeignKey(Order, on_delete=models.PROTECT, verbose_name=_("Order"), related_name='orders')
     product = models.ForeignKey(Product, on_delete=models.PROTECT, verbose_name=_("Product"), related_name='orderitems')
     unit_price = models.DecimalField(_("Unit Price"), max_digits=15, decimal_places=2,
@@ -295,6 +390,18 @@ class OrderItem(BaseModel):
 
 
 class Review(BaseModel):
+    """
+    Model representing a review.
+
+    Attributes:
+        customer (ForeignKey): The customer who left the review.
+        product (ForeignKey): The product being reviewed.
+        rating (PositiveIntegerField): The rating given by the customer.
+        title (CharField): The title of the review.
+        description (TextField): The description of the review.
+        parent_review (ForeignKey, optional): The parent review if this is a reply.
+        active (BooleanField): Indicates whether the review is active.
+    """
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, verbose_name=_("Customer"))
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews', verbose_name='Product')
     rating = models.PositiveIntegerField(_('Rating'), validators=[MinValueValidator(1), MaxValueValidator(5)])
@@ -313,6 +420,18 @@ class Review(BaseModel):
 
 
 class Transaction(BaseModel):
+     """
+    Model representing a transaction.
+
+    Attributes:
+        order (OneToOneField): The order associated with the transaction.
+        payment_status (CharField): The payment status of the transaction.
+        total_price (DecimalField): The total price of the transaction.
+        customer (ForeignKey): The customer associated with the transaction.
+        receipt_number (CharField, optional): The receipt number of the transaction.
+        phone_number (CharField): The phone number associated with the transaction.
+        Authority (CharField, optional): The authority of the transaction.
+    """
     class PaymentStatus(models.TextChoices):
         PAYMENT_STATUS_PENDING = 'P', _('Pending')
         PAYMENT_STATUS_COMPLETE = 'C', _('Complete')
@@ -378,6 +497,12 @@ class HomeBanner(BaseModel, SingletonModel):
 #         return f'{self.customer.first_name} {self.customer.last_name}'
 
 class FeatureKey(TranslatableModel):
+    """
+    Model representing a feature key.
+
+    Attributes:
+        key (CharField): The key of the feature.
+    """
     translations = TranslatedFields(
         key=models.CharField(_('Key'), max_length=50, )
     )
@@ -394,6 +519,13 @@ class FeatureKey(TranslatableModel):
 
 
 class FeatureValue(TranslatableModel):
+    """
+    Model representing a feature value.
+
+    Attributes:
+        key (ForeignKey): The feature key.
+        value (CharField): The value of the feature.
+    """
     key = models.ForeignKey(FeatureKey, on_delete=models.CASCADE, verbose_name=_('Key'), related_name='values')
     translations = TranslatedFields(
         value=models.CharField(_('Value'), max_length=50, )
@@ -411,6 +543,14 @@ class FeatureValue(TranslatableModel):
 
 
 class MainFeature(BaseModel):
+    """
+    Model representing a main feature for products.
+
+    Attributes:
+        product (ForeignKey): The product associated with the main feature.
+        key (ForeignKey): The feature key.
+        value (ForeignKey): The feature value.
+    """
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name=_('Product'))
     key = models.ForeignKey(FeatureKey, on_delete=models.DO_NOTHING, verbose_name=_('Key'))
     value = models.ForeignKey(FeatureValue, on_delete=models.DO_NOTHING, verbose_name=_('Value'))
