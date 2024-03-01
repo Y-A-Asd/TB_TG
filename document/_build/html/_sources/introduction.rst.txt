@@ -1,4 +1,4 @@
-Introduction to Django Online Shop TB_TG
+Introduction
 =========================================
 
 Welcome to the documentation for the Django Online Shop TB_TG! This documentation aims to provide you with comprehensive information on how to install, configure, and use our full-stack online shop built with Django, JavaScript, HTML, and CSS.

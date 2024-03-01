@@ -1,4 +1,4 @@
-Features of Django Online Shop TB_TG
+Features
 =====================================
 
 User Authentication (JWT)

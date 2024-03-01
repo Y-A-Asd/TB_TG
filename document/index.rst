@@ -6,10 +6,10 @@ Welcome to the TB_TG Online Shop Documentation
 ======================================================
 
 
-.. image:: https://img.shields.io/static/v1?label=License&message=WTFPL&color=blue
+.. image:: https://img.shields.io/static/v1?label=License&message=WTFPL&color=yellow
    :alt: License Badge
 
-.. image:: https://img.shields.io/badge/Python-v3.11.7-blue
+.. image:: https://img.shields.io/badge/TestCoverage-90%20%25-red
    :alt: License Badge
 
 .. image:: https://img.shields.io/badge/Django-v5.0.1-lightgreen
@@ -22,6 +22,7 @@ Welcome to the TB_TG Online Shop Documentation
    :maxdepth: 2
 
    introduction
+   features
    installation
    configuration
    models

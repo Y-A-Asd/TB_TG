@@ -6,16 +6,16 @@ Welcome to the TB_TG Online Shop Documentation
 ======================================================
 
 
-.. image:: https://img.shields.io/static/v1?label=License&message=WTFPL&color=blue
+.. image:: https://img.shields.io/static/v1?label=License&message=WTFPL&color=yellow
    :alt: License Badge
 
-.. image:: https://img.shields.io/badge/Python-v3.11.7-blue
+.. image:: https://img.shields.io/badge/TestCoverage-90%20%25-red
    :alt: License Badge
 
 .. image:: https://img.shields.io/badge/Django-v5.0.1-lightgreen
    :alt: License Badge
 
-.. image:: https://img.shields.io/badge/TestCoverage-90%20%25-red
+.. image:: https://img.shields.io/badge/Python-v3.11.7-blue
    :alt: License Badge
 
 .. toctree::
@@ -25,12 +25,15 @@ Welcome to the TB_TG Online Shop Documentation
    features
    installation
    configuration
-   usage_and_features
+   models
+   views
+   serializers
+   urls
+   templates
+   static_files
+   tests
+   deployment
    api_reference
-   admin_panel
-   testing
-   performance
-   appendix
 
 Indices and Tables
 ===================
