@@ -8,6 +8,19 @@ from core.models import BaseModel
 
 
 class BaseDiscount(BaseModel):
+     """
+    Model representing a base discount.
+
+    Attributes:
+        discount (DecimalField): The discount value.
+        active (BooleanField): Indicates whether the discount is active.
+        code (CharField, optional): The discount code.
+        valid_from (DateTimeField, optional): The start date/time of the discount validity.
+        valid_to (DateTimeField, optional): The end date/time of the discount validity.
+        mode (CharField): The mode of the discount (Direct Price, Discount Off, etc.).
+        limit_price (DecimalField, optional): The limit price for the discount.
+        max_price (DecimalField, optional): The maximum price for the discount.
+    """
     class Mode(models.TextChoices):
         DirectPrice = 'DO', _('Direct Price')
         DiscountOff = 'DP', _('Discount Off')

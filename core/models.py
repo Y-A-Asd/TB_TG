@@ -15,6 +15,17 @@ class SoftDeleteManager(models.Manager):
 
 
 class BaseModel(models.Model):
+    """
+    Base model containing common fields and functionality for other models.
+
+    Attributes:
+        created_at (DateTimeField): The datetime when the object was created.
+        updated_at (DateTimeField): The datetime when the object was last updated.
+        deleted_at (DateTimeField, optional): The datetime when the object was soft-deleted.
+
+    Methods:
+        delete(): Soft deletes the object by setting the 'deleted_at' field.
+    """
     created_at = models.DateTimeField(_("Created at"), auto_now_add=True)
     updated_at = models.DateTimeField(_("Updated at"), auto_now=True)
     deleted_at = models.DateTimeField(_("Deleted at"), null=True, blank=True)
@@ -31,6 +42,18 @@ class BaseModel(models.Model):
 
 
 class AuditLog(models.Model):
+     """
+    Model to record changes made to other models in the system.
+
+    Attributes:
+        user (ForeignKey): The user who performed the action.
+        action (CharField): The type of action performed (CREATE, UPDATE, DELETE).
+        timestamp (DateTimeField): The datetime when the action was performed.
+        table_name (CharField): The name of the table/model being modified.
+        row_id (TextField, optional): The ID of the modified row.
+        old_value (JSONField, optional): The previous value of the modified row.
+        changes (JSONField, optional): The changes made to the row.
+    """
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, default=None,
                              verbose_name=_("User"))
     action = models.CharField(_("Action"), max_length=10)  # 'CREATE', 'UPDATE', 'DELETE'
@@ -62,6 +85,17 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
+    """
+    Custom user model representing a user in the system.
+
+    Attributes:
+        phone_number (CharField): The user's phone number.
+        email (EmailField): The user's email address.
+        password (CharField): The user's password (hashed).
+        is_active (BooleanField): Indicates whether the user is active.
+        is_staff (BooleanField): Indicates whether the user is a staff member.
+        last_login (DateTimeField): The datetime when the user last logged in.
+    """
     phone_number = models.CharField(
         max_length=11,
         unique=True,
