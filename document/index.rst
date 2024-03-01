@@ -30,7 +30,6 @@ Welcome to the TB_TG Online Shop Documentation
    serializers
    urls
    templates
-   static_files
    tests
    deployment
    api_reference
@@ -40,4 +39,4 @@ Indices and Tables
 
 * :ref:`genindex`
 * :ref:`modindex`
-* :ref:`search
+* :ref:`search`

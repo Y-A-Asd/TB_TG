@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Views &mdash; TB_TG 1.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/fonts.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=8d563738"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Models" href="models.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            TB_TG
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">Models</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Views</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#blog-views">Blog Views</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#blogviewset">BlogViewSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#blogcommentviewset">BlogCommentViewSet</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#core-views">Core Views</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#usercreateview">UserCreateView</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#userloginotpview">UserLoginOTPView</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#verifyotpview">VerifyOtpView</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#shop-views">Shop Views</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#productviewset">ProductViewSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#collectionviewset">CollectionViewSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reviewviewset">ReviewViewSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#promotionviewset">PromotionViewSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cartviewset">CartViewSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cartitemviewset">CartItemViewSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#customerviewset">CustomerViewSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#orderviewset">OrderViewSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#transactionviewset">TransactionViewSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">PromotionViewSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sitesettingsviewset">SiteSettingsViewSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#homebannerviewset">HomeBannerViewSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#featureviewset">FeatureViewSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reportingapiview">ReportingAPIView</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#compare-products-api">Compare Products API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#verifyapiview">VerifyAPIView</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#addressviewset">AddressViewSet</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">TB_TG</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Views</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/views.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="views">
+<h1>Views<a class="headerlink" href="#views" title="Link to this heading"></a></h1>
+<section id="blog-views">
+<h2>Blog Views<a class="headerlink" href="#blog-views" title="Link to this heading"></a></h2>
+<section id="blogviewset">
+<h3>BlogViewSet<a class="headerlink" href="#blogviewset" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">BlogViewSet</span></code> provides API endpoints to retrieve and manipulate blog posts.</p>
+<ul>
+<li><p>Retrieve and List Blogs:
+- Endpoint: <code class="docutils literal notranslate"><span class="pre">/blogs/</span></code>
+- Methods: <code class="docutils literal notranslate"><span class="pre">GET</span></code>
+- Description: Retrieves a list of blog posts or a single blog post by its ID.
+- Parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>None</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Retrieve Blog with View Count Update:
+- Endpoint: <code class="docutils literal notranslate"><span class="pre">/blogs/&lt;blog_id&gt;/</span></code>
+- Methods: <code class="docutils literal notranslate"><span class="pre">GET</span></code>
+- Description: Retrieves a single blog post by its ID and updates its view count.
+- Parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">blog_id</span></code>: The ID of the blog post.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="blogcommentviewset">
+<h3>BlogCommentViewSet<a class="headerlink" href="#blogcommentviewset" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">BlogCommentViewSet</span></code> provides API endpoints to retrieve and manipulate comments on blog posts.</p>
+<ul>
+<li><p>List and Create Blog Comments:
+- Endpoint: <code class="docutils literal notranslate"><span class="pre">/blogs/&lt;blog_id&gt;/comments/</span></code>
+- Methods: <code class="docutils literal notranslate"><span class="pre">GET</span></code>, <code class="docutils literal notranslate"><span class="pre">POST</span></code>
+- Description: Retrieves a list of comments for a specific blog post or adds a new comment to the blog post.
+- Parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">blog_id</span></code>: The ID of the blog post.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Retrieve, Update, and Delete Blog Comments:
+- Endpoint: <code class="docutils literal notranslate"><span class="pre">/blogs/&lt;blog_id&gt;/comments/&lt;comment_id&gt;/</span></code>
+- Methods: <code class="docutils literal notranslate"><span class="pre">GET</span></code>, <code class="docutils literal notranslate"><span class="pre">PUT</span></code>, <code class="docutils literal notranslate"><span class="pre">DELETE</span></code>
+- Description: Retrieves, updates, or deletes a specific comment on a blog post.
+- Parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">blog_id</span></code>: The ID of the blog post.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">comment_id</span></code>: The ID of the comment.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</section>
+</section>
+<section id="core-views">
+<h2>Core Views<a class="headerlink" href="#core-views" title="Link to this heading"></a></h2>
+<section id="usercreateview">
+<h3>UserCreateView<a class="headerlink" href="#usercreateview" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">UserCreateView</span></code> provides API endpoints for user registration.</p>
+<ul>
+<li><p>Create User:
+- Endpoint: <code class="docutils literal notranslate"><span class="pre">/users/create/</span></code>
+- Methods: <code class="docutils literal notranslate"><span class="pre">POST</span></code>
+- Description: Registers a new user in the system.
+- Parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">phone_number</span></code>: The phone number of the user.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="userloginotpview">
+<h3>UserLoginOTPView<a class="headerlink" href="#userloginotpview" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">UserLoginOTPView</span></code> provides API endpoints for user login using OTP.</p>
+<ul>
+<li><p>Generate and Send OTP:
+- Endpoint: <code class="docutils literal notranslate"><span class="pre">/users/login/otp/</span></code>
+- Methods: <code class="docutils literal notranslate"><span class="pre">POST</span></code>
+- Description: Generates and sends an OTP to the user’s email for login.
+- Parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">email</span></code>: The email of the user.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="verifyotpview">
+<h3>VerifyOtpView<a class="headerlink" href="#verifyotpview" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">VerifyOtpView</span></code> provides API endpoints for verifying the OTP during login.</p>
+<ul>
+<li><p>Verify OTP:
+- Endpoint: <code class="docutils literal notranslate"><span class="pre">/users/login/otp/verify/</span></code>
+- Methods: <code class="docutils literal notranslate"><span class="pre">POST</span></code>
+- Description: Verifies the OTP provided by the user during login.
+- Parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">email</span></code>: The email of the user.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">otp</span></code>: The OTP provided by the user.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</section>
+</section>
+<section id="shop-views">
+<h2>Shop Views<a class="headerlink" href="#shop-views" title="Link to this heading"></a></h2>
+<section id="productviewset">
+<h3>ProductViewSet<a class="headerlink" href="#productviewset" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">ProductViewSet</span></code> provides API endpoints to retrieve and manipulate products.</p>
+<ul>
+<li><p>List Products:
+- Endpoint: <code class="docutils literal notranslate"><span class="pre">/products/</span></code>
+- Methods: <code class="docutils literal notranslate"><span class="pre">GET</span></code>
+- Description: Retrieves a list of products with optional filtering and search capabilities.
+- Parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Various query parameters for filtering and searching.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Retrieve, Create, Update, and Delete Products:
+- Endpoint: <code class="docutils literal notranslate"><span class="pre">/products/&lt;product_id&gt;/</span></code>
+- Methods: <code class="docutils literal notranslate"><span class="pre">GET</span></code>, <code class="docutils literal notranslate"><span class="pre">POST</span></code>, <code class="docutils literal notranslate"><span class="pre">PUT</span></code>, <code class="docutils literal notranslate"><span class="pre">DELETE</span></code>
+- Description: Retrieves, creates, updates, or deletes a specific product by its ID.
+- Parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">product_id</span></code>: The ID of the product.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="collectionviewset">
+<h3>CollectionViewSet<a class="headerlink" href="#collectionviewset" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">CollectionViewSet</span></code> provides API endpoints to retrieve collections and associated products.</p>
+<ul>
+<li><p>List Collections:
+- Endpoint: <code class="docutils literal notranslate"><span class="pre">/collections/</span></code>
+- Methods: <code class="docutils literal notranslate"><span class="pre">GET</span></code>
+- Description: Retrieves a list of collections with associated product counts.
+- Parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>None</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Retrieve Collection with Associated Products:
+- Endpoint: <code class="docutils literal notranslate"><span class="pre">/collections/&lt;collection_id&gt;/</span></code>
+- Methods: <code class="docutils literal notranslate"><span class="pre">GET</span></code>
+- Description: Retrieves a specific collection by its ID with associated products.
+- Parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">collection_id</span></code>: The ID of the collection.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="reviewviewset">
+<h3>ReviewViewSet<a class="headerlink" href="#reviewviewset" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">ReviewViewSet</span></code> provides API endpoints to retrieve and manipulate product reviews.</p>
+<ul>
+<li><p>List, Create, and Retrieve Reviews:
+- Endpoint: <code class="docutils literal notranslate"><span class="pre">/products/&lt;product_id&gt;/reviews/</span></code>
+- Methods: <code class="docutils literal notranslate"><span class="pre">GET</span></code>, <code class="docutils literal notranslate"><span class="pre">POST</span></code>
+- Description: Retrieves a list of reviews for a specific product, adds a new review, or retrieves a specific review.
+- Parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">product_id</span></code>: The ID of the product.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>List Review Replies:
+- Endpoint: <code class="docutils literal notranslate"><span class="pre">/products/&lt;product_id&gt;/reviews/&lt;review_id&gt;/replies/</span></code>
+- Methods: <code class="docutils literal notranslate"><span class="pre">GET</span></code>
+- Description: Retrieves a list of replies to a specific review.
+- Parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">product_id</span></code>: The ID of the product.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">review_id</span></code>: The ID of the review.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="promotionviewset">
+<h3>PromotionViewSet<a class="headerlink" href="#promotionviewset" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">PromotionViewSet</span></code> provides API endpoints to retrieve promotions and associated products.</p>
+<ul>
+<li><p>List Promotions:
+- Endpoint: <code class="docutils literal notranslate"><span class="pre">/promotions/</span></code>
+- Methods: <code class="docutils literal notranslate"><span class="pre">GET</span></code>
+- Description: Retrieves a list of promotions with associated products.
+- Parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>None</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="cartviewset">
+<h3>CartViewSet<a class="headerlink" href="#cartviewset" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">CartViewSet</span></code> provides API endpoints to manipulate shopping carts.</p>
+<ul>
+<li><p>Create, Retrieve, and Delete Cart:
+- Endpoint: <code class="docutils literal notranslate"><span class="pre">/cart/</span></code>
+- Methods: <code class="docutils literal notranslate"><span class="pre">POST</span></code>, <code class="docutils literal notranslate"><span class="pre">GET</span></code>, <code class="docutils literal notranslate"><span class="pre">DELETE</span></code>
+- Description: Creates a new cart, retrieves an existing cart, or deletes a cart.
+- Parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>None</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Apply Discount to Cart:
+- Endpoint: <code class="docutils literal notranslate"><span class="pre">/cart/&lt;cart_id&gt;/apply_discount/</span></code>
+- Methods: <code class="docutils literal notranslate"><span class="pre">GET</span></code>, <code class="docutils literal notranslate"><span class="pre">POST</span></code>
+- Description: Retrieves discount information or applies a discount to the cart.
+- Parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cart_id</span></code>: The ID of the cart.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="cartitemviewset">
+<h3>CartItemViewSet<a class="headerlink" href="#cartitemviewset" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">CartItemViewSet</span></code> provides API endpoints to manipulate cart items.</p>
+<ul>
+<li><p>List, Create, Update, and Delete Cart Items:
+- Endpoint: <code class="docutils literal notranslate"><span class="pre">/cart/&lt;cart_id&gt;/items/</span></code>
+- Methods: <code class="docutils literal notranslate"><span class="pre">GET</span></code>, <code class="docutils literal notranslate"><span class="pre">POST</span></code>, <code class="docutils literal notranslate"><span class="pre">PATCH</span></code>, <code class="docutils literal notranslate"><span class="pre">DELETE</span></code>
+- Description: Retrieves, adds, updates, or deletes cart items for a specific cart.
+- Parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><cite>cart_id</cite>: The ID of the cart.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="customerviewset">
+<h3>CustomerViewSet<a class="headerlink" href="#customerviewset" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">CustomerViewSet</span></code> provides API endpoints to manipulate customer profiles.</p>
+<ul>
+<li><p>List and Update Customers:
+- Endpoint: <code class="docutils literal notranslate"><span class="pre">/customers/</span></code>
+- Methods: <code class="docutils literal notranslate"><span class="pre">GET</span></code>, <code class="docutils literal notranslate"><span class="pre">PUT</span></code>
+- Description: Retrieves a list of customers or updates a customer’s profile.
+- Parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>None</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Retrieve Customer Profile and History:
+- Endpoint: <code class="docutils literal notranslate"><span class="pre">/customers/me/</span></code>
+- Methods: <code class="docutils literal notranslate"><span class="pre">GET</span></code>, <code class="docutils literal notranslate"><span class="pre">PUT</span></code>
+- Description: Retrieves or updates the profile of the currently authenticated user.
+- Parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>None</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Retrieve Customer Order History:
+- Endpoint: <code class="docutils literal notranslate"><span class="pre">/customers/&lt;customer_id&gt;/history/</span></code>
+- Methods: <code class="docutils literal notranslate"><span class="pre">GET</span></code>
+- Description: Retrieves the order history of a specific customer.
+- Parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">customer_id</span></code>: The ID of the customer.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="orderviewset">
+<h3>OrderViewSet<a class="headerlink" href="#orderviewset" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">OrderViewSet</span></code> provides API endpoints to manipulate orders.</p>
+<ul class="simple">
+<li><p>List, Create, Retrieve, Update, and Delete Orders:
+- Endpoint: <code class="docutils literal notranslate"><span class="pre">/orders/</span></code>
+- Methods: <code class="docutils literal notranslate"><span class="pre">GET</span></code>, <code class="docutils literal notranslate"><span class="pre">POST</span></code>, <code class="docutils literal notranslate"><span class="pre">PATCH</span></code></p></li>
+</ul>
+</section>
+<section id="transactionviewset">
+<h3>TransactionViewSet<a class="headerlink" href="#transactionviewset" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">TransactionViewSet</span></code> provides API endpoints to manage transactions.</p>
+<ul>
+<li><p>List, Create, Retrieve, Update, and Delete Transactions:
+- Endpoint: <code class="docutils literal notranslate"><span class="pre">/transactions/</span></code>
+- Methods: <code class="docutils literal notranslate"><span class="pre">GET</span></code>, <code class="docutils literal notranslate"><span class="pre">POST</span></code>, <code class="docutils literal notranslate"><span class="pre">PATCH</span></code>, <code class="docutils literal notranslate"><span class="pre">DELETE</span></code>
+- Description: Retrieves a list of transactions, creates a new transaction, retrieves, updates, or deletes a transaction.
+- Parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>None</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="id1">
+<h3>PromotionViewSet<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">PromotionViewSet</span></code> provides CRUD operations for promotions.</p>
+<ul>
+<li><p>Promotion Endpoint:
+- Endpoint: <code class="docutils literal notranslate"><span class="pre">/promotions/</span></code>
+- Methods: <code class="docutils literal notranslate"><span class="pre">GET</span></code>, <code class="docutils literal notranslate"><span class="pre">POST</span></code>, <code class="docutils literal notranslate"><span class="pre">PUT</span></code>, <code class="docutils literal notranslate"><span class="pre">PATCH</span></code>, <code class="docutils literal notranslate"><span class="pre">DELETE</span></code>
+- Description: Manages promotions.
+- Parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>None</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="sitesettingsviewset">
+<h3>SiteSettingsViewSet<a class="headerlink" href="#sitesettingsviewset" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">SiteSettingsViewSet</span></code> provides CRUD operations for site settings.</p>
+<ul>
+<li><p>Site Settings Endpoint:
+- Endpoint: <code class="docutils literal notranslate"><span class="pre">/site-settings/</span></code>
+- Methods: <code class="docutils literal notranslate"><span class="pre">GET</span></code>, <code class="docutils literal notranslate"><span class="pre">POST</span></code>, <code class="docutils literal notranslate"><span class="pre">PUT</span></code>, <code class="docutils literal notranslate"><span class="pre">PATCH</span></code>, <code class="docutils literal notranslate"><span class="pre">DELETE</span></code>
+- Description: Manages site settings.
+- Parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>None</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="homebannerviewset">
+<h3>HomeBannerViewSet<a class="headerlink" href="#homebannerviewset" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">HomeBannerViewSet</span></code> provides CRUD operations for home banners.</p>
+<ul>
+<li><p>Home Banners Endpoint:
+- Endpoint: <code class="docutils literal notranslate"><span class="pre">/home-banners/</span></code>
+- Methods: <code class="docutils literal notranslate"><span class="pre">GET</span></code>
+- Description: Manages home banners.
+- Parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>None</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="featureviewset">
+<h3>FeatureViewSet<a class="headerlink" href="#featureviewset" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">FeatureViewSet</span></code> provides CRUD operations for product features.</p>
+<ul>
+<li><p>Features Endpoint:
+- Endpoint: <code class="docutils literal notranslate"><span class="pre">/features/</span></code>
+- Methods: <code class="docutils literal notranslate"><span class="pre">GET</span></code>, <code class="docutils literal notranslate"><span class="pre">POST</span></code>, <code class="docutils literal notranslate"><span class="pre">PUT</span></code>, <code class="docutils literal notranslate"><span class="pre">PATCH</span></code>, <code class="docutils literal notranslate"><span class="pre">DELETE</span></code>
+- Description: Manages product features.
+- Parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>None</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="reportingapiview">
+<h3>ReportingAPIView<a class="headerlink" href="#reportingapiview" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">ReportingAPIView</span></code> provides an endpoint to generate various reports.</p>
+<ul>
+<li><p>Reporting Endpoint:
+- Endpoint: <code class="docutils literal notranslate"><span class="pre">/reporting/</span></code>
+- Method: <code class="docutils literal notranslate"><span class="pre">POST</span></code>
+- Description: Generates reports based on the provided parameters.
+- Parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">days</span></code>: Number of days to generate the report for.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="compare-products-api">
+<h3>Compare Products API<a class="headerlink" href="#compare-products-api" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">compare_products</span></code> view compares multiple products based on their attributes.</p>
+<ul>
+<li><p>Compare Products Endpoint:
+- Endpoint: <code class="docutils literal notranslate"><span class="pre">/compare/</span></code>
+- Method: <code class="docutils literal notranslate"><span class="pre">GET</span></code>
+- Description: Compares products based on their attributes.
+- Parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">product_ids</span></code>: List of product IDs to compare.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="verifyapiview">
+<h3>VerifyAPIView<a class="headerlink" href="#verifyapiview" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">VerifyAPIView</span></code> verifies payments made through a payment gateway.</p>
+<ul>
+<li><p>Payment Verification Endpoint:
+- Endpoint: <code class="docutils literal notranslate"><span class="pre">/payment-verify/</span></code>
+- Method: <code class="docutils literal notranslate"><span class="pre">POST</span></code>
+- Description: Verifies payments made through a payment gateway.
+- Parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">order_id</span></code>: ID of the order for which payment is being verified.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">total_price</span></code>: Total price of the order.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Authority</span></code>: Authorization code provided by the payment gateway.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="addressviewset">
+<h3>AddressViewSet<a class="headerlink" href="#addressviewset" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">AddressViewSet</span></code> provides CRUD operations for user addresses.</p>
+<ul>
+<li><p>Address Endpoint:
+- Endpoint: <code class="docutils literal notranslate"><span class="pre">/addresses/</span></code>
+- Methods: <code class="docutils literal notranslate"><span class="pre">GET</span></code>, <code class="docutils literal notranslate"><span class="pre">POST</span></code>, <code class="docutils literal notranslate"><span class="pre">PUT</span></code>, <code class="docutils literal notranslate"><span class="pre">PATCH</span></code>, <code class="docutils literal notranslate"><span class="pre">DELETE</span></code>
+- Description: Manages user addresses.
+- Parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>None</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="models.html" class="btn btn-neutral float-left" title="Models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Yousof-A-Asadi.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
