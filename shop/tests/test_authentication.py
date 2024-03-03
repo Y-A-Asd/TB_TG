@@ -78,7 +78,7 @@ class TestAuth:
         assert response.status_code == status.HTTP_201_CREATED
         email = 'yosofasadi22@gmail.com'
         otp_key = f'otp:{email}'
-        stored_otp = redis.StrictRedis(host=settings.REDIS_HOST, port=settings.REDIS_PORT,
+        stored_otp = redis.StrictRedis(host=settings.REDIS_HOST_OTP, port=settings.REDIS_PORT,
                                        db=settings.REDIS_DB).get(otp_key)
         stored_otp = str(stored_otp.decode('utf_8'))
         response = api_client.post(

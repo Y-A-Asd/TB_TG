@@ -44,7 +44,7 @@ class UserLoginOTPView(APIView):
             return Response({'message': _('Invalid Email')}, status=status.HTTP_400_BAD_REQUEST)
 
         otp_key = f'otp:{user.email}'
-        redis_connection = redis.StrictRedis(host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=settings.REDIS_DB)
+        redis_connection = redis.StrictRedis(host=settings.REDIS_HOST_OTP, port=settings.REDIS_PORT, db=settings.REDIS_DB)
         otp_is_send = redis_connection.get(otp_key)
         if otp_is_send:
             return Response({'error': _('Wait until last code expire')}, status=status.HTTP_201_CREATED)
@@ -71,7 +71,7 @@ class VerifyOtpView(APIView):
 
         otp_key = f'otp:{email}'
         print(otp_key)
-        stored_otp = redis.StrictRedis(host=settings.REDIS_HOST, port=settings.REDIS_PORT,
+        stored_otp = redis.StrictRedis(host=settings.REDIS_HOST_OTP, port=settings.REDIS_PORT,
                                        db=settings.REDIS_DB).get(otp_key)
         security_logger.info(f'user {email} entered code: {entered_otp} -> actual code: {stored_otp}')
         if str(stored_otp.decode('utf_8')) == str(entered_otp):

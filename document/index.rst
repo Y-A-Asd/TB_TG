@@ -26,17 +26,5 @@ Welcome to the TB_TG Online Shop Documentation
    installation
    configuration
    models
-   views
    serializers
-   urls
-   templates
-   tests
-   deployment
-   api_reference
-
-Indices and Tables
-===================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   views

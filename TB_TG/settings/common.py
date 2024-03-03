@@ -100,12 +100,6 @@ WSGI_APPLICATION = 'TB_TG.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -208,7 +202,7 @@ REST_FRAMEWORK = {
 }
 
 # my config for otp
-REDIS_HOST = 'localhost'
+REDIS_HOST_OTP = 'localhost'
 REDIS_PORT = 6379
 REDIS_DB = 2
 OTP_EXPIRY_SECONDS = 300
