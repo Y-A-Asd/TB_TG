@@ -4,6 +4,8 @@ from django.conf import settings
 from django.core.exceptions import FieldError
 from django.db.models import Count, F, Sum, DecimalField
 from django.utils.translation import gettext_lazy as _
+from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
 from rest_framework.exceptions import ValidationError
 from rest_framework.generics import get_object_or_404
@@ -303,6 +305,13 @@ class ReviewViewSet(ModelViewSet):
     def get_serializer_context(self):
         return {'product_id': self.kwargs['product_pk'], 'user_id': self.request.user.id}
 
+    @swagger_auto_schema(
+        methods=['get'],
+        responses={
+            200: 'Successful response',
+            404: 'Not found',
+        }
+    )
     @action(detail=True, methods=['GET'])
     def replies(self, request, *args, **kwargs):
         review = self.get_object()
@@ -380,6 +389,14 @@ class CartViewSet(CreateModelMixin,
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
+    @swagger_auto_schema(
+        methods=['get', 'post'],
+        responses={
+            200: 'Successful response (Apply Discount)',
+            400: 'Bad request',
+        },
+
+    )
     @action(detail=True, methods=['get', 'post'])
     def apply_discount(self, request, pk=None):
         cart = self.get_object()
@@ -460,7 +477,14 @@ class CustomerViewSet(ModelViewSet):
             serializer.save()
             return Response(serializer.data)
 
-    @action(detail=True, permission_classes=[ViewCustomerHistoryPermission])
+    @swagger_auto_schema(
+        methods=['get'],
+        responses={
+            200: 'Successful response',
+            403: 'Permission Denied',
+        }
+    )
+    @action(detail=True, permission_classes=[ViewCustomerHistoryPermission], methods=['get'])
     def history(self, request, pk):
         user = User.objects.get(pk=pk)
         data = AuditLog.objects.all().filter(user=user)
@@ -481,8 +505,9 @@ class OrderViewSet(ModelViewSet):
     def create(self, request, *args, **kwargs):
         try:
             serializer = CreateOrderSerializer(data=request.data, context={'user_id': self.request.user.id})
-        except serializer.ValidationError :
-            return Response(_('Item deleted from your cart because limit inventory'), status=status.HTTP_400_BAD_REQUEST)
+        except serializer.ValidationError:
+            return Response(_('Item deleted from your cart because limit inventory'),
+                            status=status.HTTP_400_BAD_REQUEST)
         serializer.is_valid(raise_exception=True)
         order = serializer.save()
         serializer = OrderSerializer(order)
@@ -502,6 +527,21 @@ class OrderViewSet(ModelViewSet):
             return UpdateOrderSerializer
         return OrderSerializer
 
+    @swagger_auto_schema(
+        methods=['post'],
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'order_id': openapi.Schema(type=openapi.TYPE_INTEGER),
+            },
+            required=['order_id'],
+        ),
+        responses={
+            200: 'Successful response',
+            400: 'Bad Request',
+            503: 'Service Unavailable',
+        }
+    )
     @action(detail=True, methods=['post'], url_path='payment-request')
     def payment_request(self, request, pk=None):
         order = self.get_object()
@@ -606,6 +646,23 @@ class HomeBannerViewSet(ReadOnlyModelViewSet):
     serializer_class = HomeBannerSerializer
 
 
+@swagger_auto_schema(
+    method='GET',
+    manual_parameters=[
+        openapi.Parameter(
+            name='product_ids',
+            in_=openapi.IN_QUERY,
+            type=openapi.TYPE_ARRAY,
+            items=openapi.Items(type=openapi.TYPE_INTEGER),
+            description='List of product IDs to compare',
+            required=True,
+        ),
+    ],
+    responses={
+        200: 'Successful response',
+        400: 'Bad Request',
+    }
+)
 @api_view(['GET'])
 def compare_products(request):
     product_ids = request.GET.getlist('product_ids')
@@ -668,7 +725,21 @@ class VerifyAPIView(APIView):
     """
     serializer_class = VerifySerializer
 
-    def post(self, request, *args, **kwargs): # pragma: no cover
+    @swagger_auto_schema(
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'order_id': openapi.Schema(type=openapi.TYPE_STRING),
+                'total_price': openapi.Schema(type=openapi.TYPE_STRING),
+                'Authority': openapi.Schema(type=openapi.TYPE_STRING),
+            }
+        ),
+        responses={
+            200: 'Transaction success',
+            400: 'Bad Request',
+        }
+    )
+    def post(self, request, *args, **kwargs):  # pragma: no cover
         client = Client(settings.ZP_API)
 
         MERCHANT = settings.MERCHANT
