@@ -202,7 +202,7 @@ REST_FRAMEWORK = {
 }
 
 # my config for otp
-REDIS_HOST_OTP = 'localhost'
+
 REDIS_PORT = 6379
 REDIS_DB = 2
 OTP_EXPIRY_SECONDS = 300
@@ -236,19 +236,19 @@ PARLER_LANGUAGES = {
     }
 }
 
-CELERY_BROKER_URL = 'redis://localhost:6379/1'
+
 CELERY_BEAT_SCHEDULE = {
     'delete_inactive_users': {
         'task': 'core.tasks.delete_inactive_users',
-        'schedule': timedelta(seconds=1),
+        'schedule': timedelta(hours=24),
     },
     'send_promotion_emails': {
         'task': 'core.tasks.send_promotion_emails',
-        'schedule': timedelta(seconds=1),
+        'schedule': timedelta(hours=24),
     },
     'send_birthday_emails': {
         'task': 'core.tasks.send_birthday_emails',
-        'schedule': timedelta(seconds=1),
+        'schedule': timedelta(hours=24),
     },
     'delete_old_carts': {
         'task': 'core.tasks.delete_old_carts',
@@ -266,23 +266,10 @@ celery command:
 
 """
 
-CACHES = {
-    "default": {
-        "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/3",
-        "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient",
-        }
-    },
-}
 """
     sudo systemctl start memcached
 """
-CACHES['memcache'] = {
 
-    "BACKEND": "django.core.cache.backends.memcached.PyMemcacheCache",
-    "LOCATION": "127.0.0.1:11211",
-}
 """
 how to use cache in class base views:
     @method_decorator(cache_page(60) -> 1 minute cache

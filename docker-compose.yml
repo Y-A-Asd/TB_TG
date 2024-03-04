@@ -22,6 +22,11 @@ services:
       - POSTGRES_PASSWORD=postgres
     volumes:
       - pgdata:/var/lib/postgresql/data
+  memcached:
+    image: memcached:1.6
+    ports:
+      - 11211:11211
+    restart: always
   redis:
     image: redis:6.2-alpine
     ports:
@@ -31,29 +36,29 @@ services:
       - redisdata:/data
   celery:
     build: .
-    command: celery -A storefront worker --loglevel=info
+    command: celery -A TB_TG worker --loglevel=info
     depends_on:
       - redis
     volumes:
       - .:/app
   celery-beat:
     build: .
-    command: celery -A storefront beat --loglevel=info
+    command: celery -A TB_TG beat --loglevel=info
     depends_on:
       - redis
     volumes:
       - .:/app
   flower:
     build: .
-    command: celery -A storefront flower
+    command: celery -A TB_TG flower
     depends_on:
       - web
       - redis
       - celery
     environment:
       - DEBUG=1
-      - CELERY_BROKER=redis://redis:6379/0
-      - CELERY_BACKEND=redis://redis:6379/0
+      - CELERY_BROKER=redis://redis:6379/1
+      - CELERY_BACKEND=redis://redis:6379/1
     ports:
       - 5555:5555
 

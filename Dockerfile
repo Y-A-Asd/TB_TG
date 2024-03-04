@@ -1,10 +1,13 @@
-FROM python:3.11.7
+FROM python:3.10.13
 
 ENV PYTHONUNBUFFERED=1
 WORKDIR /app
 
+# Install gettext for managing translations
+RUN apt-get update && apt-get install -y gettext
+
 # Install psycopg2 dependencies
-RUN apt-get update && apt-get install -y libpq-dev
+RUN apt-get install -y libpq-dev
 
 # Install pip
 RUN python -m pip install --upgrade pip
