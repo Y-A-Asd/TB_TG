@@ -53,7 +53,7 @@ A full-stack online shop built with Django, JavaScript, HTML, and CSS.
   system behavior under varying loads, ensuring application scalability and reliability.
 
 
-- **Test Coverage 90%**: Aim for <span style="color:red;">90% test coverage</span>  using pytest and coverage to improve
+- **[Test Coverage 90%](htmlcov/index.html)**: Aim for <span style="color:red;">90% test coverage</span>  using pytest and coverage to improve
   code quality and reliability.
 
 
@@ -108,3 +108,9 @@ A full-stack online shop built with Django, JavaScript, HTML, and CSS.
    python manage.py runserver
 
 6. Access the application at http://localhost:8000.
+
+
+## Documentation
+
+- [Sphinx HTML Documentation](document/_build/html/index.html): Detailed documentation for the project.
+- [Swagger API Documentation](http://localhost:8000/swagger/): Interactive API documentation powered by Swagger UI.

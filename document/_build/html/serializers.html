@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Serializers &mdash; TB_TG 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=8d563738"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Views" href="views.html" />
+    <link rel="prev" title="Models" href="models.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            TB_TG
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">Models</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Serializers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#blog-serializers">Blog Serializers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#blogserializer">BlogSerializer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#blogcommentserializer">BlogCommentSerializer</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#shop-serializers">Shop Serializers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#productimageserializer">ProductImageSerializer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#featurevaluefullserializer">FeatureValueFullSerializer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#featurekeyfullserializer">FeatureKeyFullSerializer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#featurekeyserializer">FeatureKeySerializer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#featurevalueserializer">FeatureValueSerializer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mainfeatureserializer">MainFeatureSerializer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#productserializer">ProductSerializer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#simpleproductserializer">SimpleProductSerializer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#collectionserializer">CollectionSerializer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cartitemserializer">CartItemSerializer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cartserializer">CartSerializer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#applydiscountserializer">ApplyDiscountSerializer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#additemsserializer">AddItemsSerializer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#updateitemsserializer">UpdateItemsSerializer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reviewserializer">ReviewSerializer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#orderitemserializer">OrderItemSerializer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#orderserializer">OrderSerializer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#createorderserializer">CreateOrderSerializer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#customerserializer">CustomerSerializer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reportingserializer">ReportingSerializer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#verifyserializer">VerifySerializer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sendrequestserializer">SendRequestSerializer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#updatetransactionserializer">UpdateTransactionSerializer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#auditlogserializer">AuditLogSerializer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#promotionserializer">PromotionSerializer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sitesettingsserializer">SiteSettingsSerializer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#homebannerserializer">HomeBannerSerializer</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="views.html">Views</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">TB_TG</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Serializers</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/serializers.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="serializers">
+<h1>Serializers<a class="headerlink" href="#serializers" title="Link to this heading"></a></h1>
+<section id="blog-serializers">
+<h2>Blog Serializers<a class="headerlink" href="#blog-serializers" title="Link to this heading"></a></h2>
+<section id="blogserializer">
+<h3>BlogSerializer<a class="headerlink" href="#blogserializer" title="Link to this heading"></a></h3>
+<p>This serializer is used to serialize and deserialize blog post data.</p>
+<p><em>Fields:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">id</span></code> (integer): The unique identifier for the blog post.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">title</span></code> (string): The title of the blog post.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">body</span></code> (string): The content of the blog post.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">thumbnail</span></code> (string): The URL of the thumbnail image for the blog post.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">views</span></code> (integer): The number of views for the blog post.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">author</span></code> (nested object): The author of the blog post (serialized using CustomerSerializer).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">updated_at</span></code> (datetime): The timestamp of when the blog post was last updated.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">comments_count</span></code> (integer): The number of comments on the blog post.</p></li>
+</ul>
+</section>
+<section id="blogcommentserializer">
+<h3>BlogCommentSerializer<a class="headerlink" href="#blogcommentserializer" title="Link to this heading"></a></h3>
+<p>This serializer is used to serialize and deserialize comments on blog posts.</p>
+<p><em>Fields:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">id</span></code> (integer): The unique identifier for the comment.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">customer</span></code> (nested object): The customer who posted the comment (serialized using CustomerSerializer).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">subject</span></code> (string): The subject of the comment.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">message</span></code> (string): The content of the comment.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">created_at</span></code> (datetime): The timestamp of when the comment was created.</p></li>
+</ul>
+</section>
+</section>
+<section id="shop-serializers">
+<h2>Shop Serializers<a class="headerlink" href="#shop-serializers" title="Link to this heading"></a></h2>
+<section id="productimageserializer">
+<h3>ProductImageSerializer<a class="headerlink" href="#productimageserializer" title="Link to this heading"></a></h3>
+<p>This serializer is used to serialize and deserialize product images.</p>
+<p><em>Fields:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">id</span></code> (integer): The unique identifier for the product image.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">image</span></code> (string): The URL of the product image.</p></li>
+</ul>
+</section>
+<section id="featurevaluefullserializer">
+<h3>FeatureValueFullSerializer<a class="headerlink" href="#featurevaluefullserializer" title="Link to this heading"></a></h3>
+<p>This serializer is used to serialize and deserialize feature values with translations.</p>
+<p><em>Fields:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">id</span></code> (integer): The unique identifier for the feature value.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">translations</span></code> (nested object): Translations for the feature value.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">product_count</span></code> (integer): The number of products associated with the feature value.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">value</span></code> (string): The value of the feature.</p></li>
+</ul>
+</section>
+<section id="featurekeyfullserializer">
+<h3>FeatureKeyFullSerializer<a class="headerlink" href="#featurekeyfullserializer" title="Link to this heading"></a></h3>
+<p>This serializer is used to serialize and deserialize feature keys with translations and associated values.</p>
+<p><em>Fields:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">id</span></code> (integer): The unique identifier for the feature key.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">translations</span></code> (nested object): Translations for the feature key.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">key_product_count</span></code> (integer): The number of products associated with the feature key.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">values</span></code> (nested object): Associated feature values (serialized using FeatureValueFullSerializer).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">key</span></code> (string): The key of the feature.</p></li>
+</ul>
+</section>
+<section id="featurekeyserializer">
+<h3>FeatureKeySerializer<a class="headerlink" href="#featurekeyserializer" title="Link to this heading"></a></h3>
+<p>This serializer is used to serialize and deserialize feature keys with translations.</p>
+<p><em>Fields:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">id</span></code> (integer): The unique identifier for the feature key.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">translations</span></code> (nested object): Translations for the feature key.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">key</span></code> (string): The key of the feature.</p></li>
+</ul>
+</section>
+<section id="featurevalueserializer">
+<h3>FeatureValueSerializer<a class="headerlink" href="#featurevalueserializer" title="Link to this heading"></a></h3>
+<p>This serializer is used to serialize and deserialize feature values with translations.</p>
+<p><em>Fields:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">id</span></code> (integer): The unique identifier for the feature value.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">key</span></code> (nested object): The associated feature key (serialized using FeatureKeySerializer).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">translations</span></code> (nested object): Translations for the feature value.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">value</span></code> (string): The value of the feature.</p></li>
+</ul>
+</section>
+<section id="mainfeatureserializer">
+<h3>MainFeatureSerializer<a class="headerlink" href="#mainfeatureserializer" title="Link to this heading"></a></h3>
+<p>This serializer is used to serialize and deserialize main features with associated feature keys and values.</p>
+<p><em>Fields:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">id</span></code> (integer): The unique identifier for the main feature.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">key</span></code> (nested object): The associated feature key (serialized using FeatureKeySerializer).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">value</span></code> (nested object): The associated feature value (serialized using FeatureValueSerializer).</p></li>
+</ul>
+<p><em>Methods:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">get_product_count(self,</span> <span class="pre">obj)</span></code>: Returns the number of products associated with the main feature.</p></li>
+</ul>
+</section>
+<section id="productserializer">
+<h3>ProductSerializer<a class="headerlink" href="#productserializer" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">ProductSerializer</span></code> is used to serialize and deserialize product data.</p>
+<p><em>Fields:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">id</span></code> (integer): The unique identifier for the product.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">translations</span></code> (nested object): Translated fields for the product.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">inventory</span></code> (integer): The available inventory of the product.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">org_price</span></code> (decimal): The original price of the product.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">price</span></code> (decimal): The discounted price of the product.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">price_with_tax</span></code> (decimal): The price of the product with tax included.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">collection_id</span></code> (integer): The ID of the collection to which the product belongs.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">promotions</span></code> (nested object): Promotions applied to the product.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">value_feature</span></code> (nested object): Additional features of the product.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">images</span></code> (nested object): Images associated with the product.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">secondhand</span></code> (boolean): Indicates whether the product is secondhand.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">title</span></code> (string): The title of the product.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">description</span></code> (string): The description of the product.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">slug</span></code> (string): The slugified version of the product title.</p></li>
+</ul>
+</section>
+<section id="simpleproductserializer">
+<h3>SimpleProductSerializer<a class="headerlink" href="#simpleproductserializer" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">SimpleProductSerializer</span></code> is used to serialize and deserialize basic product data.</p>
+<p><em>Fields:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">id</span></code> (integer): The unique identifier for the product.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">translations</span></code> (nested object): Translated fields for the product.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">org_price</span></code> (decimal): The original price of the product.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">price</span></code> (decimal): The discounted price of the product.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">title</span></code> (string): The title of the product.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">description</span></code> (string): The description of the product.</p></li>
+</ul>
+</section>
+<section id="collectionserializer">
+<h3>CollectionSerializer<a class="headerlink" href="#collectionserializer" title="Link to this heading"></a></h3>
+<p>This serializer is used to serialize and deserialize product collections with nested subcollections.</p>
+<p><em>Fields:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">id</span></code> (integer): The unique identifier for the collection.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">translations</span></code> (nested object): Translations for the collection.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">parent</span></code> (integer): The ID of the parent collection.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">products_count</span></code> (integer): The number of products in the collection.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">children</span></code> (nested object): Subcollections of the collection (serialized using CollectionSerializer).</p></li>
+</ul>
+</section>
+<section id="cartitemserializer">
+<h3>CartItemSerializer<a class="headerlink" href="#cartitemserializer" title="Link to this heading"></a></h3>
+<p>This serializer is used to serialize and deserialize cart items with associated product details.</p>
+<p><em>Fields:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">id</span></code> (integer): The unique identifier for the cart item.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">product</span></code> (nested object): The associated product (serialized using SimpleProductSerializer).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">quantity</span></code> (integer): The quantity of the product in the cart.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">total_price</span></code> (decimal): The total price of the cart item.</p></li>
+</ul>
+</section>
+<section id="cartserializer">
+<h3>CartSerializer<a class="headerlink" href="#cartserializer" title="Link to this heading"></a></h3>
+<p>This serializer is used to serialize and deserialize shopping carts with associated cart items.</p>
+<p><em>Fields:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">id</span></code> (UUID): The unique identifier for the cart.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">items</span></code> (nested object): Cart items in the cart (serialized using CartItemSerializer).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">total_price</span></code> (decimal): The total price of all items in the cart.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">org_price</span></code> (decimal): The original total price of all items in the cart.</p></li>
+</ul>
+<p><em>Methods:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">get_total_price(self,</span> <span class="pre">cart)</span></code>: Returns the total price of the cart.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_org_price(self,</span> <span class="pre">cart)</span></code>: Returns the original total price of the cart.</p></li>
+</ul>
+</section>
+<section id="applydiscountserializer">
+<h3>ApplyDiscountSerializer<a class="headerlink" href="#applydiscountserializer" title="Link to this heading"></a></h3>
+<p>This serializer is used to serialize and deserialize discount code application requests.</p>
+<p><em>Fields:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">discount_code</span></code> (string): The discount code to be applied.</p></li>
+</ul>
+</section>
+<section id="additemsserializer">
+<h3>AddItemsSerializer<a class="headerlink" href="#additemsserializer" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">AddItemsSerializer</span></code> is used to serialize and deserialize data for adding items to a cart.</p>
+<p><em>Fields:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">id</span></code> (integer): The unique identifier for the cart item.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">product_id</span></code> (integer): The ID of the product to add to the cart.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">quantity</span></code> (integer): The quantity of the product to add.</p></li>
+</ul>
+<p><em>Validation:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">product_id</span></code>: Must be a valid product ID.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">quantity</span></code>: Must be at least 1.</p></li>
+</ul>
+<p><em>Methods:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">save()</span></code>: Adds the specified quantity of the product to the cart. Raises a validation error if the product ID is invalid or the quantity is less than 1.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">validate_product_id()</span></code>: Validates that the product ID exists in the database.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">validate_quantity()</span></code>: Validates that the quantity is at least 1.</p></li>
+</ul>
+</section>
+<section id="updateitemsserializer">
+<h3>UpdateItemsSerializer<a class="headerlink" href="#updateitemsserializer" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">UpdateItemsSerializer</span></code> is used to serialize and deserialize data for updating items in a cart.</p>
+<p><em>Fields:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">quantity</span></code> (integer): The new quantity for the cart item.</p></li>
+</ul>
+<p><em>Methods:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">save()</span></code>: Updates the quantity of the cart item. Raises a validation error if the new quantity is less than 1.</p></li>
+</ul>
+<p><em>Validation:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">quantity</span></code>: Must be at least 1.</p></li>
+</ul>
+</section>
+<section id="reviewserializer">
+<h3>ReviewSerializer<a class="headerlink" href="#reviewserializer" title="Link to this heading"></a></h3>
+<p>This serializer is used to serialize and deserialize product reviews with associated customer details.</p>
+<p><em>Fields:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">id</span></code> (integer): The unique identifier for the review.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">created_at</span></code> (datetime): The date and time when the review was created.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">parent_review</span></code> (integer): The ID of the parent review, if any.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">title</span></code> (string): The title of the review.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">description</span></code> (string): The description of the review.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rating</span></code> (integer): The rating given in the review.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">customer</span></code> (nested object): Details of the customer who wrote the review (serialized using CustomerSerializer).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">replies</span></code> (nested object): Replies to the review (serialized using ReviewSerializer).</p></li>
+</ul>
+</section>
+<section id="orderitemserializer">
+<h3>OrderItemSerializer<a class="headerlink" href="#orderitemserializer" title="Link to this heading"></a></h3>
+<p>This serializer is used to serialize and deserialize order items with associated product details.</p>
+<p><em>Fields:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">product</span></code> (nested object): The associated product (serialized using SimpleProductSerializer).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">price</span></code> (decimal): The price of the product.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">quantity</span></code> (integer): The quantity of the product in the order.</p></li>
+</ul>
+</section>
+<section id="orderserializer">
+<h3>OrderSerializer<a class="headerlink" href="#orderserializer" title="Link to this heading"></a></h3>
+<p>This serializer is used to serialize and deserialize orders with associated order items and customer details.</p>
+<p><em>Fields:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">id</span></code> (integer): The unique identifier for the order.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">order_status</span></code> (string): The status of the order.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">customer</span></code> (nested object): Details of the customer who placed the order (serialized using CustomerSerializer).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">phone_number</span></code> (string): The phone number of the customer.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">email</span></code> (string): The email address of the customer.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">zip_code</span></code> (string): The zip code of the customer’s address.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">path</span></code> (string): The path of the customer’s address.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">city</span></code> (string): The city of the customer’s address.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">province</span></code> (string): The province of the customer’s address.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">first_name</span></code> (string): The first name of the customer.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">last_name</span></code> (string): The last name of the customer.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">orders</span></code> (nested object): Order items in the order (serialized using OrderItemSerializer).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">total_price</span></code> (decimal): The total price of the order.</p></li>
+</ul>
+</section>
+<section id="createorderserializer">
+<h3>CreateOrderSerializer<a class="headerlink" href="#createorderserializer" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">CreateOrderSerializer</span></code> is used to serialize and deserialize data for creating an order from a cart.</p>
+<p><em>Fields:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cart_id</span></code> (UUID): The ID of the cart from which the order will be created.</p></li>
+</ul>
+<p><em>Validation:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cart_id</span></code>: Must be a valid UUID corresponding to an existing cart in the database.</p></li>
+</ul>
+<p><em>Methods:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">save()</span></code>: Creates an order from the specified cart. Raises a validation error if the cart ID is invalid or the cart is empty.</p></li>
+</ul>
+</section>
+<section id="customerserializer">
+<h3>CustomerSerializer<a class="headerlink" href="#customerserializer" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">CustomerSerializer</span></code> is used to serialize customer data.</p>
+<p><em>Fields:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">id</span></code> (integer): The unique identifier for the customer.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">first_name</span></code> (string): The first name of the customer.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">last_name</span></code> (string): The last name of the customer.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">user_id</span></code> (integer): The ID of the associated user.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">birth_date</span></code> (date): The birth date of the customer.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">membership</span></code> (string): The membership status of the customer.</p></li>
+</ul>
+<p><em>Read-only Fields:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">id</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">user_id</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">membership</span></code></p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">CustomerSerializer</span></code> is read-only, used for serializing customer data retrieved from the database.</p>
+</section>
+<section id="reportingserializer">
+<h3>ReportingSerializer<a class="headerlink" href="#reportingserializer" title="Link to this heading"></a></h3>
+<p>This serializer is used to serialize and deserialize reporting parameters for generating reports.</p>
+<p><em>Fields:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">days</span></code> (integer): The number of days for the report.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">start_at</span></code> (datetime): The start date for the report.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">end_at</span></code> (datetime): The end date for the report.</p></li>
+</ul>
+</section>
+<section id="verifyserializer">
+<h3>VerifySerializer<a class="headerlink" href="#verifyserializer" title="Link to this heading"></a></h3>
+<p>This serializer is used to serialize and deserialize requests to verify transactions.</p>
+<p><em>Fields:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">order</span></code> (integer): The ID of the order associated with the transaction.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">total_price</span></code> (decimal): The total price of the transaction.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Authority</span></code> (string): The authority code for the transaction.</p></li>
+</ul>
+</section>
+<section id="sendrequestserializer">
+<h3>SendRequestSerializer<a class="headerlink" href="#sendrequestserializer" title="Link to this heading"></a></h3>
+<p>This serializer is used to serialize and deserialize requests to send transaction requests.</p>
+<p><em>Fields:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">phone_number</span></code> (string): The phone number associated with the transaction request.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">total_price</span></code> (decimal): The total price of the transaction request.</p></li>
+</ul>
+</section>
+<section id="updatetransactionserializer">
+<h3>UpdateTransactionSerializer<a class="headerlink" href="#updatetransactionserializer" title="Link to this heading"></a></h3>
+<p>This serializer is used to serialize and deserialize requests to update transaction details.</p>
+<p><em>Fields:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">payment_status</span></code> (string): The updated payment status of the transaction.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">receipt_number</span></code> (string): The receipt number of the transaction.</p></li>
+</ul>
+</section>
+<section id="auditlogserializer">
+<h3>AuditLogSerializer<a class="headerlink" href="#auditlogserializer" title="Link to this heading"></a></h3>
+<p>This serializer is used to serialize audit log entries.</p>
+<p><em>Fields:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">user</span></code> (nested object): Details of the user associated with the action.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">action</span></code> (string): The action performed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">timestamp</span></code> (datetime): The timestamp of the action.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">table_name</span></code> (string): The name of the table affected.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">row_id</span></code> (integer): The ID of the row affected.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">changes</span></code> (string): Details of the changes made.</p></li>
+</ul>
+</section>
+<section id="promotionserializer">
+<h3>PromotionSerializer<a class="headerlink" href="#promotionserializer" title="Link to this heading"></a></h3>
+<p>This serializer is used to serialize and deserialize promotions.</p>
+<p><em>Fields:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">id</span></code> (integer): The unique identifier for the promotion.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">translations</span></code> (nested object): Translations for the promotion title and description.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">title</span></code> (string): The title of the promotion.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">description</span></code> (string): The description of the promotion.</p></li>
+</ul>
+</section>
+<section id="sitesettingsserializer">
+<h3>SiteSettingsSerializer<a class="headerlink" href="#sitesettingsserializer" title="Link to this heading"></a></h3>
+<p>This serializer is used to serialize and deserialize site settings.</p>
+<p><em>Fields:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">id</span></code> (integer): The unique identifier for the site settings.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">phone_number</span></code> (string): The phone number displayed on the site.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">logo</span></code> (string): The URL of the site’s logo.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">telegram_link</span></code> (string): The link to the Telegram channel.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">twitter_link</span></code> (string): The link to the Twitter page.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">instagram_link</span></code> (string): The link to the Instagram profile.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">whatsapp_link</span></code> (string): The link to the WhatsApp contact.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">translations</span></code> (nested object): Translations for the footer text and address.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">footer_text</span></code> (string): The text displayed in the site footer.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">address</span></code> (string): The address of the business.</p></li>
+</ul>
+</section>
+<section id="homebannerserializer">
+<h3>HomeBannerSerializer<a class="headerlink" href="#homebannerserializer" title="Link to this heading"></a></h3>
+<p>This serializer is used to serialize and deserialize home banners.</p>
+<p><em>Fields:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">id</span></code> (integer): The unique identifier for the home banner.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">product</span></code> (nested object): The products featured in the home banner.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="models.html" class="btn btn-neutral float-left" title="Models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="views.html" class="btn btn-neutral float-right" title="Views" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Yousof-A-Asadi.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
