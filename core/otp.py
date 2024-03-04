@@ -19,7 +19,7 @@ class Authentication:
         otp = Authentication.generate_otp()
 
         # Store OTP in Redis with a key
-        redis_connection = redis.StrictRedis(host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=settings.REDIS_DB)
+        redis_connection = redis.StrictRedis(host=settings.REDIS_HOST_OTP, port=settings.REDIS_PORT, db=settings.REDIS_DB)
         redis_connection.set(otp_key, otp, ex=settings.OTP_EXPIRY_SECONDS)
 
         otp_expiry = timezone.now() + timezone.timedelta(seconds=settings.OTP_EXPIRY_SECONDS)

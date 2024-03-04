@@ -1,0 +1,10 @@
+front.migrations package
+========================
+
+Module contents
+---------------
+
+.. automodule:: front.migrations
+   :members:
+   :undoc-members:
+   :show-inheritance:

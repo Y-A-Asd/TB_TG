@@ -1,0 +1,45 @@
+front package
+=============
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   front.migrations
+
+Submodules
+----------
+
+front.apps module
+-----------------
+
+.. automodule:: front.apps
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+front.urls module
+-----------------
+
+.. automodule:: front.urls
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+front.views module
+------------------
+
+.. automodule:: front.views
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: front
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,11 +1,10 @@
-from django.shortcuts import render
 from rest_framework import viewsets, filters, mixins
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 from blog.models import BlogComment, Blog
 from blog.serializers import BlogSerializer, BlogCommentSerializer
-from shop.pagination import DefaultPagination
+from shop.pagination import DefaultBlogPagination
 
 
 # Create your views here.
@@ -14,7 +13,7 @@ class BlogViewSet(mixins.RetrieveModelMixin,
                   GenericViewSet):
     queryset = Blog.objects.all().prefetch_related('author', 'comments')
     serializer_class = BlogSerializer
-    pagination_class = DefaultPagination
+    pagination_class = DefaultBlogPagination
     filter_backends = [filters.SearchFilter]
     search_fields = ['translations__title', 'translations__body']
     ordering = ['-updated_at']

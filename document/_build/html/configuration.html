@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Configuration &mdash; TB_TG 1.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=8d563738"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Models" href="models.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            TB_TG
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="views.html">Views</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">TB_TG</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Configuration</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/configuration.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="configuration">
+<h1>Configuration<a class="headerlink" href="#configuration" title="Link to this heading"></a></h1>
+<p>The Django Online Shop TB_TG project offers various configuration options that users can customize to tailor the project to their specific needs. Below are some of the key configuration settings:</p>
+<ol class="arabic simple">
+<li><p><strong>Database Configuration</strong>:</p>
+<ul class="simple">
+<li><p><strong>Database Engine</strong>: Configure the database engine (e.g., SQLite, PostgreSQL, MySQL).</p></li>
+<li><p><strong>Database Name</strong>: Specify the name of the database.</p></li>
+<li><p><strong>Database User and Password</strong>: Provide credentials for accessing the database.</p></li>
+<li><p><strong>Database Host and Port</strong>: Optionally specify the host and port if using a remote database server.</p></li>
+</ul>
+</li>
+<li><p><strong>Django Settings</strong>:</p>
+<ul class="simple">
+<li><p><strong>SECRET_KEY</strong>: Set a unique secret key for cryptographic signing.</p></li>
+<li><p><strong>DEBUG</strong>: Enable or disable debug mode for development or production environments.</p></li>
+<li><p><strong>ALLOWED_HOSTS</strong>: Define a list of allowed hosts for the Django project.</p></li>
+<li><p><strong>STATIC_URL</strong> and <strong>STATIC_ROOT</strong>: Configure settings related to serving static files.</p></li>
+<li><p><strong>MEDIA_URL</strong> and <strong>MEDIA_ROOT</strong>: Define settings for serving media files uploaded by users.</p></li>
+<li><p><strong>TEMPLATES</strong>: Customize template settings, including template directories, loaders, and context processors.</p></li>
+<li><p><strong>AUTH_USER_MODEL</strong>: Specify a custom user model if needed.</p></li>
+</ul>
+</li>
+<li><p><strong>Third-Party Integration</strong>:</p>
+<ul class="simple">
+<li><p><strong>Zarinpal Configuration</strong>: If using the Zarinpal payment gateway, configure API keys or other authentication settings.</p></li>
+<li><p><strong>Celery Configuration</strong>: Customize Celery settings for background task processing, including broker URL and concurrency options.</p></li>
+<li><p><strong>Redis Configuration</strong>: Configure Redis settings for Celery task queue management and caching.</p></li>
+</ul>
+</li>
+<li><p><strong>Email Settings</strong>:</p>
+<ul class="simple">
+<li><p><strong>EMAIL_BACKEND</strong>: Choose an email backend for sending emails (e.g., SMTP, console backend for development).</p></li>
+<li><p><strong>EMAIL_HOST</strong>, <strong>EMAIL_PORT</strong>, <strong>EMAIL_HOST_USER</strong>, <strong>EMAIL_HOST_PASSWORD</strong>: Specify SMTP server details if using SMTP backend.</p></li>
+</ul>
+</li>
+<li><p><strong>Logging Configuration</strong>:</p>
+<ul class="simple">
+<li><p><strong>LOGGING</strong>: Customize logging settings for different loggers, handlers, and log levels.</p></li>
+</ul>
+</li>
+<li><p><strong>Custom Settings</strong>:</p>
+<ul class="simple">
+<li><p>Define any custom settings specific to your Django project or application.</p></li>
+</ul>
+</li>
+<li><p><strong>Dynamic Site Information (Admin)</strong>:</p>
+<ul class="simple">
+<li><p><strong>Site Settings</strong>: Use the <cite>SiteSettings</cite> model to dynamically set site information such as footer text, address, phone number, logo, and social media links.</p></li>
+<li><p><strong>Home Banner</strong>: Utilize the <cite>HomeBanner</cite> model to manage home page banners and link them to specific products.</p></li>
+</ul>
+</li>
+</ol>
+<p>Users can modify these settings and models in the project’s settings.py and models.py files, respectively, according to their requirements. It’s important to review and update these settings and models carefully, especially in production environments, to ensure the proper functioning and customization of the Django project.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="models.html" class="btn btn-neutral float-right" title="Models" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Yousof-A-Asadi.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -6,6 +6,16 @@ from shop.models import Customer
 
 
 class Blog(TranslatableModel, BaseModel):
+    """
+    Model representing a blog post.
+
+    Attributes:
+        title (CharField): The title of the blog post.
+        body (TextField, optional): The body/content of the blog post.
+        thumbnail (ImageField): The thumbnail image associated with the blog post.
+        views (IntegerField): The number of views the blog post has received.
+        author (ForeignKey): The author of the blog post.
+    """
     translations = TranslatedFields(
         title=models.CharField(_("Title"), max_length=255, unique=True),
         body=models.TextField(_("Body"), null=True, blank=True)
@@ -23,6 +33,16 @@ class Blog(TranslatableModel, BaseModel):
 
 
 class BlogComment(BaseModel):
+    """
+    Model representing a comment on a blog post.
+
+    Attributes:
+        customer (ForeignKey): The customer who left the comment.
+        blog (ForeignKey): The blog post on which the comment is made.
+        subject (CharField): The subject/title of the comment.
+        message (TextField): The content/message of the comment.
+        active (BooleanField): Indicates whether the comment is active.
+    """
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, verbose_name=_("Customer"))
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE, verbose_name=_("Blog"), related_name='comments')
     subject = models.CharField(_("Subject"), max_length=255)

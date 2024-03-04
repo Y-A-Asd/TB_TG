@@ -1,0 +1,68 @@
+version: '3.11.7'
+services:
+  web:
+    build: .
+    command: ./docker-entrypoint.sh
+    ports:
+      - 8000:8000
+    depends_on:
+      - redis
+      - postgres
+    restart: on-failure
+    volumes:
+      - .:/app
+  postgres:
+    image: postgres:15
+    ports:
+      - 5432:5432
+    restart: always
+    environment:
+      - POSTGRES_DB=tb_tg
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  memcached:
+    image: memcached:1.6
+    ports:
+      - 11211:11211
+    restart: always
+  redis:
+    image: redis:6.2-alpine
+    ports:
+      - 6379:6379
+    restart: always
+    volumes:
+      - redisdata:/data
+  celery:
+    build: .
+    command: celery -A TB_TG worker --loglevel=info
+    depends_on:
+      - redis
+    volumes:
+      - .:/app
+  celery-beat:
+    build: .
+    command: celery -A TB_TG beat --loglevel=info
+    depends_on:
+      - redis
+    volumes:
+      - .:/app
+  flower:
+    build: .
+    command: celery -A TB_TG flower
+    depends_on:
+      - web
+      - redis
+      - celery
+    environment:
+      - DEBUG=1
+      - CELERY_BROKER=redis://redis:6379/1
+      - CELERY_BACKEND=redis://redis:6379/1
+    ports:
+      - 5555:5555
+
+volumes:
+  postgresdata:
+  pgdata:
+  redisdata:    
