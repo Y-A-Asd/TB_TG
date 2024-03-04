@@ -43,6 +43,7 @@ urlpatterns = i18n_patterns(
     path("core/", include('core.urls', namespace='core')),
     path("", include('front.urls', namespace='front')),
     path("blog/", include('blog.urls', namespace='blog')),
+    path("chat-v1/", include('chat.urls', namespace='chat')),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     prefix_default_language=False

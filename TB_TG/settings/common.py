@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'channels',
     'djoser',
     'drf_yasg',
     "compressor",
@@ -57,6 +58,7 @@ INSTALLED_APPS = [
     'core',
     'shop',
     'tags',
+    'chat',
 ]
 
 """https://tech.raturi.in/compress-and-minify-files-django"""
