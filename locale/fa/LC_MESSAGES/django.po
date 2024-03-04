@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-04 13:05+0330\n"
-"PO-Revision-Date: 2024-02-19 21:16+0330\n"
-"Last-Translator: Anonymous User <yosofasadi2@gmail.com>\n"
+"POT-Creation-Date: 2024-03-04 13:37+0330\n"
+"PO-Revision-Date: 2024-03-04 13:30+0330\n"
+"Last-Translator: Anonymous User <yosofasady2@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
@@ -1095,7 +1095,7 @@ msgstr "تخفیف نامعتیر است ! مجدد حالت تخفیف را چ�
 #: shop/serializers.py:255 shop/serializers.py:260
 #, python-brace-format
 msgid "You can not add more then inventory {product_inventory} !"
-msgstr ""
+msgstr "نمیتوانید مقداری بیش از موجودی: {product_inventory} انتخاب کنید "
 
 #: shop/serializers.py:266
 msgid "No Prodcuts found!"
@@ -1108,7 +1108,7 @@ msgstr "حداقل مقدار 1 میباشد"
 #: shop/serializers.py:292
 #, python-brace-format
 msgid "You cannot add more than inventory {product_inventory}!"
-msgstr ""
+msgstr "نمیتوانید مقداری بیش از موجودی: {product_inventory} انتخاب کنید "
 
 #: shop/serializers.py:379
 msgid "No cart found!"
@@ -1128,6 +1128,7 @@ msgstr ""
 msgid ""
 "product {item.product.title} has limited inventory: {item.product.inventory}"
 msgstr ""
+"محصول {item.product.title} دارای کف موجودی:  {item.product.inventory} است"
 
 #: shop/validator.py:12
 #, python-brace-format
@@ -1158,17 +1159,15 @@ msgstr "تخفیف نامعتبر است!"
 
 #: shop/views.py:403
 msgid "Total price is below the discount limit."
-msgstr ""
+msgstr "قیمت کل از حداقل قیمت تخفیف پایین تر است"
 
 #: shop/views.py:411
-#, fuzzy
-#| msgid "Customer Not Found!"
 msgid "Discount Code Not Found"
-msgstr "مشتری یافت نشد!"
+msgstr "کد تخفیف یافت نشد!"
 
 #: shop/views.py:485
 msgid "Item deleted from your cart because limit inventory"
-msgstr ""
+msgstr "محصول از سبد خرید شما حذف شد به علت کمبود موجودی"
 
 #: tags/models.py:17
 msgid "Label"

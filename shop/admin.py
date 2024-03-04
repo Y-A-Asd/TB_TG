@@ -119,7 +119,7 @@ class ProductImageInline(admin.TabularInline):
 class CollectionAdmin(TranslatableAdmin):
     autocomplete_fields = ['parent']
     list_display = ['title', 'products_count_link', 'parent']
-    search_fields = ['translations__title']
+    search_fields = ['title']
     exclude = ['deleted_at', 'created_at', 'updated_at']
 
     def products_count_link(self, collection):  # pragma: no cover
