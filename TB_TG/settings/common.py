@@ -125,7 +125,7 @@ AUTHENTICATION_BACKENDS = ['core.backends.PhoneBackend']
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'fa'
+LANGUAGE_CODE = 'en'
 
 LANGUAGES = [
     ('en', _('English')),

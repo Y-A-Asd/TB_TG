@@ -19,6 +19,13 @@ DATABASES = {
     }
 }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 REDIS_HOST_OTP = 'redis'
 
 CELERY_BROKER_URL = 'redis://redis:6379/1'
@@ -38,7 +45,6 @@ CACHES['memcache'] = {
     "BACKEND": "django.core.cache.backends.memcached.PyMemcacheCache",
     "LOCATION": "memcached:11211",
 }
-
 
 DEBUG_TOOLBAR_CONFIG = {
     'SHOW_TOOLBAR_CALLBACK': lambda request: True

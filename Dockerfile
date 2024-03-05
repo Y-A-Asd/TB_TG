@@ -16,6 +16,13 @@ RUN python -m pip install --upgrade pip
 COPY requirements.txt /app/
 RUN pip install -r requirements.txt
 
+RUN apt-get install -y google-chrome-stable
+
+
+    && unzip -q /usr/local/bin/chromedriver_linux64.zip -d /usr/local/bin \
+    && rm /usr/local/bin/chromedriver_linux64.zip \
+    && chmod +x /usr/local/bin/chromedriver
+
 # Copy the application files into the image
 COPY . /app/
 
