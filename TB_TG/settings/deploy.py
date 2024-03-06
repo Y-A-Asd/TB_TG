@@ -1,25 +1,8 @@
 from .common import *
 import os
-
+DEBUG = True
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-ALLOWED_HOSTS = ['']
 SECRET_KEY = os.environ['SECRET_KEY']
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'tb_tg',
-        'USER': 'postgres',
-        'PASSWORD': 'posstgres',
-        'HOST': 'postgres',
-        'PORT': '5432',
-    }
-}
-
-REDIS_HOST_OTP = 'redis'
-
-CELERY_BROKER_URL = 'redis://redis:6379/1'
 
 CACHES = {
     "default": {
@@ -30,6 +13,21 @@ CACHES = {
         }
     },
 }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'tb_tg',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'postgres',
+        'PORT': '5432',
+    }
+}
+
+REDIS_HOST_OTP = 'redis'
+
+CELERY_BROKER_URL = 'redis://redis:6379/1'
 
 CACHES['memcache'] = {
 
