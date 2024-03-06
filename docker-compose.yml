@@ -1,4 +1,4 @@
-version: '3.11.7'
+version: '2'
 services:
   web:
     build: .
@@ -11,15 +11,20 @@ services:
     restart: on-failure
     volumes:
       - .:/app
+    environment:
+      - DJANGO_SETTINGS_MODULE=TB_TG.settings.deploy
+      - SECRET_KEY=0uwk9*8mltebnrrdn(zawxdyh-8b*s6$!0n(lb(cwlk+@otvzq
   postgres:
     image: postgres:15
     ports:
       - 5432:5432
     restart: always
     environment:
+      - DJANGO_SETTINGS_MODULE=TB_TG.settings.deploy
       - POSTGRES_DB=tb_tg
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+      - SECRET_KEY=0uwk9*8mltebnrrdn(zawxdyh-8b*s6$!0n(lb(cwlk+@otvzq
     volumes:
       - pgdata:/var/lib/postgresql/data
   memcached:
@@ -27,11 +32,16 @@ services:
     ports:
       - 11211:11211
     restart: always
+    environment:
+      - DJANGO_SETTINGS_MODULE=TB_TG.settings.deploy
   redis:
     image: redis:6.2-alpine
     ports:
       - 6379:6379
     restart: always
+    environment:
+      - DJANGO_SETTINGS_MODULE=TB_TG.settings.deploy
+      - SECRET_KEY=0uwk9*8mltebnrrdn(zawxdyh-8b*s6$!0n(lb(cwlk+@otvzq
     volumes:
       - redisdata:/data
   celery:
@@ -39,6 +49,9 @@ services:
     command: celery -A TB_TG worker --loglevel=info
     depends_on:
       - redis
+    environment:
+      - DJANGO_SETTINGS_MODULE=TB_TG.settings.deploy
+      - SECRET_KEY=0uwk9*8mltebnrrdn(zawxdyh-8b*s6$!0n(lb(cwlk+@otvzq
     volumes:
       - .:/app
   celery-beat:
@@ -46,6 +59,9 @@ services:
     command: celery -A TB_TG beat --loglevel=info
     depends_on:
       - redis
+    environment:
+      - DJANGO_SETTINGS_MODULE=TB_TG.settings.deploy
+      - SECRET_KEY=0uwk9*8mltebnrrdn(zawxdyh-8b*s6$!0n(lb(cwlk+@otvzq
     volumes:
       - .:/app
   flower:
@@ -56,9 +72,8 @@ services:
       - redis
       - celery
     environment:
-      - DEBUG=1
-      - CELERY_BROKER=redis://redis:6379/1
-      - CELERY_BACKEND=redis://redis:6379/1
+      - DJANGO_SETTINGS_MODULE=TB_TG.settings.deploy
+      - SECRET_KEY=0uwk9*8mltebnrrdn(zawxdyh-8b*s6$!0n(lb(cwlk+@otvzq
     ports:
       - 5555:5555
 

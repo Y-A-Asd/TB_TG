@@ -65,10 +65,13 @@ class TestRetrieveProduct:
 @pytest.mark.django_db
 class TestCompareProducts:
     def test_compare_view(self, api_client, create_product):
-        activate('en')
-        collection = baker.make(Collection)
-        product1 = baker.make(Product, id=1, collection=collection)
-        product2 = baker.make(Product, id=2, collection=collection)
+        collection = baker.make(Collection, title='col1')
+        product1 = baker.make(Product, id=1, collection=collection, title="p1")
+        print(product1.title)
+        product2 = baker.make(Product, id=2, collection=collection, title="p2")
+        print(product1.translations)
+        print(product2.translations)
+        print(product2.title)
         key = FeatureKey.objects.create(
             key='test'
         )

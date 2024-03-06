@@ -234,7 +234,7 @@ class TestSelenium(LiveServerTestCase):
         link.click()
         sleep(5)
         delete_button = wait.until(expected_conditions.element_to_be_clickable((By.XPATH,
-                                            "//button[contains(@class, 'genric-btn') and contains(@class, 'danger')][1]")))
+                                                                                "//button[contains(@class, 'genric-btn') and contains(@class, 'danger')][1]")))
         delete_button.click()
         sleep(5)
         increase_button = wait.until(expected_conditions.element_to_be_clickable((By.XPATH,

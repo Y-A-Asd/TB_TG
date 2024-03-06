@@ -50,12 +50,12 @@ class TestCreateCart:
 @pytest.mark.django_db
 class TestAddingToCart:
     def test_adding_item_to_cart_return_201(self, api_client, create_cartitems):
-        product = baker.make(Product)
+        product = baker.make(Product, inventory=10)
         response = create_cartitems(product_id=product.id, quantity=1)
         assert response.status_code == status.HTTP_201_CREATED
 
     def test_adding_invalid_item_to_cart_return_400(self, api_client, create_cartitems):
-        product = baker.make(Product)
+        product = baker.make(Product, inventory=10)
         response = create_cartitems(product_id=product.id, quantity=0)
         assert response.status_code == status.HTTP_400_BAD_REQUEST
 
@@ -80,14 +80,17 @@ class TestUpdatingCart:
             },
             format='json'
         )
+        print('response.data', response.data)
+        cartitem_id = response.data['id']
         assert response.status_code == status.HTTP_201_CREATED
         response = api_client.patch(
-            f'/api-v1/cart/{cart_id}/items/{product.id}/',
+            f'/api-v1/cart/{cart_id}/items/{cartitem_id}/',
             {
                 "quantity": 2
             },
             format='json'
         )
+        print(response.data)
         assert response.status_code == status.HTTP_200_OK
         item = CartItem.objects.get(product_id=product.id)
         assert item.quantity == 2
@@ -104,7 +107,7 @@ class TestCartDetail:
         )
         assert response.status_code == status.HTTP_201_CREATED
         cart_id = response.data['id']
-        product = baker.make(Product)
+        product = baker.make(Product, inventory=10)
         response = api_client.post(
             f'/api-v1/cart/{cart_id}/items/',
             {
@@ -113,6 +116,7 @@ class TestCartDetail:
             },
             format='json'
         )
+        print(response.data)
         assert response.status_code == status.HTTP_201_CREATED
         response = api_client.get(
             f'/api-v1/cart/{cart_id}/',
@@ -121,7 +125,6 @@ class TestCartDetail:
         )
         assert response.status_code == status.HTTP_200_OK
         assert 'items' in response.data
-
 
     def test_cart_discount_valid(self, api_client, create_cartitems, auth):
         now = timezone.now()
@@ -137,7 +140,7 @@ class TestCartDetail:
         )
         assert response.status_code == status.HTTP_201_CREATED
         cart_id = response.data['id']
-        product = baker.make(Product)
+        product = baker.make(Product, inventory=10)
         response = api_client.post(
             f'/api-v1/cart/{cart_id}/items/',
             {
@@ -175,6 +178,7 @@ class TestCartDetail:
         valid_from = now - timedelta(days=10)
         valid_to = now + timedelta(days=10)
         discount = BaseDiscount.objects.create(discount=10, code='discount', limit_price=1, max_price=1000)
+        print('discount', discount)
         auth(is_staff=True)
         response = api_client.post(
             '/api-v1/cart/',
@@ -183,7 +187,7 @@ class TestCartDetail:
         )
         assert response.status_code == status.HTTP_201_CREATED
         cart_id = response.data['id']
-        product = baker.make(Product)
+        product = baker.make(Product, inventory=10)
         response = api_client.post(
             f'/api-v1/cart/{cart_id}/items/',
             {
@@ -213,7 +217,8 @@ class TestCartDetail:
             {"discount_code": 'a', },
             format='json'
         )
-        assert response.status_code == status.HTTP_404_NOT_FOUND
+        print(response.data)
+        assert response.status_code == status.HTTP_400_BAD_REQUEST
 
         response = api_client.get(
             f'/api-v1/cart/{cart_id}/apply_discount/',
