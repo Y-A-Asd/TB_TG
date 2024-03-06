@@ -235,7 +235,9 @@ PARLER_LANGUAGES = {
         'hide_untranslated': False,
     }
 }
-
+CELERY_IMPORTS = (
+    'core.tasks',
+)
 
 CELERY_BEAT_SCHEDULE = {
     'delete_inactive_users': {

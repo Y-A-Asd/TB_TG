@@ -10,6 +10,7 @@ from django.contrib.auth import get_user_model
 from .models import User
 from .otp import Authentication
 from django.conf import settings
+from .tasks import send_otp_email_async
 
 security_logger = logging.getLogger('security_logger')
 
@@ -44,17 +45,13 @@ class UserLoginOTPView(APIView):
             return Response({'message': _('Invalid Email')}, status=status.HTTP_400_BAD_REQUEST)
 
         otp_key = f'otp:{user.email}'
-        redis_connection = redis.StrictRedis(host=settings.REDIS_HOST_OTP, port=settings.REDIS_PORT, db=settings.REDIS_DB)
+        redis_connection = redis.StrictRedis(host=settings.REDIS_HOST_OTP, port=settings.REDIS_PORT,
+                                             db=settings.REDIS_DB)
         otp_is_send = redis_connection.get(otp_key)
         if otp_is_send:
-            return Response({'error': _('Wait until last code expire')}, status=status.HTTP_201_CREATED)
-        try:
-            otp, otp_expiry = Authentication.send_otp_email(user.email, otp_key)
-            security_logger.info(f'send code for user {email} : {otp}')
-            return Response({'message': _('Code Send, Check you email')}, status=status.HTTP_201_CREATED)
-        except ConnectionError:
-            security_logger.info(f'server can not send email!')
-            return Response({'error': _('server side error!')}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({'error': _('Wait until last code expire')}, status=status.HTTP_409_CONFLICT)
+        send_otp_email_async.delay(user.email, otp_key)
+        return Response({'message': _('Code Send, Check you email')}, status=status.HTTP_201_CREATED)
 
 
 class VerifyOtpView(APIView):
@@ -74,6 +71,7 @@ class VerifyOtpView(APIView):
         stored_otp = redis.StrictRedis(host=settings.REDIS_HOST_OTP, port=settings.REDIS_PORT,
                                        db=settings.REDIS_DB).get(otp_key)
         security_logger.info(f'user {email} entered code: {entered_otp} -> actual code: {stored_otp}')
+        print(stored_otp, stored_otp.decode('utf-8'), entered_otp)
         if str(stored_otp.decode('utf_8')) == str(entered_otp):
             user = get_user_model().objects.get(email=email)
             refresh = RefreshToken.for_user(user)
