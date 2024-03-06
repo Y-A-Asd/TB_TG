@@ -410,6 +410,8 @@ class CartViewSet(CreateModelMixin,
         discount_code = serializer.validated_data['discount_code']
         try:
             discount = BaseDiscount.objects.get(code=discount_code)
+            if not discount.active:
+                raise ValidationError(_("Discount is not active."))
             if not discount.ensure_availability():
                 raise ValidationError(_("Discount is not available at the moment."))
             total_price = CartSerializer(data=cart)

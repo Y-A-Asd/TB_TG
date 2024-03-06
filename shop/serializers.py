@@ -1,4 +1,5 @@
 import uuid
+import logging
 from decimal import Decimal
 from django.db import transaction
 from django.utils.text import slugify
@@ -9,6 +10,8 @@ from shop.models import Product, Collection, Review, Customer, Order, OrderItem,
     Transaction, MainFeature, Promotion, SiteSettings, HomeBanner, FeatureKey, FeatureValue
 from parler_rest.serializers import TranslatableModelSerializer, TranslatedFieldsField
 from django.utils.translation import gettext_lazy as _
+
+views_logger = logging.getLogger('views_logger')
 
 
 class ProductImageSerializer(serializers.ModelSerializer):
@@ -213,6 +216,8 @@ class CartSerializer(serializers.ModelSerializer):
                 else:
                     raise ValueError(_(f"Invalid discount mode: {cart.discount.mode}"))
             else:
+                cart.discount = None
+                cart.save()
                 raise ValueError(_(f"Discount is not active!"))
 
         else:
@@ -394,8 +399,7 @@ class CreateOrderSerializer(serializers.Serializer):
             province = address.province
             path = address.path
             city = address.city
-            discount = Cart.objects.get(id=cart_id)
-            discount = discount.discount
+            discount: BaseDiscount = Cart.objects.get(id=cart_id).discount
 
             order = Order.objects.create(customer=customer, first_name=first_name, last_name=last_name,
                                          zip_code=zip_code, province=province, path=path, city=city, discount=discount)
@@ -429,6 +433,17 @@ class CreateOrderSerializer(serializers.Serializer):
             total_price = order.get_total_price()
             transactions.total_price = total_price
             transactions.save()
+            print('discount here:', discount.mode)
+            views_logger.info(f'discount here: {discount.mode}')
+            views_logger.info(f'discount here: {dir(discount.mode)}')
+            views_logger.info(f'discount here too: {discount.mode == BaseDiscount.Mode.PersonCode}')
+            if discount.mode == BaseDiscount.Mode.PersonCode:
+                views_logger.info(f'discount here: {discount.mode}')
+                views_logger.info(f'discount here: {discount}')
+
+                discount.active = False
+                views_logger.info(f'discount here: {discount}')
+                discount.save()
             return order
 
 
