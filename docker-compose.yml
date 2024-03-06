@@ -11,6 +11,9 @@ services:
     restart: on-failure
     volumes:
       - .:/app
+#    env_file or environment
+    env_file:
+      - .env
     environment:
       - DJANGO_SETTINGS_MODULE=TB_TG.settings.deploy
       - SECRET_KEY=0uwk9*8mltebnrrdn(zawxdyh-8b*s6$!0n(lb(cwlk+@otvzq
@@ -76,6 +79,14 @@ services:
       - SECRET_KEY=0uwk9*8mltebnrrdn(zawxdyh-8b*s6$!0n(lb(cwlk+@otvzq
     ports:
       - 5555:5555
+  nginx:
+    build: ./nginx
+    volumes:
+      - .:/app
+    ports:
+      - "80:80"
+    depends_on:
+      - web
 
 volumes:
   postgresdata:
