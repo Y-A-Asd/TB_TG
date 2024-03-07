@@ -1,14 +1,26 @@
 # tasks.py
+import logging
 from celery import shared_task
 from celery.utils.log import get_task_logger
 from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
 from django.utils import timezone
 from TB_TG.settings.common import EMAIL_HOST_PASSWORD
+from .otp import Authentication
 from .models import User
 from shop.models import Promotion, Cart, Customer
 
 logger = get_task_logger(__name__)
+security_logger = logging.getLogger('security_logger')
+
+
+@shared_task
+def send_otp_email_async(email, otp_key):
+    try:
+        otp, otp_expiry = Authentication.send_otp_email(email, otp_key)
+        security_logger.info(f'Send code for user {email}: {otp}')
+    except ConnectionError:
+        security_logger.error('Server cannot send email!')
 
 
 @shared_task

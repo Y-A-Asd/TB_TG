@@ -410,6 +410,8 @@ class CartViewSet(CreateModelMixin,
         discount_code = serializer.validated_data['discount_code']
         try:
             discount = BaseDiscount.objects.get(code=discount_code)
+            if not discount.active:
+                raise ValidationError(_("Discount is not active."))
             if not discount.ensure_availability():
                 raise ValidationError(_("Discount is not available at the moment."))
             total_price = CartSerializer(data=cart)
@@ -674,7 +676,10 @@ def compare_products(request):
         product_attrs = {}
         for product in products:
             if attr == 'Collection':
-                product_attrs[str(product.title)] = str(eval(f'product.{attr.lower()}.title'))
+                try:
+                    product_attrs[str(product.title)] = str(eval(f'product.{attr.lower()}.title'))
+                except AttributeError:
+                    product_attrs[str(product.title)] = None
             else:
                 product_attrs[str(product.title)] = str(eval(f'product.{attr.lower()}'))
 

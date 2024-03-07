@@ -326,39 +326,36 @@ class Order(BaseModel):
     def get_total_price(self):
         """get total price of order base on discount applied"""
         if self.discount:
-            self.discount.ensure_availability()
-            if self.discount.active:
-                print(self.discount.mode)
-                print('total_price')
-                if self.discount.mode == self.discount.Mode.DirectPrice:
-                    total_price = \
-                        self.orders.aggregate(
-                            total_price=Sum(F('unit_price') * F('quantity')) - self.discount.discount)[
-                            'total_price']
-                    print(total_price)
-                elif self.discount.mode == self.discount.Mode.DiscountOff:
+            # self.discount.ensure_availability()
+            # if self.discount.active:
+            print(self.discount.mode)
+            print('total_price')
+            if self.discount.mode == self.discount.Mode.DirectPrice:
+                total_price = \
+                    self.orders.aggregate(
+                        total_price=Sum(F('unit_price') * F('quantity')) - self.discount.discount)[
+                        'total_price']
+                print(total_price)
+            elif self.discount.mode == self.discount.Mode.DiscountOff:
+                total_price = self.orders.aggregate(total_price=Sum(F('unit_price') * F('quantity')) - Sum(
+                    F('unit_price') * F('quantity')) * self.discount.discount / 100)['total_price']
+            elif (self.discount.mode == self.discount.Mode.PersonCode or
+                  self.discount.mode == self.discount.Mode.EventCode):
+
+                total_price_with_out_off = self.orders.aggregate(total_price=Sum(F('unit_price') * F('quantity')))[
+                    'total_price']
+
+                if total_price_with_out_off > self.discount.max_price:
+                    total_price = total_price_with_out_off - self.discount.max_price
+
+                elif total_price_with_out_off < self.discount.limit_price:
+                    total_price = total_price_with_out_off
+
+                else:
                     total_price = self.orders.aggregate(total_price=Sum(F('unit_price') * F('quantity')) - Sum(
                         F('unit_price') * F('quantity')) * self.discount.discount / 100)['total_price']
-                elif (self.discount.mode == self.discount.Mode.PersonCode or
-                      self.discount.mode == self.discount.Mode.EventCode):
-
-                    total_price_with_out_off = self.orders.aggregate(total_price=Sum(F('unit_price') * F('quantity')))[
-                        'total_price']
-
-                    if total_price_with_out_off > self.discount.max_price:
-                        total_price = total_price_with_out_off - self.discount.max_price
-
-                    elif total_price_with_out_off < self.discount.limit_price:
-                        total_price = total_price_with_out_off
-
-                    else:
-                        total_price = self.orders.aggregate(total_price=Sum(F('unit_price') * F('quantity')) - Sum(
-                            F('unit_price') * F('quantity')) * self.discount.discount / 100)['total_price']
-                else:
-                    raise ValueError(_(f"Invalid discount mode: {self.discount.mode}"))
             else:
-                raise ValueError(_(f"Discount is not active!"))
-
+                raise ValueError(_(f"Invalid discount mode: {self.discount.mode}"))
         else:
             total_price = self.orders.aggregate(total_price=Sum(F('unit_price') * F('quantity')))['total_price']
         print('last total', total_price)

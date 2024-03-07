@@ -44,6 +44,7 @@ class BaseDiscountAdminForm(forms.ModelForm):
 
 @admin.register(BaseDiscount)
 class BaseDiscountAdmin(admin.ModelAdmin):
+    fields = ['code', 'discount', 'mode', 'active', 'valid_from', 'valid_to', 'limit_price', 'max_price']
     form = BaseDiscountAdminForm
     list_filter = ['mode', 'active', 'valid_from', 'valid_to']
     search_fields = ['code']

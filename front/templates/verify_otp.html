@@ -188,6 +188,7 @@
                                 alert(data.error);
                             } else {
                                 console.log(data);
+                                localStorage.setItem('email', email.value);
                                 alert('Check you email!')
                                 document.getElementById('loginEmailForm').style.display = 'none';
                                 document.getElementById('loginForm').removeAttribute('hidden');
