@@ -1,7 +1,7 @@
 from .common import *
 import dj_database_url
 import os
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -38,4 +38,8 @@ CACHES['memcache'] = {
 
     "BACKEND": "django.core.cache.backends.memcached.PyMemcacheCache",
     "LOCATION": "memcached:11211",
+}
+
+DEBUG_TOOLBAR_CONFIG = {
+    'SHOW_TOOLBAR_CALLBACK': lambda request: True
 }
