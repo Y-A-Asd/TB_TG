@@ -433,17 +433,18 @@ class CreateOrderSerializer(serializers.Serializer):
             total_price = order.get_total_price()
             transactions.total_price = total_price
             transactions.save()
-            print('discount here:', discount.mode)
-            views_logger.info(f'discount here: {discount.mode}')
-            views_logger.info(f'discount here: {dir(discount.mode)}')
-            views_logger.info(f'discount here too: {discount.mode == BaseDiscount.Mode.PersonCode}')
-            if discount.mode == BaseDiscount.Mode.PersonCode:
+            if discount:
+                print('discount here:', discount.mode)
                 views_logger.info(f'discount here: {discount.mode}')
-                views_logger.info(f'discount here: {discount}')
+                views_logger.info(f'discount here: {dir(discount.mode)}')
+                views_logger.info(f'discount here too: {discount.mode == BaseDiscount.Mode.PersonCode}')
+                if discount.mode == BaseDiscount.Mode.PersonCode:
+                    views_logger.info(f'discount here: {discount.mode}')
+                    views_logger.info(f'discount here: {discount}')
 
-                discount.active = False
-                views_logger.info(f'discount here: {discount}')
-                discount.save()
+                    discount.active = False
+                    views_logger.info(f'discount here: {discount}')
+                    discount.save()
             return order
 
 
