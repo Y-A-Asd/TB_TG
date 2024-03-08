@@ -37,6 +37,16 @@ REDIS_HOST_OTP = 'localhost'
 
 CELERY_BROKER_URL = 'redis://localhost:6379/1'
 
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('localhost', 6379)],
+        },
+    },
+}
+
 DEBUG_TOOLBAR_CONFIG = {
     'SHOW_TOOLBAR_CALLBACK': lambda request: True
 }

@@ -351,3 +351,5 @@ ZP_API_STARTPAY = f"https://{sandbox}.zarinpal.com/pg/StartPay/"
 ZP_API_VERIFY = f"https://{sandbox}.zarinpal.com/pg/v4/payment/verify.json"
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+ASGI_APPLICATION = "TB_TG.asgi.application"
