@@ -7,7 +7,7 @@ from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer
 from django.core.files.base import ContentFile
 
-from users.models import MyUser
+from core.models import User
 from .models import Message, Conversation
 from .serializers import MessageSerializer
 

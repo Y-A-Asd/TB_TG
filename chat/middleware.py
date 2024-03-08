@@ -1,5 +1,5 @@
 from jwt import decode, InvalidTokenError
-from django.contrib.auth.models import User
+from core.models import User
 from channels.db import database_sync_to_async
 from channels.middleware import BaseMiddleware
 import os
@@ -11,7 +11,8 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 @database_sync_to_async
 def get_user(token):
     try:
-        decoded_token = decode(token, SECRET_KEY, algorithms=['HS256'])
+        print('token', token)
+        decoded_token = decode(str(token), str(SECRET_KEY), algorithms=['HS256'])
         user_id = decoded_token.get('user_id')
         if user_id:
             return User.objects.get(pk=user_id)

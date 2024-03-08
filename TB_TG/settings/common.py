@@ -35,6 +35,7 @@ INTERNAL_IPS = [
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,11 +44,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'djoser',
     'drf_yasg',
-    "compressor",
+    'compressor',
     'solo',
     'silk',
     'parler',
-    "debug_toolbar",
+    'debug_toolbar',
     'django_filters',
     'rest_framework',
     'channels',
@@ -99,6 +100,7 @@ TEMPLATES = [
     },
 ]
 
+ASGI_APPLICATION = "TB_TG.asgi.application"
 WSGI_APPLICATION = 'TB_TG.wsgi.application'
 
 # Database
@@ -352,4 +354,3 @@ ZP_API_VERIFY = f"https://{sandbox}.zarinpal.com/pg/v4/payment/verify.json"
 
 CORS_ALLOW_ALL_ORIGINS = True
 
-ASGI_APPLICATION = "TB_TG.asgi.application"

@@ -10,20 +10,25 @@ from django.shortcuts import redirect, reverse
 
 @api_view(['POST'])
 def start_conversation(request, ):
+    """
+    {
+        "phone_number": "09353220545"
+    }
+    """
     data = request.data
-    username = data.pop('username')
+    phone_number = data.pop('phone_number')
     try:
-        participant = User.objects.get(username=username)
+        participant = User.objects.get(phone_number=phone_number)
     except User.DoesNotExist:
         return Response({'message': 'You cannot chat with a non existent user'})
 
-    conversation = Conversation.objects.filter(Q(initiator=request.user, receiver=participant) |
-                                               Q(initiator=participant, receiver=request.user))
+    conversation = Conversation.objects.filter(Q(sender_conversation=request.user, receiver_conversation=participant) |
+                                               Q(sender_conversation=participant, receiver_conversation=request.user))
     if conversation.exists():
         return redirect(reverse('get_conversation', args=(conversation[0].id,)))
     else:
-        conversation = Conversation.objects.create(initiator=request.user, receiver=participant)
-        return Response(ConversationSerializer(instance=conversation).data)
+        conversation = Conversation.objects.create(sender_conversation=request.user, receiver_conversation=participant)
+        return Response(ConversationSerializer(sender_conversation=conversation).data)
 
 
 @api_view(['GET'])
@@ -38,7 +43,7 @@ def get_conversation(request, convo_id):
 
 @api_view(['GET'])
 def conversations(request):
-    conversation_list = Conversation.objects.filter(Q(initiator=request.user) |
-                                                    Q(receiver=request.user))
+    conversation_list = Conversation.objects.filter(Q(sender_conversation=request.user) |
+                                                    Q(receiver_conversation=request.user))
     serializer = ConversationListSerializer(instance=conversation_list, many=True)
     return Response(serializer.data)

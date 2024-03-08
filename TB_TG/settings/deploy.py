@@ -53,3 +53,5 @@ CHANNEL_LAYERS = {
 DEBUG_TOOLBAR_CONFIG = {
     'SHOW_TOOLBAR_CALLBACK': lambda request: True
 }
+
+ALLOWED_HOSTS = ["*"]
