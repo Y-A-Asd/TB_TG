@@ -45,6 +45,7 @@ class ChatConsumer(WebsocketConsumer):
 
     # Receive message from room group
     def chat_message(self, event):
+
         text_data_json = event.copy()
         text_data_json.pop("type")
         message, attachment = (
@@ -55,29 +56,46 @@ class ChatConsumer(WebsocketConsumer):
         conversation = Conversation.objects.get(id=int(self.room_name))
         sender = self.scope['user']
 
-        # Attachment
-        if attachment:
-            file_str, file_ext = attachment["data"], attachment["format"]
+        print(self.scope)
+        print()
+        print(self.scope)
+        print()
+        print()
+        print('text_data_json', text_data_json)
+        try:
+            if sender:
+            # Attachment
+                if attachment:
+                    file_str, file_ext = attachment["data"], attachment["format"]
 
-            file_data = ContentFile(
-                base64.b64decode(file_str), name=f"{secrets.token_hex(8)}.{file_ext}"
-            )
-            _message = Message.objects.create(
-                sender=sender,
-                attachment=file_data,
-                text=message,
-                conversation_id=conversation,
-            )
-        else:
-            _message = Message.objects.create(
-                sender=sender,
-                text=message,
-                conversation_id=conversation,
-            )
-        serializer = MessageSerializer(instance=_message)
-        # Send message to WebSocket
-        self.send(
-            text_data=json.dumps(
-                serializer.data
-            )
-        )
+                    file_data = ContentFile(
+                        base64.b64decode(file_str), name=f"{secrets.token_hex(8)}.{file_ext}"
+                    )
+                    _message = Message.objects.create(
+                        sender=sender,
+                        attachment=file_data,
+                        text=message,
+                        conversation_id=conversation,
+                    )
+                else:
+                    _message = Message.objects.create(
+                        sender=sender,
+                        text=message,
+                        conversation_id=conversation,
+                    )
+                serializer = MessageSerializer(instance=_message)
+                # Send message to WebSocket
+                self.send(
+                    text_data=json.dumps(
+                        serializer.data
+                    )
+                )
+            else:
+                raise ValueError('Sender is not found Log in please')
+        except Exception as e:
+            error_message = {"error": str(e)}
+            self.send_error(error_message)
+
+    def send_error(self, error_message):
+        # Send error message to WebSocket
+        self.send(text_data=json.dumps(error_message))
