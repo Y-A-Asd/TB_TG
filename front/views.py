@@ -80,6 +80,10 @@ class CompareView(TemplateView):
     template_name = 'compare.html'
 
 
+class ChatView(TemplateView):
+    template_name = 'chat.html'
+
+
 class OrderDetailView(View):
     template_name = 'order_detail.html'
 

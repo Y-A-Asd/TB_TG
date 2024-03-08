@@ -18,5 +18,6 @@ urlpatterns = [
     path('set_language/', views.set_language, name='set_language'),
     path('blogs/<int:id>/', views.cached_template_blog_detail_view, name='blog_detail'),
     path('blogs/', views.cached_template_blog_list_view, name='blogs'),
+    path('chat/', views.ChatView.as_view(), name='chat'),
 
 ]
