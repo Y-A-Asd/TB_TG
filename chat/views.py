@@ -1,14 +1,15 @@
-from django.shortcuts import render
 from .models import Conversation
-from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from core.models import User
 from .serializers import ConversationListSerializer, ConversationSerializer
 from django.db.models import Q
 from django.shortcuts import redirect, reverse
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def start_conversation(request, ):
     """
     {
@@ -32,8 +33,15 @@ def start_conversation(request, ):
 
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def get_conversation(request, convo_id):
-    conversation = Conversation.objects.filter(id=convo_id)
+    user = User.objects.get(id=request.user.id)
+    if user.is_staff or user.is_superuser:
+        conversation = Conversation.objects.filter(id=convo_id)
+    else:
+        conversation = Conversation.objects.filter(
+            Q(id=convo_id) & (Q(sender_conversation=user) | Q(receiver_conversation=user))
+        )
     if not conversation.exists():
         return Response({'message': 'Conversation does not exist'})
     else:
@@ -42,6 +50,7 @@ def get_conversation(request, convo_id):
 
 
 @api_view(['GET'])
+@permission_classes([IsAdminUser])
 def conversations(request):
     conversation_list = Conversation.objects.filter(Q(sender_conversation=request.user) |
                                                     Q(receiver_conversation=request.user))

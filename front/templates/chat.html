@@ -47,61 +47,17 @@
                 </div>
 
                 <div class="messages-box">
-                    <div class="list-group rounded-0">
-                        <a class="list-group-item list-group-item-action active text-white rounded-0">
-                            <div class="media"><img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg"
-                                                    alt="user" width="50" class="rounded-circle">
-                                <div class="media-body ml-4">
-                                    <div class="d-flex align-items-center justify-content-between mb-1">
-                                        <h6 class="mb-0">Jason Doe</h6><small class="small font-weight-bold">25
-                                        Dec</small>
-                                    </div>
-                                    <p class="font-italic mb-0 text-small">Lorem ipsum dolor sit amet, consectetur
-                                        adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
-                                </div>
-                            </div>
-                        </a>
+                    <div class="list-group rounded-0" id="conversations-list">
 
-                        <a href="#" class="list-group-item list-group-item-action list-group-item-light rounded-0">
-                            <div class="media"><img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg"
-                                                    alt="user" width="50" class="rounded-circle">
-                                <div class="media-body ml-4">
-                                    <div class="d-flex align-items-center justify-content-between mb-1">
-                                        <h6 class="mb-0">Jason Doe</h6><small class="small font-weight-bold">14
-                                        Dec</small>
-                                    </div>
-                                    <p class="font-italic text-muted mb-0 text-small">Lorem ipsum dolor sit amet,
-                                        consectetur. incididunt ut labore.</p>
-                                </div>
-                            </div>
-                        </a>
                     </div>
                 </div>
             </div>
         </div>
         <!-- Chat Box-->
         <div class="col-7 px-0">
-            <div class="px-4 py-5 chat-box bg-white">
+            <div class="px-4 py-5 chat-box bg-white" id="messages-list">
                 <!-- Sender Message-->
-                <div class="media w-50 mb-3"><img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg"
-                                                  alt="user" width="50" class="rounded-circle">
-                    <div class="media-body ml-3">
-                        <div class="bg-light rounded py-2 px-3 mb-2">
-                            <p class="text-small mb-0 text-muted">Test which is a new approach all solutions</p>
-                        </div>
-                        <p class="small text-muted">12:00 PM | Aug 13</p>
-                    </div>
-                </div>
 
-                <!-- Reciever Message-->
-                <div class="media w-50 ml-auto mb-3">
-                    <div class="media-body">
-                        <div class="bg-primary rounded py-2 px-3 mb-2">
-                            <p class="text-small mb-0 text-white">Test which is a new approach to have all solutions</p>
-                        </div>
-                        <p class="small text-muted">12:00 PM | Aug 13</p>
-                    </div>
-                </div>
 
             </div>
 
@@ -111,7 +67,8 @@
                     <input type="text" placeholder="Type a message" aria-describedby="button-addon2"
                            class="form-control rounded-0 border-0 py-4 bg-light">
                     <div class="input-group-append">
-                        <button id="button-addon2" type="submit" class="btn btn-link"><i class="fa fa-paper-plane"></i>
+                        <button id="button-addon2" type="submit" class="btn btn-success">Send<i
+                                class="fa fa-paper-plane"></i>
                         </button>
                     </div>
                 </div>
@@ -120,5 +77,105 @@
         </div>
     </div>
 </div>
+
+
+<script>
+    function getToken() {
+        return localStorage.getItem('JWT');
+    }
+
+    function makeAuthenticatedRequest(url, method, context = null) {
+        const token = getToken();
+        const headers = {
+            'Content-Type': 'application/json',
+        };
+
+        if (token) {
+            headers['Authorization'] = `JWT ${token}`;
+        }
+
+        const options = {
+            method: method,
+            headers: headers,
+            body: context ? JSON.stringify(context) : null,
+        };
+
+        return fetch(url, options)
+            .then(response => {
+                if (response.ok) {
+                    return response.json()
+                } else {
+                    return response.json().then(errorJson => {
+                        alert(JSON.stringify(errorJson))
+                        throw new Error(JSON.stringify(errorJson));
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+
+    let USER_ID = 0
+    makeAuthenticatedRequest('/core/auth/users/me/', 'GET')
+        .then(data => {
+            USER_ID = data.id
+        })
+        .catch(error => console.error('Error fetching conversations:', error));
+
+    makeAuthenticatedRequest('/conversations/', 'GET')
+        .then(data => {
+            const conversationsList = document.getElementById('conversations-list');
+            conversationsList.innerHTML = '';
+            data.forEach(conversation => {
+
+                const timestamp = conversation.last_message.timestamp;
+                const dateTime = new Date(timestamp);
+                const options = {month: 'short', day: 'numeric'};
+                const formattedDateTime = dateTime.toLocaleDateString('en-US', options);
+
+                const conversationButton = document.createElement('button');
+                conversationButton.setAttribute('type', 'button');
+                conversationButton.classList.add('list-group-item', 'list-group-item-action', 'list-group-item-light', 'rounded-0');
+                conversationButton.innerHTML = `
+                <div class="media">
+                    <div class="media-body ml-4">
+                        <div class="d-flex align-items-center justify-content-between mb-1">
+                            <h6 class="mb-0">${conversation.sender_conversation.phone_number}</h6>
+                            <small class="small font-weight-bold">${formattedDateTime}</small>
+                        </div>
+                        <p class="font-italic text-muted mb-0 text-small">${conversation.last_message.text}</p>
+                    </div>
+                </div>
+            `;
+                conversationButton.addEventListener('click', () => fetchMessages(conversation.id));
+                conversationsList.appendChild(conversationButton);
+            });
+        })
+        .catch(error => console.error('Error fetching conversations:', error));
+
+    function fetchMessages(conversationId) {
+        makeAuthenticatedRequest(`/conversations/${conversationId}/`, 'GET')
+            .then(data => {
+                const messagesList = document.getElementById('messages-list');
+                messagesList.innerHTML = ''; // Clear previous messages
+
+                data.message_set.forEach(message => {
+                    const messageDiv = document.createElement('div');
+                    messageDiv.className = message.sender === USER_ID ? 'media w-50 mb-3' : 'media w-50 ml-auto mb-3';
+                    messageDiv.innerHTML = `
+                            <div class="media-body ml-3">
+                                <div class="${message.sender === USER_ID ? 'bg-light' : 'bg-primary'} rounded py-2 px-3 mb-2">
+                                    <p class="text-small mb-0 ${message.sender === USER_ID ? 'text-muted' : 'text-white'}">${message.text}</p>
+                                </div>
+                                <p class="small text-muted">${message.timestamp} | ${message.sender === USER_ID ? 'Sender' : 'Receiver'}</p>
+                            </div>
+                        `;
+                    messagesList.appendChild(messageDiv);
+                });
+            })
+            .catch(error => console.error('Error fetching messages:', error));
+    }
+</script>
 </body>
 </html>
