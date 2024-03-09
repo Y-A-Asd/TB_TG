@@ -28,7 +28,8 @@ def start_conversation(request, ):
     if conversation.exists():
         return redirect(reverse('get_conversation', args=(conversation[0].id,)))
     else:
-        conversation = Conversation.objects.create(sender_conversation=request.user, receiver_conversation=participant)
+        conversation = Conversation.objects.create(id=request.user.id, sender_conversation=request.user,
+                                                   receiver_conversation=participant)
         return Response(ConversationSerializer(sender_conversation=conversation).data)
 
 
@@ -52,7 +53,10 @@ def get_conversation(request, convo_id):
 @api_view(['GET'])
 @permission_classes([IsAdminUser])
 def conversations(request):
-    conversation_list = Conversation.objects.filter(Q(sender_conversation=request.user) |
-                                                    Q(receiver_conversation=request.user))
+    if request.user.is_staff or request.user.is_superuser:
+        conversation_list = Conversation.objects.all()
+    else:
+        conversation_list = Conversation.objects.filter(Q(sender_conversation=request.user) |
+                                                        Q(receiver_conversation=request.user))
     serializer = ConversationListSerializer(instance=conversation_list, many=True)
     return Response(serializer.data)

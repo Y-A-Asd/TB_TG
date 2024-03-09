@@ -6,15 +6,19 @@ from datetime import datetime
 from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer
 from django.core.files.base import ContentFile
-
+from jwt import decode, InvalidTokenError
+from core.models import User
 from core.models import User
 from .models import Message, Conversation
 from .serializers import MessageSerializer
+
+SECRET_KEY = '0uwk9*8mltebnrrdn(zawxdyh-8b*s6$!0n(lb(cwlk+@otvzq' #todo
 
 
 class ChatConsumer(WebsocketConsumer):
     def connect(self):
         print("here")
+        print(self.scope)
         self.room_name = self.scope["url_route"]["kwargs"]["room_name"]
         self.room_group_name = f"chat_{self.room_name}"
 
@@ -48,13 +52,23 @@ class ChatConsumer(WebsocketConsumer):
 
         text_data_json = event.copy()
         text_data_json.pop("type")
-        message, attachment = (
+        message, attachment, header = (
             text_data_json["message"],
             text_data_json.get("attachment"),
+            text_data_json.get("headers"),
         )
-
+        print('self.room_name', self.room_name)
         conversation = Conversation.objects.get(id=int(self.room_name))
-        sender = self.scope['user']
+        if header:
+            token = header['Authorization'].split()[1]
+            print(token)
+            print(type(token))
+            decoded_token = decode(token, SECRET_KEY, algorithms=['HS256'])
+            user_id = decoded_token.get('user_id')
+            user = User.objects.get(id=user_id)
+            sender = user
+        else:
+            sender = self.scope['user']
 
         print(self.scope)
         print()
@@ -64,7 +78,7 @@ class ChatConsumer(WebsocketConsumer):
         print('text_data_json', text_data_json)
         try:
             if sender:
-            # Attachment
+                # Attachment
                 if attachment:
                     file_str, file_ext = attachment["data"], attachment["format"]
 

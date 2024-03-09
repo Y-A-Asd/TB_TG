@@ -4,7 +4,7 @@ from channels.db import database_sync_to_async
 from channels.middleware import BaseMiddleware
 import os
 
-SECRET_KEY = 'django-insecure-0uwk9*8mltebnrrdn(zawxdyh-8b*s6$!0n(lb(cwlk+@otvzq'
+SECRET_KEY = 'django-insecure-0uwk9*8mltebnrrdn(zawxdyh-8b*s6$!0n(lb(cwlk+@otvzq' #todo
 
 
 @database_sync_to_async
