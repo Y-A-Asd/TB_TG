@@ -1,6 +1,7 @@
 import base64
 import json
 import secrets
+import time
 from datetime import datetime
 
 from asgiref.sync import async_to_sync
@@ -38,7 +39,7 @@ class ChatConsumer(WebsocketConsumer):
     def receive(self, text_data=None, bytes_data=None):
         # parse the json data into dictionary object
         text_data_json = json.loads(text_data)
-
+        time.sleep(2)
         # Send message to room group
         chat_type = {"type": "chat_message"}
         return_dict = {**chat_type, **text_data_json}

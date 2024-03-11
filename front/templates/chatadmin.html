@@ -67,9 +67,9 @@
                     <input id="message-input" type="text" placeholder="Type a message"
                            class="form-control rounded-0 border-0 py-4 bg-light">
                     <div class="input-group-append">
-                        <button id="send-button" type="submit" class="btn btn-success">Send<i
+                        <p id="send-button" type="submit" class="btn btn-success">Send<i
                                 class="fa fa-paper-plane"></i>
-                        </button>
+                        </p>
                     </div>
                 </div>
             </form>
@@ -80,26 +80,6 @@
 
 
 <script>
-    let USER_ID = 0;
-
-    function startConvo() {
-        let phone_number = null
-        let user_id = null
-        makeAuthenticatedRequest('/core/auth/users/me/', 'GET')
-            .then(id => {
-                phone_number = '09353220545'
-                user_id = id.id
-                url = '/conversations/start/'
-                method = 'POST'
-                context = {phone_number: phone_number}
-                makeAuthenticatedRequest(url, method, context)
-                    .then(data => {
-                        fetchMessages(user_id)
-                        alert('Conversation Started')
-                    })
-            })
-
-    }
 
 
     function getToken() {
@@ -128,7 +108,7 @@
                     return response.json()
                 } else if (response.status === 403) {
                     alert('starting the conversation ...')
-                    startConvo()
+                    window.location.href = '/login/'
                 } else {
                     return response.json().then(errorJson => {
                         alert(JSON.stringify(errorJson))
@@ -168,18 +148,7 @@
                 </div>
             `;
                 conversationButton.addEventListener('click', () => fetchMessages(conversation.id));
-                // Get references to the input and button elements
-                const messageInput = document.getElementById('message-input');
-                const sendButton = document.getElementById('send-button');
 
-                // Event listener for when the send button is clicked
-                sendButton.addEventListener('click', function () {
-                    // Get the message from the input field
-                    const message = messageInput.value;
-                    sendMessage(message, conversation.id);
-                    // Clear the input field after sending the message
-                    messageInput.value = '';
-                });
                 conversationsList.appendChild(conversationButton);
             });
         })
@@ -194,27 +163,6 @@
                     .then(id => {
                         USER_ID = id.id
                         console.log(USER_ID)
-
-                        const messageInput = document.getElementById('message-input');
-                        const sendButton = document.getElementById('send-button');
-
-                        // Event listener for when the send button is clicked
-                        sendButton.addEventListener('click', function () {
-                            // Get the message from the input field
-                            const message = messageInput.value;
-                            makeAuthenticatedRequest('/core/auth/users/me/', 'GET')
-                                .then(id => {
-                                    User_id = USER_ID
-                                    console.log('new user id = ', USER_ID)
-                                    console.log('message', message)
-                                    console.log('message', messageInput)
-                                    // Call the sendMessage function with the message
-                                    sendMessage(message, User_id);
-                                })
-                            // Clear the input field after sending the message
-                            messageInput.value = '';
-                        });
-
                         const messagesList = document.getElementById('messages-list');
                         messagesList.innerHTML = ''; // Clear previous messages
                         data.message_set.forEach(message => {
@@ -229,6 +177,18 @@
                             </div>
                         `;
                             messagesList.appendChild(messageDiv);
+                        });
+                        // Get references to the input and button elements
+                        const messageInput = document.getElementById('message-input');
+                        const sendButton = document.getElementById('send-button');
+
+                        // Event listener for when the send button is clicked
+                        sendButton.addEventListener('click', function () {
+                            // Get the message from the input field
+                            const message = messageInput.value;
+                            sendMessage(message, conversationId);
+                            // Clear the input field after sending the message
+                            messageInput.value = '';
                         });
 
                     })
