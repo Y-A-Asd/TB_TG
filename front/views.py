@@ -84,6 +84,10 @@ class ChatView(TemplateView):
     template_name = 'chat.html'
 
 
+class ChatAdminView(TemplateView):
+    template_name = 'chatadmin.html'
+
+
 class OrderDetailView(View):
     template_name = 'order_detail.html'
 

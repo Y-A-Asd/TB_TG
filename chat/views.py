@@ -6,6 +6,7 @@ from django.db.models import Q
 from django.shortcuts import redirect, reverse
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from django.db.utils import IntegrityError
 
 
 @api_view(['POST'])
@@ -17,7 +18,9 @@ def start_conversation(request, ):
     }
     """
     data = request.data
+    print(data)
     phone_number = data.pop('phone_number')
+    print(phone_number)
     try:
         participant = User.objects.get(phone_number=phone_number)
     except User.DoesNotExist:
@@ -25,6 +28,9 @@ def start_conversation(request, ):
 
     conversation = Conversation.objects.filter(Q(sender_conversation=request.user, receiver_conversation=participant) |
                                                Q(sender_conversation=participant, receiver_conversation=request.user))
+    print(conversation.query)
+    print('conversation', conversation)
+    print('user', request.user)
     if conversation.exists():
         return redirect(reverse('get_conversation', args=(conversation[0].id,)))
     else:
