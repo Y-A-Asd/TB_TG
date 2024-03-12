@@ -173,6 +173,12 @@
                 let USER_ID = 0
                 makeAuthenticatedRequest('/core/auth/users/me/', 'GET')
                     .then(id => {
+                        const socket = new WebSocket(`ws://127.0.0.1:8000/ws/chat/${conversationId}/`);
+
+                        socket.onmessage = function (event) {
+                            fetchMessages(conversationId);
+                            console.log('Message received from server:', event.data);
+                        };
                         USER_ID = id.id
                         console.log(USER_ID)
                         const messagesList = document.getElementById('messages-list');

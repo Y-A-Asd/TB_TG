@@ -4,7 +4,7 @@ import secrets
 import time
 from datetime import datetime
 
-from asgiref.sync import async_to_sync
+from asgiref.sync import async_to_sync  # todo: read it
 from channels.generic.websocket import WebsocketConsumer
 from django.core.files.base import ContentFile
 from jwt import decode, InvalidTokenError
@@ -13,12 +13,12 @@ from core.models import User
 from .models import Message, Conversation
 from .serializers import MessageSerializer
 
-SECRET_KEY = '0uwk9*8mltebnrrdn(zawxdyh-8b*s6$!0n(lb(cwlk+@otvzq' #todo
+SECRET_KEY = '0uwk9*8mltebnrrdn(zawxdyh-8b*s6$!0n(lb(cwlk+@otvzq'  # todo env bru :-/
 
 
 class ChatConsumer(WebsocketConsumer):
     def connect(self):
-        print("here")
+        print("COnnect to consumer")
         print(self.scope)
         self.room_name = self.scope["url_route"]["kwargs"]["room_name"]
         self.room_group_name = f"chat_{self.room_name}"
@@ -30,6 +30,7 @@ class ChatConsumer(WebsocketConsumer):
         self.accept()
 
     def disconnect(self, close_code):
+        print("Disconnect from consumer")
         # Leave room group
         async_to_sync(self.channel_layer.group_discard)(
             self.room_group_name, self.channel_name
@@ -38,8 +39,9 @@ class ChatConsumer(WebsocketConsumer):
     # Receive message from WebSocket
     def receive(self, text_data=None, bytes_data=None):
         # parse the json data into dictionary object
+        print("now receiver worked ")
         text_data_json = json.loads(text_data)
-        time.sleep(2)
+        # time.sleep(2)2
         # Send message to room group
         chat_type = {"type": "chat_message"}
         return_dict = {**chat_type, **text_data_json}
@@ -50,7 +52,7 @@ class ChatConsumer(WebsocketConsumer):
 
     # Receive message from room group
     def chat_message(self, event):
-
+        print("lets send some messages :-)")
         text_data_json = event.copy()
         text_data_json.pop("type")
         message, attachment, header = (
@@ -112,5 +114,6 @@ class ChatConsumer(WebsocketConsumer):
             self.send_error(error_message)
 
     def send_error(self, error_message):
+        print('Errrrrrrror happened :-//////////', error_message)
         # Send error message to WebSocket
         self.send(text_data=json.dumps(error_message))
