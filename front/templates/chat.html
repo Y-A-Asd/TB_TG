@@ -81,6 +81,7 @@
 
 <script>
     let USER_ID = 0;
+    let socket = null
 
     function startConvo() {
         let phone_number = null
@@ -110,15 +111,39 @@
 
         // Event listener for when the send button is clicked
         sendButton.addEventListener('click', function () {
+
             // Get the message from the input field
             const message = messageInput.value;
             makeAuthenticatedRequest('/core/auth/users/me/', 'GET')
                 .then(id => {
                     User_id = id.id
+                    {#const socket = new WebSocket(`ws://127.0.0.1:8000/ws/chat/${User_id}/`);#}
                     console.log('message', message)
                     console.log('message', messageInput)
                     // Call the sendMessage function with the message
-                    sendMessage(message, User_id);
+                    const token = getToken();
+
+                    // Check if token is available
+                    if (token) {
+                        const headers = {
+                            Authorization: 'JWT ' + token
+                        };
+                        // Construct message with JWT token in the header
+                        const messageWithToken = {
+                            headers: headers,
+                            message: message
+                        };
+
+                        // Send the message
+                        console.log('sending messeage', message)
+                        console.log('sending messeage', messageWithToken)
+                        console.log('sending messeage', JSON.stringify(messageWithToken))
+                        socket.send(JSON.stringify(messageWithToken));
+                        console.log('closing message')
+
+                    } else {
+                        console.error('JWT token not found in local storage');
+                    }
                 })
             // Clear the input field after sending the message
             messageInput.value = '';
@@ -154,6 +179,9 @@
                 } else if (response.status === 403) {
                     alert('starting the conversation ...')
                     startConvo()
+                } else if (response.status === 401) {
+                    alert('You are not loged in ...')
+                    window.location.href = '/login/';
                 } else {
                     return response.json().then(errorJson => {
                         alert(JSON.stringify(errorJson))
@@ -173,11 +201,19 @@
                 let USER_ID = 0
                 makeAuthenticatedRequest('/core/auth/users/me/', 'GET')
                     .then(id => {
-                        const socket = new WebSocket(`ws://127.0.0.1:8000/ws/chat/${conversationId}/`);
+                        socket = new WebSocket(`ws://127.0.0.1:8000/ws/chat/${conversationId}/`);
 
                         socket.onmessage = function (event) {
                             fetchMessages(conversationId);
                             console.log('Message received from server:', event.data);
+                        };
+                        socket.onerror = function (error) {
+                            console.error('WebSocket error:', error);
+                        };
+
+                        // Event handler for when the WebSocket connection is closed
+                        socket.onclose = function (event) {
+                            console.log('WebSocket connection closed:', event);
                         };
                         USER_ID = id.id
                         console.log(USER_ID)
@@ -203,53 +239,6 @@
             .catch(error => console.error('Error fetching messages:', error));
     }
 
-
-    // Establish WebSocket connection
-    function sendMessage(message, User) {
-        // Establish WebSocket connection
-        const socket = new WebSocket(`ws://127.0.0.1:8000/ws/chat/${User}/`);
-
-        // Event handler for when the WebSocket connection is opened
-        socket.onopen = function (event) {
-            console.log('WebSocket connection opened');
-
-            // Get JWT token from local storage
-            const token = getToken();
-
-            // Check if token is available
-            if (token) {
-                const headers = {
-                    Authorization: 'JWT ' + token
-                };
-                // Construct message with JWT token in the header
-                const messageWithToken = {
-                    headers: headers,
-                    message: message
-                };
-
-                // Send the message
-                socket.send(JSON.stringify(messageWithToken));
-            } else {
-                console.error('JWT token not found in local storage');
-            }
-        };
-
-        // Event handler for when a message is received from the WebSocket server
-        socket.onmessage = function (event) {
-            fetchMessages(User);
-            console.log('Message received from server:', event.data);
-        };
-
-        // Event handler for when an error occurs with the WebSocket connection
-        socket.onerror = function (error) {
-            console.error('WebSocket error:', error);
-        };
-
-        // Event handler for when the WebSocket connection is closed
-        socket.onclose = function (event) {
-            console.log('WebSocket connection closed:', event);
-        };
-    }
 
 
 </script>

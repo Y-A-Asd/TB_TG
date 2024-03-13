@@ -18,8 +18,8 @@ SECRET_KEY = '0uwk9*8mltebnrrdn(zawxdyh-8b*s6$!0n(lb(cwlk+@otvzq'  # todo env br
 
 class ChatConsumer(WebsocketConsumer):
     def connect(self):
-        print("COnnect to consumer")
-        print(self.scope)
+        # print("COnnect to consumer")
+        # print(self.scope)
         self.room_name = self.scope["url_route"]["kwargs"]["room_name"]
         self.room_group_name = f"chat_{self.room_name}"
 
@@ -64,8 +64,8 @@ class ChatConsumer(WebsocketConsumer):
         conversation = Conversation.objects.get(id=int(self.room_name))
         if header:
             token = header['Authorization'].split()[1]
-            print(token)
-            print(type(token))
+            # print(token)
+            # print(type(token))
             decoded_token = decode(token, SECRET_KEY, algorithms=['HS256'])
             user_id = decoded_token.get('user_id')
             user = User.objects.get(id=user_id)
@@ -73,11 +73,11 @@ class ChatConsumer(WebsocketConsumer):
         else:
             sender = self.scope['user']
 
-        print(self.scope)
-        print()
-        print(self.scope)
-        print()
-        print()
+        # print(self.scope)
+        # print()
+        # print(self.scope)
+        # print()
+        # print()
         print('text_data_json', text_data_json)
         try:
             if sender:
@@ -107,6 +107,7 @@ class ChatConsumer(WebsocketConsumer):
                         serializer.data
                     )
                 )
+                print('fINISHED')
             else:
                 raise ValueError('Sender is not found Log in please')
         except Exception as e:
