@@ -17,6 +17,11 @@ SECRET_KEY = '0uwk9*8mltebnrrdn(zawxdyh-8b*s6$!0n(lb(cwlk+@otvzq'  # todo env br
 
 
 class ChatConsumer(WebsocketConsumer):
+    def __init__(self, *args, **kwargs):
+        super().__init__(args, kwargs)
+        self.room_id = None
+        self.group_name = None
+
     def connect(self):
         # print("COnnect to consumer")
         # print(self.scope)
@@ -45,6 +50,7 @@ class ChatConsumer(WebsocketConsumer):
         # Send message to room group
         chat_type = {"type": "chat_message"}
         return_dict = {**chat_type, **text_data_json}
+        print(return_dict)
         async_to_sync(self.channel_layer.group_send)(
             self.room_group_name,
             return_dict,
@@ -52,6 +58,9 @@ class ChatConsumer(WebsocketConsumer):
 
     # Receive message from room group
     def chat_message(self, event):
+        print('event/n\n', event, "\n")
+        print('self\n', self, "\n")
+        print('self\n', dir(self), "\n")
         print("lets send some messages :-)")
         # text_data_json = event.copy()
         # text_data_json.pop("type")
@@ -64,8 +73,6 @@ class ChatConsumer(WebsocketConsumer):
         conversation = Conversation.objects.get(id=int(self.room_name))
         if header:
             token = header['Authorization'].split()[1]
-            # print(token)
-            # print(type(token))
             decoded_token = decode(token, SECRET_KEY, algorithms=['HS256'])
             user_id = decoded_token.get('user_id')
             user = User.objects.get(id=user_id)
@@ -73,12 +80,6 @@ class ChatConsumer(WebsocketConsumer):
         else:
             sender = self.scope['user']
 
-        # print(self.scope)
-        # print()
-        # print(self.scope)
-        # print()
-        # print()
-        # print('text_data_json', text_data_json)
         try:
             if sender:
                 # Attachment
@@ -102,11 +103,11 @@ class ChatConsumer(WebsocketConsumer):
                     )
                 serializer = MessageSerializer(instance=_message)
                 # Send message to WebSocket
-                self.send(
+                async_to_sync(self.send(
                     text_data=json.dumps(
                         serializer.data
                     )
-                )
+                ))
                 print('fINISHED')
             else:
                 raise ValueError('Sender is not found Log in please')
