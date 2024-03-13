@@ -32,7 +32,7 @@ class JWTAuthMiddleware(BaseMiddleware):
         headers = dict(scope['headers'])
         if b'authorization' in headers:
             try:
-                token = headers[b'authorization'].decode().split()[1]
+                token = headers[b'authorization']
                 scope['user'] = await get_user(token)
                 print('done scopeee', scope['user'])
             except IndexError:
