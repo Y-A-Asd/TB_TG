@@ -1,0 +1,262 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Mobile Specific Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="">
+    <!-- Author Meta -->
+    <meta name="author" content="CodePixar">
+    <!-- Meta Description -->
+    <meta name="description" content="">
+    <!-- Meta Keyword -->
+    <meta name="keywords" content="">
+    <!-- meta character set -->
+    <meta charset="UTF-8">
+    <!-- Site Title -->
+
+    <meta name="description" content="Y.A.A"/>
+    <meta name="author" content="Y.A.A"/>
+    <title>Chat With Assistance - TB_TG</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/chat.css' %}">
+</head>
+<body>
+<div class="container py-5 px-4">
+    <!-- For demo purpose-->
+    <header class="text-center">
+        <h1 class="display-4 text-white">Chat With Support</h1>
+        <p class="text-white lead mb-0">Ask Us</p>
+        <p class="text-white lead mb-4">Powered by
+            <a href="https://github.com/Y-A-Asd" class="text-white">
+                <u>Y.A.A</u></a>
+        </p>
+    </header>
+
+    <div class="row rounded-lg overflow-hidden shadow">
+        <!-- Users box-->
+        <div class="col-5 px-0">
+            <div class="bg-white">
+
+                <div class="bg-gray px-4 py-2 bg-light">
+                    <p class="h5 mb-0 py-1">Recent</p>
+                </div>
+
+                <div class="messages-box">
+                    <div class="list-group rounded-0" id="conversations-list">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Chat Box-->
+        <div class="col-7 px-0">
+            <div class="px-4 py-5 chat-box bg-white" id="messages-list">
+                <!-- Sender Message-->
+
+
+            </div>
+
+            <!-- Typing area -->
+            <form action="#" class="bg-light">
+                <div class="input-group">
+                    <input id="message-input" type="text" placeholder="Type a message"
+                           class="form-control rounded-0 border-0 py-4 bg-light">
+                    <div class="input-group-append">
+                        <p id="send-button" type="submit" class="btn btn-success">Send<i
+                                class="fa fa-paper-plane"></i>
+                        </p>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+
+    function getToken() {
+        return localStorage.getItem('JWT');
+    }
+
+    function makeAuthenticatedRequest(url, method, context = null) {
+        const token = getToken();
+        const headers = {
+            'Content-Type': 'application/json',
+        };
+
+        if (token) {
+            headers['Authorization'] = `JWT ${token}`;
+        }
+
+        const options = {
+            method: method,
+            headers: headers,
+            body: context ? JSON.stringify(context) : null,
+        };
+
+        return fetch(url, options)
+            .then(response => {
+                if (response.ok) {
+                    return response.json()
+                } else if (response.status === 403) {
+                    alert('starting the conversation ...')
+                    window.location.href = '/chat/'
+                } else if (response.status === 401) {
+                    alert('You are not loged in ...')
+                    window.location.href = '/login/';
+                } else {
+                    return response.json().then(errorJson => {
+                        alert(JSON.stringify(errorJson))
+                        throw new Error(JSON.stringify(errorJson));
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+
+
+    makeAuthenticatedRequest('/conversations/', 'GET')
+        .then(data => {
+            const conversationsList = document.getElementById('conversations-list');
+            conversationsList.innerHTML = '';
+            data.forEach(conversation => {
+
+                const timestamp = conversation.last_message.timestamp;
+                const dateTime = new Date(timestamp);
+                const options = {month: 'short', day: 'numeric'};
+                const formattedDateTime = dateTime.toLocaleDateString('en-US', options);
+
+                const conversationButton = document.createElement('button');
+                conversationButton.setAttribute('type', 'button');
+                conversationButton.classList.add('list-group-item', 'list-group-item-action', 'list-group-item-light', 'rounded-0');
+                conversationButton.innerHTML = `
+                <div class="media">
+                    <div class="media-body ml-4">
+                        <div class="d-flex align-items-center justify-content-between mb-1">
+                            <h6 class="mb-0">${conversation.sender_conversation.phone_number}</h6>
+                            <small class="small font-weight-bold">${formattedDateTime}</small>
+                        </div>
+                        <p class="font-italic text-muted mb-0 text-small">${conversation.last_message.text}</p>
+                    </div>
+                </div>
+            `;
+                conversationButton.addEventListener('click', () => fetchMessages(conversation.id));
+
+                conversationsList.appendChild(conversationButton);
+            });
+        })
+        .catch(error => console.error('Error fetching conversations:', error));
+
+    function fetchMessages(conversationId) {
+        makeAuthenticatedRequest(`/conversations/${conversationId}/`, 'GET')
+            .then(data => {
+
+                let USER_ID = 0
+                makeAuthenticatedRequest('/core/auth/users/me/', 'GET')
+                    .then(id => {
+                        const socket = new WebSocket(`ws://127.0.0.1:8000/ws/chat/${conversationId}/`);
+                        socket.onmessage = function (event) {
+
+                            fetchMessages(conversationId);
+                            console.log('Message received from server:', event.data);
+                        };
+
+                        USER_ID = id.id
+                        console.log(USER_ID)
+                        const messagesList = document.getElementById('messages-list');
+                        messagesList.innerHTML = ''; // Clear previous messages
+                        data.message_set.forEach(message => {
+                            const messageDiv = document.createElement('div');
+                            messageDiv.className = message.sender === USER_ID ? 'media w-50 ml-auto mb-3' : 'media w-50 mb-3';
+                            messageDiv.innerHTML = `
+                            <div class="media-body ml-3">
+                                <div class="${message.sender === USER_ID ? 'bg-primary' : 'bg-light'} rounded py-2 px-3 mb-2">
+                                    <p class="text-small mb-0 ${message.sender === USER_ID ? 'text-white' : 'text-muted'}">${message.text}</p>
+                                </div>
+                                <p class="small text-muted">${message.timestamp} | ${message.sender === USER_ID ? 'Sender' : 'Receiver'}</p>
+                            </div>
+                        `;
+                            messagesList.appendChild(messageDiv);
+                        });
+                        // Get references to the input and button elements
+                        const messageInput = document.getElementById('message-input');
+                        const sendButton = document.getElementById('send-button');
+
+                        // Event listener for when the send button is clicked
+                        sendButton.addEventListener('click', function () {
+                            // Get the message from the input field
+                            const message = messageInput.value;
+                            sendMessage(message, conversationId);
+                            // Clear the input field after sending the message
+                            messageInput.value = '';
+                        });
+
+                    })
+                    .catch(error => console.error('Error fetching conversations:', error));
+            })
+            .catch(error => console.error('Error fetching messages:', error));
+    }
+
+
+    // Establish WebSocket connection
+    function sendMessage(message, User) {
+        // Establish WebSocket connection
+        const socket = new WebSocket(`ws://127.0.0.1:8000/ws/chat/${User}/`);
+
+        // Event handler for when the WebSocket connection is opened
+        socket.onopen = function (event) {
+            console.log('WebSocket connection opened');
+
+            // Get JWT token from local storage
+            const token = getToken();
+
+            // Check if token is available
+            if (token) {
+                const headers = {
+                    Authorization: 'JWT ' + token
+                };
+                // Construct message with JWT token in the header
+                const messageWithToken = {
+                    headers: headers,
+                    message: message
+                };
+
+                // Send the message
+                socket.send(JSON.stringify(messageWithToken));
+            } else {
+                console.error('JWT token not found in local storage');
+            }
+        };
+
+        // Event handler for when a message is received from the WebSocket server
+        socket.onmessage = function (event) {
+
+            fetchMessages(User);
+            console.log('Message received from server:', event.data);
+        };
+
+        // Event handler for when an error occurs with the WebSocket connection
+        socket.onerror = function (error) {
+            console.error('WebSocket error:', error);
+        };
+
+        // Event handler for when the WebSocket connection is closed
+        socket.onclose = function (event) {
+            console.log('WebSocket connection closed:', event);
+        };
+    }
+
+
+</script>
+</body>
+</html>

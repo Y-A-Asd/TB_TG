@@ -70,14 +70,22 @@ class HomeView(TemplateView):
 class ProfileView(TemplateView):
     template_name = 'profile.html'
 
-    # @method_decorator(cache_page(60 * 15))
-    # @method_decorator(vary_on_headers("Authorization"))
-    # def dispatch(self, *args, **kwargs):
-    #     return super().dispatch(*args, **kwargs)
+    @method_decorator(cache_page(60 * 15))
+    @method_decorator(vary_on_headers("Authorization"))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
 
 
 class CompareView(TemplateView):
     template_name = 'compare.html'
+
+
+class ChatView(TemplateView):
+    template_name = 'chat.html'
+
+
+class ChatAdminView(TemplateView):
+    template_name = 'chatadmin.html'
 
 
 class OrderDetailView(View):

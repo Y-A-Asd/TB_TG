@@ -35,6 +35,7 @@ INTERNAL_IPS = [
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,18 +44,21 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'djoser',
     'drf_yasg',
-    "compressor",
+    'compressor',
     'solo',
     'silk',
     'parler',
-    "debug_toolbar",
+    'debug_toolbar',
     'django_filters',
     'rest_framework',
+    'channels',
+    'corsheaders',
     'rosetta',
     'blog',
     'front',
     'discount',
     'core',
+    'chat',
     'shop',
     'tags',
 ]
@@ -68,6 +72,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     "debug_toolbar.middleware.DebugToolbarMiddleware",
     'django.middleware.common.CommonMiddleware',
@@ -95,6 +100,7 @@ TEMPLATES = [
     },
 ]
 
+ASGI_APPLICATION = "TB_TG.asgi.application"
 WSGI_APPLICATION = 'TB_TG.wsgi.application'
 
 # Database
@@ -345,3 +351,6 @@ ZP_API = f"https://{sandbox}.zarinpal.com/pg/services/WebGate/wsdl"
 ZP_API_REQUEST = f"https://{sandbox}.zarinpal.com/pg/v4/payment/request.json"
 ZP_API_STARTPAY = f"https://{sandbox}.zarinpal.com/pg/StartPay/"
 ZP_API_VERIFY = f"https://{sandbox}.zarinpal.com/pg/v4/payment/verify.json"
+
+CORS_ALLOW_ALL_ORIGINS = True
+

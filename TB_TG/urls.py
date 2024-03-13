@@ -45,6 +45,7 @@ urlpatterns = i18n_patterns(
     path("blog/", include('blog.urls', namespace='blog')),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+    path('conversations/', include('chat.urls')),
     prefix_default_language=False
 )
 

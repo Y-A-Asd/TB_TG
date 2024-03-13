@@ -3,7 +3,7 @@ from .common import *
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-^r6+$o=0!juwr_0k89v86z93ikk&3=f1#fdxrse&k52vi*7e_u'
+SECRET_KEY = '0uwk9*8mltebnrrdn(zawxdyh-8b*s6$!0n(lb(cwlk+@otvzq'
 
 if DEBUG:
     MIDDLEWARE += ['silk.middleware.SilkyMiddleware']
@@ -35,8 +35,19 @@ CACHES['memcache'] = {
 
 REDIS_HOST_OTP = 'localhost'
 
-CELERY_BROKER_URL = 'redis://localhost:6379/1'
+CELERY_BROKER_URL = 'redis://localhost:6379/4'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('localhost', 6379)],
+        },
+    },
+}
 
 DEBUG_TOOLBAR_CONFIG = {
     'SHOW_TOOLBAR_CALLBACK': lambda request: True
 }
+
+ALLOWED_HOSTS = ["*"]
