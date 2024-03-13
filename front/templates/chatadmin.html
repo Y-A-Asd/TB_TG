@@ -81,6 +81,7 @@
 
 <script>
 
+    let socket = null
 
     function getToken() {
         return localStorage.getItem('JWT');
@@ -104,6 +105,7 @@
 
         return fetch(url, options)
             .then(response => {
+                console.log(response.status)
                 if (response.ok) {
                     return response.json()
                 } else if (response.status === 403) {
@@ -131,15 +133,16 @@
             conversationsList.innerHTML = '';
             data.forEach(conversation => {
 
-                const timestamp = conversation.last_message.timestamp;
-                const dateTime = new Date(timestamp);
-                const options = {month: 'short', day: 'numeric'};
-                const formattedDateTime = dateTime.toLocaleDateString('en-US', options);
 
                 const conversationButton = document.createElement('button');
                 conversationButton.setAttribute('type', 'button');
                 conversationButton.classList.add('list-group-item', 'list-group-item-action', 'list-group-item-light', 'rounded-0');
-                conversationButton.innerHTML = `
+                if (conversation.last_message) {
+                    const timestamp = conversation.last_message.timestamp;
+                    const dateTime = new Date(timestamp);
+                    const options = {month: 'short', day: 'numeric'};
+                    const formattedDateTime = dateTime.toLocaleDateString('en-US', options);
+                    conversationButton.innerHTML = `
                 <div class="media">
                     <div class="media-body ml-4">
                         <div class="d-flex align-items-center justify-content-between mb-1">
@@ -150,24 +153,42 @@
                     </div>
                 </div>
             `;
-                conversationButton.addEventListener('click', () => fetchMessages(conversation.id));
+                } else {
+                    conversationButton.innerHTML = `
+                <div class="media">
+                    <div class="media-body ml-4">
+                        <div class="d-flex align-items-center justify-content-between mb-1">
+                            <h6 class="mb-0">${conversation.sender_conversation.phone_number}</h6>
+                            <small class="small font-weight-bold">null</small>
+                        </div>
+                        <p class="font-italic text-muted mb-0 text-small">No message found </p>
+                    </div>
+                </div>
+            `;
+                }
+                conversationButton.addEventListener('click', () => {
+                    localStorage.setItem('user_id', conversation.id);
+                    socket = new WebSocket(`ws://127.0.0.1:8000/ws/chat/${localStorage.getItem('user_id')}/`);
+                    alert('socket initialized')
+                    fetchMessages(conversation.id, socket);
+                });
 
                 conversationsList.appendChild(conversationButton);
             });
         })
         .catch(error => console.error('Error fetching conversations:', error));
 
-    function fetchMessages(conversationId) {
+    function fetchMessages(conversationId, socket) {
         makeAuthenticatedRequest(`/conversations/${conversationId}/`, 'GET')
             .then(data => {
 
                 let USER_ID = 0
                 makeAuthenticatedRequest('/core/auth/users/me/', 'GET')
                     .then(id => {
-                        const socket = new WebSocket(`ws://127.0.0.1:8000/ws/chat/${conversationId}/`);
+
                         socket.onmessage = function (event) {
 
-                            fetchMessages(conversationId);
+                            fetchMessages(conversationId, socket);
                             console.log('Message received from server:', event.data);
                         };
 
@@ -191,12 +212,52 @@
                         // Get references to the input and button elements
                         const messageInput = document.getElementById('message-input');
                         const sendButton = document.getElementById('send-button');
-
+                        console.log(sendButton)
                         // Event listener for when the send button is clicked
                         sendButton.addEventListener('click', function () {
                             // Get the message from the input field
                             const message = messageInput.value;
-                            sendMessage(message, conversationId);
+                            console.log('sending message')
+                            socket.onopen = function (event) {
+                                console.log('WebSocket connection opened');
+
+                                // Get JWT token from local storage
+                                const token = getToken();
+
+                                // Check if token is available
+                                if (token) {
+                                    const headers = {
+                                        Authorization: 'JWT ' + token
+                                    };
+                                    // Construct message with JWT token in the header
+                                    const messageWithToken = {
+                                        headers: headers,
+                                        message: message
+                                    };
+
+                                    // Send the message
+                                    socket.send(JSON.stringify(messageWithToken));
+                                } else {
+                                    console.error('JWT token not found in local storage');
+                                }
+                            };
+
+                            // Event handler for when a message is received from the WebSocket server
+                            socket.onmessage = function (event) {
+
+                                fetchMessages(conversationId, socket);
+                                console.log('Message received from server:', event.data);
+                            };
+
+                            // Event handler for when an error occurs with the WebSocket connection
+                            socket.onerror = function (error) {
+                                console.error('WebSocket error:', error);
+                            };
+
+                            // Event handler for when the WebSocket connection is closed
+                            socket.onclose = function (event) {
+                                console.log('WebSocket connection closed:', event);
+                            };
                             // Clear the input field after sending the message
                             messageInput.value = '';
                         });
@@ -206,56 +267,6 @@
             })
             .catch(error => console.error('Error fetching messages:', error));
     }
-
-
-    // Establish WebSocket connection
-    function sendMessage(message, User) {
-        // Establish WebSocket connection
-        const socket = new WebSocket(`ws://127.0.0.1:8000/ws/chat/${User}/`);
-
-        // Event handler for when the WebSocket connection is opened
-        socket.onopen = function (event) {
-            console.log('WebSocket connection opened');
-
-            // Get JWT token from local storage
-            const token = getToken();
-
-            // Check if token is available
-            if (token) {
-                const headers = {
-                    Authorization: 'JWT ' + token
-                };
-                // Construct message with JWT token in the header
-                const messageWithToken = {
-                    headers: headers,
-                    message: message
-                };
-
-                // Send the message
-                socket.send(JSON.stringify(messageWithToken));
-            } else {
-                console.error('JWT token not found in local storage');
-            }
-        };
-
-        // Event handler for when a message is received from the WebSocket server
-        socket.onmessage = function (event) {
-
-            fetchMessages(User);
-            console.log('Message received from server:', event.data);
-        };
-
-        // Event handler for when an error occurs with the WebSocket connection
-        socket.onerror = function (error) {
-            console.error('WebSocket error:', error);
-        };
-
-        // Event handler for when the WebSocket connection is closed
-        socket.onclose = function (event) {
-            console.log('WebSocket connection closed:', event);
-        };
-    }
-
 
 </script>
 </body>
