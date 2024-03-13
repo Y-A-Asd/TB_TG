@@ -20,7 +20,7 @@ from .validator import validate_key_value_relationship
 @admin.register(FeatureValue)
 class FeatureValueAdmin(TranslatableAdmin):
     autocomplete_fields = ['key']
-    list_display = ['id', 'value']
+    list_display = ['id', 'key', 'value']
     search_fields = ['translations__value']
 
 
