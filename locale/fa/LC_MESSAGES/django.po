@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-04 13:37+0330\n"
+"POT-Creation-Date: 2024-03-14 03:00+0330\n"
 "PO-Revision-Date: 2024-03-04 13:30+0330\n"
 "Last-Translator: Anonymous User <yosofasady2@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,17 +19,17 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
 
-#: TB_TG/settings/common.py:131
+#: TB_TG/settings/common.py:137
 msgid "English"
 msgstr "انگلیسی"
 
-#: TB_TG/settings/common.py:132
+#: TB_TG/settings/common.py:138
 msgid "Persian"
 msgstr "فارسی"
 
 #: blog/models.py:20 front/templates/compare.html:77
 #: front/templates/products_detail.html:120 shop/models.py:30 shop/models.py:67
-#: shop/models.py:111 shop/models.py:408 shop/views.py:629
+#: shop/models.py:111 shop/models.py:405 shop/views.py:691
 msgid "Title"
 msgstr "عنوان"
 
@@ -60,7 +60,7 @@ msgid "Blogs"
 msgstr "بلاگ ها"
 
 #: blog/models.py:46 shop/models.py:209 shop/models.py:227 shop/models.py:268
-#: shop/models.py:309 shop/models.py:405 shop/models.py:444
+#: shop/models.py:309 shop/models.py:402 shop/models.py:441
 msgid "Customer"
 msgstr "مشتری"
 
@@ -73,7 +73,7 @@ msgid "Message"
 msgstr "پیام"
 
 #: blog/models.py:50 core/models.py:114 discount/models.py:31
-#: shop/models.py:412
+#: shop/models.py:409
 msgid "Active"
 msgstr "فعال"
 
@@ -86,7 +86,7 @@ msgstr "نظر"
 msgid "Comments"
 msgstr "نظرات"
 
-#: blog/serializers.py:35 shop/serializers.py:335
+#: blog/serializers.py:35 shop/serializers.py:340
 msgid "User not found"
 msgstr "کاربر یافت نشد "
 
@@ -162,8 +162,8 @@ msgstr "شماره تلفن و ایمیل الزامیست"
 msgid "Phone number must start with \"09\" and have 11 digits."
 msgstr "شماره تلفن معتبر نیست 09123456789"
 
-#: core/models.py:109 front/templates/order_detail.html:50 shop/models.py:446
-#: shop/models.py:462
+#: core/models.py:109 front/templates/order_detail.html:50 shop/models.py:443
+#: shop/models.py:459
 msgid "Phone Number"
 msgstr "شماره تلفن"
 
@@ -192,19 +192,19 @@ msgstr "آخرین ورود"
 msgid "Users"
 msgstr "کاربران"
 
-#: core/views.py:23
+#: core/views.py:24
 msgid "You already registered!"
 msgstr "شما قبلا وارد شدید!"
 
-#: core/views.py:28
+#: core/views.py:29
 msgid "Account created !"
 msgstr "اکانت ساخته شد"
 
-#: core/views.py:44
+#: core/views.py:45
 msgid "Invalid Email"
 msgstr "ایمیل نامعتبر!"
 
-#: core/views.py:50
+#: core/views.py:52
 msgid "Wait until last code expire"
 msgstr "صبر کنید تا کد قبلی باطل شود"
 
@@ -212,11 +212,7 @@ msgstr "صبر کنید تا کد قبلی باطل شود"
 msgid "Code Send, Check you email"
 msgstr "کد ارسال شد. ایمیل خود را بررسی کنید"
 
-#: core/views.py:57
-msgid "server side error!"
-msgstr "خطای سرور"
-
-#: core/views.py:86
+#: core/views.py:84
 msgid "Invalid Code"
 msgstr "کد نامعتبر!"
 
@@ -301,23 +297,29 @@ msgstr "ورود /ثبت نام"
 msgid "About Me"
 msgstr "درباره من"
 
-#: front/templates/base.html:119
+#: front/templates/base.html:99 templates/admin/base_site.html:23
+#, fuzzy
+#| msgid "24/7 Support"
+msgid "Support"
+msgstr "پشتیبانی 24 ساعته"
+
+#: front/templates/base.html:122
 msgid "Search Here"
 msgstr "جستجو کنید"
 
-#: front/templates/base.html:135
+#: front/templates/base.html:138
 msgid "About Us"
 msgstr "درباره ما"
 
-#: front/templates/base.html:141 shop/models.py:272 shop/models.py:460
+#: front/templates/base.html:144 shop/models.py:272 shop/models.py:457
 msgid "Address"
 msgstr "آدرس"
 
-#: front/templates/base.html:148
+#: front/templates/base.html:151
 msgid "Follow Us"
 msgstr "ما را دنبال کنید"
 
-#: front/templates/base.html:149
+#: front/templates/base.html:152
 msgid "Let us be social"
 msgstr "در فضا مجازی کنار ما باشید!"
 
@@ -342,18 +344,18 @@ msgid "Cart"
 msgstr "سبد خرید"
 
 #: front/templates/cart.html:31 front/templates/order_detail.html:79
-#: shop/models.py:164 shop/models.py:242 shop/models.py:379 shop/models.py:554
+#: shop/models.py:164 shop/models.py:242 shop/models.py:376 shop/models.py:551
 msgid "Product"
 msgstr "محصول"
 
 #: front/templates/cart.html:32 front/templates/products_list.html:40
-#: shop/views.py:625
+#: shop/views.py:687
 msgid "Price"
 msgstr "قیمت "
 
 #: front/templates/cart.html:33 front/templates/order_detail.html:80
 #: front/templates/products_detail.html:52 shop/models.py:244
-#: shop/models.py:382
+#: shop/models.py:379
 msgid "Quantity"
 msgstr "تعداد"
 
@@ -363,12 +365,12 @@ msgid "Total"
 msgstr "قیمت کل"
 
 #: front/templates/cart.html:35 front/templates/cart.html:153
-#: front/templates/profile.html:141 front/templates/profile.html:613
+#: front/templates/profile.html:141 front/templates/profile.html:612
 msgid "Delete"
 msgstr "حذف"
 
 #: front/templates/cart.html:42 front/templates/profile.html:203
-#: shop/admin.py:248 shop/admin.py:277 shop/models.py:443
+#: shop/admin.py:248 shop/admin.py:277 shop/models.py:440
 msgid "Total Price"
 msgstr "قیمت کل"
 
@@ -428,7 +430,7 @@ msgstr "محصولات پر فروش"
 #: front/templates/products_list.html:160
 #: front/templates/products_list.html:305
 #: front/templates/products_list.html:363 shop/models.py:90 shop/models.py:121
-#: shop/views.py:627
+#: shop/views.py:689
 msgid "Collection"
 msgstr "مجموعه"
 
@@ -563,7 +565,7 @@ msgstr "شماره سفارش"
 msgid "Date"
 msgstr "تاریخ"
 
-#: front/templates/order_detail.html:38 shop/models.py:307 shop/models.py:441
+#: front/templates/order_detail.html:38 shop/models.py:307 shop/models.py:438
 msgid "Payment Status"
 msgstr "وضعیت پرداخت"
 
@@ -613,7 +615,7 @@ msgid "Not Paid"
 msgstr "پرداخت نشده"
 
 #: front/templates/order_detail.html:221 front/templates/profile.html:391
-#: shop/models.py:302 shop/models.py:436
+#: shop/models.py:302 shop/models.py:433
 msgid "Pending"
 msgstr "در حال انتظار"
 
@@ -628,7 +630,7 @@ msgid "Delivered"
 msgstr "تحویل شد"
 
 #: front/templates/order_detail.html:227 front/templates/profile.html:397
-#: shop/models.py:305 shop/models.py:438
+#: shop/models.py:305 shop/models.py:435
 msgid "Failed"
 msgstr "ناموفق"
 
@@ -749,7 +751,7 @@ msgstr "نمایه"
 msgid "Default"
 msgstr "آدرس اصلی"
 
-#: front/templates/profile.html:140 front/templates/profile.html:610
+#: front/templates/profile.html:140 front/templates/profile.html:609
 msgid "Edit"
 msgstr "ویرایش"
 
@@ -870,27 +872,27 @@ msgstr "{count} محصول با موفقیت به‌روزرسانی شدند."
 msgid "Mark selected orders as delivered"
 msgstr "تراکنش انتخاب شده ارسال شد"
 
-#: shop/admin.py:259 shop/models.py:386
+#: shop/admin.py:259 shop/models.py:383
 msgid "Order Items"
 msgstr "آیتم‌های سفارش"
 
-#: shop/admin.py:305 shop/models.py:320 shop/models.py:378 shop/models.py:440
+#: shop/admin.py:306 shop/models.py:320 shop/models.py:375 shop/models.py:437
 msgid "Order"
 msgstr "سفارش"
 
-#: shop/admin.py:310
+#: shop/admin.py:311
 msgid "Mark selected transactions as complete"
 msgstr "تراکنش انتخاب شده پرداخت شد"
 
-#: shop/admin.py:327
+#: shop/admin.py:328
 msgid "No Image"
 msgstr "بدون تصویر"
 
-#: shop/admin.py:330
+#: shop/admin.py:331
 msgid "Logo Preview"
 msgstr "پیشنمایش لوگو"
 
-#: shop/filters.py:51 shop/models.py:559
+#: shop/filters.py:51 shop/models.py:556
 msgid "Main Feature"
 msgstr "ویژگی "
 
@@ -934,7 +936,7 @@ msgstr "مجموعه‌ها"
 msgid "Slug"
 msgstr "نامک"
 
-#: shop/models.py:115 shop/models.py:380
+#: shop/models.py:115 shop/models.py:377
 msgid "Unit Price"
 msgstr "قیمت واحد"
 
@@ -991,139 +993,139 @@ msgstr "مشتری یافت نشد!"
 msgid "Invalid discount mode: {self.discount.mode}"
 msgstr "حالت در نظر گرفته شده نامعتبر است"
 
-#: shop/models.py:360 shop/serializers.py:216
-msgid "Discount is not active!"
-msgstr "تخفیف غیر فعال است!"
-
-#: shop/models.py:385
+#: shop/models.py:382
 msgid "Order Item"
 msgstr "آیتم سفارش"
 
-#: shop/models.py:407
+#: shop/models.py:404
 msgid "Rating"
 msgstr "امتیاز"
 
-#: shop/models.py:418
+#: shop/models.py:415
 msgid "Review"
 msgstr "نظر"
 
-#: shop/models.py:419
+#: shop/models.py:416
 msgid "Reviews"
 msgstr "نظر ها"
 
-#: shop/models.py:437
+#: shop/models.py:434
 msgid "Complete"
 msgstr "تکمیل شده"
 
-#: shop/models.py:445
+#: shop/models.py:442
 msgid "Receipt Number"
 msgstr "شماره فیش"
 
-#: shop/models.py:453
+#: shop/models.py:450
 msgid "Transaction"
 msgstr "تراکنش"
 
-#: shop/models.py:454
+#: shop/models.py:451
 msgid "Transactions"
 msgstr "تراکنش ها"
 
-#: shop/models.py:459
+#: shop/models.py:456
 msgid "Footer Text"
 msgstr "متن زیرین"
 
-#: shop/models.py:463
+#: shop/models.py:460
 msgid "Logo"
 msgstr "لوگو"
 
-#: shop/models.py:464
+#: shop/models.py:461
 msgid "Telegram link"
 msgstr "لینک تلگرام"
 
-#: shop/models.py:465
+#: shop/models.py:462
 msgid "Twitter link"
 msgstr "لینک توییتر "
 
-#: shop/models.py:466
+#: shop/models.py:463
 msgid "Instagram link"
 msgstr "لینک اینستاگرام"
 
-#: shop/models.py:467
+#: shop/models.py:464
 msgid "Whatsapp link"
 msgstr "لینک واتساپ"
 
-#: shop/models.py:473 shop/models.py:474
+#: shop/models.py:470 shop/models.py:471
 msgid "Site Settings"
 msgstr "تنظیمات سایت"
 
-#: shop/models.py:484
+#: shop/models.py:481
 msgid "Home Banner"
 msgstr "پوستر صفحه اصلی"
 
-#: shop/models.py:485
+#: shop/models.py:482
 msgid "Home Banners"
 msgstr "پوستر های صفحه اصلی"
 
-#: shop/models.py:507 shop/models.py:529 shop/models.py:555
+#: shop/models.py:504 shop/models.py:526 shop/models.py:552
 msgid "Key"
 msgstr "کلید"
 
-#: shop/models.py:511
+#: shop/models.py:508
 msgid "Feature Key"
 msgstr "کلید ویژگی"
 
-#: shop/models.py:512
+#: shop/models.py:509
 msgid "Feature Keys"
 msgstr "کلید های ویژگی "
 
-#: shop/models.py:531 shop/models.py:556
+#: shop/models.py:528 shop/models.py:553
 msgid "Value"
 msgstr "مقدار ویژگی"
 
-#: shop/models.py:535 shop/models.py:536
+#: shop/models.py:532 shop/models.py:533
 msgid "Feature Value"
 msgstr "مقدار ویژگی"
 
-#: shop/models.py:560
+#: shop/models.py:557
 msgid "Main Features"
 msgstr "ویژگی ها"
 
-#: shop/serializers.py:214
+#: shop/serializers.py:217
 #, python-brace-format
 msgid "Invalid discount mode: {cart.discount.mode}"
 msgstr "تخفیف نامعتیر است ! مجدد حالت تخفیف را چک کنید!"
 
-#: shop/serializers.py:255 shop/serializers.py:260
+#: shop/serializers.py:221
+msgid "Discount is not active!"
+msgstr "تخفیف غیر فعال است!"
+
+#: shop/serializers.py:260 shop/serializers.py:265
 #, python-brace-format
 msgid "You can not add more then inventory {product_inventory} !"
 msgstr "نمیتوانید مقداری بیش از موجودی: {product_inventory} انتخاب کنید "
 
-#: shop/serializers.py:266
+#: shop/serializers.py:271
 msgid "No Prodcuts found!"
 msgstr "محصولی یافت نشد"
 
-#: shop/serializers.py:272 shop/serializers.py:298
+#: shop/serializers.py:277 shop/serializers.py:303
 msgid "Most be at least 1 !"
 msgstr "حداقل مقدار 1 میباشد"
 
-#: shop/serializers.py:292
+#: shop/serializers.py:297
 #, python-brace-format
 msgid "You cannot add more than inventory {product_inventory}!"
 msgstr "نمیتوانید مقداری بیش از موجودی: {product_inventory} انتخاب کنید "
 
-#: shop/serializers.py:379
+#: shop/serializers.py:384
 msgid "No cart found!"
 msgstr "سبد خرید پیدا نشد!"
 
-#: shop/serializers.py:381
+#: shop/serializers.py:386
 msgid "Cart is empty!"
 msgstr "سبد خرید یافت نشد!"
 
-#: shop/serializers.py:392
+#: shop/serializers.py:397
 msgid "You dont have address set please set your default address!"
 msgstr ""
 "آدرس اصلی برای شما در نظر گرفته نشده است لطفا آدرس اصلی هود را ثبت کنید"
 
-#: shop/serializers.py:419
+#: shop/serializers.py:423
 #, python-brace-format
 msgid ""
 "product {item.product.title} has limited inventory: {item.product.inventory}"
@@ -1153,19 +1155,25 @@ msgstr "مقدار نامعتبر!"
 msgid "The value must be associated with the specified key."
 msgstr "مقدار میبایست مرتبط با کلید باشد"
 
-#: shop/views.py:397
+#: shop/views.py:414
+#, fuzzy
+#| msgid "Discount is not active!"
+msgid "Discount is not active."
+msgstr "تخفیف غیر فعال است!"
+
+#: shop/views.py:416
 msgid "Discount is not available at the moment."
 msgstr "تخفیف نامعتبر است!"
 
-#: shop/views.py:403
+#: shop/views.py:422
 msgid "Total price is below the discount limit."
 msgstr "قیمت کل از حداقل قیمت تخفیف پایین تر است"
 
-#: shop/views.py:411
+#: shop/views.py:430
 msgid "Discount Code Not Found"
 msgstr "کد تخفیف یافت نشد!"
 
-#: shop/views.py:485
+#: shop/views.py:511
 msgid "Item deleted from your cart because limit inventory"
 msgstr "محصول از سبد خرید شما حذف شد به علت کمبود موجودی"
 
@@ -1181,17 +1189,20 @@ msgstr "آیتم برچسب گزاری شده"
 msgid "Tagged Items"
 msgstr "آیتم‌های برچسب گزاری شده"
 
-#: templates/admin/base_site.html:26
+#: templates/admin/base_site.html:27
 msgid "Documentation"
 msgstr "سند نویسی"
 
-#: templates/admin/base_site.html:30
+#: templates/admin/base_site.html:31
 msgid "Change password"
 msgstr "تغییر کدواژه"
 
-#: templates/admin/base_site.html:32
+#: templates/admin/base_site.html:33
 msgid "Log out"
 msgstr "خروج"
+
+#~ msgid "server side error!"
+#~ msgstr "خطای سرور"
 
 #~ msgid "In Stock"
 #~ msgstr "موجود"
