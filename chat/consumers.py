@@ -53,12 +53,12 @@ class ChatConsumer(WebsocketConsumer):
     # Receive message from room group
     def chat_message(self, event):
         print("lets send some messages :-)")
-        text_data_json = event.copy()
-        text_data_json.pop("type")
+        # text_data_json = event.copy()
+        # text_data_json.pop("type")
         message, attachment, header = (
-            text_data_json["message"],
-            text_data_json.get("attachment"),
-            text_data_json.get("headers"),
+            event["message"],
+            event.get("attachment"),
+            event.get("headers"),
         )
         print('self.room_name', self.room_name)
         conversation = Conversation.objects.get(id=int(self.room_name))
@@ -78,7 +78,7 @@ class ChatConsumer(WebsocketConsumer):
         # print(self.scope)
         # print()
         # print()
-        print('text_data_json', text_data_json)
+        # print('text_data_json', text_data_json)
         try:
             if sender:
                 # Attachment
