@@ -20,6 +20,7 @@
         <button style="border-radius: 1000px" type="submit" name="language_code" value="en"><img src="{% static 'images/flag-usa.png' %}"
                                                                    style="width: 30px"/></button>
     </form>
+    <a href="{% url 'front:chat-admin' %}">{% trans 'Support' %}</a>
     {% if user.is_active and user.is_staff %}
         {% url 'django-admindocs-docroot' as docsroot %}
         {% if docsroot %}
