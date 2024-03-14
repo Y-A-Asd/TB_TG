@@ -70,7 +70,7 @@ msgstr "Customer"
 msgid "Subject"
 msgstr ""
 
-#: blog/models.py:49 front/templates/products_detail.html:126
+#: blog/models.py:49 chat/models.py:30 front/templates/products_detail.html:126
 msgid "Message"
 msgstr ""
 
@@ -91,6 +91,22 @@ msgstr ""
 #: blog/serializers.py:35 shop/serializers.py:340
 msgid "User not found"
 msgstr "User not found"
+
+#: chat/models.py:16
+#, fuzzy
+#| msgid "Collection"
+msgid "Conversation"
+msgstr "Collection"
+
+#: chat/models.py:17
+#, fuzzy
+#| msgid "Collections"
+msgid "Conversations"
+msgstr "Collections"
+
+#: chat/models.py:31
+msgid "Messages"
+msgstr ""
 
 #: core/admin.py:72
 msgid "Action Revert"

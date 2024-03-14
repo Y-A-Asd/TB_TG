@@ -170,7 +170,28 @@
                     localStorage.setItem('user_id', conversation.id);
                     socket = new WebSocket(`ws://127.0.0.1:8000/ws/chat/${localStorage.getItem('user_id')}/`);
                     alert('socket initialized')
-                    fetchMessages(conversation.id, socket);
+                    fetchMessages(conversation.id);
+                    const messageInput = document.getElementById('message-input');
+                    const sendButton = document.getElementById('send-button');
+                    console.log(sendButton)
+                    sendButton.addEventListener('click', function () {
+                        const message = messageInput.value;
+                        console.log('sending message')
+                        const token = getToken();
+                        if (token) {
+                            const headers = {
+                                Authorization: 'JWT ' + token
+                            };
+                            const messageWithToken = {
+                                headers: headers,
+                                message: message
+                            };
+                            socket.send(JSON.stringify(messageWithToken));
+                        } else {
+                            console.error('JWT token not found in local storage');
+                        }
+                        messageInput.value = '';
+                    });
                 });
 
                 conversationsList.appendChild(conversationButton);
@@ -178,7 +199,7 @@
         })
         .catch(error => console.error('Error fetching conversations:', error));
 
-    function fetchMessages(conversationId, socket) {
+    function fetchMessages(conversationId) {
         makeAuthenticatedRequest(`/conversations/${conversationId}/`, 'GET')
             .then(data => {
 
@@ -188,7 +209,7 @@
 
                         socket.onmessage = function (event) {
 
-                            fetchMessages(conversationId, socket);
+                            fetchMessages(conversationId);
                             console.log('Message received from server:', event.data);
                         };
 
@@ -210,57 +231,7 @@
                             messagesList.appendChild(messageDiv);
                         });
                         // Get references to the input and button elements
-                        const messageInput = document.getElementById('message-input');
-                        const sendButton = document.getElementById('send-button');
-                        console.log(sendButton)
-                        // Event listener for when the send button is clicked
-                        sendButton.addEventListener('click', function () {
-                            // Get the message from the input field
-                            const message = messageInput.value;
-                            console.log('sending message')
-                            socket.onopen = function (event) {
-                                console.log('WebSocket connection opened');
 
-                                // Get JWT token from local storage
-                                const token = getToken();
-
-                                // Check if token is available
-                                if (token) {
-                                    const headers = {
-                                        Authorization: 'JWT ' + token
-                                    };
-                                    // Construct message with JWT token in the header
-                                    const messageWithToken = {
-                                        headers: headers,
-                                        message: message
-                                    };
-
-                                    // Send the message
-                                    socket.send(JSON.stringify(messageWithToken));
-                                } else {
-                                    console.error('JWT token not found in local storage');
-                                }
-                            };
-
-                            // Event handler for when a message is received from the WebSocket server
-                            socket.onmessage = function (event) {
-
-                                fetchMessages(conversationId, socket);
-                                console.log('Message received from server:', event.data);
-                            };
-
-                            // Event handler for when an error occurs with the WebSocket connection
-                            socket.onerror = function (error) {
-                                console.error('WebSocket error:', error);
-                            };
-
-                            // Event handler for when the WebSocket connection is closed
-                            socket.onclose = function (event) {
-                                console.log('WebSocket connection closed:', event);
-                            };
-                            // Clear the input field after sending the message
-                            messageInput.value = '';
-                        });
 
                     })
                     .catch(error => console.error('Error fetching conversations:', error));

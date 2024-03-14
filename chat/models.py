@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.utils.translation import gettext_lazy as _
 
 
 # Create your models here.
@@ -10,6 +11,10 @@ class Conversation(models.Model):
     receiver_conversation = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True,
                                               related_name="receiver_conversation")
     start_time = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = _("Conversation")
+        verbose_name_plural = _("Conversations")
 
 
 class Message(models.Model):
@@ -22,3 +27,5 @@ class Message(models.Model):
 
     class Meta:
         ordering = ('-timestamp',)
+        verbose_name = _("Message")
+        verbose_name_plural = _("Messages")

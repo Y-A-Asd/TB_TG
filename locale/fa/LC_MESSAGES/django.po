@@ -8,6 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
+24-03-14 03:03+0330\n"
 "POT-Creation-Date: 2024-03-14 03:00+0330\n"
 "PO-Revision-Date: 2024-03-04 13:30+0330\n"
 "Last-Translator: Anonymous User <yosofasady2@gmail.com>\n"
@@ -68,7 +69,7 @@ msgstr "مشتری"
 msgid "Subject"
 msgstr "موضوع"
 
-#: blog/models.py:49 front/templates/products_detail.html:126
+#: blog/models.py:49 chat/models.py:30 front/templates/products_detail.html:126
 msgid "Message"
 msgstr "پیام"
 
@@ -89,6 +90,24 @@ msgstr "نظرات"
 #: blog/serializers.py:35 shop/serializers.py:340
 msgid "User not found"
 msgstr "کاربر یافت نشد "
+
+#: chat/models.py:16
+#, fuzzy
+#| msgid "Collection"
+msgid "Conversation"
+msgstr "مجموعه"
+
+#: chat/models.py:17
+#, fuzzy
+#| msgid "Collections"
+msgid "Conversations"
+msgstr "مجموعه‌ها"
+
+#: chat/models.py:31
+#, fuzzy
+#| msgid "Message"
+msgid "Messages"
+msgstr "پیام"
 
 #: core/admin.py:72
 msgid "Action Revert"
@@ -297,11 +316,10 @@ msgstr "ورود /ثبت نام"
 msgid "About Me"
 msgstr "درباره من"
 
-#: front/templates/base.html:99 templates/admin/base_site.html:23
-#, fuzzy
-#| msgid "24/7 Support"
+
 msgid "Support"
-msgstr "پشتیبانی 24 ساعته"
+msgstr "پشتیبانی "
+
 
 #: front/templates/base.html:122
 msgid "Search Here"
@@ -1156,8 +1174,6 @@ msgid "The value must be associated with the specified key."
 msgstr "مقدار میبایست مرتبط با کلید باشد"
 
 #: shop/views.py:414
-#, fuzzy
-#| msgid "Discount is not active!"
 msgid "Discount is not active."
 msgstr "تخفیف غیر فعال است!"
 
