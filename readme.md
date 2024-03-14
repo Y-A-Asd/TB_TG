@@ -65,24 +65,42 @@ A full-stack online shop built with Django, JavaScript, HTML, and CSS.
   caching, and Redis cache for efficient view caching.
 
 
-- **API Documentation with Swagger**: Utilize Swagger for API documentation by configuring an endpoint with `/schema_view/`
-  to render Swagger UI, enhancing API usability and accessibility.
+- **Documentation with Swagger And Sphinx**: Utilize Swagger for API documentation by configuring an endpoint with `/schema_view/`
+  to render Swagger UI, enhancing API usability and accessibility.And you can check my sphinx document for more informations.
 
 
 
 - **Celery Tasks & Flower Monitoring**:
+    - **delete_inactive_users**: Deletes inactive users after three days.
 
-    - delete_inactive_users: Deletes inactive users after three days.
+    - **send_promotion_emails**: Sends recent promotions via email.
 
-    - send_promotion_emails**: Sends recent promotions via email.
+    - **send_birthday_emails**: Sends birthday greetings via email.
 
-    - send_birthday_emails**: Sends birthday greetings via email.
-
-    - delete_old_carts**: Deletes old carts after five days.
+    - **delete_old_carts**: Deletes old carts after five days.
 
 
 
 - **<span style="color:orange;">Selenium</span> Test Features**: Add Selenium tests for each feature to ensure functionality and user experience across the application.
+
+
+ - **Chat Support Feature:**
+   - **Real-time Communication:** Instant messaging with support agents.
+   - **User-friendly Interface:** Responsive and intuitive chat interface.
+   - **Scalable Solution:** Designed to handle varying loads.
+
+### Docker and Nginx Configuration
+
+#### Docker Configuration
+
+- **Dockerfile**
+- **docker-compose.yml**
+- **entrypoint.sh**
+
+#### Nginx Configuration
+
+- **default.conf**
+- **Dockerfile**
 
 ## Installation
 

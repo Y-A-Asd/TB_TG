@@ -407,21 +407,20 @@
             .then(data => {
                 data.forEach(function (order, index) {
                     let orders_body = document.getElementById("orders-body")
-                    orders_body.innerHTML += `
-                        <tr style="cursor: pointer">
-                            <th scope='row'>${order.id}</th>
-                            <td>${new Date(order.updated_at).toLocaleString()}</td>
-                            <td>${getStatusLabel(order.order_status)}</td>
-                            <td>${order.total_price}</td>
-                        </tr>
-                    `;
-                    orders_body.addEventListener("click", function () {
-                        window.location.href = `/order-detail/${order.id}/`
+                    let tr = document.createElement("tr");
+                    tr.style.cursor = "pointer";
+                    tr.innerHTML = `
+                    <th scope='row'>${order.id}</th>
+                    <td>${new Date(order.updated_at).toLocaleString()}</td>
+                    <td>${getStatusLabel(order.order_status)}</td>
+                    <td>${order.total_price}</td>
+                `;
+                    tr.addEventListener("click", function () {
+                        window.location.href = `/order-detail/${order.id}/`;
                     });
+                    console.log(tr)
+                    orders_body.appendChild(tr);
                 });
-            })
-            .catch(error => {
-                console.error("Failed to fetch orders:", error);
             });
     }
 

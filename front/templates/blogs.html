@@ -79,7 +79,7 @@
                                 <a href="">
                                     <h2 id="blog-title">${data.title}</h2>
                                 </a>
-                                <a id="view_more" class="genric-btn primary">{% trans 'View More' %}</a>
+                                <a id="${data.title}" class="genric-btn primary">{% trans 'View More' %}</a>
                             </div>
                         </div>
                     </div>
@@ -93,7 +93,8 @@
                             document.getElementById('updated-at').textContent = new Date(data.updated_at).toLocaleDateString(undefined, options);
                             document.getElementById('views-count').textContent = `${data.views} {% trans 'Views' %}`;
                             document.getElementById('comments-count').textContent = `${data.comments_count} {% trans 'Comments' %}`;
-                            let view_more = document.getElementById('view_more')
+                            let view_more = document.getElementById(`${data.title}`)
+                            console.log(view_more)
                             view_more.addEventListener('click', () => {
                                 const blogId = data.id;
                                 window.location.href = `/blogs/${blogId}/`;

@@ -8,8 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-14 03:08+0330\n"
-"PO-Revision-Date: 2024-03-14 03:03+0330\n"
+24-03-14 03:03+0330\n"
+"POT-Creation-Date: 2024-03-14 03:00+0330\n"
+"PO-Revision-Date: 2024-03-04 13:30+0330\n"
 "Last-Translator: Anonymous User <yosofasady2@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fa\n"
@@ -315,9 +316,10 @@ msgstr "ورود /ثبت نام"
 msgid "About Me"
 msgstr "درباره من"
 
-#: front/templates/base.html:99 templates/admin/base_site.html:23
+
 msgid "Support"
 msgstr "پشتیبانی "
+
 
 #: front/templates/base.html:122
 msgid "Search Here"

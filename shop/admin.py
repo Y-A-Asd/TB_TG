@@ -20,7 +20,7 @@ from .validator import validate_key_value_relationship
 @admin.register(FeatureValue)
 class FeatureValueAdmin(TranslatableAdmin):
     autocomplete_fields = ['key']
-    list_display = ['id', 'value']
+    list_display = ['id', 'key', 'value']
     search_fields = ['translations__value']
 
 
@@ -279,7 +279,8 @@ class OrderItemAdmin(admin.ModelAdmin):
 
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
-    list_display = ['id', 'customer', 'product', 'title', 'parent_review', 'rating']
+    list_display = ['id', 'customer', 'product', 'title', 'parent_review', 'rating', 'active']
+    list_editable = ['active']
     list_filter = ['customer', 'product']
     search_fields = ['name', 'description']
     date_hierarchy = 'created_at'

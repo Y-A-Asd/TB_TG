@@ -58,7 +58,7 @@
                 <div class="container">
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <a id="logo_top" class="navbar-brand logo_h" href="{% url 'front:home' %}">
-                        <img id="logoImage" class="img-fluid" style="width: 110px" src="{% static 'img/logo.png' %}"
+                        <img id="logoImage" class="img-fluid" style="width: 110px" src=""
                              alt="">
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -94,6 +94,9 @@
                             </li>
                             <li class="nav-item mx-3"><a class="nav-link"
                                                          href="https://yousofasadi.vercel.app/">{% trans 'About Me' %}</a>
+                            </li>
+                            <li class="nav-item mx-3"><a class="nav-link"
+                                                         href="{% url 'front:chat' %}">{% trans 'Support' %}</a>
                             </li>
 
                         </ul>

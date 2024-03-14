@@ -25,6 +25,7 @@ class BlogAdmin(TranslatableAdmin):
 @admin.register(BlogComment)
 class BlogCommentAdmin(admin.ModelAdmin):
     list_display = ['id', 'customer', 'blog', 'subject', 'message', 'active']
+    list_editable = ['active']
     list_filter = ['customer', 'blog']
     search_fields = ['subject', 'message']
     exclude = ['deleted_at']

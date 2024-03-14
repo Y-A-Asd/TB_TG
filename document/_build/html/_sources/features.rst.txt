@@ -73,3 +73,10 @@ Selenium Test Features
 ^^^^^^^^^^^
 Add Selenium tests for each feature to ensure functionality and user experience across the application. Selenium tests automate browser interactions, allowing for comprehensive testing of the online shop's features and functionalities.
 
+Docker and Nginx Config
+^^^^^^^^^^^
+Utilize Docker for containerization and deployment. And Efficient web server setup for routing and load balancing.
+
+Chat Support
+^^^^^^^^^^^
+Instant messaging with support agents And Responsive and intuitive chat interface.
