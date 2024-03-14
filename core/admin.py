@@ -92,8 +92,12 @@ class AuditlogAdmin(admin.ModelAdmin):
                 for field_name, field_data in log.changes.items():
 
                     if isinstance(model_instance._meta.get_field(field_name), ForeignKey):
-                        field_data['old_value'] = model_instance._meta.get_field(field_name).related_model.objects.get(
-                            pk=(field_data['old_value']))
+                        try:
+                            field_data['old_value'] = model_instance._meta.get_field(
+                                field_name).related_model.objects.get(
+                                pk=(field_data['old_value']))
+                        except:
+                            field_data['old_value'] = None
 
                     setattr(model_instance, field_name, field_data['old_value'])
                     try:
