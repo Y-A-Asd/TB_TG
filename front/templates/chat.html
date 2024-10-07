@@ -135,9 +135,9 @@
                 };
 
                 // Send the message
-                console.log('sending messeage', message)
-                console.log('sending messeage', messageWithToken)
-                console.log('sending messeage', JSON.stringify(messageWithToken))
+                    console.log('message', message)
+                    console.log('sending messeage with token', messageWithToken)
+                    console.log('sending messeage stringify', JSON.stringify(messageWithToken))
                 socket.send(JSON.stringify(messageWithToken));
                 console.log('done message')
                 socket.onmessage = function (event) {
